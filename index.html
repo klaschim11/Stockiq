@@ -35,7 +35,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; 12M-Momentum</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.7 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; 12M-Momentum</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -48,9 +48,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px">
     <button class="tab active" onclick="goTab(0,this)">&#9889; Synopse <span class="chip" id="cnt">--</span></button>
     <button class="tab" onclick="goTab(1,this)">&#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
-    <button class="tab" onclick="goTab(2,this)">&#128181; Fundamentals <span class="chip ai">AI</span></button>
-    <button class="tab" onclick="goTab(3,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
-    <button class="tab" onclick="goTab(4,this)">&#128218; Hilfe</button>
+    <button class="tab" onclick="goTab(2,this)">&#11088; WL2 <span class="chip s" id="wl2-cnt">0</span></button>
+    <button class="tab" onclick="goTab(3,this)">&#128181; Fundamentals <span class="chip ai">AI</span></button>
+    <button class="tab" onclick="goTab(4,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
+    <button class="tab" onclick="goTab(5,this)">&#128218; Hilfe</button>
   </div>
 </header>
 
@@ -80,10 +81,16 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 1: WATCHLIST -->
 <div class="page" id="p1">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">Watchlist &mdash; <span id="wl-hdr-cnt">--</span> Ticker</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">Gruppiert: BUY &middot; HOLD &middot; SELL &mdash; je nach Score sortiert &middot; Antippen = Detail</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:10px">Gruppiert: BUY &middot; HOLD &middot; SELL &mdash; Antippen = Detail</div>
+  <!-- Sync-Toggle + Sort -->
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+    <button id="sync-btn" onclick="toggleSync(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">&#128257; Alle</button>
+    <button onclick="wlSetSort('score',this)" id="sort-score" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid var(--acc);color:var(--acc);background:rgba(0,200,240,.08);cursor:pointer">Score</button>
+    <button onclick="wlSetSort('alpha',this)" id="sort-alpha" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">A-Z</button>
+  </div>
   <div class="g4" id="wl-kpi" style="margin-bottom:12px"></div>
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
-    <button class="tf active" onclick="wlFilt('all',this)">Alle 120</button>
+    <button class="tf active" onclick="wlFilt('all',this)">Alle</button>
     <button class="tf" onclick="wlFilt('strong',this)">&#11088; STRONG</button>
     <button class="tf" onclick="wlFilt('buy',this)">BUY</button>
     <button class="tf" onclick="wlFilt('pb',this)">PEG-Block</button>
@@ -94,8 +101,20 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="wl-detail" style="display:none;margin-top:8px"></div>
 </div>
 
-<!-- TAB 2: FUNDAMENTALS -->
+<!-- TAB 2: WL2 -->
 <div class="page" id="p2">
+  <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#11088; Watchlist 2 &mdash; Meine Auswahl</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:10px">Ticker aus WL1 hinzufuegen &mdash; Sync-Button filtert Synopse + WL1 auf diese Auswahl</div>
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+    <div style="font-family:monospace;font-size:10px;color:var(--mut)">Ausgewaehlt: <span id="wl2-sel-cnt" style="color:#ff9f1c;font-weight:700">0</span> Ticker</div>
+    <button onclick="wl2Clear()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(255,63,63,.4);color:#ff6666;background:transparent;cursor:pointer">&#10006; Leeren</button>
+    <button onclick="wl2SelAll()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(0,200,240,.4);color:var(--acc);background:transparent;cursor:pointer">Alle BUY</button>
+  </div>
+  <div id="wl2-list"></div>
+</div>
+
+<!-- TAB 3: FUNDAMENTALS -->
+<div class="page" id="p3">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128181; Fundamentals</div>
   <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG &middot; fund_score = 40% ROCE + 35% FCF + 25% PEG</div>
   <div class="g2" style="margin-bottom:14px">
@@ -143,8 +162,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px" id="f1"></div>
 </div>
 
-<!-- TAB 3: WALK-FORWARD -->
-<div class="page" id="p3">
+<!-- TAB 4: WALK-FORWARD -->
+<div class="page" id="p4">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128200; Walk-Forward</div>
   <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">12M Training / 3M OOS rollierend &middot; Out-of-Sample Validierung</div>
   <div class="g2" style="margin-bottom:14px">
@@ -184,8 +203,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div>
 
-<!-- TAB 4: HILFE -->
-<div class="page" id="p4">
+<!-- TAB 5: HILFE -->
+<div class="page" id="p5">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
   <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9 &middot; Stand April 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
@@ -205,9 +224,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#9889; Schnellstart</div>
     <div style="font-size:13px;color:var(--mut);line-height:1.8">
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. Synopse</strong> &mdash; Startseite. STRONG BUY (Divergenz), BUY, PEG-geblockt, Verkaufssignale.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. Watchlist</strong> &mdash; 41 Ticker nach Score. Neuer Filter: STRONG. Zeile antippen = vollstaendiger Detail.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. Fundamentals</strong> &mdash; stockiq_fundamentals.json laden. ROCE-Formel korrigiert (EK + LT-Schulden), Div+Buyback neu.</div>
-      <div><strong style="color:#dce8f5">4. Walk-Forward</strong> &mdash; stockiq_alpha_results.json fuer Out-of-Sample Validierung.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. Watchlist</strong> &mdash; Alle Ticker nach Score oder A-Z. Sync-Button filtert auf WL2. Antippen = Detail.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. WL2</strong> &mdash; Eigene Auswahl. Ticker per + WL2 hinzufuegen. Sync-Button in WL1 aktiviert WL2-Filter auf Synopse + WL1.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Fundamentals</strong> &mdash; stockiq_fundamentals.json laden. ROCE-Formel korrigiert (EK + LT-Schulden), Div+Buyback neu.</div>
+      <div><strong style="color:#dce8f5">5. Walk-Forward</strong> &mdash; stockiq_alpha_results.json fuer Out-of-Sample Validierung.</div>
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
@@ -278,6 +298,19 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">stockiq_fund_juno_v7.py</strong> &mdash; FCF Yield, ROCE, Div+Buyback, PEG, <strong style="color:#ff9f1c">12M-Momentum (NEU)</strong> via yfinance &rarr; stockiq_fundamentals.json</div>
       <div style="margin-bottom:8px"><strong style="color:#dce8f5">stockiq_alpha_juno.py</strong> &mdash; Alpha-Engine + Walk-Forward &rarr; stockiq_alpha_results.json</div>
       <div style="padding:8px 12px;background:rgba(176,124,248,.06);border-left:3px solid #b07cf8;border-radius:6px;font-family:monospace;font-size:11px;color:var(--mut)">Einmalig: <span style="color:#b07cf8">%pip install yfinance</span></div>
+    </div>
+  </div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.9.5 / v5.9.6</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.8">
+      <div>&#10003; <strong style="color:#dce8f5">WL2 (Tab 3)</strong>: Eigene Ticker-Auswahl aus allen 258. + WL2 / &#10003; WL2 Toggle je Zeile.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Sync-Button</strong>: Schaltet Synopse + WL1 auf WL2-Filterung. Tunnel zwischen Alle und WL2.</div>
+      <div>&#10003; <strong style="color:#dce8f5">A-Z Sort</strong>: Umschalter Score/Alphabet in WL1.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Exit-Hysterese v5.9.6</strong>: SELL ZL nur wenn MACD ueber ZL <em>und</em> Histogramm negativ. Verhindert vorzeitige Exits in laufenden Trends (z.B. GOOGL, AMZN).</div>
+      <div>&#10003; <strong style="color:#dce8f5">exitSignal-Fix</strong>: Logikfehler korrigiert (redundanter aboveZL-Case entfernt).</div>
+      <div>&#10003; <strong style="color:#dce8f5">Mitsui &amp; Co (8031T) v5.9.7</strong>: Soogo Shoosha Gruppe komplett (Mitsubishi, Itochu, Mitsui). Yahoo: 8031.T.</div>
+      <div>&#10003; <strong style="color:#dce8f5">WL2 Persistenz v5.9.7</strong>: WL2-Auswahl wird automatisch in localStorage gespeichert. Bleibt nach App-Neustart erhalten. Nur manuell aenderbar (kein Auto-Reset).</div>
+      <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Lernprinzip:</strong> Exit-Logik wird kontinuierlich gegen reale Signale validiert. Naechste Pruefung: Reduziert Hysterese False Exits ohne echte SELL-Signale zu verzoegern?</div>
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
@@ -364,6 +397,7 @@ var STOCKS=[
   {t:'RMS',n:'Hermes International',p:2248.00,chg:0.5,rsi:53,pe:48,eg:14,peg:3.43,above200:true,macdCross:'below_zero',macdLine:-6.00,macdSig:-8.50,hist:2.50,div:'bull_hidden',sr:true,sw:false,atr:55,mom:65,trend:64,fund:86,risk:74},
   {t:'8058T',n:'Mitsubishi Corp',p:2840.00,chg:0.8,rsi:52,pe:11,eg:8,peg:1.38,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:3.00,div:'bull_hidden',sr:true,sw:false,atr:65,mom:62,trend:60,fund:80,risk:72},
   {t:'8001T',n:'Itochu Corp',p:7480.00,chg:0.6,rsi:54,pe:13,eg:9,peg:1.44,above200:true,macdCross:'below_zero',macdLine:-18.00,macdSig:-25.00,hist:7.00,div:'none',sr:true,sw:false,atr:140,mom:64,trend:62,fund:82,risk:74},
+  {t:'8031T',n:'Mitsui & Co',p:2950.00,chg:0.5,rsi:53,pe:10,eg:9,peg:1.11,above200:true,macdCross:'below_zero',macdLine:-7.00,macdSig:-10.00,hist:3.00,div:'bull_hidden',sr:true,sw:false,atr:60,mom:63,trend:61,fund:81,risk:73},
   {t:'V',n:'Visa Inc',p:278.40,chg:0.8,rsi:56,pe:30,eg:14,peg:2.14,above200:true,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.90,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:6,mom:65,trend:66,fund:78,risk:76},
   {t:'MA',n:'Mastercard Inc',p:488.20,chg:0.9,rsi:57,pe:33,eg:16,peg:2.06,above200:true,macdCross:'below_zero',macdLine:-1.10,macdSig:-1.50,hist:0.40,div:'bull_hidden',sr:true,sw:false,atr:10,mom:66,trend:67,fund:78,risk:74},
   {t:'UNH',n:'UnitedHealth Group',p:488.60,chg:-0.5,rsi:38,pe:18,eg:12,peg:1.5,above200:false,macdCross:'below_zero',macdLine:-4.20,macdSig:-5.80,hist:0.80,div:'bull_regular',sr:true,sw:false,atr:18,mom:42,trend:36,fund:76,risk:58},
@@ -588,6 +622,9 @@ var W = {mom:0.30,trend:0.20,fund:0.35,risk:0.15};
 var WF_DATA = null;
 var WL_FILTER = 'all';
 var WL_SEL = null;
+var WL2 = {};          /* Ticker-Keys die in WL2 sind: {AAPL:true, MSFT:true, ...} */
+var WL2_SYNC = false;  /* true = Synopse+WL1 nur WL2-Ticker zeigen */
+var WL_SORT = 'score'; /* 'score' oder 'alpha' */
 
 /* ---- helpers ---- */
 function pgSt(s){if(s.peg===null||s.peg===undefined)return 'ng';if(s.peg<1.0)return 'uv';if(s.peg<1.5)return 'fr';if(s.peg<2.0)return 'sp';return 'ov';}
@@ -611,17 +648,30 @@ function histOk(s){
    Alle drei gleichzeitig = staerkstes Verkaufssignal (sell)
    SL -8% bleibt als Sicherheitsnetz im realen Handel */
 function exitSignal(s){
-  var aboveZL = s.macdCross === 'above_zero';
-  var histNeg = s.hist < 0;
+  /* Exit-Logik v5.9.6 (Option A: Hysterese-Band)
+     SELL ZL nur wenn MACD ueber Nulllinie UND Histogramm bereits negativ.
+     Verhindert vorzeitige Exits in laufenden Aufwaertstrends.
+     Lernziel: kontinuierliche Validierung ob diese Kombination
+     weniger False Exits erzeugt als reiner ZL-Exit. */
+  var aboveZL  = s.macdCross === 'above_zero';
+  var histNeg  = s.hist < 0;
   var under200 = !s.above200;
-  var count = (aboveZL?1:0) + (histNeg?1:0) + (under200?1:0);
-  if(count === 0) return null;
-  if(count === 3) return 'sell';
+
+  /* Staerkstes Signal: alle drei gleichzeitig */
+  if(aboveZL && histNeg && under200) return 'sell';
+
+  /* SELL ZL: nur wenn ZL UND Hist negativ (Hysterese -- v5.9.6) */
   if(aboveZL && histNeg) return 'sell_zl';
-  if(aboveZL) return 'sell_zl';
-  if(histNeg && under200) return 'sell_ma';
-  if(histNeg) return 'sell_hist';
-  return 'sell_ma';
+
+  /* SELL MA: Trend gebrochen -- unabhaengig von ZL */
+  if(under200 && histNeg) return 'sell_ma';
+  if(under200) return 'sell_ma';
+
+  /* SELL HIST: Momentum dreht, aber noch ueber 200MA und unter ZL */
+  if(histNeg && !aboveZL) return 'sell_hist';
+
+  /* Nur aboveZL ohne histNeg: HOLD (Trend laeuft noch) */
+  return null;
 }
 function mSig(s){
   /* --- BUY-Seite: alle Bedingungen muessen erfuellt sein --- */
@@ -715,13 +765,13 @@ tick();setInterval(tick,1000);
      ============================================================ -->
 <script>
 function goTab(n,btn){
-  var pgs=['p0','p1','p2','p3','p4'],i;
+  var pgs=['p0','p1','p2','p3','p4','p5'],i;
   for(i=0;i<pgs.length;i++){var pg=document.getElementById(pgs[i]);if(pg)pg.style.display='none';}
   var tabs=document.querySelectorAll('.tab');
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
   var pg2=document.getElementById(pgs[n]);if(pg2)pg2.style.display='block';
   if(btn)btn.classList.add('active');
-  if(n===0)rSyn();if(n===1)rWL();if(n===2)rFund();if(n===3)rWF();
+  if(n===0)rSyn();if(n===1)rWL();if(n===2)rWL2();if(n===3)rFund();if(n===4)rWF();
 }
 </script>
 
@@ -730,8 +780,8 @@ function goTab(n,btn){
      ============================================================ -->
 <script>
 function rSyn(){
-  var i,s,sc,scored=[];
-  for(i=0;i<STOCKS.length;i++)scored.push({s:STOCKS[i],sc:cSc(STOCKS[i])});
+  var i,s,sc,pool=getActiveStocks(),scored=[];
+  for(i=0;i<pool.length;i++)scored.push({s:pool[i],sc:cSc(pool[i])});
   scored.sort(function(a,b){return b.sc-a.sc;});
   var buys=0,pbs=0,sells=0,strongs=0;
   for(i=0;i<scored.length;i++){
@@ -826,9 +876,7 @@ function rSyn(){
      ============================================================ -->
 <script>
 function rWL(){
-  var i,s,scored=[];
-  for(i=0;i<STOCKS.length;i++)scored.push({s:STOCKS[i],sc:cSc(STOCKS[i])});
-  scored.sort(function(a,b){return b.sc-a.sc;});
+  var i,s,scored=getScored();
   var buys=0,pbs=0,sells=0,strongs=0,watches=0;
   for(i=0;i<scored.length;i++){
     var ms=mSig(scored[i].s);
@@ -849,10 +897,7 @@ function wlFilt(f,btn){
   var btns=document.querySelectorAll('.tf'),i;
   for(i=0;i<btns.length;i++)btns[i].classList.remove('active');
   if(btn)btn.classList.add('active');
-  var scored=[];
-  for(i=0;i<STOCKS.length;i++)scored.push({s:STOCKS[i],sc:cSc(STOCKS[i])});
-  scored.sort(function(a,b){return b.sc-a.sc;});
-  wlRend(scored);
+  wlRend(getScored());
 }
 
 function wlRend(scored){
@@ -953,8 +998,7 @@ function wlDetail(ticker){
   var det=document.getElementById('wl-detail');if(!det)return;
   if(WL_SEL===ticker){
     WL_SEL=null;det.style.display='none';
-    var sc0=[];for(i=0;i<STOCKS.length;i++)sc0.push({s:STOCKS[i],sc:cSc(STOCKS[i])});
-    sc0.sort(function(a,b){return b.sc-a.sc;});wlRend(sc0);return;
+    wlRend(getScored());return;
   }
   WL_SEL=ticker;
   var sig=mSig(s);var sc=cSc(s);var fd=FD[s.t];
@@ -1022,8 +1066,152 @@ function wlDetail(ticker){
   }
   out+='</div>';
   det.innerHTML=out;det.style.display='block';
-  var sc1=[];for(i=0;i<STOCKS.length;i++)sc1.push({s:STOCKS[i],sc:cSc(STOCKS[i])});
-  sc1.sort(function(a,b){return b.sc-a.sc;});wlRend(sc1);
+  wlRend(getScored());
+}
+</script>
+
+<!-- ============================================================
+     WL2 + SYNC + SORT
+     ============================================================ -->
+<script>
+/* ---- Sync-Toggle: schaltet zwischen Alle / WL2-gefiltert ---- */
+function toggleSync(btn){
+  WL2_SYNC = !WL2_SYNC;
+  if(btn){
+    btn.textContent = WL2_SYNC ? '\u{1F4E1} WL2' : '\u{1F501} Alle';
+    btn.style.borderColor = WL2_SYNC ? '#ff9f1c' : '#1a2a3a';
+    btn.style.color       = WL2_SYNC ? '#ff9f1c' : 'var(--mut)';
+    btn.style.background  = WL2_SYNC ? 'rgba(255,159,28,.1)' : 'transparent';
+  }
+  rSyn();
+  rWL();
+}
+
+/* ---- Sort-Umschalter ---- */
+function wlSetSort(mode, btn){
+  WL_SORT = mode;
+  var bs = document.querySelectorAll('#sort-score,#sort-alpha'), i;
+  for(i=0;i<bs.length;i++){
+    bs[i].style.borderColor = '#1a2a3a';
+    bs[i].style.color       = 'var(--mut)';
+    bs[i].style.background  = 'transparent';
+  }
+  if(btn){
+    btn.style.borderColor = 'var(--acc)';
+    btn.style.color       = 'var(--acc)';
+    btn.style.background  = 'rgba(0,200,240,.08)';
+  }
+  rWL();
+}
+
+/* ---- getActiveStocks: respektiert WL2_SYNC ---- */
+function getActiveStocks(){
+  if(!WL2_SYNC) return STOCKS;
+  var res = [], i;
+  for(i=0;i<STOCKS.length;i++){
+    if(WL2[STOCKS[i].t]) res.push(STOCKS[i]);
+  }
+  return res.length > 0 ? res : STOCKS; /* Fallback: alle wenn WL2 leer */
+}
+
+/* ---- wlRend: Sort-Modus beachten ---- */
+/* Override: Sort-Logik in wlFilt und rWL anpassen */
+function getScored(){
+  var pool = getActiveStocks();
+  var scored = [], i;
+  for(i=0;i<pool.length;i++) scored.push({s:pool[i], sc:cSc(pool[i])});
+  if(WL_SORT === 'alpha'){
+    scored.sort(function(a,b){ return a.s.t < b.s.t ? -1 : a.s.t > b.s.t ? 1 : 0; });
+  } else {
+    scored.sort(function(a,b){ return b.sc - a.sc; });
+  }
+  return scored;
+}
+
+/* ---- WL2 Persistenz: nur manuell ausgeloest ---- */
+function wl2Save(){
+  try{
+    storeSet(WL2_KEY, JSON.stringify(Object.keys(WL2)));
+    console.log('WL2 gespeichert: ' + Object.keys(WL2).length + ' Ticker');
+  }catch(e){ console.warn('WL2 speichern fehlgeschlagen: '+e.message); }
+}
+function wl2Load(){
+  try{
+    var raw = storeGet(WL2_KEY);
+    if(!raw) return;
+    var arr = JSON.parse(raw);
+    WL2 = {};
+    for(var i=0;i<arr.length;i++) WL2[arr[i]] = true;
+    updWL2Cnt();
+    console.log('WL2 geladen: ' + arr.length + ' Ticker');
+  }catch(e){ console.warn('WL2 laden fehlgeschlagen: '+e.message); }
+}
+
+/* ---- WL2 Ticker hinzufügen/entfernen ---- */
+function wl2Toggle(ticker){
+  if(WL2[ticker]){ delete WL2[ticker]; }
+  else { WL2[ticker] = true; }
+  wl2Save();
+  updWL2Cnt();
+  rWL2();
+}
+
+function wl2Clear(){
+  WL2 = {};
+  wl2Save();
+  updWL2Cnt();
+  rWL2();
+}
+
+function wl2SelAll(){
+  var i, s, sig;
+  for(i=0;i<STOCKS.length;i++){
+    s = STOCKS[i];
+    sig = mSig(s);
+    if(sig === 'strong' || sig === 'buy') WL2[s.t] = true;
+  }
+  wl2Save();
+  updWL2Cnt();
+  rWL2();
+}
+
+function updWL2Cnt(){
+  var n = Object.keys(WL2).length;
+  var e1 = document.getElementById('wl2-cnt');    if(e1) e1.textContent = n;
+  var e2 = document.getElementById('wl2-sel-cnt');if(e2) e2.textContent = n;
+}
+
+/* ---- rWL2: WL2-Tab rendern ---- */
+function rWL2(){
+  var el = document.getElementById('wl2-list'); if(!el) return;
+  var i, s, sc, sig, out = '';
+  var scored = [], pool = STOCKS;
+  for(i=0;i<pool.length;i++) scored.push({s:pool[i], sc:cSc(pool[i])});
+  scored.sort(function(a,b){ return b.sc - a.sc; });
+
+  for(i=0;i<scored.length;i++){
+    s = scored[i].s; sc = scored[i].sc; sig = mSig(s);
+    var inWL2 = !!WL2[s.t];
+    var sc2 = sig==='strong'?'#ff9f1c':sig==='buy'?'#00e57a':sig==='pb'?'#f0c000':
+              isSell(sig)||sig==='weak'?'#ff6666':'#7a9bb5';
+    var slbl = sig==='strong'?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG':
+               sig==='weak'?'WEAK':isSell(sig)?sellLabel(sig):'WATCH';
+    var rowBg = inWL2 ? 'background:#0f1e10;border:1px solid rgba(255,159,28,.4);' :
+                        'background:#0c1420;border:1px solid #1a2a3a;';
+    out += '<div style="'+rowBg+'border-radius:8px;padding:11px 13px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">';
+    out += '<div style="flex:1">';
+    out += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">';
+    out += '<span style="font-size:15px;font-weight:800">'+s.t+'</span>';
+    out += '<span style="font-size:11px;color:var(--mut)">'+s.n+'</span>';
+    out += '<span style="font-family:monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>';
+    out += '</div>';
+    out += '<div style="font-family:monospace;font-size:9px;color:var(--mut)">Score <span style="color:'+scCol(sc)+'">'+sc+'</span> &nbsp; PEG '+pgLb(s)+' &nbsp; RSI '+s.rsi+'</div>';
+    out += '</div>';
+    out += '<button onclick="wl2Toggle(\''+s.t+'\')" style="font-family:monospace;font-size:11px;padding:6px 12px;border-radius:8px;border:1px solid '+(inWL2?'rgba(255,159,28,.6)':'rgba(0,200,240,.4)')+';color:'+(inWL2?'#ff9f1c':'var(--acc)')+';background:'+(inWL2?'rgba(255,159,28,.1)':'transparent')+';cursor:pointer;white-space:nowrap">'+(inWL2?'&#10003; WL2':'+ WL2')+'</button>';
+    out += '</div>';
+  }
+  if(!out) out = '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Keine Ticker</div>';
+  el.innerHTML = out;
 }
 </script>
 
@@ -1033,6 +1221,7 @@ function wlDetail(ticker){
 <script>
 var LS_KEY     = 'stockiq_fund_v57';
 var ARCH_KEY   = 'stockiq_arch_v57';
+var WL2_KEY    = 'stockiq_wl2_v59';  /* WL2 persistent, nur manuell aenderbar */
 
 /* ================================================================
    STORAGE-WRAPPER
@@ -1230,7 +1419,7 @@ function applyFund(fund){
     "6762.T":"6762T","7832.T":"7832T","4704.T":"4704T","9766.T":"9766T","8591.T":"8591T",
     "6770.T":"6770T","6857.T":"6857T","7269.T":"7269T","9022.T":"9022T","8802.T":"8802T",
     "3659.T":"3659T","2413.T":"2413T","3086.T":"3086T","9064.T":"9064T",
-    "8058.T":"8058T","8001.T":"8001T",
+    "8058.T":"8058T","8001.T":"8001T","8031.T":"8031T",
     "6758.T":"6758T","6861.T":"6861T","7974.T":"7974T","4519.T":"4519T","4523.T":"4523T",
     "6367.T":"6367T","6902.T":"6902T","7203.T":"7203T","8316.T":"8316T","8411.T":"8411T",
     "8306.T":"8306T","9432.T":"9432T","4543.T":"4543T","6146.T":"6146T","4661.T":"4661T",
@@ -1561,6 +1750,9 @@ document.addEventListener('DOMContentLoaded', function(){
 /* Initialisierung: nur initFund() - rSyn() wird intern von initFund aufgerufen */
 /* Falls kein Cache: rSyn() direkt aufrufen */
 document.addEventListener('DOMContentLoaded', function(){
+  try{
+    wl2Load(); /* WL2 aus persistentem Speicher laden */
+  }catch(e){ console.warn('WL2 init fehlgeschlagen: '+e.message); }
   try{
     initFund();
     /* rSyn() nochmal nur wenn initFund() keinen Cache geladen hat */
