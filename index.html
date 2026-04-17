@@ -35,7 +35,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.7 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; 12M-Momentum</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.15 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -57,8 +57,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <!-- TAB 0: SYNOPSE -->
 <div class="page" id="p0" style="display:block">
-  <div style="font-size:20px;font-weight:800;margin-bottom:4px">Signal-Synopse</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">MACD ZL + 200MA + ATR-Hist-Filter + Divergenz &middot; Mom 30% Trend 20% Fund 35% Risk 15%</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <div style="font-size:20px;font-weight:800">Signal-Synopse</div>
+    <div style="display:flex;gap:6px">
+      <button id="sync-btn-syn" onclick="toggleSync(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">&#128257; Alle</button>
+      <button id="sf-btn" onclick="toggleSellFilter(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
+    </div>
+  </div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">MACD ZL + 200MA + ATR-Hist-Filter + Divergenz &middot; Mom 25% Trend 25% Fund 35% Risk 15% &middot; PEG-Block &gt;=3.0</div>
   <div class="g4" id="s0"></div>
 
   <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#11088; STRONG BUY <span style="font-size:11px;color:var(--mut);font-weight:400">(ZL + 200MA + PEG + Bull-Divergenz)</span></div>
@@ -71,7 +77,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div class="g3" id="s3" style="margin-bottom:16px"></div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
-      <div><div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;margin-bottom:5px">Methodik v5.3</div><div style="font-size:11px;color:var(--mut);line-height:1.6">Long: MACD <strong style="color:#dce8f5">unter ZL</strong>, Hist <strong style="color:#dce8f5">&gt; ATR&times;0.05</strong>, <strong style="color:#dce8f5">ueber 200MA</strong>, PEG &lt; 2.0. <strong style="color:#ff9f1c">STRONG BUY</strong> = + Bull-Divergenz.</div></div>
+      <div><div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;margin-bottom:5px">Methodik v5.9.14</div><div style="font-size:11px;color:var(--mut);line-height:1.6">Long: MACD <strong style="color:#dce8f5">unter ZL</strong>, Hist <strong style="color:#dce8f5">&gt; ATR&times;0.05</strong>, <strong style="color:#dce8f5">ueber 200MA</strong>, PEG &lt; 3.0. RSI: nur Warn-Symbol. <strong style="color:#ff9f1c">STRONG BUY</strong> = + Bull-Divergenz.</div></div>
       <div><div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;margin-bottom:5px">Datenbasis</div><div style="font-size:11px;color:var(--mut);line-height:1.6">Echte Kurse + Indikatoren via Python/Juno. JSON laden = sofortige Aktualisierung aller Signale.</div></div>
       <div><div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;margin-bottom:5px">Disclaimer</div><div style="font-size:11px;color:var(--mut);line-height:1.6">Keine Anlageberatung. Immer eigene Due Diligence.</div></div>
     </div>
@@ -105,10 +111,19 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p2">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#11088; Watchlist 2 &mdash; Meine Auswahl</div>
   <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:10px">Ticker aus WL1 hinzufuegen &mdash; Sync-Button filtert Synopse + WL1 auf diese Auswahl</div>
-  <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+  <!-- Suchfeld -->
+  <div style="margin-bottom:10px;position:relative">
+    <input id="wl2-search" type="text" placeholder="&#128269; Suche Ticker oder Name..." oninput="rWL2()"
+      style="width:100%;box-sizing:border-box;padding:9px 12px 9px 36px;background:#0c1420;border:1px solid #223040;border-radius:10px;color:var(--txt);font-family:monospace;font-size:12px;outline:none">
+    <span style="position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none">&#128269;</span>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
     <div style="font-family:monospace;font-size:10px;color:var(--mut)">Ausgewaehlt: <span id="wl2-sel-cnt" style="color:#ff9f1c;font-weight:700">0</span> Ticker</div>
     <button onclick="wl2Clear()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(255,63,63,.4);color:#ff6666;background:transparent;cursor:pointer">&#10006; Leeren</button>
     <button onclick="wl2SelAll()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(0,200,240,.4);color:var(--acc);background:transparent;cursor:pointer">Alle BUY</button>
+    <button onclick="wl2Export()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(0,229,122,.4);color:#00e57a;background:transparent;cursor:pointer">&#8595; Export</button>
+    <button onclick="document.getElementById('wl2imp').click()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8593; Import</button>
+    <input id="wl2imp" type="file" accept=".txt,.json" style="display:none" onchange="wl2Import(this)">
   </div>
   <div id="wl2-list"></div>
 </div>
@@ -116,14 +131,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 3: FUNDAMENTALS -->
 <div class="page" id="p3">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128181; Fundamentals</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG &middot; fund_score = 40% ROCE + 35% FCF + 25% PEG</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG &middot; fund_score = 50% ROCE + 35% FCF + 15% PEG (v5.9.14)</div>
   <div class="g2" style="margin-bottom:14px">
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
       <div style="font-size:13px;font-weight:700;color:#00e57a;margin-bottom:10px">&#128228; JSON laden</div>
       <div style="border:2px dashed #223040;border-radius:8px;padding:16px;text-align:center;cursor:pointer;margin-bottom:10px" onclick="document.getElementById('ffi').click()">
         <div style="font-size:18px;margin-bottom:4px">&#128193;</div>
         <div style="font-size:12px;font-weight:700;margin-bottom:2px">stockiq_fundamentals.json</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7.py</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7_4.py</div>
         <input type="file" id="ffi" accept=".json" onchange="loadFund(this)" style="display:none">
       </div>
       <div style="display:flex;align-items:center;gap:8px;font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:8px">
@@ -153,7 +168,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         <div><strong style="color:#dce8f5">ROCE</strong> = EBIT / (EK + LT-Schulden) &mdash; korrigiert v5.3</div>
         <div><strong style="color:#dce8f5">ROE</strong> = Fallback wenn ROCE n/a</div>
         <div><strong style="color:#dce8f5">Div+Buyback</strong> = Shareholder Return (neu)</div>
-        <div><strong style="color:#dce8f5">fund_score</strong> = 40% ROCE + 35% FCF + 25% PEG</div>
+        <div><strong style="color:#dce8f5">fund_score</strong> = 50% ROCE + 35% FCF + 15% PEG (v5.9.14)</div>
       </div>
     </div>
   </div>
@@ -201,12 +216,26 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px" id="w3"></div>
     </div>
   </div>
+
+  <!-- SIGNAL-HISTORY (immer sichtbar wenn Archiv vorhanden) -->
+  <div id="arch-hist-wrap" style="margin-top:6px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#128337; Signal-History <span style="font-size:11px;color:var(--mut);font-weight:400">aus Archiv-Snapshots</span></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+      <button class="tf active" onclick="archHistFilt('all',this)">Alle Ticker</button>
+      <button class="tf" onclick="archHistFilt('changed',this)">Signal geaendert</button>
+      <button class="tf" onclick="archHistFilt('buy',this)">BUY/STRONG</button>
+      <button class="tf" onclick="archHistFilt('sell',this)">SELL</button>
+    </div>
+    <div id="arch-hist-list">
+      <div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Archiv-Snapshots vorhanden. Fundamentals laden und Snapshot erstellen.</div>
+    </div>
+  </div>
 </div>
 
 <!-- TAB 5: HILFE -->
 <div class="page" id="p5">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9 &middot; Stand April 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.15 &middot; Stand April 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -227,11 +256,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. Watchlist</strong> &mdash; Alle Ticker nach Score oder A-Z. Sync-Button filtert auf WL2. Antippen = Detail.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. WL2</strong> &mdash; Eigene Auswahl. Ticker per + WL2 hinzufuegen. Sync-Button in WL1 aktiviert WL2-Filter auf Synopse + WL1.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Fundamentals</strong> &mdash; stockiq_fundamentals.json laden. ROCE-Formel korrigiert (EK + LT-Schulden), Div+Buyback neu.</div>
-      <div><strong style="color:#dce8f5">5. Walk-Forward</strong> &mdash; stockiq_alpha_results.json fuer Out-of-Sample Validierung.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">5. Walk-Forward</strong> &mdash; stockiq_alpha_results.json laden. Signal-History zeigt Aenderungen zwischen Snapshots.</div>
+      <div><strong style="color:#dce8f5">6. Hilfe</strong> &mdash; Diese Seite.</div>
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#11088; Signal-Logik v5.4</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#11088; Signal-Logik v5.9.14</div>
     <div style="padding:10px 12px;background:rgba(255,159,28,.07);border-left:3px solid #ff9f1c;border-radius:6px;margin-bottom:10px;font-family:monospace;font-size:11px">
       <div style="color:#ff9f1c;margin-bottom:3px">&#11088; STRONG BUY = alle BUY-Kriterien + bull_hidden oder bull_regular Divergenz</div>
     </div>
@@ -239,7 +269,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="color:#00e57a;margin-bottom:3px">&#10003; MACD-Kreuzung UNTER der Nulllinie</div>
       <div style="color:#00e57a;margin-bottom:3px">&#10003; Histogramm &gt; ATR &times; 0.05 (Qualitaetsfilter)</div>
       <div style="color:#00e57a;margin-bottom:3px">&#10003; Kurs UEBER dem 200-Tage-Durchschnitt</div>
-      <div style="color:#00e57a">&#10003; PEG-Ratio &lt; 2.0</div>
+      <div style="color:#00e57a">&#10003; PEG-Ratio &lt; 3.0 (v5.9.14: von 2.0 auf 3.0 angehoben)</div>
     </div>
     <div style="padding:10px 12px;background:rgba(255,63,63,.06);border-left:3px solid #ff3f3f;border-radius:6px;margin-bottom:10px;font-family:monospace;font-size:11px">
       <div style="color:#ff6666;font-weight:700;margin-bottom:4px">SELL-Logik v5.4 &mdash; Exit wenn EINE Bedingung wegfaellt:</div>
@@ -249,21 +279,23 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="color:#ff6666">&#10007; SELL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash; Alle drei gleichzeitig (staerkstes Signal)</div>
     </div>
     <div style="font-size:12px;color:var(--mut);line-height:1.7">
-      <div style="margin-bottom:5px"><strong style="color:#f0c000">PEG-GEBLOCKT</strong> = technisch kaufbar, aber PEG &gt;= 2.0.</div>
+      <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD SF</strong> = Score-Filter aktiv: technisches SELL-Signal, aber Score &gt;= Schwellenwert (Standard: 55). Fundamental starke Position wird gehalten. Toggle: SF-Button in Synopse.</div>
+      <div style="margin-bottom:5px"><strong style="color:#f0c000">PEG-GEBLOCKT</strong> = technisch kaufbar, aber PEG &gt;= 3.0 (v5.9.14: Threshold von 2.0 auf 3.0 angehoben).</div>
+      <div style="margin-bottom:5px"><strong style="color:var(--mut)">RSI &gt; 72</strong> = RSI-Filter als BUY-Blocker entfernt (v5.9.14): kein messbarer OOS-Effekt. RSI wird als Warn-Symbol &#9888; angezeigt.</div>
       <div style="margin-bottom:5px"><strong style="color:var(--mut)">WATCH</strong> = keine aktive Bedingung erfuellt.</div>
       <div><strong style="color:var(--mut)">WEAK</strong> = Seitwaertsmarkt erkannt.</div>
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:12px;color:#f0c000">&#128202; Kennzahlen-Glossar</div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">SCORE (0-100)</div><div style="font-size:12px;color:var(--mut)">Momentum 30% + Trend 20% + Fundamentals 35% + Risk 15%.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PEG-RATIO</div><div style="font-size:12px;color:var(--mut)">KGV / Gewinnwachstum%. <span style="color:#00e57a">&lt;1.0</span> unterbewertet &nbsp;<span style="color:#00c8f0">1.0-1.5</span> fair &nbsp;<span style="color:#f0c000">1.5-2.0</span> leicht teuer &nbsp;<span style="color:#ff6666">&gt;=2.0</span> BUY blockiert.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">SCORE (0-100)</div><div style="font-size:12px;color:var(--mut)">Momentum 25% + Trend 25% + Fundamentals 35% + Risk 15% (v5.9.14).</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PEG-RATIO</div><div style="font-size:12px;color:var(--mut)">KGV / Gewinnwachstum%. <span style="color:#00e57a">&lt;1.0</span> unterbewertet &nbsp;<span style="color:#00c8f0">1.0-1.5</span> fair &nbsp;<span style="color:#f0c000">1.5-2.0</span> leicht teuer &nbsp;<span style="color:#f0c000">2.0-3.0</span> teuer (Score-Malus) &nbsp;<span style="color:#ff6666">&gt;=3.0</span> BUY blockiert.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">FCF YIELD</div><div style="font-size:12px;color:var(--mut)">FreeCashflow / Marktkapitalisierung. <span style="color:#00e57a">&gt;4%</span> stark &nbsp;<span style="color:#00c8f0">2-4%</span> gut &nbsp;<span style="color:#f0c000">0-2%</span> schwach &nbsp;<span style="color:#ff6666">&lt;0%</span> negativ.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ROCE / ROE</div><div style="font-size:12px;color:var(--mut)">ROCE = EBIT / (EK + LT-Schulden). Fallback ROE wenn nicht verfuegbar. <span style="color:#00e57a">&gt;25%</span> Burggraben &nbsp;<span style="color:#00c8f0">15-25%</span> stark.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ROCE / ROE</div><div style="font-size:12px;color:var(--mut)">ROCE = EBIT / (EK + LT-Schulden). Fallback ROE wenn nicht verfuegbar. <span style="color:#00e57a">&gt;25%</span> Burggraben &nbsp;<span style="color:#00c8f0">15-25%</span> stark. Hauptgewicht im Fund-Score (50%, v5.9.14).</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DIVERGENZ</div><div style="font-size:12px;color:var(--mut)"><span style="color:#ff9f1c">bull_hidden</span> = Kurs HOH, MACD tiefer Hochpunkt = Trendfortsetzung up. <span style="color:#00e57a">bull_regular</span> = Kurs tieferes Tief, MACD hoeher = Trendumkehr.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ATR-HIST-FILTER (neu v5.3)</div><div style="font-size:12px;color:var(--mut)">Histogramm muss &gt; ATR &times; 0.05 sein. Filtert flache, unzuverlaessige MACD-Kreuzungen heraus.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ATR-HIST-FILTER (v5.3)</div><div style="font-size:12px;color:var(--mut)">Histogramm muss &gt; ATR &times; 0.05 sein. Filtert flache MACD-Kreuzungen. ATR auch fuer Volatilitaets-Adjustierung genutzt (v5.9.14).</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">MOAT</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">Wide</span> = dauerhafter Wettbewerbsvorteil &nbsp;<span style="color:#00c8f0">Narrow</span> = moderater Vorteil &nbsp;<span style="color:var(--mut)">None</span> = kein Vorteil.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">RSI</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">&lt;30</span> ueberverkauft &nbsp;<span style="color:#ff6666">&gt;70</span> ueberkauft &nbsp;<span style="color:var(--mut)">30-70</span> neutral.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">RSI</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">&lt;30</span> ueberverkauft &nbsp;<span style="color:#ff6666">&gt;70</span> ueberkauft &nbsp;<span style="color:var(--mut)">30-70</span> neutral. Ab v5.9.14 kein BUY-Blocker mehr, nur Warn-Symbol &#9888;.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">WALK-FORWARD OOS</div><div style="font-size:12px;color:var(--mut)">12M Training / 3M Out-of-Sample Test. OOS WR &gt; IS WR = kein Overfitting. Reines Validierungsinstrument &mdash; veraendert keine Live-Signale.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">STABILITAET (StdAbw OOS WR)</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">&lt;8pp</span> stabil &nbsp;<span style="color:#00c8f0">8-15pp</span> akzeptabel &nbsp;<span style="color:#ff6666">&gt;15pp</span> instabil. Bei weniger als 10 Trades pro Fenster statistisch nicht aussagekraeftig.</div></div>
     <div><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">OVERFITTING-GAP</div><div style="font-size:12px;color:var(--mut)">IS Win-Rate minus OOS Win-Rate. <span style="color:#00e57a">&lt;5pp</span> = kein Overfitting &nbsp;<span style="color:#f0c000">5-15pp</span> = leicht &nbsp;<span style="color:#ff6666">&gt;15pp</span> = stark. Negativ = OOS besser als IS (bei kleinen Stichproben: Zufall).</div></div>
@@ -276,7 +308,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <strong style="color:#dce8f5">Was Walk-Forward nicht tut:</strong> OOS-Ergebnisse beeinflussen Synopse und Watchlist nicht. Live-Signale basieren ausschliesslich auf den aktuellen MACD/200MA/PEG-Kriterien. Eine Verknuepfung waere methodisch falsch (Look-ahead-Bias).
     </div>
     <div style="font-size:13px;font-weight:700;color:#f0c000;margin-bottom:8px">Stichproben-Problem bei strengen Filtern</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Strategie filtert streng &mdash; typisch 1-3 Signale pro 3M-OOS-Fenster ueber 41 Ticker. Das ist statistisch zu wenig fuer belastbare Win-Raten. Faustregel: Erst ab ca. 30 Trades pro Fenster sind Aussagen sinnvoll. Eine hohe Stabilitaets-StdAbw (z.B. 36pp) ist bei n=1-3 Trades/Fenster kein Strategiefehler, sondern Stichproben-Rauschen.</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Strategie filtert streng. Mit 273 Tickern und 3M OOS: typisch 20-75 Trades pro Fenster. Faustregel: Erst ab ca. 30 Trades/Fenster sind Aussagen sinnvoll. Mit v5 (SPY-Filter) ist diese Schwelle in den meisten Fenstern erreicht.</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
       <div style="background:rgba(0,229,122,.06);border:1px solid rgba(0,229,122,.2);border-radius:8px;padding:10px">
         <div style="font-family:monospace;font-size:10px;color:#00e57a;margin-bottom:4px">&#9679; STATISTISCH ROBUST</div>
@@ -288,19 +320,53 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       </div>
     </div>
     <div style="padding:10px 12px;background:rgba(240,192,0,.06);border-left:3px solid #f0c000;border-radius:6px;font-size:12px;color:var(--mut);line-height:1.6">
-      <strong style="color:#f0c000">Aktuelle Situation (Apr 2026):</strong> 8 OOS-Trades in 4 Fenstern. Stabilitaet 36pp, Gap -8.3pp. <strong style="color:#dce8f5">Statistisch nicht aussagekraeftig</strong> &mdash; zu wenige Trades. Die Strategie ist damit weder widerlegt noch bestaetigt. Empfehlung: Watchlist auf 80+ Ticker erweitern oder OOS-Fenster auf 6M vergroessern.
+      <strong style="color:#00e57a">Aktuelle Situation (Apr 2026, v7.1):</strong> 273 Ticker, 8 Fenster. OOS WR 58.1%, Stabilitaet 9.2pp. <strong style="color:#dce8f5">Bisher bestes Ergebnis.</strong> SPY-Filter + Trail 10% + kein RSI-Filter. Script: stockiq_alpha_juno_v7.py.
     </div>
   </div>
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#b07cf8">&#128193; Python-Scripts (Juno)</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">stockiq_fund_juno_v7.py</strong> &mdash; FCF Yield, ROCE, Div+Buyback, PEG, <strong style="color:#ff9f1c">12M-Momentum (NEU)</strong> via yfinance &rarr; stockiq_fundamentals.json</div>
-      <div style="margin-bottom:8px"><strong style="color:#dce8f5">stockiq_alpha_juno.py</strong> &mdash; Alpha-Engine + Walk-Forward &rarr; stockiq_alpha_results.json</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">stockiq_fund_juno_v7_4.py</strong> &mdash; 273 Ticker, FCF, ROCE, 12M-Momentum, NaN-Fix, China/EM/HK neu &rarr; stockiq_fundamentals.json</div>
+      <div style="margin-bottom:8px"><strong style="color:#dce8f5">stockiq_alpha_juno_v7.py</strong> &mdash; 273 Ticker, SPY-Filter + Trail Stop 10%, kein RSI-Filter &rarr; stockiq_alpha_results.json. OOS WR 58.1%, Stabilitaet 9.2pp.</div>
       <div style="padding:8px 12px;background:rgba(176,124,248,.06);border-left:3px solid #b07cf8;border-radius:6px;font-family:monospace;font-size:11px;color:var(--mut)">Einmalig: <span style="color:#b07cf8">%pip install yfinance</span></div>
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.9.15 &mdash; Ticker-Bereinigung und Expansion</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.8">
+      <div>&#10003; <strong style="color:#dce8f5">22 delistete Japan-Ticker entfernt</strong>: Titel mit "possibly delisted" in yfinance bereinigt.</div>
+      <div>&#10003; <strong style="color:#dce8f5">2 neue Japan-Ticker</strong>: 9983.T (Fast Retailing/Uniqlo), 6098.T (Recruit Holdings).</div>
+      <div>&#10003; <strong style="color:#dce8f5">14 China-ADRs hinzugefuegt</strong>: BABA, PDD, JD, BIDU, NTES, TCOM, YUMC, BILI, TME, LI, XPEV, NIO, BEKE, ZTO.</div>
+      <div>&#10003; <strong style="color:#dce8f5">5 Hongkong-Titel</strong>: 0700.HK (Tencent), 3690.HK (Meituan), 1810.HK (Xiaomi), 1211.HK (BYD), 2318.HK (Ping An).</div>
+      <div>&#10003; <strong style="color:#dce8f5">12 Global Quality Compounder</strong>: TCS.NS, HDB, HINDUNILVR.NS, ASIANPAINT.NS, TSM, 2454.TW, D05.SI, BBCA.JK, ITUB, WALMEX.MX, FEMSAUBD.MX, 005930.KS.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Gesamt: 273 Ticker</strong> (vorher 262). ALIAS-Dict fuer alle neuen Formate (.HK, .NS, .TW, .SI, .JK, .MX, .KS) erweitert.</div>
+    </div>
+  </div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.9.14 &mdash; Literatur-basierte Optimierung</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.8">
+      <div>&#10003; <strong style="color:#dce8f5">A: RSI-Filter entfernt</strong>: RSI &gt; 72 war BUY-Blocker (v5.9.8) -- kein messbarer OOS-Effekt in Walk-Forward v3-v5. RSI bleibt Warn-Symbol &#9888; im Label. Quelle: Chong &amp; Ng (2008).</div>
+      <div>&#10003; <strong style="color:#dce8f5">B: PEG-Threshold 2.0 &rarr; 3.0</strong>: BRK-B, JNJ, SYK, MCD, Soego Shoshas jetzt kaufbar. Quelle: Damodaran NYU (2025) -- kein universeller 2.0-Schwellenwert begruendet.</div>
+      <div>&#10003; <strong style="color:#dce8f5">C: Volatilitaets-adjustiertes Momentum</strong>: Neue volAdj()-Funktion skaliert Momentum-Score bei hoher ATR zur Mitte. TSLA, NVDA: weniger aggressiv gewichtet. Quelle: Daniel &amp; Moskowitz (2016) -- Momentum Crashes.</div>
+      <div>&#10003; <strong style="color:#dce8f5">D: ROCE-Gewicht 40% &rarr; 50%</strong>: PEG-Gewicht 25% &rarr; 15% im Fund-Score. Quelle: Novy-Marx (2013) -- Gross Profitability dominiert alle anderen Quality-Faktoren.</div>
+      <div>&#10003; <strong style="color:#dce8f5">E: Composite-Gewichte angepasst</strong>: Trend 20% &rarr; 25%, Momentum 30% &rarr; 25%. Quelle: Faber (2007) -- 200MA dominanter Faktor; Jegadeesh &amp; Titman (1993) -- Momentum optimal 3-12M, nicht Tage.</div>
+      <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Validierung:</strong> alpha_juno_v5.py neu ausfuehren um OOS Win-Rate v5.9.13 vs v5.9.14 zu vergleichen. Erwartung: stabile oder leicht verbesserte OOS-Metriken, mehr BUY-Signale bei gleicher Qualitaet.</div>
+    </div>
+  </div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.9.8 &ndash; v5.9.13</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.8">
+      <div>&#10003; <strong style="color:#dce8f5">RSI-Filter (v5.9.8, in v5.9.14 entfernt)</strong>: RSI &gt; 72 war RSI-BLK. Kein OOS-Effekt nachweisbar.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Soogo Shoosha komplett</strong>: +Marubeni (8002T), +Sumitomo (8053T), +Toyota Tsusho (8015T). Alle 6 Soogo Shoosha.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Signal-History (v5.9.8)</strong>: Walk-Forward Tab zeigt Signalaenderungen zwischen Archiv-Snapshots. Filter: Alle / Geaendert / BUY / SELL.</div>
+      <div>&#10003; <strong style="color:#dce8f5">NaN-Fix fund_juno_v7_3</strong>: JSON-Export bereinigt NaN/Inf zu null. Parse-Fehler im Dashboard behoben.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Walk-Forward Format v3+v4 kompatibel</strong>: loadWF() normalisiert beide JSON-Formate automatisch.</div>
+      <div>&#10003; <strong style="color:#dce8f5">WL2 Suchfeld (v5.9.12)</strong>: Suche nach Ticker-Symbol und Klarname. WL2-Mitglieder oben gepinnt.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Sync-Button Synopse</strong>: WL2-Filter jetzt auch direkt in der Synopse schaltbar.</div>
+    </div>
+  </div>
+    <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.9.5 / v5.9.6</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.8">
       <div>&#10003; <strong style="color:#dce8f5">WL2 (Tab 3)</strong>: Eigene Ticker-Auswahl aus allen 258. + WL2 / &#10003; WL2 Toggle je Zeile.</div>
@@ -316,7 +382,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.9</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div>&#10003; <strong style="color:#dce8f5">12M-Preis-Momentum (mom12m)</strong>: Neues Feld in fund_juno_v7.py &rarr; JSON</div>
+      <div>&#10003; <strong style="color:#dce8f5">12M-Preis-Momentum (mom12m)</strong>: Feld in fund_juno_v7_4.py &rarr; JSON</div>
       <div>&#10003; <strong style="color:#dce8f5">momSc() Funktion</strong>: Momentum-Score = 50% MACD/RSI-Signal + 50% 12M-Preis-Momentum</div>
       <div>&#10003; <strong style="color:#dce8f5">Normierung</strong>: mom12m -50%..+50% wird auf 0..100 skaliert (0%=50, +50%=100)</div>
       <div>&#10003; <strong style="color:#dce8f5">Fallback</strong>: Ohne JSON unveraendert statischer Wert (rueckwaertskompatibel)</div>
@@ -347,7 +413,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.15 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -398,6 +464,9 @@ var STOCKS=[
   {t:'8058T',n:'Mitsubishi Corp',p:2840.00,chg:0.8,rsi:52,pe:11,eg:8,peg:1.38,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:3.00,div:'bull_hidden',sr:true,sw:false,atr:65,mom:62,trend:60,fund:80,risk:72},
   {t:'8001T',n:'Itochu Corp',p:7480.00,chg:0.6,rsi:54,pe:13,eg:9,peg:1.44,above200:true,macdCross:'below_zero',macdLine:-18.00,macdSig:-25.00,hist:7.00,div:'none',sr:true,sw:false,atr:140,mom:64,trend:62,fund:82,risk:74},
   {t:'8031T',n:'Mitsui & Co',p:2950.00,chg:0.5,rsi:53,pe:10,eg:9,peg:1.11,above200:true,macdCross:'below_zero',macdLine:-7.00,macdSig:-10.00,hist:3.00,div:'bull_hidden',sr:true,sw:false,atr:60,mom:63,trend:61,fund:81,risk:73},
+  {t:'8002T',n:'Marubeni Corp',p:2180.00,chg:0.4,rsi:51,pe:9,eg:8,peg:1.13,above200:true,macdCross:'below_zero',macdLine:-5.00,macdSig:-7.50,hist:2.50,div:'bull_hidden',sr:true,sw:false,atr:50,mom:61,trend:60,fund:80,risk:72},
+  {t:'8053T',n:'Sumitomo Corp',p:3120.00,chg:0.6,rsi:54,pe:10,eg:9,peg:1.11,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:3.00,div:'bull_hidden',sr:true,sw:false,atr:62,mom:62,trend:61,fund:80,risk:73},
+  {t:'8015T',n:'Toyota Tsusho',p:2650.00,chg:0.3,rsi:52,pe:12,eg:10,peg:1.20,above200:true,macdCross:'below_zero',macdLine:-6.00,macdSig:-8.50,hist:2.50,div:'bull_hidden',sr:true,sw:false,atr:52,mom:60,trend:59,fund:78,risk:71},
   {t:'V',n:'Visa Inc',p:278.40,chg:0.8,rsi:56,pe:30,eg:14,peg:2.14,above200:true,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.90,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:6,mom:65,trend:66,fund:78,risk:76},
   {t:'MA',n:'Mastercard Inc',p:488.20,chg:0.9,rsi:57,pe:33,eg:16,peg:2.06,above200:true,macdCross:'below_zero',macdLine:-1.10,macdSig:-1.50,hist:0.40,div:'bull_hidden',sr:true,sw:false,atr:10,mom:66,trend:67,fund:78,risk:74},
   {t:'UNH',n:'UnitedHealth Group',p:488.60,chg:-0.5,rsi:38,pe:18,eg:12,peg:1.5,above200:false,macdCross:'below_zero',macdLine:-4.20,macdSig:-5.80,hist:0.80,div:'bull_regular',sr:true,sw:false,atr:18,mom:42,trend:36,fund:76,risk:58},
@@ -593,41 +662,74 @@ var STOCKS=[
   {t:'6594.T',n:'Nidec Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'6723.T',n:'Renesas Electronics',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'4568.T',n:'Daiichi Sankyo Co',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'8801.T',n:'Mitsui Fudosan Co',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'9613.T',n:'NTT Data Group',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'9735.T',n:'Secom Co Ltd',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'2502.T',n:'Asahi Group Holdings',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'7733.T',n:'Olympus Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'6981.T',n:'Murata Manufacturing',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'4452.T',n:'Kao Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'7741.T',n:'Hoya Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'6762.T',n:'TDK Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'7832.T',n:'Bandai Namco Holdings',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'4704.T',n:'Trend Micro Inc',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'9766.T',n:'Konami Group Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'8591.T',n:'Orix Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'6770.T',n:'Alps Alpine Co',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'6857.T',n:'Advantest Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'7269.T',n:'Suzuki Motor Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'9022.T',n:'Central Japan Railway',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'8802.T',n:'Mitsubishi Estate Co',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'3659.T',n:'Nexon Co Ltd',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'2413.T',n:'M3 Inc',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'3086.T',n:'J.Front Retailing',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'9064.T',n:'Yamato Holdings',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65}
+  {t:'9983.T',n:'Fast Retailing Uniqlo',p:105.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.9,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:4,mom:62,trend:64,fund:72,risk:68},
+  {t:'6098.T',n:'Recruit Holdings',p:8.2,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.3,mom:60,trend:62,fund:70,risk:65},
+  {t:'BABA',n:'Alibaba Group ADR',p:85.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:3.5,mom:52,trend:48,fund:68,risk:45},
+  {t:'PDD',n:'PDD Holdings Temu',p:108.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.08,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:5.2,mom:58,trend:54,fund:65,risk:42},
+  {t:'JD',n:'JD.com ADR',p:26.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.15,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.2,mom:50,trend:46,fund:62,risk:44},
+  {t:'BIDU',n:'Baidu ADR',p:82.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.2,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:3.8,mom:48,trend:44,fund:60,risk:40},
+  {t:'NTES',n:'NetEase ADR',p:103.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.05,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:4.0,mom:60,trend:58,fund:66,risk:52},
+  {t:'TCOM',n:'Trip.com Group ADR',p:62.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.08,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:2.8,mom:62,trend:60,fund:65,risk:55},
+  {t:'YUMC',n:'Yum China Holdings',p:44.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.8,mom:58,trend:56,fund:68,risk:60},
+  {t:'BILI',n:'Bilibili ADR',p:14.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.33,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.9,mom:52,trend:48,fund:55,risk:38},
+  {t:'TME',n:'Tencent Music ADR',p:10.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.25,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.5,mom:54,trend:50,fund:58,risk:45},
+  {t:'LI',n:'Li Auto ADR',p:23.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.4,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.4,mom:50,trend:46,fund:52,risk:35},
+  {t:'XPEV',n:'XPeng ADR',p:11.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.45,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.8,mom:48,trend:44,fund:50,risk:32},
+  {t:'NIO',n:'NIO Inc ADR',p:4.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.4,mom:46,trend:42,fund:48,risk:30},
+  {t:'BEKE',n:'KE Holdings Beike ADR',p:18.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.2,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.9,mom:55,trend:52,fund:60,risk:48},
+  {t:'ZTO',n:'ZTO Express ADR',p:18.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.12,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.8,mom:57,trend:55,fund:63,risk:52},
+  {t:'0700.HK',n:'Tencent Holdings HK',p:380.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:14,mom:62,trend:60,fund:70,risk:55},
+  {t:'3690.HK',n:'Meituan HK',p:90.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.15,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:4,mom:58,trend:56,fund:62,risk:48},
+  {t:'1810.HK',n:'Xiaomi HK',p:46.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.2,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:2,mom:60,trend:58,fund:60,risk:50},
+  {t:'1211.HK',n:'BYD Company HK',p:27.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.08,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.5,mom:55,trend:54,fund:65,risk:52},
+  {t:'2318.HK',n:'Ping An Insurance HK',p:34.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.08,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.5,mom:52,trend:50,fund:65,risk:58},
+  {t:'TCS.NS',n:'Tata Consultancy Services',p:3850.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.7,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:60,mom:64,trend:66,fund:80,risk:72},
+  {t:'HDB',n:'HDFC Bank ADR',p:60.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.85,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:2,mom:60,trend:62,fund:74,risk:68},
+  {t:'HINDUNILVR.NS',n:'Hindustan Unilever',p:2400.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.9,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:40,mom:58,trend:60,fund:72,risk:70},
+  {t:'ASIANPAINT.NS',n:'Asian Paints India',p:2350.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.8,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:45,mom:60,trend:62,fund:76,risk:72},
+  {t:'TSM',n:'TSMC ADR',p:170.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.65,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:7,mom:65,trend:66,fund:82,risk:65},
+  {t:'2454.TW',n:'MediaTek Taiwan',p:1050.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.85,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:35,mom:62,trend:63,fund:74,risk:62},
+  {t:'D05.SI',n:'DBS Group Singapore',p:40.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.8,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1,mom:60,trend:62,fund:76,risk:70},
+  {t:'BBCA.JK',n:'Bank Central Asia',p:9500.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.75,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:160,mom:62,trend:64,fund:78,risk:72},
+  {t:'ITUB',n:'Itau Unibanco ADR',p:6.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.3,mom:58,trend:58,fund:68,risk:60},
+  {t:'WALMEX.MX',n:'Walmart de Mexico',p:75.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:2,mom:60,trend:62,fund:70,risk:65},
+  {t:'FEMSAUBD.MX',n:'FEMSA Mexico',p:155.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:5,mom:58,trend:58,fund:68,risk:62},
+  {t:'005930.KS',n:'Samsung Electronics',p:74000.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1800,mom:60,trend:60,fund:70,risk:58},
 ];
 
 var FD = {};
-var W = {mom:0.30,trend:0.20,fund:0.35,risk:0.15};
+/* v5.9.14 Aenderung D+E: Gewichte empirisch angepasst.
+   Trend: 0.20->0.25 (Faber 2007: 200MA dominanter Faktor; eigene WF-Daten bestaetigen).
+   Mom:   0.30->0.25 (Jegadeesh&Titman 1993: Momentum optimal 3-12M, nicht Tage;
+                      kurzfristiger MACD-Anteil im bisherigen Modell uebergewichtet).
+   Fund: 0.35 unveraendert (Novy-Marx 2013: Quality stabil).
+   Risk: 0.15 unveraendert. Summe: 0.25+0.25+0.35+0.15 = 1.00 */
+var W = {mom:0.25,trend:0.25,fund:0.35,risk:0.15};
 var WF_DATA = null;
 var WL_FILTER = 'all';
 var WL_SEL = null;
 var WL2 = {};          /* Ticker-Keys die in WL2 sind: {AAPL:true, MSFT:true, ...} */
 var WL2_SYNC = false;  /* true = Synopse+WL1 nur WL2-Ticker zeigen */
 var WL_SORT = 'score'; /* 'score' oder 'alpha' */
+var SELL_SCORE_FILTER = false; /* Score-Filter: SELL nur wenn Score < SELL_SCORE_MIN */
+var SELL_SCORE_MIN    = 55;    /* Schwellenwert (0-100) */
 
 /* ---- helpers ---- */
-function pgSt(s){if(s.peg===null||s.peg===undefined)return 'ng';if(s.peg<1.0)return 'uv';if(s.peg<1.5)return 'fr';if(s.peg<2.0)return 'sp';return 'ov';}
+/* v5.9.14 Aenderung B: PEG-Threshold von 2.0 auf 3.0 angehoben.
+   Quelle: Damodaran (NYU 2025) -- PEG kontextabhaengig, kein universeller
+   2.0-Schwellenwert empirisch begruendet. Industrieabhaengige Wachstumsraten
+   machen einen starren Schwellenwert problematisch.
+   Novy-Marx (2013): ROCE ist staerkerer Qualitaetsindikator als PEG.
+   Neue Stufe 'tt' (teuer tolerierbar) fuer PEG 2.0-3.0: Score-Malus aber kein Block.
+   BRK-B, JNJ, SYK, MCD, Soego Shoshas: PEG ~2.x -> jetzt kaufbar. */
+function pgSt(s){
+  if(s.peg===null||s.peg===undefined)return 'ng';
+  if(s.peg<1.0)return 'uv';   /* unterbewertet */
+  if(s.peg<1.5)return 'fr';   /* fair */
+  if(s.peg<2.0)return 'sp';   /* leicht teuer */
+  if(s.peg<3.0)return 'tt';   /* teuer aber tolerierbar (neu v5.9.14) */
+  return 'ov';                 /* >= 3.0: BUY geblockt */
+}
 function pgBk(s){var p=pgSt(s);return p==='ov'||p==='ng';}
 function pgLb(s){if(s.peg===null||s.peg===undefined)return 'n/a';return s.peg.toFixed(2);}
 function fp(v){if(v===null||v===undefined||isNaN(v))return 'n/a';return (v>=0?'+':'')+v.toFixed(1)+'%';}
@@ -675,20 +777,37 @@ function exitSignal(s){
 }
 function mSig(s){
   /* --- BUY-Seite: alle Bedingungen muessen erfuellt sein --- */
-  var zl = s.macdCross === 'below_zero';
-  var ok = zl && histOk(s) && s.above200 && !s.sw;
+  /* v5.9.14 Aenderung A: RSI-Filter entfernt.
+     Begruendung: Walk-Forward v3-v5 zeigte keinen messbaren OOS-Effekt.
+     Quelle: Chong & Ng (2008) -- RSI-Threshold marktspezifisch, kein
+     universeller 72er-Schwellenwert peer-reviewed begruendet.
+     RSI > 72 wird im Detail-View weiterhin als Warnung angezeigt. */
+  var zl  = s.macdCross === 'below_zero';
+  var ok  = zl && histOk(s) && s.above200 && !s.sw;
   if(ok){
     if(isDivBull(s)){if(pgBk(s))return 'pb';return 'strong';}
     if(pgBk(s)) return 'pb';
     return 'buy';
   }
+  /* rsi_block als Signaltyp entfernt (v5.9.14) -- Archiv-Snapshots behalten alten Wert */
   /* --- SELL-Seite: eine Bedingung reicht --- */
   var ex = exitSignal(s);
-  if(ex) return ex;
+  if(ex){
+    /* Score-Filter v5.9.13: SELL unterdruecken wenn Score >= Schwellenwert
+       Methodisch: nur fuer Live-Entscheidungen, nicht im Backtest.
+       Fundamental starke Positionen koennen trotz technischem Signal gehalten werden. */
+    if(SELL_SCORE_FILTER){
+      var sc = cSc(s);
+      if(sc >= SELL_SCORE_MIN) return 'hold_sf'; /* SF = Score-Filter aktiv */
+    }
+    return ex;
+  }
   if(s.sw) return 'weak';
   return 'watch';
 }
 function isSell(sig){return sig==='sell'||sig==='sell_zl'||sig==='sell_hist'||sig==='sell_ma';}
+function isHoldSF(sig){return sig==='hold_sf';}
+function isRsiBlock(sig){return sig==='rsi_block';}
 function sellLabel(sig){
   if(sig==='sell') return 'SELL';
   if(sig==='sell_zl') return 'SELL ZL';
@@ -698,44 +817,81 @@ function sellLabel(sig){
 }
 function sellWhy(s,sig){
   if(sig==='sell') return 'MACD ueber ZL + Hist negativ + unter 200MA';
-  if(sig==='sell_zl') return 'MACD ueber Nulllinie (Entry-Bedingung weggefallen)';
+  if(sig==='sell_zl') return 'MACD ueber Nulllinie + Hist negativ (Hysterese v5.9.6)';
   if(sig==='sell_hist') return 'Histogramm negativ (Momentum dreht)';
   if(sig==='sell_ma') return 'Kurs unter 200MA (Trend gebrochen)';
   return '';
 }
 
-/* ---- momentum score v5.9 ----
-   Kombiniert kurzfristiges MACD/RSI-Signal (s.mom, 50%)
+/* ---- volatility adjustment v5.9.14 (Aenderung C) ----
+   Quelle: Daniel & Moskowitz (2016) "Momentum crashes" JFE:
+   Momentum-Crashs entstehen in Hochvolatilitaetsphasen.
+   Loesung: Momentum-Score mit inverser Volatilitaet skalieren.
+   ATR als % des Kurses = Proxy fuer realisierte Volatilitaet.
+   Referenz: 2% ATR-% (typisch Large Cap Stabilitaet) = keine Anpassung (adj=1.0).
+   Bei 4% ATR-% = adj=0.5, bei >=10% = adj=0.2 (Mindestbeitrag).
+   Formel: adj = clamp(2.0 / volPct, 0.2, 1.0)
+   ES5-kompatibel: kein Exponent-Operator, keine Arrow-Functions. */
+function volAdj(s){
+  if(!s.p||s.p<=0||!s.atr||s.atr<=0)return 1.0;
+  var volPct=(s.atr/s.p)*100;
+  if(volPct<=0)return 1.0;
+  var adj=2.0/volPct;
+  if(adj>1.0)adj=1.0;
+  if(adj<0.2)adj=0.2;
+  return adj;
+}
+
+/* ---- momentum score v5.9.14 ----
+   Kombiniert kurzfristiges MACD-Signal (s.mom, 50%)
    mit 12-Monats-Preis-Momentum aus JSON (fd.mom12m, 50%).
-   Ohne JSON-Daten: unveraendert s.mom (rueckwaertskompatibel).
-   mom12m normierung: -50%..+50% -> 0..100
-   Clamp: min 0, max 100 */
+   Aenderung C: Volatilitaets-Adjustierung nach Daniel & Moskowitz (2016).
+   Hohes ATR relativ zum Kurs -> Regression zur Mitte (50).
+   Ohne JSON-Daten: volAdj auf statischen Wert anwenden.
+   mom12m normierung: -50%..+50% -> 0..100 | Clamp: min 0, max 100 */
 function momSc(s){
   var fd = FD[s.t];
+  var adj = volAdj(s); /* 0.2 bis 1.0 */
   if(!fd || fd.mom12m === null || fd.mom12m === undefined){
-    return s.mom; /* Fallback: statischer Wert */
+    /* Fallback: statischer Wert, vol-adjustiert zur Mitte */
+    return Math.round(s.mom * adj + 50 * (1.0 - adj));
   }
   /* mom12m in 0-100 normieren: +50% -> 100, 0% -> 50, -50% -> 0 */
   var raw = fd.mom12m;
-  var norm = 50 + raw; /* +50%->100, 0->50, -50->0 */
+  var norm = 50 + raw;
   if(norm > 100) norm = 100;
   if(norm < 0) norm = 0;
   norm = Math.round(norm);
-  /* 50% kurzfristig (s.mom) + 50% langfristig (norm) */
-  return Math.round(s.mom * 0.5 + norm * 0.5);
+  /* 50% kurzfristig (s.mom) + 50% langfristig (norm), dann vol-adjustiert */
+  var rawMom = Math.round(s.mom * 0.5 + norm * 0.5);
+  return Math.round(rawMom * adj + 50 * (1.0 - adj));
 }
 
-/* ---- fundamental score ---- */
+/* ---- fundamental score v5.9.14 ---- */
+/* Aenderung D: ROCE-Gewicht 40%->50%, PEG-Gewicht 25%->15%.
+   Quelle: Novy-Marx (2013) + Novy-Marx & Medhat (2025): Profitabilitaet
+   (ROCE/Gross Profit) ist der dominante Quality-Praediktor und erklaert
+   alle anderen Quality-Faktoren. PEG geschwaeche weil Threshold auf 3.0
+   angehoben (Aenderung B) -- weniger haertes Kriterium = weniger Gewicht.
+   Neue Gewichte: 50% ROCE + 35% FCF + 15% PEG = 100% */
 function fSc(s){
   var fd=FD[s.t];if(!fd)return s.fund;
+  /* PEG-Score: feingranularer, Grenzwert jetzt bei 3.0 (Aenderung B) */
   var ps=50;
-  if(s.peg!==null&&s.peg!==undefined){if(s.peg<0.8)ps=100;else if(s.peg<1.2)ps=85;else if(s.peg<1.6)ps=70;else if(s.peg<2.0)ps=50;else ps=20;}
+  if(s.peg!==null&&s.peg!==undefined){
+    if(s.peg<0.8)ps=100;else if(s.peg<1.2)ps=85;
+    else if(s.peg<1.6)ps=70;else if(s.peg<2.0)ps=55;
+    else if(s.peg<2.5)ps=35;else if(s.peg<3.0)ps=20;
+    else ps=5; /* >= 3.0 = BUY geblockt, kaum Fund-Score */
+  }
+  /* FCF Yield: unveraendert */
   var fs=40;
   if(fd.fcf!==null&&fd.fcf!==undefined){if(fd.fcf>6)fs=100;else if(fd.fcf>4)fs=85;else if(fd.fcf>2)fs=65;else if(fd.fcf>0)fs=40;else fs=10;}
+  /* ROCE/ROE: Hauptgewicht (Novy-Marx 2013) */
   var rs=45;
   var rv=fd.roce!==null&&fd.roce!==undefined?fd.roce:(fd.roe!==null&&fd.roe!==undefined?fd.roe:null);
   if(rv!==null){if(rv>30)rs=100;else if(rv>20)rs=80;else if(rv>12)rs=60;else if(rv>6)rs=40;else rs=15;}
-  return Math.round(ps*0.25+fs*0.35+rs*0.40);
+  return Math.round(ps*0.15+fs*0.35+rs*0.50);
 }
 
 /* ---- composite score ---- */
@@ -771,7 +927,8 @@ function goTab(n,btn){
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
   var pg2=document.getElementById(pgs[n]);if(pg2)pg2.style.display='block';
   if(btn)btn.classList.add('active');
-  if(n===0)rSyn();if(n===1)rWL();if(n===2)rWL2();if(n===3)rFund();if(n===4)rWF();
+  if(n===0)rSyn();if(n===1)rWL();if(n===2)rWL2();if(n===3)rFund();
+  if(n===4){rWF();try{archHistRend();}catch(e){}}
 }
 </script>
 
@@ -789,11 +946,12 @@ function rSyn(){
     if(sig==='strong')strongs++;
     else if(sig==='buy')buys++;
     else if(sig==='pb')pbs++;
+    /* rsi_block als Signaltyp entfernt v5.9.14 */
     else if(isSell(sig)||sig==='weak')sells++;
   }
   var ce=document.getElementById('cnt');if(ce)ce.textContent=strongs+buys;
   var el=document.getElementById('s0');
-  if(el)el.innerHTML=kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Geblockt',pbs,'PEG > 2.0','#f0c000');
+  if(el)el.innerHTML=kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
 
   /* STRONG BUY cards */
   var sStrong=[],sBuys=[],sPbs=[],sSells=[];
@@ -883,11 +1041,12 @@ function rWL(){
     if(ms==='strong')strongs++;
     else if(ms==='buy')buys++;
     else if(ms==='pb')pbs++;
+    /* rsi_block entfernt v5.9.14 */
     else if(isSell(ms)||ms==='weak')sells++;
     else watches++;
   }
   var kpi=document.getElementById('wl-kpi');
-  if(kpi)kpi.innerHTML=kpiCard('STRONG',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'','#f0c000')+kpiCard('Sell/Weak',sells,'','#ff6666');
+  if(kpi)kpi.innerHTML=kpiCard('STRONG',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000')+kpiCard('Sell/Weak',sells,'','#ff6666');
   wlRend(scored);
 }
 
@@ -901,7 +1060,7 @@ function wlFilt(f,btn){
 }
 
 function wlRend(scored){
-  /* Drei Gruppen: BUY (strong+buy+pb), HOLD (watch+weak), SELL (alle sell_*) */
+  /* Drei Gruppen: BUY (strong+buy+pb), HOLD (watch+weak+hold_sf), SELL */
   var i,s,sc,sig;
   var gBuy=[],gHold=[],gSell=[];
   for(i=0;i<scored.length;i++){
@@ -909,14 +1068,14 @@ function wlRend(scored){
     if(WL_FILTER!=='all'){
       if(WL_FILTER==='strong'&&sig!=='strong')continue;
       if(WL_FILTER==='buy'&&sig!=='buy')continue;
-      if(WL_FILTER==='pb'&&sig!=='pb')continue;
+      if(WL_FILTER==='pb'&&sig!=='pb')continue; /* rsi_block entfernt v5.9.14 */
       if(WL_FILTER==='sell'&&!isSell(sig)&&sig!=='weak')continue;
       if(WL_FILTER==='watch'&&sig!=='watch'&&sig!=='weak')continue;
     }
     var entry={s:s,sc:sc,sig:sig};
     if(isSell(sig)||sig==='weak') gSell.push(entry);
     else if(sig==='strong'||sig==='buy'||sig==='pb') gBuy.push(entry);
-    else gHold.push(entry);
+    else gHold.push(entry); /* watch, hold_sf */
   }
   /* Innerhalb jeder Gruppe nach Score sortieren */
   gBuy.sort(function(a,b){return b.sc-a.sc;});
@@ -927,16 +1086,20 @@ function wlRend(scored){
     s=entry.s;sc=entry.sc;sig=entry.sig;
     var fd=FD[s.t];
     var isStrong=sig==='strong';
+    var isRsiBlk=sig==='rsi_block'; /* Archiv-Kompatibilitaet */
+    var isHoldSf=sig==='hold_sf';
     var isSellSig=isSell(sig);
-    var sc2=isStrong?'#ff9f1c':sig==='buy'?'#00e57a':sig==='pb'?'#f0c000':isSellSig||sig==='weak'?'#ff6666':'#7a9bb5';
-    var slbl=isStrong?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG':sig==='weak'?'WEAK':isSellSig?sellLabel(sig):'WATCH';
+    /* RSI > 72: nur Warn-Hinweis im Label, kein eigener Signaltyp mehr */
+    var rsiWarn=s.rsi>72?' ⚠':'';
+    var sc2=isStrong?'#ff9f1c':sig==='buy'?'#00e57a':sig==='pb'?'#f0c000':isRsiBlk?'#e8a020':isHoldSf?'#b07cf8':isSellSig||sig==='weak'?'#ff6666':'#7a9bb5';
+    var slbl=isStrong?'STRONG'+rsiWarn:sig==='buy'?'BUY'+rsiWarn:sig==='pb'?'PEG-BLK':isRsiBlk?'RSI-BLK':isHoldSf?'HOLD SF':sig==='weak'?'WEAK':isSellSig?sellLabel(sig):'WATCH';
     var scc=scCol(sc);
     var pgD=(s.peg!==null&&s.peg!==undefined)?s.peg.toFixed(2):'--';
     var pgC=pgBk(s)?'#f0c000':s.peg<1.5?'#00e57a':'#7a9bb5';
     var fcfD=fd&&fd.fcf!==null?fp(fd.fcf):'--';
     var rv=fd?(fd.roce!==null&&fd.roce!==undefined?fd.roce:(fd.roe!==null&&fd.roe!==undefined?fd.roe:null)):null;
     var roceD=rv!==null?fp(rv):'--';
-    var rsiC=s.rsi<30?'#00e57a':s.rsi>70?'#ff6666':'#7a9bb5';
+    var rsiC=s.rsi<30?'#00e57a':s.rsi>72?'#ff6666':'#7a9bb5';
     var rowBg=WL_SEL===s.t?'background:#101d2e;':'background:#0c1420;';
     var topC=rank<=3?'#ffd040':'#7a9bb5';
     var borderLeft=isStrong?'border-left:3px solid #ff9f1c;':isSellSig?'border-left:3px solid #ff3f3f;':'';
@@ -1003,14 +1166,18 @@ function wlDetail(ticker){
   WL_SEL=ticker;
   var sig=mSig(s);var sc=cSc(s);var fd=FD[s.t];
   var isStrong=sig==='strong';
+  var isRsiBlkD=sig==='rsi_block';
+  var isHoldSfD=sig==='hold_sf';
   var isSellD=isSell(sig);
-  var sc2=isStrong?'#ff9f1c':sig==='buy'?'#00e57a':sig==='pb'?'#f0c000':isSellD||sig==='weak'?'#ff6666':'#00c8f0';
+  var sc2=isStrong?'#ff9f1c':sig==='buy'?'#00e57a':sig==='pb'?'#f0c000':isRsiBlkD?'#e8a020':isHoldSfD?'#b07cf8':isSellD||sig==='weak'?'#ff6666':'#00c8f0';
   var fs2=fSc(s);
   var minH=(s.atr*0.05).toFixed(2);
   var why='';
   if(isStrong)why='STRONG: ZL ok | >200MA | PEG '+pgLb(s)+' | '+(s.div==='bull_hidden'?'Bull Hidden Div':'Bull Regular Div')+' | Hist '+s.hist.toFixed(2)+' > '+minH;
   else if(sig==='buy')why='ZL ok | Ueber 200MA | PEG '+pgLb(s)+' < 2.0 | Hist '+s.hist.toFixed(2)+' > '+minH;
   else if(sig==='pb')why='PEG '+pgLb(s)+' > 2.0 blockiert | ZL+200MA ok';
+  else if(isRsiBlkD)why='RSI '+s.rsi+' > 72 -- ueberkauft | ZL+200MA ok | Warten auf Abkuehlung';
+  else if(isHoldSfD)why='Score-Filter aktiv: Score '+cSc(s)+' >= '+SELL_SCORE_MIN+' -- SELL unterdrueckt | '+sellWhy(s,exitSignal(s)||'sell');
   else if(isSellD)why=sellWhy(s,sig);
   else if(sig==='weak')why='Seitwaertsmarkt';
   else{
@@ -1019,7 +1186,7 @@ function wlDetail(ticker){
     var hf=histOk(s)?'Hist ok ('+s.hist.toFixed(2)+')':'Hist zu flach ('+s.hist.toFixed(2)+'<'+minH+')';
     why=zl2+' | '+ma2+' | '+hf;
   }
-  var sigTitleSuffix=isSellD?' ('+sellLabel(sig)+')':isStrong?' &#11088;':'';
+  var sigTitleSuffix=isSellD?' ('+sellLabel(sig)+')':isStrong?' &#11088;':isRsiBlkD?' &#128683;':isHoldSfD?' &#128994;':'';
   var box='background:rgba(255,255,255,.05);border-radius:6px;padding:7px 9px';
   var row='display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:3px';
   var out='<div style="background:#0c1420;border:1px solid #1a2a3a;border-left:3px solid '+sc2+';border-radius:12px;padding:16px">';
@@ -1074,14 +1241,32 @@ function wlDetail(ticker){
      WL2 + SYNC + SORT
      ============================================================ -->
 <script>
-/* ---- Sync-Toggle: schaltet zwischen Alle / WL2-gefiltert ---- */
+/* ---- Score-Filter Toggle ---- */
+function toggleSellFilter(btn){
+  SELL_SCORE_FILTER = !SELL_SCORE_FILTER;
+  /* Alle SF-Buttons aktualisieren */
+  var sfBtns = document.querySelectorAll('#sf-btn, #sf-btn-wl'), i;
+  for(i=0;i<sfBtns.length;i++){
+    var b = sfBtns[i]; if(!b) continue;
+    b.textContent    = SELL_SCORE_FILTER ? ('SF: >' + SELL_SCORE_MIN) : 'SF: aus';
+    b.style.borderColor = SELL_SCORE_FILTER ? '#b07cf8' : '#1a2a3a';
+    b.style.color       = SELL_SCORE_FILTER ? '#b07cf8' : 'var(--mut)';
+    b.style.background  = SELL_SCORE_FILTER ? 'rgba(176,124,248,.1)' : 'transparent';
+  }
+  rSyn();
+  rWL();
+}
 function toggleSync(btn){
   WL2_SYNC = !WL2_SYNC;
-  if(btn){
-    btn.textContent = WL2_SYNC ? '\u{1F4E1} WL2' : '\u{1F501} Alle';
-    btn.style.borderColor = WL2_SYNC ? '#ff9f1c' : '#1a2a3a';
-    btn.style.color       = WL2_SYNC ? '#ff9f1c' : 'var(--mut)';
-    btn.style.background  = WL2_SYNC ? 'rgba(255,159,28,.1)' : 'transparent';
+  /* Alle Sync-Buttons aktualisieren */
+  var syncBtns = [document.getElementById('sync-btn'), document.getElementById('sync-btn-syn')];
+  var i;
+  for(i=0;i<syncBtns.length;i++){
+    var b = syncBtns[i]; if(!b) continue;
+    b.textContent    = WL2_SYNC ? '\u{1F4E1} WL2' : '\u{1F501} Alle';
+    b.style.borderColor = WL2_SYNC ? '#ff9f1c' : '#1a2a3a';
+    b.style.color       = WL2_SYNC ? '#ff9f1c' : 'var(--mut)';
+    b.style.background  = WL2_SYNC ? 'rgba(255,159,28,.1)' : 'transparent';
   }
   rSyn();
   rWL();
@@ -1138,10 +1323,21 @@ function wl2Save(){
 function wl2Load(){
   try{
     var raw = storeGet(WL2_KEY);
+    /* v5.9.15 Migration: versuche alte Key-Varianten wenn neuer leer */
+    if(!raw){
+      var oldKeys = ['stockiq_wl2_v59','stockiq_wl2_v58','stockiq_wl2'];
+      for(var ki=0;ki<oldKeys.length;ki++){
+        if(oldKeys[ki] !== WL2_KEY){
+          raw = storeGet(oldKeys[ki]);
+          if(raw){ console.log('WL2 migriert von: ' + oldKeys[ki]); break; }
+        }
+      }
+    }
     if(!raw) return;
     var arr = JSON.parse(raw);
     WL2 = {};
     for(var i=0;i<arr.length;i++) WL2[arr[i]] = true;
+    wl2Save(); /* unter aktuellem Key abspeichern */
     updWL2Cnt();
     console.log('WL2 geladen: ' + arr.length + ' Ticker');
   }catch(e){ console.warn('WL2 laden fehlgeschlagen: '+e.message); }
@@ -1161,6 +1357,82 @@ function wl2Clear(){
   wl2Save();
   updWL2Cnt();
   rWL2();
+}
+
+/* WL2 Export: iOS-kompatibel via Textarea-Modal (Blob-Download blockiert) */
+function wl2Export(){
+  var tickers = Object.keys(WL2);
+  if(tickers.length === 0){ alert('WL2 ist leer.'); return; }
+  var txt = tickers.join('\n');
+  /* Modal erstellen */
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box';
+  var box = document.createElement('div');
+  box.style.cssText = 'background:#0c1420;border:1px solid #00c8f0;border-radius:14px;padding:20px;width:100%;max-width:420px;max-height:80vh;display:flex;flex-direction:column;gap:12px';
+  box.innerHTML = '<div style="font-family:monospace;font-size:13px;color:#00c8f0;font-weight:700">WL2 Export — '+tickers.length+' Ticker</div>'
+    + '<div style="font-size:11px;color:var(--mut)">Alles markieren und kopieren (Doppeltippen -> Alles auswählen):</div>';
+  var ta = document.createElement('textarea');
+  ta.value = txt;
+  ta.style.cssText = 'width:100%;box-sizing:border-box;height:160px;background:#060e1a;border:1px solid #223040;border-radius:8px;color:#dce8f5;font-family:monospace;font-size:12px;padding:10px;resize:none;outline:none';
+  ta.readOnly = true;
+  var btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:8px';
+  /* Copy-Button */
+  var btnCopy = document.createElement('button');
+  btnCopy.textContent = 'Kopieren';
+  btnCopy.style.cssText = 'flex:1;font-family:monospace;font-size:12px;padding:10px;border-radius:8px;border:1px solid #00c8f0;color:#00c8f0;background:rgba(0,200,240,.1);cursor:pointer';
+  btnCopy.onclick = function(){
+    ta.select();
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){ btnCopy.textContent = 'Kopiert!'; });
+      } else {
+        document.execCommand('copy');
+        btnCopy.textContent = 'Kopiert!';
+      }
+    }catch(ex){ btnCopy.textContent = 'Manuell kopieren'; }
+  };
+  /* Schließen-Button */
+  var btnClose = document.createElement('button');
+  btnClose.textContent = 'Schliessen';
+  btnClose.style.cssText = 'flex:1;font-family:monospace;font-size:12px;padding:10px;border-radius:8px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer';
+  btnClose.onclick = function(){ document.body.removeChild(overlay); };
+  btnRow.appendChild(btnCopy);
+  btnRow.appendChild(btnClose);
+  box.appendChild(ta);
+  box.appendChild(btnRow);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+  /* Auto-Select nach kurzer Verzögerung */
+  setTimeout(function(){ ta.focus(); ta.select(); }, 100);
+}
+
+/* WL2 Import: liest .txt (ein Ticker pro Zeile) oder .json Array */
+function wl2Import(input){
+  var file = input.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      var text = e.target.result.trim();
+      var arr;
+      if(text.charAt(0) === '['){
+        arr = JSON.parse(text); /* JSON-Array */
+      } else {
+        arr = text.split(/[\r\n,]+/).map(function(t){ return t.trim(); }).filter(Boolean);
+      }
+      var added = 0;
+      for(var i=0;i<arr.length;i++){
+        if(arr[i]){ WL2[arr[i]] = true; added++; }
+      }
+      wl2Save();
+      updWL2Cnt();
+      rWL2();
+      alert('WL2 Import: ' + added + ' Ticker geladen.');
+    }catch(ex){ alert('Import fehlgeschlagen: ' + ex.message); }
+    input.value = '';
+  };
+  reader.readAsText(file);
 }
 
 function wl2SelAll(){
@@ -1185,17 +1457,34 @@ function updWL2Cnt(){
 function rWL2(){
   var el = document.getElementById('wl2-list'); if(!el) return;
   var i, s, sc, sig, out = '';
+
+  /* Suchbegriff */
+  var searchEl = document.getElementById('wl2-search');
+  var q = searchEl ? searchEl.value.toLowerCase().trim() : '';
+
   var scored = [], pool = STOCKS;
   for(i=0;i<pool.length;i++) scored.push({s:pool[i], sc:cSc(pool[i])});
-  scored.sort(function(a,b){ return b.sc - a.sc; });
 
+  /* Sortierung: WL2-Mitglieder zuerst, dann nach Score */
+  scored.sort(function(a,b){
+    var aIn = WL2[a.s.t] ? 1 : 0;
+    var bIn = WL2[b.s.t] ? 1 : 0;
+    if(bIn !== aIn) return bIn - aIn;
+    return b.sc - a.sc;
+  });
+
+  var shown = 0;
   for(i=0;i<scored.length;i++){
     s = scored[i].s; sc = scored[i].sc; sig = mSig(s);
+    /* Suchfilter: Ticker oder Klarname */
+    if(q && s.t.toLowerCase().indexOf(q) === -1 && s.n.toLowerCase().indexOf(q) === -1) continue;
+    shown++;
+
     var inWL2 = !!WL2[s.t];
     var sc2 = sig==='strong'?'#ff9f1c':sig==='buy'?'#00e57a':sig==='pb'?'#f0c000':
-              isSell(sig)||sig==='weak'?'#ff6666':'#7a9bb5';
-    var slbl = sig==='strong'?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG':
-               sig==='weak'?'WEAK':isSell(sig)?sellLabel(sig):'WATCH';
+              sig==='rsi_block'?'#e8a020':isSell(sig)||sig==='weak'?'#ff6666':'#7a9bb5';
+    var slbl = sig==='strong'?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG-BLK':
+               sig==='rsi_block'?'RSI-BLK':sig==='weak'?'WEAK':isSell(sig)?sellLabel(sig):'WATCH';
     var rowBg = inWL2 ? 'background:#0f1e10;border:1px solid rgba(255,159,28,.4);' :
                         'background:#0c1420;border:1px solid #1a2a3a;';
     out += '<div style="'+rowBg+'border-radius:8px;padding:11px 13px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">';
@@ -1210,7 +1499,9 @@ function rWL2(){
     out += '<button onclick="wl2Toggle(\''+s.t+'\')" style="font-family:monospace;font-size:11px;padding:6px 12px;border-radius:8px;border:1px solid '+(inWL2?'rgba(255,159,28,.6)':'rgba(0,200,240,.4)')+';color:'+(inWL2?'#ff9f1c':'var(--acc)')+';background:'+(inWL2?'rgba(255,159,28,.1)':'transparent')+';cursor:pointer;white-space:nowrap">'+(inWL2?'&#10003; WL2':'+ WL2')+'</button>';
     out += '</div>';
   }
-  if(!out) out = '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Keine Ticker</div>';
+  if(!out){
+    out = '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">'+(q?'Keine Treffer fuer "'+q+'"':'Keine Ticker')+'</div>';
+  }
   el.innerHTML = out;
 }
 </script>
@@ -1219,9 +1510,9 @@ function rWL2(){
      FUNDAMENTALS + localStorage-Persistenz
      ============================================================ -->
 <script>
-var LS_KEY     = 'stockiq_fund_v57';
-var ARCH_KEY   = 'stockiq_arch_v57';
-var WL2_KEY    = 'stockiq_wl2_v59';  /* WL2 persistent, nur manuell aenderbar */
+var LS_KEY     = 'stockiq_fund_v515';  /* v5.9.15: neuer Key loescht alten 262-Ticker-Cache */
+var ARCH_KEY   = 'stockiq_arch_v515'; /* Archiv ebenfalls neu -- 273 Ticker */
+var WL2_KEY    = 'stockiq_wl2_v59';   /* WL2 unveraendert -- Auswahl bleibt erhalten */
 
 /* ================================================================
    STORAGE-WRAPPER
@@ -1419,7 +1710,7 @@ function applyFund(fund){
     "6762.T":"6762T","7832.T":"7832T","4704.T":"4704T","9766.T":"9766T","8591.T":"8591T",
     "6770.T":"6770T","6857.T":"6857T","7269.T":"7269T","9022.T":"9022T","8802.T":"8802T",
     "3659.T":"3659T","2413.T":"2413T","3086.T":"3086T","9064.T":"9064T",
-    "8058.T":"8058T","8001.T":"8001T","8031.T":"8031T",
+    "8058.T":"8058T","8001.T":"8001T","8031.T":"8031T","8002.T":"8002T","8053.T":"8053T","8015.T":"8015T",
     "6758.T":"6758T","6861.T":"6861T","7974.T":"7974T","4519.T":"4519T","4523.T":"4523T",
     "6367.T":"6367T","6902.T":"6902T","7203.T":"7203T","8316.T":"8316T","8411.T":"8411T",
     "8306.T":"8306T","9432.T":"9432T","4543.T":"4543T","6146.T":"6146T","4661.T":"4661T",
@@ -1430,6 +1721,12 @@ function applyFund(fund){
     "9022.T":"9022T","9020.T":"9020T","5108.T":"5108T","6971.T":"6971T","8766.T":"8766T",
     "8750.T":"8750T","2503.T":"2503T","2502.T":"2502T","4452.T":"4452T","6326.T":"6326T",
     "4901.T":"4901T","4578.T":"4578T","9983.T":"9983T","6645.T":"6645T","4704.T":"4704T"
+
+    "9983.T":"9983T","6098.T":"6098T",
+    "0700.HK":"0700HK","3690.HK":"3690HK","1810.HK":"1810HK","1211.HK":"1211HK","2318.HK":"2318HK",
+    "TCS.NS":"TCSNS","HINDUNILVR.NS":"HINDUNILVR","ASIANPAINT.NS":"ASIANPAINT",
+    "2454.TW":"2454TW","D05.SI":"D05SI","BBCA.JK":"BBCAJK",
+    "WALMEX.MX":"WALMEXMX","FEMSAUBD.MX":"FEMSAUBD","005930.KS":"005930KS"
   };
   var keys=Object.keys(fund),i2;
   for(i2=0;i2<keys.length;i2++){
@@ -1546,6 +1843,19 @@ function initFund(){
   try{ updArchStatus(); }catch(e){}
   try{
     var raw=storeGet(LS_KEY);
+    /* v5.9.15 Cache-Migration: versuche alten Key wenn neuer leer */
+    if(!raw){
+      var oldFundKeys=['stockiq_fund_v57','stockiq_fund_v56','stockiq_fund_v55'];
+      for(var fki=0;fki<oldFundKeys.length;fki++){
+        raw=storeGet(oldFundKeys[fki]);
+        if(raw){
+          console.log('Fundamentals: migriere Cache von '+oldFundKeys[fki]+' -> '+LS_KEY);
+          storeSet(LS_KEY, raw); /* unter neuem Key sichern */
+          storeDel(oldFundKeys[fki]); /* alten Key aufraemen */
+          break;
+        }
+      }
+    }
     if(!raw)return;
     var cached=JSON.parse(raw);
     if(!cached||!cached.data)return;
@@ -1624,8 +1934,28 @@ function loadWF(inp){
   reader.onload=function(e){
     try{
       WF_DATA=JSON.parse(e.target.result);
+      /* Format-Normalisierung: v3 (global_stats) und v4 (summary) vereinheitlichen */
+      if(!WF_DATA.global_stats && WF_DATA.summary){
+        var s=WF_DATA.summary;
+        WF_DATA.global_stats={
+          standard:{win_rate:s.avg_is_wr||0, avg_return:0, n_signals:s.total_trades||0},
+          alpha:   {win_rate:s.avg_oos_wr||0, avg_return:0, n_signals:s.n_oos_windows||0}
+        };
+      }
+      /* walk_forward Eintraege normalisieren (fehlende Felder mit Fallback) */
+      var wf=WF_DATA.walk_forward||[];
+      for(var i=0;i<wf.length;i++){
+        var w=wf[i];
+        if(!w.start)  w.start  = w.oos_start||'--';
+        if(!w.end)    w.end    = w.oos_end||'--';
+        if(w.win_rate===undefined||w.win_rate===null) w.win_rate = w.oos_wr||0;
+        if(!w.n_signals) w.n_signals = w.oos_trades||0;
+        if(w.avg_return===undefined||w.avg_return===null) w.avg_return = 0;
+        if(!w.window) w.window = i+1;
+      }
       if(dm)dm.style.background='#00e57a';
-      if(mm)mm.textContent='Geladen: '+(WF_DATA.meta?WF_DATA.meta.n_tickers:'?')+' Ticker';
+      var ver=(WF_DATA.meta&&WF_DATA.meta.version)?(' v:'+WF_DATA.meta.version):'';
+      if(mm)mm.textContent='Geladen: '+(WF_DATA.meta?(WF_DATA.meta.n_tickers||WF_DATA.meta.tickers||'?'):'?')+' Ticker'+ver;
       rWF();
     }catch(err){if(dm)dm.style.background='#ff6666';if(mm)mm.textContent='Fehler: '+err.message;}
   };
@@ -1636,15 +1966,19 @@ function rWF(){
   if(!WF_DATA)return;
   var wres=document.getElementById('wres');if(wres)wres.style.display='block';
   var wf=WF_DATA.walk_forward||[];var gs=WF_DATA.global_stats||WF_DATA.summary||{};
-  var stdWR=gs.standard?gs.standard.win_rate:(gs.standard_wr||0);
-  var alpWR=gs.alpha?gs.alpha.win_rate:(gs.alpha_wr||0);
+  /* v3: global_stats.standard/alpha -- v4: summary.avg_is_wr/avg_oos_wr */
+  var stdWR = gs.standard ? gs.standard.win_rate : (gs.avg_is_wr || gs.standard_wr || 0);
+  /* avg_oos_wr kann null sein wenn keine Fenster >= 3 Trades -- Fallback total_wr */
+  var rawOOS = gs.alpha ? gs.alpha.win_rate : gs.avg_oos_wr;
+  var alpWR  = (rawOOS !== null && rawOOS !== undefined) ? rawOOS : (gs.total_wr || gs.alpha_wr || 0);
+  var alpSub = (rawOOS === null || rawOOS === undefined) ? 'Fallback: Gesamt-WR' : '5 Filter';
   var wfAWR=0,i;
   if(wf.length){for(i=0;i<wf.length;i++)wfAWR+=wf[i].win_rate;wfAWR=+(wfAWR/wf.length).toFixed(1);}else{wfAWR=alpWR;}
   var stab='n/a',stabC='#00c8f0';
   if(wf.length>1){var mn=wfAWR,va=0;for(i=0;i<wf.length;i++)va+=(wf[i].win_rate-mn)*(wf[i].win_rate-mn);var sd=Math.sqrt(va/wf.length);stab=sd.toFixed(1)+'pp';stabC=sd<8?'#00e57a':sd<15?'#00c8f0':'#ff6666';}
   var oof=+(alpWR-wfAWR).toFixed(1);var oofC=oof<5?'#00e57a':oof<15?'#f0c000':'#ff6666';
   var w0=document.getElementById('w0');
-  if(w0)w0.innerHTML=kpiCard('IS Win-Rate',stdWR+'%','',stdWR>=60?'#00e57a':'#f0c000')+kpiCard('Alpha WR',alpWR+'%','5 Filter','#00e57a')+kpiCard('OOS Avg',wfAWR+'%','',wfAWR>=60?'#00e57a':'#f0c000')+kpiCard('Stabilitaet',stab,'',stabC);
+  if(w0)w0.innerHTML=kpiCard('IS Win-Rate',stdWR+'%','',stdWR>=60?'#00e57a':'#f0c000')+kpiCard('Alpha WR',alpWR+'%',alpSub,'#00e57a')+kpiCard('OOS Avg',wfAWR+'%','',wfAWR>=60?'#00e57a':'#f0c000')+kpiCard('Stabilitaet',stab,'',stabC);
   setTimeout(function(){drawWFC(wf);},80);
   var cards='';
   for(i=0;i<wf.length;i++){
@@ -1661,6 +1995,7 @@ function rWF(){
   var oof2=oof<5?'Kein Overfitting.':oof<15?'Leichtes Overfitting.':'Starkes Overfitting!';
   var w2=document.getElementById('w2');if(w2)w2.innerHTML=kpiCard('Stabilitaet',stab,'StdAbw OOS WR',stabC);
   var w3=document.getElementById('w3');if(w3)w3.innerHTML=kpiCard('Overfitting-Gap',oof.toFixed(1)+'pp','IS vs. OOS',oofC)+'<div style="margin-top:8px;font-size:11px;color:var(--mut)">'+oof2+'</div>';
+  try{ archHistRend(); }catch(e){ /* Signal-History noch nicht geladen */ }
 }
 
 function drawWFC(wf){
@@ -1730,6 +2065,121 @@ function dlDataUrl(){
     + '</div>';
   document.body.insertBefore(div, document.body.firstChild);
 }
+</script>
+
+<!-- ============================================================
+     SIGNAL-HISTORY (Archiv-Auswertung)
+     ============================================================ -->
+<script>
+var ARCH_HIST_FILT = 'all';
+
+function archHistFilt(f, btn){
+  ARCH_HIST_FILT = f;
+  var btns = document.querySelectorAll('#arch-hist-wrap .tf'), i;
+  for(i=0;i<btns.length;i++){
+    btns[i].style.borderColor='#223040';btns[i].style.color='var(--mut)';
+    btns[i].classList.remove('active');
+  }
+  if(btn){btn.style.borderColor='var(--acc)';btn.style.color='var(--acc)';btn.classList.add('active');}
+  archHistRend();
+}
+
+function archHistRend(){
+  var el = document.getElementById('arch-hist-list'); if(!el) return;
+  if(!_archive || _archive.length < 1){
+    el.innerHTML = '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Archiv-Snapshots. Fundamentals laden und Snapshot erstellen.</div>';
+    return;
+  }
+
+  /* Letzten und vorletzten Snapshot fuer Signal-Vergleich */
+  var latest  = _archive[0];
+  var prev    = _archive.length > 1 ? _archive[1] : null;
+
+  /* Index: Ticker -> Eintrag aus letztem Snapshot */
+  var latestMap = {}, prevMap = {}, i;
+  for(i=0;i<latest.entries.length;i++) latestMap[latest.entries[i].t] = latest.entries[i];
+  if(prev){ for(i=0;i<prev.entries.length;i++) prevMap[prev.entries[i].t] = prev.entries[i]; }
+
+  /* Signal-Farbe */
+  function sigCol(sig){
+    if(sig==='strong') return '#ff9f1c';
+    if(sig==='buy')    return '#00e57a';
+    if(sig==='rsi_block'||sig==='pb') return '#e8a020';
+    if(sig==='sell'||sig==='sell_zl'||sig==='sell_hist'||sig==='sell_ma') return '#ff6666';
+    if(sig==='weak')   return '#ff9966';
+    return '#7a9bb5';
+  }
+  function sigLbl(sig){
+    if(sig==='strong')    return 'STRONG';
+    if(sig==='buy')       return 'BUY';
+    if(sig==='pb')        return 'PEG-BLK';
+    if(sig==='rsi_block') return 'RSI-BLK';
+    if(sig==='sell')      return 'SELL';
+    if(sig==='sell_zl')   return 'SELL ZL';
+    if(sig==='sell_hist') return 'SELL HIST';
+    if(sig==='sell_ma')   return 'SELL MA';
+    if(sig==='weak')      return 'WEAK';
+    return 'WATCH';
+  }
+
+  /* Tickers sortiert nach Score (latest) */
+  var entries = latest.entries.slice();
+  entries.sort(function(a,b){ return (b.sc||0)-(a.sc||0); });
+
+  var out = '';
+  /* Header: Snapshot-Datum(en) */
+  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">';
+  out += 'Aktuell: <strong style="color:#dce8f5">'+latest.date+'</strong>';
+  if(prev) out += ' &nbsp;|&nbsp; Vorher: '+prev.date;
+  out += ' &nbsp;|&nbsp; '+_archive.length+' Snapshots gesamt';
+  out += '</div>';
+
+  var shown = 0;
+  for(i=0;i<entries.length;i++){
+    var e = entries[i];
+    var ep = prevMap[e.t] || null;
+    var changed = ep && ep.sig !== e.sig;
+    var isBuy   = e.sig==='strong'||e.sig==='buy';
+    var isSellS = e.sig==='sell'||e.sig==='sell_zl'||e.sig==='sell_hist'||e.sig==='sell_ma';
+
+    /* Filter */
+    if(ARCH_HIST_FILT==='changed' && !changed) continue;
+    if(ARCH_HIST_FILT==='buy'     && !isBuy)   continue;
+    if(ARCH_HIST_FILT==='sell'    && !isSellS)  continue;
+
+    shown++;
+    var sc2 = sigCol(e.sig);
+    var borderL = changed ? 'border-left:3px solid #b07cf8;' : '';
+    var rowBg   = changed ? 'background:rgba(176,124,248,.05);' : 'background:#0c1420;';
+
+    out += '<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderL+'border-radius:8px;padding:10px 13px;margin-bottom:5px">';
+    out += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
+    out += '<div style="display:flex;align-items:center;gap:8px">';
+    out += '<span style="font-size:14px;font-weight:800">'+e.t+'</span>';
+    if(changed){
+      out += '<span style="font-family:monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(176,124,248,.15);color:#b07cf8">'+sigLbl(ep.sig)+' &rarr; '+sigLbl(e.sig)+'</span>';
+    } else {
+      out += '<span style="font-family:monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.05);color:'+sc2+'">'+sigLbl(e.sig)+'</span>';
+    }
+    out += '</div>';
+    out += '<span style="font-size:16px;font-weight:800;color:'+sc2+'">'+e.sc+'</span>';
+    out += '</div>';
+    out += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-family:monospace;font-size:9px;color:var(--mut)">';
+    out += '<span>P: '+(e.p!==null?e.p:'--')+'</span>';
+    out += '<span>RSI: <span style="color:'+(e.rsi>72?'#ff6666':e.rsi<30?'#00e57a':'#dce8f5')+'">'+(e.rsi||'--')+'</span></span>';
+    out += '<span>Hist: '+(e.hist!==null?e.hist:'--')+'</span>';
+    out += '<span>200MA: <span style="color:'+(e.a200?'#00e57a':'#ff6666')+'">'+(e.a200?'&#10003;':'&#10007;')+'</span></span>';
+    out += '</div>';
+    out += '</div>';
+  }
+
+  if(shown === 0){
+    out += '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Keine Eintraege fuer diesen Filter.</div>';
+  }
+  el.innerHTML = out;
+}
+
+/* archHistRend wird von goTab(4) via rWF aufgerufen -- direkt integriert */
 </script>
 
 <script>
