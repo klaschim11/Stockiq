@@ -188,7 +188,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="border:2px dashed #223040;border-radius:8px;padding:16px;text-align:center;cursor:pointer;margin-bottom:10px" onclick="document.getElementById('wfi').click()">
         <div style="font-size:18px;margin-bottom:4px">&#128193;</div>
         <div style="font-size:12px;font-weight:700;margin-bottom:2px">stockiq_alpha_results.json</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_alpha_juno.py</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_alpha_juno_v7.py</div>
         <input type="file" id="wfi" accept=".json" onchange="loadWF(this)" style="display:none">
       </div>
       <div style="display:flex;align-items:center;gap:8px;font-family:monospace;font-size:11px;color:var(--mut)">
@@ -1631,7 +1631,7 @@ function updateFundStatus(n, ts, fromCache){
   var badge=document.getElementById('fcache-badge');
   var tsEl=document.getElementById('fts');
   if(dm)dm.style.background='#00e57a';
-  if(mm)mm.textContent='Geladen: '+n+' / 120 Ticker';
+  if(mm)mm.textContent='Geladen: '+n+' / '+STOCKS.length+' Ticker';
   if(badge){
     if(fromCache){
       badge.style.display='inline-block';
@@ -1724,7 +1724,7 @@ function rFund(){
       if(fd3.moat==='wide')wideM++;
     }
     avgF=fc?+(avgF/fc).toFixed(1):null;avgR=rc?+(avgR/rc).toFixed(1):null;
-    if(f0)f0.innerHTML=kpiCard('Analysiert',loaded,'von 41','#00c8f0')+kpiCard('Avg FCF',fp(avgF),'',avgF>3?'#00e57a':'#f0c000')+kpiCard('Avg ROCE/ROE',fp(avgR),'',avgR>15?'#00e57a':'#f0c000')+kpiCard('Wide Moat',wideM,'','#b07cf8');
+    if(f0)f0.innerHTML=kpiCard('Analysiert',loaded,'von '+STOCKS.length,'#00c8f0')+kpiCard('Avg FCF',fp(avgF),'',avgF>3?'#00e57a':'#f0c000')+kpiCard('Avg ROCE/ROE',fp(avgR),'',avgR>15?'#00e57a':'#f0c000')+kpiCard('Wide Moat',wideM,'','#b07cf8');
   }
   var cards='',i2,s,fd4,fs3;
   for(i2=0;i2<tickers.length;i2++){
