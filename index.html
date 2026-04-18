@@ -47,17 +47,22 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px">
     <button class="tab active" onclick="goTab(0,this)">&#9889; Synopse <span class="chip" id="cnt">--</span></button>
-    <button class="tab" onclick="goTab(1,this)">&#128202; Watchlist <span class="chip">120</span></button>
-    <button class="tab" onclick="goTab(2,this)">&#128181; Fundamentals <span class="chip ai">AI</span></button>
-    <button class="tab" onclick="goTab(3,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
-    <button class="tab" onclick="goTab(4,this)">&#128218; Hilfe</button>
+    <button class="tab" onclick="goTab(1,this)">&#128202; WL1 <span class="chip">120</span></button>
+    <button class="tab" onclick="goTab(2,this)">&#11088; WL2 <span class="chip s" id="wl2cnt">0</span></button>
+    <button class="tab" onclick="goTab(3,this)">&#128181; Fundamentals <span class="chip ai">AI</span></button>
+    <button class="tab" onclick="goTab(4,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
+    <button class="tab" onclick="goTab(5,this)">&#128218; Hilfe</button>
   </div>
 </header>
 
 <!-- TAB 0: SYNOPSE -->
 <div class="page" id="p0" style="display:block">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">Signal-Synopse</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">MACD ZL + 200MA + ATR-Hist-Filter + Divergenz &middot; Mom 25% Trend 20% Fund 35% Risk 20% (Beta)</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:10px">MACD ZL + 200MA + ATR-Hist-Filter + Divergenz &middot; Mom 25% Trend 20% Fund 35% Risk 20% (Beta)</div>
+  <div style="display:flex;gap:6px;margin-bottom:12px">
+    <button class="tf active" id="syn-all-btn" onclick="synFilt('all',this)">Alle</button>
+    <button class="tf" id="syn-wl2-btn" onclick="synFilt('wl2',this)">&#11088; Nur WL2 <span id="syn-wl2-count"></span></button>
+  </div>
   <div class="g4" id="s0"></div>
 
   <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#11088; STRONG BUY <span style="font-size:11px;color:var(--mut);font-weight:400">(ZL + 200MA + PEG + Bull-Divergenz)</span></div>
@@ -77,9 +82,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div>
 
-<!-- TAB 1: WATCHLIST -->
+<!-- TAB 1: WATCHLIST WL1 -->
 <div class="page" id="p1">
-  <div style="font-size:20px;font-weight:800;margin-bottom:4px">Watchlist &mdash; 120 Ticker</div>
+  <div style="font-size:20px;font-weight:800;margin-bottom:4px">WL1 &mdash; 120 Ticker</div>
   <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">Gruppiert: BUY &middot; HOLD &middot; SELL &mdash; je nach Score sortiert &middot; Antippen = Detail</div>
   <div class="g4" id="wl-kpi" style="margin-bottom:12px"></div>
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
@@ -89,9 +94,27 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button class="tf" onclick="wlFilt('pb',this)">PEG-Block</button>
     <button class="tf" onclick="wlFilt('sell',this)">SELL</button>
     <button class="tf" onclick="wlFilt('watch',this)">HOLD/Watch</button>
+    <button class="tf" onclick="wlFilt('wl2',this)" style="border-color:var(--str)">&#11088; WL2</button>
   </div>
   <div id="wl-list"></div>
   <div id="wl-detail" style="display:none;margin-top:8px"></div>
+</div>
+
+<!-- TAB 2: WL2 PERSÖNLICHE WATCHLIST -->
+<div class="page" id="pwl2">
+  <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#11088; WL2 &mdash; Meine Liste</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">Pers&ouml;nliche Auswahl &middot; persistent &middot; Filter f&uuml;r Synopse und WL1</div>
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+    <span style="font-family:monospace;font-size:10px;color:var(--mut)">Ticker aus WL1 antippen = hinzuf&uuml;gen/entfernen</span>
+    <button onclick="wl2Clear()" style="font-family:monospace;font-size:9px;color:var(--red);background:transparent;border:1px solid rgba(255,63,63,.3);border-radius:6px;padding:3px 10px;cursor:pointer">&#128465; Leeren</button>
+  </div>
+  <div class="g4" id="wl2-kpi" style="margin-bottom:12px"></div>
+  <div id="wl2-list"></div>
+  <div id="wl2-detail" style="display:none;margin-top:8px"></div>
+  <div style="margin-top:16px;padding:12px;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px">
+    <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:8px">TICKER HINZUF&Uuml;GEN &mdash; aus der Gesamtliste</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap" id="wl2-picker"></div>
+  </div>
 </div>
 
 <!-- TAB 2: FUNDAMENTALS -->
@@ -588,13 +611,13 @@ tick();setInterval(tick,1000);
      ============================================================ -->
 <script>
 function goTab(n,btn){
-  var pgs=['p0','p1','p2','p3','p4'],i;
+  var pgs=['p0','p1','pwl2','p2','p3','p4'],i;
   for(i=0;i<pgs.length;i++){var pg=document.getElementById(pgs[i]);if(pg)pg.style.display='none';}
   var tabs=document.querySelectorAll('.tab');
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
   var pg2=document.getElementById(pgs[n]);if(pg2)pg2.style.display='block';
   if(btn)btn.classList.add('active');
-  if(n===0)rSyn();if(n===1)rWL();if(n===2)rFund();if(n===3)rWF();
+  if(n===0)rSyn();if(n===1)rWL();if(n===2)rWL2();if(n===3)rFund();if(n===4)rWF();
 }
 </script>
 
@@ -604,7 +627,10 @@ function goTab(n,btn){
 <script>
 function rSyn(){
   var i,s,sc,scored=[];
-  for(i=0;i<STOCKS.length;i++)scored.push({s:STOCKS[i],sc:cSc(STOCKS[i])});
+  for(i=0;i<STOCKS.length;i++){
+    if(SYN_FILTER==='wl2'&&!wl2Has(STOCKS[i].t))continue;
+    scored.push({s:STOCKS[i],sc:cSc(STOCKS[i])});
+  }
   scored.sort(function(a,b){return b.sc-a.sc;});
   var buys=0,pbs=0,sells=0,strongs=0;
   for(i=0;i<scored.length;i++){
@@ -740,6 +766,7 @@ function wlRend(scored){
       if(WL_FILTER==='pb'&&sig!=='pb')continue;
       if(WL_FILTER==='sell'&&!isSell(sig)&&sig!=='weak')continue;
       if(WL_FILTER==='watch'&&sig!=='watch'&&sig!=='weak')continue;
+      if(WL_FILTER==='wl2'&&!wl2Has(s.t))continue;
     }
     var entry={s:s,sc:sc,sig:sig};
     if(isSell(sig)||sig==='weak') gSell.push(entry);
@@ -771,7 +798,10 @@ function wlRend(scored){
     var h='<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderLeft+'border-radius:8px;padding:11px 13px;margin-bottom:6px;cursor:pointer" onclick="wlDetail(\''+s.t+'\')">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
     h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+s.n+'</span></div>';
-    h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span><span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span></div></div>';
+    var inWl2=wl2Has(s.t);
+    h+='<div style="display:flex;align-items:center;gap:6px">';
+    h+='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\')" style="font-size:12px;padding:2px 5px;border-radius:4px;border:1px solid '+(inWl2?'rgba(255,159,28,.5)':'rgba(255,255,255,.1)')+';background:'+(inWl2?'rgba(255,159,28,.12)':'transparent')+';color:'+(inWl2?'#ff9f1c':'#456278')+';cursor:pointer">&#11088;</button>';
+    h+='<span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span><span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span></div></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
@@ -910,8 +940,134 @@ function wlDetail(ticker){
 </script>
 
 <!-- ============================================================
-     FUNDAMENTALS + localStorage-Persistenz
+     WL2 — PERSÖNLICHE WATCHLIST
      ============================================================ -->
+<script>
+var WL2_KEY = 'stockiq_wl2_v59';
+var WL2 = [];
+var SYN_FILTER = 'all';
+
+/* Init WL2 aus Storage */
+function wl2Init(){
+  try{var r=storeGet(WL2_KEY);if(r){var p=JSON.parse(r);if(p&&p.tickers)WL2=p.tickers;}}catch(e){}
+  wl2UpdCount();
+}
+function wl2Save(){
+  try{storeSet(WL2_KEY,JSON.stringify({tickers:WL2}));}catch(e){}
+  wl2UpdCount();
+}
+function wl2Has(t){for(var i=0;i<WL2.length;i++)if(WL2[i]===t)return true;return false;}
+function wl2Toggle(t){
+  if(wl2Has(t)){var n=[];for(var i=0;i<WL2.length;i++)if(WL2[i]!==t)n.push(WL2[i]);WL2=n;}
+  else{WL2.push(t);}
+  wl2Save();
+  /* Re-render falls WL2-Tab aktiv */
+  var p=document.getElementById('pwl2');
+  if(p&&p.style.display!=='none')rWL2();
+  /* WL-Liste auch aktualisieren (Stern) */
+  var sc0=[];for(var j=0;j<STOCKS.length;j++)sc0.push({s:STOCKS[j],sc:cSc(STOCKS[j])});
+  sc0.sort(function(a,b){return b.sc-a.sc;});wlRend(sc0);
+}
+function wl2Clear(){
+  if(!confirm('WL2 komplett leeren?'))return;
+  WL2=[];wl2Save();
+  var p=document.getElementById('pwl2');
+  if(p&&p.style.display!=='none')rWL2();
+  var sc0=[];for(var j=0;j<STOCKS.length;j++)sc0.push({s:STOCKS[j],sc:cSc(STOCKS[j])});
+  sc0.sort(function(a,b){return b.sc-a.sc;});wlRend(sc0);
+}
+function wl2UpdCount(){
+  var el=document.getElementById('wl2cnt');if(el)el.textContent=WL2.length;
+  var el2=document.getElementById('syn-wl2-count');if(el2)el2.textContent=WL2.length>0?'('+WL2.length+')':'';
+}
+
+/* Synopse-Filter */
+function synFilt(f,btn){
+  SYN_FILTER=f;
+  var btns=document.querySelectorAll('#p0 .tf');
+  for(var i=0;i<btns.length;i++)btns[i].classList.remove('active');
+  if(btn)btn.classList.add('active');
+  rSyn();
+}
+
+/* WL2 Tab rendern */
+function rWL2(){
+  wl2UpdCount();
+  /* KPI */
+  var kpi=document.getElementById('wl2-kpi');
+  if(kpi)kpi.innerHTML=kpiCard('WL2 Ticker',WL2.length,'Pers. Auswahl','#ff9f1c')+kpiCard('Score &empty;',wl2AvgSc(),'aller WL2-Ticker','#00c8f0');
+  /* Liste */
+  var out='';
+  if(WL2.length===0){
+    out='<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:20px;text-align:center">WL2 ist leer.<br>In WL1 Ticker antippen &rarr; &#11088;-Taste</div>';
+  } else {
+    var scored=[];
+    for(var i=0;i<STOCKS.length;i++){
+      if(wl2Has(STOCKS[i].t))scored.push({s:STOCKS[i],sc:cSc(STOCKS[i])});
+    }
+    scored.sort(function(a,b){return b.sc-a.sc;});
+    for(var j=0;j<scored.length;j++){
+      var s=scored[j].s;var sc=scored[j].sc;var sig=mSig(s);
+      var isStrong=sig==='strong';var isSellSig=isSell(sig);
+      var sc2=isStrong?'#ff9f1c':sig==='buy'?'#00e57a':sig==='pb'?'#f0c000':isSellSig||sig==='weak'?'#ff6666':'#7a9bb5';
+      var slbl=isStrong?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG':sig==='weak'?'WEAK':isSellSig?sellLabel(sig):'WATCH';
+      var scc=scCol(sc);
+      var borderLeft=isStrong?'border-left:3px solid #ff9f1c;':isSellSig?'border-left:3px solid #ff3f3f;':'';
+      out+='<div style="background:#0c1420;border:1px solid #1a2a3a;'+borderLeft+'border-radius:8px;padding:11px 13px;margin-bottom:6px;cursor:pointer" onclick="wl2Detail(\''+s.t+'\')">';
+      out+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
+      out+='<div style="display:flex;align-items:center;gap:8px">';
+      out+='<span style="font-size:15px;font-weight:800">'+s.t+'</span>';
+      out+='<span style="font-size:11px;color:var(--mut)">'+s.n+'</span></div>';
+      out+='<div style="display:flex;align-items:center;gap:6px">';
+      out+='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\')" style="font-family:monospace;font-size:10px;color:var(--red);background:transparent;border:1px solid rgba(255,63,63,.3);border-radius:4px;padding:2px 7px;cursor:pointer">&#10005;</button>';
+      out+='<span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>';
+      out+='<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span></div></div>';
+      var fd=FD[s.t];
+      var fcfD=fd&&fd.fcf!==null?fp(fd.fcf):'--';
+      var rv=fd?(fd.roce!==null&&fd.roce!==undefined?fd.roce:(fd.roe!==null&&fd.roe!==undefined?fd.roe:null)):null;
+      var roceD=rv!==null?fp(rv):'--';
+      out+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
+      out+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">PEG </span><span style="color:'+(pgBk(s)?'#f0c000':s.peg&&s.peg<1.5?'#00e57a':'#7a9bb5')+'">'+(s.peg?s.peg.toFixed(2):'--')+'</span></div>';
+      out+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
+      out+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">ROCE </span><span>'+roceD+'</span></div>';
+      out+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">RSI </span><span style="color:'+(s.rsi<30?'#00e57a':s.rsi>70?'#ff6666':'#7a9bb5')+'">'+s.rsi+'</span></div></div>';
+      out+='</div>';
+    }
+  }
+  var el=document.getElementById('wl2-list');if(el)el.innerHTML=out;
+  /* Picker — alle Ticker nicht in WL2 */
+  var pick='';
+  var all=[];for(var k=0;k<STOCKS.length;k++)all.push(STOCKS[k]);
+  all.sort(function(a,b){return a.t<b.t?-1:1;});
+  for(var m=0;m<all.length;m++){
+    var inWl2=wl2Has(all[m].t);
+    var sc3=scCol(cSc(all[m]));
+    pick+='<button onclick="wl2Toggle(\''+all[m].t+'\')" style="font-family:monospace;font-size:9px;padding:3px 8px;border-radius:5px;border:1px solid '+(inWl2?'#ff9f1c':'#1a2a3a')+';background:'+(inWl2?'rgba(255,159,28,.12)':'transparent')+';color:'+(inWl2?'#ff9f1c':sc3)+';cursor:pointer">'+all[m].t+'</button>';
+  }
+  var pe=document.getElementById('wl2-picker');if(pe)pe.innerHTML=pick;
+}
+
+function wl2AvgSc(){
+  if(WL2.length===0)return '--';
+  var sum=0,cnt=0;
+  for(var i=0;i<STOCKS.length;i++){if(wl2Has(STOCKS[i].t)){sum+=cSc(STOCKS[i]);cnt++;}}
+  return cnt>0?Math.round(sum/cnt):0;
+}
+
+function wl2Detail(ticker){
+  var det=document.getElementById('wl2-detail');
+  if(!det)return;
+  /* Detail wie WL1 — wlDetail wiederverwenden, aber Output in wl2-detail */
+  var s=null;
+  for(var i=0;i<STOCKS.length;i++)if(STOCKS[i].t===ticker){s=STOCKS[i];break;}
+  if(!s){det.style.display='none';return;}
+  /* Einfach wlDetail aufrufen — rendert in wl-detail */
+  wlDetail(ticker);
+  /* Scroll zu wl-detail */
+  var el=document.getElementById('wl-detail');
+  if(el)el.scrollIntoView({behavior:'smooth'});
+}
+</script>
 <script>
 var LS_KEY     = 'stockiq_fund_v57';
 var ARCH_KEY   = 'stockiq_arch_v57';
@@ -1406,12 +1562,12 @@ document.addEventListener('DOMContentLoaded', function(){
 /* Falls kein Cache: rSyn() direkt aufrufen */
 document.addEventListener('DOMContentLoaded', function(){
   try{
+    wl2Init();
     initFund();
-    /* rSyn() nochmal nur wenn initFund() keinen Cache geladen hat */
     if(Object.keys(FD).length === 0){ rSyn(); }
   }catch(e){
     console.error('Init fehlgeschlagen: ' + e.message);
-    try{ rSyn(); }catch(e2){}
+    try{ wl2Init();rSyn(); }catch(e2){}
   }
 });
 </script>
