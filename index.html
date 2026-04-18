@@ -642,7 +642,7 @@ var STOCKS=[
   {t:'6723.T',n:'Renesas Electronics',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'4568.T',n:'Daiichi Sankyo Co',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'9983.T',n:'Fast Retailing Uniqlo',p:47000.0,chg:0.0,rsi:50,pe:38,eg:12,peg:2.8,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:900,mom:62,trend:64,fund:60,risk:68},
-  {t:'6098.T',n:'Recruit Holdings',p:8200.0,chg:0.0,rsi:50,pe:30,eg:15,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:160,mom:60,trend:62,fund:65,risk:65},];
+  {t:'6098.T',n:'Recruit Holdings',p:8200.0,chg:0.0,rsi:50,pe:30,eg:15,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:160,mom:60,trend:62,fund:65,risk:65},
   {t:'BABA',n:'Alibaba Group ADR',p:85.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:3.5,mom:52,trend:48,fund:68,risk:45},
   {t:'PDD',n:'PDD Holdings Temu',p:108.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.08,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:5.2,mom:58,trend:54,fund:65,risk:42},
   {t:'JD',n:'JD.com ADR',p:26.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.15,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.2,mom:50,trend:46,fund:62,risk:44},
@@ -674,7 +674,7 @@ var STOCKS=[
   {t:'WALMEX.MX',n:'Walmart de Mexico',p:75.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:2,mom:60,trend:62,fund:70,risk:65},
   {t:'FEMSAUBD.MX',n:'FEMSA Mexico',p:155.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:5,mom:58,trend:58,fund:68,risk:62},
   {t:'005930.KS',n:'Samsung Electronics',p:74000.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1800,mom:60,trend:60,fund:70,risk:58},
-
+];
 var FD = {};
 /* v5.9.15: Trend 0.20->0.25, Mom 0.30->0.25 (Faber 2007, Jegadeesh&Titman 1993) */
 var W = {mom:0.25,trend:0.25,fund:0.35,risk:0.15};
@@ -1198,7 +1198,7 @@ function toggleSync(btn){
   var i;
   for(i=0;i<syncBtns.length;i++){
     var b = syncBtns[i]; if(!b) continue;
-    b.textContent    = WL2_SYNC ? '\u{1F4E1} WL2' : '\u{1F501} Alle';
+    b.textContent    = WL2_SYNC ? '[>] WL2' : '[<] Alle';
     b.style.borderColor = WL2_SYNC ? '#ff9f1c' : '#1a2a3a';
     b.style.color       = WL2_SYNC ? '#ff9f1c' : 'var(--mut)';
     b.style.background  = WL2_SYNC ? 'rgba(255,159,28,.1)' : 'transparent';
