@@ -139,7 +139,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="border:2px dashed #223040;border-radius:8px;padding:16px;text-align:center;cursor:pointer;margin-bottom:10px" onclick="document.getElementById('ffi').click()">
         <div style="font-size:18px;margin-bottom:4px">&#128193;</div>
         <div style="font-size:12px;font-weight:700;margin-bottom:2px">stockiq_fundamentals.json</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7.py</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7_4.py</div>
         <input type="file" id="ffi" accept=".json" onchange="loadFund(this)" style="display:none">
       </div>
       <div style="display:flex;align-items:center;gap:8px;font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:8px">
@@ -169,7 +169,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         <div><strong style="color:#dce8f5">ROCE</strong> = EBIT / (EK + LT-Schulden) &mdash; korrigiert v5.3</div>
         <div><strong style="color:#dce8f5">ROE</strong> = Fallback wenn ROCE n/a</div>
         <div><strong style="color:#dce8f5">Div+Buyback</strong> = Shareholder Return (neu)</div>
-        <div><strong style="color:#dce8f5">fund_score</strong> = 40% ROCE + 35% FCF + 25% PEG</div>
+        <div><strong style="color:#dce8f5">fund_score</strong> = 50% ROCE + 35% FCF + 15% PEG (v5.9.15)</div>
       </div>
     </div>
   </div>
@@ -877,7 +877,7 @@ function rSyn(){
   var i,s,sc,pool=getActiveStocks(),scored=[];
   for(i=0;i<pool.length;i++)scored.push({s:pool[i],sc:cSc(pool[i])});
   scored.sort(function(a,b){return b.sc-a.sc;});
-  var buys=0,pbs=0,sells=0,strongs=0,rsiBlocks=0;
+  var buys=0,pbs=0,sells=0,strongs=0;
   for(i=0;i<scored.length;i++){
     var sig=mSig(scored[i].s);
     if(sig==='strong')strongs++;
@@ -888,7 +888,7 @@ function rSyn(){
   }
   var ce=document.getElementById('cnt');if(ce)ce.textContent=strongs+buys;
   var el=document.getElementById('s0');
-  if(el)el.innerHTML=kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('Geblockt',pbs+rsiBlocks,'PEG>2 / RSI>72','#f0c000');
+  if(el)el.innerHTML=kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
 
   /* STRONG BUY cards */
   var sStrong=[],sBuys=[],sPbs=[],sSells=[];
@@ -972,7 +972,7 @@ function rSyn(){
 <script>
 function rWL(){
   var i,s,scored=getScored();
-  var buys=0,pbs=0,sells=0,strongs=0,watches=0,rsiBlocks=0;
+  var buys=0,pbs=0,sells=0,strongs=0,watches=0;
   for(i=0;i<scored.length;i++){
     var ms=mSig(scored[i].s);
     if(ms==='strong')strongs++;
@@ -983,7 +983,7 @@ function rWL(){
     else watches++;
   }
   var kpi=document.getElementById('wl-kpi');
-  if(kpi)kpi.innerHTML=kpiCard('STRONG',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('Geblockt',pbs+rsiBlocks,'PEG>2 / RSI>72','#f0c000')+kpiCard('Sell/Weak',sells,'','#ff6666');
+  if(kpi)kpi.innerHTML=kpiCard('STRONG',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000')+kpiCard('Sell/Weak',sells,'','#ff6666');
   wlRend(scored);
 }
 
@@ -1568,9 +1568,8 @@ function applyFund(fund){
     "4503.T":"4503T","4568.T":"4568T","8802.T":"8802T","3382.T":"3382T","2802.T":"2802T",
     "9022.T":"9022T","9020.T":"9020T","5108.T":"5108T","6971.T":"6971T","8766.T":"8766T",
     "8750.T":"8750T","2503.T":"2503T","2502.T":"2502T","4452.T":"4452T","6326.T":"6326T",
-    "4901.T":"4901T","4578.T":"4578T","9983.T":"9983T","6645.T":"6645T","4704.T":"4704T"
-
-    "9983.T":"9983T","6098.T":"6098T",
+    "4901.T":"4901T","4578.T":"4578T","9983.T":"9983T","6645.T":"6645T","4704.T":"4704T",
+    "6098.T":"6098T",
     "0700.HK":"0700HK","3690.HK":"3690HK","1810.HK":"1810HK","1211.HK":"1211HK","2318.HK":"2318HK",
     "TCS.NS":"TCSNS","HINDUNILVR.NS":"HINDUNILVR","ASIANPAINT.NS":"ASIANPAINT",
     "2454.TW":"2454TW","D05.SI":"D05SI","BBCA.JK":"BBCAJK",
