@@ -181,7 +181,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 4: WALK-FORWARD -->
 <div class="page" id="p4">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128200; Walk-Forward</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">12M Training / 3M OOS rollierend &middot; Out-of-Sample Validierung</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px" id="wf-subtitle">12M Training / 6M OOS rollierend &middot; Out-of-Sample Validierung</div>
   <div class="g2" style="margin-bottom:14px">
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
       <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:10px">&#128228; JSON laden</div>
@@ -299,7 +299,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ATR-HIST-FILTER (neu v5.3)</div><div style="font-size:12px;color:var(--mut)">Histogramm muss &gt; ATR &times; 0.05 sein. Filtert flache, unzuverlaessige MACD-Kreuzungen heraus.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">MOAT</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">Wide</span> = dauerhafter Wettbewerbsvorteil &nbsp;<span style="color:#00c8f0">Narrow</span> = moderater Vorteil &nbsp;<span style="color:var(--mut)">None</span> = kein Vorteil.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">RSI</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">&lt;30</span> ueberverkauft &nbsp;<span style="color:#ff6666">&gt;70</span> ueberkauft &nbsp;<span style="color:var(--mut)">30-70</span> neutral.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">WALK-FORWARD OOS</div><div style="font-size:12px;color:var(--mut)">12M Training / 3M Out-of-Sample Test. OOS WR &gt; IS WR = kein Overfitting. Reines Validierungsinstrument &mdash; veraendert keine Live-Signale.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">WALK-FORWARD OOS</div><div style="font-size:12px;color:var(--mut)">12M Training / 6M Out-of-Sample Test (v6b_6m). OOS WR &gt; IS WR = kein Overfitting. Reines Validierungsinstrument &mdash; veraendert keine Live-Signale.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">STABILITAET (StdAbw OOS WR)</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">&lt;8pp</span> stabil &nbsp;<span style="color:#00c8f0">8-15pp</span> akzeptabel &nbsp;<span style="color:#ff6666">&gt;15pp</span> instabil. Bei weniger als 10 Trades pro Fenster statistisch nicht aussagekraeftig.</div></div>
     <div><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">OVERFITTING-GAP</div><div style="font-size:12px;color:var(--mut)">IS Win-Rate minus OOS Win-Rate. <span style="color:#00e57a">&lt;5pp</span> = kein Overfitting &nbsp;<span style="color:#f0c000">5-15pp</span> = leicht &nbsp;<span style="color:#ff6666">&gt;15pp</span> = stark. Negativ = OOS besser als IS (bei kleinen Stichproben: Zufall).</div></div>
   </div>
@@ -311,7 +311,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <strong style="color:#dce8f5">Was Walk-Forward nicht tut:</strong> OOS-Ergebnisse beeinflussen Synopse und Watchlist nicht. Live-Signale basieren ausschliesslich auf den aktuellen MACD/200MA/PEG-Kriterien. Eine Verknuepfung waere methodisch falsch (Look-ahead-Bias).
     </div>
     <div style="font-size:13px;font-weight:700;color:#f0c000;margin-bottom:8px">Stichproben-Problem bei strengen Filtern</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Strategie filtert streng. Mit 262 Tickern und 3M OOS: typisch 20-75 Trades pro Fenster. Faustregel: Erst ab ca. 30 Trades/Fenster sind Aussagen sinnvoll. Mit v5 (SPY-Filter) ist diese Schwelle in den meisten Fenstern erreicht.</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Strategie filtert streng. Mit 262 Tickern und 6M OOS: typisch 50&ndash;150 Trades pro Fenster. Faustregel: Erst ab ca. 30 Trades/Fenster sind Aussagen sinnvoll. Mit v6b_6m (SPY-Filter, 4 Fenster) ist diese Schwelle in allen Fenstern klar erreicht.</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
       <div style="background:rgba(0,229,122,.06);border:1px solid rgba(0,229,122,.2);border-radius:8px;padding:10px">
         <div style="font-family:monospace;font-size:10px;color:#00e57a;margin-bottom:4px">&#9679; STATISTISCH ROBUST</div>
@@ -1852,19 +1852,34 @@ function rWF(){
   if(!WF_DATA)return;
   var wres=document.getElementById('wres');if(wres)wres.style.display='block';
   var wf=WF_DATA.walk_forward||[];var gs=WF_DATA.global_stats||WF_DATA.summary||{};
+  /* Subtitle dynamisch aus JSON-Meta (wf_oos_months) */
+  var oosMths=(WF_DATA.meta&&WF_DATA.meta.wf_oos_months)?WF_DATA.meta.wf_oos_months:6;
+  var isMths=(WF_DATA.meta&&WF_DATA.meta.wf_is_months)?WF_DATA.meta.wf_is_months:12;
+  var sub=document.getElementById('wf-subtitle');
+  if(sub)sub.textContent=isMths+'M Training / '+oosMths+'M OOS rollierend \u00b7 Out-of-Sample Validierung';
   /* v3: global_stats.standard/alpha -- v4: summary.avg_is_wr/avg_oos_wr */
   var stdWR = gs.standard ? gs.standard.win_rate : (gs.avg_is_wr || gs.standard_wr || 0);
-  /* avg_oos_wr kann null sein wenn keine Fenster >= 3 Trades -- Fallback total_wr */
-  var rawOOS = gs.alpha ? gs.alpha.win_rate : gs.avg_oos_wr;
-  var alpWR  = (rawOOS !== null && rawOOS !== undefined) ? rawOOS : (gs.total_wr || gs.alpha_wr || 0);
-  var alpSub = (rawOOS === null || rawOOS === undefined) ? 'Fallback: Gesamt-WR' : '5 Filter';
+  /* OOS AVG aus walk_forward-Array berechnen (immer vorhanden, auch bei Interim-JSON) */
   var wfAWR=0,i;
-  if(wf.length){for(i=0;i<wf.length;i++)wfAWR+=wf[i].win_rate;wfAWR=+(wfAWR/wf.length).toFixed(1);}else{wfAWR=alpWR;}
+  if(wf.length){for(i=0;i<wf.length;i++)wfAWR+=wf[i].win_rate;wfAWR=+(wfAWR/wf.length).toFixed(1);}
+  /* Alpha WR: aus global_stats wenn vorhanden, sonst Fallback auf wfAWR (OOS-Avg) */
+  var rawOOS = gs.alpha ? gs.alpha.win_rate : gs.avg_oos_wr;
+  var alpWR,alpSub;
+  if(rawOOS!==null&&rawOOS!==undefined&&rawOOS>0){
+    alpWR=rawOOS;alpSub=oosMths+'M OOS';
+  } else if(wfAWR>0){
+    alpWR=wfAWR;alpSub='OOS-Avg ('+oosMths+'M)';
+  } else {
+    alpWR=0;alpSub='Fallback: Gesamt-WR';
+  }
+  /* IS WR: 'n/a' wenn nicht im JSON (Interim-JSON hat kein global_stats) */
+  var stdDisp=(stdWR>0)?stdWR+'%':'n/a';
+  var stdC=(stdWR>0)?(stdWR>=60?'#00e57a':'#f0c000'):'#7a9bb5';
   var stab='n/a',stabC='#00c8f0';
   if(wf.length>1){var mn=wfAWR,va=0;for(i=0;i<wf.length;i++)va+=(wf[i].win_rate-mn)*(wf[i].win_rate-mn);var sd=Math.sqrt(va/wf.length);stab=sd.toFixed(1)+'pp';stabC=sd<8?'#00e57a':sd<15?'#00c8f0':'#ff6666';}
   var oof=+(alpWR-wfAWR).toFixed(1);var oofC=oof<5?'#00e57a':oof<15?'#f0c000':'#ff6666';
   var w0=document.getElementById('w0');
-  if(w0)w0.innerHTML=kpiCard('IS Win-Rate',stdWR+'%','',stdWR>=60?'#00e57a':'#f0c000')+kpiCard('Alpha WR',alpWR+'%',alpSub,'#00e57a')+kpiCard('OOS Avg',wfAWR+'%','',wfAWR>=60?'#00e57a':'#f0c000')+kpiCard('Stabilitaet',stab,'',stabC);
+  if(w0)w0.innerHTML=kpiCard('IS Win-Rate',stdDisp,'',stdC)+kpiCard('Alpha WR',alpWR+'%',alpSub,'#00e57a')+kpiCard('OOS Avg',wfAWR+'%','',wfAWR>=60?'#00e57a':'#f0c000')+kpiCard('Stabilitaet',stab,'',stabC);
   setTimeout(function(){drawWFC(wf);},80);
   var cards='';
   for(i=0;i<wf.length;i++){
