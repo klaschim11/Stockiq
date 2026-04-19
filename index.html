@@ -125,6 +125,11 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-family:monospace;font-size:10px;color:var(--mut)">Ausgewaehlt: <span id="wl2-sel-cnt" style="color:#ff9f1c;font-weight:700">0</span> Ticker</div>
     <button onclick="wl2Clear()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(255,63,63,.4);color:#ff6666;background:transparent;cursor:pointer">&#10006; Leeren</button>
     <button onclick="wl2SelAll()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(0,200,240,.4);color:var(--acc);background:transparent;cursor:pointer">Alle BUY</button>
+    <button onclick="wl2Export()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8595; Export</button>
+    <label style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8593; Import<input type="file" accept=".json" onchange="wl2Import(this)" style="display:none"></label>
+  </div>
+  <div id="wl2-origin-warn" style="display:none;font-family:monospace;font-size:10px;color:#f0c000;background:rgba(240,192,0,.07);border:1px solid rgba(240,192,0,.25);border-radius:8px;padding:8px 12px;margin-bottom:10px">
+    &#9888; Lokale Datei: localStorage nicht mit GitHub Pages geteilt. Export/Import nutzen um WL2 zu uebertragen.
   </div>
   <div id="wl2-list"></div>
 </div>
@@ -255,7 +260,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:13px;color:var(--mut);line-height:1.8">
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. Synopse</strong> &mdash; Startseite. STRONG BUY (Divergenz), BUY, PEG-geblockt, Verkaufssignale.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. Watchlist</strong> &mdash; Alle Ticker nach Score oder A-Z. Sync-Button filtert auf WL2. Antippen = Detail.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. WL2</strong> &mdash; Eigene Auswahl. Ticker per + WL2 hinzufuegen. Sync-Button in WL1 aktiviert WL2-Filter auf Synopse + WL1.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. WL2</strong> &mdash; Eigene Auswahl. Ticker per + WL2 hinzufuegen. Sync-Button in WL1 aktiviert WL2-Filter auf Synopse + WL1. Export (JSON) sichert WL2 geraeteuebergreifend. Import stellt WL2 wieder her.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Fundamentals</strong> &mdash; stockiq_fundamentals.json laden. ROCE-Formel korrigiert (EK + LT-Schulden), Div+Buyback neu.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">5. Walk-Forward</strong> &mdash; stockiq_alpha_results.json laden. Signal-History zeigt Aenderungen zwischen Snapshots.</div>
       <div><strong style="color:#dce8f5">6. Hilfe</strong> &mdash; Diese Seite.</div>
@@ -369,6 +374,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div>&#10003; <strong style="color:#dce8f5">exitSignal-Fix</strong>: Logikfehler korrigiert (redundanter aboveZL-Case entfernt).</div>
       <div>&#10003; <strong style="color:#dce8f5">Mitsui &amp; Co (8031T) v5.9.7</strong>: Soogo Shoosha Gruppe komplett (Mitsubishi, Itochu, Mitsui). Yahoo: 8031.T.</div>
       <div>&#10003; <strong style="color:#dce8f5">WL2 Persistenz v5.9.7</strong>: WL2-Auswahl wird automatisch in localStorage gespeichert. Bleibt nach App-Neustart erhalten. Nur manuell aenderbar (kein Auto-Reset).</div>
+      <div>&#10003; <strong style="color:#dce8f5">WL2 Export/Import (v5.9.16)</strong>: JSON-Export sichert WL2 dauerhaft. Import stellt sie nach Versions-Update oder auf neuem Geraet wieder her. Wichtig: localStorage ist pro Origin &mdash; lokale Datei und GitHub Pages teilen KEINEN gemeinsamen Speicher.</div>
       <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Lernprinzip:</strong> Exit-Logik wird kontinuierlich gegen reale Signale validiert. Naechste Pruefung: Reduziert Hysterese False Exits ohne echte SELL-Signale zu verzoegern?</div>
     </div>
   </div>
@@ -1329,6 +1335,7 @@ function wl2Toggle(ticker){
 }
 
 function wl2Clear(){
+  if(!confirm('WL2 komplett leeren?'))return;
   WL2 = {};
   wl2Save();
   updWL2Cnt();
@@ -1345,6 +1352,45 @@ function wl2SelAll(){
   wl2Save();
   updWL2Cnt();
   rWL2();
+}
+
+/* ---- WL2 Export: JSON-Download ---- */
+function wl2Export(){
+  var tickers = Object.keys(WL2);
+  if(tickers.length === 0){alert('WL2 ist leer.');return;}
+  var data = JSON.stringify({wl2:tickers,ts:new Date().toISOString(),v:'5.9.16'},null,2);
+  var a = document.createElement('a');
+  a.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(data);
+  a.download = 'stockiq_wl2_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+}
+
+/* ---- WL2 Import: JSON-Upload ---- */
+function wl2Import(inp){
+  var file = inp.files[0]; if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      var d = JSON.parse(e.target.result);
+      var arr = d.wl2 || d.tickers || d;
+      if(!Array.isArray(arr)){alert('Ungueltige WL2-Datei.');return;}
+      var added = 0;
+      for(var i=0;i<arr.length;i++){
+        if(typeof arr[i]==='string'){WL2[arr[i]]=true;added++;}
+      }
+      wl2Save();updWL2Cnt();rWL2();
+      alert(added + ' Ticker importiert.');
+    }catch(err){alert('Import-Fehler: '+err.message);}
+  };
+  reader.readAsText(file);
+  inp.value = '';
+}
+
+/* ---- Origin-Warnung: lokale Datei vs. GitHub Pages ---- */
+function wl2CheckOrigin(){
+  var isLocal = (window.location.protocol === 'file:' || window.location.hostname === 'localhost');
+  var warn = document.getElementById('wl2-origin-warn');
+  if(warn) warn.style.display = isLocal ? 'block' : 'none';
 }
 
 function updWL2Cnt(){
@@ -2103,6 +2149,7 @@ document.addEventListener('DOMContentLoaded', function(){
 document.addEventListener('DOMContentLoaded', function(){
   try{
     wl2Load(); /* WL2 aus persistentem Speicher laden */
+    wl2CheckOrigin(); /* Origin-Warnung prüfen */
   }catch(e){ console.warn('WL2 init fehlgeschlagen: '+e.message); }
   try{
     initFund();
