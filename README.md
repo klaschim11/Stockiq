@@ -1,3 +1,25 @@
+Glossar-Einträge für Beta und Debt ergänzen:​​​​​​​​​​​​​​​​
+
+Jetzt finaler Check:​​​​​​​​​​​​​​​​
+
+Alle Checks grün. Zusammenfassung was v5.9.16 jetzt enthält:
+Basis: v5.9.15.11 — 274 Ticker, WL2, Score-Filter, momSc(), volAdj(), Hysterese-Exit, 12M-Momentum, Signal-History. Alles unverändert erhalten.
+Neu in v5.9.16:
+
+
+
+|                  |v5.9.15                                      |v5.9.16                                            |
+|------------------|---------------------------------------------|---------------------------------------------------|
+|Composite-Gewichte|Mom 25 / Trend **25** / Fund 35 / Risk **15**|Mom 25 / Trend **20** / Fund 35 / Risk **20**      |
+|Fund-Formel       |ROCE **50%** + FCF 35% + PEG **15%**         |ROCE **35%** + FCF 30% + PEG **20%** + Debt **15%**|
+|Risk-Berechnung   |statisch `s.risk`                            |60% statisch + **40% Beta-Score**                  |
+|Neue Funktionen   |—                                            |`betaSc()`, `debtSc()`                             |
+|Detail-View       |FCF / ROCE / MOAT                            |+ **Beta** + **Debt/EQ%**                          |
+|Python-Script     |v7_3                                         |**v7_4** (beta + debtToEquity + sanitize)          |
+
+Der NaN-Fehler wird durch sanitize() in fund_juno_v7_4.py behoben — einmalig das Script neu ausführen, dann lädt das JSON fehlerfrei.​​​​​​​​​​​​​​​​
+
+old:
 I'll retrieve and examine the Index.html file from your Stockiq repository.I've successfully retrieved the full Index.html file from the klaschim11/Stockiq repository. This is **StockIQ v5.9**, a comprehensive stock analysis dashboard with 258+ tickers.
 
 ## Key Features:
