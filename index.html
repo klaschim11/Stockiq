@@ -77,6 +77,17 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">MACD ZL + 200MA + ATR-Hist-Filter + Divergenz &middot; Mom 25% Trend 25% Fund 35% Risk 15% &middot; PEG-Block &gt;=3.0</div>
   <div class="g4" id="s0"></div>
+  <div id="macro-strip" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:10px 14px;margin-bottom:14px">
+    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;min-width:36px">Makro</div>
+      <div id="macro-regime" style="display:flex;align-items:center;gap:6px"></div>
+      <div style="width:1px;height:20px;background:#1a2a3a"></div>
+      <div id="macro-gsr" style="display:flex;align-items:center;gap:6px"></div>
+      <div style="width:1px;height:20px;background:#1a2a3a"></div>
+      <div id="macro-metals" style="display:flex;align-items:center;gap:10px"></div>
+      <div id="macro-ts" style="font-family:monospace;font-size:9px;color:var(--mut);margin-left:auto"></div>
+    </div>
+  </div>
 
   <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#11088; STRONG BUY <span style="font-size:11px;color:var(--mut);font-weight:400">(ZL + 200MA + PEG + Bull-Divergenz)</span></div>
   <div class="g3" id="s_strong" style="margin-bottom:14px"></div>
@@ -716,6 +727,7 @@ var STOCKS=[
   {t:'005930.KS',n:'Samsung Electronics',p:74000.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1800,mom:60,trend:60,fund:70,risk:58},
 ];
 var FD = {};
+var MACRO_DATA = null; /* Makro: Gold, Silber, GSR, SPY-Regime aus fund_juno_v7_5 */
 /* v5.9.16: Risk 0.15->0.20, Trend 0.25->0.20 (Low-Vol-Faktor, MSCI/BlackRock 1963-2024) */
 var W = {mom:0.25,trend:0.20,fund:0.35,risk:0.20};
 var WF_DATA = null;
@@ -1047,6 +1059,57 @@ function rSyn(){
     sH+='<div style="font-family:monospace;font-size:9px;color:#ff6666">'+swhy3+'</div></div>';
   }
   var s3=document.getElementById('s3');if(s3)s3.innerHTML=sH;
+}
+</script>
+
+/* ---- rMacro: Makro-Strip rendern (Regime + GSR + Metalle) ---- */
+<script>
+function rMacro(){
+  var strip = document.getElementById('macro-strip');
+  if(!strip) return;
+  if(!MACRO_DATA){strip.style.display='none';return;}
+  strip.style.display='block';
+  var m = MACRO_DATA;
+
+  /* --- Regime-Badge --- */
+  var regEl = document.getElementById('macro-regime');
+  if(regEl){
+    var regC  = m.spy_regime==='bull'?'#00e57a':'#ff6666';
+    var regBg = m.spy_regime==='bull'?'rgba(0,229,122,.1)':'rgba(255,63,63,.1)';
+    var regLbl= m.spy_regime==='bull'?'BULL':'BEAR';
+    var spyTxt= (m.spy_price&&m.spy_ma200)?
+      ' <span style="font-family:monospace;font-size:9px;color:var(--mut)">SPY '+m.spy_price+' / 200MA '+m.spy_ma200+'</span>':'';
+    regEl.innerHTML='<span style="font-family:monospace;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;background:'+regBg+';color:'+regC+'">'+regLbl+'</span>'+spyTxt;
+  }
+
+  /* --- GSR-Anzeige --- */
+  var gsrEl = document.getElementById('macro-gsr');
+  if(gsrEl&&m.gsr!==null&&m.gsr!==undefined){
+    var gsrC, gsrLbl, gsrBg;
+    if(m.gsr_signal==='switch_silver'){
+      gsrC='#00c8f0';gsrBg='rgba(0,200,240,.1)';gsrLbl='SWITCH SILBER';
+    } else if(m.gsr_signal==='switch_gold'){
+      gsrC='#ffd040';gsrBg='rgba(255,208,64,.1)';gsrLbl='SWITCH GOLD';
+    } else {
+      gsrC='#7a9bb5';gsrBg='rgba(122,155,181,.08)';gsrLbl='HALTEN';
+    }
+    gsrEl.innerHTML='<span style="font-family:monospace;font-size:10px;color:var(--mut)">GSR</span>'
+      +'<span style="font-family:monospace;font-size:13px;font-weight:700;color:'+gsrC+'">'+m.gsr+'</span>'
+      +'<span style="font-family:monospace;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;background:'+gsrBg+';color:'+gsrC+'">'+gsrLbl+'</span>'
+      +'<span style="font-family:monospace;font-size:9px;color:var(--mut)">&lt;70=Silber | &gt;90=Gold</span>';
+  }
+
+  /* --- Metall-Preise --- */
+  var metEl = document.getElementById('macro-metals');
+  if(metEl){
+    var gStr = m.gold_usd?'<span style="font-family:monospace;font-size:9px"><span style="color:#ffd040">Au</span> <span style="color:var(--txt)">'+m.gold_usd+'</span></span>':'';
+    var sStr = m.silver_usd?'<span style="font-family:monospace;font-size:9px"><span style="color:#b0c4d8">Ag</span> <span style="color:var(--txt)">'+m.silver_usd+'</span></span>':'';
+    metEl.innerHTML = gStr + (gStr&&sStr?' ':'')+sStr;
+  }
+
+  /* --- Timestamp --- */
+  var tsEl = document.getElementById('macro-ts');
+  if(tsEl&&m.ts) tsEl.textContent = m.ts;
 }
 </script>
 
@@ -1841,12 +1904,13 @@ function loadFund(inp){
     try{
       var rawData=JSON.parse(e.target.result);
       var fund=rawData.fundamentals||rawData;
+      if(rawData.macro) MACRO_DATA = rawData.macro;
       var ts=Date.now();
       applyFund(fund);
       saveFundToCache(rawData, ts);
       var n=countLoaded();
       updateFundStatus(n, ts, false);
-      rFund();rSyn();
+      rFund();rSyn();rMacro();
       archSnapshot(); /* Snapshot nach manuellem JSON-Laden */
     }catch(err){
       if(dm)dm.style.background='#ff6666';
@@ -1878,11 +1942,12 @@ function initFund(){
     var cached=JSON.parse(raw);
     if(!cached||!cached.data)return;
     var fund=cached.data.fundamentals||cached.data;
+    if(cached.data.macro) MACRO_DATA = cached.data.macro;
     var ts=cached.ts||null;
     applyFund(fund);
     var n=countLoaded();
     updateFundStatus(n, ts, true);
-    rFund();rSyn();
+    rFund();rSyn();rMacro();
     console.log('Fundamentals aus Cache geladen: '+n+' Ticker, Stand '+fmtDate(ts));
     try{ archSnapshot(); }catch(ae){ console.warn('Snapshot fehlgeschlagen: '+ae.message); }
   }catch(e){
