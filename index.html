@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.18</title>
+<title>StockIQ v5.9.19</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -162,9 +162,16 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="border:2px dashed #223040;border-radius:8px;padding:16px;text-align:center;cursor:pointer;margin-bottom:10px" onclick="document.getElementById('ffi').click()">
         <div style="font-size:18px;margin-bottom:4px">&#128193;</div>
         <div style="font-size:12px;font-weight:700;margin-bottom:2px">stockiq_fundamentals.json</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7_4.py</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7_6.py</div>
         <input type="file" id="ffi" accept=".json" onchange="loadFund(this)" style="display:none">
       </div>
+      <div style="border:2px dashed #1a3025;border-radius:8px;padding:12px;text-align:center;cursor:pointer;margin-bottom:10px" onclick="document.getElementById('fsi').click()">
+        <div style="font-size:16px;margin-bottom:4px">&#128190;</div>
+        <div style="font-size:12px;font-weight:700;margin-bottom:2px;color:#00e57a">stockiq_snapshots.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">Archiv &mdash; Signal-History + Faktor-Analyse</div>
+        <input type="file" id="fsi" accept=".json" onchange="loadSnaps(this)" style="display:none">
+      </div>
+      <div id="snap-status" style="display:none;font-family:monospace;font-size:10px;background:#0c1420;border:1px solid #1a3025;border-radius:8px;padding:8px 10px;margin-bottom:10px;color:#00e57a"></div>
       <div style="display:flex;align-items:center;gap:8px;font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:8px">
         <div style="width:8px;height:8px;border-radius:50%;background:#7a9bb5" id="fdot"></div>
         <span id="fmsg">Warte auf JSON...</span>
@@ -243,7 +250,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
   <!-- SIGNAL-HISTORY (immer sichtbar wenn Archiv vorhanden) -->
   <div id="arch-hist-wrap" style="margin-top:6px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#128337; Signal-History <span style="font-size:11px;color:var(--mut);font-weight:400">aus Archiv-Snapshots</span></div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#128337; Signal-History <span style="font-size:11px;color:var(--mut);font-weight:400">aus stockiq_snapshots.json</span></div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
       <button class="tf active" onclick="archHistFilt('all',this)">Alle Ticker</button>
       <button class="tf" onclick="archHistFilt('changed',this)">Signal geaendert</button>
@@ -251,7 +258,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <button class="tf" onclick="archHistFilt('sell',this)">SELL</button>
     </div>
     <div id="arch-hist-list">
-      <div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Archiv-Snapshots vorhanden. Fundamentals laden und Snapshot erstellen.</div>
+      <div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Snapshot-Daten. stockiq_snapshots.json im Fundamentals-Tab laden.</div>
     </div>
   </div>
 </div>
@@ -259,7 +266,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 5: HILFE -->
 <div class="page" id="p5">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.18 &middot; Stand April 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.19 &middot; Stand April 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -476,7 +483,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.18 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.19 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -761,6 +768,7 @@ var STOCKS=[
 ];
 var FD = {};
 var MACRO_DATA = null; /* Makro: Gold, Silber, GSR, SPY-Regime aus fund_juno_v7_5 */
+var SNAP_DATA  = null; /* Snapshot-Archiv aus stockiq_snapshots.json (v7.6) */
 /* v5.9.16: Risk 0.15->0.20, Trend 0.25->0.20 (Low-Vol-Faktor, MSCI/BlackRock 1963-2024) */
 var W = {mom:0.25,trend:0.20,fund:0.35,risk:0.20};
 var WF_DATA = null;
@@ -1966,6 +1974,34 @@ function clearFundCache(){
   rFund();rSyn();
 }
 
+/* ---- loadSnaps: stockiq_snapshots.json laden (v5.9.19) ---- */
+function loadSnaps(inp){
+  var file=inp.files[0]; if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var d=JSON.parse(e.target.result);
+      if(!d.snapshots||!Array.isArray(d.snapshots)){
+        alert('Ungueltige Snapshot-Datei.');return;
+      }
+      SNAP_DATA=d;
+      var n=d.snapshots.length;
+      var meta=d.meta||{};
+      var ss=document.getElementById('snap-status');
+      if(ss){
+        ss.style.display='block';
+        ss.innerHTML='&#128190; '+n+' Snapshots geladen'
+          +(meta.oldest?' &middot; '+meta.oldest+' bis '+meta.newest:'')
+          +' &middot; '+((d.snapshots[0]||{}).n_tickers||'?')+' Ticker/Tag';
+      }
+      rWF(); /* Signal-History neu rendern */
+      console.log('Snapshots geladen: '+n);
+    }catch(err){alert('Snapshot-Ladefehler: '+err.message);}
+  };
+  reader.readAsText(file);
+  inp.value='';
+}
+
 function initFund(){
   try{ archLoad(); }catch(e){ _archive=[]; }
   try{ updArchStatus(); }catch(e){}
@@ -2171,7 +2207,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.18.html';
+    a.download = 'stockiq-v5.9.19.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -2222,12 +2258,90 @@ function archHistFilt(f, btn){
 
 function archHistRend(){
   var el = document.getElementById('arch-hist-list'); if(!el) return;
-  if(!_archive || _archive.length < 1){
-    el.innerHTML = '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Archiv-Snapshots. Fundamentals laden und Snapshot erstellen.</div>';
+
+  /* v5.9.19: SNAP_DATA (stockiq_snapshots.json) ist primaere Quelle.
+     Fallback: _archive (localStorage, abwaertskompatibel).
+     SNAP_DATA-Format: snapshots[].tickers[{t,fcf,roce,peg,beta,...}]
+     Archive-Format:   snapshots[].entries[{t,sig,sc,p,...}]        */
+  var useSnap = SNAP_DATA && SNAP_DATA.snapshots && SNAP_DATA.snapshots.length > 0;
+  var useArch = !useSnap && _archive && _archive.length > 0;
+
+  if(!useSnap && !useArch){
+    el.innerHTML = '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Snapshot-Daten. stockiq_snapshots.json im Fundamentals-Tab laden.</div>';
     return;
   }
 
-  /* Letzten und vorletzten Snapshot fuer Signal-Vergleich */
+  /* ---- Datenmodus: SNAP_DATA ---- */
+  if(useSnap){
+    var snaps = SNAP_DATA.snapshots;
+    var latest = snaps[0];
+    var prev   = snaps.length > 1 ? snaps[1] : null;
+
+    /* Ticker-Maps aufbauen */
+    var latMap = {}, prevMap2 = {}, i2;
+    for(i2=0;i2<latest.tickers.length;i2++) latMap[latest.tickers[i2].t] = latest.tickers[i2];
+    if(prev){ for(i2=0;i2<prev.tickers.length;i2++) prevMap2[prev.tickers[i2].t] = prev.tickers[i2]; }
+
+    /* Signal + Score ruckwirkend berechnen
+       Dazu muessen wir die Rohdaten in ein Stock-Objekt umwandeln das fSc/cSc/mSig versteht.
+       Fehlende Felder werden mit STOCKS-Daten ergaenzt wenn verfuegbar. */
+    var stocksMap = {};
+    for(var si=0;si<STOCKS.length;si++) stocksMap[STOCKS[si].t] = STOCKS[si];
+
+    var out2 = '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">';
+    out2 += 'Snapshot: <strong style="color:#dce8f5">'+latest.date+'</strong>';
+    if(prev) out2 += ' &nbsp;|&nbsp; Vorher: '+prev.date;
+    out2 += ' &nbsp;|&nbsp; '+snaps.length+' Snapshots &nbsp;|&nbsp; Zeitraum: ';
+    out2 += (SNAP_DATA.meta&&SNAP_DATA.meta.oldest?SNAP_DATA.meta.oldest:'?')+' &ndash; '+latest.date;
+    out2 += '</div>';
+
+    /* Scores berechnen und sortieren */
+    var scored2 = [];
+    for(var tk in latMap){
+      if(!latMap.hasOwnProperty(tk)) continue;
+      var raw = latMap[tk];
+      var baseStock = stocksMap[tk] || null;
+      /* Fund-Score aus Rohdaten */
+      var tmpFD = {};
+      tmpFD[tk] = {fcf:raw.fcf, roce:raw.roce, roe:raw.roe, debt:raw.debt, beta:raw.beta,
+                   div_yield:raw.div, shareholder_return:raw.shr, moat:raw.moat||'none'};
+      /* Score mit Live-Stock-Daten + Snapshot-Fundamentals */
+      var sc3 = 50;
+      if(baseStock){
+        var oldFD = FD[tk]; FD[tk] = tmpFD[tk];
+        sc3 = cSc(baseStock);
+        if(oldFD !== undefined) FD[tk] = oldFD; else delete FD[tk];
+      }
+      var prevRaw = prevMap2[tk] || null;
+      scored2.push({t:tk, raw:raw, prevRaw:prevRaw, sc:sc3, base:baseStock});
+    }
+    scored2.sort(function(a,b){return b.sc-a.sc;});
+
+    for(var si2=0;si2<scored2.length;si2++){
+      var item = scored2[si2];
+      var scc3 = scCol(item.sc);
+      var fcfD3 = item.raw.fcf!==null&&item.raw.fcf!==undefined?fp(item.raw.fcf):'--';
+      var roceD3 = item.raw.roce!==null&&item.raw.roce!==undefined?fp(item.raw.roce):(item.raw.roe!==null&&item.raw.roe!==undefined?fp(item.raw.roe):'--');
+      var betaD3 = item.raw.beta!==null&&item.raw.beta!==undefined?item.raw.beta.toFixed(2):'--';
+      var betaC3 = item.raw.beta!==null&&item.raw.beta!==undefined?(item.raw.beta<0.8?'#00e57a':item.raw.beta<1.2?'#7a9bb5':'#ff6666'):'#7a9bb5';
+      var m12D3  = item.raw.m12!==null&&item.raw.m12!==undefined?(item.raw.m12>0?'+':'')+item.raw.m12.toFixed(1)+'%':'--';
+      var m12C3  = item.raw.m12!==null&&item.raw.m12!==undefined?(item.raw.m12>0?'#00e57a':'#ff6666'):'#7a9bb5';
+      out2+='<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;padding:9px 12px;margin-bottom:5px">';
+      out2+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
+      out2+='<span style="font-size:13px;font-weight:700">'+item.t+'</span>';
+      out2+='<span style="font-size:17px;font-weight:700;color:'+scc3+'">'+item.sc+'</span></div>';
+      out2+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-family:monospace;font-size:9px">';
+      out2+='<span><span style="color:var(--mut)">FCF </span>'+fcfD3+'</span>';
+      out2+='<span><span style="color:var(--mut)">ROCE </span>'+roceD3+'</span>';
+      out2+='<span><span style="color:'+betaC3+'">&#946; </span><span style="color:'+betaC3+'">'+betaD3+'</span></span>';
+      out2+='<span><span style="color:var(--mut)">12M </span><span style="color:'+m12C3+'">'+m12D3+'</span></span>';
+      out2+='</div></div>';
+    }
+    el.innerHTML = out2;
+    return;
+  }
+
+  /* ---- Datenmodus: _archive (Fallback) ---- */
   var latest  = _archive[0];
   var prev    = _archive.length > 1 ? _archive[1] : null;
 
@@ -2267,7 +2381,7 @@ function archHistRend(){
   out += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">';
   out += 'Aktuell: <strong style="color:#dce8f5">'+latest.date+'</strong>';
   if(prev) out += ' &nbsp;|&nbsp; Vorher: '+prev.date;
-  out += ' &nbsp;|&nbsp; '+_archive.length+' Snapshots gesamt';
+  out += ' &nbsp;|&nbsp; '+_archive.length+' Snapshots gesamt (localStorage)';
   out += '</div>';
 
   var shown = 0;
