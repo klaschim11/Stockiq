@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.19</title>
+<title>StockIQ v5.9.21</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.18 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.21 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -55,7 +55,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button class="tab" onclick="goTab(2,this)">&#11088; WL2 <span class="chip s" id="wl2-cnt">0</span></button>
     <button class="tab" onclick="goTab(3,this)">&#128181; Fundamentals <span class="chip ai">AI</span></button>
     <button class="tab" onclick="goTab(4,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
-    <button class="tab" onclick="goTab(5,this)">&#128218; Hilfe</button>
+    <button class="tab" onclick="goTab(5,this)">&#9878; Allokation</button>
+    <button class="tab" onclick="goTab(6,this)">&#128218; Hilfe</button>
   </div>
 </header>
 
@@ -77,17 +78,6 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">MACD ZL + 200MA + ATR-Hist-Filter + Divergenz &middot; Mom 25% Trend 25% Fund 35% Risk 15% &middot; PEG-Block &gt;=3.0</div>
   <div class="g4" id="s0"></div>
-  <div id="macro-strip" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:10px 14px;margin-bottom:14px">
-    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;min-width:36px">Makro</div>
-      <div id="macro-regime" style="display:flex;align-items:center;gap:6px"></div>
-      <div style="width:1px;height:20px;background:#1a2a3a"></div>
-      <div id="macro-gsr" style="display:flex;align-items:center;gap:6px"></div>
-      <div style="width:1px;height:20px;background:#1a2a3a"></div>
-      <div id="macro-metals" style="display:flex;align-items:center;gap:10px"></div>
-      <div id="macro-ts" style="font-family:monospace;font-size:9px;color:var(--mut);margin-left:auto"></div>
-    </div>
-  </div>
 
   <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#11088; STRONG BUY <span style="font-size:11px;color:var(--mut);font-weight:400">(ZL + 200MA + PEG + Bull-Divergenz)</span></div>
   <div class="g3" id="s_strong" style="margin-bottom:14px"></div>
@@ -155,23 +145,16 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 3: FUNDAMENTALS -->
 <div class="page" id="p3">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128181; Fundamentals</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG + Schuldenqualit&auml;t &middot; fund_score = 35% ROCE + 30% FCF + 20% PEG + 15% Debt (v5.9.16)</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG + Schuldenqualit&auml;t + Piotroski Mini-Score &middot; fund_score = 35% ROCE + 30% FCF + 20% PEG + 15% Debt (v5.9.16)</div>
   <div class="g2" style="margin-bottom:14px">
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
       <div style="font-size:13px;font-weight:700;color:#00e57a;margin-bottom:10px">&#128228; JSON laden</div>
       <div style="border:2px dashed #223040;border-radius:8px;padding:16px;text-align:center;cursor:pointer;margin-bottom:10px" onclick="document.getElementById('ffi').click()">
         <div style="font-size:18px;margin-bottom:4px">&#128193;</div>
         <div style="font-size:12px;font-weight:700;margin-bottom:2px">stockiq_fundamentals.json</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7_6.py</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7_4.py</div>
         <input type="file" id="ffi" accept=".json" onchange="loadFund(this)" style="display:none">
       </div>
-      <div style="border:2px dashed #1a3025;border-radius:8px;padding:12px;text-align:center;cursor:pointer;margin-bottom:10px" onclick="document.getElementById('fsi').click()">
-        <div style="font-size:16px;margin-bottom:4px">&#128190;</div>
-        <div style="font-size:12px;font-weight:700;margin-bottom:2px;color:#00e57a">stockiq_snapshots.json</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">Archiv &mdash; Signal-History + Faktor-Analyse</div>
-        <input type="file" id="fsi" accept=".json" onchange="loadSnaps(this)" style="display:none">
-      </div>
-      <div id="snap-status" style="display:none;font-family:monospace;font-size:10px;background:#0c1420;border:1px solid #1a3025;border-radius:8px;padding:8px 10px;margin-bottom:10px;color:#00e57a"></div>
       <div style="display:flex;align-items:center;gap:8px;font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:8px">
         <div style="width:8px;height:8px;border-radius:50%;background:#7a9bb5" id="fdot"></div>
         <span id="fmsg">Warte auf JSON...</span>
@@ -229,8 +212,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
       <div style="font-size:13px;font-weight:700;color:#b07cf8;margin-bottom:10px">&#128301; Methodik</div>
       <div style="font-size:12px;color:var(--mut);line-height:1.9">
-        <div><strong style="color:#dce8f5">Training:</strong> <span id="wf-meth-is">12</span> Monate In-Sample</div>
-        <div><strong style="color:#dce8f5">Test:</strong> <span id="wf-meth-oos">6</span> Monate Out-of-Sample</div>
+        <div><strong style="color:#dce8f5">Training:</strong> 12 Monate In-Sample</div>
+        <div><strong style="color:#dce8f5">Test:</strong> 3 Monate Out-of-Sample</div>
         <div><strong style="color:#dce8f5">Ziel:</strong> OOS WR &gt; IS WR = kein Overfitting</div>
       </div>
     </div>
@@ -250,7 +233,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
   <!-- SIGNAL-HISTORY (immer sichtbar wenn Archiv vorhanden) -->
   <div id="arch-hist-wrap" style="margin-top:6px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#128337; Signal-History <span style="font-size:11px;color:var(--mut);font-weight:400">aus stockiq_snapshots.json</span></div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#128337; Signal-History <span style="font-size:11px;color:var(--mut);font-weight:400">aus Archiv-Snapshots</span></div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
       <button class="tf active" onclick="archHistFilt('all',this)">Alle Ticker</button>
       <button class="tf" onclick="archHistFilt('changed',this)">Signal geaendert</button>
@@ -258,15 +241,102 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <button class="tf" onclick="archHistFilt('sell',this)">SELL</button>
     </div>
     <div id="arch-hist-list">
-      <div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Snapshot-Daten. stockiq_snapshots.json im Fundamentals-Tab laden.</div>
+      <div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Archiv-Snapshots vorhanden. Fundamentals laden und Snapshot erstellen.</div>
     </div>
   </div>
 </div>
 
 <!-- TAB 5: HILFE -->
 <div class="page" id="p5">
+<!-- ============================================================
+     ALLOKATIONS-TAB v5.9.20
+     Ziel-Allokation: 60% Aktien / 20% Anleihen / 15% Gold / 5% Cash
+     Rebalancing-Alert +/-7pp
+     ============================================================ -->
+<div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v5.9.20</div>
+
+<!-- EINGABE-SEKTION -->
+<div id="alloc-inputs" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:14px">
+  <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:12px">&#128221; Aktueller Portfoliowert eingeben</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">AKTIEN (EUR)</div>
+      <input id="ai-stocks" type="number" min="0" step="100" placeholder="z.B. 60000"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
+        oninput="rAlloc()">
+    </div>
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">ANLEIHEN / RENTEN (EUR)</div>
+      <input id="ai-bonds" type="number" min="0" step="100" placeholder="z.B. 20000"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
+        oninput="rAlloc()">
+    </div>
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">GOLD / EDELMETALLE (EUR)</div>
+      <input id="ai-gold" type="number" min="0" step="100" placeholder="z.B. 15000"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
+        oninput="rAlloc()">
+    </div>
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">CASH / TAGESGELD (EUR)</div>
+      <input id="ai-cash" type="number" min="0" step="100" placeholder="z.B. 5000"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
+        oninput="rAlloc()">
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center">
+    <div style="font-family:monospace;font-size:10px;color:var(--mut)">Gesamt: <span id="ai-total" style="color:#dce8f5;font-weight:700">0 EUR</span></div>
+    <button onclick="allocClear()" style="margin-left:auto;padding:5px 12px;background:transparent;border:1px solid #1a3050;border-radius:5px;color:var(--mut);font-size:10px;cursor:pointer">&#10006; Leeren</button>
+    <button onclick="allocSave()" style="padding:5px 12px;background:#001a30;border:1px solid #00c8f0;border-radius:5px;color:#00c8f0;font-size:10px;cursor:pointer">&#128190; Speichern</button>
+  </div>
+</div>
+
+<!-- ERGEBNIS-SEKTION -->
+<div id="alloc-result" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:14px">
+  <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:12px">&#128200; Ist vs. Soll</div>
+  <div id="alloc-bars">
+    <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:24px 0">Bitte Portfoliowerte eingeben.</div>
+  </div>
+</div>
+
+<!-- REBALANCING-SEKTION -->
+<div id="alloc-rebal" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:14px;display:none">
+  <div style="font-size:12px;font-weight:700;color:#ffab00;margin-bottom:10px">&#9888; Rebalancing-Empfehlung</div>
+  <div id="alloc-rebal-body"></div>
+</div>
+
+<!-- ZIEL-INFO -->
+<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px">
+  <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">&#128270; Ziel-Allokation (1-3 Jahres-Horizont)</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+    <div style="text-align:center;padding:8px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">
+      <div style="font-size:18px;font-weight:700;color:#00e676">60%</div>
+      <div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">AKTIEN</div>
+    </div>
+    <div style="text-align:center;padding:8px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">
+      <div style="font-size:18px;font-weight:700;color:#00c8f0">20%</div>
+      <div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">ANLEIHEN</div>
+    </div>
+    <div style="text-align:center;padding:8px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">
+      <div style="font-size:18px;font-weight:700;color:#ffab00">15%</div>
+      <div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">GOLD</div>
+    </div>
+    <div style="text-align:center;padding:8px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">
+      <div style="font-size:18px;font-weight:700;color:#b388ff">5%</div>
+      <div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">CASH</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:10px;color:var(--mut);line-height:1.6">
+    <strong style="color:#dce8f5">Rebalancing-Trigger:</strong> Abweichung &gt; &plusmn;7pp vom Zielwert &rarr; rot markiert + Empfehlung.<br>
+    <strong style="color:#dce8f5">Toleranzband:</strong> &plusmn;7pp (gruen = im Ziel, gelb = Randbereich &plusmn;4-7pp, rot = Handlungsbedarf).
+  </div>
+</div>
+</div>
+
+<div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.19 &middot; Stand April 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.17 &middot; Stand April 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -324,31 +394,6 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">SCORE (0-100)</div><div style="font-size:12px;color:var(--mut)">Momentum 25% + Trend 20% + Fundamentals 35% + Risk 20% (inkl. Beta-Faktor ab v5.9.16).</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">BETA / LOW-VOL (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Beta = Kursvolatilitaet relativ zum Markt. <span style="color:#00e57a">&lt; 0.8</span> defensiv (Bonus) &nbsp;<span style="color:#f0c000">0.8&ndash;1.2</span> markt&auml;hnlich &nbsp;<span style="color:#ff6666">&gt; 1.5</span> spekulativ (Malus). Fliesst zu 40% in Risk-Score. Akademisch: MSCI/BlackRock 1963&ndash;2024.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DEBT/EQ % (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Verschuldungsgrad (yfinance debtToEquity). <span style="color:#00e57a">&lt; 100</span> konservativ &nbsp;<span style="color:#f0c000">100&ndash;200</span> normal &nbsp;<span style="color:#ff6666">&gt; 200</span> risikoreich. 15% Gewicht im Fund-Score als Safety-Dimension.</div></div>
-
-    <div style="margin-bottom:12px;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px">
-      <div style="font-family:monospace;font-size:11px;color:#ffd040;font-weight:700;margin-bottom:8px">&#9733; GSR &mdash; Gold-Silber-Ratio (v5.9.17)</div>
-      <div style="font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:10px">GSR = Goldpreis / Silberpreis. Historische Bandbreite: ~15 (1980) bis ~125 (2020). Langfristiger Median: ~65&ndash;70.</div>
-
-      <div style="font-family:monospace;font-size:10px;color:#9ab8d0;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">StockIQ Schwellenwerte</div>
-      <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:10px">
-        <span style="font-family:monospace;color:#00c8f0;font-weight:700">GSR &lt; 70</span><span style="color:var(--mut)"><strong style="color:#dce8f5">SWITCH SILBER</strong> &mdash; Silber relativ unterbewertet vs. Gold</span>
-        <span style="font-family:monospace;color:#7a9bb5">GSR 70&ndash;90</span><span style="color:var(--mut)"><strong style="color:#dce8f5">HALTEN</strong> &mdash; neutrale Zone, kein Handlungsbedarf</span>
-        <span style="font-family:monospace;color:#ffd040;font-weight:700">GSR &gt; 90</span><span style="color:var(--mut)"><strong style="color:#dce8f5">SWITCH GOLD</strong> &mdash; Gold relativ unterbewertet vs. Silber</span>
-      </div>
-
-      <div style="font-family:monospace;font-size:10px;color:#9ab8d0;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Wann tauschen? &mdash; Entscheidungsrahmen</div>
-      <div style="font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:10px">
-        <strong style="color:#00c8f0">Gold &rarr; Silber</strong> (GSR &lt; 70): Silber hat st&auml;rker zugelegt als Gold oder Gold hat korrigiert. Silber bietet h&ouml;heres Aufholpotenzial. Sinnvoll wenn: Industriekonjunktur positiv, kein akuter Krisenkontext, GSR f&auml;llt seit mehreren Wochen.<br><br>
-        <strong style="color:#ffd040">Silber &rarr; Gold</strong> (GSR &gt; 90): Gold hat Silber stark &uuml;bertroffen (typisch: Krisenflucht, geopolitische Eskalation). R&uuml;ckf&uuml;hrung in Gold sichert Gewinne und positioniert f&uuml;r n&auml;chste Silber-Aufholjagd. Sinnvoll wenn: GSR mehrere Wochen &uuml;ber 90, Silber zeigt keine St&auml;rke.
-      </div>
-
-      <div style="font-family:monospace;font-size:10px;color:#ff6666;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">&#9888; Spread-Kosten physisch &mdash; entscheidend!</div>
-      <div style="font-size:12px;color:var(--mut);line-height:1.8">
-        Physisches Edelmetall hat <strong style="color:#dce8f5">hohe Transaktionskosten</strong>: Ankaufs-/Verkaufsspreads beim H&auml;ndler typisch 3&ndash;8% (Silber h&auml;her als Gold durch niedrigeren Preis/Einheit). Faustregel: Ein Switch lohnt sich erst wenn der erwartete GSR-Gewinn die Spread-Kosten <strong style="color:#dce8f5">beider Transaktionen</strong> &uuml;bersteigt.<br><br>
-        <strong style="color:#dce8f5">Beispiel:</strong> GSR-Wechsel von 95 auf 70 = ca. 26% Silber-Outperformance. Bei Spread 6% hin + 6% zur&uuml;ck = 12% Kosten. Nettogewinn ~14% &rarr; lohnt sich. Bei GSR 92 auf 85 = nur 7% Potenzial &rarr; nach Spreads kein Gewinn.<br><br>
-        <strong style="color:#dce8f5">Empfehlung:</strong> Nur bei klarer Signal-Zone (&lt;65 oder &gt;95) tauschen. Nie auf genauen Schwellenwert warten &mdash; Trend ist wichtiger als exakter Punkt. Eher in Tranchen als auf einmal.
-      </div>
-    </div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PEG-RATIO</div><div style="font-size:12px;color:var(--mut)">KGV / Gewinnwachstum%. <span style="color:#00e57a">&lt;1.0</span> unterbewertet &nbsp;<span style="color:#00c8f0">1.0-1.5</span> fair &nbsp;<span style="color:#f0c000">1.5-2.0</span> leicht teuer &nbsp;<span style="color:#ff6666">&gt;=2.0</span> BUY blockiert.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">FCF YIELD</div><div style="font-size:12px;color:var(--mut)">FreeCashflow / Marktkapitalisierung. <span style="color:#00e57a">&gt;4%</span> stark &nbsp;<span style="color:#00c8f0">2-4%</span> gut &nbsp;<span style="color:#f0c000">0-2%</span> schwach &nbsp;<span style="color:#ff6666">&lt;0%</span> negativ.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ROCE / ROE</div><div style="font-size:12px;color:var(--mut)">ROCE = EBIT / (EK + LT-Schulden). Fallback ROE wenn nicht verfuegbar. <span style="color:#00e57a">&gt;25%</span> Burggraben &nbsp;<span style="color:#00c8f0">15-25%</span> stark.</div></div>
@@ -394,15 +439,20 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.18</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div>&#10003; <strong style="color:#dce8f5">WF Methodik-Box dynamisch</strong>: "Test: X Monate Out-of-Sample" liest jetzt wf_oos_months aus dem JSON. Zeigt korrekt 3M oder 6M je nach geladenem Script.</div>
-      <div>&#10003; <strong style="color:#dce8f5">GSR-Hilfetext vollst&auml;ndig</strong>: Buy/Sell-Logik (wann Gold&rarr;Silber und Silber&rarr;Gold sinnvoll), Schwellenwerte mit Begr&uuml;ndung, Spread-Kalkulation f&uuml;r physisches Edelmetall, Faustregel f&uuml;r Entscheidung.</div>
-      <div>&#10003; <strong style="color:#dce8f5">alpha_juno Vergleichslogik</strong>: Stabilit&auml;tsvorteil wird jetzt korrekt bewertet (nicht nur OOS WR). 6M &uuml;berzeugt prim&auml;r durch Stabilit&auml;t 3.4pp vs. 10.0pp.</div>
-    </div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.21</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Piotroski Mini-Score (neu)</strong>: 5-Punkte Quality-Filter auf jedem Fundamentals-Ticker-Card. Kriterien: ROA&gt;0 (ROCE-Proxy), CFO&gt;0 (FCF-Proxy), Accruals OK*, GrossMargin-Trend*, Debt Safe. *=benoetigt fund_juno_v7.7.</div>
+    <div>&#10003; <strong style="color:#dce8f5">pioScore() + pioBadge()</strong>: Neue Scoring-Funktionen. Rueckgabe {score, max, pending, criteria[]}. Pending-Kriterien werden als ? angezeigt bis fund_juno_v7.7 geladen.</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno_v7.7 (separates Script)</strong>: Neue Felder accruals_ok (CFO &gt; NetIncome) und gross_margin_ok (YoY Verbesserung) via yfinance.</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Basis:</strong> Alle v5.9.20-Features erhalten (Allokations-Tab, Header-Fix). Naechste Version: Sektor-neutraler PEG (v5.9.22).</div>
   </div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.17</div>
+  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.20</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Header-Fix</strong>: Version korrekt auf v5.9.20 (war v5.9.18/v5.9.19 inkonsistent).</div>
+    <div>&#10003; <strong style="color:#dce8f5">Allokations-Tab (neu)</strong>: Portfolio Ist vs. Soll-Vergleich. Ziel-Allokation 60/20/15/5. Rebalancing-Alert &plusmn;7pp (rot), Randzone &plusmn;4-7pp (gelb). Eurobetrag-Kalkulation. Persistenz via localStorage. Basis: Gap-Analyse April 2026.</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Basis:</strong> Alle v5.9.17-Features erhalten. Naechste Version: Piotroski Mini-Score (v5.9.21).</div>
+  </div>
+  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.17</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.8">
       <div>&#10003; <strong style="color:#dce8f5">Dividenden-Hold-Filter (DR)</strong>: SELL wird unterdrueckt wenn Dividendenrendite &ge; max(Floor 3.5%, Bund+2pp). Heute bei Bund 2.6%: Schwelle 4.6%.</div>
       <div>&#10003; <strong style="color:#dce8f5">Option 3 Referenzzins</strong>: Schwelle = max(Mindest-%, Bund+Spread). Schutzt vor Nullzins-Aushoelung und passt sich Zinszyklen an. Damodaran Equity Risk Premium Logik.</div>
@@ -483,7 +533,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.19 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.21 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -767,8 +817,6 @@ var STOCKS=[
   {t:'005930.KS',n:'Samsung Electronics',p:74000.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1800,mom:60,trend:60,fund:70,risk:58},
 ];
 var FD = {};
-var MACRO_DATA = null; /* Makro: Gold, Silber, GSR, SPY-Regime aus fund_juno_v7_5 */
-var SNAP_DATA  = null; /* Snapshot-Archiv aus stockiq_snapshots.json (v7.6) */
 /* v5.9.16: Risk 0.15->0.20, Trend 0.25->0.20 (Low-Vol-Faktor, MSCI/BlackRock 1963-2024) */
 var W = {mom:0.25,trend:0.20,fund:0.35,risk:0.20};
 var WF_DATA = null;
@@ -995,7 +1043,7 @@ tick();setInterval(tick,1000);
      ============================================================ -->
 <script>
 function goTab(n,btn){
-  var pgs=['p0','p1','p2','p3','p4','p5'],i;
+  var pgs=['p0','p1','p2','p3','p4','p5','p6'],i;
   for(i=0;i<pgs.length;i++){var pg=document.getElementById(pgs[i]);if(pg)pg.style.display='none';}
   var tabs=document.querySelectorAll('.tab');
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
@@ -1003,6 +1051,7 @@ function goTab(n,btn){
   if(btn)btn.classList.add('active');
   if(n===0)rSyn();if(n===1)rWL();if(n===2)rWL2();if(n===3)rFund();
   if(n===4){rWF();try{archHistRend();}catch(e){}}
+  if(n===5)rAlloc();
 }
 </script>
 
@@ -1100,57 +1149,6 @@ function rSyn(){
     sH+='<div style="font-family:monospace;font-size:9px;color:#ff6666">'+swhy3+'</div></div>';
   }
   var s3=document.getElementById('s3');if(s3)s3.innerHTML=sH;
-}
-</script>
-
-/* ---- rMacro: Makro-Strip rendern (Regime + GSR + Metalle) ---- */
-<script>
-function rMacro(){
-  var strip = document.getElementById('macro-strip');
-  if(!strip) return;
-  if(!MACRO_DATA){strip.style.display='none';return;}
-  strip.style.display='block';
-  var m = MACRO_DATA;
-
-  /* --- Regime-Badge --- */
-  var regEl = document.getElementById('macro-regime');
-  if(regEl){
-    var regC  = m.spy_regime==='bull'?'#00e57a':'#ff6666';
-    var regBg = m.spy_regime==='bull'?'rgba(0,229,122,.1)':'rgba(255,63,63,.1)';
-    var regLbl= m.spy_regime==='bull'?'BULL':'BEAR';
-    var spyTxt= (m.spy_price&&m.spy_ma200)?
-      ' <span style="font-family:monospace;font-size:9px;color:var(--mut)">SPY '+m.spy_price+' / 200MA '+m.spy_ma200+'</span>':'';
-    regEl.innerHTML='<span style="font-family:monospace;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;background:'+regBg+';color:'+regC+'">'+regLbl+'</span>'+spyTxt;
-  }
-
-  /* --- GSR-Anzeige --- */
-  var gsrEl = document.getElementById('macro-gsr');
-  if(gsrEl&&m.gsr!==null&&m.gsr!==undefined){
-    var gsrC, gsrLbl, gsrBg;
-    if(m.gsr_signal==='switch_silver'){
-      gsrC='#00c8f0';gsrBg='rgba(0,200,240,.1)';gsrLbl='SWITCH SILBER';
-    } else if(m.gsr_signal==='switch_gold'){
-      gsrC='#ffd040';gsrBg='rgba(255,208,64,.1)';gsrLbl='SWITCH GOLD';
-    } else {
-      gsrC='#7a9bb5';gsrBg='rgba(122,155,181,.08)';gsrLbl='HALTEN';
-    }
-    gsrEl.innerHTML='<span style="font-family:monospace;font-size:10px;color:var(--mut)">GSR</span>'
-      +'<span style="font-family:monospace;font-size:13px;font-weight:700;color:'+gsrC+'">'+m.gsr+'</span>'
-      +'<span style="font-family:monospace;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;background:'+gsrBg+';color:'+gsrC+'">'+gsrLbl+'</span>'
-      +'<span style="font-family:monospace;font-size:9px;color:var(--mut)">&lt;70=Silber | &gt;90=Gold</span>';
-  }
-
-  /* --- Metall-Preise --- */
-  var metEl = document.getElementById('macro-metals');
-  if(metEl){
-    var gStr = m.gold_usd?'<span style="font-family:monospace;font-size:9px"><span style="color:#ffd040">Au</span> <span style="color:var(--txt)">'+m.gold_usd+'</span></span>':'';
-    var sStr = m.silver_usd?'<span style="font-family:monospace;font-size:9px"><span style="color:#b0c4d8">Ag</span> <span style="color:var(--txt)">'+m.silver_usd+'</span></span>':'';
-    metEl.innerHTML = gStr + (gStr&&sStr?' ':'')+sStr;
-  }
-
-  /* --- Timestamp --- */
-  var tsEl = document.getElementById('macro-ts');
-  if(tsEl&&m.ts) tsEl.textContent = m.ts;
 }
 </script>
 
@@ -1945,13 +1943,12 @@ function loadFund(inp){
     try{
       var rawData=JSON.parse(e.target.result);
       var fund=rawData.fundamentals||rawData;
-      if(rawData.macro) MACRO_DATA = rawData.macro;
       var ts=Date.now();
       applyFund(fund);
       saveFundToCache(rawData, ts);
       var n=countLoaded();
       updateFundStatus(n, ts, false);
-      rFund();rSyn();rMacro();
+      rFund();rSyn();
       archSnapshot(); /* Snapshot nach manuellem JSON-Laden */
     }catch(err){
       if(dm)dm.style.background='#ff6666';
@@ -1974,34 +1971,6 @@ function clearFundCache(){
   rFund();rSyn();
 }
 
-/* ---- loadSnaps: stockiq_snapshots.json laden (v5.9.19) ---- */
-function loadSnaps(inp){
-  var file=inp.files[0]; if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(e){
-    try{
-      var d=JSON.parse(e.target.result);
-      if(!d.snapshots||!Array.isArray(d.snapshots)){
-        alert('Ungueltige Snapshot-Datei.');return;
-      }
-      SNAP_DATA=d;
-      var n=d.snapshots.length;
-      var meta=d.meta||{};
-      var ss=document.getElementById('snap-status');
-      if(ss){
-        ss.style.display='block';
-        ss.innerHTML='&#128190; '+n+' Snapshots geladen'
-          +(meta.oldest?' &middot; '+meta.oldest+' bis '+meta.newest:'')
-          +' &middot; '+((d.snapshots[0]||{}).n_tickers||'?')+' Ticker/Tag';
-      }
-      rWF(); /* Signal-History neu rendern */
-      console.log('Snapshots geladen: '+n);
-    }catch(err){alert('Snapshot-Ladefehler: '+err.message);}
-  };
-  reader.readAsText(file);
-  inp.value='';
-}
-
 function initFund(){
   try{ archLoad(); }catch(e){ _archive=[]; }
   try{ updArchStatus(); }catch(e){}
@@ -2011,12 +1980,11 @@ function initFund(){
     var cached=JSON.parse(raw);
     if(!cached||!cached.data)return;
     var fund=cached.data.fundamentals||cached.data;
-    if(cached.data.macro) MACRO_DATA = cached.data.macro;
     var ts=cached.ts||null;
     applyFund(fund);
     var n=countLoaded();
     updateFundStatus(n, ts, true);
-    rFund();rSyn();rMacro();
+    rFund();rSyn();
     console.log('Fundamentals aus Cache geladen: '+n+' Ticker, Stand '+fmtDate(ts));
     try{ archSnapshot(); }catch(ae){ console.warn('Snapshot fehlgeschlagen: '+ae.message); }
   }catch(e){
@@ -2027,6 +1995,94 @@ function initFund(){
 </script>
 
 <script>
+/* ============================================================
+   PIOTROSKI MINI-SCORE v5.9.21
+   5 von 9 Kriterien — Quelle: Piotroski (2000) Stanford
+   P1: ROA > 0    (ROCE/ROE-Proxy, immer verfuegbar)
+   P2: CFO > 0    (FCF-Proxy, immer verfuegbar)
+   P3: Accruals   (CFO > NI, neu via fund_juno_v7.7: fd.accruals_ok)
+   P4: GrossMargin wachsend (neu via fund_juno_v7.7: fd.gross_margin_ok)
+   P5: Debt Safe  (D/E < 200, Proxy-Kriterium, immer verfuegbar)
+   Rueckgabe: {score, max, pending, criteria[]}
+   ============================================================ */
+function pioScore(s, fd) {
+  var criteria = [];
+  var score = 0;
+  var pending = 0;
+
+  /* P1: ROA > 0 via ROCE/ROE-Proxy */
+  var rv = (fd && fd.roce !== null && fd.roce !== undefined) ? fd.roce :
+           (fd && fd.roe  !== null && fd.roe  !== undefined) ? fd.roe : null;
+  var p1 = rv !== null && rv > 0;
+  if (p1) score++;
+  criteria.push({label:'ROA>0', ok:p1, src:'Proxy'});
+
+  /* P2: CFO > 0 via FCF-Proxy */
+  var p2 = fd && fd.fcf !== null && fd.fcf !== undefined && fd.fcf > 0;
+  if (p2) score++;
+  criteria.push({label:'CFO>0', ok:p2, src:'Proxy'});
+
+  /* P3: Accruals OK — fd.accruals_ok aus fund_juno_v7.7 */
+  if (fd && fd.accruals_ok !== null && fd.accruals_ok !== undefined) {
+    var p3 = (fd.accruals_ok === true || fd.accruals_ok === 1);
+    if (p3) score++;
+    criteria.push({label:'Accruals', ok:p3, src:'v7.7'});
+  } else {
+    pending++;
+    criteria.push({label:'Accruals', ok:null, src:'v7.7'});
+  }
+
+  /* P4: Delta Gross Margin positiv — fd.gross_margin_ok aus fund_juno_v7.7 */
+  if (fd && fd.gross_margin_ok !== null && fd.gross_margin_ok !== undefined) {
+    var p4 = (fd.gross_margin_ok === true || fd.gross_margin_ok === 1);
+    if (p4) score++;
+    criteria.push({label:'GrossMgn', ok:p4, src:'v7.7'});
+  } else {
+    pending++;
+    criteria.push({label:'GrossMgn', ok:null, src:'v7.7'});
+  }
+
+  /* P5: Debt Safe: D/E < 200 (konservativ bis normal) */
+  var p5 = fd && fd.debt !== null && fd.debt !== undefined && fd.debt < 200;
+  if (p5) score++;
+  criteria.push({label:'DebtSafe', ok:p5, src:'Proxy'});
+
+  return {score:score, max:5, pending:pending, criteria:criteria};
+}
+
+/* Piotroski-Badge fuer Fundamentals-Karte */
+function pioBadge(s, fd) {
+  if (!fd) return '';
+  var p = pioScore(s, fd);
+  var col = p.score >= 4 ? '#00e676' : p.score >= 3 ? '#f0c000' : '#ff6666';
+  var h = '<div style="margin-top:6px;padding:5px 8px;background:rgba(0,0,0,.2);border-radius:6px;border:1px solid #1a3050">';
+  h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
+  h += '<div style="font-family:monospace;font-size:8px;color:#456278">PIOTROSKI MINI</div>';
+  h += '<div style="font-family:monospace;font-size:11px;font-weight:700;color:' + col + '">';
+  h += p.score + '/' + (5 - p.pending) + '</div></div>';
+  h += '<div style="display:flex;gap:3px;flex-wrap:wrap">';
+  for (var i = 0; i < p.criteria.length; i++) {
+    var c = p.criteria[i];
+    var bg, tc;
+    if (c.ok === null) {
+      bg = 'rgba(70,90,120,.3)'; tc = '#456278';
+    } else if (c.ok) {
+      bg = 'rgba(0,230,118,.12)'; tc = '#00e676';
+    } else {
+      bg = 'rgba(255,82,82,.12)'; tc = '#ff5252';
+    }
+    h += '<div style="padding:2px 5px;border-radius:4px;background:' + bg + ';font-family:monospace;font-size:7px;color:' + tc + '">';
+    h += (c.ok === null ? '?' : (c.ok ? '\u2713' : '\u2717')) + ' ' + c.label;
+    h += '</div>';
+  }
+  h += '</div>';
+  if (p.pending > 0) {
+    h += '<div style="font-family:monospace;font-size:7px;color:#456278;margin-top:3px">? = fund_juno_v7.7 benoetigt</div>';
+  }
+  h += '</div>';
+  return h;
+}
+
 function rFund(){
   var i,loaded=0;
   for(i=0;i<STOCKS.length;i++){if(FD[STOCKS[i].t])loaded++;}
@@ -2069,6 +2125,7 @@ function rFund(){
     if(fd4.shareholder_return!==null&&fd4.shareholder_return!==undefined){
       cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-top:2px"><span style="color:var(--mut)">SH Return</span><span style="color:#b07cf8">'+fp(fd4.shareholder_return)+'</span></div>';
     }
+    cards+=pioBadge(s, fd4);
     cards+='</div>';
   }
   var f1=document.getElementById('f1');if(f1)f1.innerHTML=cards;
@@ -2123,11 +2180,6 @@ function rWF(){
   var isMths=(WF_DATA.meta&&WF_DATA.meta.wf_is_months)?WF_DATA.meta.wf_is_months:12;
   var sub=document.getElementById('wf-subtitle');
   if(sub)sub.textContent=isMths+'M Training / '+oosMths+'M OOS rollierend \u00b7 Out-of-Sample Validierung';
-  /* Methodik-Box Spans aktualisieren */
-  var methIs=document.getElementById('wf-meth-is');
-  var methOos=document.getElementById('wf-meth-oos');
-  if(methIs)methIs.textContent=isMths;
-  if(methOos)methOos.textContent=oosMths;
   /* v3: global_stats.standard/alpha -- v4: summary.avg_is_wr/avg_oos_wr */
   var stdWR = gs.standard ? gs.standard.win_rate : (gs.avg_is_wr || gs.standard_wr || 0);
   /* OOS AVG aus walk_forward-Array berechnen (immer vorhanden, auch bei Interim-JSON) */
@@ -2207,7 +2259,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.19.html';
+    a.download = 'stockiq-v5.9.20.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -2258,90 +2310,12 @@ function archHistFilt(f, btn){
 
 function archHistRend(){
   var el = document.getElementById('arch-hist-list'); if(!el) return;
-
-  /* v5.9.19: SNAP_DATA (stockiq_snapshots.json) ist primaere Quelle.
-     Fallback: _archive (localStorage, abwaertskompatibel).
-     SNAP_DATA-Format: snapshots[].tickers[{t,fcf,roce,peg,beta,...}]
-     Archive-Format:   snapshots[].entries[{t,sig,sc,p,...}]        */
-  var useSnap = SNAP_DATA && SNAP_DATA.snapshots && SNAP_DATA.snapshots.length > 0;
-  var useArch = !useSnap && _archive && _archive.length > 0;
-
-  if(!useSnap && !useArch){
-    el.innerHTML = '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Snapshot-Daten. stockiq_snapshots.json im Fundamentals-Tab laden.</div>';
+  if(!_archive || _archive.length < 1){
+    el.innerHTML = '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Archiv-Snapshots. Fundamentals laden und Snapshot erstellen.</div>';
     return;
   }
 
-  /* ---- Datenmodus: SNAP_DATA ---- */
-  if(useSnap){
-    var snaps = SNAP_DATA.snapshots;
-    var latest = snaps[0];
-    var prev   = snaps.length > 1 ? snaps[1] : null;
-
-    /* Ticker-Maps aufbauen */
-    var latMap = {}, prevMap2 = {}, i2;
-    for(i2=0;i2<latest.tickers.length;i2++) latMap[latest.tickers[i2].t] = latest.tickers[i2];
-    if(prev){ for(i2=0;i2<prev.tickers.length;i2++) prevMap2[prev.tickers[i2].t] = prev.tickers[i2]; }
-
-    /* Signal + Score ruckwirkend berechnen
-       Dazu muessen wir die Rohdaten in ein Stock-Objekt umwandeln das fSc/cSc/mSig versteht.
-       Fehlende Felder werden mit STOCKS-Daten ergaenzt wenn verfuegbar. */
-    var stocksMap = {};
-    for(var si=0;si<STOCKS.length;si++) stocksMap[STOCKS[si].t] = STOCKS[si];
-
-    var out2 = '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">';
-    out2 += 'Snapshot: <strong style="color:#dce8f5">'+latest.date+'</strong>';
-    if(prev) out2 += ' &nbsp;|&nbsp; Vorher: '+prev.date;
-    out2 += ' &nbsp;|&nbsp; '+snaps.length+' Snapshots &nbsp;|&nbsp; Zeitraum: ';
-    out2 += (SNAP_DATA.meta&&SNAP_DATA.meta.oldest?SNAP_DATA.meta.oldest:'?')+' &ndash; '+latest.date;
-    out2 += '</div>';
-
-    /* Scores berechnen und sortieren */
-    var scored2 = [];
-    for(var tk in latMap){
-      if(!latMap.hasOwnProperty(tk)) continue;
-      var raw = latMap[tk];
-      var baseStock = stocksMap[tk] || null;
-      /* Fund-Score aus Rohdaten */
-      var tmpFD = {};
-      tmpFD[tk] = {fcf:raw.fcf, roce:raw.roce, roe:raw.roe, debt:raw.debt, beta:raw.beta,
-                   div_yield:raw.div, shareholder_return:raw.shr, moat:raw.moat||'none'};
-      /* Score mit Live-Stock-Daten + Snapshot-Fundamentals */
-      var sc3 = 50;
-      if(baseStock){
-        var oldFD = FD[tk]; FD[tk] = tmpFD[tk];
-        sc3 = cSc(baseStock);
-        if(oldFD !== undefined) FD[tk] = oldFD; else delete FD[tk];
-      }
-      var prevRaw = prevMap2[tk] || null;
-      scored2.push({t:tk, raw:raw, prevRaw:prevRaw, sc:sc3, base:baseStock});
-    }
-    scored2.sort(function(a,b){return b.sc-a.sc;});
-
-    for(var si2=0;si2<scored2.length;si2++){
-      var item = scored2[si2];
-      var scc3 = scCol(item.sc);
-      var fcfD3 = item.raw.fcf!==null&&item.raw.fcf!==undefined?fp(item.raw.fcf):'--';
-      var roceD3 = item.raw.roce!==null&&item.raw.roce!==undefined?fp(item.raw.roce):(item.raw.roe!==null&&item.raw.roe!==undefined?fp(item.raw.roe):'--');
-      var betaD3 = item.raw.beta!==null&&item.raw.beta!==undefined?item.raw.beta.toFixed(2):'--';
-      var betaC3 = item.raw.beta!==null&&item.raw.beta!==undefined?(item.raw.beta<0.8?'#00e57a':item.raw.beta<1.2?'#7a9bb5':'#ff6666'):'#7a9bb5';
-      var m12D3  = item.raw.m12!==null&&item.raw.m12!==undefined?(item.raw.m12>0?'+':'')+item.raw.m12.toFixed(1)+'%':'--';
-      var m12C3  = item.raw.m12!==null&&item.raw.m12!==undefined?(item.raw.m12>0?'#00e57a':'#ff6666'):'#7a9bb5';
-      out2+='<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;padding:9px 12px;margin-bottom:5px">';
-      out2+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
-      out2+='<span style="font-size:13px;font-weight:700">'+item.t+'</span>';
-      out2+='<span style="font-size:17px;font-weight:700;color:'+scc3+'">'+item.sc+'</span></div>';
-      out2+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-family:monospace;font-size:9px">';
-      out2+='<span><span style="color:var(--mut)">FCF </span>'+fcfD3+'</span>';
-      out2+='<span><span style="color:var(--mut)">ROCE </span>'+roceD3+'</span>';
-      out2+='<span><span style="color:'+betaC3+'">&#946; </span><span style="color:'+betaC3+'">'+betaD3+'</span></span>';
-      out2+='<span><span style="color:var(--mut)">12M </span><span style="color:'+m12C3+'">'+m12D3+'</span></span>';
-      out2+='</div></div>';
-    }
-    el.innerHTML = out2;
-    return;
-  }
-
-  /* ---- Datenmodus: _archive (Fallback) ---- */
+  /* Letzten und vorletzten Snapshot fuer Signal-Vergleich */
   var latest  = _archive[0];
   var prev    = _archive.length > 1 ? _archive[1] : null;
 
@@ -2381,7 +2355,7 @@ function archHistRend(){
   out += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">';
   out += 'Aktuell: <strong style="color:#dce8f5">'+latest.date+'</strong>';
   if(prev) out += ' &nbsp;|&nbsp; Vorher: '+prev.date;
-  out += ' &nbsp;|&nbsp; '+_archive.length+' Snapshots gesamt (localStorage)';
+  out += ' &nbsp;|&nbsp; '+_archive.length+' Snapshots gesamt';
   out += '</div>';
 
   var shown = 0;
@@ -2462,7 +2436,176 @@ document.addEventListener('DOMContentLoaded', function(){
     console.error('Init fehlgeschlagen: ' + e.message);
     try{ rSyn(); }catch(e2){}
   }
+  try{ initAlloc(); }catch(e3){}
 });
+</script>
+<script>
+/* ============================================================
+   ALLOKATIONS-TAB v5.9.20
+   Ziel: 60% Aktien / 20% Anleihen / 15% Gold / 5% Cash
+   Toleranz: +-7pp | Amber-Zone: +-4-7pp
+   Storage-Key: stockiq_alloc_v520
+   ============================================================ */
+var ALLOC_KEY = 'stockiq_alloc_v520';
+var ALLOC_TARGETS = [
+  {id:'stocks', label:'Aktien',    icon:'&#9776;', soll:60, col:'#00e676', colAmber:'#ffab00', colRed:'#ff5252'},
+  {id:'bonds',  label:'Anleihen',  icon:'&#128196;', soll:20, col:'#00c8f0', colAmber:'#ffab00', colRed:'#ff5252'},
+  {id:'gold',   label:'Gold',      icon:'&#127875;', soll:15, col:'#ffab00', colAmber:'#ff9f1c', colRed:'#ff5252'},
+  {id:'cash',   label:'Cash',      icon:'&#128181;', soll:5,  col:'#b388ff', colAmber:'#ffab00', colRed:'#ff5252'}
+];
+var ALLOC_TOL = 7;
+var ALLOC_AMBER = 4;
+
+function allocLoad(){
+  try {
+    var raw = localStorage.getItem(ALLOC_KEY);
+    if(!raw) return;
+    var data = JSON.parse(raw);
+    var ids = ['stocks','bonds','gold','cash'];
+    for(var i=0;i<ids.length;i++){
+      var el = document.getElementById('ai-'+ids[i]);
+      if(el && data[ids[i]] !== undefined) el.value = data[ids[i]];
+    }
+  } catch(e){}
+}
+
+function allocSave(){
+  try {
+    var data = {};
+    var ids = ['stocks','bonds','gold','cash'];
+    for(var i=0;i<ids.length;i++){
+      var el = document.getElementById('ai-'+ids[i]);
+      data[ids[i]] = el ? (parseFloat(el.value)||0) : 0;
+    }
+    localStorage.setItem(ALLOC_KEY, JSON.stringify(data));
+    var btn = document.querySelector('[onclick="allocSave()"]');
+    if(btn){ btn.textContent = '\u2713 Gespeichert'; setTimeout(function(){ btn.innerHTML='&#128190; Speichern'; },1500); }
+  } catch(e){}
+}
+
+function allocClear(){
+  var ids = ['stocks','bonds','gold','cash'];
+  for(var i=0;i<ids.length;i++){
+    var el = document.getElementById('ai-'+ids[i]);
+    if(el) el.value = '';
+  }
+  try { localStorage.removeItem(ALLOC_KEY); } catch(e){}
+  rAlloc();
+}
+
+function rAlloc(){
+  var ids = ['stocks','bonds','gold','cash'];
+  var vals = [];
+  var total = 0;
+  for(var i=0;i<ids.length;i++){
+    var el = document.getElementById('ai-'+ids[i]);
+    var v = el ? (parseFloat(el.value)||0) : 0;
+    vals.push(v);
+    total += v;
+  }
+  var totEl = document.getElementById('ai-total');
+  if(totEl) totEl.textContent = total.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR';
+
+  var barsEl = document.getElementById('alloc-bars');
+  var rebalEl = document.getElementById('alloc-rebal');
+  var rebalBody = document.getElementById('alloc-rebal-body');
+  if(!barsEl) return;
+
+  if(total <= 0){
+    barsEl.innerHTML = '<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:24px 0">Bitte Portfoliowerte eingeben.</div>';
+    if(rebalEl) rebalEl.style.display = 'none';
+    return;
+  }
+
+  var html = '';
+  var rebalHtml = '';
+  var needRebal = false;
+
+  for(var j=0;j<ALLOC_TARGETS.length;j++){
+    var t = ALLOC_TARGETS[j];
+    var ist = (vals[j] / total) * 100;
+    var delta = ist - t.soll;
+    var absDelta = delta < 0 ? -delta : delta;
+
+    var barColor = t.col;
+    var labelColor = '#dce8f5';
+    var statusIcon = '&#9989;';
+    var statusText = 'Im Ziel';
+
+    if(absDelta > ALLOC_TOL){
+      barColor = t.colRed;
+      labelColor = '#ff5252';
+      statusIcon = '&#9888;';
+      statusText = 'Rebalancing!';
+      needRebal = true;
+    } else if(absDelta > ALLOC_AMBER){
+      barColor = t.colAmber;
+      labelColor = '#ffab00';
+      statusIcon = '&#9651;';
+      statusText = 'Randzone';
+    }
+
+    var barPct = ist > 100 ? 100 : ist;
+    var sollPct = t.soll;
+
+    html += '<div style="margin-bottom:14px">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
+    html += '<div style="font-family:monospace;font-size:10px;font-weight:700;color:' + labelColor + '">' + t.icon + ' ' + t.label + '</div>';
+    html += '<div style="display:flex;gap:12px;align-items:center">';
+    html += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">Soll: <span style="color:#dce8f5">' + t.soll + '%</span></div>';
+    html += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">Ist: <span style="color:' + barColor + ';font-weight:700">' + ist.toFixed(1) + '%</span></div>';
+    html += '<div style="font-family:monospace;font-size:9px;color:' + labelColor + '">' + statusIcon + ' ' + statusText + '</div>';
+    html += '</div></div>';
+
+    /* Fortschrittsbalken */
+    html += '<div style="position:relative;height:18px;background:#0a1628;border-radius:4px;overflow:hidden;border:1px solid #1a3050">';
+    /* Ist-Balken */
+    html += '<div style="position:absolute;top:0;left:0;height:100%;width:' + barPct.toFixed(1) + '%;background:' + barColor + ';opacity:0.7;border-radius:3px;transition:width 0.3s"></div>';
+    /* Soll-Marker */
+    html += '<div style="position:absolute;top:0;left:' + sollPct.toFixed(1) + '%;width:2px;height:100%;background:#dce8f5;opacity:0.5"></div>';
+    /* Delta-Label */
+    html += '<div style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-family:monospace;font-size:9px;color:#dce8f5;opacity:0.9">';
+    html += (delta >= 0 ? '+' : '') + delta.toFixed(1) + 'pp</div>';
+    html += '</div>';
+
+    /* Eurobetrag */
+    html += '<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-top:3px">';
+    html += vals[j].toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR';
+    var sollVal = (t.soll / 100) * total;
+    var diff = vals[j] - sollVal;
+    var diffStr = (diff >= 0 ? '+' : '') + diff.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0});
+    html += ' &nbsp;(Soll: ' + sollVal.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR &nbsp;&#916; ' + diffStr + ' EUR)</div>';
+    html += '</div>';
+
+    /* Rebalancing-Empfehlung */
+    if(absDelta > ALLOC_TOL){
+      var action = diff > 0 ? 'REDUZIEREN' : 'AUFSTOCKEN';
+      var absDiff = diff < 0 ? -diff : diff;
+      rebalHtml += '<div style="margin-bottom:8px;padding:8px;background:#0a1628;border-left:3px solid ' + barColor + ';border-radius:4px">';
+      rebalHtml += '<div style="font-family:monospace;font-size:9px;font-weight:700;color:' + barColor + '">' + t.label + ' &#8594; ' + action + '</div>';
+      rebalHtml += '<div style="font-size:10px;color:#dce8f5;margin-top:3px">';
+      rebalHtml += absDiff.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR ' + (diff > 0 ? 'verkaufen / umschichten' : 'zukaufen');
+      rebalHtml += ' &nbsp;<span style="color:var(--mut)">(' + (diff > 0 ? '+' : '') + delta.toFixed(1) + 'pp Abweichung)</span>';
+      rebalHtml += '</div></div>';
+    }
+  }
+
+  barsEl.innerHTML = html;
+
+  if(rebalEl && rebalBody){
+    if(needRebal){
+      rebalBody.innerHTML = rebalHtml;
+      rebalEl.style.display = 'block';
+    } else {
+      rebalEl.style.display = 'none';
+    }
+  }
+}
+
+function initAlloc(){
+  allocLoad();
+  rAlloc();
+}
 </script>
 </body>
 </html>
