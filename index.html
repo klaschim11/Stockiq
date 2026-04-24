@@ -441,6 +441,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.21</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Piotroski B1-Daempfung (neu)</strong>: Piotroski-Score &lt; 2 bei mind. 2 messbaren Kriterien &rarr; Fund-Score &times;0.85. Badge zeigt rot-gestrichelten Rand + "&#9660; Fund &times;0.85" wenn aktiv. Fliesst via fSc() in Composite Score und BUY/HOLD/SELL ein.</div>
     <div>&#10003; <strong style="color:#dce8f5">Piotroski Mini-Score (neu)</strong>: 5-Punkte Quality-Filter auf jedem Fundamentals-Ticker-Card. Kriterien: ROA&gt;0 (ROCE-Proxy), CFO&gt;0 (FCF-Proxy), Accruals OK*, GrossMargin-Trend*, Debt Safe. *=benoetigt fund_juno_v7.7.</div>
     <div>&#10003; <strong style="color:#dce8f5">pioScore() + pioBadge()</strong>: Neue Scoring-Funktionen. Rueckgabe {score, max, pending, criteria[]}. Pending-Kriterien werden als ? angezeigt bis fund_juno_v7.7 geladen.</div>
     <div>&#10003; <strong style="color:#dce8f5">fund_juno_v7.7 (separates Script)</strong>: Neue Felder accruals_ok (CFO &gt; NetIncome) und gross_margin_ok (YoY Verbesserung) via yfinance.</div>
@@ -1006,7 +1007,13 @@ function fSc(s){
   var rv=fd.roce!==null&&fd.roce!==undefined?fd.roce:(fd.roe!==null&&fd.roe!==undefined?fd.roe:null);
   if(rv!==null){if(rv>30)rs=100;else if(rv>20)rs=80;else if(rv>12)rs=60;else if(rv>6)rs=40;else rs=15;}
   var ds=debtSc(fd.debt);
-  return Math.round(ps*0.20+fs*0.30+rs*0.35+ds*0.15);
+  var base=Math.round(ps*0.20+fs*0.30+rs*0.35+ds*0.15);
+  /* Piotroski B1-Daempfung (v5.9.21): Score < 2 von messbaren Kriterien → ×0.85
+     Nur wenn mind. 2 Kriterien messbar sind (pending < 4), sonst kein Einfluss */
+  var pio=pioScore(s,fd);
+  var measurable=pio.max-pio.pending;
+  if(measurable>=2&&pio.score<2){base=Math.round(base*0.85);}
+  return base;
 }
 
 /* ---- composite score (v5.9.16) ----
@@ -2057,11 +2064,16 @@ function pioBadge(s, fd) {
   if (!fd) return '';
   var p = pioScore(s, fd);
   var col = p.score >= 4 ? '#00e676' : p.score >= 3 ? '#f0c000' : '#ff6666';
-  var h = '<div style="margin-top:6px;padding:5px 8px;background:rgba(0,0,0,.2);border-radius:6px;border:1px solid #1a3050">';
+  var measurable = p.max - p.pending;
+  var damped = (measurable >= 2 && p.score < 2);
+  var borderCol = damped ? '#ff5252' : '#1a3050';
+  var h = '<div style="margin-top:6px;padding:5px 8px;background:rgba(0,0,0,.2);border-radius:6px;border:1px solid ' + borderCol + '">';
   h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
   h += '<div style="font-family:monospace;font-size:8px;color:#456278">PIOTROSKI MINI</div>';
+  h += '<div style="display:flex;align-items:center;gap:5px">';
+  if (damped) { h += '<div style="font-family:monospace;font-size:7px;color:#ff5252">&#9660; Fund &times;0.85</div>'; }
   h += '<div style="font-family:monospace;font-size:11px;font-weight:700;color:' + col + '">';
-  h += p.score + '/' + (5 - p.pending) + '</div></div>';
+  h += p.score + '/' + (5 - p.pending) + '</div></div></div>';
   h += '<div style="display:flex;gap:3px;flex-wrap:wrap">';
   for (var i = 0; i < p.criteria.length; i++) {
     var c = p.criteria[i];
