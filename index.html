@@ -213,7 +213,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="font-size:13px;font-weight:700;color:#b07cf8;margin-bottom:10px">&#128301; Methodik</div>
       <div style="font-size:12px;color:var(--mut);line-height:1.9">
         <div><strong style="color:#dce8f5">Training:</strong> 12 Monate In-Sample</div>
-        <div><strong style="color:#dce8f5">Test:</strong> 3 Monate Out-of-Sample</div>
+        <div><strong style="color:#dce8f5">Test:</strong> 6 Monate Out-of-Sample</div>
         <div><strong style="color:#dce8f5">Ziel:</strong> OOS WR &gt; IS WR = kein Overfitting</div>
       </div>
     </div>
@@ -1942,7 +1942,8 @@ function loadFund(inp){
   reader.onload=function(e){
     try{
       var rawData=JSON.parse(e.target.result);
-      var fund=rawData.fundamentals||rawData;
+      /* v7.x-Format: {meta, data:{ticker:...}} | Alt: {fundamentals:{...}} | Flat */
+      var fund=rawData.data||rawData.fundamentals||rawData;
       var ts=Date.now();
       applyFund(fund);
       saveFundToCache(rawData, ts);
@@ -1979,7 +1980,8 @@ function initFund(){
     if(!raw)return;
     var cached=JSON.parse(raw);
     if(!cached||!cached.data)return;
-    var fund=cached.data.fundamentals||cached.data;
+    /* cached.data = rawData = {meta, data:{tickers}} | {fundamentals} | flat */
+    var fund=cached.data.data||cached.data.fundamentals||cached.data;
     var ts=cached.ts||null;
     applyFund(fund);
     var n=countLoaded();
