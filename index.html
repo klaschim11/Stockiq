@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.17</title>
+<title>StockIQ v5.9.18</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.17 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.18 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -222,8 +222,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
       <div style="font-size:13px;font-weight:700;color:#b07cf8;margin-bottom:10px">&#128301; Methodik</div>
       <div style="font-size:12px;color:var(--mut);line-height:1.9">
-        <div><strong style="color:#dce8f5">Training:</strong> 12 Monate In-Sample</div>
-        <div><strong style="color:#dce8f5">Test:</strong> 3 Monate Out-of-Sample</div>
+        <div><strong style="color:#dce8f5">Training:</strong> <span id="wf-meth-is">12</span> Monate In-Sample</div>
+        <div><strong style="color:#dce8f5">Test:</strong> <span id="wf-meth-oos">6</span> Monate Out-of-Sample</div>
         <div><strong style="color:#dce8f5">Ziel:</strong> OOS WR &gt; IS WR = kein Overfitting</div>
       </div>
     </div>
@@ -259,7 +259,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 5: HILFE -->
 <div class="page" id="p5">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.17 &middot; Stand April 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.18 &middot; Stand April 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -317,6 +317,31 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">SCORE (0-100)</div><div style="font-size:12px;color:var(--mut)">Momentum 25% + Trend 20% + Fundamentals 35% + Risk 20% (inkl. Beta-Faktor ab v5.9.16).</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">BETA / LOW-VOL (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Beta = Kursvolatilitaet relativ zum Markt. <span style="color:#00e57a">&lt; 0.8</span> defensiv (Bonus) &nbsp;<span style="color:#f0c000">0.8&ndash;1.2</span> markt&auml;hnlich &nbsp;<span style="color:#ff6666">&gt; 1.5</span> spekulativ (Malus). Fliesst zu 40% in Risk-Score. Akademisch: MSCI/BlackRock 1963&ndash;2024.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DEBT/EQ % (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Verschuldungsgrad (yfinance debtToEquity). <span style="color:#00e57a">&lt; 100</span> konservativ &nbsp;<span style="color:#f0c000">100&ndash;200</span> normal &nbsp;<span style="color:#ff6666">&gt; 200</span> risikoreich. 15% Gewicht im Fund-Score als Safety-Dimension.</div></div>
+
+    <div style="margin-bottom:12px;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px">
+      <div style="font-family:monospace;font-size:11px;color:#ffd040;font-weight:700;margin-bottom:8px">&#9733; GSR &mdash; Gold-Silber-Ratio (v5.9.17)</div>
+      <div style="font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:10px">GSR = Goldpreis / Silberpreis. Historische Bandbreite: ~15 (1980) bis ~125 (2020). Langfristiger Median: ~65&ndash;70.</div>
+
+      <div style="font-family:monospace;font-size:10px;color:#9ab8d0;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">StockIQ Schwellenwerte</div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;margin-bottom:10px">
+        <span style="font-family:monospace;color:#00c8f0;font-weight:700">GSR &lt; 70</span><span style="color:var(--mut)"><strong style="color:#dce8f5">SWITCH SILBER</strong> &mdash; Silber relativ unterbewertet vs. Gold</span>
+        <span style="font-family:monospace;color:#7a9bb5">GSR 70&ndash;90</span><span style="color:var(--mut)"><strong style="color:#dce8f5">HALTEN</strong> &mdash; neutrale Zone, kein Handlungsbedarf</span>
+        <span style="font-family:monospace;color:#ffd040;font-weight:700">GSR &gt; 90</span><span style="color:var(--mut)"><strong style="color:#dce8f5">SWITCH GOLD</strong> &mdash; Gold relativ unterbewertet vs. Silber</span>
+      </div>
+
+      <div style="font-family:monospace;font-size:10px;color:#9ab8d0;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Wann tauschen? &mdash; Entscheidungsrahmen</div>
+      <div style="font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:10px">
+        <strong style="color:#00c8f0">Gold &rarr; Silber</strong> (GSR &lt; 70): Silber hat st&auml;rker zugelegt als Gold oder Gold hat korrigiert. Silber bietet h&ouml;heres Aufholpotenzial. Sinnvoll wenn: Industriekonjunktur positiv, kein akuter Krisenkontext, GSR f&auml;llt seit mehreren Wochen.<br><br>
+        <strong style="color:#ffd040">Silber &rarr; Gold</strong> (GSR &gt; 90): Gold hat Silber stark &uuml;bertroffen (typisch: Krisenflucht, geopolitische Eskalation). R&uuml;ckf&uuml;hrung in Gold sichert Gewinne und positioniert f&uuml;r n&auml;chste Silber-Aufholjagd. Sinnvoll wenn: GSR mehrere Wochen &uuml;ber 90, Silber zeigt keine St&auml;rke.
+      </div>
+
+      <div style="font-family:monospace;font-size:10px;color:#ff6666;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">&#9888; Spread-Kosten physisch &mdash; entscheidend!</div>
+      <div style="font-size:12px;color:var(--mut);line-height:1.8">
+        Physisches Edelmetall hat <strong style="color:#dce8f5">hohe Transaktionskosten</strong>: Ankaufs-/Verkaufsspreads beim H&auml;ndler typisch 3&ndash;8% (Silber h&auml;her als Gold durch niedrigeren Preis/Einheit). Faustregel: Ein Switch lohnt sich erst wenn der erwartete GSR-Gewinn die Spread-Kosten <strong style="color:#dce8f5">beider Transaktionen</strong> &uuml;bersteigt.<br><br>
+        <strong style="color:#dce8f5">Beispiel:</strong> GSR-Wechsel von 95 auf 70 = ca. 26% Silber-Outperformance. Bei Spread 6% hin + 6% zur&uuml;ck = 12% Kosten. Nettogewinn ~14% &rarr; lohnt sich. Bei GSR 92 auf 85 = nur 7% Potenzial &rarr; nach Spreads kein Gewinn.<br><br>
+        <strong style="color:#dce8f5">Empfehlung:</strong> Nur bei klarer Signal-Zone (&lt;65 oder &gt;95) tauschen. Nie auf genauen Schwellenwert warten &mdash; Trend ist wichtiger als exakter Punkt. Eher in Tranchen als auf einmal.
+      </div>
+    </div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PEG-RATIO</div><div style="font-size:12px;color:var(--mut)">KGV / Gewinnwachstum%. <span style="color:#00e57a">&lt;1.0</span> unterbewertet &nbsp;<span style="color:#00c8f0">1.0-1.5</span> fair &nbsp;<span style="color:#f0c000">1.5-2.0</span> leicht teuer &nbsp;<span style="color:#ff6666">&gt;=2.0</span> BUY blockiert.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">FCF YIELD</div><div style="font-size:12px;color:var(--mut)">FreeCashflow / Marktkapitalisierung. <span style="color:#00e57a">&gt;4%</span> stark &nbsp;<span style="color:#00c8f0">2-4%</span> gut &nbsp;<span style="color:#f0c000">0-2%</span> schwach &nbsp;<span style="color:#ff6666">&lt;0%</span> negativ.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ROCE / ROE</div><div style="font-size:12px;color:var(--mut)">ROCE = EBIT / (EK + LT-Schulden). Fallback ROE wenn nicht verfuegbar. <span style="color:#00e57a">&gt;25%</span> Burggraben &nbsp;<span style="color:#00c8f0">15-25%</span> stark.</div></div>
@@ -361,6 +386,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.18</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.8">
+      <div>&#10003; <strong style="color:#dce8f5">WF Methodik-Box dynamisch</strong>: "Test: X Monate Out-of-Sample" liest jetzt wf_oos_months aus dem JSON. Zeigt korrekt 3M oder 6M je nach geladenem Script.</div>
+      <div>&#10003; <strong style="color:#dce8f5">GSR-Hilfetext vollst&auml;ndig</strong>: Buy/Sell-Logik (wann Gold&rarr;Silber und Silber&rarr;Gold sinnvoll), Schwellenwerte mit Begr&uuml;ndung, Spread-Kalkulation f&uuml;r physisches Edelmetall, Faustregel f&uuml;r Entscheidung.</div>
+      <div>&#10003; <strong style="color:#dce8f5">alpha_juno Vergleichslogik</strong>: Stabilit&auml;tsvorteil wird jetzt korrekt bewertet (nicht nur OOS WR). 6M &uuml;berzeugt prim&auml;r durch Stabilit&auml;t 3.4pp vs. 10.0pp.</div>
+    </div>
+  </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.17</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.8">
@@ -443,7 +476,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.17 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.18 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -2054,6 +2087,11 @@ function rWF(){
   var isMths=(WF_DATA.meta&&WF_DATA.meta.wf_is_months)?WF_DATA.meta.wf_is_months:12;
   var sub=document.getElementById('wf-subtitle');
   if(sub)sub.textContent=isMths+'M Training / '+oosMths+'M OOS rollierend \u00b7 Out-of-Sample Validierung';
+  /* Methodik-Box Spans aktualisieren */
+  var methIs=document.getElementById('wf-meth-is');
+  var methOos=document.getElementById('wf-meth-oos');
+  if(methIs)methIs.textContent=isMths;
+  if(methOos)methOos.textContent=oosMths;
   /* v3: global_stats.standard/alpha -- v4: summary.avg_is_wr/avg_oos_wr */
   var stdWR = gs.standard ? gs.standard.win_rate : (gs.avg_is_wr || gs.standard_wr || 0);
   /* OOS AVG aus walk_forward-Array berechnen (immer vorhanden, auch bei Interim-JSON) */
@@ -2133,7 +2171,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.17.html';
+    a.download = 'stockiq-v5.9.18.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
