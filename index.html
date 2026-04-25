@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.22</title>
+<title>StockIQ v5.9.23</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.22 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.23 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -440,7 +440,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.22</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.23</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">5 neue Portfolio-Ticker</strong>: HELN.SW (Helvetia Baloise), BKW.SW (BKW AG), KNIN.SW (K&uuml;hne+Nagel), HOLN.SW (Holcim), SIX2.DE (Sixt SE). Jetzt 278 Ticker.</div>
+    <div>&#10003; <strong style="color:#dce8f5">ALIAS-Mapping</strong>: Alle 5 neuen Ticker korrekt gemappt (yfinance-Suffix &rarr; STOCKS-t).</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno_v7_7.py</strong>: Ticker-Liste auf 278 erweitert.</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Hinweis:</strong> Statische Kursdaten (p, chg, rsi etc.) werden beim naechsten fund_juno-Lauf automatisch aktualisiert.</div>
+  </div>
+  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.22</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">DR/SF-Grund in WL1</strong>: HOLD SF/DR/SF+D-Karten zeigen jetzt Begr&uuml;ndungszeile (Score &ge; SF-Schwelle / Div &ge; DR-Schwelle) &mdash; identisch zur Synopse-Detailansicht.</div>
     <div>&#10003; <strong style="color:#dce8f5">DR/SF-Grund in WL2</strong>: HOLD-Eintr&auml;ge zeigen ebenfalls SF- und DR-Zeile. Badge-Farbe #b07cf8 (lila) wie in WL1/Synopse.</div>
@@ -543,7 +550,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.22 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.23 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -749,6 +756,11 @@ var STOCKS=[
   {t:'SLHN.SW',n:'Swiss Life Holding',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'BALN.SW',n:'Baloise Holding',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'PGHN.SW',n:'Partners Group Holding',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'HELN.SW',n:'Helvetia Baloise Holding AG',p:100.00,chg:0.0,rsi:50,pe:14,eg:6,peg:2.3,above200:true,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.60,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:3,mom:55,trend:55,fund:72,risk:74},
+  {t:'BKW.SW',n:'BKW AG',p:100.00,chg:0.0,rsi:50,pe:16,eg:7,peg:2.3,above200:true,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.50,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:3,mom:55,trend:55,fund:70,risk:72},
+  {t:'KNIN.SW',n:'Kuehne Nagel International AG',p:100.00,chg:0.0,rsi:50,pe:18,eg:8,peg:2.25,above200:false,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:4,mom:48,trend:46,fund:74,risk:68},
+  {t:'HOLN.SW',n:'Holcim Ltd',p:100.00,chg:0.0,rsi:50,pe:12,eg:8,peg:1.5,above200:true,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.60,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:3,mom:52,trend:54,fund:70,risk:66},
+  {t:'SIX2.DE',n:'Sixt SE',p:100.00,chg:0.0,rsi:50,pe:14,eg:10,peg:1.4,above200:false,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'bull_regular',sr:false,sw:false,atr:3,mom:46,trend:44,fund:66,risk:58},
   {t:'BP.L',n:'BP plc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'HSBA.L',n:'HSBC Holdings',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'BA.L',n:'BAE Systems',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
@@ -1869,6 +1881,8 @@ function applyFund(fund){
     "ITX.MC":"INDITEX","REP.MC":"REP","TEF.MC":"TEF","SAN.MC":"SAN","BBVA.MC":"BBVA","IBE.MC":"IBE",
     "ENEL.MI":"ENEL","UCG.MI":"UCG","ISP.MI":"ISP","LDO.MI":"LDO","ERG.MI":"ERG","STLAM.MI":"STLAM","G.MI":"G","RACE.MI":"RACE",
     "CFR.SW":"CFR","SLHN.SW":"SLHN","BALN.SW":"BALN",
+    "HELN.SW":"HELN","BKW.SW":"BKW","KNIN.SW":"KNIN","HOLN.SW":"HOLN",
+    "SIX2.DE":"SIX2",
     "AIR.PA":"AIR","SU.PA":"SU","EN.PA":"EN","LR.PA":"LR","STM.PA":"STM",
     "BA.L":"BA","REL.L":"REL","LSEG.L":"LSEG","CPG.L":"CPG","BATS.L":"BATS",
     "WKL.AS":"WKL","ASRNL.AS":"ASRNL",
