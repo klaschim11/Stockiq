@@ -152,7 +152,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="border:2px dashed #223040;border-radius:8px;padding:16px;text-align:center;cursor:pointer;margin-bottom:10px" onclick="document.getElementById('ffi').click()">
         <div style="font-size:18px;margin-bottom:4px">&#128193;</div>
         <div style="font-size:12px;font-weight:700;margin-bottom:2px">stockiq_fundamentals.json</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7_4.py</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7_7.py</div>
         <input type="file" id="ffi" accept=".json" onchange="loadFund(this)" style="display:none">
       </div>
       <div style="display:flex;align-items:center;gap:8px;font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:8px">
@@ -161,6 +161,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         <span id="fcache-badge" style="display:none;padding:1px 6px;background:rgba(0,200,240,.15);border:1px solid #00c8f0;border-radius:8px;font-size:9px;color:#00c8f0"></span>
       </div>
       <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:8px" id="fts"></div>
+      <div id="fund-meta-info" style="display:none;font-family:monospace;font-size:9px;color:#00c8f0;margin-bottom:6px;padding:3px 8px;background:rgba(0,200,240,.08);border-radius:5px;border:1px solid rgba(0,200,240,.2)"></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button onclick="clearFundCache()" style="font-family:monospace;font-size:10px;color:var(--mut);background:transparent;border:1px solid #1a2a3a;border-radius:6px;padding:4px 10px;cursor:pointer">&#128465; Cache leeren</button>
         <button onclick="archSnapshot();alert('Snapshot gespeichert: '+_archive.length+' Eintraege')" style="font-family:monospace;font-size:10px;color:var(--acc);background:transparent;border:1px solid var(--acc);border-radius:6px;padding:4px 10px;cursor:pointer">&#128247; Snapshot</button>
@@ -1955,8 +1956,7 @@ function updateFundStatus(n, ts, fromCache){
   var tsEl=document.getElementById('fts');
   if(dm)dm.style.background='#00e57a';
   if(mm)mm.textContent='Geladen: '+n+' / '+STOCKS.length+' Ticker';
-  if(badge){
-    if(fromCache){
+  if(badge){    if(fromCache){
       badge.style.display='inline-block';
       badge.textContent='Cache '+fmtAge(ts);
     } else {
@@ -1981,6 +1981,16 @@ function loadFund(inp){
       var rawData=JSON.parse(e.target.result);
       /* v7.x-Format: {meta, data:{ticker:...}} | Alt: {fundamentals:{...}} | Flat */
       var fund=rawData.data||rawData.fundamentals||rawData;
+      /* Meta-Info anzeigen */
+      var metaEl=document.getElementById('fund-meta-info');
+      if(metaEl&&rawData.meta){
+        var m=rawData.meta;
+        metaEl.textContent='JSON: v'+( m.version||'?')+' | '+( m.n_tickers||Object.keys(fund).length)+' Ticker | '+(m.generated?m.generated.slice(0,16).replace('T',' '):'');
+        metaEl.style.display='block';
+      } else if(metaEl){
+        metaEl.textContent='JSON: '+Object.keys(fund).length+' Eintraege (kein Meta-Block)';
+        metaEl.style.display='block';
+      }
       var ts=Date.now();
       applyFund(fund);
       saveFundToCache(rawData, ts);
@@ -2019,6 +2029,12 @@ function initFund(){
     if(!cached||!cached.data)return;
     /* cached.data = rawData = {meta, data:{tickers}} | {fundamentals} | flat */
     var fund=cached.data.data||cached.data.fundamentals||cached.data;
+    var metaEl2=document.getElementById('fund-meta-info');
+    if(metaEl2&&cached.data&&cached.data.meta){
+      var mc=cached.data.meta;
+      metaEl2.textContent='Cache: v'+(mc.version||'?')+' | '+(mc.n_tickers||Object.keys(fund).length)+' Ticker | '+(mc.generated?mc.generated.slice(0,16).replace('T',' '):'');
+      metaEl2.style.display='block';
+    }
     var ts=cached.ts||null;
     applyFund(fund);
     var n=countLoaded();
