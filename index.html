@@ -1903,7 +1903,14 @@ function applyFund(fund){
   for(i2=0;i2<keys.length;i2++){
     if(fund[keys[i2]]&&typeof fund[keys[i2]]==='object'){
       FD[keys[i2]]=fund[keys[i2]];
+      /* 1) Expliziter ALIAS (z.B. ITX.MC → INDITEX) */
       if(ALIAS[keys[i2]])FD[ALIAS[keys[i2]]]=fund[keys[i2]];
+      /* 2) Suffix-Strip-Fallback: NESN.SW→NESN, AZN.L→AZN, 7203.T→7203 */
+      var dotIdx=keys[i2].lastIndexOf('.');
+      if(dotIdx>0){
+        var stripped=keys[i2].slice(0,dotIdx);
+        if(!FD[stripped])FD[stripped]=fund[keys[i2]];
+      }
     }
   }
   for(i2=0;i2<STOCKS.length;i2++){
