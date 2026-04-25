@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.21</title>
+<title>StockIQ v5.9.22</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.21 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.22 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -439,7 +439,15 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.21</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.22</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">DR/SF-Grund in WL1</strong>: HOLD SF/DR/SF+D-Karten zeigen jetzt Begr&uuml;ndungszeile (Score &ge; SF-Schwelle / Div &ge; DR-Schwelle) &mdash; identisch zur Synopse-Detailansicht.</div>
+    <div>&#10003; <strong style="color:#dce8f5">DR/SF-Grund in WL2</strong>: HOLD-Eintr&auml;ge zeigen ebenfalls SF- und DR-Zeile. Badge-Farbe #b07cf8 (lila) wie in WL1/Synopse.</div>
+    <div>&#10003; <strong style="color:#dce8f5">WL2 SELL-Begr&uuml;ndung</strong>: Sell-Signal-Zeile auch in WL2 sichtbar (war vorher nur in WL1/Synopse).</div>
+    <div>&#10003; <strong style="color:#dce8f5">WL2 HOLD-Label korrekt</strong>: HOLD SF / HOLD DR / HOLD SF+D werden jetzt mit korrektem Badge und Farbe angezeigt (war vorher WATCH).</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">fund_juno_v7.7</strong>: Zwischenspeichern alle 50 Ticker (separates Script-Update &mdash; iOS-Hintergrundproblem teilweise entsch&auml;rft).</div>
+  </div>
+  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.21</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">Piotroski B1-Daempfung (neu)</strong>: Piotroski-Score &lt; 2 bei mind. 2 messbaren Kriterien &rarr; Fund-Score &times;0.85. Badge zeigt rot-gestrichelten Rand + "&#9660; Fund &times;0.85" wenn aktiv. Fliesst via fSc() in Composite Score und BUY/HOLD/SELL ein.</div>
     <div>&#10003; <strong style="color:#dce8f5">Piotroski Mini-Score (neu)</strong>: 5-Punkte Quality-Filter auf jedem Fundamentals-Ticker-Card. Kriterien: ROA&gt;0 (ROCE-Proxy), CFO&gt;0 (FCF-Proxy), Accruals OK*, GrossMargin-Trend*, Debt Safe. *=benoetigt fund_juno_v7.7.</div>
@@ -534,7 +542,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.21 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.22 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -1244,6 +1252,17 @@ function wlRend(scored){
     h+='</div>';
     if(isStrong){var dl=s.div==='bull_hidden'?'Bull Hidden Div':'Bull Regular Div';h+='<div style="font-family:monospace;font-size:9px;color:#ff9f1c;margin-top:4px">&#11088; '+dl+' | ATR-Hist ok</div>';}
     if(isSellSig){h+='<div style="font-family:monospace;font-size:9px;color:#ff6666;margin-top:4px">'+sellWhy(s,sig)+'</div>';}
+    if(isHoldSf){
+      var holdFd=FD[s.t];
+      var holdDr=sig==='hold_sf_div'||sig==='hold_sf_both';
+      var holdSfOnly=sig==='hold_sf'||sig==='hold_sf_both';
+      var parts=[];
+      if(holdSfOnly)parts.push('Score '+sc+' \u2265 '+SELL_SCORE_MIN+' (SF)');
+      if(holdDr&&holdFd&&holdFd.div_yield!==null&&holdFd.div_yield!==undefined)
+        parts.push('Div '+holdFd.div_yield.toFixed(1)+'% \u2265 '+divThresh()+'% (DR)');
+      else if(holdDr) parts.push('DR-Hold aktiv');
+      h+='<div style="font-family:monospace;font-size:9px;color:#b07cf8;margin-top:4px">&#9654; '+parts.join(' | ')+'</div>';
+    }
     h+='</div>';
     return h;
   }
@@ -1623,9 +1642,9 @@ function rWL2(){
 
     var inWL2 = !!WL2[s.t];
     var sc2 = sig==='strong'?'#ff9f1c':sig==='buy'?'#00e57a':sig==='pb'?'#f0c000':
-              sig==='rsi_block'?'#e8a020':isSell(sig)||sig==='weak'?'#ff6666':'#7a9bb5';
+              sig==='rsi_block'?'#e8a020':isHoldSF(sig)?'#b07cf8':isSell(sig)||sig==='weak'?'#ff6666':'#7a9bb5';
     var slbl = sig==='strong'?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG-BLK':
-               sig==='rsi_block'?'RSI-BLK':sig==='weak'?'WEAK':isSell(sig)?sellLabel(sig):'WATCH';
+               sig==='rsi_block'?'RSI-BLK':isHoldSF(sig)?holdSFLabel(sig):sig==='weak'?'WEAK':isSell(sig)?sellLabel(sig):'WATCH';
     var rowBg = inWL2 ? 'background:#0f1e10;border:1px solid rgba(255,159,28,.4);' :
                         'background:#0c1420;border:1px solid #1a2a3a;';
     out += '<div style="'+rowBg+'border-radius:8px;padding:11px 13px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">';
@@ -1636,6 +1655,17 @@ function rWL2(){
     out += '<span style="font-family:monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>';
     out += '</div>';
     out += '<div style="font-family:monospace;font-size:9px;color:var(--mut)">Score <span style="color:'+scCol(sc)+'">'+sc+'</span> &nbsp; PEG '+pgLb(s)+' &nbsp; RSI '+s.rsi+'</div>';
+    if(isHoldSF(sig)){
+      var wl2Fd=FD[s.t];
+      var wl2Parts=[];
+      if(sig==='hold_sf'||sig==='hold_sf_both')wl2Parts.push('SF Score\u2265'+SELL_SCORE_MIN);
+      if(sig==='hold_sf_div'||sig==='hold_sf_both'){
+        var wl2Dy=wl2Fd&&wl2Fd.div_yield!==null&&wl2Fd.div_yield!==undefined?wl2Fd.div_yield.toFixed(1)+'%':'--';
+        wl2Parts.push('DR Div '+wl2Dy+'\u2265'+divThresh()+'%');
+      }
+      out+='<div style="font-family:monospace;font-size:8px;color:#b07cf8;margin-top:2px">&#9654; '+wl2Parts.join(' | ')+'</div>';
+    }
+    if(isSell(sig)){out+='<div style="font-family:monospace;font-size:8px;color:#ff6666;margin-top:2px">'+sellWhy(s,sig)+'</div>';}
     out += '</div>';
     out += '<button onclick="wl2Toggle(\''+s.t+'\')" style="font-family:monospace;font-size:11px;padding:6px 12px;border-radius:8px;border:1px solid '+(inWL2?'rgba(255,159,28,.6)':'rgba(0,200,240,.4)')+';color:'+(inWL2?'#ff9f1c':'var(--acc)')+';background:'+(inWL2?'rgba(255,159,28,.1)':'transparent')+';cursor:pointer;white-space:nowrap">'+(inWL2?'&#10003; WL2':'+ WL2')+'</button>';
     out += '</div>';
