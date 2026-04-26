@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.23</title>
+<title>StockIQ v5.9.24</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.23 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.24 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski &middot; VIX-Regime</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -440,7 +440,15 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.23</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.24</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">VIX-Regime-Daempfung (neu)</strong>: Momentum-Score wird je nach VIX-Level skaliert. Zone 1 VIX&lt;20: &times;1.00 (volle Wirkung). Zone 2 VIX 20-30: &times;0.60 (moderate Daempfung). Zone 3 VIX&gt;30: &times;0.20 (Crash-Schutz). Akademische Basis: Barroso/Santa-Clara 2015, Daniel/Moskowitz 2016.</div>
+    <div>&#10003; <strong style="color:#dce8f5">VIX-Banner in Synopse</strong>: Regime-Anzeige oben in der Synopse (gruen/gelb/rot). Zeigt aktuellen VIX-Wert und aktive Daempfung. Erscheint sobald VIX aus JSON geladen.</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno_v7.7</strong>: Fetcht ^VIX taeglich und speichert in <code>__macro__</code>-Eintrag. Dashboard liest VIX_LEVEL automatisch beim JSON-Laden.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Soft-Scaling statt Hard-Block</strong>: VIX-Daempfung skaliert Momentum Richtung Neutral (50), nicht auf 0 &mdash; konsistent mit Piotroski B1-Logik.</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(255,171,0,.06);border-left:3px solid #ffab00;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Hinweis:</strong> VIX erst nach naechstem fund_juno_v7.7-Lauf im Banner sichtbar. Bis dahin: kein Einfluss (VIX_LEVEL=null &rarr; Faktor &times;1.00).</div>
+  </div>
+  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.23</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">5 neue Portfolio-Ticker</strong>: HELN.SW (Helvetia Baloise), BKW.SW (BKW AG), KNIN.SW (K&uuml;hne+Nagel), HOLN.SW (Holcim), SIX2.DE (Sixt SE). Jetzt 278 Ticker.</div>
     <div>&#10003; <strong style="color:#dce8f5">ALIAS-Mapping</strong>: Alle 5 neuen Ticker korrekt gemappt (yfinance-Suffix &rarr; STOCKS-t).</div>
@@ -550,7 +558,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.23 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.24 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -976,11 +984,40 @@ function volAdj(s){
   if(a<0.2)a=0.2;
   return a;
 }
+/* ============================================================
+   VIX-REGIME-DAEMPFUNG v5.9.24
+   Quelle: Barroso/Santa-Clara 2015, Daniel/Moskowitz 2016
+           Volatility Box Praxis-Framework (15/20/30 Zonen)
+   Mechanismus: Momentum-Score × vixFactor
+   Zone 1 VIX < 20:  volle Momentum-Wirkung (×1.00)
+   Zone 2 VIX 20-30: moderate Daempfung      (×0.60)
+   Zone 3 VIX > 30:  starke Daempfung        (×0.20)
+   VIX-Quelle: fd['__macro__'].vix aus fund_juno_v7.7
+   Fallback: VIX_LEVEL = null → kein Einfluss (×1.00)
+   ============================================================ */
+var VIX_LEVEL = null;  /* wird in applyFund() gesetzt */
+
+function vixFactor(){
+  if(VIX_LEVEL===null||VIX_LEVEL===undefined)return 1.0;
+  if(VIX_LEVEL<20)return 1.0;
+  if(VIX_LEVEL<30)return 0.60;
+  return 0.20;
+}
+
+function vixRegimeLabel(){
+  if(VIX_LEVEL===null||VIX_LEVEL===undefined)return null;
+  if(VIX_LEVEL<20)return {label:'VIX '+VIX_LEVEL.toFixed(1)+' — Low Vol',col:'#00e676',zone:1};
+  if(VIX_LEVEL<30)return {label:'VIX '+VIX_LEVEL.toFixed(1)+' — Elevated',col:'#ffab00',zone:2};
+  return {label:'VIX '+VIX_LEVEL.toFixed(1)+' — CRISIS',col:'#ff5252',zone:3};
+}
+
 function momSc(s){
   var fd=FD[s.t];
   var adj=volAdj(s);
   if(!fd||fd.mom12m===null||fd.mom12m===undefined){
-    return Math.round(s.mom*adj+50*(1.0-adj));
+    var base0=Math.round(s.mom*adj+50*(1.0-adj));
+    var vf0=vixFactor();
+    return vf0<1.0?Math.round(base0*vf0+50*(1.0-vf0)):base0;
   }
   var raw=fd.mom12m;
   var norm=50+raw;
@@ -988,7 +1025,11 @@ function momSc(s){
   if(norm<0)norm=0;
   norm=Math.round(norm);
   var rm=Math.round(s.mom*0.5+norm*0.5);
-  return Math.round(rm*adj+50*(1.0-adj));
+  var damped=Math.round(rm*adj+50*(1.0-adj));
+  /* VIX-Regime-Daempfung: Zone 2/3 → Momentum Richtung Neutral (50) skalieren */
+  var vf=vixFactor();
+  if(vf<1.0){damped=Math.round(damped*vf+50*(1.0-vf));}
+  return damped;
 }
 
 /* ---- Low-Volatility: Beta-Score (v5.9.16) ----
@@ -1102,7 +1143,18 @@ function rSyn(){
   }
   var ce=document.getElementById('cnt');if(ce)ce.textContent=strongs+buys;
   var el=document.getElementById('s0');
-  if(el)el.innerHTML=kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
+  /* VIX-Regime-Banner */
+  var vixH='';
+  var vrl=vixRegimeLabel();
+  if(vrl){
+    var vixBg=vrl.zone===1?'rgba(0,230,118,.07)':vrl.zone===2?'rgba(255,171,0,.10)':'rgba(255,82,82,.12)';
+    vixH='<div style="grid-column:1/-1;padding:7px 12px;background:'+vixBg+';border:1px solid '+vrl.col+';border-radius:8px;display:flex;align-items:center;gap:8px;margin-bottom:4px">';
+    vixH+='<div style="font-family:monospace;font-size:9px;font-weight:700;color:'+vrl.col+'">&#9632; '+vrl.label+'</div>';
+    if(vrl.zone===2){vixH+='<div style="font-family:monospace;font-size:8px;color:#ffab00">Mom. &times;0.60</div>';}
+    if(vrl.zone===3){vixH+='<div style="font-family:monospace;font-size:8px;color:#ff5252">Mom. &times;0.20 — CRASH-SCHUTZ AKTIV</div>';}
+    vixH+='</div>';
+  }
+  if(el)el.innerHTML=vixH+kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
 
   /* STRONG BUY cards */
   var sStrong=[],sBuys=[],sPbs=[],sSells=[];
@@ -1913,6 +1965,12 @@ function applyFund(fund){
     "2454.TW":"2454TW","D05.SI":"D05SI","BBCA.JK":"BBCAJK",
     "WALMEX.MX":"WALMEXMX","FEMSAUBD.MX":"FEMSAUBD","005930.KS":"005930KS"
   };
+  /* VIX-Level aus Makro-Block extrahieren (fund_juno_v7.7+) */
+  if(fund['__macro__']&&fund['__macro__'].vix!==null&&fund['__macro__'].vix!==undefined){
+    VIX_LEVEL=fund['__macro__'].vix;
+  } else if(fund['MACRO']&&fund['MACRO'].vix!==null){
+    VIX_LEVEL=fund['MACRO'].vix;
+  }
   var keys=Object.keys(fund),i2;
   for(i2=0;i2<keys.length;i2++){
     if(fund[keys[i2]]&&typeof fund[keys[i2]]==='object'){
