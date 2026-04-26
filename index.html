@@ -2064,7 +2064,13 @@ function loadFund(inp){
       var metaEl=document.getElementById('fund-meta-info');
       if(metaEl&&rawData.meta){
         var m=rawData.meta;
-        metaEl.textContent='JSON: v'+( m.version||'?')+' | '+( m.n_tickers||Object.keys(fund).length)+' Ticker | '+(m.generated?m.generated.slice(0,16).replace('T',' '):'');
+        var vixStr='';
+        if(VIX_LEVEL!==null&&VIX_LEVEL!==undefined){
+          var vZone=VIX_LEVEL<20?'Low':VIX_LEVEL<30?'Elevated':'CRISIS';
+          var vCol=VIX_LEVEL<20?'#00e676':VIX_LEVEL<30?'#ffab00':'#ff5252';
+          vixStr=' &nbsp;|&nbsp; <span style="color:'+vCol+'">VIX '+VIX_LEVEL.toFixed(1)+' ('+vZone+')</span>';
+        }
+        metaEl.innerHTML='JSON: v'+( m.version||'?')+' | '+( m.n_tickers||Object.keys(fund).length)+' Ticker | '+(m.generated?m.generated.slice(0,16).replace('T',' '):'')+vixStr;
         metaEl.style.display='block';
       } else if(metaEl){
         metaEl.textContent='JSON: '+Object.keys(fund).length+' Eintraege (kein Meta-Block)';
@@ -2111,7 +2117,13 @@ function initFund(){
     var metaEl2=document.getElementById('fund-meta-info');
     if(metaEl2&&cached.data&&cached.data.meta){
       var mc=cached.data.meta;
-      metaEl2.textContent='Cache: v'+(mc.version||'?')+' | '+(mc.n_tickers||Object.keys(fund).length)+' Ticker | '+(mc.generated?mc.generated.slice(0,16).replace('T',' '):'');
+      var vixStr2='';
+      if(VIX_LEVEL!==null&&VIX_LEVEL!==undefined){
+        var vZone2=VIX_LEVEL<20?'Low':VIX_LEVEL<30?'Elevated':'CRISIS';
+        var vCol2=VIX_LEVEL<20?'#00e676':VIX_LEVEL<30?'#ffab00':'#ff5252';
+        vixStr2=' &nbsp;|&nbsp; <span style="color:'+vCol2+'">VIX '+VIX_LEVEL.toFixed(1)+' ('+vZone2+')</span>';
+      }
+      metaEl2.innerHTML='Cache: v'+(mc.version||'?')+' | '+(mc.n_tickers||Object.keys(fund).length)+' Ticker | '+(mc.generated?mc.generated.slice(0,16).replace('T',' '):'')+vixStr2;
       metaEl2.style.display='block';
     }
     var ts=cached.ts||null;
