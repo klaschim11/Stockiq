@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.24</title>
+<title>StockIQ v5.9.25</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.24 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski &middot; VIX-Regime</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.25 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski &middot; VIX-Regime</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -105,6 +105,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button id="sync-btn" onclick="toggleSync(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">&#128257; Alle</button>
     <button onclick="wlSetSort('score',this)" id="sort-score" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid var(--acc);color:var(--acc);background:rgba(0,200,240,.08);cursor:pointer">Score</button>
     <button onclick="wlSetSort('alpha',this)" id="sort-alpha" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">A-Z</button>
+    <button id="wl-sf-btn" onclick="toggleSellFilter(document.getElementById('sf-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
+    <button id="wl-dr-btn" onclick="toggleDivFilter(document.getElementById('dr-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
   </div>
   <div class="g4" id="wl-kpi" style="margin-bottom:12px"></div>
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
@@ -404,6 +406,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">RSI</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">&lt;30</span> ueberverkauft &nbsp;<span style="color:#ff6666">&gt;70</span> ueberkauft &nbsp;<span style="color:var(--mut)">30-70</span> neutral.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">WALK-FORWARD OOS</div><div style="font-size:12px;color:var(--mut)">12M Training / 6M Out-of-Sample Test (v6b_6m). OOS WR &gt; IS WR = kein Overfitting. Reines Validierungsinstrument &mdash; veraendert keine Live-Signale.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">STABILITAET (StdAbw OOS WR)</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">&lt;8pp</span> stabil &nbsp;<span style="color:#00c8f0">8-15pp</span> akzeptabel &nbsp;<span style="color:#ff6666">&gt;15pp</span> instabil. Bei weniger als 10 Trades pro Fenster statistisch nicht aussagekraeftig.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PIOTROSKI MINI-SCORE (v5.9.21)</div><div style="font-size:12px;color:var(--mut)">5-Punkte Quality-Filter: ROA&gt;0, CFO&gt;0, Accruals OK (CFO&gt;NI), GrossMargin steigend, Debt Safe. Score &lt;2 bei &ge;2 messbaren Kriterien &rarr; Fund-Score &times;0.85 (B1-Daempfung). Quelle: Piotroski 2000.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">VIX-REGIME (v5.9.24)</div><div style="font-size:12px;color:var(--mut)">CBOE Volatility Index: <span style="color:#00e676">&lt;20 Low Vol</span> &times;1.00 &nbsp;<span style="color:#ffab00">20-30 Elevated</span> &times;0.60 &nbsp;<span style="color:#ff5252">&gt;30 Crisis</span> &times;0.20. Skaliert Momentum Richtung Neutral (50). Quelle: Barroso/Santa-Clara 2015.</div></div>
     <div><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">OVERFITTING-GAP</div><div style="font-size:12px;color:var(--mut)">IS Win-Rate minus OOS Win-Rate. <span style="color:#00e57a">&lt;5pp</span> = kein Overfitting &nbsp;<span style="color:#f0c000">5-15pp</span> = leicht &nbsp;<span style="color:#ff6666">&gt;15pp</span> = stark. Negativ = OOS besser als IS (bei kleinen Stichproben: Zufall).</div></div>
   </div>
 
@@ -426,21 +430,26 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       </div>
     </div>
     <div style="padding:10px 12px;background:rgba(240,192,0,.06);border-left:3px solid #f0c000;border-radius:6px;font-size:12px;color:var(--mut);line-height:1.6">
-      <strong style="color:#00e57a">Aktuelle Situation (Apr 2026, v5):</strong> 262 Ticker, 8 Fenster, ~22-75 OOS-Trades/Fenster. OOS WR 59.4%, Gap 1.0pp, Stabilitaet 10.0pp. <strong style="color:#dce8f5">Statistisch belastbar.</strong> SPY-Filter eliminiert Baermarkt-Eintraege. Produktions-Script: stockiq_alpha_juno_v5.py.
+      <strong style="color:#00e57a">Aktuelle Situation (Apr 2026, v5.9.24):</strong> 278 Ticker, 4 Fenster, ~80-120 OOS-Trades/Fenster. OOS WR ~60%, Gap ~1pp, Stabilitaet ~2.5pp. <strong style="color:#dce8f5">Statistisch belastbar.</strong> SPY-Filter eliminiert Baermarkt-Eintraege. Produktions-Script: stockiq_alpha_juno_v6b_6m.py.
     </div>
   </div>
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#b07cf8">&#128193; Python-Scripts (Juno)</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">stockiq_fund_juno_v7_4.py</strong> &mdash; 262+ Ticker, FCF, ROCE, beta, debtToEquity, 12M-Momentum, NaN-Fix &rarr; stockiq_fundamentals.json</div>
-      <div style="margin-bottom:8px"><strong style="color:#dce8f5">stockiq_alpha_juno_v5.py</strong> &mdash; SPY-Filter + Trailing Stop 10% &rarr; stockiq_alpha_results.json. OOS WR 59.4%, Gap 1.0pp.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">stockiq_fund_juno_v7_7.py</strong> &mdash; 278 Ticker, FCF, ROCE, beta, Piotroski (accruals_ok, gross_margin_ok), VIX (^VIX), Snapshot-Archiv &rarr; stockiq_fundamentals.json</div>
+      <div style="margin-bottom:8px"><strong style="color:#dce8f5">stockiq_alpha_juno_v6b_6m.py</strong> &mdash; SPY-Filter + Trailing Stop 10% + 6M OOS &rarr; stockiq_alpha_results.json. OOS WR ~60%, Stabilitaet ~2.5pp.</div>
       <div style="padding:8px 12px;background:rgba(176,124,248,.06);border-left:3px solid #b07cf8;border-radius:6px;font-family:monospace;font-size:11px;color:var(--mut)">Einmalig: <span style="color:#b07cf8">%pip install yfinance</span></div>
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.24</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.25</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">SF/DR-Filter in WL1</strong>: Score-Filter (SF) und Dividenden-Hold (DR) jetzt auch im WL1-Tab als Buttons. Synchron mit Synopse &mdash; ein Toggle wirkt auf beide Tabs gleichzeitig.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Hilfe-Tab aktualisiert</strong>: Scripts auf v7_7/v6b_6m, 278 Ticker, aktuelle OOS-Metriken. Piotroski und VIX-Regime ins Glossar. Doppelter div-Tag entfernt.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Download-Filename</strong>: Korrigiert auf stockiq-v5.9.25.html.</div>
+  </div>
+  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.24</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">VIX-Regime-Daempfung (neu)</strong>: Momentum-Score wird je nach VIX-Level skaliert. Zone 1 VIX&lt;20: &times;1.00 (volle Wirkung). Zone 2 VIX 20-30: &times;0.60 (moderate Daempfung). Zone 3 VIX&gt;30: &times;0.20 (Crash-Schutz). Akademische Basis: Barroso/Santa-Clara 2015, Daniel/Moskowitz 2016.</div>
     <div>&#10003; <strong style="color:#dce8f5">VIX-Banner in Synopse</strong>: Regime-Anzeige oben in der Synopse (gruen/gelb/rot). Zeigt aktuellen VIX-Wert und aktive Daempfung. Erscheint sobald VIX aus JSON geladen.</div>
@@ -558,7 +567,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.24 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.25 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -1487,8 +1496,7 @@ function wlDetail(ticker){
 /* ---- Score-Filter Toggle ---- */
 function toggleSellFilter(btn){
   SELL_SCORE_FILTER = !SELL_SCORE_FILTER;
-  /* Alle SF-Buttons aktualisieren */
-  var sfBtns = document.querySelectorAll('#sf-btn, #sf-btn-wl'), i;
+  var sfBtns = document.querySelectorAll('#sf-btn, #sf-btn-wl, #wl-sf-btn'), i;
   for(i=0;i<sfBtns.length;i++){
     var b = sfBtns[i]; if(!b) continue;
     b.textContent    = SELL_SCORE_FILTER ? ('SF: >'+SELL_SCORE_MIN) : 'SF: aus';
@@ -1502,10 +1510,10 @@ function toggleSellFilter(btn){
 /* ---- Dividenden-Hold-Filter Toggle (v5.9.17) ---- */
 function toggleDivFilter(btn){
   DIV_HOLD_FILTER = !DIV_HOLD_FILTER;
-  var drBtns = document.querySelectorAll('#dr-btn'), i;
+  var thr = divThresh();
+  var drBtns = document.querySelectorAll('#dr-btn, #wl-dr-btn'), i;
   for(i=0;i<drBtns.length;i++){
     var b2 = drBtns[i]; if(!b2) continue;
-    var thr = divThresh();
     b2.textContent    = DIV_HOLD_FILTER ? ('DR: >'+thr+'%') : 'DR: aus';
     b2.style.borderColor = DIV_HOLD_FILTER ? '#00c8f0' : '#1a2a3a';
     b2.style.color       = DIV_HOLD_FILTER ? '#00c8f0' : 'var(--mut)';
@@ -2410,7 +2418,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.20.html';
+    a.download = 'stockiq-v5.9.25.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
