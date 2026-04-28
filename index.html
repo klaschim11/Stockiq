@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.27</title>
+<title>StockIQ v5.9.28</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.27 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.28 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -443,7 +443,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.27</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.28</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Ticker-Bereinigung</strong>: 278 &rarr; 260 Ticker. Entfernt: 7 Fehler-Ticker (HELN.SW, BALN.SW, FCA.MI, MMC, ANSS, STM.PA, NZYMB) + 12 EM-Ticker ohne zuverl&auml;ssige yfinance-Daten.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Behalten</strong>: 0700.HK (Tencent), 1211.HK (BYD), 005930.KS (Samsung) &mdash; relevante Einzeltitel mit Investitionsrelevanz.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Neu: 3750.HK (CATL)</strong>: Weltgr&ouml;&szlig;ter EV-Batteriehersteller, HK-Listing seit April 2024.</div>
+    <div>&#10003; <strong style="color:#dce8f5">DQ-Effekt</strong>: stat-Ticker sinkt von ~19 auf ~4-5 (nur verbleibende HK/EM-Exoten). DQ-Banner sollte jetzt fast permanent gr&uuml;n sein.</div>
+  </div>
+  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.27</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">DQ-Banner (Datenqualit&auml;t)</strong>: Synopse zeigt jetzt prominent: JSON-Ladestand (n/278), AI/JSON/stat-Verteilung, Trend- und RSI-Qualit&auml;t, Sanity-Flag-Z&auml;hler. Farbe: gr&uuml;n=alles ok, gelb=&lt;20 stat, rot=&gt;20 stat.</div>
     <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.8</strong>: Neue Felder trend (SMA200-Abstand, 5-95 skaliert) und rsi_val (relativeStrengthIndex14 + 52W-Proxy-Fallback). Dashboard &uuml;bernimmt beide Felder automatisch beim JSON-Laden und setzt s.trend + s.rsi je Ticker.</div>
@@ -582,7 +589,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.27 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.28 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -691,7 +698,6 @@ var STOCKS=[
   {t:'HEIA',n:'Heineken NV',p:68.40,chg:0.1,rsi:48,pe:16,eg:6,peg:2.67,above200:false,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.40,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:1.6,mom:50,trend:48,fund:72,risk:66},
   {t:'INGA',n:'ING Groep NV',p:18.40,chg:0.4,rsi:54,pe:8,eg:6,peg:1.33,above200:true,macdCross:'below_zero',macdLine:-0.05,macdSig:-0.08,hist:0.03,div:'bull_hidden',sr:true,sw:false,atr:0.4,mom:59,trend:60,fund:74,risk:66},
   {t:'NOVOB',n:'Novo Nordisk B',p:68.10,chg:-0.8,rsi:24,pe:16,eg:18,peg:0.89,above200:false,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.80,hist:0.20,div:'bull_regular',sr:false,sw:false,atr:2.8,mom:28,trend:22,fund:66,risk:46},
-  {t:'NZYMB',n:'Novozymes B',p:48.40,chg:0.3,rsi:52,pe:28,eg:10,peg:2.8,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.08,div:'bull_hidden',sr:true,sw:false,atr:1.1,mom:57,trend:58,fund:72,risk:68},
   {t:'ATCOA',n:'Atlas Copco A',p:18.40,chg:0.5,rsi:54,pe:24,eg:10,peg:2.4,above200:true,macdCross:'below_zero',macdLine:-0.05,macdSig:-0.07,hist:0.03,div:'bull_hidden',sr:true,sw:false,atr:0.4,mom:60,trend:61,fund:74,risk:70},
   {t:'SANDVIK',n:'Sandvik AB',p:22.40,chg:0.4,rsi:52,pe:18,eg:8,peg:2.25,above200:true,macdCross:'below_zero',macdLine:-0.06,macdSig:-0.09,hist:0.03,div:'bull_hidden',sr:true,sw:false,atr:0.5,mom:57,trend:58,fund:72,risk:68},
   {t:'INDITEX',n:'Inditex SA',p:48.40,chg:0.6,rsi:58,pe:22,eg:12,peg:1.83,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.08,div:'bull_hidden',sr:true,sw:false,atr:1.1,mom:63,trend:64,fund:78,risk:72},
@@ -722,11 +728,9 @@ var STOCKS=[
   {t:'BAC',n:'Bank of America',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'AXP',n:'American Express',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'CB',n:'Chubb Ltd',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'MMC',n:'Marsh & McLennan',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'ORCL',n:'Oracle Corp',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'INTU',n:'Intuit Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'FTNT',n:'Fortinet Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ANSS',n:'Ansys Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'CAT',n:'Caterpillar Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'DE',n:'Deere & Co',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'HON',n:'Honeywell Intl',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
@@ -782,13 +786,10 @@ var STOCKS=[
   {t:'CAP.PA',n:'Capgemini SE',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'KER.PA',n:'Kering SA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'LR.PA',n:'Legrand SA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'STM.PA',n:'STMicroelectronics',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'ZURN.SW',n:'Zurich Insurance Group',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'CFR.SW',n:'Richemont AG',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'SLHN.SW',n:'Swiss Life Holding',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'BALN.SW',n:'Baloise Holding',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'PGHN.SW',n:'Partners Group Holding',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'HELN.SW',n:'Helvetia Baloise Holding AG',p:100.00,chg:0.0,rsi:50,pe:14,eg:6,peg:2.3,above200:true,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.60,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:3,mom:55,trend:55,fund:72,risk:74},
   {t:'BKW.SW',n:'BKW AG',p:100.00,chg:0.0,rsi:50,pe:16,eg:7,peg:2.3,above200:true,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.50,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:3,mom:55,trend:55,fund:70,risk:72},
   {t:'KNIN.SW',n:'Kuehne Nagel International AG',p:100.00,chg:0.0,rsi:50,pe:18,eg:8,peg:2.25,above200:false,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:4,mom:48,trend:46,fund:74,risk:68},
   {t:'HOLN.SW',n:'Holcim Ltd',p:100.00,chg:0.0,rsi:50,pe:12,eg:8,peg:1.5,above200:true,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.60,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:3,mom:52,trend:54,fund:70,risk:66},
@@ -817,7 +818,6 @@ var STOCKS=[
   {t:'ERG.MI',n:'ERG SpA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'STLAM.MI',n:'Stellantis NV',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'G.MI',n:'Generali Assicurazioni',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'FCA.MI',n:'Ferrari NV',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'RACE.MI',n:'Ferrari NV ADR',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'7751.T',n:'Canon Inc',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'4901.T',n:'Fujifilm Holdings',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
@@ -853,21 +853,10 @@ var STOCKS=[
   {t:'BEKE',n:'KE Holdings Beike ADR',p:18.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.2,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.9,mom:55,trend:52,fund:60,risk:48},
   {t:'ZTO',n:'ZTO Express ADR',p:18.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.12,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.8,mom:57,trend:55,fund:63,risk:52},
   {t:'0700.HK',n:'Tencent Holdings HK',p:380.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:14,mom:62,trend:60,fund:70,risk:55},
-  {t:'3690.HK',n:'Meituan HK',p:90.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.15,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:4,mom:58,trend:56,fund:62,risk:48},
-  {t:'1810.HK',n:'Xiaomi HK',p:46.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.2,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:2,mom:60,trend:58,fund:60,risk:50},
+  {t:'3750.HK',n:'CATL HK',p:100.00,chg:0.0,rsi:50,pe:20,eg:20,peg:1.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:70,risk:60},
   {t:'1211.HK',n:'BYD Company HK',p:27.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.08,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.5,mom:55,trend:54,fund:65,risk:52},
-  {t:'2318.HK',n:'Ping An Insurance HK',p:34.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.08,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.5,mom:52,trend:50,fund:65,risk:58},
-  {t:'TCS.NS',n:'Tata Consultancy Services',p:3850.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.7,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:60,mom:64,trend:66,fund:80,risk:72},
   {t:'HDB',n:'HDFC Bank ADR',p:60.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.85,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:2,mom:60,trend:62,fund:74,risk:68},
-  {t:'HINDUNILVR.NS',n:'Hindustan Unilever',p:2400.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.9,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:40,mom:58,trend:60,fund:72,risk:70},
-  {t:'ASIANPAINT.NS',n:'Asian Paints India',p:2350.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.8,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:45,mom:60,trend:62,fund:76,risk:72},
   {t:'TSM',n:'TSMC ADR',p:170.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.65,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:7,mom:65,trend:66,fund:82,risk:65},
-  {t:'2454.TW',n:'MediaTek Taiwan',p:1050.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.85,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:35,mom:62,trend:63,fund:74,risk:62},
-  {t:'D05.SI',n:'DBS Group Singapore',p:40.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.8,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1,mom:60,trend:62,fund:76,risk:70},
-  {t:'BBCA.JK',n:'Bank Central Asia',p:9500.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.75,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:160,mom:62,trend:64,fund:78,risk:72},
-  {t:'ITUB',n:'Itau Unibanco ADR',p:6.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.3,mom:58,trend:58,fund:68,risk:60},
-  {t:'WALMEX.MX',n:'Walmart de Mexico',p:75.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:2,mom:60,trend:62,fund:70,risk:65},
-  {t:'FEMSAUBD.MX',n:'FEMSA Mexico',p:155.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:5,mom:58,trend:58,fund:68,risk:62},
   {t:'005930.KS',n:'Samsung Electronics',p:74000.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1800,mom:60,trend:60,fund:70,risk:58},
 ];
 var FD = {};
@@ -1209,16 +1198,20 @@ function rSyn(){
   }
   /* DQ-Banner: Datenqualitaets-Anzeige (v5.9.27) */
   var dqH='';
-  var nLoaded=Object.keys(FD).length-(FD['__macro__']?1:0);
-  var nTotal=STOCKS.length;
-  var nAI=0,nJSON=0,nStat=0,nSanity=0,i_dq;
+  /* Bug-Fix: nLoaded gegen STOCKS zaehlen (nicht FD-Keys wegen Suffix-Strip-Duplikate) */
+  var nLoaded=0,i_dq,nAI=0,nJSON=0,nStat=0,nSanity=0;
   for(i_dq=0;i_dq<STOCKS.length;i_dq++){
+    if(FD[STOCKS[i_dq].t]) nLoaded++;
     var q_dq=scoreQuality(STOCKS[i_dq]);
     if(q_dq==='ai') nAI++;
     else if(q_dq==='json') nJSON++;
     else nStat++;
+    /* Sanity nur pruefen wenn FD vorhanden (verhindert False-Positives bei leerem FD) */
     var fd_dq=FD[STOCKS[i_dq].t];
-    if(fd_dq&&((fd_dq.div_yield!==null&&fd_dq.div_yield>25)||(fd_dq.shareholder_return!==null&&fd_dq.shareholder_return>30))) nSanity++;
+    if(fd_dq&&typeof fd_dq==='object'){
+      if((fd_dq.div_yield!==null&&fd_dq.div_yield!==undefined&&fd_dq.div_yield>25)||
+         (fd_dq.shareholder_return!==null&&fd_dq.shareholder_return!==undefined&&fd_dq.shareholder_return>30)) nSanity++;
+    }
   }
   var s0trend=STOCKS[0];var fd0=FD[s0trend.t];
   var hasTrendLive=fd0&&fd0.trend!==null&&fd0.trend!==undefined;
@@ -1228,7 +1221,7 @@ function rSyn(){
   var dqCol=nStat===0?'#00e676':nStat<20?'#ffab00':'#ff5252';
   dqH='<div style="grid-column:1/-1;padding:6px 12px;background:rgba(0,0,0,.25);border:1px solid '+dqCol+';border-radius:8px;margin-bottom:4px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">';
   dqH+='<div style="font-family:monospace;font-size:8px;font-weight:700;color:'+dqCol+'">&#9141; DQ</div>';
-  dqH+='<div style="font-family:monospace;font-size:8px;color:#8ab4cc">'+nLoaded+'/'+nTotal+'</div>';
+  dqH+='<div style="font-family:monospace;font-size:8px;color:#8ab4cc">'+nLoaded+'/'+STOCKS.length+'</div>';
   dqH+='<div style="font-family:monospace;font-size:8px;color:#00e676">AI:'+nAI+'</div>';
   if(nJSON) dqH+='<div style="font-family:monospace;font-size:8px;color:#00c8f0">JSON:'+nJSON+'</div>';
   if(nStat) dqH+='<div style="font-family:monospace;font-size:8px;color:#456278">stat:'+nStat+'</div>';
@@ -2015,10 +2008,10 @@ function applyFund(fund){
     "NOKIA.HE":"NOKIA","SAMPO.HE":"SAMPO",
     "ITX.MC":"INDITEX","REP.MC":"REP","TEF.MC":"TEF","SAN.MC":"SAN","BBVA.MC":"BBVA","IBE.MC":"IBE",
     "ENEL.MI":"ENEL","UCG.MI":"UCG","ISP.MI":"ISP","LDO.MI":"LDO","ERG.MI":"ERG","STLAM.MI":"STLAM","G.MI":"G","RACE.MI":"RACE",
-    "CFR.SW":"CFR","SLHN.SW":"SLHN","BALN.SW":"BALN",
-    "HELN.SW":"HELN","BKW.SW":"BKW","KNIN.SW":"KNIN","HOLN.SW":"HOLN",
+    "CFR.SW":"CFR","SLHN.SW":"SLHN",
+    "BKW.SW":"BKW","KNIN.SW":"KNIN","HOLN.SW":"HOLN",
     "SIX2.DE":"SIX2",
-    "AIR.PA":"AIR","SU.PA":"SU","EN.PA":"EN","LR.PA":"LR","STM.PA":"STM",
+    "AIR.PA":"AIR","SU.PA":"SU","EN.PA":"EN","LR.PA":"LR",
     "BA.L":"BA","REL.L":"REL","LSEG.L":"LSEG","CPG.L":"CPG","BATS.L":"BATS",
     "WKL.AS":"WKL","ASRNL.AS":"ASRNL",
     "ASSA-B.ST":"ASSAB","EQT.ST":"EQT",
@@ -2043,7 +2036,7 @@ function applyFund(fund){
     "8750.T":"8750T","2503.T":"2503T","2502.T":"2502T","4452.T":"4452T","6326.T":"6326T",
     "4901.T":"4901T","4578.T":"4578T","9983.T":"9983T","6645.T":"6645T","4704.T":"4704T",
     "6098.T":"6098T",
-    "0700.HK":"0700HK","3690.HK":"3690HK","1810.HK":"1810HK","1211.HK":"1211HK","2318.HK":"2318HK",
+    "0700.HK":"0700HK","3750.HK":"3750HK","3690.HK":"3690HK","1810.HK":"1810HK","1211.HK":"1211HK","2318.HK":"2318HK",
     "TCS.NS":"TCSNS","HINDUNILVR.NS":"HINDUNILVR","ASIANPAINT.NS":"ASIANPAINT",
     "2454.TW":"2454TW","D05.SI":"D05SI","BBCA.JK":"BBCAJK",
     "WALMEX.MX":"WALMEXMX","FEMSAUBD.MX":"FEMSAUBD","005930.KS":"005930KS"
