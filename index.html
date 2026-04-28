@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.25</title>
+<title>StockIQ v5.9.26</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.25 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski &middot; VIX-Regime</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.26 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski &middot; VIX-Regime &middot; Score-QA</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -443,7 +443,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.25</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.26</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Score-Qualit&auml;ts-Badge (neu)</strong>: scoreQuality() klassifiziert Scores als AI (JSON+mom12m), JSON (nur Fund/Risk), oder stat (Platzhalter). Badge erscheint neben Score-Zahl in WL1, WL2 und Synopse-Detail.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Score-Farbe ged&auml;mpft bei stat</strong>: scColQ() faerbt Score grau (#456278) wenn keine JSON-Daten geladen &rarr; verhindert Fehlinterpretation von Platzhalter-Scores.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Trend 20% als stat markiert</strong>: Synopse-Detail zeigt Trend-Wert grau + "stat" &mdash; da s.trend nie durch JSON ueberschrieben wird (P2: fund_juno_v7.8 geplant).</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(255,171,0,.06);border-left:3px solid #ffab00;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Interpretation:</strong> <span style="color:#00e676">AI</span> = verlässlich | <span style="color:#00c8f0">JSON</span> = Fund/Risk ok, Mom teilweise | <span style="color:#456278">stat</span> = Platzhalter, Score nur als Orientierung. P2-Plan: Trend-Feld in fund_juno_v7.8 ergänzen (SMA200-Abstand als Proxy).</div>
+  </div>
+  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.25</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">SF/DR-Filter in WL1</strong>: Score-Filter (SF) und Dividenden-Hold (DR) jetzt auch im WL1-Tab als Buttons. Synchron mit Synopse &mdash; ein Toggle wirkt auf beide Tabs gleichzeitig.</div>
     <div>&#10003; <strong style="color:#dce8f5">Hilfe-Tab aktualisiert</strong>: Scripts auf v7_7/v6b_6m, 278 Ticker, aktuelle OOS-Metriken. Piotroski und VIX-Regime ins Glossar. Doppelter div-Tag entfernt.</div>
@@ -567,7 +574,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.25 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.26 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -1097,7 +1104,36 @@ function cSc(s){
   return Math.round(momSc(s)*W.mom+s.trend*W.trend+fSc(s)*W.fund+rSc*W.risk);
 }
 
-/* ---- KPI card ---- */
+/* ---- Score-Qualitaetsindikator (v5.9.26) ────────────────────
+   Gibt zurueck ob cSc() auf echten oder Platzhalter-Daten basiert.
+   Kriterien:
+     'ai'   = JSON geladen + mom12m vorhanden → Score verlässlich
+     'json' = JSON geladen, mom12m fehlt → Fund/Risk ok, Mom teilweise
+     'stat' = kein JSON → Platzhalter dominieren, Score nicht verlässlich
+   ──────────────────────────────────────────────────────────────── */
+function scoreQuality(s){
+  var fd=FD[s.t];
+  if(!fd) return 'stat';
+  var hasMom=(fd.mom12m!==null&&fd.mom12m!==undefined);
+  var hasFund=(fd.fcf!==null&&fd.fcf!==undefined)||(fd.roce!==null&&fd.roce!==undefined)||(fd.roe!==null&&fd.roe!==undefined);
+  if(hasMom&&hasFund) return 'ai';
+  if(hasFund)         return 'json';
+  return 'stat';
+}
+
+/* Badge-HTML fuer Score-Qualitaet */
+function sqBadge(s){
+  var q=scoreQuality(s);
+  if(q==='ai')   return '<span style="font-family:monospace;font-size:7px;padding:1px 4px;border-radius:3px;background:rgba(0,230,118,.15);color:#00e676;margin-left:4px">AI</span>';
+  if(q==='json') return '<span style="font-family:monospace;font-size:7px;padding:1px 4px;border-radius:3px;background:rgba(0,200,240,.12);color:#00c8f0;margin-left:4px">JSON</span>';
+  return '<span style="font-family:monospace;font-size:7px;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,.07);color:#456278;margin-left:4px">stat</span>';
+}
+
+/* Score-Farbe: bei stat-Qualitaet gedämpft */
+function scColQ(sc, s){
+  if(scoreQuality(s)==='stat') return '#456278';  /* grau: Platzhalter */
+  return scCol(sc);
+} */
 function kpiCard(label,val,sub,vc){
   var h='<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px">';
   h+='<div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">'+label+'</div>';
@@ -1304,7 +1340,8 @@ function wlRend(scored){
     var isSellSig=isSell(sig);
     var sc2=isStrong?'#ff9f1c':sig==='buy'?'#00e57a':sig==='pb'?'#f0c000':isRsiBlk?'#e8a020':isHoldSf?'#b07cf8':isSellSig||sig==='weak'?'#ff6666':'#7a9bb5';
     var slbl=isStrong?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG-BLK':isRsiBlk?'RSI-BLK':isHoldSf?holdLbl:sig==='weak'?'WEAK':isSellSig?sellLabel(sig):'WATCH';
-    var scc=scCol(sc);
+    var scc=scColQ(sc,s);
+    var sqB=sqBadge(s);
     var pgD=(s.peg!==null&&s.peg!==undefined)?s.peg.toFixed(2):'--';
     var pgC=pgBk(s)?'#f0c000':s.peg<1.5?'#00e57a':'#7a9bb5';
     var fcfD=fd&&fd.fcf!==null?fp(fd.fcf):'--';
@@ -1317,7 +1354,7 @@ function wlRend(scored){
     var h='<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderLeft+'border-radius:8px;padding:11px 13px;margin-bottom:6px;cursor:pointer" onclick="wlDetail(\''+s.t+'\')">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
     h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+s.n+'</span></div>';
-    h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span><span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span></div></div>';
+    h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span><span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+'</div></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
@@ -1422,13 +1459,14 @@ function wlDetail(ticker){
   var row='display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:3px';
   var out='<div style="background:#0c1420;border:1px solid #1a2a3a;border-left:3px solid '+sc2+';border-radius:12px;padding:16px">';
   out+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">';
-  out+='<div><div style="font-size:20px;font-weight:800;color:'+sc2+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+s.n+'</div></div>';
-  out+='<div style="text-align:right"><div style="font-size:26px;font-weight:800;color:'+sc2+'">'+sc+'</div><div style="font-family:monospace;font-size:9px;color:var(--mut)">/100</div></div></div>';
+  out+='<div><div style="font-size:20px;font-weight:800;color:'+scColQ(sc,s)+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+s.n+'</div></div>';
+  out+='<div style="text-align:right"><div style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:9px;color:var(--mut)">/100 '+sqBadge(s)+'</div></div></div>';
   out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">'+why+'</div>';
   out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">';
   out+='<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:5px">SCORE</div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Momentum 25%</span><span>'+momSc(s)+(FD[s.t]&&FD[s.t].mom12m!==null&&FD[s.t].mom12m!==undefined?' AI':' stat')+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">Trend 20%</span><span>'+s.trend+'</span></div>';
+  var trendQ=FD[s.t]?'stat':'stat';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">Trend 20%</span><span style="color:#456278">'+s.trend+' stat</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Fund 35%</span><span>'+fs2+(fs2!==s.fund?' AI':' stat')+'</span></div>';
   var fdBeta=FD[s.t];var betaVal=fdBeta&&fdBeta.beta!==null&&fdBeta.beta!==undefined?fdBeta.beta:null;
   var rSc2=betaVal!==null?Math.round(s.risk*0.60+betaSc(betaVal)*0.40):s.risk;
@@ -1727,7 +1765,7 @@ function rWL2(){
     out += '<span style="font-size:11px;color:var(--mut)">'+s.n+'</span>';
     out += '<span style="font-family:monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>';
     out += '</div>';
-    out += '<div style="font-family:monospace;font-size:9px;color:var(--mut)">Score <span style="color:'+scCol(sc)+'">'+sc+'</span> &nbsp; PEG '+pgLb(s)+' &nbsp; RSI '+s.rsi+'</div>';
+    out += '<div style="font-family:monospace;font-size:9px;color:var(--mut)">Score <span style="color:'+scColQ(sc,s)+'">'+sc+'</span>'+sqBadge(s)+' &nbsp; PEG '+pgLb(s)+' &nbsp; RSI '+s.rsi+'</div>';
     if(isHoldSF(sig)){
       var wl2Fd=FD[s.t];
       var wl2Parts=[];
