@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.26</title>
+<title>StockIQ v5.9.27</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.26 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Signal-Exit &middot; Score-Filter &middot; Low-Vol &middot; Allokation &middot; Piotroski &middot; VIX-Regime &middot; Score-QA</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.27 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -443,7 +443,15 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.26</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.27</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">DQ-Banner (Datenqualit&auml;t)</strong>: Synopse zeigt jetzt prominent: JSON-Ladestand (n/278), AI/JSON/stat-Verteilung, Trend- und RSI-Qualit&auml;t, Sanity-Flag-Z&auml;hler. Farbe: gr&uuml;n=alles ok, gelb=&lt;20 stat, rot=&gt;20 stat.</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.8</strong>: Neue Felder trend (SMA200-Abstand, 5-95 skaliert) und rsi_val (relativeStrengthIndex14 + 52W-Proxy-Fallback). Dashboard &uuml;bernimmt beide Felder automatisch beim JSON-Laden und setzt s.trend + s.rsi je Ticker.</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.7.1</strong>: Sanity-Checks div_yield &gt;25% und shareholder_return &gt;30% &rarr; None (behebt GSK 327%-Anomalie).</div>
+    <div>&#10003; <strong style="color:#dce8f5">ALIAS_REV</strong>: Reverse-Alias-Mapping fuer trend/rsi_val-Lookup (stocks_t &rarr; yfinance-key).</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,230,118,.06);border-left:3px solid #00e676;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Nach n&auml;chstem Juno-Lauf:</strong> DQ-Banner zeigt Trend+RSI als live (gr&uuml;n) statt stat. Score-Qualit&auml;t steigt auf ~85% der Felder verl&auml;sslich.</div>
+  </div>
+  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.26</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">Score-Qualit&auml;ts-Badge (neu)</strong>: scoreQuality() klassifiziert Scores als AI (JSON+mom12m), JSON (nur Fund/Risk), oder stat (Platzhalter). Badge erscheint neben Score-Zahl in WL1, WL2 und Synopse-Detail.</div>
     <div>&#10003; <strong style="color:#dce8f5">Score-Farbe ged&auml;mpft bei stat</strong>: scColQ() faerbt Score grau (#456278) wenn keine JSON-Daten geladen &rarr; verhindert Fehlinterpretation von Platzhalter-Scores.</div>
@@ -574,7 +582,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.26 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.27 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -1199,7 +1207,36 @@ function rSyn(){
     if(vrl.zone===3){vixH+='<div style="font-family:monospace;font-size:8px;color:#ff5252">Mom. &times;0.20 — CRASH-SCHUTZ AKTIV</div>';}
     vixH+='</div>';
   }
-  if(el)el.innerHTML=vixH+kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
+  /* DQ-Banner: Datenqualitaets-Anzeige (v5.9.27) */
+  var dqH='';
+  var nLoaded=Object.keys(FD).length-(FD['__macro__']?1:0);
+  var nTotal=STOCKS.length;
+  var nAI=0,nJSON=0,nStat=0,nSanity=0,i_dq;
+  for(i_dq=0;i_dq<STOCKS.length;i_dq++){
+    var q_dq=scoreQuality(STOCKS[i_dq]);
+    if(q_dq==='ai') nAI++;
+    else if(q_dq==='json') nJSON++;
+    else nStat++;
+    var fd_dq=FD[STOCKS[i_dq].t];
+    if(fd_dq&&((fd_dq.div_yield!==null&&fd_dq.div_yield>25)||(fd_dq.shareholder_return!==null&&fd_dq.shareholder_return>30))) nSanity++;
+  }
+  var s0trend=STOCKS[0];var fd0=FD[s0trend.t];
+  var hasTrendLive=fd0&&fd0.trend!==null&&fd0.trend!==undefined;
+  var hasRsiLive=fd0&&fd0.rsi_val!==null&&fd0.rsi_val!==undefined;
+  var trendQstr=hasTrendLive?'<span style="color:#00e676">live</span>':'<span style="color:#456278">stat</span>';
+  var rsiQstr=hasRsiLive?'<span style="color:#00e676">live</span>':'<span style="color:#456278">stat</span>';
+  var dqCol=nStat===0?'#00e676':nStat<20?'#ffab00':'#ff5252';
+  dqH='<div style="grid-column:1/-1;padding:6px 12px;background:rgba(0,0,0,.25);border:1px solid '+dqCol+';border-radius:8px;margin-bottom:4px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">';
+  dqH+='<div style="font-family:monospace;font-size:8px;font-weight:700;color:'+dqCol+'">&#9141; DQ</div>';
+  dqH+='<div style="font-family:monospace;font-size:8px;color:#8ab4cc">'+nLoaded+'/'+nTotal+'</div>';
+  dqH+='<div style="font-family:monospace;font-size:8px;color:#00e676">AI:'+nAI+'</div>';
+  if(nJSON) dqH+='<div style="font-family:monospace;font-size:8px;color:#00c8f0">JSON:'+nJSON+'</div>';
+  if(nStat) dqH+='<div style="font-family:monospace;font-size:8px;color:#456278">stat:'+nStat+'</div>';
+  dqH+='<div style="font-family:monospace;font-size:8px;color:#456278">Trend:'+trendQstr+'</div>';
+  dqH+='<div style="font-family:monospace;font-size:8px;color:#456278">RSI:'+rsiQstr+'</div>';
+  if(nSanity) dqH+='<div style="font-family:monospace;font-size:8px;color:#ff5252">&#9888; Sanity:'+nSanity+'</div>';
+  dqH+='</div>';
+  if(el)el.innerHTML=vixH+dqH+kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
 
   /* STRONG BUY cards */
   var sStrong=[],sBuys=[],sPbs=[],sSells=[];
@@ -2011,11 +2048,26 @@ function applyFund(fund){
     "2454.TW":"2454TW","D05.SI":"D05SI","BBCA.JK":"BBCAJK",
     "WALMEX.MX":"WALMEXMX","FEMSAUBD.MX":"FEMSAUBD","005930.KS":"005930KS"
   };
+  /* Reverse ALIAS: stocks_t → yfinance-key (fuer trend/rsi_val Lookup) */
+  var ALIAS_REV={};
+  var _ak=Object.keys(ALIAS);
+  for(var _ai=0;_ai<_ak.length;_ai++) ALIAS_REV[ALIAS[_ak[_ai]]]=_ak[_ai];
   /* VIX-Level aus Makro-Block extrahieren (fund_juno_v7.7+) */
   if(fund['__macro__']&&fund['__macro__'].vix!==null&&fund['__macro__'].vix!==undefined){
     VIX_LEVEL=fund['__macro__'].vix;
   } else if(fund['MACRO']&&fund['MACRO'].vix!==null){
     VIX_LEVEL=fund['MACRO'].vix;
+  }
+  /* v7.8: trend + rsi_val aus JSON in STOCKS-Array übernehmen */
+  var i_pre;
+  for(i_pre=0;i_pre<STOCKS.length;i_pre++){
+    var sym_pre=STOCKS[i_pre].t;
+    var fd_pre=fund[sym_pre]||fund[ALIAS_REV[sym_pre]];
+    if(!fd_pre) continue;
+    if(fd_pre.trend!==null&&fd_pre.trend!==undefined)
+      STOCKS[i_pre].trend=fd_pre.trend;
+    if(fd_pre.rsi_val!==null&&fd_pre.rsi_val!==undefined)
+      STOCKS[i_pre].rsi=fd_pre.rsi_val;
   }
   var keys=Object.keys(fund),i2;
   for(i2=0;i2<keys.length;i2++){
