@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.28</title>
+<title>StockIQ v5.9.29</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.28 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.29 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -443,6 +443,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.29</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">EVAR — Earnings Variability Score</strong>: Neues MSCI-Quality-Deskriptor-Feld aus fund_juno v7.9. Score 0-100 (100=maximal stabil). Berechnung: Std der quarterly Net Income YoY-Wachstumsraten. Fallback: earningsQuarterlyGrowth-Proxy.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Risk-Score erweitert</strong>: Wenn EVAR vorhanden: Risk = stat&times;0.50 + Beta&times;0.40 + EVAR&times;0.10. Ohne EVAR: bisherige Formel stat&times;0.60 + Beta&times;0.40 (r&uuml;ckw&auml;rtskompatibel).</div>
+    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: Risk-Zeile zeigt jetzt &beta;-Wert UND EVAR wenn vorhanden (z.B. &ldquo;Risk 20% | &beta;1.20 | EVAR 72&rdquo;).</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.0</strong>: calc_evar_score() mit 3-stufiger Fallback-Logik. Neue Zusammenfassung: stabil(&ge;70) / volatil(&lt;40) Z&auml;hler.</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Akademische Basis:</strong> MSCI Quality Index nutzt ROE + D/E + Earnings Variability als drei Kerndeskriptoren. EVAR-Pr&auml;mie (1964-2023): 4.7% p.a., Sharpe 0.47 (Alpha Architect / AQR). Stabile Gewinne = defensiver Quality-Anker in Abschwunphasen.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.28</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">Ticker-Bereinigung</strong>: 278 &rarr; 260 Ticker. Entfernt: 7 Fehler-Ticker (HELN.SW, BALN.SW, FCA.MI, MMC, ANSS, STM.PA, NZYMB) + 12 EM-Ticker ohne zuverl&auml;ssige yfinance-Daten.</div>
@@ -589,7 +597,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.28 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.29 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -1091,13 +1099,22 @@ function fSc(s){
   return base;
 }
 
-/* ---- composite score (v5.9.16) ----
-   Risk-Anteil: 60% statisch + 40% Beta-Score (wenn Beta in JSON vorhanden).
+/* ---- composite score (v5.9.16 / v5.9.29) ----
+   Risk-Anteil: 50% statisch + 40% Beta-Score + 10% EVAR-Score.
+   EVAR: Earnings Variability 0-100 (hoch=stabil) aus fund_juno v7.9.
+   Fallback: EVAR nicht vorhanden → Gewicht auf statisch (60/40).
    Gewichte: Mom 25% | Trend 20% | Fund 35% | Risk 20% */
 function cSc(s){
   var fd=FD[s.t];
   var rSc=s.risk;
-  if(fd&&fd.beta!==null&&fd.beta!==undefined){rSc=Math.round(s.risk*0.60+betaSc(fd.beta)*0.40);}
+  if(fd&&fd.beta!==null&&fd.beta!==undefined){
+    var evarSc=(fd.evar!==null&&fd.evar!==undefined)?fd.evar/10:null;
+    if(evarSc!==null){
+      rSc=Math.round(s.risk*0.50+betaSc(fd.beta)*0.40+evarSc*0.10);
+    } else {
+      rSc=Math.round(s.risk*0.60+betaSc(fd.beta)*0.40);
+    }
+  }
   return Math.round(momSc(s)*W.mom+s.trend*W.trend+fSc(s)*W.fund+rSc*W.risk);
 }
 
@@ -1499,9 +1516,13 @@ function wlDetail(ticker){
   out+='<div style="'+row+'"><span style="color:var(--mut)">Trend 20%</span><span style="color:#456278">'+s.trend+' stat</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Fund 35%</span><span>'+fs2+(fs2!==s.fund?' AI':' stat')+'</span></div>';
   var fdBeta=FD[s.t];var betaVal=fdBeta&&fdBeta.beta!==null&&fdBeta.beta!==undefined?fdBeta.beta:null;
-  var rSc2=betaVal!==null?Math.round(s.risk*0.60+betaSc(betaVal)*0.40):s.risk;
+  var evarVal=fdBeta&&fdBeta.evar!==null&&fdBeta.evar!==undefined?fdBeta.evar:null;
+  var rSc2=s.risk;
+  if(betaVal!==null&&evarVal!==null){rSc2=Math.round(s.risk*0.50+betaSc(betaVal)*0.40+(evarVal/10)*0.10);}
+  else if(betaVal!==null){rSc2=Math.round(s.risk*0.60+betaSc(betaVal)*0.40);}
   var betaStr=betaVal!==null?(' | &beta;'+betaVal.toFixed(2)):'';
-  out+='<div style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)">Risk 20%'+betaStr+'</span><span>'+rSc2+'</span></div>';
+  var evarStr=evarVal!==null?(' | EVAR '+evarVal):'';
+  out+='<div style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)">Risk 20%'+betaStr+evarStr+'</span><span>'+rSc2+'</span></div>';
   /* DR-Hold-Zeile: nur anzeigen wenn DIV_HOLD_FILTER aktiv und JSON vorhanden */
   if(DIV_HOLD_FILTER){
     var fdDr=FD[s.t];var dyV=fdDr&&fdDr.div_yield!==null&&fdDr.div_yield!==undefined?fdDr.div_yield:null;
@@ -2061,6 +2082,7 @@ function applyFund(fund){
       STOCKS[i_pre].trend=fd_pre.trend;
     if(fd_pre.rsi_val!==null&&fd_pre.rsi_val!==undefined)
       STOCKS[i_pre].rsi=fd_pre.rsi_val;
+    /* v7.9: evar bleibt in FD[t] — cSc() liest es direkt von dort */
   }
   var keys=Object.keys(fund),i2;
   for(i2=0;i2<keys.length;i2++){
@@ -2501,7 +2523,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.25.html';
+    a.download = 'stockiq-v5.9.29.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
