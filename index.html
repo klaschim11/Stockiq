@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.29</title>
+<title>StockIQ v5.9.30</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.29 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.30 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR &middot; EV/EBITDA</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -147,7 +147,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 3: FUNDAMENTALS -->
 <div class="page" id="p3">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128181; Fundamentals</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG + Schuldenqualit&auml;t + Piotroski Mini-Score &middot; fund_score = 35% ROCE + 30% FCF + 20% PEG + 15% Debt (v5.9.16)</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG + EV/EBITDA + Schuldenqualit&auml;t + Piotroski Mini-Score &middot; fund_score = 35% ROCE + 30% FCF + 20% Value(PEG+EV/EBITDA) + 15% Debt (v5.9.30)</div>
   <div class="g2" style="margin-bottom:14px">
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
       <div style="font-size:13px;font-weight:700;color:#00e57a;margin-bottom:10px">&#128228; JSON laden</div>
@@ -185,7 +185,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         <div><strong style="color:#dce8f5">ROCE</strong> = EBIT / (EK + LT-Schulden) &mdash; korrigiert v5.3</div>
         <div><strong style="color:#dce8f5">ROE</strong> = Fallback wenn ROCE n/a</div>
         <div><strong style="color:#dce8f5">Div+Buyback</strong> = Shareholder Return (neu)</div>
-        <div><strong style="color:#dce8f5">fund_score</strong> = 35% ROCE + 30% FCF + 20% PEG + 15% Debt Safety (v5.9.16)</div>
+        <div><strong style="color:#dce8f5">fund_score</strong> = 35% ROCE + 30% FCF + 20% Value (PEG&times;60% + EV/EBITDA&times;40%) + 15% Debt Safety (v5.9.30)</div>
       </div>
     </div>
   </div>
@@ -398,6 +398,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">BETA / LOW-VOL (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Beta = Kursvolatilitaet relativ zum Markt. <span style="color:#00e57a">&lt; 0.8</span> defensiv (Bonus) &nbsp;<span style="color:#f0c000">0.8&ndash;1.2</span> markt&auml;hnlich &nbsp;<span style="color:#ff6666">&gt; 1.5</span> spekulativ (Malus). Fliesst zu 40% in Risk-Score. Akademisch: MSCI/BlackRock 1963&ndash;2024.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DEBT/EQ % (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Verschuldungsgrad (yfinance debtToEquity). <span style="color:#00e57a">&lt; 100</span> konservativ &nbsp;<span style="color:#f0c000">100&ndash;200</span> normal &nbsp;<span style="color:#ff6666">&gt; 200</span> risikoreich. 15% Gewicht im Fund-Score als Safety-Dimension.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PEG-RATIO</div><div style="font-size:12px;color:var(--mut)">KGV / Gewinnwachstum%. <span style="color:#00e57a">&lt;1.0</span> unterbewertet &nbsp;<span style="color:#00c8f0">1.0-1.5</span> fair &nbsp;<span style="color:#f0c000">1.5-2.0</span> leicht teuer &nbsp;<span style="color:#ff6666">&gt;=2.0</span> BUY blockiert.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EV/EBITDA (v5.9.30)</div><div style="font-size:12px;color:var(--mut)">Enterprise Value / EBITDA &mdash; robusteres Value-Signal als P/E oder PEG. EV umfasst Marktkapitalisierung + Schulden &minus; Cash; EBITDA eliminiert Abschreibungseffekte. <span style="color:#00e57a">&lt;12x</span> guenstig &nbsp;<span style="color:#f0c000">12&ndash;20x</span> fair bis erhoht &nbsp;<span style="color:#ff6666">&gt;25x</span> teuer. Fliesst zu 40% in den Value-Score ein (PEG 60%). Quelle: Loughran/Wellman 2011 &mdash; EV/EBITDA outperformt P/E als Faktor &uuml;ber 40 Jahre.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">FCF YIELD</div><div style="font-size:12px;color:var(--mut)">FreeCashflow / Marktkapitalisierung. <span style="color:#00e57a">&gt;4%</span> stark &nbsp;<span style="color:#00c8f0">2-4%</span> gut &nbsp;<span style="color:#f0c000">0-2%</span> schwach &nbsp;<span style="color:#ff6666">&lt;0%</span> negativ.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ROCE / ROE</div><div style="font-size:12px;color:var(--mut)">ROCE = EBIT / (EK + LT-Schulden). Fallback ROE wenn nicht verfuegbar. <span style="color:#00e57a">&gt;25%</span> Burggraben &nbsp;<span style="color:#00c8f0">15-25%</span> stark.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DIVERGENZ</div><div style="font-size:12px;color:var(--mut)"><span style="color:#ff9f1c">bull_hidden</span> = Kurs HOH, MACD tiefer Hochpunkt = Trendfortsetzung up. <span style="color:#00e57a">bull_regular</span> = Kurs tieferes Tief, MACD hoeher = Trendumkehr.</div></div>
@@ -443,6 +444,15 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.30</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">EV/EBITDA — Enhanced Value-Signal</strong>: Zweites Value-Signal neben PEG. Enterprise Value umfasst Schulden und Cash, EBITDA normalisiert Abschreibungen. Robusterer Vergleich als KGV besonders bei kapitalintensiven und hoch-verschuldeten Unternehmen.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Kombinierter Value-Score</strong>: valSc = PEG&times;0.60 + EV/EBITDA&times;0.40. Gewichte unveraendert: Value 20% + FCF 30% + ROCE 35% + Debt 15%. R&uuml;ckwaertskompatibel: ohne EV/EBITDA-Daten = bisherige PEG-only Formel.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: Neues EV/EBITDA-Feld neben EVAR in der Fundamentals-Box. Farbe: <span style="color:#00e57a">&lt;12x gr&uuml;n</span> &nbsp;<span style="color:#f0c000">12-20x gelb</span> &nbsp;<span style="color:#ff6666">&gt;25x rot</span>.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Hilfe-Tab Glossar</strong>: EV/EBITDA-Erkl&auml;rung + akademische Quelle (Loughran/Wellman 2011).</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.1</strong>: Fetch via yfinance enterpriseToEbitda, Fallback: enterpriseValue/ebitda. Sanity: negatives EBITDA und &gt;100x → None.</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(240,192,0,.06);border-left:3px solid #f0c000;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Akademische Basis:</strong> Loughran &amp; Wellman (2011) &mdash; EV/EBITDA outperformt P/E als Faktor bei US-Aktien 1963&ndash;2009. Besonders stark bei defensiven Sektoren (Industrie, Healthcare, Konsumg&uuml;ter). MSCI Enhanced Value Index nutzt EV/EBITDA als einen von drei Kern-Deskriptoren neben P/B und P/FCF.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.29</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">EVAR — Earnings Variability Score</strong>: Neues MSCI-Quality-Deskriptor-Feld aus fund_juno v7.9. Score 0-100 (100=maximal stabil). Berechnung: Std der quarterly Net Income YoY-Wachstumsraten. Fallback: earningsQuarterlyGrowth-Proxy.</div>
@@ -597,7 +607,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.29 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.30 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -1072,11 +1082,31 @@ function debtSc(dte){
   if(dte<350)return 30;return 10;
 }
 
-/* ---- fundamental score (v5.9.16) ----
-   Erweiterung: +Debt Safety 15%, ROCE 50%->35%, FCF 35%->30%, PEG 15%->20%.
-   Ma/Yang/Ye (2024): Quality = Profitabilität + Wachstum + Ausschüttung + Sicherheit. */
+/* ---- EV/EBITDA Score (v5.9.30) ────────────────────────────
+   Enterprise Value Multiple: niedrig = guenstig = Value-Signal.
+   Akademisch: Loughran/Wellman 2011 — EV/EBITDA outperformt P/E
+   als Value-Faktor. Kombiniert Schulden, Kapital und Gewinn.
+   Quelle: fund_juno v7.9.1 (enterpriseToEbitda).
+   Default 50 (neutral) wenn kein Wert vorhanden. */
+function evSc(evebitda){
+  if(evebitda===null||evebitda===undefined)return 50;
+  if(evebitda<8)return 100;   // Deep Value
+  if(evebitda<12)return 85;   // Guenstig
+  if(evebitda<16)return 70;   // Fair
+  if(evebitda<20)return 55;   // Leicht erhoht
+  if(evebitda<25)return 35;   // Teuer
+  if(evebitda<35)return 18;   // Sehr teuer
+  return 5;                   // Extrem teuer / Growth-Premium
+}
+
+/* ---- fundamental score (v5.9.30) ────────────────────────────
+   Value-Komponente: PEG (60%) + EV/EBITDA (40%) = valSc (Combined Value).
+   Wenn EV/EBITDA fehlt → valSc = pegScore allein (rueckwaertskompatibel).
+   Gewichte unveraendert: Value 20% + FCF 30% + ROCE 35% + Debt 15%.
+   Quelle: Loughran/Wellman 2011, MSCI Enhanced Value Index. */
 function fSc(s){
   var fd=FD[s.t];if(!fd)return s.fund;
+  /* PEG Score */
   var ps=50;
   if(s.peg!==null&&s.peg!==undefined){
     if(s.peg<0.8)ps=100;else if(s.peg<1.2)ps=85;
@@ -1084,15 +1114,20 @@ function fSc(s){
     else if(s.peg<2.5)ps=35;else if(s.peg<3.0)ps=20;
     else ps=5;
   }
+  /* EV/EBITDA Score (v5.9.30) */
+  var eveb=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda:null;
+  /* Combined Value Score: PEG 60% + EV/EBITDA 40% (wenn vorhanden) */
+  var valSc=eveb!==null?Math.round(ps*0.60+evSc(eveb)*0.40):ps;
+  /* FCF Yield Score */
   var fs=40;
   if(fd.fcf!==null&&fd.fcf!==undefined){if(fd.fcf>6)fs=100;else if(fd.fcf>4)fs=85;else if(fd.fcf>2)fs=65;else if(fd.fcf>0)fs=40;else fs=10;}
+  /* ROCE / ROE Score */
   var rs=45;
   var rv=fd.roce!==null&&fd.roce!==undefined?fd.roce:(fd.roe!==null&&fd.roe!==undefined?fd.roe:null);
   if(rv!==null){if(rv>30)rs=100;else if(rv>20)rs=80;else if(rv>12)rs=60;else if(rv>6)rs=40;else rs=15;}
   var ds=debtSc(fd.debt);
-  var base=Math.round(ps*0.20+fs*0.30+rs*0.35+ds*0.15);
-  /* Piotroski B1-Daempfung (v5.9.21): Score < 2 von messbaren Kriterien → ×0.85
-     Nur wenn mind. 2 Kriterien messbar sind (pending < 4), sonst kein Einfluss */
+  var base=Math.round(valSc*0.20+fs*0.30+rs*0.35+ds*0.15);
+  /* Piotroski B1-Daempfung (v5.9.21): Score < 2 von messbaren Kriterien → ×0.85 */
   var pio=pioScore(s,fd);
   var measurable=pio.max-pio.pending;
   if(measurable>=2&&pio.score<2){base=Math.round(base*0.85);}
@@ -1550,6 +1585,15 @@ function wlDetail(ticker){
     var rl2=fd.roce!==null&&fd.roce!==undefined?'ROCE':'ROE';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+rl2+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">MOAT</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+'</div></div>';
+    out+='</div>';
+    /* EV/EBITDA + EVAR — zweite Zeile Value-Qualitaet (v5.9.30) */
+    var evebDisp=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda.toFixed(1)+'x':'n/a';
+    var evebColor=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?(fd.ev_ebitda<12?'#00e57a':fd.ev_ebitda<20?'#f0c000':'#ff6666'):'#7a9bb5';
+    var evarDisp=fd.evar!==null&&fd.evar!==undefined?fd.evar:'n/a';
+    var evarColor=fd.evar!==null&&fd.evar!==undefined?(fd.evar>=70?'#00e57a':fd.evar>=45?'#f0c000':'#ff6666'):'#7a9bb5';
+    out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EV/EBITDA</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EVAR (Stab.)</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDisp+'</div></div>';
     out+='</div>';
     var betaColor=fd.beta!==null&&fd.beta!==undefined?(fd.beta<0.8?'#00e57a':fd.beta<1.2?'#f0c000':'#ff6666'):'#7a9bb5';
     var betaDisp=fd.beta!==null&&fd.beta!==undefined?fd.beta.toFixed(2):'n/a';
@@ -2523,7 +2567,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.29.html';
+    a.download = 'stockiq-v5.9.30.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
