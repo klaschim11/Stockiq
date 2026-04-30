@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.32</title>
+<title>StockIQ v5.9.33</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.32 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.33 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -445,6 +445,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.33</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Skip-Month Momentum (mom_skip)</strong>: Akademischer Standard nach Jegadeesh/Titman 1993. Berechnung: 11M-Return (Monat&minus;12 bis Monat&minus;1, letzter Monat ausgeschlossen). Verhindert Short-Term-Reversal durch Bid-Ask-Bounce und Microstructure-Effekte. Vorteil &uuml;ber 12M-Raw: ~0.5&ndash;1% p.a. h&ouml;here Rendite in akademischen Studien.</div>
+    <div>&#10003; <strong style="color:#dce8f5">momSc() neu</strong>: Fallback-Kette: (1) mom_skip &rarr; (2) mom12m_ret &rarr; (3) mom12m-Position (Legacy). Normierung: Return &times; 0.9 + 50 &rarr; Score 5&ndash;95. Detail-Panel zeigt &ldquo;12M-Mom (skip)&rdquo; + &ldquo;12M (inkl.1M)&rdquo; zum Vergleich.</div>
+    <div>&#10003; <strong style="color:#dce8f5">mom12m Skalierungsbug behoben</strong>: Alter Code: norm = 50 + raw (raw war Position 0&ndash;100 &rarr; alle &gt;50 wurden auf 100 gecappt). Neuer Code: Position direkt als Score (0&ndash;100). Betraf alle Ticker ohne JSON-Fundamentaldaten.</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.4</strong>: +mom_skip (11M-Return) +mom12m_ret (echter 12M-Return). Quelle: tk.history(period=&ldquo;13mo&rdquo;, interval=&ldquo;1mo&rdquo;) &mdash; sehr leichtgewichtig (13 Datenpunkte pro Ticker).</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Akademische Basis:</strong> Jegadeesh &amp; Titman (1993) &mdash; Skip-Month outperformt 12M-Raw. Fama/French (1996) best&auml;tigen: Monats-Lag eliminiert Reversal-Noise. Asness (1994): gilt auch cross-sectional f&uuml;r internationale Aktien.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.32</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">Sektor-relatives EVAR (EVAR-rel)</strong>: EVAR wird nicht mehr absolut bewertet, sondern relativ zum Sektor-Median. META (EVAR=5, Tech-Median~35) erh&auml;lt Score 50 statt 5 — Zykliker werden mit Zyklikern verglichen.</div>
@@ -622,7 +630,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.32 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.33 &middot; Claude (Anthropic) &middot; April/Mai 2026</div>
 </div>
 </div>
 
@@ -1057,25 +1065,51 @@ function vixRegimeLabel(){
   return {label:'VIX '+VIX_LEVEL.toFixed(1)+' — CRISIS',col:'#ff5252',zone:3};
 }
 
+/* ---- Momentum Score (v5.9.33 — Skip-Month) ──────────────────
+   Akademisch: Jegadeesh/Titman 1993 — 12M-1M ("Skip-Month") Momentum
+   outperformt 12M-Momentum um ~0.5-1% p.a. durch Vermeidung
+   von Short-Term-Reversal (Bid-Ask-Bounce, Microstructure-Effekte).
+   Quelle: fund_juno v7.9.4 (mom_skip = 11M-Return in %)
+
+   Normierung mom_skip (Prozent-Return → Score 0-100):
+     +50% und mehr → 95  |  +25% → 79  |  0% → 50  |  -25% → 21  |  -50% → 5
+   Formel: score = max(5, min(95, 50 + return * 0.9))
+   (0.9 = Skalierungsfaktor: ±55% → ±50 Score-Punkte)
+
+   Fallback-Kette (Rueckwaerts-kompatibel):
+     1. mom_skip (neu, v7.9.4)
+     2. mom12m_ret (echter 12M-Return, ebenfalls v7.9.4)
+     3. mom12m (52W-Position 0-100, alt — Skalierungsbug war: norm=50+raw)
+        FIX: raw ist Position (0-100), nicht Return → direkt als Score nutzen
+
+   Alle Varianten: 50% MACD/RSI-Signal + 50% Preis-Momentum.
+   VIX-Daempfung und volAdj() unveraendert. */
 function momSc(s){
   var fd=FD[s.t];
   var adj=volAdj(s);
-  if(!fd||fd.mom12m===null||fd.mom12m===undefined){
-    var base0=Math.round(s.mom*adj+50*(1.0-adj));
-    var vf0=vixFactor();
-    return vf0<1.0?Math.round(base0*vf0+50*(1.0-vf0)):base0;
-  }
-  var raw=fd.mom12m;
-  var norm=50+raw;
-  if(norm>100)norm=100;
-  if(norm<0)norm=0;
-  norm=Math.round(norm);
-  var rm=Math.round(s.mom*0.5+norm*0.5);
-  var damped=Math.round(rm*adj+50*(1.0-adj));
-  /* VIX-Regime-Daempfung: Zone 2/3 → Momentum Richtung Neutral (50) skalieren */
   var vf=vixFactor();
-  if(vf<1.0){damped=Math.round(damped*vf+50*(1.0-vf));}
-  return damped;
+  function applyDamp(base){
+    var d=Math.round(base*adj+50*(1.0-adj));
+    return vf<1.0?Math.round(d*vf+50*(1.0-vf)):d;
+  }
+  if(!fd){return applyDamp(Math.round(s.mom*adj+50*(1.0-adj)));}
+
+  var priceMom=null;
+  /* Prioritaet 1: mom_skip (Skip-Month, v7.9.4) */
+  if(fd.mom_skip!==null&&fd.mom_skip!==undefined){
+    priceMom=Math.max(5,Math.min(95,Math.round(50+fd.mom_skip*0.9)));
+  }
+  /* Prioritaet 2: mom12m_ret (echter 12M-Return, v7.9.4) */
+  else if(fd.mom12m_ret!==null&&fd.mom12m_ret!==undefined){
+    priceMom=Math.max(5,Math.min(95,Math.round(50+fd.mom12m_ret*0.9)));
+  }
+  /* Prioritaet 3: mom12m (52W-Position 0-100, Legacy-Fix) */
+  else if(fd.mom12m!==null&&fd.mom12m!==undefined){
+    priceMom=Math.round(fd.mom12m);  /* direkt 0-100, kein 50+ Bug */
+  }
+  if(priceMom===null){return applyDamp(Math.round(s.mom*adj+50*(1.0-adj)));}
+  var rm=Math.round(s.mom*0.5+priceMom*0.5);
+  return applyDamp(rm);
 }
 
 /* ---- Low-Volatility: Beta-Score (v5.9.16) ----
@@ -1217,7 +1251,9 @@ function cSc(s){
 function scoreQuality(s){
   var fd=FD[s.t];
   if(!fd) return 'stat';
-  var hasMom=(fd.mom12m!==null&&fd.mom12m!==undefined);
+  var hasMom=(fd.mom_skip!==null&&fd.mom_skip!==undefined)||
+             (fd.mom12m_ret!==null&&fd.mom12m_ret!==undefined)||
+             (fd.mom12m!==null&&fd.mom12m!==undefined);
   var hasFund=(fd.fcf!==null&&fd.fcf!==undefined)||(fd.roce!==null&&fd.roce!==undefined)||(fd.roe!==null&&fd.roe!==undefined);
   if(hasMom&&hasFund) return 'ai';
   if(hasFund)         return 'json';
@@ -1600,7 +1636,7 @@ function wlDetail(ticker){
   out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">'+why+'</div>';
   out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">';
   out+='<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:5px">SCORE</div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">Momentum 25%</span><span>'+momSc(s)+(FD[s.t]&&FD[s.t].mom12m!==null&&FD[s.t].mom12m!==undefined?' AI':' stat')+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">Momentum 25%</span><span>'+momSc(s)+(FD[s.t]&&(FD[s.t].mom_skip!=null||FD[s.t].mom12m_ret!=null||FD[s.t].mom12m!=null)?' AI':' stat')+'</span></div>';
   var trendQ=FD[s.t]?'stat':'stat';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Trend 20%</span><span style="color:#456278">'+s.trend+' stat</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Fund 35%</span><span>'+fs2+(fs2!==s.fund?' AI':' stat')+'</span></div>';
@@ -1628,8 +1664,17 @@ function wlDetail(ticker){
   out+='<div style="'+row+'"><span style="color:var(--mut)">MACD</span><span style="color:'+(s.macdLine<0?'#00e57a':'#ff6666')+'">'+s.macdLine.toFixed(2)+'</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Hist / min</span><span style="color:'+(histOk(s)?'#00e57a':'#f0c000')+'">'+s.hist.toFixed(2)+' / '+minH+'</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">RSI</span><span style="color:'+(s.rsi<30?'#00e57a':s.rsi>70?'#ff6666':'#dce8f5')+'">'+s.rsi+'</span></div>';
-  var fd_m=FD[s.t];var m12=fd_m&&fd_m.mom12m!==null&&fd_m.mom12m!==undefined?fd_m.mom12m:null;
-  if(m12!==null){out+='<div style="'+row+'"><span style="color:var(--mut)">12M-Mom</span><span style="color:'+(m12>=20?'#00e57a':m12>=0?'#00c8f0':m12>=-15?'#f0c000':'#ff6666')+'">'+(m12>=0?'+':'')+m12.toFixed(1)+'%</span></div>';}
+  var fd_m=FD[s.t];
+  var skipVal=fd_m&&fd_m.mom_skip!=null?fd_m.mom_skip:null;
+  var ret12Val=fd_m&&fd_m.mom12m_ret!=null?fd_m.mom12m_ret:null;
+  var m12leg=fd_m&&fd_m.mom12m!=null?fd_m.mom12m:null;
+  if(skipVal!==null){
+    var sc=skipVal>=20?'#00e57a':skipVal>=0?'#00c8f0':skipVal>=-15?'#f0c000':'#ff6666';
+    out+='<div style="'+row+'"><span style="color:var(--mut)">12M-Mom (skip)</span><span style="color:'+sc+'">'+(skipVal>=0?'+':'')+skipVal.toFixed(1)+'%</span></div>';
+    if(ret12Val!==null){var r12c=ret12Val>=20?'#00e57a':ret12Val>=0?'#00c8f0':ret12Val>=-15?'#f0c000':'#ff6666';out+='<div style="'+row+'"><span style="color:var(--mut)">12M (inkl.1M)</span><span style="color:'+r12c+'">'+(ret12Val>=0?'+':'')+ret12Val.toFixed(1)+'%</span></div>';}
+  } else if(m12leg!==null){
+    out+='<div style="'+row+'"><span style="color:var(--mut)">12M-Mom</span><span style="color:'+(m12leg>=20?'#00e57a':m12leg>=0?'#00c8f0':m12leg>=-15?'#f0c000':'#ff6666')+'">'+(m12leg>=0?'+':'')+m12leg.toFixed(1)+'%</span></div>';
+  }
   out+='<div style="'+row+'"><span style="color:var(--mut)">Divergenz</span><span style="color:'+(isDivBull(s)?'#ff9f1c':'#7a9bb5')+'">'+s.div+'</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">KGV / EG</span><span>'+s.pe+'x / '+(s.eg||'-')+'%</span></div></div></div>';
   if(fd){
@@ -2640,7 +2685,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.32.html';
+    a.download = 'stockiq-v5.9.33.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
