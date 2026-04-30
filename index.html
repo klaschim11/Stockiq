@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.30</title>
+<title>StockIQ v5.9.31</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.30 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR &middot; EV/EBITDA</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.31 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR &middot; EV/EBITDA</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -444,6 +444,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.31</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">IS Win-Rate Fix</strong>: Walk-Forward zeigte &ldquo;n/a&rdquo; obwohl IS-WR im JSON vorhanden. 3-stufige Fallback-Kette: (1) global_stats.standard.win_rate, (2) meta.is_win_rate (neu in alpha_juno v6b_6m-u4), (3) OOS + overfitting_gap_pp aus meta.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Ticker-Anzeige Fix</strong>: Walk-Forward zeigte &ldquo;? Ticker&rdquo;. Dashboard sucht jetzt meta.n_tickers ODER n_tickers_loaded ODER n_tickers_total (alle Varianten kompatibel).</div>
+    <div>&#10003; <strong style="color:#dce8f5">alpha_juno v6b_6m-u4</strong>: SPY-Filter 4 Versuche: SPY tk.history &rarr; SPY download &rarr; <strong>^GSPC tk.history</strong> &rarr; ^GSPC download. Behebt Juno-Fehler &ldquo;keine Daten verfuegbar&rdquo;. Zus&auml;tzlich: meta.n_tickers + meta.is_win_rate in JSON-Output.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.30</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">EV/EBITDA — Enhanced Value-Signal</strong>: Zweites Value-Signal neben PEG. Enterprise Value umfasst Schulden und Cash, EBITDA normalisiert Abschreibungen. Robusterer Vergleich als KGV besonders bei kapitalintensiven und hoch-verschuldeten Unternehmen.</div>
@@ -607,7 +613,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.30 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.31 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -2472,7 +2478,8 @@ function loadWF(inp){
       }
       if(dm)dm.style.background='#00e57a';
       var ver=(WF_DATA.meta&&WF_DATA.meta.version)?(' v:'+WF_DATA.meta.version):'';
-      if(mm)mm.textContent='Geladen: '+(WF_DATA.meta?(WF_DATA.meta.n_tickers||WF_DATA.meta.tickers||'?'):'?')+' Ticker'+ver;
+      var nTk=(WF_DATA.meta)?(WF_DATA.meta.n_tickers||WF_DATA.meta.n_tickers_loaded||WF_DATA.meta.n_tickers_total||WF_DATA.meta.tickers||'?'):'?';
+      if(mm)mm.textContent='Geladen: '+nTk+' Ticker'+ver;
       rWF();
     }catch(err){if(dm)dm.style.background='#ff6666';if(mm)mm.textContent='Fehler: '+err.message;}
   };
@@ -2488,8 +2495,19 @@ function rWF(){
   var isMths=(WF_DATA.meta&&WF_DATA.meta.wf_is_months)?WF_DATA.meta.wf_is_months:12;
   var sub=document.getElementById('wf-subtitle');
   if(sub)sub.textContent=isMths+'M Training / '+oosMths+'M OOS rollierend \u00b7 Out-of-Sample Validierung';
-  /* v3: global_stats.standard/alpha -- v4: summary.avg_is_wr/avg_oos_wr */
+  /* v3: global_stats.standard/alpha -- v4: summary.avg_is_wr -- v5.9.31: meta.is_win_rate Fallback */
   var stdWR = gs.standard ? gs.standard.win_rate : (gs.avg_is_wr || gs.standard_wr || 0);
+  /* IS-WR Fallback-Kette (v5.9.31): meta.is_win_rate → meta.overfitting_gap_pp + OOS */
+  if(!(stdWR>0)){
+    var meta=WF_DATA.meta||{};
+    if(meta.is_win_rate!==null&&meta.is_win_rate!==undefined&&meta.is_win_rate>0){
+      stdWR=meta.is_win_rate;
+    } else if(meta.overfitting_gap_pp!==null&&meta.overfitting_gap_pp!==undefined){
+      /* IS = OOS + Gap (Identitaet aus Backtest-Logik) */
+      var oosRef=gs.alpha?gs.alpha.win_rate:(gs.avg_oos_wr||0);
+      if(oosRef>0) stdWR=Math.round((oosRef+meta.overfitting_gap_pp)*10)/10;
+    }
+  }
   /* OOS AVG aus walk_forward-Array berechnen (immer vorhanden, auch bei Interim-JSON) */
   var wfAWR=0,i;
   if(wf.length){for(i=0;i<wf.length;i++)wfAWR+=wf[i].win_rate;wfAWR=+(wfAWR/wf.length).toFixed(1);}
@@ -2567,7 +2585,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.30.html';
+    a.download = 'stockiq-v5.9.31.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
