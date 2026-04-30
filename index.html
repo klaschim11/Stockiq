@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.31</title>
+<title>StockIQ v5.9.32</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.31 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR &middot; EV/EBITDA</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.32 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -398,6 +398,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">BETA / LOW-VOL (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Beta = Kursvolatilitaet relativ zum Markt. <span style="color:#00e57a">&lt; 0.8</span> defensiv (Bonus) &nbsp;<span style="color:#f0c000">0.8&ndash;1.2</span> markt&auml;hnlich &nbsp;<span style="color:#ff6666">&gt; 1.5</span> spekulativ (Malus). Fliesst zu 40% in Risk-Score. Akademisch: MSCI/BlackRock 1963&ndash;2024.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DEBT/EQ % (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Verschuldungsgrad (yfinance debtToEquity). <span style="color:#00e57a">&lt; 100</span> konservativ &nbsp;<span style="color:#f0c000">100&ndash;200</span> normal &nbsp;<span style="color:#ff6666">&gt; 200</span> risikoreich. 15% Gewicht im Fund-Score als Safety-Dimension.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PEG-RATIO</div><div style="font-size:12px;color:var(--mut)">KGV / Gewinnwachstum%. <span style="color:#00e57a">&lt;1.0</span> unterbewertet &nbsp;<span style="color:#00c8f0">1.0-1.5</span> fair &nbsp;<span style="color:#f0c000">1.5-2.0</span> leicht teuer &nbsp;<span style="color:#ff6666">&gt;=2.0</span> BUY blockiert.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EVAR — Sektor-relatives Stability-Score (v5.9.32)</div><div style="font-size:12px;color:var(--mut)">Earnings Variability: Stabilit&auml;t der quarterly Net Income YoY-Wachstumsraten. Score 0&ndash;100 (100=maximal stabil). <strong style="color:#dce8f5">Ab v5.9.32 sektor-relativ</strong>: Zykliker werden mit Zyklikern verglichen. Diff = EVAR &minus; Sektor-Median &rarr; Score 50 + Diff&times;1.5. Quelle: MSCI Quality Index (dritter Kerndeskriptor neben ROE + D/E). Daten: fund_juno v7.9.3 (sector-Feld).</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EV/EBITDA (v5.9.30)</div><div style="font-size:12px;color:var(--mut)">Enterprise Value / EBITDA &mdash; robusteres Value-Signal als P/E oder PEG. EV umfasst Marktkapitalisierung + Schulden &minus; Cash; EBITDA eliminiert Abschreibungseffekte. <span style="color:#00e57a">&lt;12x</span> guenstig &nbsp;<span style="color:#f0c000">12&ndash;20x</span> fair bis erhoht &nbsp;<span style="color:#ff6666">&gt;25x</span> teuer. Fliesst zu 40% in den Value-Score ein (PEG 60%). Quelle: Loughran/Wellman 2011 &mdash; EV/EBITDA outperformt P/E als Faktor &uuml;ber 40 Jahre.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">FCF YIELD</div><div style="font-size:12px;color:var(--mut)">FreeCashflow / Marktkapitalisierung. <span style="color:#00e57a">&gt;4%</span> stark &nbsp;<span style="color:#00c8f0">2-4%</span> gut &nbsp;<span style="color:#f0c000">0-2%</span> schwach &nbsp;<span style="color:#ff6666">&lt;0%</span> negativ.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ROCE / ROE</div><div style="font-size:12px;color:var(--mut)">ROCE = EBIT / (EK + LT-Schulden). Fallback ROE wenn nicht verfuegbar. <span style="color:#00e57a">&gt;25%</span> Burggraben &nbsp;<span style="color:#00c8f0">15-25%</span> stark.</div></div>
@@ -444,6 +445,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.32</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Sektor-relatives EVAR (EVAR-rel)</strong>: EVAR wird nicht mehr absolut bewertet, sondern relativ zum Sektor-Median. META (EVAR=5, Tech-Median~35) erh&auml;lt Score 50 statt 5 — Zykliker werden mit Zyklikern verglichen.</div>
+    <div>&#10003; <strong style="color:#dce8f5">evarRelSc()-Funktion</strong>: Diff = EVAR_ticker &minus; EVAR_Sektor-Median. Score = 50 + Diff &times; 1.5, Cap 5&ndash;95. Rueckwaerts-kompatibel: ohne sector-Feld (altes JSON) → absoluter Fallback.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: EVAR-Box zeigt Rohwert + relativen Score (z.B. &ldquo;15 &#8594; 48&rdquo;). Risk-Zeile: &ldquo;&beta;0.35 | EVAR 15 vs.55(Healthcare)&rdquo;.</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.3</strong>: +sector + industry Felder (yfinance info.sector / info.industry). Juno-Output zeigt EVAR-Median pro Sektor.</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Hintergrund:</strong> IC-Analyse S20 (April 2026) zeigte 21% der Ticker mit EVAR=5 (Minimum), darunter META, QCOM, HON, POOL. Ursache: Einmalige EPS-Schocks (COVID-Basiseffekt, Regulierung, Commodity-Zyklus) treiben YoY-Std ins Extreme. Sektor-Normierung hebt diesen Bias systematisch auf.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.31</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">IS Win-Rate Fix</strong>: Walk-Forward zeigte &ldquo;n/a&rdquo; obwohl IS-WR im JSON vorhanden. 3-stufige Fallback-Kette: (1) global_stats.standard.win_rate, (2) meta.is_win_rate (neu in alpha_juno v6b_6m-u4), (3) OOS + overfitting_gap_pp aus meta.</div>
@@ -613,7 +622,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.31 &middot; Claude (Anthropic) &middot; April 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.32 &middot; Claude (Anthropic) &middot; April 2026</div>
 </div>
 </div>
 
@@ -1105,6 +1114,45 @@ function evSc(evebitda){
   return 5;                   // Extrem teuer / Growth-Premium
 }
 
+/* ---- Sektor-EVAR-Mediane (v5.9.32) ────────────────────────
+   Berechnet einmalig nach JSON-Laden via buildSectorEvarMed().
+   SECTOR_EVAR_MED = { "Technology": 35, "Healthcare": 60, ... }
+   Problem v5.9.29-31: EVAR absolut → Zykliker (META, QCOM) =5
+   Loesung: EVAR_ticker vs. Sektor-Median → relativer Score.
+   Rueckwaerts-kompatibel: ohne sector-Feld → globaler Median. */
+var SECTOR_EVAR_MED={};
+var EVAR_GLOBAL_MED=57;
+function buildSectorEvarMed(){
+  var raw={};var all=[];
+  Object.keys(FD).forEach(function(t){
+    var fd=FD[t];
+    if(!fd||fd.evar==null)return;
+    var s=fd.sector||'__other__';
+    if(!raw[s])raw[s]=[];
+    raw[s].push(fd.evar);
+    all.push(fd.evar);
+  });
+  function med(a){
+    if(!a||!a.length)return null;
+    var s=a.slice().sort(function(x,y){return x-y;});
+    var m=Math.floor(s.length/2);
+    return s.length%2?s[m]:Math.round((s[m-1]+s[m])/2);
+  }
+  EVAR_GLOBAL_MED=med(all)||57;
+  Object.keys(raw).forEach(function(s){SECTOR_EVAR_MED[s]=med(raw[s]);});
+}
+/* evarRelSc(ticker): 0-100, 50=Sektor-Median
+   Diff +30pp → Score ~95 | Diff -30pp → Score ~5
+   Wenn kein sector-Feld (altes JSON ohne v7.9.3) → abs. Fallback */
+function evarRelSc(t){
+  var fd=FD[t];
+  if(!fd||fd.evar==null)return null;
+  /* Kein sector-Feld → absoluter Fallback (Rueckwaerts-kompatibel) */
+  if(!fd.sector)return Math.round(fd.evar/10*9+5);
+  var med=SECTOR_EVAR_MED[fd.sector]!=null?SECTOR_EVAR_MED[fd.sector]:EVAR_GLOBAL_MED;
+  return Math.max(5,Math.min(95,Math.round(50+(fd.evar-med)*1.5)));
+}
+
 /* ---- fundamental score (v5.9.30) ────────────────────────────
    Value-Komponente: PEG (60%) + EV/EBITDA (40%) = valSc (Combined Value).
    Wenn EV/EBITDA fehlt → valSc = pegScore allein (rueckwaertskompatibel).
@@ -1140,18 +1188,18 @@ function fSc(s){
   return base;
 }
 
-/* ---- composite score (v5.9.16 / v5.9.29) ----
-   Risk-Anteil: 50% statisch + 40% Beta-Score + 10% EVAR-Score.
-   EVAR: Earnings Variability 0-100 (hoch=stabil) aus fund_juno v7.9.
-   Fallback: EVAR nicht vorhanden → Gewicht auf statisch (60/40).
+/* ---- composite score (v5.9.29 / v5.9.32) ----
+   Risk-Anteil: 50% statisch + 40% Beta-Score + 10% EVAR-rel-Score.
+   EVAR-rel (v5.9.32): sektor-relatives EVAR (Zykliker vs. Zykliker).
+   Fallback: ohne EVAR → 60/40; ohne Beta → stat allein.
    Gewichte: Mom 25% | Trend 20% | Fund 35% | Risk 20% */
 function cSc(s){
   var fd=FD[s.t];
   var rSc=s.risk;
   if(fd&&fd.beta!==null&&fd.beta!==undefined){
-    var evarSc=(fd.evar!==null&&fd.evar!==undefined)?fd.evar/10:null;
-    if(evarSc!==null){
-      rSc=Math.round(s.risk*0.50+betaSc(fd.beta)*0.40+evarSc*0.10);
+    var eRel=evarRelSc(s.t);
+    if(eRel!==null){
+      rSc=Math.round(s.risk*0.50+betaSc(fd.beta)*0.40+eRel*0.10);
     } else {
       rSc=Math.round(s.risk*0.60+betaSc(fd.beta)*0.40);
     }
@@ -1558,11 +1606,13 @@ function wlDetail(ticker){
   out+='<div style="'+row+'"><span style="color:var(--mut)">Fund 35%</span><span>'+fs2+(fs2!==s.fund?' AI':' stat')+'</span></div>';
   var fdBeta=FD[s.t];var betaVal=fdBeta&&fdBeta.beta!==null&&fdBeta.beta!==undefined?fdBeta.beta:null;
   var evarVal=fdBeta&&fdBeta.evar!==null&&fdBeta.evar!==undefined?fdBeta.evar:null;
+  var eRel=evarRelSc(s.t);
   var rSc2=s.risk;
-  if(betaVal!==null&&evarVal!==null){rSc2=Math.round(s.risk*0.50+betaSc(betaVal)*0.40+(evarVal/10)*0.10);}
+  if(betaVal!==null&&eRel!==null){rSc2=Math.round(s.risk*0.50+betaSc(betaVal)*0.40+eRel*0.10);}
   else if(betaVal!==null){rSc2=Math.round(s.risk*0.60+betaSc(betaVal)*0.40);}
   var betaStr=betaVal!==null?(' | &beta;'+betaVal.toFixed(2)):'';
-  var evarStr=evarVal!==null?(' | EVAR '+evarVal):'';
+  var secMed=fdBeta&&fdBeta.sector?SECTOR_EVAR_MED[fdBeta.sector]:null;
+  var evarStr=evarVal!==null?(' | EVAR '+evarVal+(secMed!=null?' vs.'+secMed+'('+fdBeta.sector.split(' ')[0]+')':'')):''  ;
   out+='<div style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)">Risk 20%'+betaStr+evarStr+'</span><span>'+rSc2+'</span></div>';
   /* DR-Hold-Zeile: nur anzeigen wenn DIV_HOLD_FILTER aktiv und JSON vorhanden */
   if(DIV_HOLD_FILTER){
@@ -1595,11 +1645,14 @@ function wlDetail(ticker){
     /* EV/EBITDA + EVAR — zweite Zeile Value-Qualitaet (v5.9.30) */
     var evebDisp=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda.toFixed(1)+'x':'n/a';
     var evebColor=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?(fd.ev_ebitda<12?'#00e57a':fd.ev_ebitda<20?'#f0c000':'#ff6666'):'#7a9bb5';
-    var evarDisp=fd.evar!==null&&fd.evar!==undefined?fd.evar:'n/a';
-    var evarColor=fd.evar!==null&&fd.evar!==undefined?(fd.evar>=70?'#00e57a':fd.evar>=45?'#f0c000':'#ff6666'):'#7a9bb5';
+    var evarRel=evarRelSc(s.t);
+    var evarLabel=fd.sector?'EVAR (rel.)':'EVAR (abs.)';
+    var evarDispFull=fd.evar!=null?(fd.evar+(evarRel!=null&&fd.sector?' &#8594;'+evarRel:'')):'n/a';
+    var evarScore=evarRel!=null?evarRel:fd.evar;
+    var evarColor=evarScore!=null?(evarScore>=60?'#00e57a':evarScore>=40?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EV/EBITDA</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EVAR (Stab.)</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+evarLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDispFull+'</div></div>';
     out+='</div>';
     var betaColor=fd.beta!==null&&fd.beta!==undefined?(fd.beta<0.8?'#00e57a':fd.beta<1.2?'#f0c000':'#ff6666'):'#7a9bb5';
     var betaDisp=fd.beta!==null&&fd.beta!==undefined?fd.beta.toFixed(2):'n/a';
@@ -2133,6 +2186,8 @@ function applyFund(fund){
     if(fd_pre.rsi_val!==null&&fd_pre.rsi_val!==undefined)
       STOCKS[i_pre].rsi=fd_pre.rsi_val;
     /* v7.9: evar bleibt in FD[t] — cSc() liest es direkt von dort */
+    /* v7.9.3: Sektor-EVAR-Mediane nach vollstaendigem FD-Aufbau berechnen */
+    buildSectorEvarMed();
   }
   var keys=Object.keys(fund),i2;
   for(i2=0;i2<keys.length;i2++){
@@ -2585,7 +2640,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.31.html';
+    a.download = 'stockiq-v5.9.32.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
