@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.33</title>
+<title>StockIQ v5.9.34</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.33 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.34 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -445,6 +445,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.34</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">EV/EBITDA Sanity-Fix (50x)</strong>: Cutoff von 100x auf 50x gesenkt. Werte &gt;50x werden als &ldquo;kein Signal&rdquo; behandelt (Score=50, neutral). Betrifft PANW (~93x), ZS (~80x), AXON (~70x) &mdash; deren EBITDA ist noch klein relativ zur Marktkapitalisierung, das EV-Multiple ist daher kein valides Value-Signal. Legitime Obergrenze: ASML ~30x, MSCI ~40x.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Scoring 35&ndash;50x</strong>: Neuer Wert 8 (statt 5) f&uuml;r 35&ndash;50x-Bereich &mdash; weiterhin sehr teuer, aber nicht mehr Minimum-Score.</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.5</strong>: Sanity-Grenze im Fetch-Code: ev_eb &gt; 50 &rarr; None. Betroffene Ticker liefern ev_ebitda=null &rarr; valSc f&auml;llt auf PEG-only zur&uuml;ck.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.33</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">Skip-Month Momentum (mom_skip)</strong>: Akademischer Standard nach Jegadeesh/Titman 1993. Berechnung: 11M-Return (Monat&minus;12 bis Monat&minus;1, letzter Monat ausgeschlossen). Verhindert Short-Term-Reversal durch Bid-Ask-Bounce und Microstructure-Effekte. Vorteil &uuml;ber 12M-Raw: ~0.5&ndash;1% p.a. h&ouml;here Rendite in akademischen Studien.</div>
@@ -630,7 +636,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.33 &middot; Claude (Anthropic) &middot; April/Mai 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.34 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 </div>
 </div>
 
@@ -1131,21 +1137,23 @@ function debtSc(dte){
   if(dte<350)return 30;return 10;
 }
 
-/* ---- EV/EBITDA Score (v5.9.30) ────────────────────────────
-   Enterprise Value Multiple: niedrig = guenstig = Value-Signal.
-   Akademisch: Loughran/Wellman 2011 — EV/EBITDA outperformt P/E
-   als Value-Faktor. Kombiniert Schulden, Kapital und Gewinn.
-   Quelle: fund_juno v7.9.1 (enterpriseToEbitda).
-   Default 50 (neutral) wenn kein Wert vorhanden. */
+/* ---- EV/EBITDA Score (v5.9.30 / v5.9.34) ──────────────────
+   Sanity-Grenze v5.9.34: >50x → neutral (kein Signal, Score=50).
+   fund_juno v7.9.5 filtert >50x bereits auf None heraus.
+   Dashboard-Schutz: falls altes JSON noch Werte >50x enthaelt.
+   Legitime Grenze: ASML ~30x, MSCI ~40x — 50x deckt alle validen
+   Wachstumswerte ab. PANW ~93x = Datenfehler, nicht Value-Signal.
+   Quelle: Loughran/Wellman 2011, MSCI Enhanced Value Index. */
 function evSc(evebitda){
   if(evebitda===null||evebitda===undefined)return 50;
-  if(evebitda<8)return 100;   // Deep Value
-  if(evebitda<12)return 85;   // Guenstig
-  if(evebitda<16)return 70;   // Fair
-  if(evebitda<20)return 55;   // Leicht erhoht
-  if(evebitda<25)return 35;   // Teuer
-  if(evebitda<35)return 18;   // Sehr teuer
-  return 5;                   // Extrem teuer / Growth-Premium
+  if(evebitda>50)return 50;    // Sanity: >50x → kein Signal (neutral)
+  if(evebitda<8)return 100;    // Deep Value
+  if(evebitda<12)return 85;    // Guenstig
+  if(evebitda<16)return 70;    // Fair
+  if(evebitda<20)return 55;    // Leicht erhoht
+  if(evebitda<25)return 35;    // Teuer
+  if(evebitda<35)return 18;    // Sehr teuer
+  return 8;                    // 35-50x: Extrem / Growth-Premium
 }
 
 /* ---- Sektor-EVAR-Mediane (v5.9.32) ────────────────────────
@@ -2685,7 +2693,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.33.html';
+    a.download = 'stockiq-v5.9.34.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
