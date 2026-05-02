@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.36</title>
+<title>StockIQ v5.9.37</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.36 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.37 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -452,6 +452,13 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.37</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">IQR-Outlier-Filter in calcAnnualStats()</strong>: Tukey-Methode (Q1&minus;1.5&times;IQR / Q3+1.5&times;IQR) filtert Extremwerte vor Std-Abw-Berechnung. Behebt GOOGL-Artefakt: ROCE 2026=79% (Backfill-Fehler) wurde ohne Filter als Ausreisser mitgerechnet und hat Konsistenz-Score von ~80 auf 36 gedrueckt.</div>
+    <div>&#10003; <strong style="color:#dce8f5">GOOGL nach Fix</strong>: ROCE [26.6, 29.1, 35.7, 34.5] ohne Ausreisser → Std ~3.9pp → Score ~83 (vorher 36). Korrekte Einordnung als qualitativ konsistentes Unternehmen.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: Zeigt &ldquo;[1 Outlier]&rdquo; wenn ein Wert herausgefiltert wurde. Vollst&auml;ndige Transparenz.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Sicherheit</strong>: Fallback-Logik &mdash; wenn nach Filterung weniger als 3 Punkte verbleiben, werden alle Werte ungefiltert genutzt.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.36</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">Konsistenz-Score (Phase 2)</strong>: Buffetts &ldquo;10-Year Consistency&rdquo;-Kriterium als 5. fSc()-Komponente. Basis: Std-Abweichung des ROCE &uuml;ber 6 Jahres-Snapshots (2021&ndash;2026). Kalibrierung: Universe-Median Std=3.1pp &rarr; Score 65. Stabile Titel (Std&lt;2pp) &rarr; Score 90&ndash;95. Volatile Titel (Std&gt;30pp, NVDA/PANW) &rarr; Score 5&ndash;15.</div>
@@ -659,7 +666,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.36 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.37 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 </div>
 </div>
 
@@ -1226,7 +1233,10 @@ function trendArrow(pts){
    Reine Anzeige wenn < 3 Datenpunkte (keine Score-Aenderung). */
 function calcAnnualStats(t){
   /* Berechnet Mittelwert und Std-Abw von ROCE und FCF aus ANNUAL_DATA.
-     Gibt {roceMean, roceStd, fcfMean, fcfStd, n} zurueck. */
+     v5.9.37: IQR-Outlier-Filter — entfernt Werte ausserhalb Q1-1.5*IQR / Q3+1.5*IQR.
+     Grund: Backfill-Artefakte (z.B. GOOGL 2026: ROCE=79% statt ~35%)
+     oder Einmalereignisse (Abschreibungen, Spinoffs) verzerren Std-Abw massiv.
+     Mindestens 3 Werte nach Filterung erforderlich, sonst keine Filterung. */
   if(!ANNUAL_DATA||!ANNUAL_DATA.length)return null;
   var roces=[],fcfs=[];
   ANNUAL_DATA.forEach(function(e){
@@ -1235,11 +1245,31 @@ function calcAnnualStats(t){
     if(td.roce!==null&&td.roce!==undefined)roces.push(td.roce);
     if(td.fcf !==null&&td.fcf !==undefined)fcfs.push(td.fcf);
   });
+  function iqrFilter(arr){
+    /* Tukey IQR-Methode: entfernt Extremwerte ausserhalb Q1-1.5*IQR bis Q3+1.5*IQR.
+       Nur anwenden wenn >= 4 Werte vorhanden und >= 3 nach Filterung bleiben. */
+    if(arr.length<4)return arr;
+    var s=arr.slice().sort(function(a,b){return a-b;});
+    var q1=s[Math.floor(s.length*0.25)];
+    var q3=s[Math.floor(s.length*0.75)];
+    var iqr=q3-q1;
+    var lo=q1-1.5*iqr, hi=q3+1.5*iqr;
+    var filtered=arr.filter(function(v){return v>=lo&&v<=hi;});
+    return filtered.length>=3?filtered:arr;  /* Fallback: ungefiltert */
+  }
   function stats(arr){
     if(arr.length<2)return null;
-    var m=arr.reduce(function(a,b){return a+b;},0)/arr.length;
-    var v=arr.reduce(function(s,x){return s+(x-m)*(x-m);},0)/arr.length;
-    return {mean:Math.round(m*10)/10, std:Math.round(Math.sqrt(v)*10)/10, n:arr.length};
+    var filtered=iqrFilter(arr);
+    var nOrig=arr.length, nFilt=filtered.length;
+    var m=filtered.reduce(function(a,b){return a+b;},0)/filtered.length;
+    var v=filtered.reduce(function(s,x){return s+(x-m)*(x-m);},0)/filtered.length;
+    return {
+      mean:    Math.round(m*10)/10,
+      std:     Math.round(Math.sqrt(v)*10)/10,
+      n:       nFilt,
+      nOrig:   nOrig,
+      outliers: nOrig-nFilt
+    };
   }
   var rs=stats(roces), fs=stats(fcfs);
   return {roce:rs, fcf:fs};
@@ -1247,8 +1277,9 @@ function calcAnnualStats(t){
 
 function consScore(t){
   /* Konsistenz-Score 0-100 (hoch=stabil).
-     Primaer: ROCE-Std. Sekundaer: FCF-Std (falls ROCE < 3 Punkte).
-     Fallback: null (kein Einfluss auf fSc). */
+     Primaer: ROCE-Std (IQR-gefiltert). Sekundaer: FCF-Std.
+     Fallback: null (kein Einfluss auf fSc).
+     Kalibrierung: Std=0pp→95, Std=3.1pp(Median)→86, Std=10pp→65, Std=30pp→5 */
   var as=calcAnnualStats(t);
   if(!as)return null;
   var std=null;
@@ -1762,8 +1793,8 @@ function wlDetail(ticker){
   var as2=calcAnnualStats(s.t);
   if(cs2!==null&&as2){
     var csColor=cs2>=70?'#00e57a':cs2>=45?'#f0c000':'#ff6666';
-    var roceStdStr=as2.roce?('Std '+as2.roce.std+'pp, '+as2.roce.n+'J'):'n/a';
-    out+='<div style="'+row+';font-size:9px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:'+csColor+'">'+cs2+' | '+roceStdStr+'</span></div>';
+    var roceInfo=as2.roce?('Std '+as2.roce.std+'pp, '+as2.roce.n+'J'+(as2.roce.outliers>0?' ['+as2.roce.outliers+' Outlier]':'')):' n/a';
+    out+='<div style="'+row+';font-size:9px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:'+csColor+'">'+cs2+' | '+roceInfo+'</span></div>';
   }
   var fdBeta=FD[s.t];var betaVal=fdBeta&&fdBeta.beta!==null&&fdBeta.beta!==undefined?fdBeta.beta:null;
   var evarVal=fdBeta&&fdBeta.evar!==null&&fdBeta.evar!==undefined?fdBeta.evar:null;
@@ -2862,7 +2893,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.36.html';
+    a.download = 'stockiq-v5.9.37.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
