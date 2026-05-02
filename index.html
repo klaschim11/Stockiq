@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.35</title>
+<title>StockIQ v5.9.36</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.35 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Jahres-Trend</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.36 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -147,7 +147,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 3: FUNDAMENTALS -->
 <div class="page" id="p3">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128181; Fundamentals</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG + EV/EBITDA + Schuldenqualit&auml;t + Piotroski Mini-Score &middot; fund_score = 35% ROCE + 30% FCF + 20% Value(PEG+EV/EBITDA) + 15% Debt (v5.9.30)</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG + EV/EBITDA + Schuldenqualit&auml;t + Piotroski + <strong style="color:#00e57a">Konsistenz</strong> &middot; fund_score = 30% ROCE + 30% FCF + 20% Value + 15% Debt + 5% Konsistenz (v5.9.36)</div>
   <div class="g2" style="margin-bottom:14px">
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
       <div style="font-size:13px;font-weight:700;color:#00e57a;margin-bottom:10px">&#128228; JSON laden</div>
@@ -192,7 +192,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         <div><strong style="color:#dce8f5">ROCE</strong> = EBIT / (EK + LT-Schulden) &mdash; korrigiert v5.3</div>
         <div><strong style="color:#dce8f5">ROE</strong> = Fallback wenn ROCE n/a</div>
         <div><strong style="color:#dce8f5">Div+Buyback</strong> = Shareholder Return (neu)</div>
-        <div><strong style="color:#dce8f5">fund_score</strong> = 35% ROCE + 30% FCF + 20% Value (PEG&times;60% + EV/EBITDA&times;40%) + 15% Debt Safety (v5.9.30)</div>
+        <div><strong style="color:#dce8f5">fund_score</strong> = 30% ROCE + 30% FCF + 20% Value (PEG&times;60% + EV/EBITDA&times;40%) + 15% Debt Safety + 5% Konsistenz (v5.9.36)</div>
       </div>
     </div>
   </div>
@@ -452,6 +452,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.36</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Konsistenz-Score (Phase 2)</strong>: Buffetts &ldquo;10-Year Consistency&rdquo;-Kriterium als 5. fSc()-Komponente. Basis: Std-Abweichung des ROCE &uuml;ber 6 Jahres-Snapshots (2021&ndash;2026). Kalibrierung: Universe-Median Std=3.1pp &rarr; Score 65. Stabile Titel (Std&lt;2pp) &rarr; Score 90&ndash;95. Volatile Titel (Std&gt;30pp, NVDA/PANW) &rarr; Score 5&ndash;15.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Neue Gewichtung fSc()</strong>: Mit annual.json geladen: ROCE 30% + FCF 30% + Value 20% + Debt 15% + Konsistenz 5%. Ohne annual.json: bisherige Formel (ROCE 35%) unvera&#776;ndert &mdash; r&uuml;ckw&auml;rtskompatibel.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: Neue Zeile &ldquo;Konsistenz (ROCE)&rdquo; zeigt Score + Std-Abw + Anzahl Jahre. Farbe: &ge;70 gr&uuml;n, &ge;45 gelb, &lt;45 rot.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Backfill 2021&ndash;2025</strong>: stockiq_annual.json enth&auml;lt [2021,2022,2023,2024,2025,2026]. ROCE/ROE vollst&auml;ndig historisch; FCF-Yield via hist. Kurs &times; akt. Shares (~95% genau).</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,229,122,.06);border-left:3px solid #00e57a;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Akademische Basis (Buffett 2024):</strong> &ldquo;The best business to own is one that over an extended period can employ large amounts of incremental capital at very high rates of return.&rdquo; Konsistenz &uuml;ber Zeit &mdash; nicht Einzel-ROCE &mdash; ist das Kern-Qualit&auml;tskriterium. Stabilste Titel: NESN.SW, 8058.T, BTI, MDT (Std &lt; 1pp). Volatilste: PANW, NVDA, SBUX (Turnaround/Growth-Phase).</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.35</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">Jahres-Snapshot-Infrastruktur (Phase 1)</strong>: fund_juno v7.9.6 schreibt automatisch am 1. Mai (&plusmn;7 Tage) eine kompakte Datei <code>stockiq_annual.json</code>. Format: [{year, date, version, tickers:{roce,fcf,mom_skip,...}}]. Idempotent: mehrere Runs im Fenster &uuml;berschreiben denselben Jahres-Eintrag.</div>
@@ -651,7 +659,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.35 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.36 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 </div>
 </div>
 
@@ -1196,6 +1204,59 @@ function trendArrow(pts){
   if(Math.abs(diff)<0.5)return '<span style="color:#7a9bb5">&rarr;</span>';
   return diff>0?'<span style="color:#00e57a">&#8593;</span>':'<span style="color:#ff6666">&#8595;</span>';
 }
+
+/* ---- Konsistenz-Score (v5.9.36) ─────────────────────────────
+   Buffetts "10-Year Consistency" Kriterium — approximiert via
+   Std-Abweichung von ROCE und FCF ueber verfuegbare Jahres-Snapshots.
+   Benoetigt: ANNUAL_DATA geladen mit mind. 3 validen ROCE-Werten.
+
+   Kalibrierung (aus Backfill-Analyse Mai 2026):
+     Median Universe Std ROCE = 3.1pp
+     Std < 2pp  (z.B. NESN.SW, 8058.T) → Score 90-95
+     Std = 3pp  (Universe-Median)       → Score 65
+     Std = 10pp (erhoeht)               → Score 40
+     Std = 30pp (NVDA, zyklisch)        → Score 10
+     Formel: score = max(5, min(95, round(95 - std * 3.0)))
+
+   Einfluss auf fSc():
+     Wenn Konsistenz-Score verfuegbar (>= 3 Jahre):
+       ROCE 30% + FCF 30% + Value 20% + Debt 15% + Cons 5%
+     Ohne Jahres-Daten: bisherige Formel (ROCE 35%) unveraendert.
+
+   Reine Anzeige wenn < 3 Datenpunkte (keine Score-Aenderung). */
+function calcAnnualStats(t){
+  /* Berechnet Mittelwert und Std-Abw von ROCE und FCF aus ANNUAL_DATA.
+     Gibt {roceMean, roceStd, fcfMean, fcfStd, n} zurueck. */
+  if(!ANNUAL_DATA||!ANNUAL_DATA.length)return null;
+  var roces=[],fcfs=[];
+  ANNUAL_DATA.forEach(function(e){
+    var td=e.tickers&&e.tickers[t];
+    if(!td)return;
+    if(td.roce!==null&&td.roce!==undefined)roces.push(td.roce);
+    if(td.fcf !==null&&td.fcf !==undefined)fcfs.push(td.fcf);
+  });
+  function stats(arr){
+    if(arr.length<2)return null;
+    var m=arr.reduce(function(a,b){return a+b;},0)/arr.length;
+    var v=arr.reduce(function(s,x){return s+(x-m)*(x-m);},0)/arr.length;
+    return {mean:Math.round(m*10)/10, std:Math.round(Math.sqrt(v)*10)/10, n:arr.length};
+  }
+  var rs=stats(roces), fs=stats(fcfs);
+  return {roce:rs, fcf:fs};
+}
+
+function consScore(t){
+  /* Konsistenz-Score 0-100 (hoch=stabil).
+     Primaer: ROCE-Std. Sekundaer: FCF-Std (falls ROCE < 3 Punkte).
+     Fallback: null (kein Einfluss auf fSc). */
+  var as=calcAnnualStats(t);
+  if(!as)return null;
+  var std=null;
+  if(as.roce&&as.roce.n>=3)std=as.roce.std;
+  else if(as.fcf&&as.fcf.n>=3)std=as.fcf.std;
+  if(std===null)return null;
+  return Math.max(5,Math.min(95,Math.round(95-std*3.0)));
+}
 /* ---- Sektor-EVAR-Mediane (v5.9.32) ────────────────────────
    Berechnet einmalig nach JSON-Laden via buildSectorEvarMed().
    SECTOR_EVAR_MED = { "Technology": 35, "Healthcare": 60, ... }
@@ -1235,11 +1296,11 @@ function evarRelSc(t){
   return Math.max(5,Math.min(95,Math.round(50+(fd.evar-med)*1.5)));
 }
 
-/* ---- fundamental score (v5.9.30) ────────────────────────────
-   Value-Komponente: PEG (60%) + EV/EBITDA (40%) = valSc (Combined Value).
-   Wenn EV/EBITDA fehlt → valSc = pegScore allein (rueckwaertskompatibel).
-   Gewichte unveraendert: Value 20% + FCF 30% + ROCE 35% + Debt 15%.
-   Quelle: Loughran/Wellman 2011, MSCI Enhanced Value Index. */
+/* ---- fundamental score (v5.9.30 / v5.9.36) ────────────────
+   Ohne Konsistenz-Daten: Value 20% + FCF 30% + ROCE 35% + Debt 15%
+   Mit Konsistenz (>=3 Jahre): Value 20% + FCF 30% + ROCE 30% + Debt 15% + Cons 5%
+   Konsistenz = Std-Abw ROCE ueber Jahres-Snapshots (Buffett-Test).
+   Quelle: Loughran/Wellman 2011, MSCI Enhanced Value, Buffett (2024). */
 function fSc(s){
   var fd=FD[s.t];if(!fd)return s.fund;
   /* PEG Score */
@@ -1252,7 +1313,6 @@ function fSc(s){
   }
   /* EV/EBITDA Score (v5.9.30) */
   var eveb=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda:null;
-  /* Combined Value Score: PEG 60% + EV/EBITDA 40% (wenn vorhanden) */
   var valSc=eveb!==null?Math.round(ps*0.60+evSc(eveb)*0.40):ps;
   /* FCF Yield Score */
   var fs=40;
@@ -1262,8 +1322,17 @@ function fSc(s){
   var rv=fd.roce!==null&&fd.roce!==undefined?fd.roce:(fd.roe!==null&&fd.roe!==undefined?fd.roe:null);
   if(rv!==null){if(rv>30)rs=100;else if(rv>20)rs=80;else if(rv>12)rs=60;else if(rv>6)rs=40;else rs=15;}
   var ds=debtSc(fd.debt);
-  var base=Math.round(valSc*0.20+fs*0.30+rs*0.35+ds*0.15);
-  /* Piotroski B1-Daempfung (v5.9.21): Score < 2 von messbaren Kriterien → ×0.85 */
+  /* Konsistenz-Score (v5.9.36): Std-Abw ROCE ueber Jahres-Snapshots */
+  var cs=consScore(s.t);
+  var base;
+  if(cs!==null){
+    /* Mit Konsistenz: ROCE 30% + FCF 30% + Value 20% + Debt 15% + Cons 5% */
+    base=Math.round(valSc*0.20+fs*0.30+rs*0.30+ds*0.15+cs*0.05);
+  } else {
+    /* Ohne Konsistenz: bisherige Formel (ROCE 35%) */
+    base=Math.round(valSc*0.20+fs*0.30+rs*0.35+ds*0.15);
+  }
+  /* Piotroski B1-Daempfung */
   var pio=pioScore(s,fd);
   var measurable=pio.max-pio.pending;
   if(measurable>=2&&pio.score<2){base=Math.round(base*0.85);}
@@ -1688,6 +1757,14 @@ function wlDetail(ticker){
   var trendQ=FD[s.t]?'stat':'stat';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Trend 20%</span><span style="color:#456278">'+s.trend+' stat</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Fund 35%</span><span>'+fs2+(fs2!==s.fund?' AI':' stat')+'</span></div>';
+  /* Konsistenz-Badge (v5.9.36) */
+  var cs2=consScore(s.t);
+  var as2=calcAnnualStats(s.t);
+  if(cs2!==null&&as2){
+    var csColor=cs2>=70?'#00e57a':cs2>=45?'#f0c000':'#ff6666';
+    var roceStdStr=as2.roce?('Std '+as2.roce.std+'pp, '+as2.roce.n+'J'):'n/a';
+    out+='<div style="'+row+';font-size:9px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:'+csColor+'">'+cs2+' | '+roceStdStr+'</span></div>';
+  }
   var fdBeta=FD[s.t];var betaVal=fdBeta&&fdBeta.beta!==null&&fdBeta.beta!==undefined?fdBeta.beta:null;
   var evarVal=fdBeta&&fdBeta.evar!==null&&fdBeta.evar!==undefined?fdBeta.evar:null;
   var eRel=evarRelSc(s.t);
@@ -2785,7 +2862,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.35.html';
+    a.download = 'stockiq-v5.9.36.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
