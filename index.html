@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.34</title>
+<title>StockIQ v5.9.35</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.34 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.35 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Jahres-Trend</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -167,6 +167,13 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button onclick="clearFundCache()" style="font-family:monospace;font-size:10px;color:var(--mut);background:transparent;border:1px solid #1a2a3a;border-radius:6px;padding:4px 10px;cursor:pointer">&#128465; Cache leeren</button>
         <button onclick="archSnapshot();alert('Snapshot gespeichert: '+_archive.length+' Eintraege')" style="font-family:monospace;font-size:10px;color:var(--acc);background:transparent;border:1px solid var(--acc);border-radius:6px;padding:4px 10px;cursor:pointer">&#128247; Snapshot</button>
+      </div>
+      <div style="margin-top:8px">
+        <label style="font-family:monospace;font-size:10px;color:var(--mut);cursor:pointer;display:inline-block;padding:4px 10px;border:1px dashed #1a4a2a;border-radius:6px;color:#00e57a">
+          &#128197; Annual laden
+          <input type="file" accept=".json" onchange="loadAnnual(this)" style="display:none">
+        </label>
+        <span id="annual-status" style="font-family:monospace;font-size:9px;color:var(--mut);margin-left:8px">stockiq_annual.json (optional)</span>
       </div>
       <div style="margin-top:10px;padding:8px 10px;background:rgba(0,200,240,.06);border:1px solid rgba(0,200,240,.15);border-radius:8px">
         <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:6px;text-transform:uppercase">Archiv</div>
@@ -445,6 +452,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.35</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Jahres-Snapshot-Infrastruktur (Phase 1)</strong>: fund_juno v7.9.6 schreibt automatisch am 1. Mai (&plusmn;7 Tage) eine kompakte Datei <code>stockiq_annual.json</code>. Format: [{year, date, version, tickers:{roce,fcf,mom_skip,...}}]. Idempotent: mehrere Runs im Fenster &uuml;berschreiben denselben Jahres-Eintrag.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Annual JSON laden</strong>: Neuer gr&uuml;ner Button im Fundamentals-Tab. Laedt stockiq_annual.json optional dazu &mdash; kein Pflichtfeld, Dashboard funktioniert ohne es.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Jahres-Trend im Detail-Panel</strong>: Wenn annual.json geladen: zeigt ROCE, FCF und Mom-Skip der gespeicherten Jahre mit Pfeil-Indikator (&uarr;/&darr;/&rarr;). Kein Einfluss auf Score. Beispiel: &ldquo;ROCE: 2026: 24.1%  2027: 27.3%&rdquo; &uarr;</div>
+    <div>&#10003; <strong style="color:#dce8f5">Phase 2 (geplant ab 2028)</strong>: Sobald 3 Jahres-Snapshots vorliegen, wird Konsistenz-Score (Std-Abw ROCE/FCF) als optionale fSc()-Komponente integriert (Buffetts 10-Year-Consistency-Test approximiert).</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(255,159,28,.06);border-left:3px solid #ff9f1c;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Akademische Basis (Buffett 2024):</strong> &ldquo;The best business to own is one that over an extended period can employ large amounts of incremental capital at very high rates of return.&rdquo; Konsistenz &uuml;ber Zeit ist Buffetts Kern-Qualit&auml;tskriterium &mdash; einmaliger ROCE-Wert sagt wenig, 5-j&auml;hriger Trend sagt alles.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.34</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">EV/EBITDA Sanity-Fix (50x)</strong>: Cutoff von 100x auf 50x gesenkt. Werte &gt;50x werden als &ldquo;kein Signal&rdquo; behandelt (Score=50, neutral). Betrifft PANW (~93x), ZS (~80x), AXON (~70x) &mdash; deren EBITDA ist noch klein relativ zur Marktkapitalisierung, das EV-Multiple ist daher kein valides Value-Signal. Legitime Obergrenze: ASML ~30x, MSCI ~40x.</div>
@@ -636,7 +651,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.34 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.35 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 </div>
 </div>
 
@@ -1156,7 +1171,31 @@ function evSc(evebitda){
   return 8;                    // 35-50x: Extrem / Growth-Premium
 }
 
-/* ---- Sektor-EVAR-Mediane (v5.9.32) ────────────────────────
+/* ---- Jahres-Trend-Daten (v5.9.35) ──────────────────────────
+   ANNUAL_DATA: geladen aus stockiq_annual.json (optional)
+   Format: [{year, date, version, tickers:{t:{roce,fcf,...}}}]
+   Kein Einfluss auf Score — nur Anzeige im Detail-Panel.
+   getAnnualTrend(ticker, field): Array [{year, val}] aufsteigend.
+   trendArrow(values): "↑" / "↓" / "→" / "" fuer UI-Anzeige. */
+var ANNUAL_DATA = [];
+function getAnnualTrend(t, field){
+  var out = [];
+  ANNUAL_DATA.forEach(function(entry){
+    var td = entry.tickers && entry.tickers[t];
+    if(td && td[field]!==null && td[field]!==undefined){
+      out.push({year: entry.year, val: td[field]});
+    }
+  });
+  out.sort(function(a,b){return a.year-b.year;});
+  return out;
+}
+function trendArrow(pts){
+  if(!pts||pts.length<2)return '';
+  var first=pts[0].val, last=pts[pts.length-1].val;
+  var diff=last-first;
+  if(Math.abs(diff)<0.5)return '<span style="color:#7a9bb5">&rarr;</span>';
+  return diff>0?'<span style="color:#00e57a">&#8593;</span>':'<span style="color:#ff6666">&#8595;</span>';
+}
    Berechnet einmalig nach JSON-Laden via buildSectorEvarMed().
    SECTOR_EVAR_MED = { "Technology": 35, "Healthcare": 60, ... }
    Problem v5.9.29-31: EVAR absolut → Zykliker (META, QCOM) =5
@@ -1707,6 +1746,32 @@ function wlDetail(ticker){
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EV/EBITDA</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+evarLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDispFull+'</div></div>';
     out+='</div>';
+    /* Jahres-Trend (v5.9.35): ROCE + FCF + Mom aus annual.json */
+    if(ANNUAL_DATA&&ANNUAL_DATA.length>0){
+      var rocePts=getAnnualTrend(s.t,'roce');
+      var fcfPts =getAnnualTrend(s.t,'fcf');
+      var momPts =getAnnualTrend(s.t,'mom_skip');
+      if(rocePts.length>0||fcfPts.length>0){
+        out+='<div style="margin-top:6px;padding:5px 7px;background:rgba(0,229,122,.04);border:1px solid rgba(0,229,122,.15);border-radius:6px">';
+        out+='<div style="font-family:monospace;font-size:8px;color:#00e57a;margin-bottom:3px">JAHRES-TREND '+trendArrow(rocePts)+' ROCE &nbsp;'+trendArrow(fcfPts)+' FCF</div>';
+        /* ROCE-Verlauf */
+        if(rocePts.length>0){
+          var rStr=rocePts.map(function(p){return p.year+': '+(p.val!=null?(p.val.toFixed(1)+'%'):'--');}).join(' &nbsp;');
+          out+='<div style="font-family:monospace;font-size:9px;color:var(--mut)">ROCE: '+rStr+'</div>';
+        }
+        /* FCF-Verlauf */
+        if(fcfPts.length>0){
+          var fStr=fcfPts.map(function(p){return p.year+': '+(p.val!=null?(p.val.toFixed(1)+'%'):'--');}).join(' &nbsp;');
+          out+='<div style="font-family:monospace;font-size:9px;color:var(--mut)">FCF:  '+fStr+'</div>';
+        }
+        /* Mom-Verlauf */
+        if(momPts.length>0){
+          var mStr=momPts.map(function(p){return p.year+': '+(p.val!=null?((p.val>=0?'+':'')+p.val.toFixed(0)+'%'):'--');}).join(' &nbsp;');
+          out+='<div style="font-family:monospace;font-size:9px;color:var(--mut)">Mom:  '+mStr+'</div>';
+        }
+        out+='</div>';
+      }
+    }
     var betaColor=fd.beta!==null&&fd.beta!==undefined?(fd.beta<0.8?'#00e57a':fd.beta<1.2?'#f0c000':'#ff6666'):'#7a9bb5';
     var betaDisp=fd.beta!==null&&fd.beta!==undefined?fd.beta.toFixed(2):'n/a';
     var debtDisp=fd.debt!==null&&fd.debt!==undefined?fd.debt.toFixed(0):'n/a';
@@ -2362,6 +2427,32 @@ function loadFund(inp){
   reader.readAsText(file);
 }
 
+/* ---- Annual JSON laden (v5.9.35) ───────────────────────────
+   Laedt stockiq_annual.json → ANNUAL_DATA.
+   Kein Pflichtfeld — Dashboard funktioniert ohne annual.json.
+   Nach dem Laden: refresht alle offenen Detail-Panels. */
+function loadAnnual(inp){
+  var file=inp.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var parsed=JSON.parse(e.target.result);
+      if(!Array.isArray(parsed)){
+        alert('stockiq_annual.json: Ungueltiges Format (Array erwartet)');
+        return;
+      }
+      ANNUAL_DATA=parsed;
+      var years=parsed.map(function(e){return e.year;}).join(', ');
+      var lbl=document.getElementById('annual-status');
+      if(lbl)lbl.textContent='Annual: '+parsed.length+' Jahr(e) geladen ('+years+')';
+      rFund();rSyn(); /* Detail-Panels refreshen */
+    }catch(err){
+      alert('Annual JSON Fehler: '+err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
 function clearFundCache(){
   storeDel(LS_KEY);
   var dm=document.getElementById('fdot');var mm=document.getElementById('fmsg');
@@ -2693,7 +2784,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.34.html';
+    a.download = 'stockiq-v5.9.35.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
