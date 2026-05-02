@@ -1176,7 +1176,7 @@ function evSc(evebitda){
    Format: [{year, date, version, tickers:{t:{roce,fcf,...}}}]
    Kein Einfluss auf Score — nur Anzeige im Detail-Panel.
    getAnnualTrend(ticker, field): Array [{year, val}] aufsteigend.
-   trendArrow(values): "↑" / "↓" / "→" / "" fuer UI-Anzeige. */
+   trendArrow(values): Pfeil-Anzeige hoch/runter/neutral. */
 var ANNUAL_DATA = [];
 function getAnnualTrend(t, field){
   var out = [];
@@ -1196,6 +1196,7 @@ function trendArrow(pts){
   if(Math.abs(diff)<0.5)return '<span style="color:#7a9bb5">&rarr;</span>';
   return diff>0?'<span style="color:#00e57a">&#8593;</span>':'<span style="color:#ff6666">&#8595;</span>';
 }
+/* ---- Sektor-EVAR-Mediane (v5.9.32) ────────────────────────
    Berechnet einmalig nach JSON-Laden via buildSectorEvarMed().
    SECTOR_EVAR_MED = { "Technology": 35, "Healthcare": 60, ... }
    Problem v5.9.29-31: EVAR absolut → Zykliker (META, QCOM) =5
