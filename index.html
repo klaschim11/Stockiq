@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.40</title>
+<title>StockIQ v5.9.41</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.40 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.41 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -484,6 +484,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.41</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Sektor-relativer PEG (pegRelSc)</strong>: PEG wird nicht mehr absolut bewertet, sondern relativ zum Sektor-Median. Ein Pharma-Titel mit PEG 2.5 ist nicht teurer als ein Tech-Titel mit PEG 2.5. Scale: 1 PEG-Einheit unter Median &rarr; +20 Score-Punkte.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Sektor-Mediane</strong>: buildSectorPegMed() wird einmalig nach JSON-Laden berechnet. Fallback: absolutes PEG wenn kein sector-Feld (r&uuml;ckw&auml;rtskompatibel).</div>
+    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: Neue Zeile &ldquo;PEG vs. Tech Med.2.4 &rarr; 66&rdquo; unter KGV/EG. Farbe: &ge;65 gr&uuml;n, &ge;40 gelb, &lt;40 rot.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Gewicht unveraendert</strong>: Value-Gewicht 20% bleibt &mdash; erst nach IC-Best&auml;tigung anpassen.</div>
+    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Analogie zu v5.9.32 (EVAR-rel):</strong> Wie Zykliker bei EVAR mit Zyklikern verglichen werden, werden Wachstumstitel bei PEG mit Wachstumstiteln verglichen. Akademisch: Sektor-neutrales Value ist seit Fama/French bekannt als robusterer Faktor als absolutes Value.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.40</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">Script-Workflow dokumentiert</strong>: Hilfe-Tab zeigt alle Python-Scripts mit empfohlenem Rhythmus (t&auml;glich / optional / j&auml;hrlich / Setup) und Erkl&auml;rung der IC-Analyse-Typen.</div>
@@ -719,7 +727,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.40 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.41 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -743,7 +751,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <span style="color:#00e57a;font-weight:700">Mom 25%</span><span style="color:#dce8f5">momSc()</span><span style="color:var(--mut)">Skip-Month 11M + MACD + RSI &middot; VIX-Daempfung &times;1.0/0.6/0.2</span>
       <span style="color:#00e57a;font-weight:700">Trend 20%</span><span style="color:#dce8f5">SMA200</span><span style="color:var(--mut)">Abstand zur 200MA &middot; MACD Zero-Line &middot; ATR-Filter</span>
       <span style="color:#00c8f0;font-weight:700">Fund 35%</span><span style="color:#dce8f5">fSc()</span><span style="color:var(--mut)">ROCE 30% + FCF 30% + Value 20% + Debt 15% + Konsistenz 5%</span>
-      <span style="color:#00c8f0;font-weight:700">&nbsp;&nbsp;&rarr; Value 20%</span><span style="color:#dce8f5">valSc</span><span style="color:var(--mut)">PEG &times;60% + EV/EBITDA &times;40% (Sanity &lt;50x)</span>
+      <span style="color:#00c8f0;font-weight:700">&nbsp;&nbsp;&rarr; Value 20%</span><span style="color:#dce8f5">valSc</span><span style="color:var(--mut)">PEG-rel (sektor-neutral) &times;60% + EV/EBITDA &times;40% &middot; v5.9.41</span>
       <span style="color:#00c8f0;font-weight:700">&nbsp;&nbsp;&rarr; Kons. 5%</span><span style="color:#dce8f5">consScore()</span><span style="color:var(--mut)">Std-Abw ROCE 2021&ndash;2026 &middot; IQR-Outlier-Filter &middot; Buffett-Test</span>
       <span style="color:#f0c000;font-weight:700">Risk 15%</span><span style="color:#dce8f5">rSc()</span><span style="color:var(--mut)">stat &times;0.50 + Beta &times;0.40 + EVAR-rel &times;0.10 (sektor-neutral)</span>
       <span style="color:#7a9bb5;font-weight:700">Piotroski</span><span style="color:#dce8f5">pioScore()</span><span style="color:var(--mut)">5 Kriterien &middot; B1-Daempfung &times;0.85 bei Score&lt;2</span>
@@ -885,7 +893,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p7 Roadmap -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.40 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.41 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1544,21 +1552,63 @@ function evarRelSc(t){
   return Math.max(5,Math.min(95,Math.round(50+(fd.evar-med)*1.5)));
 }
 
-/* ---- fundamental score (v5.9.30 / v5.9.36) ────────────────
-   Ohne Konsistenz-Daten: Value 20% + FCF 30% + ROCE 35% + Debt 15%
-   Mit Konsistenz (>=3 Jahre): Value 20% + FCF 30% + ROCE 30% + Debt 15% + Cons 5%
-   Konsistenz = Std-Abw ROCE ueber Jahres-Snapshots (Buffett-Test).
-   Quelle: Loughran/Wellman 2011, MSCI Enhanced Value, Buffett (2024). */
+/* ---- Sektor-PEG-Mediane (v5.9.41) ─────────────────────────
+   Analogon zu SECTOR_EVAR_MED — berechnet Median-PEG pro Sektor.
+   Benoetigt: sector-Feld in FD (fund_juno v7.9.3+).
+   Beispiel-Mediane: Tech ~2.4 | Healthcare ~1.8 | Industrials ~1.5
+   Wird einmalig nach JSON-Laden aufgerufen (buildSectorPegMed). */
+var SECTOR_PEG_MED={};
+var PEG_GLOBAL_MED=1.8;  /* Startwert; wird beim Laden ueberschrieben */
+function buildSectorPegMed(){
+  var raw={};var all=[];
+  STOCKS.forEach(function(s){
+    if(s.peg==null||s.peg<=0||s.peg>10)return; /* Sanity */
+    var fd=FD[s.t];
+    var sec=(fd&&fd.sector)?fd.sector:'__other__';
+    if(!raw[sec])raw[sec]=[];
+    raw[sec].push(s.peg);
+    all.push(s.peg);
+  });
+  function med(a){
+    if(!a||!a.length)return null;
+    var s=a.slice().sort(function(x,y){return x-y;});
+    var m=Math.floor(s.length/2);
+    return s.length%2?s[m]:Math.round((s[m-1]+s[m])*10)/20;
+  }
+  PEG_GLOBAL_MED=med(all)||1.8;
+  Object.keys(raw).forEach(function(s){SECTOR_PEG_MED[s]=med(raw[s]);});
+}
+/* pegRelSc(s): 0-100, 50=Sektor-Median-PEG des Titels.
+   PEG ist invertiert: niedrig=gut → diff = sectorMed - s.peg
+   Scale: 1 PEG-Einheit unter Median → +20 Score-Punkte.
+   Beispiel: Tech-Median 2.4, NVDA PEG 1.6 → diff=+0.8 → Score 66
+             Tech-Median 2.4, MSFT PEG 3.1 → diff=-0.7 → Score 36
+   Fallback: kein sector → absoluter PEG-Score (Rueckwaerts-kompatibel). */
+function pegRelSc(s){
+  if(s.peg==null||s.peg<=0)return null;
+  var fd=FD[s.t];
+  var sec=(fd&&fd.sector)?fd.sector:null;
+  var medPeg=sec?(SECTOR_PEG_MED[sec]!=null?SECTOR_PEG_MED[sec]:PEG_GLOBAL_MED):null;
+  if(medPeg==null){
+    /* Absoluter Fallback: bisherige Stufen-Logik */
+    if(s.peg<0.8)return 100;if(s.peg<1.2)return 85;
+    if(s.peg<1.6)return 70;if(s.peg<2.0)return 55;
+    if(s.peg<2.5)return 35;if(s.peg<3.0)return 20;
+    return 5;
+  }
+  /* Sektor-relativ: diff = medPeg - peg (positiv = guenstiger als Sektor) */
+  var diff=medPeg-s.peg;
+  return Math.max(5,Math.min(95,Math.round(50+diff*20)));
+}
+
+/* ---- fundamental score (v5.9.36 / v5.9.41) ────────────────
+   v5.9.41: PEG sektor-relativ via pegRelSc() — Pharma vs. Tech korrekt.
+   Gewicht unveraendert. Fallback: absolutes PEG wenn kein sector-Feld. */
 function fSc(s){
   var fd=FD[s.t];if(!fd)return s.fund;
-  /* PEG Score */
-  var ps=50;
-  if(s.peg!==null&&s.peg!==undefined){
-    if(s.peg<0.8)ps=100;else if(s.peg<1.2)ps=85;
-    else if(s.peg<1.6)ps=70;else if(s.peg<2.0)ps=55;
-    else if(s.peg<2.5)ps=35;else if(s.peg<3.0)ps=20;
-    else ps=5;
-  }
+  /* PEG Score — sektor-relativ (v5.9.41) */
+  var ps=pegRelSc(s);
+  if(ps===null)ps=50; /* Kein PEG vorhanden → neutral */
   /* EV/EBITDA Score (v5.9.30) */
   var eveb=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda:null;
   var valSc=eveb!==null?Math.round(ps*0.60+evSc(eveb)*0.40):ps;
@@ -2049,7 +2099,18 @@ function wlDetail(ticker){
     out+='<div style="'+row+'"><span style="color:var(--mut)">12M-Mom</span><span style="color:'+(m12leg>=20?'#00e57a':m12leg>=0?'#00c8f0':m12leg>=-15?'#f0c000':'#ff6666')+'">'+(m12leg>=0?'+':'')+m12leg.toFixed(1)+'%</span></div>';
   }
   out+='<div style="'+row+'"><span style="color:var(--mut)">Divergenz</span><span style="color:'+(isDivBull(s)?'#ff9f1c':'#7a9bb5')+'">'+s.div+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">KGV / EG</span><span>'+s.pe+'x / '+(s.eg||'-')+'%</span></div></div></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">KGV / EG</span><span>'+s.pe+'x / '+(s.eg||'-')+'%</span></div>';
+  /* PEG sektor-relativ (v5.9.41) */
+  if(s.peg!=null){
+    var pegRel=pegRelSc(s);
+    var fd_pg=FD[s.t];
+    var secPegMed=(fd_pg&&fd_pg.sector&&SECTOR_PEG_MED[fd_pg.sector]!=null)?SECTOR_PEG_MED[fd_pg.sector]:null;
+    var secName=(fd_pg&&fd_pg.sector)?fd_pg.sector.split(' ')[0]:'glb';
+    var pegLabel=secPegMed!=null?('PEG vs.'+secName+' Med.'+secPegMed.toFixed(1)):'PEG (abs.)';
+    var pegColor=pegRel!=null?(pegRel>=65?'#00e57a':pegRel>=40?'#f0c000':'#ff6666'):'#7a9bb5';
+    out+='<div style="'+row+';font-size:9px"><span style="color:var(--mut)">'+pegLabel+'</span><span style="color:'+pegColor+'">'+s.peg.toFixed(2)+(pegRel!=null?' \u2192 '+pegRel:'')+'</span></div>';
+  }
+  out+='</div></div>';
   if(fd){
     out+='<div style="border-top:1px solid #1a2a3a;padding-top:10px">';
     out+='<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:6px">FUNDAMENTALS (JSON)</div>';
@@ -2632,6 +2693,8 @@ function applyFund(fund){
     /* v7.9: evar bleibt in FD[t] — cSc() liest es direkt von dort */
     /* v7.9.3: Sektor-EVAR-Mediane nach vollstaendigem FD-Aufbau berechnen */
     buildSectorEvarMed();
+    /* v5.9.41: Sektor-PEG-Mediane berechnen (nach STOCKS + FD geladen) */
+    buildSectorPegMed();
   }
   var keys=Object.keys(fund),i2;
   for(i2=0;i2<keys.length;i2++){
@@ -3110,7 +3173,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.40.html';
+    a.download = 'stockiq-v5.9.41.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
