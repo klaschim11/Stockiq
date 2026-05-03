@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.37</title>
+<title>StockIQ v5.9.40</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.37 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.40 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -57,6 +57,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button class="tab" onclick="goTab(4,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
     <button class="tab" onclick="goTab(5,this)">&#9878; Allokation</button>
     <button class="tab" onclick="goTab(6,this)">&#128218; Hilfe</button>
+    <button class="tab" onclick="goTab(7,this)">&#128203; Roadmap</button>
   </div>
 </header>
 
@@ -444,14 +445,57 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#b07cf8">&#128193; Python-Scripts (Juno)</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#b07cf8">&#128193; Python-Scripts — Uebersicht und Rhythmus</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">stockiq_fund_juno_v7_7.py</strong> &mdash; 278 Ticker, FCF, ROCE, beta, Piotroski (accruals_ok, gross_margin_ok), VIX (^VIX), Snapshot-Archiv &rarr; stockiq_fundamentals.json</div>
-      <div style="margin-bottom:8px"><strong style="color:#dce8f5">stockiq_alpha_juno_v6b_6m.py</strong> &mdash; SPY-Filter + Trailing Stop 10% + 6M OOS &rarr; stockiq_alpha_results.json. OOS WR ~60%, Stabilitaet ~2.5pp.</div>
-      <div style="padding:8px 12px;background:rgba(176,124,248,.06);border-left:3px solid #b07cf8;border-radius:6px;font-family:monospace;font-size:11px;color:var(--mut)">Einmalig: <span style="color:#b07cf8">%pip install yfinance</span></div>
+
+      <!-- Taeglich -->
+      <div style="font-family:monospace;font-size:10px;color:#00e57a;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Taeglich</div>
+      <div style="margin-bottom:8px"><strong style="color:#dce8f5">fund_juno_v7.9.6.py</strong> &mdash; 260 Ticker, FCF, ROCE, EVAR, EV/EBITDA, mom_skip, sector &rarr; stockiq_fundamentals.json + stockiq_snapshots.json<br>
+      <span style="color:#7a9bb5;font-size:10px">Automatisch: 1. Mai &plusmn;7 Tage &rarr; zus&auml;tzlich stockiq_annual.json (Jahres-Snapshot)</span></div>
+
+      <!-- Optional taeglich -->
+      <div style="font-family:monospace;font-size:10px;color:#f0c000;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Optional (nach Bedarf)</div>
+      <div style="margin-bottom:8px"><strong style="color:#dce8f5">alpha_juno_v6b_6m-u4.py</strong> &mdash; Walk-Forward 6M OOS, SPY/GSPC-Filter &rarr; stockiq_alpha_results.json (~30 Min)<br>
+      <span style="color:#7a9bb5;font-size:10px">Empfohlen: 1&times;/Woche oder nach groesseren Marktbewegungen</span></div>
+
+      <!-- Jaehrlich -->
+      <div style="font-family:monospace;font-size:10px;color:#00c8f0;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Jaehrlich (Mai)</div>
+      <div style="margin-bottom:4px"><strong style="color:#dce8f5">annual_backfill_v1.x.py</strong> &mdash; Historische Jahres-Fundamentaldaten (ROCE/FCF 5+ Jahre) &rarr; stockiq_annual.json<br>
+      <span style="color:#7a9bb5;font-size:10px">Nur wenn neues Jahr benoetigt. fund_juno ergaenzt aktuelles Jahr automatisch.</span></div>
+      <div style="margin-bottom:8px"><strong style="color:#dce8f5">annual_ic_v1.0.py</strong> &mdash; Faktor-IC-Analyse (Faktorwert Dez &rarr; Jahresrendite Folgejahr) &rarr; stockiq_annual_ic_results.json<br>
+      <span style="color:#7a9bb5;font-size:10px">Sinnvoll: 1&times; nach annual.json-Update (Mai). Neue Ergebnisse erst nach neuem Jahres-Datenpunkt.</span></div>
+
+      <!-- Einmalig -->
+      <div style="font-family:monospace;font-size:10px;color:#ff9f1c;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Einmalig / Setup</div>
+      <div style="margin-bottom:12px"><strong style="color:#dce8f5">%pip install yfinance</strong> &mdash; Juno-Einrichtung</div>
+
+      <!-- IC-Erklaerung -->
+      <div style="padding:10px 12px;background:rgba(176,124,248,.06);border-left:3px solid #b07cf8;border-radius:6px;font-size:11px;color:var(--mut);line-height:1.7">
+        <strong style="color:#dce8f5">Faktor-IC (Information Coefficient) &mdash; was es bedeutet:</strong><br>
+        IC = Spearman-Korrelation zwischen Faktorwert und nachfolgendem Return. IC=0.15 bedeutet: der Faktor erklaert 15% der Rangordnung der Folgerenditen.<br><br>
+        <strong style="color:#dce8f5">Zwei IC-Typen in StockIQ:</strong><br>
+        <strong style="color:#00c8f0">Annual-IC</strong> (annual_ic.py): Faktor Dez.Jahr &rarr; Jahresrendite. Langfrist-Validierung. 1&times;/Jahr sinnvoll.<br>
+        <strong style="color:#00c8f0">30-Tage-IC</strong> (geplant): Faktor Snapshot &rarr; 30d-Return. Kurzfrist-Signal. 1&times;/Monat wenn &ge;20 Snapshots.<br><br>
+        <strong style="color:#dce8f5">Interpretation Annual-IC Mai 2026:</strong><br>
+        ROCE/FCF/ROE: NEUTRAL &mdash; Quality-Screening-Bias (Universe schon hochwertig, keine Differenzierung).<br>
+        Debt: schwach signifikant &mdash; niedrige Verschuldung leicht praediktiv.<br>
+        mom_skip/evar/ev_ebitda: kein Backfill &mdash; Daten erst ab 2026 vorhanden. Naechste IC 2027 aussagekraeftiger.
+      </div>
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.40</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Script-Workflow dokumentiert</strong>: Hilfe-Tab zeigt alle Python-Scripts mit empfohlenem Rhythmus (t&auml;glich / optional / j&auml;hrlich / Setup) und Erkl&auml;rung der IC-Analyse-Typen.</div>
+    <div>&#10003; <strong style="color:#dce8f5">IC-Interpretation</strong>: Annual-IC Mai 2026 Ergebnisse und Methodik erkl&auml;rt. NEUTRAL bei ROCE/FCF durch Quality-Screening-Bias dokumentiert.</div>
+  </div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Roadmap-Tab: Relevanz-Kommentare</strong>: Jede akademische Faktorl&uuml;cke erh&auml;lt Kurzkommentar mit Relevanz-Einstufung (HOCH/MITTEL/NIEDRIG) und Begr&uuml;ndung. EPS-Revisionen und Marktregime-Score als HOCH eingestuft; Net Debt/EBITDA als NIEDRIG-MITTEL.</div>
+  </div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.38</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Roadmap-Tab (Tab 7)</strong>: Neuer Tab &ldquo;&#128203; Roadmap&rdquo; mit immer aktuellem Entwicklungsstand &mdash; Produktions-Stack, Score-Architektur, akademische L&uuml;cken, Walk-Forward-Kennzahlen, priorisierte offene Punkte und Entwicklungsregeln. Ersetzt das externe PDF als lebendiges Dokument im Dashboard.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.37</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">IQR-Outlier-Filter in calcAnnualStats()</strong>: Tukey-Methode (Q1&minus;1.5&times;IQR / Q3+1.5&times;IQR) filtert Extremwerte vor Std-Abw-Berechnung. Behebt GOOGL-Artefakt: ROCE 2026=79% (Backfill-Fehler) wurde ohne Filter als Ausreisser mitgerechnet und hat Konsistenz-Score von ~80 auf 36 gedrueckt.</div>
@@ -666,9 +710,182 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.37 &middot; Claude (Anthropic) &middot; Mai 2026</div>
-</div>
-</div>
+
+</div><!-- Ende p6 Hilfe -->
+
+<!-- ============================================================
+     TAB 7: ROADMAP
+     ============================================================ -->
+<div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
+
+  <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.40 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+
+  <!-- ── Produktions-Stack ── -->
+  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px;font-size:11px">
+    <div style="display:grid;grid-template-columns:1fr 1fr 2fr 1fr;gap:4px 8px;color:var(--mut);font-family:monospace;border-bottom:1px solid #1a2a3a;padding-bottom:6px;margin-bottom:6px">
+      <span style="color:#7a9bb5">Datei</span><span style="color:#7a9bb5">Version</span><span style="color:#7a9bb5">Zweck</span><span style="color:#7a9bb5">Status</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 2fr 1fr;gap:5px 8px;font-family:monospace">
+      <span style="color:#dce8f5">Dashboard</span><span style="color:#00e57a">v5.9.38</span><span style="color:var(--mut)">iOS Safari, GitHub Pages</span><span style="color:#00e57a">&#9679; Prod</span>
+      <span style="color:#dce8f5">fund_juno</span><span style="color:#00e57a">v7.9.6</span><span style="color:var(--mut)">Fundamentals + Jahres-Snapshot</span><span style="color:#00e57a">&#9679; Prod</span>
+      <span style="color:#dce8f5">alpha_juno</span><span style="color:#00e57a">v6b_6m-u4</span><span style="color:var(--mut)">Walk-Forward 6M OOS</span><span style="color:#00e57a">&#9679; Prod</span>
+      <span style="color:#dce8f5">annual.json</span><span style="color:#00e57a">2021&ndash;2026</span><span style="color:var(--mut)">Jahres-Snapshots (6 Jahre)</span><span style="color:#00e57a">&#9679; Aktiv</span>
+      <span style="color:#dce8f5">snapshots.json</span><span style="color:#f0c000">25+ Eintr.</span><span style="color:var(--mut)">Taegl. Fundamentals-Archiv</span><span style="color:#f0c000">&#9679; Aufbau</span>
+    </div>
+  </div>
+
+  <!-- ── Score-Architektur ── -->
+  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#127919; Score-Architektur v5.9.38</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px;font-size:11px">
+    <div style="display:grid;grid-template-columns:auto 1fr 2fr;gap:5px 12px;font-family:monospace">
+      <span style="color:#00e57a;font-weight:700">Mom 25%</span><span style="color:#dce8f5">momSc()</span><span style="color:var(--mut)">Skip-Month 11M + MACD + RSI &middot; VIX-Daempfung &times;1.0/0.6/0.2</span>
+      <span style="color:#00e57a;font-weight:700">Trend 20%</span><span style="color:#dce8f5">SMA200</span><span style="color:var(--mut)">Abstand zur 200MA &middot; MACD Zero-Line &middot; ATR-Filter</span>
+      <span style="color:#00c8f0;font-weight:700">Fund 35%</span><span style="color:#dce8f5">fSc()</span><span style="color:var(--mut)">ROCE 30% + FCF 30% + Value 20% + Debt 15% + Konsistenz 5%</span>
+      <span style="color:#00c8f0;font-weight:700">&nbsp;&nbsp;&rarr; Value 20%</span><span style="color:#dce8f5">valSc</span><span style="color:var(--mut)">PEG &times;60% + EV/EBITDA &times;40% (Sanity &lt;50x)</span>
+      <span style="color:#00c8f0;font-weight:700">&nbsp;&nbsp;&rarr; Kons. 5%</span><span style="color:#dce8f5">consScore()</span><span style="color:var(--mut)">Std-Abw ROCE 2021&ndash;2026 &middot; IQR-Outlier-Filter &middot; Buffett-Test</span>
+      <span style="color:#f0c000;font-weight:700">Risk 15%</span><span style="color:#dce8f5">rSc()</span><span style="color:var(--mut)">stat &times;0.50 + Beta &times;0.40 + EVAR-rel &times;0.10 (sektor-neutral)</span>
+      <span style="color:#7a9bb5;font-weight:700">Piotroski</span><span style="color:#dce8f5">pioScore()</span><span style="color:var(--mut)">5 Kriterien &middot; B1-Daempfung &times;0.85 bei Score&lt;2</span>
+    </div>
+  </div>
+
+  <!-- ── Akademische Luecken ── -->
+  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#127891; Akademische Faktorluecken (Fama-French / MSCI)</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px;font-size:11px">
+    <div style="display:grid;grid-template-columns:auto auto 1fr;gap:6px 10px;font-family:monospace;align-items:start">
+
+      <span style="color:#00e57a">&#10003;</span>
+      <span style="color:#dce8f5">Momentum</span>
+      <span style="color:var(--mut)">12M-Skip implementiert (v5.9.33) &middot; Jegadeesh/Titman 1993
+        <span style="display:block;color:#7a9bb5;font-size:9px;margin-top:2px">Relevanz: HOCH &mdash; staerkster kurzfristiger Praediktor. Korrekte Implementierung kritisch.</span></span>
+
+      <span style="color:#00e57a">&#10003;</span>
+      <span style="color:#dce8f5">Quality</span>
+      <span style="color:var(--mut)">ROCE, FCF, Piotroski, EVAR-rel, Konsistenz vorhanden
+        <span style="display:block;color:#7a9bb5;font-size:9px;margin-top:2px">Relevanz: HOCH &mdash; robustester Langfrist-Faktor. StockIQ-Kernkompetenz. Gut abgedeckt.</span></span>
+
+      <span style="color:#f0c000">&#9651;</span>
+      <span style="color:#dce8f5">Low Volatility</span>
+      <span style="color:var(--mut)">Beta im Risk-Score &middot; kein dediz. Low-Vol-Faktor &middot; akadem. 20% empfohlen
+        <span style="display:block;color:#7a9bb5;font-size:9px;margin-top:2px">Relevanz: MITTEL &mdash; defensiver Schutz in Risk-off-Phasen. Beta ist guter Proxy. Score-Filter substituiert teilweise. Kein akuter Handlungsbedarf.</span></span>
+
+      <span style="color:#f0c000">&#9651;</span>
+      <span style="color:#dce8f5">Value</span>
+      <span style="color:var(--mut)">PEG + EV/EBITDA absolut &middot; sektor-neutral nach IC-Analyse geplant
+        <span style="display:block;color:#7a9bb5;font-size:9px;margin-top:2px">Relevanz: MITTEL &mdash; Value-Praemie langfristig robust (Loughran/Wellman). Sektor-Neutralisierung verbessert IC signifikant. Warten auf Annual-IC-Ergebnis.</span></span>
+
+      <span style="color:#ff6666">&#10007;</span>
+      <span style="color:#dce8f5">Net Debt/EBITDA</span>
+      <span style="color:var(--mut)">Fehlt &middot; yfinance verfuegbar &middot; robustere Verschuldungsmessung
+        <span style="display:block;color:#7a9bb5;font-size:9px;margin-top:2px">Relevanz: NIEDRIG-MITTEL &mdash; D/E-Proxy ausreichend fuer Screening. Net Debt/EBITDA praeziser bei Kapitalstruktur-Vergleichen. Kein kritischer Gap.</span></span>
+
+      <span style="color:#ff6666">&#10007;</span>
+      <span style="color:#dce8f5">Marktregime-Score</span>
+      <span style="color:var(--mut)">SPY-Filter nur in Alpha &middot; VIX-Daempfung im Score aktiv
+        <span style="display:block;color:#7a9bb5;font-size:9px;margin-top:2px">Relevanz: HOCH fuer Timing &mdash; Momentum crasht bei Trendwenden (2009, 2022). VIX-Daempfung ist guter Proxy. Regime-Score wuerde Fehlsignale in Baerenphasen reduzieren.</span></span>
+
+      <span style="color:#ff6666">&#10007;</span>
+      <span style="color:#dce8f5">EPS-Revisionen</span>
+      <span style="color:var(--mut)">Seeking Alpha Q5-Faktor &middot; kein direkter yfinance-Proxy
+        <span style="display:block;color:#7a9bb5;font-size:9px;margin-top:2px">Relevanz: HOCH kurzfristig &mdash; staerkster 1-3M-Praediktor gemaess Seeking Alpha Quant. earningsQuarterlyGrowth als Proxy moeglich aber ungenau. Externe Datenquelle noetig.</span></span>
+
+    </div>
+    <div style="margin-top:8px;padding:6px 8px;background:rgba(0,200,240,.05);border-radius:6px;font-size:9px;color:#7a9bb5;font-family:monospace">
+      &#10003; vorhanden &nbsp;&#9651; partiell &nbsp;&#10007; fehlend &nbsp;&mdash;&nbsp;
+      Relevanz-Einstufung: HOCH = direkte Score-Auswirkung / MITTEL = partiell abgedeckt / NIEDRIG = marginaler Effekt
+    </div>
+  </div>
+
+  <!-- ── Walk-Forward Status ── -->
+  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#128200; Walk-Forward Status (v6b_6m-u4)</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+    <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;padding:10px;text-align:center">
+      <div style="font-family:monospace;font-size:9px;color:var(--mut)">OOS WR</div>
+      <div style="font-size:18px;font-weight:700;color:#00e57a">60.7%</div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut)">6M OOS avg</div>
+    </div>
+    <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;padding:10px;text-align:center">
+      <div style="font-family:monospace;font-size:9px;color:var(--mut)">STABILITAET</div>
+      <div style="font-size:18px;font-weight:700;color:#00e57a">2.7pp</div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut)">StdAbw Fenster</div>
+    </div>
+    <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;padding:10px;text-align:center">
+      <div style="font-family:monospace;font-size:9px;color:var(--mut)">IS WR</div>
+      <div style="font-size:18px;font-weight:700;color:#00e57a">61.5%</div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut)">In-Sample</div>
+    </div>
+    <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;padding:10px;text-align:center">
+      <div style="font-family:monospace;font-size:9px;color:var(--mut)">FENSTER &lt;50%</div>
+      <div style="font-size:18px;font-weight:700;color:#00e57a">0</div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut)">von 4</div>
+    </div>
+  </div>
+
+  <!-- ── Offene Punkte ── -->
+  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#128203; Offene Punkte (priorisiert)</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px">
+    <div style="display:grid;grid-template-columns:auto auto 1fr auto;gap:6px 12px;font-size:11px;font-family:monospace;align-items:start">
+
+      <span style="color:#ff6666;font-weight:700">P1</span>
+      <span style="color:#dce8f5">IC-Analyse</span>
+      <span style="color:var(--mut)">Faktorwert(25.Apr) &rarr; Return(25.Mai) &middot; erster praedikativer Test</span>
+      <span style="color:#f0c000;font-size:9px">Ende Mai</span>
+
+      <span style="color:#ff6666;font-weight:700">P1</span>
+      <span style="color:#dce8f5">WL3 Signal-Tracking</span>
+      <span style="color:var(--mut)">BUY/SELL Outcome-Validation nach 30+ Snapshots</span>
+      <span style="color:#f0c000;font-size:9px">ab Snap.30</span>
+
+      <span style="color:#f0c000;font-weight:700">P2</span>
+      <span style="color:#dce8f5">Sektor-neutraler PEG</span>
+      <span style="color:var(--mut)">Nach IC-Bestaetigung PEG-IC &gt; 0.05 &middot; geplant v5.9.39+</span>
+      <span style="color:#7a9bb5;font-size:9px">nach IC</span>
+
+      <span style="color:#f0c000;font-weight:700">P2</span>
+      <span style="color:#dce8f5">EV/EBIT statt EBITDA</span>
+      <span style="color:var(--mut)">Buffett-konformer Value-Faktor &middot; nach IC-Analyse evaluieren</span>
+      <span style="color:#7a9bb5;font-size:9px">nach IC</span>
+
+      <span style="color:#7a9bb5;font-weight:700">P3</span>
+      <span style="color:#dce8f5">Net Debt/EBITDA</span>
+      <span style="color:var(--mut)">Robustere Verschuldungsmessung &middot; yfinance verfuegbar</span>
+      <span style="color:#7a9bb5;font-size:9px">offen</span>
+
+      <span style="color:#7a9bb5;font-weight:700">P3</span>
+      <span style="color:#dce8f5">Phase 2 Konsistenz</span>
+      <span style="color:var(--mut)">Std-Abw-Score in fSc() aktiv (v5.9.36) &middot; Kalibrierung nach IC</span>
+      <span style="color:#00e57a;font-size:9px">aktiv</span>
+
+      <span style="color:#7a9bb5;font-weight:700">P4</span>
+      <span style="color:#dce8f5">IC-basierte Gewichte</span>
+      <span style="color:var(--mut)">alpha_juno v7 A/B vs. statisch &middot; nach 30+ Snapshots</span>
+      <span style="color:#7a9bb5;font-size:9px">Juli+</span>
+
+      <span style="color:#7a9bb5;font-weight:700">P4</span>
+      <span style="color:#dce8f5">Annual 2027</span>
+      <span style="color:var(--mut)">fund_juno v7.9.6 laeuft automatisch am 1. Mai 2027 (&plusmn;7 Tage)</span>
+      <span style="color:#7a9bb5;font-size:9px">Mai 2027</span>
+    </div>
+  </div>
+
+  <!-- ── Entwicklungsregeln ── -->
+  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#128204; Kritische Entwicklungsregeln</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:11px;font-family:monospace">
+    <div style="margin-bottom:6px"><span style="color:#ff6666;font-weight:700">R1 Minimal Patch</span> <span style="color:var(--mut)">&mdash; Nie funktionierenden Code neu schreiben. Immer nur die noetigen Zeilen aendern.</span></div>
+    <div style="margin-bottom:6px"><span style="color:#ff6666;font-weight:700">R2 str.replace only</span> <span style="color:var(--mut)">&mdash; HTML: NIEMALS content[:position]. Immer str.replace() mit Anker-String.</span></div>
+    <div style="margin-bottom:6px"><span style="color:#ff6666;font-weight:700">R3 Script-Balance</span> <span style="color:var(--mut)">&mdash; Vor Ausgabe: &lt;script&gt;-Oeffnungen == Schliessungen + node --check pro Block.</span></div>
+    <div style="margin-bottom:6px"><span style="color:#f0c000;font-weight:700">R4 ES5-only JS</span> <span style="color:var(--mut)">&mdash; Kein ?. => const let async **. iOS Safari wirft stumme Fehler.</span></div>
+    <div style="margin-bottom:6px"><span style="color:#f0c000;font-weight:700">R5 Original zuerst</span> <span style="color:var(--mut)">&mdash; Bei Bugs: Original-Script vorlegen (Upload) BEVOR Fixes gemacht werden.</span></div>
+    <div><span style="color:#7a9bb5;font-weight:700">R6 yfinance-API</span> <span style="color:var(--mut)">&mdash; tk.history() != yf.download(). tk.history() fuer Juno/iOS bevorzugen.</span></div>
+  </div>
+
+  <div style="margin-top:10px;font-family:monospace;font-size:9px;color:#7a9bb5;text-align:center">
+    Quellen: Piotroski 2000 &middot; Fama-French 1993 &middot; Jegadeesh/Titman 1993 &middot; Loughran/Wellman 2011 &middot; MSCI Factor Investing 2024 &middot; Buffett Letters 2024
+  </div>
+</div><!-- Ende p7 Roadmap -->
+
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.40 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1444,7 +1661,7 @@ tick();setInterval(tick,1000);
      ============================================================ -->
 <script>
 function goTab(n,btn){
-  var pgs=['p0','p1','p2','p3','p4','p5','p6'],i;
+  var pgs=['p0','p1','p2','p3','p4','p5','p6','p7'],i;
   for(i=0;i<pgs.length;i++){var pg=document.getElementById(pgs[i]);if(pg)pg.style.display='none';}
   var tabs=document.querySelectorAll('.tab');
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
@@ -2893,7 +3110,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.37.html';
+    a.download = 'stockiq-v5.9.40.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
