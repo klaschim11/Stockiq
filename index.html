@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.43</title>
+<title>StockIQ v5.9.44</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.43 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.44 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -484,6 +484,17 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.44</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Owner Earnings Yield (Display)</strong>: Neues Feld im Detail-Panel: NI + D&amp;A &minus; CapEx / MarketCap. Buffetts (1986) robusteres Cashflow-Maß. Diff zu FCF sichtbar (z.B. NVO: OE +8% vs. FCF +0.2% = Growth-Capex-Effekt). Kein Einfluss auf Score bis IC-Best&auml;tigung.</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.7</strong>: owner_earnings_yield berechnet aus cashflow-Statement (D&amp;A + CapEx) + financials (Net Income). Sanity: &plusmn;50%.</div>
+  </div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.44</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">Owner Earnings Yield (OWN.EARN.)</strong>: Neues Display-Feld im Fundamentals-Panel. Formel: (NI + D&amp;A &minus; CapEx) / MarketCap. Buffetts originale Definition (1986). Kein Einfluss auf Score bis IC-Best&auml;tigung (Ende Mai).</div>
+    <div>&#10003; <strong style="color:#dce8f5">NVO-Erkl&auml;rung</strong>: FCF +0.2% (kollabiert durch Fabrik-CapEx) vs. OE zeigt echten operativen Gewinn ohne Growth-Capex-Verzerrung. Relevant f&uuml;r Pharma, Industrie, Energie.</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.7</strong>: +owner_earnings_yield. Berechnung aus financials (NI), cashflow (D&amp;A + CapEx). Sanity &plusmn;50%.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.43</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">pegRelSc() Fallback-Fix</strong>: ADRs ohne sector-Feld (NVO, NOVOB, TSM etc.) nutzten bislang absolutes PEG. Neue Fallback-Kette: (1) Sektor-Median, (2) Globaler Median PEG_GLOBAL_MED, (3) Absolut. NVO zeigt jetzt &ldquo;PEG vs. glb Med.X.X&rdquo; statt &ldquo;PEG (abs.)&rdquo;.</div>
@@ -738,7 +749,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.43 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.44 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -917,7 +928,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p7 Roadmap -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.43 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.44 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2145,9 +2156,13 @@ function wlDetail(ticker){
   if(fd){
     out+='<div style="border-top:1px solid #1a2a3a;padding-top:10px">';
     out+='<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:6px">FUNDAMENTALS (JSON)</div>';
-    out+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px">';
+    out+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px">';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">FCF YIELD</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf>3?'#00e57a':fd.fcf>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf)+'</div></div>';
-    var rv2=fd.roce!==null&&fd.roce!==undefined?fd.roce:fd.roe;
+    /* Owner Earnings Yield (v5.9.44 / v7.9.7) */
+    var oeY=fd.owner_earnings_yield!=null?fd.owner_earnings_yield:null;
+    var oeDisp=oeY!=null?((oeY>=0?'+':'')+oeY.toFixed(1)+'%'):'n/a';
+    var oeColor=oeY!=null?(oeY>4?'#00e57a':oeY>0?'#f0c000':'#ff6666'):'#7a9bb5';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">OWN.EARN.</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+oeDisp+'</div></div>';
     var rl2=fd.roce!==null&&fd.roce!==undefined?'ROCE':'ROE';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+rl2+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">MOAT</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+'</div></div>';
@@ -2164,6 +2179,18 @@ function wlDetail(ticker){
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EV/EBITDA</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+evarLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDispFull+'</div></div>';
     out+='</div>';
+    /* Owner Earnings Yield (v5.9.44) — Buffett NI+D&A-CapEx/MC */
+    var oeVal=fd.owner_earnings_yield!=null?fd.owner_earnings_yield:null;
+    if(oeVal!==null){
+      var oeColor=oeVal>4?'#00e57a':oeVal>0?'#f0c000':'#ff6666';
+      var oeDiff=fd.fcf!=null?Math.round((oeVal-fd.fcf)*10)/10:null;
+      var oeDiffStr=oeDiff!=null?(' ('+(oeDiff>=0?'+':'')+oeDiff+'pp)'):'';
+      var oeLabel='OE Yield'+oeDiffStr;
+      out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+oeLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+(oeVal>=0?'+':'')+oeVal.toFixed(1)+'%</div></div>';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">FCF YIELD</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf>3?'#00e57a':fd.fcf>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf)+'</div></div>';
+      out+='</div>';
+    }
     /* Jahres-Trend (v5.9.35): ROCE + FCF + Mom aus annual.json */
     if(ANNUAL_DATA&&ANNUAL_DATA.length>0){
       var rocePts=getAnnualTrend(s.t,'roce');
@@ -3204,7 +3231,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.43.html';
+    a.download = 'stockiq-v5.9.44.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
