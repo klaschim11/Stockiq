@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.42</title>
+<title>StockIQ v5.9.43</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -39,7 +39,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.42 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.43 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -484,6 +484,11 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.43</div>
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
+    <div>&#10003; <strong style="color:#dce8f5">pegRelSc() Fallback-Fix</strong>: ADRs ohne sector-Feld (NVO, NOVOB, TSM etc.) nutzten bislang absolutes PEG. Neue Fallback-Kette: (1) Sektor-Median, (2) Globaler Median PEG_GLOBAL_MED, (3) Absolut. NVO zeigt jetzt &ldquo;PEG vs. glb Med.X.X&rdquo; statt &ldquo;PEG (abs.)&rdquo;.</div>
+    <div>&#10003; <strong style="color:#dce8f5">Label-Update</strong>: Detail-Panel zeigt &ldquo;glb&rdquo; als Sektor-K&uuml;rzel wenn globaler Median verwendet wird.</div>
+  </div>
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.42</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
     <div>&#10003; <strong style="color:#dce8f5">Roadmap aktualisiert</strong>: Owner Earnings Yield als P1 (Juni) aufgenommen. NVO-Analyse (Mai 2026): FCF-Kollaps 30.8%&rarr;0.2% durch strategischen Fabrik-Capex (Ozempic) &mdash; kein Qualit&auml;tsverlust, sondern Growth-Investment. Buffetts Owner Earnings (OCF+Abschr.&minus;Capex) trennt Maintenance von Growth.</div>
@@ -733,7 +738,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.42 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.43 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -912,7 +917,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p7 Roadmap -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.42 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.43 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1600,22 +1605,28 @@ function buildSectorPegMed(){
 /* pegRelSc(s): 0-100, 50=Sektor-Median-PEG des Titels.
    PEG ist invertiert: niedrig=gut → diff = sectorMed - s.peg
    Scale: 1 PEG-Einheit unter Median → +20 Score-Punkte.
-   Beispiel: Tech-Median 2.4, NVDA PEG 1.6 → diff=+0.8 → Score 66
-             Tech-Median 2.4, MSFT PEG 3.1 → diff=-0.7 → Score 36
-   Fallback: kein sector → absoluter PEG-Score (Rueckwaerts-kompatibel). */
+   Fallback-Kette (v5.9.43):
+     1. Sektor-Median (sector vorhanden)
+     2. Globaler Median PEG_GLOBAL_MED (kein sector, z.B. ADRs)
+     3. Absolut (kein PEG_GLOBAL_MED berechenbar) */
 function pegRelSc(s){
   if(s.peg==null||s.peg<=0)return null;
   var fd=FD[s.t];
   var sec=(fd&&fd.sector)?fd.sector:null;
-  var medPeg=sec?(SECTOR_PEG_MED[sec]!=null?SECTOR_PEG_MED[sec]:PEG_GLOBAL_MED):null;
+  /* Median: Sektor → Global → null */
+  var medPeg=null;
+  if(sec&&SECTOR_PEG_MED[sec]!=null){
+    medPeg=SECTOR_PEG_MED[sec];
+  } else if(PEG_GLOBAL_MED>0){
+    medPeg=PEG_GLOBAL_MED;  /* Globaler Median als Fallback (ADRs ohne sector) */
+  }
   if(medPeg==null){
-    /* Absoluter Fallback: bisherige Stufen-Logik */
+    /* Absoluter Fallback als letzter Ausweg */
     if(s.peg<0.8)return 100;if(s.peg<1.2)return 85;
     if(s.peg<1.6)return 70;if(s.peg<2.0)return 55;
     if(s.peg<2.5)return 35;if(s.peg<3.0)return 20;
     return 5;
   }
-  /* Sektor-relativ: diff = medPeg - peg (positiv = guenstiger als Sektor) */
   var diff=medPeg-s.peg;
   return Math.max(5,Math.min(95,Math.round(50+diff*20)));
 }
@@ -2125,7 +2136,8 @@ function wlDetail(ticker){
     var fd_pg=FD[s.t];
     var secPegMed=(fd_pg&&fd_pg.sector&&SECTOR_PEG_MED[fd_pg.sector]!=null)?SECTOR_PEG_MED[fd_pg.sector]:null;
     var secName=(fd_pg&&fd_pg.sector)?fd_pg.sector.split(' ')[0]:'glb';
-    var pegLabel=secPegMed!=null?('PEG vs.'+secName+' Med.'+secPegMed.toFixed(1)):'PEG (abs.)';
+    var usedMed=secPegMed!=null?secPegMed:PEG_GLOBAL_MED;
+    var pegLabel='PEG vs.'+secName+' Med.'+(usedMed>0?usedMed.toFixed(1):'?');
     var pegColor=pegRel!=null?(pegRel>=65?'#00e57a':pegRel>=40?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="'+row+';font-size:9px"><span style="color:var(--mut)">'+pegLabel+'</span><span style="color:'+pegColor+'">'+s.peg.toFixed(2)+(pegRel!=null?' \u2192 '+pegRel:'')+'</span></div>';
   }
@@ -3192,7 +3204,7 @@ function dlSelf(){
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     a.href   = url;
-    a.download = 'stockiq-v5.9.42.html';
+    a.download = 'stockiq-v5.9.43.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
