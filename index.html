@@ -2163,6 +2163,7 @@ function wlDetail(ticker){
     var oeDisp=oeY!=null?((oeY>=0?'+':'')+oeY.toFixed(1)+'%'):'n/a';
     var oeColor=oeY!=null?(oeY>4?'#00e57a':oeY>0?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">OWN.EARN.</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+oeDisp+'</div></div>';
+    var rv2=fd.roce!==null&&fd.roce!==undefined?fd.roce:fd.roe;
     var rl2=fd.roce!==null&&fd.roce!==undefined?'ROCE':'ROE';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+rl2+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">MOAT</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+'</div></div>';
