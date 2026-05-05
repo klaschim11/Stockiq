@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.48</title>
+<title>StockIQ v5.9.50</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -369,14 +369,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         oninput="rGSR()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">GOLD-SPREAD % (physisch)</div>
-      <input id="gsr-gspread" type="number" min="0" max="20" step="0.5" value="2"
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">GOLD-SPREAD % (1oz M&uuml;nze)</div>
+      <input id="gsr-gspread" type="number" min="0" max="20" step="0.5" value="4.5"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a2a3a;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rGSR()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">SILBER-SPREAD % (physisch)</div>
-      <input id="gsr-sspread" type="number" min="0" max="30" step="0.5" value="8"
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">SILBER-SPREAD % (1oz M&uuml;nze, 19% MwSt)</div>
+      <input id="gsr-sspread" type="number" min="0" max="40" step="0.5" value="22"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a2a3a;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rGSR()">
     </div>
@@ -385,10 +385,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 </div>
 
 <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:18px;font-size:10px;color:var(--mut);line-height:1.7">
-  <strong style="color:#dce8f5">GSR-Logik:</strong> GSR = Gold/Silber-Preis.
-  Hohe GSR (&gt;80) = Silber historisch guenstig. Niedrige GSR (&lt;55) = Gold guenstig.
-  <strong style="color:#dce8f5">Spread-Hurdle:</strong> Switch lohnt erst wenn GSR-Signal &gt; kombiniertem Spread (Verkauf + Kauf).
-  Historischer Schnitt: ~65. Extremwerte: 120 (Corona 2020), 35 (1980).
+  <strong style="color:#dce8f5">Spread-Basis: 1oz M&uuml;nze (Philharmoniker / Maple Leaf) &mdash; Deutschland 2026</strong><br>
+  <strong style="color:#ffab00">Gold:</strong> MwSt-frei (§25c UStG) &middot; Kauf ~3&ndash;5% Aufgeld &middot; Verkauf ~2&ndash;3% unter Spot &rarr; Round-Trip ~5&ndash;7%<br>
+  <strong style="color:#ff5252">Silber ab 01.01.2025:</strong> <strong>19% MwSt auf Gesamtpreis</strong> (Differenzbesteuerung abgeschafft, JStG 2024) &middot; + ~3&ndash;5% Aufgeld = <strong>~22&ndash;24% Kauf-Aufschlag</strong><br>
+  <strong style="color:#7a9bb5">Ausnahme:</strong> Gebrauchtware / Privatankauf kann noch differenzbesteuert sein (~10&ndash;12% Aufschlag, aber Verf&uuml;gbarkeit begrenzt)<br>
+  <strong style="color:#dce8f5">Switch-Hurdle (Gold &rarr; Silber):</strong> ~3% (Gold-Verkauf) + ~22% (Silber-Kauf) = <strong style="color:#ff5252">~25%</strong> &mdash; wirtschaftlich nur bei extremen GSR-Niveaus sinnvoll.<br>
+  <strong style="color:#dce8f5">GSR-Logik:</strong> GSR = Gold/Silber-Spotpreis. Historischer Schnitt: ~65 &middot; Extremwerte: 120 (Corona 2020), 35 (1980) &middot; Aktuell (Spot): ~62
 </div>
 
 <!-- ============================================================
@@ -835,7 +837,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.48 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.50 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -1103,7 +1105,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p7 Roadmap -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.48 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.50 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -3884,45 +3886,46 @@ function rGSR(){
   var sigText = '';
   var sigIcon = '';
 
-  if(gsr > 85 && combinedSpread < 8){
+  if(gsr > 100 && combinedSpread < 30){
     signal = 'SWITCH zu SILBER';
     sigCol  = '#00e57a';
-    sigText = 'GSR stark erhoht. Silber historisch guenstig. Spread rechtfertigt Wechsel.';
+    sigText = 'GSR extrem. 19%-MwSt-Hurdle ueberwunden. Switch langfristig vorteilhaft.';
     sigIcon = '&#8593;';
-  } else if(gsr > 80 && combinedSpread < 12){
-    signal = 'SILBER ueberwichten';
+  } else if(gsr > 90 && combinedSpread < 32){
+    signal = 'SILBER stark ueberwichten';
     sigCol  = '#a5d6a7';
-    sigText = 'GSR erhoht. Silber attraktiv. Spread pruefen.';
+    sigText = 'GSR sehr hoch. MwSt-Hurdle fast ueberwunden. Schrittweise Umschichtung pruefen.';
     sigIcon = '&#8599;';
   } else if(gsr > 80){
-    signal = 'HOLD — Spread zu hoch';
+    signal = 'BEOBACHTEN - MwSt-Hurdle zu hoch';
     sigCol  = '#ffab00';
-    sigText = 'GSR-Signal vorhanden, aber Spread (' + combinedSpread.toFixed(1) + '%) frisst Vorteil.';
+    sigText = 'GSR erhoht, aber 19% MwSt auf Silber (' + combinedSpread.toFixed(1) + '% Spread) macht Switch unwirtschaftlich.';
     sigIcon = '&#8594;';
-  } else if(gsr < 50 && combinedSpread < 8){
+    sigIcon = '&#8594;';
+  } else if(gsr < 45 && combinedSpread < 25){
     signal = 'SWITCH zu GOLD';
     sigCol  = '#ffab00';
-    sigText = 'GSR sehr niedrig. Gold historisch guenstig. Wechsel sinnvoll.';
+    sigText = 'GSR sehr niedrig. Gold historisch guenstig. Silber verkaufen + Gold kaufen.';
     sigIcon = '&#8595;';
-  } else if(gsr < 60 && combinedSpread < 12){
+  } else if(gsr < 55 && combinedSpread < 30){
     signal = 'GOLD ueberwichten';
     sigCol  = '#ffe082';
-    sigText = 'GSR niedrig. Gold attraktiv. Spread beachten.';
+    sigText = 'GSR niedrig. Gold relativ attraktiv vs. Silber (MwSt-Vorteil).';
     sigIcon = '&#8600;';
-  } else if(gsr >= 65 && gsr <= 80){
+  } else if(gsr >= 55 && gsr <= 80){
     signal = 'NEUTRAL — im historischen Bereich';
     sigCol  = '#7a9bb5';
-    sigText = 'GSR im normalen Bereich (65-80). Kein Handlungsbedarf.';
+    sigText = 'GSR im normalen Bereich (55-80). Kein Switch wirtschaftlich sinnvoll. Historisch ~65.';
     sigIcon = '&#8594;';
   } else {
     signal = 'BEOBACHTEN';
     sigCol  = '#7a9bb5';
-    sigText = 'GSR ausserhalb Neutralzone. Spread-Hurdle noch nicht erreicht.';
+    sigText = 'GSR ausserhalb Neutralzone, aber 19% MwSt-Hurdle (' + combinedSpread.toFixed(1) + '%) nicht ueberwunden.';
     sigIcon = '&#9888;';
   }
 
   /* Breakeven-GSR: ab wann lohnt Switch bei aktuellem Spread */
-  var beGSR = (80 + combinedSpread * 0.5).toFixed(1);
+  var beGSR = (65 + combinedSpread * 0.7).toFixed(1);  /* 19% MwSt Basis */
 
   var out = '';
   out += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">';
@@ -3932,8 +3935,8 @@ function rGSR(){
   out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">Ø ~65</div></div>';
   out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a2a3a;border-radius:8px">';
   out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">SPREAD gesamt</div>';
-  out += '<div style="font-size:20px;font-weight:800;color:' + (combinedSpread > 12 ? '#ff5252' : '#dce8f5') + '">' + combinedSpread.toFixed(1) + '%</div>';
-  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">Hurdle ~10%</div></div>';
+  out += '<div style="font-size:20px;font-weight:800;color:' + (combinedSpread > 25 ? '#ff5252' : combinedSpread > 20 ? '#ffab00' : '#dce8f5') + '">' + combinedSpread.toFixed(1) + '%</div>';
+  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">M&uuml;nze ~16-18%</div></div>';
   out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a2a3a;border-radius:8px">';
   out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">BE-GSR f. Switch</div>';
   out += '<div style="font-size:20px;font-weight:800;color:#7a9bb5">' + beGSR + '</div>';
