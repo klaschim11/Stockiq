@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.46</title>
+<title>StockIQ v5.9.48</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -342,6 +342,92 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <strong style="color:#dce8f5">Rebalancing-Trigger:</strong> Abweichung &gt; &plusmn;7pp vom Zielwert &rarr; rot markiert + Empfehlung.<br>
     <strong style="color:#dce8f5">Toleranzband:</strong> &plusmn;7pp (gruen = im Ziel, gelb = Randbereich &plusmn;4-7pp, rot = Handlungsbedarf).
   </div>
+</div>
+
+<!-- ============================================================
+     GOLD-SILVER-RATIO (GSR) v5.9.47
+     Signal: GSR + Spread-adjustierte Switch-Empfehlung
+     ============================================================ -->
+<div style="font-family:monospace;font-size:13px;font-weight:700;color:#ffab00;margin:18px 0 4px">&#127750; Gold-Silver-Ratio (GSR)</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:6px">Spread-adjustiertes Switch-Signal &middot; Physische Edelmetalle</div>
+<div id="macro-auto-badge" style="display:none;font-family:monospace;font-size:10px;color:#00e57a;background:rgba(0,229,122,.07);border:1px solid rgba(0,229,122,.2);border-radius:6px;padding:5px 10px;margin-bottom:10px"></div>
+<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:10px">Preise werden nach JSON-Laden automatisch befuellt (fund_juno v7.9.9+). Manuell &uuml;berschreibbar.</div>
+
+<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:10px">
+  <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:10px">Preise &amp; Spreads eingeben (EUR/Unze)</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:#ffab00;margin-bottom:3px">GOLD-PREIS (EUR/oz)</div>
+      <input id="gsr-gold" type="number" min="0" step="1" placeholder="z.B. 2900"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #332200;border-radius:6px;padding:7px 9px;color:#ffab00;font-size:13px;font-family:monospace"
+        oninput="rGSR()">
+    </div>
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:#c0c0c0;margin-bottom:3px">SILBER-PREIS (EUR/oz)</div>
+      <input id="gsr-silver" type="number" min="0" step="0.1" placeholder="z.B. 32"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a2a3a;border-radius:6px;padding:7px 9px;color:#c0c0c0;font-size:13px;font-family:monospace"
+        oninput="rGSR()">
+    </div>
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">GOLD-SPREAD % (physisch)</div>
+      <input id="gsr-gspread" type="number" min="0" max="20" step="0.5" value="2"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a2a3a;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace"
+        oninput="rGSR()">
+    </div>
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">SILBER-SPREAD % (physisch)</div>
+      <input id="gsr-sspread" type="number" min="0" max="30" step="0.5" value="8"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a2a3a;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace"
+        oninput="rGSR()">
+    </div>
+  </div>
+  <div id="gsr-result" style="font-family:monospace;font-size:11px;color:var(--mut);text-align:center;padding:12px 0">Preise eingeben zur Signalberechnung.</div>
+</div>
+
+<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:18px;font-size:10px;color:var(--mut);line-height:1.7">
+  <strong style="color:#dce8f5">GSR-Logik:</strong> GSR = Gold/Silber-Preis.
+  Hohe GSR (&gt;80) = Silber historisch guenstig. Niedrige GSR (&lt;55) = Gold guenstig.
+  <strong style="color:#dce8f5">Spread-Hurdle:</strong> Switch lohnt erst wenn GSR-Signal &gt; kombiniertem Spread (Verkauf + Kauf).
+  Historischer Schnitt: ~65. Extremwerte: 120 (Corona 2020), 35 (1980).
+</div>
+
+<!-- ============================================================
+     BOND-ETF DURATION-ALLOKATION v5.9.47
+     Empfehlung nach Bund-Yield-Level + Yield-Kurven-Form
+     ============================================================ -->
+<div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin:4px 0">&#128218; Bond-ETF Duration-Allokation</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:12px">Laufzeit-Empfehlung nach Zinsniveau &amp; Yield-Kurve &middot; v5.9.48</div>
+
+<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:10px">
+  <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:10px">Parameter</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">BUND-RENDITE % (10J)</div>
+      <input id="bond-bund" type="number" value="2.6" min="0" max="10" step="0.1"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#00c8f0;font-size:13px;font-family:monospace"
+        oninput="rBondETF()">
+    </div>
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">YIELD-KURVE FORM</div>
+      <select id="bond-curve" onchange="rBondETF()"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:12px;font-family:monospace">
+        <option value="normal">Normal (kurz &lt; lang)</option>
+        <option value="flat">Flach (kurz = lang)</option>
+        <option value="inverted">Invers (kurz &gt; lang)</option>
+        <option value="steepening">Steepening (lang steigt)</option>
+      </select>
+    </div>
+  </div>
+  <div id="bond-result" style="margin-top:4px"></div>
+</div>
+
+<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:10px;color:var(--mut);line-height:1.7">
+  <strong style="color:#dce8f5">Duration-Logik:</strong>
+  Bund &lt;1.5% = kurze Laufzeit (Zinsrisiko). 1.5-3% = Mix. &gt;3% = Mittlere/Lange Laufzeit bevorzugt (Yield locken).
+  Bei inverser Kurve: immer kurz bleiben (kein Laufzeit-Aufpreis).
+  <strong style="color:#dce8f5">1pp Zinsanstieg</strong> kostet bei 7J-Duration ~7% Kursverlust.
+</div>
+
 </div>
 </div>
 
@@ -749,7 +835,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.46 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.48 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -759,7 +845,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 2fr 1fr;gap:5px 8px;font-family:monospace">
       <span style="color:#dce8f5">Dashboard</span><span style="color:#00e57a">v5.9.45</span><span style="color:var(--mut)">iOS Safari, GitHub Pages</span><span style="color:#00e57a">&#9679; Prod</span>
-      <span style="color:#dce8f5">fund_juno v7.9.8 | Fundamentals + Owner Earnings + Jahres-Snapshot</span><span style="color:#00e57a">&#9679; Prod</span>
+      <span style="color:#dce8f5">fund_juno v7.9.9 | Fundamentals + Owner Earnings + Jahres-Snapshot</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">alpha_juno</span><span style="color:#00e57a">v6b_6m-u4</span><span style="color:var(--mut)">Walk-Forward 6M OOS</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">annual.json</span><span style="color:#00e57a">2021&ndash;2026</span><span style="color:var(--mut)">Jahres-Snapshots (6 Jahre)</span><span style="color:#00e57a">&#9679; Aktiv</span>
       <span style="color:#dce8f5">snapshots.json</span><span style="color:#f0c000">25+ Eintr.</span><span style="color:var(--mut)">Taegl. Fundamentals-Archiv</span><span style="color:#f0c000">&#9679; Aufbau</span>
@@ -910,6 +996,11 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="display:grid;grid-template-columns:auto auto 1fr auto;gap:6px 12px;font-size:11px;font-family:monospace;align-items:start">
 
       <span style="color:#00e57a;font-weight:700">&#10003;</span>
+      <span style="color:#dce8f5">GSR + Bond Auto-Fill</span>
+      <span style="color:var(--mut)">fund_juno v7.9.9: GC=F, SI=F, EURUSD, ^TNX, ^IRX &rarr; gold_eur, silver_eur, yield_curve &middot; Dashboard auto-bef&uuml;llt Allokations-Tab</span>
+      <span style="color:#00e57a;font-size:9px">v5.9.48 &#10003;</span>
+
+      <span style="color:#00e57a;font-weight:700">&#10003;</span>
       <span style="color:#dce8f5">V2X + Bond-Vol</span>
       <span style="color:var(--mut)">fund_juno v7.9.8: ^V2TX + ^VXTLT + vix_bond_div &middot; momSc() f&uuml;r EU-Ticker V2X-gesteuert &middot; Market Ear 04.05.2026</span>
       <span style="color:#00e57a;font-size:9px">v5.9.46 &#10003;</span>
@@ -971,8 +1062,13 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
       <span style="color:#7a9bb5;font-weight:700">P4</span>
       <span style="color:#dce8f5">Annual 2027</span>
-      <span style="color:var(--mut)">fund_juno v7.9.7 laeuft automatisch am 1. Mai 2027 (&plusmn;7 Tage)</span>
+      <span style="color:var(--mut)">fund_juno v7.9.9 laeuft automatisch am 1. Mai 2027 (&plusmn;7 Tage)</span>
       <span style="color:#7a9bb5;font-size:9px">Mai 2027</span>
+
+      <span style="color:#7a9bb5;font-weight:700">&#128203;</span>
+      <span style="color:#dce8f5">BondIQ (eigenes Projekt)</span>
+      <span style="color:var(--mut)">Anleihen-Scoring: andere Logik &mdash; Duration &middot; Rating &middot; Yield-Spread &middot; Real-Yield &middot; kein MACD/Trend. StockIQ bleibt Aktien-fokussiert. Konzept offen.</span>
+      <span style="color:#7a9bb5;font-size:9px">Future</span>
 
       <span style="color:#7a9bb5;font-weight:700">P3</span>
       <span style="color:#dce8f5">Drawdown vom 52W-Hoch</span>
@@ -1007,7 +1103,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p7 Roadmap -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.46 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.48 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2862,6 +2958,45 @@ function applyFund(fund){
       VXTLT_LEVEL=fund['__macro__'].vxtlt;
     if(fund['__macro__'].vix_bond_div)
       VIX_BOND_DIV=fund['__macro__'].vix_bond_div;
+    /* v7.9.9: Auto-Fill GSR + Bond-ETF aus Macro-Daten */
+    var m = fund['__macro__'];
+    var gsrFilled = false;
+    if(m.gold_eur && m.gold_eur > 0){
+      var gIn = document.getElementById('gsr-gold');
+      if(gIn && !gIn.value){ gIn.value = Math.round(m.gold_eur); gsrFilled = true; }
+    }
+    if(m.silver_eur && m.silver_eur > 0){
+      var sIn = document.getElementById('gsr-silver');
+      if(sIn && !sIn.value){ sIn.value = m.silver_eur.toFixed(2); gsrFilled = true; }
+    }
+    if(gsrFilled){ rGSR(); }
+    /* Bond-ETF: US10Y als Proxy wenn kein Bund manuell */
+    var bondFilled = false;
+    if(m.us10y && m.us10y > 0){
+      var bIn = document.getElementById('bond-bund');
+      /* Nur befuellen wenn Feld noch auf Default 2.6 steht */
+      if(bIn && (bIn.value === '2.6' || bIn.value === '')){
+        bIn.value = m.us10y.toFixed(1); bondFilled = true;
+      }
+    }
+    if(m.yield_curve){
+      var cSel = document.getElementById('bond-curve');
+      if(cSel){ cSel.value = m.yield_curve; bondFilled = true; }
+    }
+    if(bondFilled){ rBondETF(); }
+    /* Auto-Badge: Zeige welche Felder live befuellt wurden */
+    var autoEl = document.getElementById('macro-auto-badge');
+    if(autoEl){
+      var parts = [];
+      if(m.gold_eur) parts.push('Gold ' + Math.round(m.gold_eur) + ' EUR/oz');
+      if(m.silver_eur) parts.push('Silber ' + m.silver_eur.toFixed(2) + ' EUR/oz');
+      if(m.us10y) parts.push('US10Y ' + m.us10y.toFixed(2) + '%');
+      if(m.yield_curve) parts.push('Kurve: ' + m.yield_curve);
+      if(parts.length > 0){
+        autoEl.innerHTML = '&#9989; Live-Daten: ' + parts.join(' &middot; ');
+        autoEl.style.display = 'block';
+      }
+    }
   }
   /* v7.8: trend + rsi_val aus JSON in STOCKS-Array übernehmen */
   var i_pre;
@@ -3719,6 +3854,205 @@ function rAlloc(){
 function initAlloc(){
   allocLoad();
   rAlloc();
+  rGSR();
+  rBondETF();
+}
+
+/* ============================================================
+   GSR — Gold-Silver-Ratio Signal v5.9.47
+   Spread-adjustierte Switch-Empfehlung
+   ============================================================ */
+function rGSR(){
+  var el = document.getElementById('gsr-result');
+  if(!el) return;
+  var gPrice  = parseFloat(document.getElementById('gsr-gold').value);
+  var sPrice  = parseFloat(document.getElementById('gsr-silver').value);
+  var gSpread = parseFloat(document.getElementById('gsr-gspread').value) || 2;
+  var sSpread = parseFloat(document.getElementById('gsr-sspread').value) || 8;
+
+  if(!gPrice || !sPrice || sPrice <= 0){
+    el.innerHTML = '<span style="color:var(--mut)">Preise eingeben zur Signalberechnung.</span>';
+    return;
+  }
+
+  var gsr = gPrice / sPrice;
+  var combinedSpread = gSpread + sSpread; /* Kosten: Verkauf + Kauf */
+
+  /* Signal-Logik */
+  var signal = 'NEUTRAL';
+  var sigCol  = '#7a9bb5';
+  var sigText = '';
+  var sigIcon = '';
+
+  if(gsr > 85 && combinedSpread < 8){
+    signal = 'SWITCH zu SILBER';
+    sigCol  = '#00e57a';
+    sigText = 'GSR stark erhoht. Silber historisch guenstig. Spread rechtfertigt Wechsel.';
+    sigIcon = '&#8593;';
+  } else if(gsr > 80 && combinedSpread < 12){
+    signal = 'SILBER ueberwichten';
+    sigCol  = '#a5d6a7';
+    sigText = 'GSR erhoht. Silber attraktiv. Spread pruefen.';
+    sigIcon = '&#8599;';
+  } else if(gsr > 80){
+    signal = 'HOLD — Spread zu hoch';
+    sigCol  = '#ffab00';
+    sigText = 'GSR-Signal vorhanden, aber Spread (' + combinedSpread.toFixed(1) + '%) frisst Vorteil.';
+    sigIcon = '&#8594;';
+  } else if(gsr < 50 && combinedSpread < 8){
+    signal = 'SWITCH zu GOLD';
+    sigCol  = '#ffab00';
+    sigText = 'GSR sehr niedrig. Gold historisch guenstig. Wechsel sinnvoll.';
+    sigIcon = '&#8595;';
+  } else if(gsr < 60 && combinedSpread < 12){
+    signal = 'GOLD ueberwichten';
+    sigCol  = '#ffe082';
+    sigText = 'GSR niedrig. Gold attraktiv. Spread beachten.';
+    sigIcon = '&#8600;';
+  } else if(gsr >= 65 && gsr <= 80){
+    signal = 'NEUTRAL — im historischen Bereich';
+    sigCol  = '#7a9bb5';
+    sigText = 'GSR im normalen Bereich (65-80). Kein Handlungsbedarf.';
+    sigIcon = '&#8594;';
+  } else {
+    signal = 'BEOBACHTEN';
+    sigCol  = '#7a9bb5';
+    sigText = 'GSR ausserhalb Neutralzone. Spread-Hurdle noch nicht erreicht.';
+    sigIcon = '&#9888;';
+  }
+
+  /* Breakeven-GSR: ab wann lohnt Switch bei aktuellem Spread */
+  var beGSR = (80 + combinedSpread * 0.5).toFixed(1);
+
+  var out = '';
+  out += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">';
+  out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #332200;border-radius:8px">';
+  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">GSR</div>';
+  out += '<div style="font-size:20px;font-weight:800;color:#ffab00">' + gsr.toFixed(1) + '</div>';
+  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">Ø ~65</div></div>';
+  out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a2a3a;border-radius:8px">';
+  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">SPREAD gesamt</div>';
+  out += '<div style="font-size:20px;font-weight:800;color:' + (combinedSpread > 12 ? '#ff5252' : '#dce8f5') + '">' + combinedSpread.toFixed(1) + '%</div>';
+  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">Hurdle ~10%</div></div>';
+  out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a2a3a;border-radius:8px">';
+  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">BE-GSR f. Switch</div>';
+  out += '<div style="font-size:20px;font-weight:800;color:#7a9bb5">' + beGSR + '</div>';
+  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">bei akt. Spread</div></div>';
+  out += '</div>';
+  out += '<div style="padding:10px 12px;border-left:3px solid ' + sigCol + ';background:rgba(0,0,0,.2);border-radius:4px">';
+  out += '<div style="font-size:13px;font-weight:700;color:' + sigCol + '">' + sigIcon + ' ' + signal + '</div>';
+  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:3px">' + sigText + '</div>';
+  out += '</div>';
+  el.innerHTML = out;
+}
+
+/* ============================================================
+   BOND-ETF Duration-Allokation v5.9.47
+   Empfehlung nach Bund-Yield + Yield-Kurven-Form
+   ============================================================ */
+function rBondETF(){
+  var el = document.getElementById('bond-result');
+  if(!el) return;
+  var bund  = parseFloat(document.getElementById('bond-bund').value) || 2.6;
+  var curve = document.getElementById('bond-curve').value || 'normal';
+
+  /* Segment-Definitionen */
+  var segs = [
+    {id:'ultra', label:'Ultra-kurz (0-1J)', dur:0.5, examples:'Tagesgeld / Festgeld / XTRS 0-1yr'},
+    {id:'short',  label:'Kurz (1-3J)',        dur:2.0, examples:'iShares EUR Govt 1-3yr (IBGS) / Amundi 1-3yr'},
+    {id:'mid',    label:'Mittel (3-7J)',       dur:5.0, examples:'iShares Core EUR Govt (IEGA) / Xtrackers 3-7yr'},
+    {id:'long',   label:'Lang (7-10J)',        dur:8.5, examples:'iShares EUR Govt 7-10yr (IBGL)'},
+    {id:'infl',   label:'Inflationslinker',    dur:7.0, examples:'iShares EUR Infl. Linked (IBCI) / Lyxor EUR Infl.'}
+  ];
+
+  /* Gewichtungsempfehlung berechnen */
+  /* Basiert auf: Zinsniveau + Kurvenform */
+  var w = {ultra:0, short:0, mid:0, long:0, infl:0};
+
+  if(curve === 'inverted'){
+    /* Invers: kein Laufzeit-Aufpreis → kurz halten */
+    w.ultra = 30; w.short = 50; w.mid = 15; w.long = 0; w.infl = 5;
+  } else if(curve === 'flat'){
+    /* Flach: minimale Laufzeit-Kompensation → kurz bis mittel */
+    w.ultra = 15; w.short = 40; w.mid = 30; w.long = 10; w.infl = 5;
+  } else if(curve === 'steepening'){
+    /* Steepening: lange Laufzeiten werden attraktiver → mittel bis lang */
+    if(bund >= 3.5){
+      w.ultra = 5; w.short = 15; w.mid = 35; w.long = 35; w.infl = 10;
+    } else {
+      w.ultra = 10; w.short = 25; w.mid = 35; w.long = 20; w.infl = 10;
+    }
+  } else {
+    /* Normal: Zinsniveau entscheidet */
+    if(bund < 1.5){
+      w.ultra = 30; w.short = 45; w.mid = 20; w.long = 0; w.infl = 5;
+    } else if(bund < 2.5){
+      w.ultra = 15; w.short = 35; w.mid = 35; w.long = 10; w.infl = 5;
+    } else if(bund < 3.5){
+      w.ultra = 10; w.short = 25; w.mid = 35; w.long = 20; w.infl = 10;
+    } else {
+      /* Hohes Zinsniveau: Yields locken → mittel bis lang */
+      w.ultra = 5; w.short = 15; w.mid = 35; w.long = 35; w.infl = 10;
+    }
+  }
+
+  /* Portfoliorisiko: Zinsaenderungsrisiko bei 1pp Anstieg */
+  var avgDur = (w.ultra*0.5 + w.short*2.0 + w.mid*5.0 + w.long*8.5 + w.infl*7.0) / 100;
+  var riskPp = (avgDur * 1.0).toFixed(1); /* ~Duration × 1pp */
+
+  /* HTML aufbauen */
+  var wKeys = ['ultra','short','mid','long','infl'];
+  var wCols = ['#b388ff','#00c8f0','#00e676','#ffab00','#ff7043'];
+  var segMap = {};
+  for(var si=0;si<segs.length;si++) segMap[segs[si].id] = segs[si];
+
+  var out = '';
+  /* Regime-Label */
+  var regLabel = '';
+  var regCol = '#7a9bb5';
+  if(curve === 'inverted'){
+    regLabel = 'Inverse Kurve &mdash; KURZ bleiben';
+    regCol = '#ff5252';
+  } else if(curve === 'flat'){
+    regLabel = 'Flache Kurve &mdash; kurz bis mittel';
+    regCol = '#ffab00';
+  } else if(bund >= 3.5){
+    regLabel = 'Hohe Renditen &mdash; Yields locken (Mittel/Lang)';
+    regCol = '#00e676';
+  } else if(bund >= 2.5){
+    regLabel = 'Moderate Renditen &mdash; Balanced Mix';
+    regCol = '#a5d6a7';
+  } else {
+    regLabel = 'Tiefe Renditen &mdash; Zinsrisiko minimieren';
+    regCol = '#ff5252';
+  }
+
+  out += '<div style="padding:8px 10px;border-left:3px solid ' + regCol + ';background:rgba(0,0,0,.15);border-radius:4px;margin-bottom:10px">';
+  out += '<div style="font-size:12px;font-weight:700;color:' + regCol + '">' + regLabel + '</div>';
+  out += '<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-top:2px">Bund ' + bund.toFixed(1) + '% &middot; Kurve: ' + curve + ' &middot; Zinsrisiko (1pp): &minus;' + riskPp + '% Porfolio</div>';
+  out += '</div>';
+
+  /* Balken pro Segment */
+  out += '<div style="display:flex;flex-direction:column;gap:6px">';
+  for(var ki=0;ki<wKeys.length;ki++){
+    var key = wKeys[ki];
+    var seg = segMap[key];
+    var wt  = w[key];
+    var col = wCols[ki];
+    if(wt === 0){ continue; }
+    out += '<div>';
+    out += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">';
+    out += '<span style="font-family:monospace;font-size:9px;color:#dce8f5">' + seg.label + '</span>';
+    out += '<span style="font-family:monospace;font-size:11px;font-weight:700;color:' + col + '">' + wt + '%</span>';
+    out += '</div>';
+    out += '<div style="background:#0a1628;border-radius:3px;height:8px">';
+    out += '<div style="background:' + col + ';height:8px;border-radius:3px;width:' + wt + '%"></div>';
+    out += '</div>';
+    out += '<div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">' + seg.examples + ' &middot; Duration ~' + seg.dur + 'J</div>';
+    out += '</div>';
+  }
+  out += '</div>';
+  el.innerHTML = out;
 }
 </script>
 </body>
