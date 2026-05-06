@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.50</title>
+<title>StockIQ v5.9.52</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -32,6 +32,31 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,159,28,.4)}70%{box-shadow:0 0 0 6px rgba(255,159,28,0)}}
 .strong-buy-pulse{animation:pulse 2s infinite}
 </style>
+<style>
+@media print {
+  body > *:not(#rpt-modal) { display:none !important; }
+  #rpt-modal { display:block !important; position:static !important;
+    background:#fff !important; color:#000 !important; padding:0 !important; margin:0 !important; }
+  #rpt-overlay-bg, #rpt-close-btn, #rpt-print-btn, #rpt-controls { display:none !important; }
+  #rpt-content { box-shadow:none !important; border:none !important;
+    max-width:100% !important; padding:10px !important; }
+  .rpt-card { break-inside:avoid; page-break-inside:avoid; border:1px solid #ccc !important;
+    background:#f9f9f9 !important; color:#000 !important; margin-bottom:12px !important; }
+  .rpt-h1 { color:#1a3a5c !important; }
+  .rpt-h2 { color:#2d7dd2 !important; }
+  .rpt-label { color:#555 !important; }
+  .rpt-val { color:#000 !important; }
+  .rpt-buy  { color:#007a30 !important; }
+  .rpt-sell { color:#b00020 !important; }
+  .rpt-hold { color:#804000 !important; }
+  .rpt-mut  { color:#555 !important; }
+  table.rpt-tbl { width:100%; border-collapse:collapse; font-size:10px; }
+  table.rpt-tbl th { background:#1a3a5c !important; color:#fff !important; padding:4px 6px; }
+  table.rpt-tbl td { border:1px solid #ddd; padding:4px 6px; }
+  table.rpt-tbl tr:nth-child(even) td { background:#f0f4f8 !important; }
+  @page { margin:1.5cm; size:A4; }
+}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -46,6 +71,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="margin-top:4px;display:flex;gap:4px;justify-content:flex-end">
         <button onclick="dlSelf()" style="font-family:monospace;font-size:9px;color:var(--acc);background:rgba(0,200,240,.1);border:1px solid rgba(0,200,240,.3);border-radius:6px;padding:3px 8px;cursor:pointer">&#8595; HTML</button>
         <button onclick="dlDataUrl()" style="font-family:monospace;font-size:9px;color:var(--grn);background:rgba(0,229,122,.1);border:1px solid rgba(0,229,122,.3);border-radius:6px;padding:3px 8px;cursor:pointer">&#8595; Link</button>
+        <button onclick="rptOpen()" style="font-family:monospace;font-size:9px;color:#ffab00;background:rgba(255,171,0,.1);border:1px solid rgba(255,171,0,.3);border-radius:6px;padding:3px 8px;cursor:pointer">&#128203; Bericht</button>
       </div>
     </div>
   </div>
@@ -837,7 +863,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.50 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.52 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -1105,7 +1131,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p7 Roadmap -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.50 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.52 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -4056,6 +4082,423 @@ function rBondETF(){
   }
   out += '</div>';
   el.innerHTML = out;
+}
+</script>
+<!-- ============================================================
+     SEKTOR-BERICHT MODAL v5.9.51
+     Sektorvergleich + 2 Aktien-Detail + window.print() → PDF
+     ============================================================ -->
+<div id="rpt-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:9000;overflow-y:auto;-webkit-overflow-scrolling:touch">
+  <div id="rpt-overlay-bg" onclick="rptClose()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7)"></div>
+  <div id="rpt-content" style="position:relative;z-index:9001;max-width:720px;margin:20px auto;background:#0a1628;border:1px solid #1a3a5c;border-radius:14px;padding:20px;box-shadow:0 8px 40px rgba(0,0,0,.6)">
+
+    <!-- Header -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div>
+        <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
+        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.52 &middot; Daten aus geladener fundamentals.json</div>
+      </div>
+      <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
+    </div>
+
+    <!-- Steuerung -->
+    <div id="rpt-controls" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">
+      <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:10px">Berichts-Parameter</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
+        <div>
+          <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">SEKTOR</div>
+          <select id="rpt-sector" onchange="rptFillStocks()" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select>
+        </div>
+        <div>
+          <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">AKTIE 1</div>
+          <select id="rpt-s1" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select>
+        </div>
+        <div>
+          <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">AKTIE 2</div>
+          <select id="rpt-s2" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button onclick="rptBuild()" style="flex:1;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#9654; Bericht erstellen</button>
+        <button id="rpt-print-btn" onclick="rptPrint()" style="flex:1;background:#1a7a3a;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer;display:none">&#128438; Als PDF drucken</button>
+      </div>
+    </div>
+
+    <!-- Report-Ausgabe -->
+    <div id="rpt-output"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   SEKTOR-BERICHT ENGINE v5.9.51
+   ============================================================ */
+
+function rptOpen(){
+  if(!STOCKS || STOCKS.length === 0){
+    alert('Bitte zuerst fundamentals.json laden.');
+    return;
+  }
+  rptInitSectors();
+  document.getElementById('rpt-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function rptClose(){
+  document.getElementById('rpt-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function rptPrint(){
+  window.print();
+}
+
+/* Sektoren aus geladenen Daten befuellen */
+function rptInitSectors(){
+  var sectors = {};
+  for(var i=0;i<STOCKS.length;i++){
+    var fd = FD[STOCKS[i].t];
+    var sec = (fd && fd.sector) ? fd.sector : (STOCKS[i].sector || '');
+    if(sec) sectors[sec] = (sectors[sec]||0)+1;
+  }
+  var sel = document.getElementById('rpt-sector');
+  sel.innerHTML = '';
+  var secArr = Object.keys(sectors).sort();
+  for(var j=0;j<secArr.length;j++){
+    var opt = document.createElement('option');
+    opt.value = secArr[j]; opt.textContent = secArr[j] + ' (' + sectors[secArr[j]] + ')';
+    if(secArr[j] === 'Healthcare') opt.selected = true;
+    sel.appendChild(opt);
+  }
+  rptFillStocks();
+}
+
+/* Aktien-Dropdowns fuer gewaehlten Sektor befuellen */
+function rptFillStocks(){
+  var sec = document.getElementById('rpt-sector').value;
+  var inSec = [];
+  for(var i=0;i<STOCKS.length;i++){
+    var fd = FD[STOCKS[i].t];
+    var s = (fd && fd.sector) ? fd.sector : (STOCKS[i].sector || '');
+    if(s === sec) inSec.push(STOCKS[i]);
+  }
+  /* Nach Score absteigend sortieren */
+  inSec.sort(function(a,b){ return cSc(b) - cSc(a); });
+
+  function fillSel(elId, defaultTk){
+    var sel = document.getElementById(elId);
+    sel.innerHTML = '';
+    for(var k=0;k<inSec.length;k++){
+      var opt = document.createElement('option');
+      opt.value = inSec[k].t;
+      opt.textContent = inSec[k].t + ' — ' + (inSec[k].n || '') + ' (' + Math.round(cSc(inSec[k])) + ')';
+      if(inSec[k].t === defaultTk) opt.selected = true;
+      sel.appendChild(opt);
+    }
+  }
+  fillSel('rpt-s1', 'LLY');
+  fillSel('rpt-s2', 'NVO');
+}
+
+/* Hauptfunktion: Bericht aufbauen */
+function rptBuild(){
+  var sec  = document.getElementById('rpt-sector').value;
+  var tk1  = document.getElementById('rpt-s1').value;
+  var tk2  = document.getElementById('rpt-s2').value;
+  var now  = new Date();
+  var dateStr = now.toLocaleDateString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric'});
+
+  /* Sektor-Statistiken berechnen */
+  var secStocks = [];
+  for(var i=0;i<STOCKS.length;i++){
+    var fd0 = FD[STOCKS[i].t];
+    var s0  = (fd0 && fd0.sector) ? fd0.sector : (STOCKS[i].sector || '');
+    if(s0 === sec) secStocks.push(STOCKS[i]);
+  }
+  secStocks.sort(function(a,b){ return cSc(b)-cSc(a); });
+
+  var stats = rptCalcStats(secStocks);
+
+  var out = '';
+
+  /* ── Titel-Block ── */
+  out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a3a5c;border-radius:10px;padding:16px;margin-bottom:14px">';
+  out += '<div class="rpt-h1" style="font-size:18px;font-weight:800;color:#00c8f0;margin-bottom:4px">StockIQ Sektor-Analyse</div>';
+  out += '<div class="rpt-h2" style="font-size:14px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#128202; ' + sec + ' &mdash; ' + dateStr + '</div>';
+  out += '<div class="rpt-mut" style="font-family:monospace;font-size:9px;color:#7a9bb5">';
+  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v5.9.52</div>';
+  out += '</div>';
+
+  /* ── 1. Sektorvergleich: Statistik-Kacheln ── */
+  out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
+  out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">1. Sektor&uuml;bersicht &mdash; ' + sec + '</div>';
+  out += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">';
+  var kpis = [
+    {l:'Anz. Titel', v:secStocks.length, u:''},
+    {l:'Ø Score', v:stats.avgScore.toFixed(1), u:'/100'},
+    {l:'Ø FCF Yield', v:stats.avgFcf !== null ? stats.avgFcf.toFixed(1)+'%' : 'n/a', u:''},
+    {l:'Ø ROCE', v:stats.avgRoce !== null ? stats.avgRoce.toFixed(1)+'%' : 'n/a', u:''},
+  ];
+  for(var ki=0;ki<kpis.length;ki++){
+    out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">';
+    out += '<div class="rpt-label" style="font-family:monospace;font-size:8px;color:#7a9bb5">' + kpis[ki].l + '</div>';
+    out += '<div class="rpt-val" style="font-size:16px;font-weight:800;color:#dce8f5">' + kpis[ki].v + '</div>';
+    if(kpis[ki].u) out += '<div class="rpt-mut" style="font-family:monospace;font-size:8px;color:#7a9bb5">' + kpis[ki].u + '</div>';
+    out += '</div>';
+  }
+  out += '</div>';
+
+  /* Sektor-Tabelle: Top 10 nach Score */
+  out += '<div style="font-family:monospace;font-size:9px;font-weight:700;color:#7a9bb5;margin-bottom:6px">TOP-TITEL IM SEKTOR (nach Score):</div>';
+  out += '<table class="rpt-tbl" style="width:100%;border-collapse:collapse;font-size:10px">';
+  out += '<tr><th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:left">Ticker</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:left">Name</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">Score</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">Signal</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">FCF%</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">ROCE%</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">PEG</th></tr>';
+
+  var top = secStocks.slice(0, 10);
+  for(var ri=0;ri<top.length;ri++){
+    var rs  = top[ri];
+    var rfd = FD[rs.t] || {};
+    var rsc = Math.round(cSc(rs));
+    var rsig = sigText(rs);
+    var sigC = rsig.indexOf('BUY')>=0 ? '#00e57a' : rsig.indexOf('SELL')>=0 ? '#ff5252' : '#ffab00';
+    var rowBg = ri % 2 === 0 ? '#0a1628' : '#0c1a2e';
+    var isSel = (rs.t === tk1 || rs.t === tk2) ? 'font-weight:700;' : '';
+    out += '<tr style="background:' + rowBg + '">';
+    out += '<td style="padding:5px 7px;' + isSel + 'color:' + (rs.t===tk1||rs.t===tk2?'#00c8f0':'#dce8f5') + '">' + rs.t + '</td>';
+    out += '<td style="padding:5px 7px;color:#dce8f5;font-size:9px">' + (rs.n||'') + '</td>';
+    out += '<td style="padding:5px 7px;text-align:center;color:#dce8f5;font-weight:700">' + rsc + '</td>';
+    out += '<td style="padding:5px 7px;text-align:center;color:' + sigC + ';font-size:9px">' + rsig + '</td>';
+    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.fcf!=null?rfd.fcf.toFixed(1)+'%':'—') + '</td>';
+    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.roce!=null?rfd.roce.toFixed(1)+'%':'—') + '</td>';
+    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.peg!=null?rfd.peg.toFixed(2):'—') + '</td>';
+    out += '</tr>';
+  }
+  out += '</table>';
+  if(secStocks.length > 10) out += '<div style="font-family:monospace;font-size:9px;color:#7a9bb5;margin-top:4px">+ ' + (secStocks.length-10) + ' weitere Titel im Sektor</div>';
+  out += '</div>';
+
+  /* ── 2. Aktien-Detail ── */
+  out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
+  out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">2. Aktien-Vergleich &amp; Analyse</div>';
+  out += rptCompareBlock(tk1, tk2);
+  out += '</div>';
+
+  /* ── 3. Detail-Karten ── */
+  out += rptDetailCard(tk1, '3a');
+  out += rptDetailCard(tk2, '3b');
+
+  /* ── Disclaimer ── */
+  out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a2a3a;border-radius:8px;padding:10px;margin-bottom:10px">';
+  out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5;line-height:1.5">';
+  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.52 generiert. ';
+  out += 'Er dient ausschlie&szlig;lich zu Informationszwecken und stellt keine Anlageberatung dar. ';
+  out += 'Alle Daten stammen aus yfinance (Yahoo Finance) und sind ohne Gew&auml;hr. ';
+  out += 'Investitionsentscheidungen sollten immer auf Basis eigener Recherche und ggf. professioneller Beratung getroffen werden.';
+  out += '</div></div>';
+
+  document.getElementById('rpt-output').innerHTML = out;
+  document.getElementById('rpt-print-btn').style.display = 'block';
+
+  /* Controls einklappen — Bericht sichtbar machen */
+  var ctrl = document.getElementById('rpt-controls');
+  ctrl.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center">' +
+    '<div style="font-family:monospace;font-size:10px;color:#00e57a">&#10003; Bericht erstellt: ' +
+    sec + ' &middot; ' + tk1 + ' vs. ' + tk2 + '</div>' +
+    '<button onclick="rptShowControls()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">&#9881; &Auml;ndern</button>' +
+    '</div>';
+
+  /* Scroll: Modal-Content-Div nach oben, dann zu Output */
+  var modal = document.getElementById('rpt-modal');
+  var content = document.getElementById('rpt-content');
+  modal.scrollTop = 0;
+  setTimeout(function(){
+    var outputTop = document.getElementById('rpt-output').offsetTop;
+    modal.scrollTop = outputTop - 20;
+  }, 100);
+}
+
+/* Vergleichs-Tabelle zweier Aktien */
+function rptCompareBlock(tk1, tk2){
+  var s1 = null; var s2 = null;
+  for(var i=0;i<STOCKS.length;i++){
+    if(STOCKS[i].t===tk1) s1=STOCKS[i];
+    if(STOCKS[i].t===tk2) s2=STOCKS[i];
+  }
+  if(!s1||!s2) return '<div style="color:#ff5252">Ticker nicht in STOCKS gefunden.</div>';
+  var fd1 = FD[tk1]||{}; var fd2 = FD[tk2]||{};
+  var sc1 = Math.round(cSc(s1)); var sc2 = Math.round(cSc(s2));
+
+  function row(lbl, v1, v2, higherIsBetter){
+    var c1='#dce8f5'; var c2='#dce8f5';
+    var n1=parseFloat(v1); var n2=parseFloat(v2);
+    if(!isNaN(n1)&&!isNaN(n2)&&n1!==n2){
+      var better = higherIsBetter ? (n1>n2) : (n1<n2);
+      c1 = better ? '#00e57a' : '#ff7043';
+      c2 = better ? '#ff7043' : '#00e57a';
+    }
+    return '<tr><td style="padding:5px 8px;color:#7a9bb5;font-size:9px">' + lbl + '</td>' +
+      '<td style="padding:5px 8px;text-align:center;color:'+c1+';font-weight:700">' + v1 + '</td>' +
+      '<td style="padding:5px 8px;text-align:center;color:'+c2+';font-weight:700">' + v2 + '</td></tr>';
+  }
+  function fmtN(v, suf){ return v!=null ? v.toFixed(1)+suf : '—'; }
+
+  var out='';
+  out += '<table class="rpt-tbl" style="width:100%;border-collapse:collapse;font-size:11px">';
+  out += '<tr><th style="background:#1a3a5c;color:#dce8f5;padding:7px;text-align:left;width:35%">Kennzahl</th>';
+  out += '<th style="background:#1a3a5c;color:#00c8f0;padding:7px;text-align:center">' + tk1 + '<br><span style="font-size:9px;font-weight:400">' + (s1.n||'') + '</span></th>';
+  out += '<th style="background:#1a3a5c;color:#00c8f0;padding:7px;text-align:center">' + tk2 + '<br><span style="font-size:9px;font-weight:400">' + (s2.n||'') + '</span></th></tr>';
+  out += row('Gesamt-Score /100', sc1, sc2, true);
+  out += row('Signal', sigText(s1), sigText(s2), false);
+  out += row('Momentum', Math.round(momSc(s1)), Math.round(momSc(s2)), true);
+  out += row('Fundamentals', Math.round(fSc(s1)), Math.round(fSc(s2)), true);
+  out += row('FCF Yield %', fmtN(fd1.fcf,'%'), fmtN(fd2.fcf,'%'), true);
+  out += row('ROCE %', fmtN(fd1.roce,'%'), fmtN(fd2.roce,'%'), true);
+  out += row('OE Yield %', fmtN(fd1.owner_earnings_yield,'%'), fmtN(fd2.owner_earnings_yield,'%'), true);
+  out += row('PEG', fd1.peg!=null?fd1.peg.toFixed(2):'—', fd2.peg!=null?fd2.peg.toFixed(2):'—', false);
+  out += row('EV/EBITDA', fmtN(fd1.ev_ebitda,'x'), fmtN(fd2.ev_ebitda,'x'), false);
+  out += row('Beta', fmtN(fd1.beta,''), fmtN(fd2.beta,''), false);
+  out += row('Debt/Equity %', fmtN(fd1.debt,'%'), fmtN(fd2.debt,'%'), false);
+  out += row('EVAR (rel.)', fmtN(fd1.evar,''), fmtN(fd2.evar,''), true);
+  out += row('12M-Momentum', fmtN(fd1.mom_skip!=null?fd1.mom_skip:fd1.mom12m,'%'), fmtN(fd2.mom_skip!=null?fd2.mom_skip:fd2.mom12m,'%'), true);
+  out += '</table>';
+  return out;
+}
+
+/* Detail-Karte fuer eine Aktie */
+function rptDetailCard(tk, num){
+  var st=null;
+  for(var i=0;i<STOCKS.length;i++){ if(STOCKS[i].t===tk){st=STOCKS[i];break;} }
+  if(!st) return '';
+  var fd=FD[tk]||{};
+  var sc=Math.round(cSc(st));
+  var sig=sigText(st);
+  var sigC=sig.indexOf('BUY')>=0?'#00e57a':sig.indexOf('SELL')>=0?'#ff5252':'#ffab00';
+
+  var out='';
+  out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
+  out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">'+num+'. Detailanalyse: ' + tk + '</div>';
+  out += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">';
+  out += '<div><div style="font-size:20px;font-weight:800;color:#dce8f5">' + (st.n||tk) + '</div>';
+  out += '<div style="font-family:monospace;font-size:9px;color:#7a9bb5">' + (fd.sector||'') + (fd.industry?' &middot; '+fd.industry:'') + '</div>';
+  if(fd.moat&&fd.moat!=='none') out += '<div style="font-family:monospace;font-size:9px;color:#ffab00;margin-top:2px">MOAT: ' + fd.moat.toUpperCase() + '</div>';
+  out += '</div>';
+  out += '<div style="text-align:right">';
+  out += '<div style="font-size:36px;font-weight:900;color:'+sigC+'">' + sc + '</div>';
+  out += '<div style="font-family:monospace;font-size:10px;color:'+sigC+';font-weight:700">' + sig + '</div>';
+  out += '</div></div>';
+
+  /* Score-Komponenten */
+  out += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:12px">';
+  var comps = [
+    {l:'Momentum', v:Math.round(momSc(st)), c:'#00c8f0'},
+    {l:'Trend', v:Math.round(st.trend||0), c:'#7a9bb5'},
+    {l:'Fund', v:Math.round(fSc(st)), c:'#00e57a'},
+    {l:'Risk', v:Math.round(rSc(st)), c:'#ffab00'},
+  ];
+  for(var ci=0;ci<comps.length;ci++){
+    out += '<div style="text-align:center;padding:8px 4px;background:#0a1628;border:1px solid #1a3050;border-radius:6px">';
+    out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5">' + comps[ci].l + '</div>';
+    out += '<div style="font-size:18px;font-weight:800;color:' + comps[ci].c + '">' + comps[ci].v + '</div>';
+    out += '</div>';
+  }
+  out += '</div>';
+
+  /* Fundamentals-Grid */
+  out += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">';
+  var fkpis = [
+    {l:'FCF Yield', v:fd.fcf!=null?fd.fcf.toFixed(1)+'%':'n/a', c:fd.fcf>5?'#00e57a':fd.fcf>2?'#ffab00':'#ff5252'},
+    {l:'OE Yield', v:fd.owner_earnings_yield!=null?fd.owner_earnings_yield.toFixed(1)+'%':'n/a', c:'#dce8f5'},
+    {l:'ROCE', v:fd.roce!=null?fd.roce.toFixed(1)+'%':'n/a', c:fd.roce>15?'#00e57a':fd.roce>8?'#ffab00':'#dce8f5'},
+    {l:'PEG', v:fd.peg!=null?fd.peg.toFixed(2):'n/a', c:fd.peg<2?'#00e57a':fd.peg<3?'#ffab00':'#ff5252'},
+    {l:'EV/EBITDA', v:fd.ev_ebitda!=null?fd.ev_ebitda.toFixed(1)+'x':'n/a', c:fd.ev_ebitda<15?'#00e57a':fd.ev_ebitda<25?'#ffab00':'#ff5252'},
+    {l:'EVAR (rel.)', v:fd.evar!=null?Math.round(fd.evar):'n/a', c:fd.evar>60?'#00e57a':fd.evar>30?'#ffab00':'#ff5252'},
+  ];
+  for(var fi2=0;fi2<fkpis.length;fi2++){
+    out += '<div style="padding:7px 8px;background:#0a1628;border:1px solid #1a3050;border-radius:6px">';
+    out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5">' + fkpis[fi2].l + '</div>';
+    out += '<div style="font-size:14px;font-weight:700;color:' + fkpis[fi2].c + '">' + fkpis[fi2].v + '</div>';
+    out += '</div>';
+  }
+  out += '</div>';
+
+  /* Jahres-Trend wenn vorhanden */
+  var annTrend = '';
+  if(window.ANNUAL_DATA && ANNUAL_DATA.length > 0){
+    var roce_hist = []; var fcf_hist = [];
+    for(var ai=0;ai<ANNUAL_DATA.length;ai++){
+      var ae = ANNUAL_DATA[ai];
+      if(ae.tickers && ae.tickers[tk]){
+        var afd = ae.tickers[tk];
+        if(afd.roce!=null) roce_hist.push(ae.year+': '+afd.roce.toFixed(1)+'%');
+        if(afd.fcf!=null)  fcf_hist.push(ae.year+': '+afd.fcf.toFixed(1)+'%');
+      }
+    }
+    if(roce_hist.length>0){
+      annTrend += '<div style="padding:8px 10px;background:rgba(0,200,240,.05);border:1px solid rgba(0,200,240,.15);border-radius:6px;font-family:monospace;font-size:9px;margin-top:8px">';
+      annTrend += '<div style="color:#00c8f0;margin-bottom:3px;font-weight:700">JAHRES-TREND</div>';
+      annTrend += '<div style="color:#7a9bb5">ROCE: ' + roce_hist.join(' &middot; ') + '</div>';
+      if(fcf_hist.length>0) annTrend += '<div style="color:#7a9bb5;margin-top:2px">FCF: ' + fcf_hist.join(' &middot; ') + '</div>';
+      annTrend += '</div>';
+    }
+  }
+  out += annTrend;
+
+  /* Technisch */
+  out += '<div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-family:monospace;font-size:10px">';
+  out += '<div style="color:#7a9bb5">RSI: <span style="color:#dce8f5">' + (fd.rsi_val!=null?Math.round(fd.rsi_val):'n/a') + '</span></div>';
+  out += '<div style="color:#7a9bb5">12M-Mom: <span style="color:#dce8f5">' + (fd.mom_skip!=null?fd.mom_skip.toFixed(1)+'%':fd.mom12m!=null?fd.mom12m.toFixed(1)+'%':'n/a') + '</span></div>';
+  out += '<div style="color:#7a9bb5">Beta: <span style="color:#dce8f5">' + (fd.beta!=null?fd.beta.toFixed(2):'n/a') + '</span></div>';
+  out += '<div style="color:#7a9bb5">Div+Buyback: <span style="color:#dce8f5">' + (fd.shareholder_return!=null?fd.shareholder_return.toFixed(1)+'%':'n/a') + '</span></div>';
+  out += '</div>';
+  out += '</div>';
+  return out;
+}
+
+/* Controls wiederherstellen nach Einklappen */
+function rptShowControls(){
+  var ctrl = document.getElementById('rpt-controls');
+  ctrl.innerHTML = '<div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:10px">Berichts-Parameter</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">' +
+    '<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">SEKTOR</div>' +
+    '<select id="rpt-sector" onchange="rptFillStocks()" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select></div>' +
+    '<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">AKTIE 1</div>' +
+    '<select id="rpt-s1" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select></div>' +
+    '<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">AKTIE 2</div>' +
+    '<select id="rpt-s2" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select></div>' +
+    '</div>' +
+    '<div style="display:flex;gap:8px">' +
+    '<button onclick="rptBuild()" style="flex:1;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#9654; Bericht erstellen</button>' +
+    '<button id="rpt-print-btn" onclick="rptPrint()" style="flex:1;background:#1a7a3a;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer;display:none">&#128438; Als PDF drucken</button>' +
+    '</div>';
+  rptInitSectors();
+  document.getElementById('rpt-modal').scrollTop = 0;
+}
+
+/* Sektor-Statistiken berechnen */
+function rptCalcStats(arr){
+  var scores=[]; var fcfs=[]; var roces=[];
+  for(var i=0;i<arr.length;i++){
+    scores.push(cSc(arr[i]));
+    var fd=FD[arr[i].t]||{};
+    if(fd.fcf!=null&&!isNaN(fd.fcf)&&Math.abs(fd.fcf)<100) fcfs.push(fd.fcf);
+    if(fd.roce!=null&&!isNaN(fd.roce)&&fd.roce<200) roces.push(fd.roce);
+  }
+  function avg(a){ if(!a.length) return null; var s=0; for(var i=0;i<a.length;i++) s+=a[i]; return s/a.length; }
+  return { avgScore:avg(scores)||0, avgFcf:avg(fcfs), avgRoce:avg(roces) };
+}
+
+/* Hilfsfunktion: Signal-Text */
+function sigText(s){
+  var sc=cSc(s);
+  if(sc>=65&&s.trend>0&&momSc(s)>=50) return 'BUY';
+  if(sc<=40||s.trend<-15) return 'SELL MA';
+  if(sc>=65) return 'BUY (Tech-)';
+  return 'HOLD';
 }
 </script>
 </body>
