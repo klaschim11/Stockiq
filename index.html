@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.53</title>
+<title>StockIQ v5.9.54</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -863,7 +863,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.53 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.54 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -1131,7 +1131,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p7 Roadmap -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.53 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.54 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -4096,7 +4096,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.53 &middot; Daten aus geladener fundamentals.json</div>
+        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.54 &middot; Daten aus geladener fundamentals.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
@@ -4226,7 +4226,7 @@ function rptBuild(){
   out += '<div class="rpt-h1" style="font-size:18px;font-weight:800;color:#00c8f0;margin-bottom:4px">StockIQ Sektor-Analyse</div>';
   out += '<div class="rpt-h2" style="font-size:14px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#128202; ' + sec + ' &mdash; ' + dateStr + '</div>';
   out += '<div class="rpt-mut" style="font-family:monospace;font-size:9px;color:#7a9bb5">';
-  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v5.9.53</div>';
+  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v5.9.54</div>';
   out += '</div>';
 
   /* ── 1. Sektorvergleich: Statistik-Kacheln ── */
@@ -4264,7 +4264,7 @@ function rptBuild(){
     var rs  = top[ri];
     var rfd = FD[rs.t] || {};
     var rsc = Math.round(cSc(rs));
-    var rsig = sigText(rs);
+    var rsig = rptSigText(rs);
     var sigC = rsig.indexOf('BUY')>=0 ? '#00e57a' : rsig.indexOf('SELL')>=0 ? '#ff5252' : '#ffab00';
     var rowBg = ri % 2 === 0 ? '#0a1628' : '#0c1a2e';
     var isSel = (rs.t === tk1 || rs.t === tk2) ? 'font-weight:700;' : '';
@@ -4295,7 +4295,7 @@ function rptBuild(){
   /* ── Disclaimer ── */
   out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a2a3a;border-radius:8px;padding:10px;margin-bottom:10px">';
   out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5;line-height:1.5">';
-  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.53 generiert. ';
+  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.54 generiert. ';
   out += 'Er dient ausschlie&szlig;lich zu Informationszwecken und stellt keine Anlageberatung dar. ';
   out += 'Alle Daten stammen aus yfinance (Yahoo Finance) und sind ohne Gew&auml;hr. ';
   out += 'Investitionsentscheidungen sollten immer auf Basis eigener Recherche und ggf. professioneller Beratung getroffen werden.';
@@ -4353,7 +4353,7 @@ function rptCompareBlock(tk1, tk2){
   out += '<th style="background:#1a3a5c;color:#00c8f0;padding:7px;text-align:center">' + tk1 + '<br><span style="font-size:9px;font-weight:400">' + (s1.n||'') + '</span></th>';
   out += '<th style="background:#1a3a5c;color:#00c8f0;padding:7px;text-align:center">' + tk2 + '<br><span style="font-size:9px;font-weight:400">' + (s2.n||'') + '</span></th></tr>';
   out += row('Gesamt-Score /100', sc1, sc2, true);
-  out += row('Signal', sigText(s1), sigText(s2), false);
+  out += row('Signal', rptSigText(s1), rptSigText(s2), false);
   out += row('Momentum', Math.round(momSc(s1)), Math.round(momSc(s2)), true);
   out += row('Fundamentals', Math.round(fSc(s1)), Math.round(fSc(s2)), true);
   out += row('FCF Yield %', fmtN(fd1.fcf,'%'), fmtN(fd2.fcf,'%'), true);
@@ -4376,7 +4376,7 @@ function rptDetailCard(tk, num){
   if(!st) return '';
   var fd=FD[tk]||{};
   var sc=Math.round(cSc(st));
-  var sig=sigText(st);
+  var sig=rptSigText(st);
   var sigC=sig.indexOf('BUY')>=0?'#00e57a':sig.indexOf('SELL')>=0?'#ff5252':'#ffab00';
 
   var out='';
@@ -4506,12 +4506,16 @@ function rptCalcStats(arr){
   return { avgScore:avg(scores)||0, avgFcf:avg(fcfs), avgRoce:avg(roces) };
 }
 
-/* Hilfsfunktion: Signal-Text */
-function sigText(s){
-  var sc=cSc(s);
-  if(sc>=65&&s.trend>0&&momSc(s)>=50) return 'BUY';
-  if(sc<=40||s.trend<-15) return 'SELL MA';
-  if(sc>=65) return 'BUY (Tech-)';
+/* Signal-Text fuer Report: nutzt mSig() + sellLabel() aus Dashboard (identisch mit WL) */
+function rptSigText(s){
+  var sig = mSig(s);
+  if(!sig || sig === 'watch') return 'WATCH';
+  if(sig === 'weak')          return 'WEAK';
+  if(sig === 'buy')           return 'BUY';
+  if(sig === 'strong')        return 'BUY STRONG';
+  if(sig === 'pb')            return 'BUY PB';
+  if(isSell(sig))             return sellLabel(sig);
+  if(isHoldSF(sig))           return holdSFLabel(sig);
   return 'HOLD';
 }
 </script>
