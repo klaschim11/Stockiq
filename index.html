@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.55</title>
+<title>StockIQ v5.9.57</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -863,7 +863,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.55 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.57 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -1131,7 +1131,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p7 Roadmap -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.55 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.57 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1478,16 +1478,23 @@ function mSig(s){
   var zl  = s.macdCross === 'below_zero';
   var ok  = zl && histOk(s) && s.above200 && !s.sw;
   if(ok){
-    if(isDivBull(s)){if(pgBk(s))return 'pb';return 'strong';}
+    var fd3 = FD[s.t];
+    var rsiVal = fd3 && fd3.rsi_val !== null && fd3.rsi_val !== undefined ? fd3.rsi_val : 50;
+    /* RSI-Cap v5.9.57: kein BUY STRONG bei RSI > 78 (ATH/Ueberhitzung)
+       Begruendung: Chance/Risiko fuer Neueinstieg ungünstig nahe ATH.
+       Methodisch: Amplitude des Signals begrenzen, nicht Signal entfernen. */
+    var rsiOverheat = rsiVal > 78;
+    if(isDivBull(s)){
+      if(pgBk(s)) return 'pb';
+      return rsiOverheat ? 'buy' : 'strong';  /* STRONG → BUY wenn RSI > 78 */
+    }
     if(pgBk(s)) return 'pb';
     return 'buy';
   }
   /* --- SELL-Seite: eine Bedingung reicht --- */
   var ex = exitSignal(s);
   if(ex){
-    /* Score-Filter v5.9.13 + Div-Hold-Filter v5.9.17
-       Methodisch: nur Live-Entscheidung, nicht im Backtest.
-       Reihenfolge: Score pruefen, dann DR pruefen, Kombinationen abbilden. */
+    /* Score-Filter v5.9.13 + Div-Hold-Filter v5.9.17 */
     var sfActive = false; var drActive = false;
     if(SELL_SCORE_FILTER){ var sc=cSc(s); if(sc>=SELL_SCORE_MIN) sfActive=true; }
     if(DIV_HOLD_FILTER){
@@ -1620,7 +1627,7 @@ function momSc(s){
   var adj=volAdj(s);
   /* isEuropean: Sektor aus FD oder Ticker-Endung (.PA .MI .SW .AS .DE .L .MC) */
   var isEU=false;
-  if(fd&&fd.sector){isEU=true;}  /* alle Ticker mit Sektor-Daten aus EU-Boersen */
+  if(fd&&fd.sector){isEU=true;}
   var tkSuf=s.t.indexOf('.')>=0;
   if(tkSuf)isEU=true;
   var vf=vixFactor(isEU);
@@ -1641,10 +1648,22 @@ function momSc(s){
   }
   /* Prioritaet 3: mom12m (52W-Position 0-100, Legacy-Fix) */
   else if(fd.mom12m!==null&&fd.mom12m!==undefined){
-    priceMom=Math.round(fd.mom12m);  /* direkt 0-100, kein 50+ Bug */
+    priceMom=Math.round(fd.mom12m);
   }
   if(priceMom===null){return applyDamp(Math.round(s.mom*adj+50*(1.0-adj)));}
   var rm=Math.round(s.mom*0.5+priceMom*0.5);
+
+  /* RSI-Ueberhitzungs-Daempfung v5.9.57 (Barroso/Santa-Clara 2015)
+     RSI > 80: Momentum ueberdehnt → Daempfung ×0.70 (kein Neueinstieg)
+     RSI > 75: Erhoeht → leichte Daempfung ×0.85
+     Logik: hohe RSI = nahe ATH = schlechtes Chance/Risiko fuer Einstieg */
+  var rsiFactor=1.0;
+  if(fd.rsi_val!==null&&fd.rsi_val!==undefined){
+    if(fd.rsi_val>80)       rsiFactor=0.70;
+    else if(fd.rsi_val>75)  rsiFactor=0.85;
+  }
+  if(rsiFactor<1.0){ rm=Math.round(rm*rsiFactor+50*(1.0-rsiFactor)); }
+
   return applyDamp(rm);
 }
 
@@ -4096,7 +4115,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.55 &middot; Daten aus geladener fundamentals.json</div>
+        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.57 &middot; Daten aus geladener fundamentals.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
@@ -4226,7 +4245,7 @@ function rptBuild(){
   out += '<div class="rpt-h1" style="font-size:18px;font-weight:800;color:#00c8f0;margin-bottom:4px">StockIQ Sektor-Analyse</div>';
   out += '<div class="rpt-h2" style="font-size:14px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#128202; ' + sec + ' &mdash; ' + dateStr + '</div>';
   out += '<div class="rpt-mut" style="font-family:monospace;font-size:9px;color:#7a9bb5">';
-  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v5.9.55</div>';
+  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v5.9.57</div>';
   out += '</div>';
 
   /* ── 0. Sektor-Performance-Ranking (alle Sektoren) ── */
@@ -4308,7 +4327,7 @@ function rptBuild(){
   /* ── Disclaimer ── */
   out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a2a3a;border-radius:8px;padding:10px;margin-bottom:10px">';
   out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5;line-height:1.5">';
-  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.55 generiert. ';
+  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.57 generiert. ';
   out += 'Er dient ausschlie&szlig;lich zu Informationszwecken und stellt keine Anlageberatung dar. ';
   out += 'Alle Daten stammen aus yfinance (Yahoo Finance) und sind ohne Gew&auml;hr. ';
   out += 'Investitionsentscheidungen sollten immer auf Basis eigener Recherche und ggf. professioneller Beratung getroffen werden.';
@@ -4319,11 +4338,13 @@ function rptBuild(){
 
   /* Controls einklappen — Bericht sichtbar machen */
   var ctrl = document.getElementById('rpt-controls');
-  ctrl.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center">' +
+  ctrl.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">' +
     '<div style="font-family:monospace;font-size:10px;color:#00e57a">&#10003; Bericht erstellt: ' +
     sec + ' &middot; ' + tk1 + ' vs. ' + tk2 + '</div>' +
-    '<button onclick="rptShowControls()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">&#9881; &Auml;ndern</button>' +
-    '</div>';
+    '<div style="display:flex;gap:8px">' +
+    '<button onclick="rptPrint()" style="background:#1a7a3a;border:none;color:#fff;font-size:11px;font-weight:700;padding:6px 14px;border-radius:8px;cursor:pointer">&#128438; Als PDF drucken</button>' +
+    '<button onclick="rptShowControls()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:10px;padding:6px 10px;border-radius:8px;cursor:pointer">&#9881; &Auml;ndern</button>' +
+    '</div></div>';
 
   /* Scroll: Modal-Content-Div nach oben, dann zu Output */
   var modal = document.getElementById('rpt-modal');
