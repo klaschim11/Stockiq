@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.57</title>
+<title>StockIQ v5.9.58</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.57 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.58 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -317,8 +317,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
     <div>
       <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">CASH / TAGESGELD (EUR)</div>
-      <input id="ai-cash" type="number" min="0" step="100" placeholder="z.B. 5000"
+      <input id="ai-cash" type="number" min="0" step="100" placeholder="z.B. 10000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
+        oninput="rAlloc()">
+    </div>
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:#ff9f1c;margin-bottom:4px">ROHSTOFFE / COMMODITIES (EUR)</div>
+      <input id="ai-commod" type="number" min="0" step="100" placeholder="z.B. 8000"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #332200;border-radius:6px;padding:8px 10px;color:#ff9f1c;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
     </div>
   </div>
@@ -327,6 +333,25 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button onclick="allocClear()" style="margin-left:auto;padding:5px 12px;background:transparent;border:1px solid #1a3050;border-radius:5px;color:var(--mut);font-size:10px;cursor:pointer">&#10006; Leeren</button>
     <button onclick="allocSave()" style="padding:5px 12px;background:#001a30;border:1px solid #00c8f0;border-radius:5px;color:#00c8f0;font-size:10px;cursor:pointer">&#128190; Speichern</button>
   </div>
+</div>
+
+<!-- ZYKLUS-OVERLAY v5.9.58 (Fidelity Business Cycle, Hambro/BlackRock) -->
+<div style="background:#0c1420;border:1px solid #1a3050;border-radius:12px;padding:14px;margin-bottom:14px">
+  <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#9881; Konjunkturzyklus-Overlay <span style="font-family:monospace;font-size:9px;color:var(--mut)">Fidelity Business Cycle 2025</span></div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px">
+    <button id="cyc-early"     onclick="setCycle('early')"     style="padding:8px 4px;border:2px solid #1a3050;border-radius:8px;background:#0a1628;color:#7a9bb5;font-size:10px;font-weight:700;cursor:pointer">
+      &#9651; Early<br><span style="font-size:8px;font-weight:400">Aufschw.</span></button>
+    <button id="cyc-mid"       onclick="setCycle('mid')"       style="padding:8px 4px;border:2px solid #1a3050;border-radius:8px;background:#0a1628;color:#7a9bb5;font-size:10px;font-weight:700;cursor:pointer">
+      &#9651; Mid<br><span style="font-size:8px;font-weight:400">Expansion</span></button>
+    <button id="cyc-late"      onclick="setCycle('late')"      style="padding:8px 4px;border:2px solid #ffab00;border-radius:8px;background:rgba(255,171,0,.08);color:#ffab00;font-size:10px;font-weight:700;cursor:pointer">
+      &#9654; Late<br><span style="font-size:8px;font-weight:400">Sp&auml;tzyklus</span></button>
+    <button id="cyc-recession" onclick="setCycle('recession')" style="padding:8px 4px;border:2px solid #1a3050;border-radius:8px;background:#0a1628;color:#7a9bb5;font-size:10px;font-weight:700;cursor:pointer">
+      &#9661; Rezess.<br><span style="font-size:8px;font-weight:400">Kontraktion</span></button>
+  </div>
+  <div id="cycle-info" style="font-family:monospace;font-size:9px;color:var(--mut);padding:6px 8px;background:rgba(255,171,0,.05);border-left:3px solid #ffab00;border-radius:4px;margin-bottom:8px">
+    &#9654; <strong style="color:#ffab00">Late Cycle</strong> &mdash; Energy &amp; Rohstoffe f&uuml;hren. Defensive Sektoren aufbauen. Cash erh&ouml;hen. <span style="color:#7a9bb5">(Befund: Sektor-Ranking Mai 2026)</span>
+  </div>
+  <div id="cycle-targets" style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px"></div>
 </div>
 
 <!-- ERGEBNIS-SEKTION -->
@@ -345,28 +370,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <!-- ZIEL-INFO -->
 <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px">
-  <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">&#128270; Ziel-Allokation (1-3 Jahres-Horizont)</div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-    <div style="text-align:center;padding:8px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">
-      <div style="font-size:18px;font-weight:700;color:#00e676">60%</div>
-      <div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">AKTIEN</div>
-    </div>
-    <div style="text-align:center;padding:8px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">
-      <div style="font-size:18px;font-weight:700;color:#00c8f0">20%</div>
-      <div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">ANLEIHEN</div>
-    </div>
-    <div style="text-align:center;padding:8px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">
-      <div style="font-size:18px;font-weight:700;color:#ffab00">15%</div>
-      <div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">GOLD</div>
-    </div>
-    <div style="text-align:center;padding:8px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">
-      <div style="font-size:18px;font-weight:700;color:#b388ff">5%</div>
-      <div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">CASH</div>
-    </div>
-  </div>
-  <div style="margin-top:10px;font-size:10px;color:var(--mut);line-height:1.6">
-    <strong style="color:#dce8f5">Rebalancing-Trigger:</strong> Abweichung &gt; &plusmn;7pp vom Zielwert &rarr; rot markiert + Empfehlung.<br>
-    <strong style="color:#dce8f5">Toleranzband:</strong> &plusmn;7pp (gruen = im Ziel, gelb = Randbereich &plusmn;4-7pp, rot = Handlungsbedarf).
+  <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">&#128270; Ziel-Allokation (zyklus-adjustiert, v5.9.58)</div>
+  <div id="ziel-kacheln" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px"></div>
+  <div style="font-family:monospace;font-size:9px;color:var(--mut);line-height:1.6">
+    <strong style="color:#dce8f5">Basis (Hambro/BlackRock 2026):</strong> 55% Aktien / 15% Anleihen / 12% Gold / 8% Rohstoffe / 10% Cash<br>
+    <strong style="color:#dce8f5">Quelle:</strong> Fidelity Business Cycle AART Jan 2025 &middot; BlackRock Hambro Webinar Mai 2026<br>
+    <strong style="color:#dce8f5">Rebalancing-Trigger:</strong> Abweichung &gt; &plusmn;7pp vom Zielwert &rarr; rot markiert + Empfehlung.
   </div>
 </div>
 
@@ -461,7 +470,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.57 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.58 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -863,7 +872,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.57 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.58 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -872,7 +881,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <span style="color:#7a9bb5">Datei</span><span style="color:#7a9bb5">Version</span><span style="color:#7a9bb5">Zweck</span><span style="color:#7a9bb5">Status</span>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 2fr 1fr;gap:5px 8px;font-family:monospace">
-      <span style="color:#dce8f5">Dashboard</span><span style="color:#00e57a">v5.9.57</span><span style="color:var(--mut)">iOS Safari, GitHub Pages</span><span style="color:#00e57a">&#9679; Prod</span>
+      <span style="color:#dce8f5">Dashboard</span><span style="color:#00e57a">v5.9.58</span><span style="color:var(--mut)">iOS Safari, GitHub Pages</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">fund_juno v7.9.9 | Fundamentals + Owner Earnings + Jahres-Snapshot</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">alpha_juno</span><span style="color:#00e57a">v6b_6m-u4</span><span style="color:var(--mut)">Walk-Forward 6M OOS</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">annual.json</span><span style="color:#00e57a">2021&ndash;2026</span><span style="color:var(--mut)">Jahres-Snapshots (6 Jahre)</span><span style="color:#00e57a">&#9679; Aktiv</span>
@@ -881,7 +890,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 
   <!-- ── Score-Architektur ── -->
-  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#127919; Score-Architektur v5.9.57</div>
+  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#127919; Score-Architektur v5.9.58</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px;font-size:11px">
     <div style="display:grid;grid-template-columns:auto 1fr 2fr;gap:5px 12px;font-family:monospace">
       <span style="color:#00e57a;font-weight:700">Mom 25%</span><span style="color:#dce8f5">momSc()</span><span style="color:var(--mut)">Skip-Month 11M + MACD + RSI &middot; VIX-D&auml;mpfung &times;1.0/0.6/0.2 &middot; V2X f&uuml;r EU-Ticker &middot; Bond-Div-Faktor</span>
@@ -1131,7 +1140,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p7 Roadmap -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.57 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.58 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1480,7 +1489,7 @@ function mSig(s){
   if(ok){
     var fd3 = FD[s.t];
     var rsiVal = fd3 && fd3.rsi_val !== null && fd3.rsi_val !== undefined ? fd3.rsi_val : 50;
-    /* RSI-Cap v5.9.57: kein BUY STRONG bei RSI > 78 (ATH/Ueberhitzung)
+    /* RSI-Cap v5.9.58: kein BUY STRONG bei RSI > 78 (ATH/Ueberhitzung)
        Begruendung: Chance/Risiko fuer Neueinstieg ungünstig nahe ATH.
        Methodisch: Amplitude des Signals begrenzen, nicht Signal entfernen. */
     var rsiOverheat = rsiVal > 78;
@@ -1653,7 +1662,7 @@ function momSc(s){
   if(priceMom===null){return applyDamp(Math.round(s.mom*adj+50*(1.0-adj)));}
   var rm=Math.round(s.mom*0.5+priceMom*0.5);
 
-  /* RSI-Ueberhitzungs-Daempfung v5.9.57 (Barroso/Santa-Clara 2015)
+  /* RSI-Ueberhitzungs-Daempfung v5.9.58 (Barroso/Santa-Clara 2015)
      RSI > 80: Momentum ueberdehnt → Daempfung ×0.70 (kein Neueinstieg)
      RSI > 75: Erhoeht → leichte Daempfung ×0.85
      Logik: hohe RSI = nahe ATH = schlechtes Chance/Risiko fuer Einstieg */
@@ -3181,7 +3190,7 @@ function loadFund(inp){
   reader.readAsText(file);
 }
 
-/* ---- Annual JSON laden (v5.9.57) ───────────────────────────
+/* ---- Annual JSON laden (v5.9.58) ───────────────────────────
    Laedt stockiq_annual.json → ANNUAL_DATA.
    Akzeptiert: Array [...] | Objekt {years:[...]} | Single {year:...}
    Kein Pflichtfeld — Dashboard funktioniert ohne annual.json.
@@ -3757,7 +3766,7 @@ function allocLoad(){
     var raw = localStorage.getItem(ALLOC_KEY);
     if(!raw) return;
     var data = JSON.parse(raw);
-    var ids = ['stocks','bonds','gold','cash'];
+    var ids = ['stocks','bonds','gold','commod','cash'];
     for(var i=0;i<ids.length;i++){
       var el = document.getElementById('ai-'+ids[i]);
       if(el && data[ids[i]] !== undefined) el.value = data[ids[i]];
@@ -3768,7 +3777,7 @@ function allocLoad(){
 function allocSave(){
   try {
     var data = {};
-    var ids = ['stocks','bonds','gold','cash'];
+    var ids = ['stocks','bonds','gold','commod','cash'];
     for(var i=0;i<ids.length;i++){
       var el = document.getElementById('ai-'+ids[i]);
       data[ids[i]] = el ? (parseFloat(el.value)||0) : 0;
@@ -3780,7 +3789,7 @@ function allocSave(){
 }
 
 function allocClear(){
-  var ids = ['stocks','bonds','gold','cash'];
+  var ids = ['stocks','bonds','gold','commod','cash'];
   for(var i=0;i<ids.length;i++){
     var el = document.getElementById('ai-'+ids[i]);
     if(el) el.value = '';
@@ -3790,7 +3799,7 @@ function allocClear(){
 }
 
 function rAlloc(){
-  var ids = ['stocks','bonds','gold','cash'];
+  var ids = ['stocks','bonds','gold','commod','cash'];
   var vals = [];
   var total = 0;
   for(var i=0;i<ids.length;i++){
@@ -3900,10 +3909,86 @@ function rAlloc(){
 
 function initAlloc(){
   allocLoad();
+  renderCycleTargets(CURRENT_CYCLE);
+  renderZielKacheln(CURRENT_CYCLE);
   rAlloc();
   rGSR();
   rBondETF();
 }
+
+/* Zyklus-Button-Highlighting + Targets neu setzen */
+function setCycle(c){
+  CURRENT_CYCLE = c;
+  ALLOC_TARGETS = buildAllocTargets(c);
+  /* Button-Styles */
+  var cycles = ['early','mid','late','recession'];
+  var cols   = {early:'#00e57a', mid:'#00c8f0', late:'#ffab00', recession:'#ff5252'};
+  for(var ci=0;ci<cycles.length;ci++){
+    var btn = document.getElementById('cyc-' + cycles[ci]);
+    if(!btn) continue;
+    if(cycles[ci] === c){
+      btn.style.borderColor = cols[c];
+      btn.style.background  = 'rgba(' + (c==='early'?'0,229,122':c==='mid'?'0,200,240':c==='late'?'255,171,0':'255,82,82') + ',.08)';
+      btn.style.color = cols[c];
+    } else {
+      btn.style.borderColor = '#1a3050';
+      btn.style.background  = '#0a1628';
+      btn.style.color = '#7a9bb5';
+    }
+  }
+  /* Info-Text aktualisieren */
+  var ca = CYCLE_ALLOC[c];
+  var el = document.getElementById('cycle-info');
+  if(el) el.innerHTML = '<strong style="color:' + ca.col + '">' + ca.label + '</strong> &mdash; ' + ca.note;
+  renderCycleTargets(c);
+  renderZielKacheln(c);
+  rAlloc();
+}
+
+/* Ziel-Kacheln im Zyklus-Overlay */
+function renderCycleTargets(c){
+  var el = document.getElementById('cycle-targets');
+  if(!el) return;
+  var ca = CYCLE_ALLOC[c];
+  var out = '';
+  var items = [
+    {id:'stocks', l:'Aktien',    col:'#00e676'},
+    {id:'bonds',  l:'Anleihen',  col:'#00c8f0'},
+    {id:'gold',   l:'Gold',      col:'#ffab00'},
+    {id:'commod', l:'Rohst.',    col:'#ff9f1c'},
+    {id:'cash',   l:'Cash',      col:'#b388ff'},
+  ];
+  for(var i=0;i<items.length;i++){
+    out += '<div style="text-align:center;padding:6px 2px;background:#0a1628;border:1px solid #1a3050;border-radius:6px">';
+    out += '<div style="font-size:15px;font-weight:800;color:' + items[i].col + '">' + (ca[items[i].id]||0) + '%</div>';
+    out += '<div style="font-family:monospace;font-size:7px;color:var(--mut)">' + items[i].l + '</div>';
+    out += '</div>';
+  }
+  el.innerHTML = out;
+}
+
+/* Ziel-Kacheln unten */
+function renderZielKacheln(c){
+  var el = document.getElementById('ziel-kacheln');
+  if(!el) return;
+  var ca = CYCLE_ALLOC[c];
+  var items = [
+    {id:'stocks', l:'AKTIEN',    col:'#00e676'},
+    {id:'bonds',  l:'ANLEIHEN',  col:'#00c8f0'},
+    {id:'gold',   l:'GOLD',      col:'#ffab00'},
+    {id:'commod', l:'ROHST.',    col:'#ff9f1c'},
+    {id:'cash',   l:'CASH',      col:'#b388ff'},
+  ];
+  var out = '';
+  for(var i=0;i<items.length;i++){
+    out += '<div style="text-align:center;padding:8px 4px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">';
+    out += '<div style="font-size:17px;font-weight:700;color:' + items[i].col + '">' + (ca[items[i].id]||0) + '%</div>';
+    out += '<div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">' + items[i].l + '</div>';
+    out += '</div>';
+  }
+  el.innerHTML = out;
+}
+
 
 /* ============================================================
    GSR — Gold-Silver-Ratio Signal v5.9.47
@@ -4115,7 +4200,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.57 &middot; Daten aus geladener fundamentals.json</div>
+        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.58 &middot; Daten aus geladener fundamentals.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
@@ -4245,7 +4330,7 @@ function rptBuild(){
   out += '<div class="rpt-h1" style="font-size:18px;font-weight:800;color:#00c8f0;margin-bottom:4px">StockIQ Sektor-Analyse</div>';
   out += '<div class="rpt-h2" style="font-size:14px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#128202; ' + sec + ' &mdash; ' + dateStr + '</div>';
   out += '<div class="rpt-mut" style="font-family:monospace;font-size:9px;color:#7a9bb5">';
-  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v5.9.57</div>';
+  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v5.9.58</div>';
   out += '</div>';
 
   /* ── 0. Sektor-Performance-Ranking (alle Sektoren) ── */
@@ -4327,7 +4412,7 @@ function rptBuild(){
   /* ── Disclaimer ── */
   out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a2a3a;border-radius:8px;padding:10px;margin-bottom:10px">';
   out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5;line-height:1.5">';
-  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.57 generiert. ';
+  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.58 generiert. ';
   out += 'Er dient ausschlie&szlig;lich zu Informationszwecken und stellt keine Anlageberatung dar. ';
   out += 'Alle Daten stammen aus yfinance (Yahoo Finance) und sind ohne Gew&auml;hr. ';
   out += 'Investitionsentscheidungen sollten immer auf Basis eigener Recherche und ggf. professioneller Beratung getroffen werden.';
