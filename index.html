@@ -5405,15 +5405,7 @@ function rptTextAnalysis(tk, secStats){
   out += '</div>';
   return out;
 }
-  var st = null;
-  for(var i=0;i<STOCKS.length;i++){ if(STOCKS[i].t===tk){st=STOCKS[i];break;} }
-  if(!st) return '';
-  var fd = FD[tk] || {};
-  var sc = Math.round(cSc(st));
-  var sig = rptSigText(st);
-  var name = st.n || tk;
 
-  /* Hilfsfunktionen */
 /* ── Kompaktes Glossar (v5.9.55) ── */
 function rptGlossar(){
   var terms = [
