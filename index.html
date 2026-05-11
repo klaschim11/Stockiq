@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.65</title>
+<title>StockIQ v5.9.66</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.65 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.66 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -79,12 +79,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button class="tab active" onclick="goTab(0,this)">&#9889; Synopse <span class="chip" id="cnt">--</span></button>
     <button class="tab" onclick="goTab(1,this)">&#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
     <button class="tab" onclick="goTab(2,this)">&#11088; WL2 <span class="chip s" id="wl2-cnt">0</span></button>
-    <button class="tab" onclick="goTab(3,this)">&#128181; Fundamentals <span class="chip ai">AI</span></button>
-    <button class="tab" onclick="goTab(4,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
-    <button class="tab" onclick="goTab(5,this)">&#9878; Allokation</button>
-    <button class="tab" onclick="goTab(6,this)">&#128218; Hilfe</button>
-    <button class="tab" onclick="goTab(7,this)">&#128203; Roadmap</button>
-    <button class="tab" onclick="goTab(8,this);initDepot()">&#128200; Depot</button>
+    <button class="tab" onclick="goTab(3,this);initDepot()">&#128200; Depot</button>
+    <button class="tab" onclick="goTab(4,this)">&#128181; Fundamentals <span class="chip ai">AI</span></button>
+    <button class="tab" onclick="goTab(5,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
+    <button class="tab" onclick="goTab(6,this)">&#9878; Allokation</button>
+    <button class="tab" onclick="goTab(7,this)">&#128218; Hilfe</button>
+    <button class="tab" onclick="goTab(8,this)">&#128203; Roadmap</button>
   </div>
 </header>
 
@@ -336,7 +336,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div>
 
-<!-- ZYKLUS-OVERLAY v5.9.65 (Fidelity Business Cycle, Hambro/BlackRock) -->
+<!-- ZYKLUS-OVERLAY v5.9.66 (Fidelity Business Cycle, Hambro/BlackRock) -->
 <div style="background:#0c1420;border:1px solid #1a3050;border-radius:12px;padding:14px;margin-bottom:14px">
   <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#9881; Konjunkturzyklus-Overlay <span style="font-family:monospace;font-size:9px;color:var(--mut)">Fidelity Business Cycle 2025</span></div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px">
@@ -371,7 +371,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <!-- ZIEL-INFO -->
 <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px">
-  <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">&#128270; Ziel-Allokation (zyklus-adjustiert, v5.9.65)</div>
+  <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">&#128270; Ziel-Allokation (zyklus-adjustiert, v5.9.66)</div>
   <div id="ziel-kacheln" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px"></div>
   <div style="font-family:monospace;font-size:9px;color:var(--mut);line-height:1.6">
     <strong style="color:#dce8f5">Basis (Hambro/BlackRock 2026):</strong> 55% Aktien / 15% Anleihen / 12% Gold / 8% Rohstoffe / 10% Cash<br>
@@ -471,7 +471,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.65 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.66 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -516,7 +516,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
     <div style="font-size:12px;color:var(--mut);line-height:1.7">
       <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD SF</strong> = Score-Filter: SELL unterdrueckt weil Score &ge; 55. Toggle: SF-Button.</div>
-      <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD DVG</strong> = Deep Value Divergence (v5.9.65): SELL unterdrueckt weil Fund &ge;80 + RSI &lt;35 + Bullish Divergenz. Gutes Unternehmen in technischer Schwaechephase.</div>
+      <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD DVG</strong> = Deep Value Divergence (v5.9.66): SELL unterdrueckt weil Fund &ge;80 + RSI &lt;35 + Bullish Divergenz. Gutes Unternehmen in technischer Schwaechephase.</div>
       <div style="margin-bottom:5px"><strong style="color:#00c8f0">HOLD DR</strong> = Dividenden-Hold: SELL unterdrueckt weil Dividendenrendite &ge; max(Floor, Bund+2pp). Toggle: DR-Button + Bund%-Eingabe.</div>
       <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD SF+D</strong> = Beide Kriterien aktiv gleichzeitig (Score UND Dividende halten).</div>
       <div style="margin-bottom:5px"><strong style="color:#f0c000">PEG-GEBLOCKT</strong> = technisch kaufbar, aber PEG &gt;= 3.0.</div>
@@ -874,7 +874,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.65 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.66 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -883,7 +883,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <span style="color:#7a9bb5">Datei</span><span style="color:#7a9bb5">Version</span><span style="color:#7a9bb5">Zweck</span><span style="color:#7a9bb5">Status</span>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 2fr 1fr;gap:5px 8px;font-family:monospace">
-      <span style="color:#dce8f5">Dashboard</span><span style="color:#00e57a">v5.9.65</span><span style="color:var(--mut)">iOS Safari, GitHub Pages</span><span style="color:#00e57a">&#9679; Prod</span>
+      <span style="color:#dce8f5">Dashboard</span><span style="color:#00e57a">v5.9.66</span><span style="color:var(--mut)">iOS Safari, GitHub Pages</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">fund_juno v7.9.9 | Fundamentals + Owner Earnings + Jahres-Snapshot</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">alpha_juno</span><span style="color:#00e57a">v6b_6m-u4</span><span style="color:var(--mut)">Walk-Forward 6M OOS</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">annual.json</span><span style="color:#00e57a">2021&ndash;2026</span><span style="color:var(--mut)">Jahres-Snapshots (6 Jahre)</span><span style="color:#00e57a">&#9679; Aktiv</span>
@@ -892,7 +892,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 
   <!-- ── Score-Architektur ── -->
-  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#127919; Score-Architektur v5.9.65</div>
+  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#127919; Score-Architektur v5.9.66</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px;font-size:11px">
     <div style="display:grid;grid-template-columns:auto 1fr 2fr;gap:5px 12px;font-family:monospace">
       <span style="color:#00e57a;font-weight:700">Mom 25%</span><span style="color:#dce8f5">momSc()</span><span style="color:var(--mut)">Skip-Month 11M + MACD + RSI &middot; VIX-D&auml;mpfung &times;1.0/0.6/0.2 &middot; V2X f&uuml;r EU-Ticker &middot; Bond-Div-Faktor</span>
@@ -1143,13 +1143,13 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 </div><!-- Ende p7 Roadmap -->
 
 <!-- ============================================================
-     TAB p8: DEPOT-TRACKING v5.9.65
+     TAB p8: DEPOT-TRACKING v5.9.66
      WL2-basiert + manueller Selektor + Zeitreihen-Chart (Canvas)
      ============================================================ -->
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v5.9.65
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v5.9.66
   </div>
 
   <!-- ── Position hinzufügen ── -->
@@ -1219,7 +1219,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.65 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.66 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1234,6 +1234,7 @@ var STOCKS=[
   {t:'NVDA',n:'NVIDIA Corp',p:171.80,chg:-1.4,rsi:38,pe:42,eg:80,peg:0.53,above200:false,macdCross:'below_zero',macdLine:-2.80,macdSig:-3.20,hist:0.40,div:'bull_regular',sr:true,sw:false,atr:12,mom:62,trend:48,fund:58,risk:55},
   {t:'TSLA',n:'Tesla Inc',p:252.80,chg:2.8,rsi:42,pe:88,eg:8,peg:11.0,above200:false,macdCross:'below_zero',macdLine:-4.10,macdSig:-3.20,hist:-0.90,div:'none',sr:false,sw:true,atr:18,mom:38,trend:32,fund:22,risk:28},
   {t:'AVGO',n:'Broadcom Inc',p:168.20,chg:-0.9,rsi:41,pe:35,eg:24,peg:1.46,above200:false,macdCross:'below_zero',macdLine:-1.80,macdSig:-2.20,hist:0.40,div:'bull_regular',sr:true,sw:false,atr:7,mom:55,trend:50,fund:72,risk:60},
+  {t:'MU',n:'Micron Technology',p:118.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
   {t:'QCOM',n:'Qualcomm',p:148.30,chg:-1.1,rsi:40,pe:16,eg:14,peg:1.14,above200:false,macdCross:'below_zero',macdLine:-1.20,macdSig:-1.60,hist:0.40,div:'bull_hidden',sr:true,sw:false,atr:5,mom:52,trend:46,fund:74,risk:62},
   {t:'CDNS',n:'Cadence Design Sys',p:224.50,chg:0.4,rsi:52,pe:64,eg:18,peg:3.56,above200:false,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.90,hist:0.30,div:'none',sr:true,sw:false,atr:8,mom:56,trend:54,fund:70,risk:58},
   {t:'SNPS',n:'Synopsys',p:448.20,chg:0.2,rsi:50,pe:58,eg:17,peg:3.41,above200:false,macdCross:'below_zero',macdLine:-0.80,macdSig:-1.10,hist:0.30,div:'none',sr:true,sw:false,atr:14,mom:54,trend:52,fund:72,risk:60},
@@ -1264,7 +1265,6 @@ var STOCKS=[
   {t:'BTI',n:'British American Tobacco',p:34.80,chg:0.2,rsi:48,pe:8,eg:-2,peg:null,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.10,div:'none',sr:true,sw:false,atr:0.8,mom:50,trend:52,fund:62,risk:68},
   {t:'RIO',n:'Rio Tinto',p:58.40,chg:-0.4,rsi:44,pe:11,eg:4,peg:2.75,above200:false,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.50,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:1.5,mom:48,trend:44,fund:72,risk:64},
   {t:'SHEL.L',n:'Shell plc (London)',p:2850.00,chg:0.3,rsi:50,pe:13,eg:3,peg:4.33,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:3.00,div:'none',sr:true,sw:false,atr:40,mom:52,trend:52,fund:68,risk:66},
-  {t:'SHEL',n:'Shell plc',p:62.20,chg:0.3,rsi:50,pe:13,eg:3,peg:4.33,above200:true,macdCross:'below_zero',macdLine:-0.20,macdSig:-0.30,hist:0.10,div:'none',sr:true,sw:false,atr:1.4,mom:52,trend:52,fund:68,risk:66},
   {t:'RMS',n:'Hermes International',p:2248.00,chg:0.5,rsi:53,pe:48,eg:14,peg:3.43,above200:true,macdCross:'below_zero',macdLine:-6.00,macdSig:-8.50,hist:2.50,div:'bull_hidden',sr:true,sw:false,atr:55,mom:65,trend:64,fund:86,risk:74},
   {t:'8058T',n:'Mitsubishi Corp',p:2840.00,chg:0.8,rsi:52,pe:11,eg:8,peg:1.38,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:3.00,div:'bull_hidden',sr:true,sw:false,atr:65,mom:62,trend:60,fund:80,risk:72},
   {t:'8001T',n:'Itochu Corp',p:7480.00,chg:0.6,rsi:54,pe:13,eg:9,peg:1.44,above200:true,macdCross:'below_zero',macdLine:-18.00,macdSig:-25.00,hist:7.00,div:'none',sr:true,sw:false,atr:140,mom:64,trend:62,fund:82,risk:74},
@@ -1321,7 +1321,6 @@ var STOCKS=[
   {t:'LONN',n:'Lonza Group AG',p:388.40,chg:-0.4,rsi:44,pe:36,eg:14,peg:2.57,above200:false,macdCross:'below_zero',macdLine:-2.00,macdSig:-2.80,hist:0.50,div:'none',sr:false,sw:false,atr:12,mom:48,trend:46,fund:72,risk:60},
   {t:'AZN',n:'AstraZeneca plc ADR',p:68.40,chg:0.3,rsi:52,pe:22,eg:12,peg:1.83,above200:true,macdCross:'below_zero',macdLine:-0.20,macdSig:-0.30,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:1.5,mom:58,trend:59,fund:78,risk:72},
   {t:'GSK.L',n:'GSK plc (London)',p:1750.00,chg:0.2,rsi:50,pe:12,eg:6,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-3.00,macdSig:-4.00,hist:1.00,div:'bull_hidden',sr:true,sw:false,atr:25,mom:54,trend:55,fund:74,risk:70},
-  {t:'GSK',n:'GSK plc ADR',p:38.40,chg:0.2,rsi:50,pe:12,eg:6,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.06,div:'bull_hidden',sr:true,sw:false,atr:0.9,mom:54,trend:55,fund:74,risk:70},
   {t:'ULVR',n:'Unilever plc',p:48.40,chg:0.2,rsi:50,pe:18,eg:4,peg:4.5,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.06,div:'bull_hidden',sr:true,sw:false,atr:1.1,mom:54,trend:56,fund:76,risk:76},
   {t:'DGE',n:'Diageo plc',p:22.40,chg:-0.3,rsi:40,pe:16,eg:4,peg:4.0,above200:false,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.10,hist:0.03,div:'bull_regular',sr:true,sw:false,atr:0.5,mom:44,trend:42,fund:74,risk:64},
   {t:'EXPN',n:'Experian plc',p:38.40,chg:0.5,rsi:55,pe:28,eg:12,peg:2.33,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.10,hist:0.04,div:'none',sr:true,sw:false,atr:0.9,mom:61,trend:62,fund:72,risk:66},
@@ -1355,6 +1354,9 @@ var STOCKS=[
   {t:'GS',n:'Goldman Sachs',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'MS',n:'Morgan Stanley',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'JPM',n:'JPMorgan Chase',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CNR',n:'Canadian National Railway',p:155.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'RY',n:'Royal Bank of Canada',p:148.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'SHOP',n:'Shopify Inc',p:92.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
   {t:'BAC',n:'Bank of America',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'AXP',n:'American Express',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'CB',n:'Chubb Ltd',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
@@ -1444,6 +1446,12 @@ var STOCKS=[
   {t:'BBVA.MC',n:'Banco Bilbao Vizcaya',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'ISP.MI',n:'Intesa Sanpaolo',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'UCG.MI',n:'UniCredit SpA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+
+  {t:'RHM.DE',n:'Rheinmetall AG',p:1680.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'SAF.PA',n:'Safran SA',p:245.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'HO.PA',n:'Thales SA',p:185.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'RR.L',n:'Rolls-Royce Holdings',p:780.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'BAES.L',n:'BAE Systems plc',p:1420.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
   {t:'LDO.MI',n:'Leonardo SpA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'ERG.MI',n:'ERG SpA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
   {t:'STLAM.MI',n:'Stellantis NV',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
@@ -1498,7 +1506,7 @@ var WL_SEL = null;
 var WL2 = {};          /* Ticker-Keys die in WL2 sind: {AAPL:true, MSFT:true, ...} */
 var WL2_SYNC = false;  /* true = Synopse+WL1 nur WL2-Ticker zeigen */
 var WL_SORT = 'score'; /* 'score' oder 'alpha' */
-var SELL_SCORE_FILTER = true;   /* v5.9.65: Standard-ein (IC-Validierung Ende Mai) */ /* Score-Filter: SELL nur wenn Score < SELL_SCORE_MIN */
+var SELL_SCORE_FILTER = true;   /* v5.9.66: Standard-ein (IC-Validierung Ende Mai) */ /* Score-Filter: SELL nur wenn Score < SELL_SCORE_MIN */
 var SELL_SCORE_MIN    = 55;    /* Schwellenwert (0-100) */
 var DIV_HOLD_FILTER   = false; /* Dividenden-Hold-Filter (v5.9.17) */
 var BUND_RATE         = 2.6;   /* 10J-Referenzzins in %, quartalsweise anpassen */
@@ -1570,7 +1578,7 @@ function mSig(s){
   if(ok){
     var fd3 = FD[s.t];
     var rsiVal = fd3 && fd3.rsi_val !== null && fd3.rsi_val !== undefined ? fd3.rsi_val : 50;
-    /* RSI-Cap v5.9.65: kein BUY STRONG bei RSI > 78 (ATH/Ueberhitzung)
+    /* RSI-Cap v5.9.66: kein BUY STRONG bei RSI > 78 (ATH/Ueberhitzung)
        Begruendung: Chance/Risiko fuer Neueinstieg ungünstig nahe ATH.
        Methodisch: Amplitude des Signals begrenzen, nicht Signal entfernen. */
     var rsiOverheat = rsiVal > 78;
@@ -1579,7 +1587,7 @@ function mSig(s){
       return rsiOverheat ? 'buy' : 'strong';  /* STRONG -> BUY wenn RSI > 78 */
     }
     if(pgBk(s)) return 'pb';
-    /* RSI-Erschoepfungs-Signal v5.9.65: BUY abschwaechen bei Bearish Div + hohem RSI */
+    /* RSI-Erschoepfungs-Signal v5.9.66: BUY abschwaechen bei Bearish Div + hohem RSI */
     var fd4 = FD[s.t];
     var rsi4val = fd4 && fd4.rsi_val !== null && fd4.rsi_val !== undefined ? fd4.rsi_val : 50;
     var hasBearDiv = (s.div === 'bear_regular' || s.div === 'bear_hidden');
@@ -1603,7 +1611,7 @@ function mSig(s){
     if(sfActive)           return 'hold_sf';
     if(drActive)           return 'hold_sf_div';
 
-    /* Deep Value Divergence Override v5.9.65 (Option B+C)
+    /* Deep Value Divergence Override v5.9.66 (Option B+C)
        Bedingung: Fund > 80 + RSI < 35 + Bullish Divergenz
        Logik: "Good company, weak chart" — Fundamentals dominieren
        Quellen: Piotroski 2000 (Value-Turnaround), ChatGPT-Analyse PYPL Mai 2026
@@ -1764,7 +1772,7 @@ function momSc(s){
   if(priceMom===null){return applyDamp(Math.round(s.mom*adj+50*(1.0-adj)));}
   var rm=Math.round(s.mom*0.5+priceMom*0.5);
 
-  /* RSI-Ueberhitzungs-Daempfung v5.9.65 (Barroso/Santa-Clara 2015)
+  /* RSI-Ueberhitzungs-Daempfung v5.9.66 (Barroso/Santa-Clara 2015)
      RSI > 80: Momentum ueberdehnt → Daempfung ×0.70 (kein Neueinstieg)
      RSI > 75: Erhoeht → leichte Daempfung ×0.85
      Logik: hohe RSI = nahe ATH = schlechtes Chance/Risiko fuer Einstieg */
@@ -2122,7 +2130,7 @@ tick();setInterval(tick,1000);
      ============================================================ -->
 <script>
 function goTab(n,btn){
-  var pgs=['p0','p1','p2','p3','p4','p5','p6','p7','p8'],i;
+  var pgs=['p0','p1','p2','p8','p3','p4','p5','p6','p7'],i; /* v5.9.66: Depot(p8) nach WL2 */
   for(i=0;i<pgs.length;i++){var pg=document.getElementById(pgs[i]);if(pg)pg.style.display='none';}
   var tabs=document.querySelectorAll('.tab');
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
@@ -3308,7 +3316,7 @@ function loadFund(inp){
   reader.readAsText(file);
 }
 
-/* ---- Annual JSON laden (v5.9.65) ───────────────────────────
+/* ---- Annual JSON laden (v5.9.66) ───────────────────────────
    Laedt stockiq_annual.json → ANNUAL_DATA.
    Akzeptiert: Array [...] | Objekt {years:[...]} | Single {year:...}
    Kein Pflichtfeld — Dashboard funktioniert ohne annual.json.
@@ -3872,7 +3880,7 @@ document.addEventListener('DOMContentLoaded', function(){
    Storage-Key: stockiq_alloc_v520
    ============================================================ */
 var ALLOC_KEY = 'stockiq_alloc_v520';
-/* ALLOC_TARGETS: wird durch buildAllocTargets(CURRENT_CYCLE) gesetzt (v5.9.65)
+/* ALLOC_TARGETS: wird durch buildAllocTargets(CURRENT_CYCLE) gesetzt (v5.9.66)
    Initialisierung erst in initAlloc() nach DOM-Ready */
 var ALLOC_TARGETS = [];
 var ALLOC_BASE = [
@@ -4057,7 +4065,7 @@ function rAlloc(){
 }
 
 /* ============================================================
-   DEPOT-TRACKING v5.9.65
+   DEPOT-TRACKING v5.9.66
    WL2-basiert + manuell | Canvas-Chart | localStorage
    ============================================================ */
 var DEPOT_KEY = 'stockiq_depot_v1';
@@ -4151,7 +4159,7 @@ function dpClearAll(){
   dpRender();
 }
 
-/* Aktuellen Kurs aus FD[] — EUR-normiert (v5.9.65) */
+/* Aktuellen Kurs aus FD[] — EUR-normiert (v5.9.66) */
 function dpCurrentPrice(tk){
   var fd = FD[tk];
   if(!fd) return null;
@@ -4437,7 +4445,7 @@ function dpRender(){
 
 function initAlloc(){
   allocLoad();
-  ALLOC_TARGETS = buildAllocTargets(CURRENT_CYCLE);  /* v5.9.65: vor rAlloc() setzen */
+  ALLOC_TARGETS = buildAllocTargets(CURRENT_CYCLE);  /* v5.9.66: vor rAlloc() setzen */
   renderCycleTargets(CURRENT_CYCLE);
   renderZielKacheln(CURRENT_CYCLE);
   highlightCycleBtn(CURRENT_CYCLE);
@@ -4735,7 +4743,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.65 &middot; Daten aus geladener fundamentals.json</div>
+        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.66 &middot; Daten aus geladener fundamentals.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
@@ -4865,7 +4873,7 @@ function rptBuild(){
   out += '<div class="rpt-h1" style="font-size:18px;font-weight:800;color:#00c8f0;margin-bottom:4px">StockIQ Sektor-Analyse</div>';
   out += '<div class="rpt-h2" style="font-size:14px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#128202; ' + sec + ' &mdash; ' + dateStr + '</div>';
   out += '<div class="rpt-mut" style="font-family:monospace;font-size:9px;color:#7a9bb5">';
-  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v5.9.65</div>';
+  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v5.9.66</div>';
   out += '</div>';
 
   /* ── 0. Sektor-Performance-Ranking (alle Sektoren) ── */
@@ -4947,7 +4955,7 @@ function rptBuild(){
   /* ── Disclaimer ── */
   out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a2a3a;border-radius:8px;padding:10px;margin-bottom:10px">';
   out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5;line-height:1.5">';
-  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.65 generiert. ';
+  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.66 generiert. ';
   out += 'Er dient ausschlie&szlig;lich zu Informationszwecken und stellt keine Anlageberatung dar. ';
   out += 'Alle Daten stammen aus yfinance (Yahoo Finance) und sind ohne Gew&auml;hr. ';
   out += 'Investitionsentscheidungen sollten immer auf Basis eigener Recherche und ggf. professioneller Beratung getroffen werden.';
@@ -5222,7 +5230,7 @@ function rptSectorRanking(){
   return out;
 }
 
-/* ── Regelbasierte Textanalyse signal-konform (v5.9.65) ── */
+/* ── Regelbasierte Textanalyse signal-konform (v5.9.66) ── */
 function rptTextAnalysis(tk, secStats){
   var st = null;
   for(var i=0;i<STOCKS.length;i++){ if(STOCKS[i].t===tk){st=STOCKS[i];break;} }
@@ -5425,7 +5433,7 @@ function rptGlossar(){
     {t:'RSI', d:'Relative Strength Index (14). &lt;30 = &uuml;berverkauft (Kaufgelegenheit m&ouml;glich), &gt;70 = &uuml;berkauft, 40&ndash;60 = neutral.'},
     {t:'Divergenz', d:'bull_regular: RSI steigt bei fallendem Kurs = nachlassender Verkaufsdruck, m&ouml;gliche Trendwende. bear_regular: Gegenst&uuml;ck (Kauf-Warnsignal).'},
     {t:'SELL MA', d:'Signal: Kurs hat die 200-Tage-Linie (SMA200) unterschritten &mdash; Aufwärtstrend gebrochen. Unabh&auml;ngig vom MACD-Signal.'},
-    {t:'HOLD DVG', d:'Deep Value Divergence: Technisches SELL-Signal unterdrueckt weil Fund &ge;80 + RSI &lt;35 + Bullish Divergenz gleichzeitig. Zeigt: gutes Unternehmen in technischer Schwaechephase. Beobachten auf 200MA-Rueckkehr. (v5.9.65)'},
+    {t:'HOLD DVG', d:'Deep Value Divergence: Technisches SELL-Signal unterdrueckt weil Fund &ge;80 + RSI &lt;35 + Bullish Divergenz gleichzeitig. Zeigt: gutes Unternehmen in technischer Schwaechephase. Beobachten auf 200MA-Rueckkehr. (v5.9.66)'},
     {t:'Moat', d:'Wirtschaftlicher Burggraben nach Morningstar: Wide (sehr stark), Narrow (moderat), None (kein struktureller Vorteil). Wichtig f&uuml;r langfristige Haltestrategien.'},
   ];
 
