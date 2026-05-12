@@ -4592,11 +4592,12 @@ function initAlloc(){
 /* Aktienwert aus Depot-Tab vorbelegen (v5.9.68) */
 function allocPrefillFromDepot(){
   try {
-    depotLoad();  /* v5.9.68: sicherstellen dass Depot geladen */
+    depotLoad();  /* sicherstellen dass Depot geladen */
     var tot = dpCalcTotal();
     if(tot && tot.hasPrice > 0 && tot.val > 0){
       var el = document.getElementById('ai-stocks');
-      if(el && !el.value){
+      if(el){
+        /* Depot-Wert immer setzen (autoritaetive Quelle fuer Aktienwert) */
         el.value = Math.round(tot.val);
         var badge = document.getElementById('alloc-depot-badge');
         if(badge) badge.style.display = 'inline';
