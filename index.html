@@ -297,7 +297,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
 
-<!-- EINGABE-SEKTION -->
+<!-- SEKTOR-AMPEL v5.9.69 -->
+<div id="sektor-ampel" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px">
+  <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#127942; Sektor-Performance (12M ETF-Returns) <span style="font-family:monospace;font-size:8px;color:var(--mut)">aus fund_juno __macro__</span></div>
+  <div id="sektor-ampel-content" style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px"></div>
+  <div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:6px">&#128202; &gt;+10% Leading &middot; &#128993; 0-10% Neutral &middot; &#128308; &lt;0% Lagging</div>
+</div>
 <div id="alloc-inputs" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:14px">
   <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:12px">&#128221; Aktueller Portfoliowert eingeben</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
@@ -4324,6 +4329,7 @@ function dpRenderTable(){
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:right">+/-%</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Score</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Sig</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Skt</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px"></th></tr>';
 
   for(var i=0;i<DEPOT_POSITIONS.length;i++){
@@ -4365,6 +4371,7 @@ function dpRenderTable(){
     out += '<td style="padding:5px 6px;text-align:right;color:'+pnlC+';font-weight:700">'+(pnlPct!==null?(pnlPct>=0?'+':'')+pnlPct.toFixed(1)+'%':'n/a')+'</td>';
     out += '<td style="padding:5px 6px;text-align:center;color:#dce8f5;font-weight:700">'+sc+'</td>';
     out += '<td style="padding:5px 6px;text-align:center;color:'+sigC+';font-size:9px;font-weight:700">'+sigLbl+'</td>';
+    out += '<td style="padding:5px 6px;text-align:center">'+getSektorBadge(p.t)+'</td>';
     out += '<td style="padding:5px 6px;text-align:center"><button onclick="dpRemove('+i+')" style="background:transparent;border:1px solid #332;color:#ff6666;font-size:10px;padding:2px 7px;border-radius:4px;cursor:pointer">\u00d7</button></td>';
     out += '</tr>';
   }
@@ -4596,6 +4603,7 @@ function initAlloc(){
   rGSR();
   rBondETF();
   rBeckRegime();            /* v5.9.69: Beck-Krisen-Regime */
+  rSektorAmpel();           /* v5.9.69: Sektor-Ampel */
 }
 
 /* Aktienwert aus Depot-Tab vorbelegen (v5.9.69) */
@@ -4613,6 +4621,68 @@ function allocPrefillFromDepot(){
       }
     }
   } catch(e){}
+}
+
+/* Sektor-Ampel (v5.9.69) */
+function getSektorColor(mom){
+  if(mom===null||mom===undefined) return {col:'#7a9bb5',bg:'rgba(122,155,181,.08)',icon:'&#9898;',label:'n/a'};
+  if(mom>10)  return {col:'#00e57a',bg:'rgba(0,229,122,.08)',icon:'&#128202;',label:mom.toFixed(1)+'%'};
+  if(mom>=0)  return {col:'#ffab00',bg:'rgba(255,171,0,.08)',icon:'&#128993;',label:'+'+mom.toFixed(1)+'%'};
+  return          {col:'#ff5252',bg:'rgba(255,82,82,.08)',icon:'&#128308;',label:mom.toFixed(1)+'%'};
+}
+function getSektorMom(etfSym){
+  try{
+    var m=FD['__macro__'];
+    if(!m||!m.sector_etfs) return null;
+    var etf=m.sector_etfs[etfSym];
+    return (etf&&etf.mom12m!==null)?etf.mom12m:null;
+  } catch(e){return null;}
+}
+function rSektorAmpel(){
+  var el=document.getElementById('sektor-ampel');
+  var cont=document.getElementById('sektor-ampel-content');
+  if(!el||!cont) return;
+  var sectors=[
+    {sym:'XLE',name:'Energy'},{sym:'XLB',name:'Materials'},
+    {sym:'XLI',name:'Industrials'},{sym:'XLK',name:'Technology'},
+    {sym:'XLV',name:'Healthcare'},{sym:'XLF',name:'Financials'},
+    {sym:'XLY',name:'Cons.Cyc.'},{sym:'XLP',name:'Cons.Def.'},
+    {sym:'XLC',name:'Comm.Svc.'},{sym:'XLRE',name:'Real Est.'},
+    {sym:'XLU',name:'Utilities'}
+  ];
+  sectors.sort(function(a,b){
+    var ma=getSektorMom(a.sym); var mb=getSektorMom(b.sym);
+    if(ma===null&&mb===null) return 0;
+    if(ma===null) return 1; if(mb===null) return -1;
+    return mb-ma;
+  });
+  var hasData=sectors.some(function(s){return getSektorMom(s.sym)!==null;});
+  if(!hasData){el.style.display='none'; return;}
+  el.style.display='block';
+  var out='';
+  for(var i=0;i<sectors.length;i++){
+    var sec=sectors[i]; var mom=getSektorMom(sec.sym); var c=getSektorColor(mom);
+    var rank=i===0?'&#127947; ':i===1?'&#129352; ':i===2?'&#129353; ':'';
+    out+='<div style="padding:5px 4px;background:'+c.bg+';border:1px solid '+c.col+'44;border-radius:6px;text-align:center">';
+    out+='<div style="font-size:8px;color:var(--mut);font-family:monospace">'+rank+sec.name+'</div>';
+    out+='<div style="font-size:11px;font-weight:800;color:'+c.col+'">'+c.icon+' '+c.label+'</div>';
+    out+='</div>';
+  }
+  cont.innerHTML=out;
+}
+function getSektorBadge(ticker){
+  try{
+    var fd=FD[ticker]; if(!fd||!fd.sector) return '';
+    var map={'Healthcare':'XLV','Technology':'XLK','Financial Services':'XLF',
+      'Financials':'XLF','Energy':'XLE','Consumer Staples':'XLP',
+      'Consumer Defensive':'XLP','Consumer Cyclical':'XLY',
+      'Consumer Discretionary':'XLY','Industrials':'XLI',
+      'Basic Materials':'XLB','Materials':'XLB',
+      'Real Estate':'XLRE','Utilities':'XLU','Communication Services':'XLC'};
+    var etf=map[fd.sector]; if(!etf) return '';
+    var mom=getSektorMom(etf); var c=getSektorColor(mom);
+    return '<span style="font-size:9px;color:'+c.col+';margin-left:3px" title="'+fd.sector+' '+c.label+'">'+c.icon+'</span>';
+  } catch(e){return '';}
 }
 
 /* Beck-Krisen-Regime (v5.9.69, Andreas Beck / GPO) */
