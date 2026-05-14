@@ -533,6 +533,49 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div><strong style="color:var(--mut)">WEAK</strong> = Seitwaertsmarkt erkannt.</div>
     </div>
   </div>
+
+  <!-- SEKTOR-AMPEL ERKLAERUNG v5.9.69 -->
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#127942; Sektor-Ampel &amp; Triple-Confirmation (v5.9.69)</div>
+    <div style="font-size:11px;color:var(--mut);margin-bottom:10px;line-height:1.7">
+      Die <strong style="color:#dce8f5">Sektor-Ampel</strong> (Spalte &ldquo;Skt&rdquo; im Depot-Tab, Block im Allokations-Tab) zeigt ob der Sektor eines Titels in der aktuellen Marktphase f&uuml;hrt oder nachhinkt &mdash; basierend auf 12M-Return des Sektor-ETFs (XLV, XLK etc.)
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
+      <div style="text-align:center;padding:7px;background:rgba(0,229,122,.07);border:1px solid rgba(0,229,122,.3);border-radius:7px">
+        <div style="font-size:16px">&#128202;</div>
+        <div style="font-family:monospace;font-size:9px;color:#00e57a;font-weight:700">LEADING &gt;+10%</div>
+      </div>
+      <div style="text-align:center;padding:7px;background:rgba(255,171,0,.07);border:1px solid rgba(255,171,0,.3);border-radius:7px">
+        <div style="font-size:16px">&#128993;</div>
+        <div style="font-family:monospace;font-size:9px;color:#ffab00;font-weight:700">NEUTRAL 0-10%</div>
+      </div>
+      <div style="text-align:center;padding:7px;background:rgba(255,82,82,.07);border:1px solid rgba(255,82,82,.3);border-radius:7px">
+        <div style="font-size:16px">&#128308;</div>
+        <div style="font-family:monospace;font-size:9px;color:#ff5252;font-weight:700">LAGGING &lt;0%</div>
+      </div>
+    </div>
+    <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:6px">Interpretationsmatrix: Sektor &times; Signal</div>
+    <table style="width:100%;border-collapse:collapse;font-size:9px;margin-bottom:10px">
+      <tr style="background:#1a3a5c"><th style="color:#dce8f5;padding:4px 6px;text-align:left">Sektor</th><th style="color:#dce8f5;padding:4px 6px;text-align:left">Signal</th><th style="color:#dce8f5;padding:4px 6px">Interpretation</th><th style="color:#dce8f5;padding:4px 6px">Handlung</th></tr>
+      <tr style="background:#0a1628"><td style="padding:4px 6px;color:#00e57a">&#128202;</td><td style="padding:4px 6px;color:#00e57a">BUY/STRONG</td><td style="padding:4px 6px;color:#dce8f5">&#11088; Ideal &mdash; Sektor + Titel konvergieren</td><td style="padding:4px 6px;color:#00e57a">Aufbauen</td></tr>
+      <tr style="background:#0c1a2e"><td style="padding:4px 6px;color:#00e57a">&#128202;</td><td style="padding:4px 6px;color:#b07cf8">HOLD SF</td><td style="padding:4px 6px;color:#dce8f5">Titel schw&auml;cher als Sektor &mdash; unternehmensspezifisch</td><td style="padding:4px 6px;color:#ffab00">Beobachten</td></tr>
+      <tr style="background:#0a1628"><td style="padding:4px 6px;color:#00e57a">&#128202;</td><td style="padding:4px 6px;color:#ff6666">SELL MA</td><td style="padding:4px 6px;color:#dce8f5">Relative Schw&auml;che &mdash; Sektor f&uuml;hrt, Titel verliert</td><td style="padding:4px 6px;color:#ff5252">Kein Einstieg</td></tr>
+      <tr style="background:#0c1a2e"><td style="padding:4px 6px;color:#ffab00">&#128993;</td><td style="padding:4px 6px;color:#00e57a">BUY</td><td style="padding:4px 6px;color:#dce8f5">Titelselektion schl&auml;gt Sektor &mdash; ohne R&uuml;ckenwind</td><td style="padding:4px 6px;color:#ffab00">Normal kaufen</td></tr>
+      <tr style="background:#0a1628"><td style="padding:4px 6px;color:#ff5252">&#128308;</td><td style="padding:4px 6px;color:#ff6666">SELL</td><td style="padding:4px 6px;color:#dce8f5">&#10007; Doppeltes Warnsignal &mdash; Sektor + Titel schwach</td><td style="padding:4px 6px;color:#ff5252">Meiden</td></tr>
+      <tr style="background:#0c1a2e"><td style="padding:4px 6px;color:#ff5252">&#128308;</td><td style="padding:4px 6px;color:#00e57a">BUY</td><td style="padding:4px 6px;color:#dce8f5">Titelselektion gegen Sektor-Gegenwind</td><td style="padding:4px 6px;color:#ffab00">Klein positionieren</td></tr>
+    </table>
+    <div style="padding:10px;background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.2);border-radius:7px">
+      <div style="font-size:11px;font-weight:700;color:#ffd700;margin-bottom:6px">&#11088; Triple-Confirmation-Strategie</div>
+      <div style="font-size:10px;color:#dce8f5;margin-bottom:6px">H&ouml;chste Outperformance-Wahrscheinlichkeit wenn <strong>alle drei</strong> erf&uuml;llt:</div>
+      <div style="font-family:monospace;font-size:9px;color:#00e57a;margin-bottom:4px">1. &#128202; Sektor-Ampel gr&uuml;n (&gt;+10% ETF-Return)</div>
+      <div style="font-family:monospace;font-size:9px;color:#00e57a;margin-bottom:4px">2. &#9654; Signal = BUY oder STRONG</div>
+      <div style="font-family:monospace;font-size:9px;color:#00e57a;margin-bottom:6px">3. &#128200; Score &ge; 65</div>
+      <div style="font-size:9px;color:#7a9bb5;line-height:1.6">Verkauf wenn: Signal &rarr; SELL | Sektor &rarr; &#128308; | Score &lt; 55<br>
+      Quelle: Moskowitz/Grinblatt 1999 + Fama/French 2015 + Jegadeesh/Titman 1993<br>
+      <span style="color:#ffab00">&#9888; Empirische Validierung ausstehend &mdash; Short-IC Ende Mai 2026</span></div>
+    </div>
+  </div>
+
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:12px;color:#f0c000">&#128202; Kennzahlen-Glossar</div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">SCORE (0-100)</div><div style="font-size:12px;color:var(--mut)">Momentum 25% + Trend 20% + Fundamentals 35% + Risk 20% (inkl. Beta-Faktor ab v5.9.16).</div></div>
