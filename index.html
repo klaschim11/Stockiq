@@ -95,6 +95,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="display:flex;gap:6px">
       <button id="sync-btn-syn" onclick="toggleSync(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">&#128257; Alle</button>
       <button id="sf-btn" onclick="toggleSellFilter(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
+      <button id="hc-btn" onclick="toggleHCFilter(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">HC: aus</button>
       <button id="dr-btn" onclick="toggleDivFilter(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
       <span id="dr-config" style="display:none;align-items:center;gap:4px">
         <span style="font-family:monospace;font-size:9px;color:var(--mut)">Bund%</span>
@@ -134,6 +135,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button onclick="wlSetSort('score',this)" id="sort-score" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid var(--acc);color:var(--acc);background:rgba(0,200,240,.08);cursor:pointer">Score</button>
     <button onclick="wlSetSort('alpha',this)" id="sort-alpha" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">A-Z</button>
     <button id="wl-sf-btn" onclick="toggleSellFilter(document.getElementById('sf-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
+    <button id="wl-hc-btn" onclick="toggleHCFilter(document.getElementById('hc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">HC: aus</button>
     <button id="wl-dr-btn" onclick="toggleDivFilter(document.getElementById('dr-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
   </div>
   <div class="g4" id="wl-kpi" style="margin-bottom:12px"></div>
@@ -586,7 +588,22 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EV/EBITDA (v5.9.30)</div><div style="font-size:12px;color:var(--mut)">Enterprise Value / EBITDA &mdash; robusteres Value-Signal als P/E oder PEG. EV umfasst Marktkapitalisierung + Schulden &minus; Cash; EBITDA eliminiert Abschreibungseffekte. <span style="color:#00e57a">&lt;12x</span> guenstig &nbsp;<span style="color:#f0c000">12&ndash;20x</span> fair bis erhoht &nbsp;<span style="color:#ff6666">&gt;25x</span> teuer. Fliesst zu 40% in den Value-Score ein (PEG 60%). Quelle: Loughran/Wellman 2011 &mdash; EV/EBITDA outperformt P/E als Faktor &uuml;ber 40 Jahre.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">FCF YIELD</div><div style="font-size:12px;color:var(--mut)">FreeCashflow / Marktkapitalisierung. <span style="color:#00e57a">&gt;4%</span> stark &nbsp;<span style="color:#00c8f0">2-4%</span> gut &nbsp;<span style="color:#f0c000">0-2%</span> schwach &nbsp;<span style="color:#ff6666">&lt;0%</span> negativ.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ROCE / ROE</div><div style="font-size:12px;color:var(--mut)">ROCE = EBIT / (EK + LT-Schulden). Fallback ROE wenn nicht verfuegbar. <span style="color:#00e57a">&gt;25%</span> Burggraben &nbsp;<span style="color:#00c8f0">15-25%</span> stark.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DIVERGENZ</div><div style="font-size:12px;color:var(--mut)"><span style="color:#ff9f1c">bull_hidden</span> = Kurs HOH, MACD tiefer Hochpunkt = Trendfortsetzung up. <span style="color:#00e57a">bull_regular</span> = Kurs tieferes Tief, MACD hoeher = Trendumkehr.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#ff9f1c;font-weight:700;margin-bottom:6px">&#11088; DIVERGENZ &mdash; st&auml;rkstes Qualit&auml;tssignal in StockIQ</div>
+    <div style="font-size:11px;color:var(--mut);line-height:1.7;margin-bottom:8px">Divergenz = Kurs und MACD entwickeln sich gegens&auml;tzlich. Das signalisiert nachlassenden Verkaufsdruck (Bullish) bevor der Kurs dreht &mdash; ein vorlaufender Indikator. StockIQ nutzt Divergenz als Upgrade-Bedingung von BUY zu <strong style="color:#ff9f1c">STRONG BUY</strong>.</div>
+    <div style="background:#0a1628;border-radius:8px;padding:10px;margin-bottom:8px">
+      <div style="font-family:monospace;font-size:10px;color:#ff9f1c;font-weight:700;margin-bottom:4px">bull_hidden &mdash; Trendfortsetzung (st&auml;rkeres Signal)</div>
+      <div style="font-size:10px;color:#dce8f5;margin-bottom:3px">Kurs macht h&ouml;heres Hoch (HOH) &rarr; Aufw&auml;rtstrend intakt</div>
+      <div style="font-size:10px;color:#dce8f5;margin-bottom:6px">MACD macht tieferen Hochpunkt &rarr; kurzfristiger R&uuml;cksetzer im Trend</div>
+      <div style="font-family:monospace;font-size:9px;color:#ffab00">Interpretation: Der Trend ist gesund. R&uuml;cksetzer sind Kaufgelegenheiten.</div>
+      <div style="font-family:monospace;font-size:9px;color:#7a9bb5">Beispiel: SANDVIK steigt, MACD zieht kurz zur&uuml;ck &rarr; bull_hidden &rarr; STRONG BUY</div>
+    </div>
+    <div style="background:#0a1628;border-radius:8px;padding:10px">
+      <div style="font-family:monospace;font-size:10px;color:#00e57a;font-weight:700;margin-bottom:4px">bull_regular &mdash; Trendumkehr (Bodenbildung)</div>
+      <div style="font-size:10px;color:#dce8f5;margin-bottom:3px">Kurs macht tieferes Tief &rarr; Abw&auml;rtsdruck sichtbar</div>
+      <div style="font-size:10px;color:#dce8f5;margin-bottom:6px">MACD macht h&ouml;heren Tiefpunkt &rarr; Verkaufsdruck l&auml;sst nach</div>
+      <div style="font-family:monospace;font-size:9px;color:#ffab00">Interpretation: Bodenbildung wahrscheinlich. Einstieg mit Absicherung pr&uuml;fen.</div>
+      <div style="font-family:monospace;font-size:9px;color:#7a9bb5">Beispiel: PYPL tieferes Tief, MACD h&ouml;her &rarr; bull_regular + Fund 87 &rarr; HOLD DVG</div>
+    </div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ATR-HIST-FILTER (neu v5.3)</div><div style="font-size:12px;color:var(--mut)">Histogramm muss &gt; ATR &times; 0.05 sein. Filtert flache, unzuverlaessige MACD-Kreuzungen heraus.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">MOAT</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">Wide</span> = dauerhafter Wettbewerbsvorteil &nbsp;<span style="color:#00c8f0">Narrow</span> = moderater Vorteil &nbsp;<span style="color:var(--mut)">None</span> = kein Vorteil.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">RSI</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">&lt;30</span> ueberverkauft &nbsp;<span style="color:#ff6666">&gt;70</span> ueberkauft &nbsp;<span style="color:var(--mut)">30-70</span> neutral.</div></div>
@@ -1639,7 +1656,8 @@ var WL_SEL = null;
 var WL2 = {};          /* Ticker-Keys die in WL2 sind: {AAPL:true, MSFT:true, ...} */
 var WL2_SYNC = false;  /* true = Synopse+WL1 nur WL2-Ticker zeigen */
 var WL_SORT = 'score'; /* 'score' oder 'alpha' */
-var SELL_SCORE_FILTER = true;   /* v5.9.69: Standard-ein (IC-Validierung Ende Mai) */ /* Score-Filter: SELL nur wenn Score < SELL_SCORE_MIN */
+var SELL_SCORE_FILTER = true;   /* v5.9.69: Standard-ein (IC-Validierung Ende Mai) */
+var HC_FILTER = false;              /* v5.9.69: High-Conviction-Filter (Triple-Confirmation) */
 var SELL_SCORE_MIN    = 55;    /* Schwellenwert (0-100) */
 var DIV_HOLD_FILTER   = false; /* Dividenden-Hold-Filter (v5.9.17) */
 var BUND_RATE         = 2.6;   /* 10J-Referenzzins in %, quartalsweise anpassen */
@@ -2283,7 +2301,7 @@ function rSyn(){
   var i,s,sc,pool=getActiveStocks(),scored=[];
   for(i=0;i<pool.length;i++)scored.push({s:pool[i],sc:cSc(pool[i])});
   scored.sort(function(a,b){return b.sc-a.sc;});
-  var buys=0,pbs=0,sells=0,strongs=0;
+  var buys=0,pbs=0,sells=0,strongs=0,hcs=0;
   for(i=0;i<scored.length;i++){
     var sig=mSig(scored[i].s);
     if(sig==='strong')strongs++;
@@ -2291,6 +2309,8 @@ function rSyn(){
     else if(sig==='pb')pbs++;
     else if(sig==='rsi_block')rsiBlocks++;
     else if(isSell(sig)||sig==='weak')sells++;
+    /* HC-Zaehler: Triple-Confirmation */
+    if((sig==='buy'||sig==='strong') && isHC(scored[i].s, scored[i].sc)) hcs++;
   }
   var ce=document.getElementById('cnt');if(ce)ce.textContent=strongs+buys;
   var el=document.getElementById('s0');
@@ -2338,7 +2358,7 @@ function rSyn(){
   dqH+='<div style="font-family:monospace;font-size:8px;color:#456278">RSI:'+rsiQstr+'</div>';
   if(nSanity) dqH+='<div style="font-family:monospace;font-size:8px;color:#ff5252">&#9888; Sanity:'+nSanity+'</div>';
   dqH+='</div>';
-  if(el)el.innerHTML=vixH+dqH+kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
+  if(el)el.innerHTML=vixH+dqH+kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('&#11088; HC',hcs,'Score\u226565+Sektor+Mom','#ffd700')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
 
   /* STRONG BUY cards */
   var sStrong=[],sBuys=[],sPbs=[],sSells=[];
@@ -2423,17 +2443,22 @@ function rSyn(){
 function rWL(){
   var i,s,scored=getScored();
   var buys=0,pbs=0,sells=0,strongs=0,watches=0;
+  var hcBuys=0,hcStrongs=0;  /* v5.9.69: HC-gefilterte Zähler */
   for(i=0;i<scored.length;i++){
     var ms=mSig(scored[i].s);
-    if(ms==='strong')strongs++;
-    else if(ms==='buy')buys++;
-    else if(ms==='pb')pbs++;
-    else if(ms==='rsi_block')rsiBlocks++;
-    else if(isSell(ms)||ms==='weak')sells++;
+    if(ms==='strong'){ strongs++;
+      if(isHC(scored[i].s, scored[i].sc)) hcStrongs++;
+    } else if(ms==='buy'){ buys++;
+      if(isHC(scored[i].s, scored[i].sc)) hcBuys++;
+    } else if(ms==='pb') pbs++;
+    else if(ms==='rsi_block') rsiBlocks++;
+    else if(isSell(ms)||ms==='weak') sells++;
     else watches++;
   }
+  var dispStrongs = HC_FILTER ? hcStrongs : strongs;
+  var dispBuys    = HC_FILTER ? hcBuys    : buys;
   var kpi=document.getElementById('wl-kpi');
-  if(kpi)kpi.innerHTML=kpiCard('STRONG',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000')+kpiCard('Sell/Weak',sells,'','#ff6666');
+  if(kpi)kpi.innerHTML=kpiCard('STRONG',dispStrongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',dispBuys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000')+kpiCard('Sell/Weak',sells,'','#ff6666');
   wlRend(scored);
 }
 
@@ -2452,6 +2477,8 @@ function wlRend(scored){
   var gBuy=[],gHold=[],gSell=[];
   for(i=0;i<scored.length;i++){
     s=scored[i].s;sc=scored[i].sc;sig=mSig(s);
+    /* HC-Filter v5.9.69: isHC() Triple-Confirmation */
+    if(HC_FILTER && (sig==='buy'||sig==='strong'||sig==='pb') && !isHC(s,sc)) continue;
     if(WL_FILTER!=='all'){
       if(WL_FILTER==='strong'&&sig!=='strong')continue;
       if(WL_FILTER==='buy'&&sig!=='buy')continue;
@@ -2790,6 +2817,20 @@ function toggleSellFilter(btn){
     b.style.background  = SELL_SCORE_FILTER ? 'rgba(176,124,248,.1)' : 'transparent';
   }
   rSyn();rWL();
+}
+
+/* ---- High-Conviction-Filter Toggle (v5.9.69) ---- */
+function toggleHCFilter(btn){
+  HC_FILTER = !HC_FILTER;
+  var hcBtns = document.querySelectorAll('#hc-btn, #wl-hc-btn'), i;
+  for(i=0;i<hcBtns.length;i++){
+    var b = hcBtns[i]; if(!b) continue;
+    b.textContent    = HC_FILTER ? 'HC: ein' : 'HC: aus';
+    b.style.borderColor = HC_FILTER ? '#ffd700' : '#1a2a3a';
+    b.style.color       = HC_FILTER ? '#ffd700' : 'var(--mut)';
+    b.style.background  = HC_FILTER ? 'rgba(255,215,0,.1)' : 'transparent';
+  }
+  rSyn(); rWL();
 }
 
 /* ---- Dividenden-Hold-Filter Toggle (v5.9.17) ---- */
@@ -4664,6 +4705,26 @@ function allocPrefillFromDepot(){
       }
     }
   } catch(e){}
+}
+
+/* isHC: Triple-Confirmation-Check (v5.9.69) — zentrale Funktion */
+function isHC(s, sc){
+  try{
+    if(!sc) sc = cSc(s);
+    if(sc < 65) return false;
+    var fd = FD[s.t] || {};
+    var mom = fd.mom_skip !== null && fd.mom_skip !== undefined ? fd.mom_skip :
+              (fd.mom12m_ret !== null && fd.mom12m_ret !== undefined ? fd.mom12m_ret : null);
+    if(mom === null || mom <= 5) return false;
+    var smap = {'Healthcare':'XLV','Technology':'XLK','Financial Services':'XLF',
+      'Financials':'XLF','Energy':'XLE','Consumer Staples':'XLP','Consumer Defensive':'XLP',
+      'Consumer Cyclical':'XLY','Consumer Discretionary':'XLY','Industrials':'XLI',
+      'Basic Materials':'XLB','Materials':'XLB','Real Estate':'XLRE',
+      'Utilities':'XLU','Communication Services':'XLC'};
+    if(!fd.sector || !smap[fd.sector]) return false;
+    var etfMom = getSektorMom(smap[fd.sector]);
+    return etfMom !== null && etfMom > 10;
+  } catch(e){ return false; }
 }
 
 /* Sektor-Ampel (v5.9.69) */
