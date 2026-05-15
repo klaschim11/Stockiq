@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.70</title>
+<title>StockIQ v5.9.71</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.70 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.71 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -138,7 +138,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button id="wl-hc-btn" onclick="toggleHCFilter(document.getElementById('hc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">HC: aus</button>
     <button id="wl-dr-btn" onclick="toggleDivFilter(document.getElementById('dr-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
   </div>
-  <div class="g4" id="wl-kpi" style="margin-bottom:12px"></div>
+  <div class="g4" id="wl-kpi" style="margin-bottom:8px"></div>
+  <!-- v5.9.71: Synopse-Vergleichszeile -->
+  <div id="wl-syn-bar" style="background:rgba(255,159,28,.06);border:1px solid rgba(255,159,28,.2);border-radius:8px;padding:7px 12px;margin-bottom:10px;display:flex;align-items:center;flex-wrap:wrap;gap:6px"></div>
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
     <button class="tf active" onclick="wlFilt('all',this)">Alle</button>
     <button class="tf" onclick="wlFilt('strong',this)">&#11088; STRONG</button>
@@ -481,7 +483,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.70 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.71 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -506,6 +508,53 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div><strong style="color:#dce8f5">6. Hilfe</strong> &mdash; Diese Seite.</div>
     </div>
   </div>
+  <!-- v5.9.71: Synopse vs Watchlist Erklaerung -->
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00e57a">&#128270; Synopse vs. Watchlist &mdash; Unterschiede</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.8">
+      <div style="margin-bottom:10px">Beide Tabs zeigen dieselben Signale &mdash; aber aus verschiedenen Perspektiven. Die Zaehlungen <strong style="color:#dce8f5">koennen abweichen</strong>, weil unterschiedliche Filter aktiv sind.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+        <div style="background:#0a1628;border-left:3px solid #ff9f1c;border-radius:6px;padding:10px">
+          <div style="font-size:11px;font-weight:700;color:#ff9f1c;margin-bottom:6px">&#9889; SYNOPSE</div>
+          <div style="font-size:11px;color:var(--mut);line-height:1.7">
+            <div>&#8594; <strong style="color:#dce8f5">Tagesaktion</strong>: Was tue ich heute?</div>
+            <div>&#8594; Immer <strong style="color:#dce8f5">alle 269 Ticker</strong> (kein WL2-Filter)</div>
+            <div>&#8594; Zeigt <strong style="color:#dce8f5">Top 3 je Signal</strong></div>
+            <div>&#8594; VIX-Regime + DQ-Status sichtbar</div>
+            <div>&#8594; SF/HC/DR-Filter wirken</div>
+          </div>
+        </div>
+        <div style="background:#0a1628;border-left:3px solid #00e57a;border-radius:6px;padding:10px">
+          <div style="font-size:11px;font-weight:700;color:#00e57a;margin-bottom:6px">&#128202; WATCHLIST</div>
+          <div style="font-size:11px;color:var(--mut);line-height:1.7">
+            <div>&#8594; <strong style="color:#dce8f5">Positionsmonitor</strong>: Was halte ich?</div>
+            <div>&#8594; Optional nur <strong style="color:#dce8f5">WL2</strong> (eigene Titel)</div>
+            <div>&#8594; Zeigt <strong style="color:#dce8f5">alle Titel</strong> nach Score</div>
+            <div>&#8594; Drei Gruppen: BUY / HOLD / SELL</div>
+            <div>&#8594; SF/HC/DR-Filter wirken identisch</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:rgba(255,82,82,.08);border-left:3px solid #ff5252;border-radius:6px;padding:10px;margin-bottom:8px">
+        <div style="font-size:11px;font-weight:700;color:#ff6666;margin-bottom:4px">&#9888; Warum Synopse STRONG=12 und WL STRONG=2 zeigen kann:</div>
+        <div style="font-size:11px;color:var(--mut);line-height:1.7">
+          <div>&#8226; WL-Filter <strong style="color:#dce8f5">HC: ein</strong> aktiv &rarr; WL zeigt nur Triple-Confirmation-Titel</div>
+          <div>&#8226; WL-Sync-Button auf <strong style="color:#dce8f5">[&gt;] WL2</strong> &rarr; WL zeigt nur deine 39 WL2-Titel</div>
+          <div>&#8226; Synopse laeuft immer ueber alle 269 Ticker</div>
+        </div>
+      </div>
+      <div style="background:rgba(0,200,240,.07);border-left:3px solid #00c8f0;border-radius:6px;padding:10px">
+        <div style="font-size:11px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#128161; Empfohlener Workflow:</div>
+        <div style="font-size:11px;color:var(--mut);line-height:1.7">
+          <div><strong style="color:#dce8f5">1. Synopse</strong> &rarr; Marktlage + VIX + Top-Signale einschaetzen</div>
+          <div><strong style="color:#dce8f5">2. WL (Alle)</strong> &rarr; Synopse-Vergleichszeile zeigt Gesamtuniverse-Zaehler</div>
+          <div><strong style="color:#dce8f5">3. WL (WL2)</strong> &rarr; Sync-Button: nur eigene Positionen pruefen</div>
+          <div><strong style="color:#dce8f5">Filter synchron halten:</strong> SF/HC/DR gelten fuer beide Tabs gleichzeitig</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#11088; Signal-Logik v5.9.x</div>
     <div style="padding:10px 12px;background:rgba(255,159,28,.07);border-left:3px solid #ff9f1c;border-radius:6px;margin-bottom:10px;font-family:monospace;font-size:11px">
@@ -678,6 +727,13 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Neu seit v5.9.45 (Mai 2026)</div>
+
+    <!-- v5.9.71 -->
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.71 &mdash; Synopse/WL-Bruecke + Hilfe-Erklaerung</div>
+    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
+      <div>&#10003; <strong style="color:#dce8f5">Synopse-Vergleichszeile in WL</strong>: Kompakte Zeile unter den WL-Karten zeigt Gesamtuniverse-Zaehler (alle 269 Ticker, ungefiltert): STRONG / BUY / PEG-Blk / SELL. Erklaert sofort warum Synopse und WL unterschiedliche Zahlen zeigen koennen. HC-Filter-Status wird angezeigt.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Hilfe-Tab: Synopse vs. WL</strong>: Neuer Erklaerungsblock mit Perspektiven-Vergleich (Tagesaktion vs. Positionsmonitor), Ursachen fuer Zaehldifferenzen, und empfohlenem Workflow. v5.9.71</div>
+    </div>
 
     <!-- v5.9.70 -->
     <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.70 &mdash; EV/EBIT + EPS-Revision (Buffett/Damodaran + Twin Momentum)</div>
@@ -2506,6 +2562,26 @@ function rWL(){
   var dispBuys    = HC_FILTER ? hcBuys    : buys;
   var kpi=document.getElementById('wl-kpi');
   if(kpi)kpi.innerHTML=kpiCard('STRONG',dispStrongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',dispBuys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000')+kpiCard('Sell/Weak',sells,'','#ff6666');
+  /* ---- v5.9.71: Aktions-Zeile Synopse-Zaehler ---- */
+  /* Synopse-Gesamtzaehler (ungefiltert) fuer Kontext-Vergleich */
+  var synPool=getActiveStocks(), synStrong=0, synBuy=0, synSell=0, synPB=0;
+  for(var _i=0;_i<synPool.length;_i++){
+    var _sig=mSig(synPool[_i]);
+    if(_sig==='strong')synStrong++;
+    else if(_sig==='buy')synBuy++;
+    else if(_sig==='pb')synPB++;
+    else if(isSell(_sig)||_sig==='weak')synSell++;
+  }
+  var synBar=document.getElementById('wl-syn-bar');
+  if(synBar){
+    var hcNote=HC_FILTER?' <span style="font-size:9px;color:#ffd700">(HC-Filter aktiv)</span>':'';
+    synBar.innerHTML='<span style="font-size:10px;color:var(--mut);margin-right:6px">Synopse:</span>'
+      +'<span style="font-size:10px;color:#ff9f1c;margin-right:8px">&#11088; '+synStrong+'</span>'
+      +'<span style="font-size:10px;color:#00e57a;margin-right:8px">BUY '+synBuy+'</span>'
+      +'<span style="font-size:10px;color:#f0c000;margin-right:8px">PEG-Blk '+synPB+'</span>'
+      +'<span style="font-size:10px;color:#ff6666">SELL '+synSell+'</span>'
+      +hcNote;
+  }
   wlRend(scored);
 }
 
