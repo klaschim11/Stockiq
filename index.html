@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.69</title>
+<title>StockIQ v5.9.70</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.69 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; Skip-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.70 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -481,7 +481,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.69 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.70 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -678,6 +678,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Neu seit v5.9.45 (Mai 2026)</div>
+
+    <!-- v5.9.70 -->
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.70 &mdash; EV/EBIT + EPS-Revision (Buffett/Damodaran + Twin Momentum)</div>
+    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
+      <div>&#10003; <strong style="color:#dce8f5">EV/EBIT Signal (valSc)</strong>: Neues Value-Signal analog EV/EBITDA. Buffett (2002): D&amp;A ist realer Kostenfaktor &mdash; EBITDA ignoriert ihn. EV/EBIT sauberer f&uuml;r kapitalintensive Branchen (Industrials, Telcos, Utilities). Quelle: Damodaran. Beide verf&uuml;gbar: valSc = PEG&times;50% + EV/EBITDA&times;25% + EV/EBIT&times;25%. Fallback-Kette: beide &rarr; einzelne &rarr; PEG allein.</div>
+      <div>&#10003; <strong style="color:#dce8f5">EPS-Revision-Score (momSc)</strong>: Fundamentales Momentum als 3. Komponente in momSc(). Quelle: fd.eps_growth (earningsGrowth YoY aus yfinance). Normierung: 0% = Score 50, +40% &asymp; 98, &minus;40% &asymp; 2. Wenn verf&uuml;gbar: mom = MACD&times;45% + Skip-Mom&times;45% + EPS-Mom&times;10%. Gibt null zur&uuml;ck wenn kein eps_growth &rarr; Fallback auf bisherige 50/50-Formel. Akademisch: Validea Twin Momentum, O&rsquo;Shaughnessy 2012.</div>
+      <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.20</strong>: +ev_ebit (EV/EBIT aus enterpriseValue/EBIT) +eps_growth (earningsGrowth&times;100). Sanity: ev_ebit &gt;60&rarr;None; eps_growth &plusmn;200%.</div>
+    </div>
 
     <!-- v5.9.69 -->
     <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.69 — Bugfixes</div>
@@ -1041,11 +1049,11 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#127919; Score-Architektur v5.9.69</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px;font-size:11px">
     <div style="display:grid;grid-template-columns:auto 1fr 2fr;gap:5px 12px;font-family:monospace">
-      <span style="color:#00e57a;font-weight:700">Mom 25%</span><span style="color:#dce8f5">momSc()</span><span style="color:var(--mut)">Skip-Month 11M + MACD + RSI &middot; VIX-D&auml;mpfung &times;1.0/0.6/0.2 &middot; V2X f&uuml;r EU-Ticker &middot; Bond-Div-Faktor</span>
+      <span style="color:#00e57a;font-weight:700">Mom 25%</span><span style="color:#dce8f5">momSc()</span><span style="color:var(--mut)">Skip-Month 11M + MACD + RSI + EPS-Revision (10%) &middot; VIX-D&auml;mpfung &times;1.0/0.6/0.2 &middot; V2X f&uuml;r EU-Ticker &middot; Bond-Div-Faktor</span>
       <span style="color:#00e57a;font-weight:700">Trend 20%</span><span style="color:#dce8f5">SMA200</span><span style="color:var(--mut)">Abstand zur 200MA &middot; MACD Zero-Line &middot; ATR-Filter</span>
       <span style="color:#00c8f0;font-weight:700">Fund 35%</span><span style="color:#dce8f5">fSc()</span><span style="color:var(--mut)">ROCE 30% + FCF 30% + Value 20% + Debt 15% + Konsistenz 5%</span>
       <span style="color:#7a9bb5;font-weight:700">&nbsp;&nbsp;&rarr; FCF</span><span style="color:#dce8f5">fcf_yield</span><span style="color:var(--mut)">FreeCashflow / MarketCap &middot; geplant: + Owner Earnings (OCF &minus; Maint.Capex) als Erg&auml;nzung</span>
-      <span style="color:#00c8f0;font-weight:700">&nbsp;&nbsp;&rarr; Value 20%</span><span style="color:#dce8f5">valSc</span><span style="color:var(--mut)">PEG-rel (sektor-neutral) &times;60% + EV/EBITDA &times;40% &middot; v5.9.41</span>
+      <span style="color:#00c8f0;font-weight:700">&nbsp;&nbsp;&rarr; Value 20%</span><span style="color:#dce8f5">valSc</span><span style="color:var(--mut)">PEG-rel &times;50% + EV/EBITDA &times;25% + EV/EBIT &times;25% (dual signal v5.9.70) &middot; Fallback: einzelne Signale</span>
       <span style="color:#00c8f0;font-weight:700">&nbsp;&nbsp;&rarr; Kons. 5%</span><span style="color:#dce8f5">consScore()</span><span style="color:var(--mut)">Std-Abw ROCE 2021&ndash;2026 &middot; IQR-Outlier-Filter &middot; Buffett-Test</span>
       <span style="color:#f0c000;font-weight:700">Risk 15%</span><span style="color:#dce8f5">rSc()</span><span style="color:var(--mut)">stat &times;0.50 + Beta &times;0.40 + EVAR-rel &times;0.10 (sektor-neutral)</span>
       <span style="color:#7a9bb5;font-weight:700">Piotroski</span><span style="color:#dce8f5">pioScore()</span><span style="color:var(--mut)">5 Kriterien &middot; B1-Daempfung &times;0.85 bei Score&lt;2</span>
@@ -1921,7 +1929,10 @@ function momSc(s){
     priceMom=Math.round(fd.mom12m);
   }
   if(priceMom===null){return applyDamp(Math.round(s.mom*adj+50*(1.0-adj)));}
-  var rm=Math.round(s.mom*0.5+priceMom*0.5);
+  /* EPS-Revision als 3. Momentum-Komponente (v5.9.70) -- 10% Gewicht wenn verfuegbar.
+     Fundamentales Momentum: earningsGrowth YoY. Quelle: epsMomSc(fd). */
+  var epsMom=epsMomSc(fd);
+  var rm=epsMom!==null?Math.round(s.mom*0.45+priceMom*0.45+epsMom*0.10):Math.round(s.mom*0.50+priceMom*0.50);
 
   /* RSI-Ueberhitzungs-Daempfung v5.9.69 (Barroso/Santa-Clara 2015)
      RSI > 80: Momentum ueberdehnt → Daempfung ×0.70 (kein Neueinstieg)
@@ -1973,6 +1984,37 @@ function evSc(evebitda){
   if(evebitda<25)return 35;    // Teuer
   if(evebitda<35)return 18;    // Sehr teuer
   return 8;                    // 35-50x: Extrem / Growth-Premium
+}
+
+/* ---- EV/EBIT Score (v5.9.70) --------------------------------
+   Buffett/Damodaran: EV/EBIT sauberer als EV/EBITDA.
+   D&A ist realer Kostenfaktor -- EBITDA ignoriert ihn.
+   Besonders relevant: Industrials, Telcos, Utilities.
+   EV/EBIT ist hoeher als EV/EBITDA -> Skala nach oben verschoben.
+   Quelle: fund_juno v7.9.20 ev_ebit-Feld. */
+function evEbitSc(evebit){
+  if(evebit===null||evebit===undefined)return 50;
+  if(evebit>60)return 50;
+  if(evebit<10)return 100;
+  if(evebit<15)return 85;
+  if(evebit<20)return 70;
+  if(evebit<25)return 55;
+  if(evebit<32)return 35;
+  if(evebit<45)return 18;
+  return 8;
+}
+
+/* ---- EPS-Revision-Score (v5.9.70) ----------------------------
+   Fundamentales Momentum: YoY Earnings Growth (TTM).
+   Quelle: fd.eps_growth (fund_juno v7.9.20, earningsGrowth yfinance).
+   Normierung: linear, 0% Wachstum = Score 50.
+   Skala: +40%->Score 98, +20%->74, 0%->50, -20%->26, -40%->2.
+   Faktor 1.2: maessig sensitiv (EPS-Revisionen schwanken stark).
+   Gibt null zurueck wenn kein eps_growth vorhanden -> kein Einfluss. */
+function epsMomSc(fd){
+  if(!fd)return null;
+  if(fd.eps_growth===null||fd.eps_growth===undefined)return null;
+  return Math.max(5,Math.min(95,Math.round(50+fd.eps_growth*1.2)));
 }
 
 /* ---- Jahres-Trend-Daten (v5.9.35) ──────────────────────────
@@ -2179,9 +2221,14 @@ function fSc(s){
   /* PEG Score — sektor-relativ (v5.9.41) */
   var ps=pegRelSc(s);
   if(ps===null)ps=50; /* Kein PEG vorhanden → neutral */
-  /* EV/EBITDA Score (v5.9.30) */
+  /* EV/EBITDA + EV/EBIT Score (v5.9.70: dual signal) */
   var eveb=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda:null;
-  var valSc=eveb!==null?Math.round(ps*0.60+evSc(eveb)*0.40):ps;
+  var eveit=fd.ev_ebit!==null&&fd.ev_ebit!==undefined?fd.ev_ebit:null;
+  var valSc;
+  if(eveb!==null&&eveit!==null){valSc=Math.round(ps*0.50+evSc(eveb)*0.25+evEbitSc(eveit)*0.25);}
+  else if(eveb!==null){valSc=Math.round(ps*0.60+evSc(eveb)*0.40);}
+  else if(eveit!==null){valSc=Math.round(ps*0.65+evEbitSc(eveit)*0.35);}
+  else{valSc=ps;}
   /* FCF Yield Score */
   var fs=40;
   if(fd.fcf!==null&&fd.fcf!==undefined){if(fd.fcf>6)fs=100;else if(fd.fcf>4)fs=85;else if(fd.fcf>2)fs=65;else if(fd.fcf>0)fs=40;else fs=10;}
