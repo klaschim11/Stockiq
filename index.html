@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.71</title>
+<title>StockIQ v5.9.74</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.71 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.74 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -483,7 +483,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.71 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.74 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -727,6 +727,26 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Neu seit v5.9.45 (Mai 2026)</div>
+
+    <!-- v5.9.74 -->
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.74 &mdash; HC-Z&auml;hler konsistent (alle Signale)</div>
+    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
+      <div>&#10003; <strong style="color:#ffd700">&#11088; HC-Z&auml;hler auf alle Signale ausgedehnt</strong>: Bisher z&auml;hlte HC nur BUY+STRONG Ticker. Badge (&#11088;) erscheint aber f&uuml;r alle Signale (inkl. PEG-BLK, HOLD, WATCH) wenn Score&ge;65+Mom+Sektor erf&uuml;llt. Z&auml;hler war damit zu niedrig. Jetzt: hcTotal = alle Ticker im Universum mit isHC()=true, unabh&auml;ngig vom Signal-Typ. Gilt f&uuml;r WL-Karte, Synopse-Bar und Synopse-HC-Karte.</div>
+    </div>
+
+    <!-- v5.9.73 -->
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.73 &mdash; HC-Z&auml;hler in WL + Synopse-Bar korrigiert</div>
+    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
+      <div>&#10003; <strong style="color:#ffd700">&#11088; HC-Karte in WL-KPIs</strong>: F&uuml;nfte Karte zeigt HC-Gesamtzahl (hcStrongs + hcBuys). Zeigt alle Titel mit Triple-Confirmation: Score &ge;65 + Momentum &gt;5% + Sektor-ETF &gt;+10%. Karte erscheint immer, unabh&auml;ngig vom HC-Filter-Status.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Synopse-Bar korrigiert</strong>: &#11088; zeigte bisher STRONG-BUY-Z&auml;hler (falsche Semantik). Jetzt zeigt &#11088; HC = echte Triple-Confirmation-Anzahl f&uuml;r das Gesamtuniverse (alle 269). STRONG wird separat als Zahl dahinter angezeigt.</div>
+    </div>
+
+    <!-- v5.9.72 -->
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.72 &mdash; Triple-Confirmation in WL-Karten</div>
+    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
+      <div>&#10003; <strong style="color:#dce8f5">Sektor-Ampel in jeder WL-Karte</strong>: Rechts neben Score-Badge erscheint das Ampel-Icon aus dem Depot-Tab (&#128202; gruen &gt;+10% | &#128993; gelb 0-10% | &#128308; rot &lt;0%). Tooltip zeigt Sektor + ETF-Return. Identisch zu Depot-Tab "Skt"-Spalte.</div>
+      <div>&#10003; <strong style="color:#ffd700">HC-Stern &#11088; in WL-Karten</strong>: Goldener Stern wenn Triple-Confirmation erfuellt (Score &ge;65 + Momentum &gt;5% + Sektor-ETF &gt;+10%). BUY/STRONG zeigt zusaetzlich Zeile "Triple: Score+Mom+Sektor | [Sektor-Name]".</div>
+    </div>
 
     <!-- v5.9.71 -->
     <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.71 &mdash; Synopse/WL-Bruecke + Hilfe-Erklaerung</div>
@@ -2413,7 +2433,7 @@ function rSyn(){
     else if(sig==='rsi_block')rsiBlocks++;
     else if(isSell(sig)||sig==='weak')sells++;
     /* HC-Zaehler: Triple-Confirmation */
-    if((sig==='buy'||sig==='strong') && isHC(scored[i].s, scored[i].sc)) hcs++;
+    if(isHC(scored[i].s, scored[i].sc)) hcs++;  /* v5.9.74: alle Signale */
   }
   var ce=document.getElementById('cnt');if(ce)ce.textContent=strongs+buys;
   var el=document.getElementById('s0');
@@ -2546,41 +2566,46 @@ function rSyn(){
 function rWL(){
   var i,s,scored=getScored();
   var buys=0,pbs=0,sells=0,strongs=0,watches=0;
-  var hcBuys=0,hcStrongs=0;  /* v5.9.69: HC-gefilterte Zähler */
+  var hcBuys=0,hcStrongs=0,hcTotal=0;  /* v5.9.74: hcTotal = alle isHC() */
   for(i=0;i<scored.length;i++){
-    var ms=mSig(scored[i].s);
-    if(ms==='strong'){ strongs++;
-      if(isHC(scored[i].s, scored[i].sc)) hcStrongs++;
-    } else if(ms==='buy'){ buys++;
-      if(isHC(scored[i].s, scored[i].sc)) hcBuys++;
-    } else if(ms==='pb') pbs++;
+    var ms=mSig(scored[i].s), _hc=isHC(scored[i].s, scored[i].sc);
+    if(ms==='strong'){ strongs++; if(_hc) hcStrongs++; }
+    else if(ms==='buy'){ buys++; if(_hc) hcBuys++; }
+    else if(ms==='pb') pbs++;
     else if(ms==='rsi_block') rsiBlocks++;
     else if(isSell(ms)||ms==='weak') sells++;
     else watches++;
+    if(_hc) hcTotal++;  /* alle Signale: buy+strong+pb+watch+hold */
   }
   var dispStrongs = HC_FILTER ? hcStrongs : strongs;
   var dispBuys    = HC_FILTER ? hcBuys    : buys;
   var kpi=document.getElementById('wl-kpi');
-  if(kpi)kpi.innerHTML=kpiCard('STRONG',dispStrongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',dispBuys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000')+kpiCard('Sell/Weak',sells,'','#ff6666');
-  /* ---- v5.9.71: Aktions-Zeile Synopse-Zaehler ---- */
-  /* Synopse-Gesamtzaehler (ungefiltert) fuer Kontext-Vergleich */
-  var synPool=getActiveStocks(), synStrong=0, synBuy=0, synSell=0, synPB=0;
+  if(kpi)kpi.innerHTML=
+    kpiCard('STRONG',dispStrongs,'ZL+Div+200MA+PEG','#ff9f1c')
+    +kpiCard('BUY',dispBuys,'ZL+200MA+PEG','#00e57a')
+    +kpiCard('&#11088; HC',hcTotal,'Score+Mom+Sektor (alle Sig.)','#ffd700')
+    +kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000')
+    +kpiCard('Sell/Weak',sells,'','#ff6666');
+  /* ---- v5.9.73: Synopse-Bar mit echtem HC-Zaehler (nicht STRONG-Zaehler) ---- */
+  var synPool=getActiveStocks(), synStrong=0, synBuy=0, synSell=0, synPB=0, synHC=0;
   for(var _i=0;_i<synPool.length;_i++){
-    var _sig=mSig(synPool[_i]);
-    if(_sig==='strong')synStrong++;
-    else if(_sig==='buy')synBuy++;
-    else if(_sig==='pb')synPB++;
-    else if(isSell(_sig)||_sig==='weak')synSell++;
+    var _s2=synPool[_i], _sig=mSig(_s2), _sc2=cSc(_s2);
+    if(_sig==='strong') synStrong++;
+    else if(_sig==='buy') synBuy++;
+    else if(_sig==='pb') synPB++;
+    else if(isSell(_sig)||_sig==='weak') synSell++;
+    if(isHC(_s2,_sc2)) synHC++;  /* v5.9.74: alle Signale, nicht nur buy+strong */
   }
   var synBar=document.getElementById('wl-syn-bar');
   if(synBar){
-    var hcNote=HC_FILTER?' <span style="font-size:9px;color:#ffd700">(HC-Filter aktiv)</span>':'';
-    synBar.innerHTML='<span style="font-size:10px;color:var(--mut);margin-right:6px">Synopse:</span>'
-      +'<span style="font-size:10px;color:#ff9f1c;margin-right:8px">&#11088; '+synStrong+'</span>'
-      +'<span style="font-size:10px;color:#00e57a;margin-right:8px">BUY '+synBuy+'</span>'
-      +'<span style="font-size:10px;color:#f0c000;margin-right:8px">PEG-Blk '+synPB+'</span>'
-      +'<span style="font-size:10px;color:#ff6666">SELL '+synSell+'</span>'
-      +hcNote;
+    var hcActv=HC_FILTER?' <span style="font-size:9px;color:#ffd700">(HC-Filter aktiv)</span>':'';
+    synBar.innerHTML='<span style="font-size:10px;color:var(--mut);margin-right:8px">Synopse (alle 269):</span>'
+      +'<span style="font-size:10px;color:#ffd700;margin-right:10px">&#11088; HC&nbsp;'+synHC+'</span>'
+      +'<span style="font-size:10px;color:#ff9f1c;margin-right:8px">STRONG&nbsp;'+synStrong+'</span>'
+      +'<span style="font-size:10px;color:#00e57a;margin-right:8px">BUY&nbsp;'+synBuy+'</span>'
+      +'<span style="font-size:10px;color:#f0c000;margin-right:8px">PEG&nbsp;'+synPB+'</span>'
+      +'<span style="font-size:10px;color:#ff6666">SELL&nbsp;'+synSell+'</span>'
+      +hcActv;
   }
   wlRend(scored);
 }
@@ -2640,17 +2665,35 @@ function wlRend(scored){
     var rowBg=WL_SEL===s.t?'background:#101d2e;':'background:#0c1420;';
     var topC=rank<=3?'#ffd040':'#7a9bb5';
     var borderLeft=isStrong?'border-left:3px solid #ff9f1c;':isSellSig?'border-left:3px solid #ff3f3f;':'';
+    /* v5.9.72: Sektor-Ampel + HC-Badge fuer WL-Karte */
+    var sktBdg = getSektorBadge(s.t);
+    var hcBdg  = isHC(s, sc)
+      ? '<span style="font-size:10px;color:#ffd700;margin-left:2px" title="Triple-Confirmation: Score+Momentum+Sektor">&#11088;</span>'
+      : '';
     var h='<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderLeft+'border-radius:8px;padding:11px 13px;margin-bottom:6px;cursor:pointer" onclick="wlDetail(\''+s.t+'\')">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
     h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+s.n+'</span></div>';
-    h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span><span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+'</div></div>';
+    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span><span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+'</div></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">ROCE </span><span>'+roceD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">RSI </span><span style="color:'+rsiC+'">'+s.rsi+'</span></div>';
     h+='</div>';
-    if(isStrong){var dl=s.div==='bull_hidden'?'Bull Hidden Div':'Bull Regular Div';h+='<div style="font-family:monospace;font-size:9px;color:#ff9f1c;margin-top:4px">&#11088; '+dl+' | ATR-Hist ok</div>';}
+    if(isStrong){
+      var dl=s.div==='bull_hidden'?'Bull Hidden Div':'Bull Regular Div';
+      h+='<div style="font-family:monospace;font-size:9px;color:#ff9f1c;margin-top:4px">&#11088; '+dl+' | ATR-Hist ok</div>';
+    }
+    /* v5.9.72: Triple-Confirmation-Zeile fuer BUY+STRONG wenn isHC */
+    if(isHC(s,sc) && sig!=='strong'){
+      var fdHC=FD[s.t]||{};
+      var sktLabel=fdHC.sector?(' | '+fdHC.sector.replace('Consumer ','')):'';
+      h+='<div style="font-family:monospace;font-size:9px;color:#ffd700;margin-top:4px">&#11088; Triple: Score+Mom+Sektor'+sktLabel+'</div>';
+    } else if(isHC(s,sc) && sig==='strong'){
+      var fdHC2=FD[s.t]||{};
+      var sktLabel2=fdHC2.sector?(' | Skt: '+fdHC2.sector.replace('Consumer ','')):'';
+      h+='<div style="font-family:monospace;font-size:9px;color:#ffd700;margin-top:1px">+ Triple-Confirmation'+sktLabel2+'</div>';
+    }
     if(isSellSig){h+='<div style="font-family:monospace;font-size:9px;color:#ff6666;margin-top:4px">'+sellWhy(s,sig)+'</div>';}
     if(isHoldSf){
       var holdFd=FD[s.t];
