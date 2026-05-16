@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.74</title>
+<title>StockIQ v5.9.75</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.74 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.75 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -483,7 +483,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.74 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.75 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -728,7 +728,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Neu seit v5.9.45 (Mai 2026)</div>
 
+    <!-- v5.9.75 -->
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.75 &mdash; EV/EBIT++ &middot; MomRisk-Anzeige (Buffett 2024 / JP Morgan Q2 2026)</div>
+    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
+      <div>&#10003; <strong style="color:#dce8f5">EV/EBIT h&ouml;her gewichtet in valSc()</strong>: Wenn beide Signale verf&uuml;gbar: EV/EBIT 0.25 &rarr; 0.30, EV/EBITDA 0.25 &rarr; 0.20. Quelle: Buffett Annual Letter 2024: &ldquo;EBITDA &mdash; a flawed favorite of Wall Street.&rdquo; D&amp;A ist ein realer Kostenfaktor; EV/EBIT bewertet ehrlicher. Kein Einfluss wenn nur EV/EBIT oder nur EV/EBITDA verf&uuml;gbar (Fallback-Kette unveraendert).</div>
+      <div>&#10003; <strong style="color:#dce8f5">MomRisk-Indikator im VIX-Banner</strong>: Zus&auml;tzlich zum VIX-Regime (Low/Elevated/CRISIS) erscheint jetzt ein Momentum-Crash-Risiko-Label. HOCH (rot): wenn Bond-Vol-Divergenz stark (VIX_BOND_DIV=strong). Erh&ouml;ht (orange): wenn Bond-Div mild ODER VIX &ge;20. Akademische Basis: Daniel &amp; Moskowitz (2016) Momentum Crashes; JP Morgan Factor Views Q2 2026: Dispersion zwischen Momentum-Gewinnern und -Verlierern auf h&ouml;chstem Stand seit 1990.</div>
+    </div>
     <!-- v5.9.74 -->
+
     <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.74 &mdash; HC-Z&auml;hler konsistent (alle Signale)</div>
     <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
       <div>&#10003; <strong style="color:#ffd700">&#11088; HC-Z&auml;hler auf alle Signale ausgedehnt</strong>: Bisher z&auml;hlte HC nur BUY+STRONG Ticker. Badge (&#11088;) erscheint aber f&uuml;r alle Signale (inkl. PEG-BLK, HOLD, WATCH) wenn Score&ge;65+Mom+Sektor erf&uuml;llt. Z&auml;hler war damit zu niedrig. Jetzt: hcTotal = alle Ticker im Universum mit isHC()=true, unabh&auml;ngig vom Signal-Typ. Gilt f&uuml;r WL-Karte, Synopse-Bar und Synopse-HC-Karte.</div>
@@ -2301,7 +2308,7 @@ function fSc(s){
   var eveb=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda:null;
   var eveit=fd.ev_ebit!==null&&fd.ev_ebit!==undefined?fd.ev_ebit:null;
   var valSc;
-  if(eveb!==null&&eveit!==null){valSc=Math.round(ps*0.50+evSc(eveb)*0.25+evEbitSc(eveit)*0.25);}
+  if(eveb!==null&&eveit!==null){valSc=Math.round(ps*0.50+evSc(eveb)*0.20+evEbitSc(eveit)*0.30);}/* v5.9.75: EV/EBIT 0.25->0.30, EV/EBITDA 0.25->0.20 (Buffett 2024) */
   else if(eveb!==null){valSc=Math.round(ps*0.60+evSc(eveb)*0.40);}
   else if(eveit!==null){valSc=Math.round(ps*0.65+evEbitSc(eveit)*0.35);}
   else{valSc=ps;}
@@ -3637,7 +3644,10 @@ function loadFund(inp){
         if(VIX_LEVEL!==null&&VIX_LEVEL!==undefined){
           var vZone=VIX_LEVEL<20?'Low':VIX_LEVEL<30?'Elevated':'CRISIS';
           var vCol=VIX_LEVEL<20?'#00e676':VIX_LEVEL<30?'#ffab00':'#ff5252';
-          vixStr=' &nbsp;|&nbsp; <span style="color:'+vCol+'">VIX '+VIX_LEVEL.toFixed(1)+' ('+vZone+')</span>';
+          var momRisk='';
+          if(VIX_BOND_DIV==='strong'){momRisk=' <span style="color:#ff5252;font-size:10px">&#9888; MomRisk:HOCH</span>';}
+          else if(VIX_BOND_DIV==='mild'||VIX_LEVEL>=20){momRisk=' <span style="color:#ffab00;font-size:10px">&#9888; MomRisk:erh&ouml;ht</span>';}
+          vixStr=' &nbsp;|&nbsp; <span style="color:'+vCol+'">VIX '+VIX_LEVEL.toFixed(1)+' ('+vZone+')</span>'+momRisk;
         }
         metaEl.innerHTML='JSON: v'+( m.version||'?')+' | '+( m.n_tickers||Object.keys(fund).length)+' Ticker | '+(m.generated?m.generated.slice(0,16).replace('T',' '):'')+vixStr;
         metaEl.style.display='block';
@@ -3733,7 +3743,10 @@ function initFund(){
       if(VIX_LEVEL!==null&&VIX_LEVEL!==undefined){
         var vZone2=VIX_LEVEL<20?'Low':VIX_LEVEL<30?'Elevated':'CRISIS';
         var vCol2=VIX_LEVEL<20?'#00e676':VIX_LEVEL<30?'#ffab00':'#ff5252';
-        vixStr2=' &nbsp;|&nbsp; <span style="color:'+vCol2+'">VIX '+VIX_LEVEL.toFixed(1)+' ('+vZone2+')</span>';
+        var momRisk2='';
+        if(VIX_BOND_DIV==='strong'){momRisk2=' <span style="color:#ff5252;font-size:10px">&#9888; MomRisk:HOCH</span>';}
+        else if(VIX_BOND_DIV==='mild'||VIX_LEVEL>=20){momRisk2=' <span style="color:#ffab00;font-size:10px">&#9888; MomRisk:erh&ouml;ht</span>';}
+        vixStr2=' &nbsp;|&nbsp; <span style="color:'+vCol2+'">VIX '+VIX_LEVEL.toFixed(1)+' ('+vZone2+')</span>'+momRisk2;
       }
       metaEl2.innerHTML='Cache: v'+(mc.version||'?')+' | '+(mc.n_tickers||Object.keys(fund).length)+' Ticker | '+(mc.generated?mc.generated.slice(0,16).replace('T',' '):'')+vixStr2;
       metaEl2.style.display='block';
