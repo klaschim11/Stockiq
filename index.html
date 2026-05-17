@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.75</title>
+<title>StockIQ v5.9.77</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.75 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.77 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -383,7 +383,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <!-- ZIEL-INFO -->
 <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px">
-  <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">&#128270; Ziel-Allokation (zyklus-adjustiert, v5.9.75)</div>
+  <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">&#128270; Ziel-Allokation (zyklus-adjustiert, v5.9.76)</div>
   <div id="ziel-kacheln" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px"></div>
   <div style="font-family:monospace;font-size:9px;color:var(--mut);line-height:1.6">
     <strong style="color:#dce8f5">Basis (Hambro/BlackRock 2026):</strong> 55% Aktien / 15% Anleihen / 12% Gold / 8% Rohstoffe / 10% Cash<br>
@@ -483,7 +483,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.75 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.76 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -682,7 +682,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       </div>
     </div>
     <div style="padding:10px 12px;background:rgba(240,192,0,.06);border-left:3px solid #f0c000;border-radius:6px;font-size:12px;color:var(--mut);line-height:1.6">
-      <strong style="color:#00e57a">Aktuelle Situation (Mai 2026, v5.9.75):</strong> 269 Ticker, 4 Fenster, ~80&ndash;120 OOS-Trades/Fenster. OOS WR 59.8%, IS WR 60.9%, Stabilitaet 2.1pp, Overfitting-Gap 1.1pp. <strong style="color:#dce8f5">Statistisch belastbar.</strong> Alle 4 Fenster &gt;57%. SPY-Filter eliminiert Baermarkt-Eintraege. Produktions-Script: stockiq_alpha_juno_v6b_6m-u4.py.
+      <strong style="color:#00e57a">Aktuelle Situation (Mai 2026, v5.9.76):</strong> 269 Ticker, 4 Fenster, ~80&ndash;120 OOS-Trades/Fenster. OOS WR 59.8%, IS WR 60.9%, Stabilitaet 2.1pp, Overfitting-Gap 1.1pp. <strong style="color:#dce8f5">Statistisch belastbar.</strong> Alle 4 Fenster &gt;57%. SPY-Filter eliminiert Baermarkt-Eintraege. Produktions-Script: stockiq_alpha_juno_v6b_6m-u4.py.
     </div>
   </div>
 
@@ -728,6 +728,19 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Neu seit v5.9.45 (Mai 2026)</div>
 
+    <!-- v5.9.77 -->
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.77 &mdash; Buyback-Signal Display &middot; shares_change_yoy (O&rsquo;Shaughnessy Shareholder Yield)</div>
+    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
+      <div>&#10003; <strong style="color:#dce8f5">shares_change_yoy: Buyback-Ampel</strong> &mdash; YoY-Ver&auml;nderung der Aktienanzahl aus fund_juno v7.9.23 (quarterly_balance_sheet). Jetzt in Fund-Tab-Karten und WL-Detail angezeigt. Negativ = Aktienr&uuml;ckkauf (gr&uuml;n/blau), Positiv = Verw&auml;sserung (rot). Kein Score-Einfluss &mdash; IC-Test ausstehend. Akademische Basis: O&rsquo;Shaughnessy (2012) &ldquo;What Works on Wall Street&rdquo;: Shareholder Yield (Div + Buyback) = st&auml;rkster Value-Faktor 1967&ndash;2009. Morningstar/Ibbotson 2024.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Evaluation Modell-Review 2026-05-17</strong>: IC-Test jetzt f&auml;llig (30+ Snapshots). Offene Score-Entscheidungen bis IC: fcf_debt_cover in debtSc(), shares_change_yoy in fSc(), norm_pe (Shiller-EPS), 6M-Momentum-Gewicht. Roadmap: v5.9.78+ nach IC-Ergebnissen.</div>
+    </div>
+
+    <!-- v5.9.76 -->
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.76 &mdash; FCF/Debt + EV/EBIT Display &middot; MomRank &middot; Research Sprint (Buffett/Greenblatt/CANSLIM)</div>
+    <div>&#10003; <strong style="color:#dce8f5">FCF/Debt Coverage</strong>: fund_juno v7.9.22-Feld fcf_debt_cover jetzt in Fund-Tab-Karten und Synopse-Detail angezeigt. Buffett-Proxy: FCF/Schulden &gt;0.20 = tilgbar in &lt;5 Jahren. Quelle: O'Shaughnessy QVM + Buffett Annual Report 2024.</div>
+    <div>&#10003; <strong style="color:#dce8f5">EV/EBIT Display</strong>: ev_ebit (fund_juno v7.9.22) jetzt in Synopse-Detail sichtbar. valSc()-Verdrahtung war bereits in v5.9.70 korrekt &mdash; bisher nur Datenanzeige fehlend. Greenblatt Magic Formula: ROIC + EV/EBIT-Yield = Kern-Kombination.</div>
+    <div>&#10003; <strong style="color:#dce8f5">MomRank (CANSLIM-L)</strong>: calcMomRank() berechnet Momentum-Perzentil im Universe (0&ndash;100%). Angezeigt in Fund-Tab-Karten. CANSLIM: Relative Strength &ge;80 Pz = Market Leader. Kein Score-Einfluss &mdash; Display-only bis IC-Test (Snapshot 30).</div>
+    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.23</strong>: +shares_change_yoy (YoY Aktienanzahl-Veraenderung via quarterly_balance_sheet). Negativ = Aktienrueckkauf. Kein Score-Einfluss &mdash; IC-Signal-Sammlung (O'Shaughnessy Shareholder Yield). Literatur: Morningstar/Ibbotson 2024.</div>
     <!-- v5.9.75 -->
     <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.75 &mdash; EV/EBIT++ &middot; MomRisk-Anzeige (Buffett 2024 / JP Morgan Q2 2026)</div>
     <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
@@ -1111,7 +1124,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.75 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.76 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -1120,7 +1133,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <span style="color:#7a9bb5">Datei</span><span style="color:#7a9bb5">Version</span><span style="color:#7a9bb5">Zweck</span><span style="color:#7a9bb5">Status</span>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 2fr 1fr;gap:5px 8px;font-family:monospace">
-      <span style="color:#dce8f5">Dashboard</span><span style="color:#00e57a">v5.9.75</span><span style="color:var(--mut)">iOS Safari, GitHub Pages</span><span style="color:#00e57a">&#9679; Prod</span>
+      <span style="color:#dce8f5">Dashboard</span><span style="color:#00e57a">v5.9.76</span><span style="color:var(--mut)">iOS Safari, GitHub Pages</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">fund_juno v7.9.21 | Fundamentals + Owner Earnings + Jahres-Snapshot</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">alpha_juno</span><span style="color:#00e57a">v6b_6m-u4</span><span style="color:var(--mut)">Walk-Forward 6M OOS</span><span style="color:#00e57a">&#9679; Prod</span>
       <span style="color:#dce8f5">annual.json</span><span style="color:#00e57a">2021&ndash;2026</span><span style="color:var(--mut)">Jahres-Snapshots (6 Jahre)</span><span style="color:#00e57a">&#9679; Aktiv</span>
@@ -1129,7 +1142,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 
   <!-- ── Score-Architektur ── -->
-  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#127919; Score-Architektur v5.9.75</div>
+  <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#127919; Score-Architektur v5.9.76</div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px;font-size:11px">
     <div style="display:grid;grid-template-columns:auto 1fr 2fr;gap:5px 12px;font-family:monospace">
       <span style="color:#00e57a;font-weight:700">Mom 25%</span><span style="color:#dce8f5">momSc()</span><span style="color:var(--mut)">Skip-Month 11M + MACD + RSI + EPS-Revision (10%) &middot; VIX-D&auml;mpfung &times;1.0/0.6/0.2 &middot; V2X f&uuml;r EU-Ticker &middot; Bond-Div-Faktor</span>
@@ -1460,7 +1473,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.75 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.76 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2356,6 +2369,28 @@ function cSc(s){
   return Math.round(momSc(s)*W.mom+s.trend*W.trend+fSc(s)*W.fund+rSc*W.risk);
 }
 
+/* ---- Momentum Percentile-Rank (v5.9.76) ─────────────────────
+   CANSLIM-L: Relative Strength >= 80 Pz = Leader im Universe.
+   calcMomRank(): berechnet s.momRank (0-100) fuer alle STOCKS.
+   Aufruf: am Anfang von rFund() nach applyFund().
+   Kein Score-Einfluss -- nur Anzeige (IC-Test pending).
+   ─────────────────────────────────────────────────────────────── */
+function calcMomRank(){
+  var i,j,n=STOCKS.length,scores=[],ms;
+  for(i=0;i<n;i++){
+    ms=momSc(STOCKS[i]);
+    STOCKS[i]._msc=ms;
+    scores.push(ms);
+  }
+  scores.sort(function(a,b){return a-b;});
+  for(i=0;i<n;i++){
+    ms=STOCKS[i]._msc;
+    var below=0;
+    for(j=0;j<n;j++){if(scores[j]<ms)below++;}
+    STOCKS[i].momRank=Math.round(below/n*100);
+  }
+}
+
 /* ---- Score-Qualitaetsindikator (v5.9.26) ────────────────────
    Gibt zurueck ob cSc() auf echten oder Platzhalter-Daten basiert.
    Kriterien:
@@ -2909,6 +2944,16 @@ function wlDetail(ticker){
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EV/EBITDA</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+evarLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDispFull+'</div></div>';
     out+='</div>';
+    /* EV/EBIT + FCF/Debt Cover (v5.9.76: Research Sprint -- Buffett/Greenblatt) */
+    var eveitDisp2=fd.ev_ebit!==null&&fd.ev_ebit!==undefined?fd.ev_ebit.toFixed(1)+'x':'n/a';
+    var eveitColor2=fd.ev_ebit!==null&&fd.ev_ebit!==undefined?(fd.ev_ebit<15?'#00e57a':fd.ev_ebit<25?'#f0c000':'#ff6666'):'#7a9bb5';
+    var fdcV=fd.fcf_debt_cover!==null&&fd.fcf_debt_cover!==undefined?fd.fcf_debt_cover:null;
+    var fdcStr=fdcV!==null?(fdcV>=10?'&gt;10x':fdcV.toFixed(2)+'x'):'n/a';
+    var fdcCol=fdcV!==null?(fdcV>=0.20?'#00e57a':fdcV>=0.05?'#f0c000':'#ff6666'):'#7a9bb5';
+    out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EV/EBIT</div><div style="font-family:monospace;font-size:11px;color:'+eveitColor2+'">'+eveitDisp2+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">FCF/DEBT</div><div style="font-family:monospace;font-size:11px;color:'+fdcCol+'">'+fdcStr+'</div></div>';
+    out+='</div>';
     /* Owner Earnings Yield (v5.9.44) — Buffett NI+D&A-CapEx/MC */
     var oeVal=fd.owner_earnings_yield!=null?fd.owner_earnings_yield:null;
     if(oeVal!==null){
@@ -2963,6 +3008,21 @@ function wlDetail(ticker){
       out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">DIV YIELD</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+dy+'</div></div>';
       out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">BUYBACK</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+by+'</div></div>';
       out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">SH RETURN</div><div style="font-family:monospace;font-size:11px;color:#b07cf8">'+sry+'</div></div>';
+      out+='</div>';
+    }
+    /* shares_change_yoy: Buyback-Signal v5.9.77 */
+    var scyV=fd.shares_change_yoy!==null&&fd.shares_change_yoy!==undefined?fd.shares_change_yoy:null;
+    if(scyV!==null){
+      var scyCol=scyV<-3?'#00e57a':scyV<0?'#00c8f0':scyV<2?'#7a9bb5':'#ff6666';
+      var scyLbl=scyV<-3?'Buyback++':scyV<0?'Buyback':scyV<2?'Stabil':'Dilution';
+      var scySign=scyV<0?'':'+';
+      var scyTip=scyV<-3?'Starker Aktienrueckkauf (O\'Shaughnessy Shareholder Yield)':scyV<0?'Aktienrueckkauf aktiv':scyV<2?'Aktienanzahl stabil':'Achtung: Aktienverwaesserung';
+      out+='<div style="margin-top:5px;padding:5px 8px;background:rgba(255,255,255,.03);border:1px solid #1a2a3a;border-radius:6px">';
+      out+='<div style="display:flex;justify-content:space-between;align-items:center">';
+      out+='<div style="font-family:monospace;font-size:8px;color:var(--mut)">SHARES YOY <span style="color:#456278">(Buyback-Signal)</span></div>';
+      out+='<div style="font-family:monospace;font-size:11px;font-weight:700;color:'+scyCol+'">'+scyLbl+' ('+scySign+scyV.toFixed(1)+'%)</div>';
+      out+='</div>';
+      out+='<div style="font-family:monospace;font-size:8px;color:#456278;margin-top:2px">'+scyTip+'</div>';
       out+='</div>';
     }
     if(fd.mr)out+='<div style="font-size:10px;color:var(--mut);margin-top:6px;font-style:italic">'+fd.mr+'</div>';
@@ -3862,6 +3922,7 @@ function pioBadge(s, fd) {
 function rFund(){
   var i,loaded=0;
   for(i=0;i<STOCKS.length;i++){if(FD[STOCKS[i].t])loaded++;}
+  calcMomRank();
   var tickers=STOCKS.slice().sort(function(a,b){return fSc(b)-fSc(a);});
   var f0=document.getElementById('f0');
   if(loaded>0){
@@ -3896,10 +3957,22 @@ function rFund(){
     cards+='<div style="font-family:monospace;font-size:8px;padding:2px 7px;border-radius:8px;background:rgba(255,255,255,.06);color:'+mC+';margin-bottom:6px;display:inline-block">'+fd4.moat.toUpperCase()+'</div>';
     cards+='<div style="font-size:10px;color:var(--mut);margin-bottom:6px;font-style:italic">'+(fd4.mr||'')+'</div>';
     cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:2px"><span style="color:var(--mut)">FCF Yield</span><span style="color:'+fcC+'">'+fp(fd4.fcf)+'</span></div>';
+    var fdcC4=fd4.fcf_debt_cover!==null&&fd4.fcf_debt_cover!==undefined?fd4.fcf_debt_cover:null;
+    if(fdcC4!==null){var fdcCol4=fdcC4>=0.20?'#00e57a':fdcC4>=0.05?'#f0c000':'#ff6666';var fdcStr4=fdcC4>=10?'&gt;10x':fdcC4.toFixed(2)+'x';cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:2px"><span style="color:var(--mut)">FCF/Debt</span><span style="color:'+fdcCol4+'">'+fdcStr4+'</span></div>';}
     cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:2px"><span style="color:var(--mut)">'+rl4+'</span><span style="color:'+rc4+'">'+fp(rv4)+'</span></div>';
     cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG</span><span>'+pgLb(s)+'</span></div>';
+    var mrkC4=typeof s.momRank==='number'?(s.momRank>=80?'#00e57a':s.momRank>=60?'#f0c000':'#7a9bb5'):'#7a9bb5';
+    cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-top:2px"><span style="color:var(--mut)">MomRank</span><span style="color:'+mrkC4+'">'+(typeof s.momRank==='number'?s.momRank+'%':'--')+'</span></div>';
     if(fd4.shareholder_return!==null&&fd4.shareholder_return!==undefined){
       cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-top:2px"><span style="color:var(--mut)">SH Return</span><span style="color:#b07cf8">'+fp(fd4.shareholder_return)+'</span></div>';
+    }
+    /* shares_change_yoy: Buyback-Signal v5.9.77 (O'Shaughnessy Shareholder Yield) */
+    var scyV4=fd4.shares_change_yoy!==null&&fd4.shares_change_yoy!==undefined?fd4.shares_change_yoy:null;
+    if(scyV4!==null){
+      var scyCol4=scyV4<-3?'#00e57a':scyV4<0?'#00c8f0':scyV4<2?'#7a9bb5':'#ff6666';
+      var scyLbl4=scyV4<-3?'Buyback++':scyV4<0?'Buyback':scyV4<2?'Stabil':'Dilution';
+      var scySign4=scyV4<0?'':'+';
+      cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-top:2px"><span style="color:var(--mut)">Shares YoY</span><span style="color:'+scyCol4+'">'+scyLbl4+' ('+scySign4+scyV4.toFixed(1)+'%)</span></div>';
     }
     cards+=pioBadge(s, fd4);
     cards+='</div>';
@@ -5298,7 +5371,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.75 &middot; Daten aus geladener fundamentals.json</div>
+        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.76 &middot; Daten aus geladener fundamentals.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
@@ -5517,7 +5590,7 @@ function rptBuild(){
   /* ── Disclaimer ── */
   out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a2a3a;border-radius:8px;padding:10px;margin-bottom:10px">';
   out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5;line-height:1.5">';
-  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.75 generiert. ';
+  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.76 generiert. ';
   out += 'Er dient ausschlie&szlig;lich zu Informationszwecken und stellt keine Anlageberatung dar. ';
   out += 'Alle Daten stammen aus yfinance (Yahoo Finance) und sind ohne Gew&auml;hr. ';
   out += 'Investitionsentscheidungen sollten immer auf Basis eigener Recherche und ggf. professioneller Beratung getroffen werden.';
