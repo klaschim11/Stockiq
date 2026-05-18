@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.80</title>
+<title>StockIQ v5.9.81</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.80 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.81 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -629,12 +629,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:12px;color:#f0c000">&#128202; Kennzahlen-Glossar</div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">SCORE (0-100)</div><div style="font-size:12px;color:var(--mut)">Momentum 25% + Trend 20% + Fundamentals 35% + Risk 20% (inkl. Beta-Faktor ab v5.9.16).</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">BETA / LOW-VOL (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Beta = Kursvolatilitaet relativ zum Markt. <span style="color:#00e57a">&lt; 0.8</span> defensiv (Bonus) &nbsp;<span style="color:#f0c000">0.8&ndash;1.2</span> markt&auml;hnlich &nbsp;<span style="color:#ff6666">&gt; 1.5</span> spekulativ (Malus). Fliesst zu 40% in Risk-Score. Akademisch: MSCI/BlackRock 1963&ndash;2024.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DEBT/EQ % (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Verschuldungsgrad (yfinance debtToEquity). <span style="color:#00e57a">&lt; 100</span> konservativ &nbsp;<span style="color:#f0c000">100&ndash;200</span> normal &nbsp;<span style="color:#ff6666">&gt; 200</span> risikoreich. 15% Gewicht im Fund-Score als Safety-Dimension.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">SCORE (0-100)</div><div style="font-size:12px;color:var(--mut)">Zusammengesetzter Score aus vier Faktoren: Momentum, Trend, Fundamentaldaten und Risiko. H&ouml;here Werte = besseres Gesamtbild. Score allein ist kein Kaufsignal &mdash; der Signalstatus (BUY/HOLD/SELL) ist ma&szlig;geblich.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">BETA / LOW-VOL (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Beta = Kursvolatilitaet relativ zum Markt. <span style="color:#00e57a">&lt; 0.8</span> defensiv (Bonus) &nbsp;<span style="color:#f0c000">0.8&ndash;1.2</span> markt&auml;hnlich &nbsp;<span style="color:#ff6666">&gt; 1.5</span> spekulativ (Malus). Fliesst in den Risk-Score ein. Akademisch: MSCI/BlackRock 1963&ndash;2024.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DEBT/EQ % (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Verschuldungsgrad (yfinance debtToEquity). <span style="color:#00e57a">&lt; 100</span> konservativ &nbsp;<span style="color:#f0c000">100&ndash;200</span> normal &nbsp;<span style="color:#ff6666">&gt; 200</span> risikoreich. Fliesst als Sicherheitsdimension in den Fundamental-Score ein. Finanzwerte werden separat bewertet (strukturell hohe D/E-Ratios).</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PEG-RATIO</div><div style="font-size:12px;color:var(--mut)">KGV / Gewinnwachstum%. <span style="color:#00e57a">&lt;1.0</span> unterbewertet &nbsp;<span style="color:#00c8f0">1.0-1.5</span> fair &nbsp;<span style="color:#f0c000">1.5-2.0</span> leicht teuer &nbsp;<span style="color:#ff6666">&gt;=2.0</span> BUY blockiert.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EVAR — Sektor-relatives Stability-Score (v5.9.32)</div><div style="font-size:12px;color:var(--mut)">Earnings Variability: Stabilit&auml;t der quarterly Net Income YoY-Wachstumsraten. Score 0&ndash;100 (100=maximal stabil). <strong style="color:#dce8f5">Ab v5.9.32 sektor-relativ</strong>: Zykliker werden mit Zyklikern verglichen. Diff = EVAR &minus; Sektor-Median &rarr; Score 50 + Diff&times;1.5. Quelle: MSCI Quality Index (dritter Kerndeskriptor neben ROE + D/E). Daten: fund_juno v7.9.3 (sector-Feld).</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EV/EBITDA (v5.9.30)</div><div style="font-size:12px;color:var(--mut)">Enterprise Value / EBITDA &mdash; robusteres Value-Signal als P/E oder PEG. EV umfasst Marktkapitalisierung + Schulden &minus; Cash; EBITDA eliminiert Abschreibungseffekte. <span style="color:#00e57a">&lt;12x</span> guenstig &nbsp;<span style="color:#f0c000">12&ndash;20x</span> fair bis erhoht &nbsp;<span style="color:#ff6666">&gt;25x</span> teuer. Fliesst zu 40% in den Value-Score ein (PEG 60%). Quelle: Loughran/Wellman 2011 &mdash; EV/EBITDA outperformt P/E als Faktor &uuml;ber 40 Jahre.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EVAR — Sektor-relatives Stability-Score (v5.9.32)</div><div style="font-size:12px;color:var(--mut)">Earnings Variability: Stabilit&auml;t der quarterly Net Income YoY-Wachstumsraten. Score 0&ndash;100 (100=maximal stabil). Ab v5.9.32 <strong style="color:#dce8f5">sektor-relativ</strong>: Zykliker werden mit Zyklikern verglichen. Quelle: MSCI Quality Index (dritter Kerndeskriptor neben ROE + D/E). Daten: fund_juno v7.9.3+.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EV/EBITDA (v5.9.30)</div><div style="font-size:12px;color:var(--mut)">Enterprise Value / EBITDA &mdash; robusteres Value-Signal als P/E oder PEG. EV umfasst Marktkapitalisierung + Schulden &minus; Cash; EBITDA eliminiert Abschreibungseffekte. <span style="color:#00e57a">&lt;12x</span> guenstig &nbsp;<span style="color:#f0c000">12&ndash;20x</span> fair bis erhoht &nbsp;<span style="color:#ff6666">&gt;25x</span> teuer. Fliesst in den Value-Score ein. Quelle: Loughran/Wellman 2011.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">FCF YIELD</div><div style="font-size:12px;color:var(--mut)">FreeCashflow / Marktkapitalisierung. <span style="color:#00e57a">&gt;4%</span> stark &nbsp;<span style="color:#00c8f0">2-4%</span> gut &nbsp;<span style="color:#f0c000">0-2%</span> schwach &nbsp;<span style="color:#ff6666">&lt;0%</span> negativ.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ROCE / ROE</div><div style="font-size:12px;color:var(--mut)">ROCE = EBIT / (EK + LT-Schulden). Fallback ROE wenn nicht verfuegbar. <span style="color:#00e57a">&gt;25%</span> Burggraben &nbsp;<span style="color:#00c8f0">15-25%</span> stark.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#ff9f1c;font-weight:700;margin-bottom:6px">&#11088; DIVERGENZ &mdash; st&auml;rkstes Qualit&auml;tssignal in StockIQ</div>
@@ -658,8 +658,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">RSI</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">&lt;30</span> ueberverkauft &nbsp;<span style="color:#ff6666">&gt;70</span> ueberkauft &nbsp;<span style="color:var(--mut)">30-70</span> neutral.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">WALK-FORWARD OOS</div><div style="font-size:12px;color:var(--mut)">12M Training / 6M Out-of-Sample Test (v6b_6m). OOS WR &gt; IS WR = kein Overfitting. Reines Validierungsinstrument &mdash; veraendert keine Live-Signale.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">STABILITAET (StdAbw OOS WR)</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">&lt;8pp</span> stabil &nbsp;<span style="color:#00c8f0">8-15pp</span> akzeptabel &nbsp;<span style="color:#ff6666">&gt;15pp</span> instabil. Bei weniger als 10 Trades pro Fenster statistisch nicht aussagekraeftig.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PIOTROSKI MINI-SCORE (v5.9.21)</div><div style="font-size:12px;color:var(--mut)">5-Punkte Quality-Filter: ROA&gt;0, CFO&gt;0, Accruals OK (CFO&gt;NI), GrossMargin steigend, Debt Safe. Score &lt;2 bei &ge;2 messbaren Kriterien &rarr; Fund-Score &times;0.85 (B1-Daempfung). Quelle: Piotroski 2000.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">VIX-REGIME (v5.9.24)</div><div style="font-size:12px;color:var(--mut)">CBOE Volatility Index: <span style="color:#00e676">&lt;20 Low Vol</span> &times;1.00 &nbsp;<span style="color:#ffab00">20-30 Elevated</span> &times;0.60 &nbsp;<span style="color:#ff5252">&gt;30 Crisis</span> &times;0.20. Skaliert Momentum Richtung Neutral (50). Quelle: Barroso/Santa-Clara 2015.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PIOTROSKI MINI-SCORE (v5.9.21)</div><div style="font-size:12px;color:var(--mut)">5-Punkte Quality-Filter: ROA&gt;0, CFO&gt;0, Accruals OK (CFO&gt;NI), GrossMargin steigend, Debt Safe. Niedrige Scores bei messbaren Kriterien d&auml;mpfen den Fundamental-Score. Quelle: Piotroski 2000.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">VIX-REGIME (v5.9.24)</div><div style="font-size:12px;color:var(--mut)">CBOE Volatility Index: <span style="color:#00e676">&lt;20 Low Vol</span> normal &nbsp;<span style="color:#ffab00">20-30 Elevated</span> ged&auml;mpft &nbsp;<span style="color:#ff5252">&gt;30 Crisis</span> stark ged&auml;mpft. Momentum-Score wird bei h&ouml;herer Volatilitaet Richtung Neutral skaliert. Quelle: Barroso/Santa-Clara 2015.</div></div>
     <div><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">OVERFITTING-GAP</div><div style="font-size:12px;color:var(--mut)">IS Win-Rate minus OOS Win-Rate. <span style="color:#00e57a">&lt;5pp</span> = kein Overfitting &nbsp;<span style="color:#f0c000">5-15pp</span> = leicht &nbsp;<span style="color:#ff6666">&gt;15pp</span> = stark. Negativ = OOS besser als IS (bei kleinen Stichproben: Zufall).</div></div>
   </div>
 
@@ -682,7 +682,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       </div>
     </div>
     <div style="padding:10px 12px;background:rgba(240,192,0,.06);border-left:3px solid #f0c000;border-radius:6px;font-size:12px;color:var(--mut);line-height:1.6">
-      <strong style="color:#00e57a">Aktuelle Situation (Mai 2026, v5.9.78):</strong> 269 Ticker, 4 Fenster, ~80&ndash;120 OOS-Trades/Fenster. OOS WR 59.8%, IS WR 60.9%, Stabilitaet 2.1pp, Overfitting-Gap 1.1pp. <strong style="color:#dce8f5">Statistisch belastbar.</strong> Alle 4 Fenster &gt;57%. SPY-Filter eliminiert Baermarkt-Eintraege. Produktions-Script: stockiq_alpha_juno_v6b_6m-u4.py.
+      <strong style="color:#00e57a">Aktuelle Situation (Mai 2026):</strong> 269 Ticker, 4 Fenster, ~80&ndash;120 OOS-Trades/Fenster. <strong style="color:#dce8f5">Statistisch belastbar.</strong> Alle 4 Fenster konsistent positiv. SPY-Filter eliminiert Baermarkt-Eintraege. Produktions-Script: stockiq_alpha_juno_v6b_6m.
     </div>
   </div>
 
@@ -711,426 +711,41 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="font-family:monospace;font-size:10px;color:#ff9f1c;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Einmalig / Setup</div>
       <div style="margin-bottom:12px"><strong style="color:#dce8f5">%pip install yfinance</strong> &mdash; Juno-Einrichtung</div>
 
-      <!-- IC-Erklaerung -->
+      <!-- IC-Erklaerung (vereinfacht) -->
       <div style="padding:10px 12px;background:rgba(176,124,248,.06);border-left:3px solid #b07cf8;border-radius:6px;font-size:11px;color:var(--mut);line-height:1.7">
-        <strong style="color:#dce8f5">Faktor-IC (Information Coefficient) &mdash; was es bedeutet:</strong><br>
-        IC = Spearman-Korrelation zwischen Faktorwert und nachfolgendem Return. IC=0.15 bedeutet: der Faktor erklaert 15% der Rangordnung der Folgerenditen.<br><br>
+        <strong style="color:#dce8f5">Faktor-IC (Information Coefficient):</strong><br>
+        IC misst wie gut ein Faktor die zuk&uuml;nftige Rendite-Rangordnung vorhersagt. Ein positiver IC best&auml;tigt, dass der Faktor als Signal taugt. Negative oder neutrale ICs f&uuml;hren zur Modell-Anpassung.<br><br>
         <strong style="color:#dce8f5">Zwei IC-Typen in StockIQ:</strong><br>
-        <strong style="color:#00c8f0">Annual-IC</strong> (annual_ic.py): Faktor Dez.Jahr &rarr; Jahresrendite. Langfrist-Validierung. 1&times;/Jahr sinnvoll.<br>
-        <strong style="color:#00c8f0">30-Tage-IC</strong> (geplant): Faktor Snapshot &rarr; 30d-Return. Kurzfrist-Signal. 1&times;/Monat wenn &ge;20 Snapshots.<br><br>
-        <strong style="color:#dce8f5">Interpretation Annual-IC Mai 2026:</strong><br>
-        ROCE/FCF/ROE: NEUTRAL &mdash; Quality-Screening-Bias (Universe schon hochwertig, keine Differenzierung).<br>
-        Debt: schwach signifikant &mdash; niedrige Verschuldung leicht praediktiv.<br>
-        mom_skip/evar/ev_ebitda: kein Backfill &mdash; Daten erst ab 2026 vorhanden. Naechste IC 2027 aussagekraeftiger.
+        <strong style="color:#00c8f0">Annual-IC</strong>: Langfrist-Validierung 1&times;/Jahr (Mai). Basis: Jahres-Fundamentaldaten &rarr; Jahresrendite.<br>
+        <strong style="color:#00c8f0">30-Tage-IC</strong> (geplant): Kurzfrist-Validierung 1&times;/Monat ab &ge;20 Snapshots.
       </div>
     </div>
   </div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Neu seit v5.9.45 (Mai 2026)</div>
-
-    <!-- v5.9.80 Bericht-Fix -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.80 &mdash; Bericht-Fix: EVAR (rel.) + Risk-Farbe + Shares YoY + EV/EBIT</div>
-    <div style="background:rgba(255,63,63,.05);border-left:3px solid #ff3f3f;padding:8px 10px;border-radius:6px;font-size:11px;color:var(--mut)">
-      <div>&#10003; <strong style="color:#dce8f5">EVAR (rel.) Bug behoben</strong>: rptDetailCard() verwendete fd.evar (raw) statt evarRelSc() (sektor-relativ). Fix: evarRelSc(tk) mit Fallback auf fd.evar. Betrifft Score-Breakdown-Anzeige im Bericht (cSc selbst war korrekt).</div>
-      <div>&#10003; <strong style="color:#dce8f5">Risk-Farbe dynamisch</strong>: Bericht zeigte Risk-Komponente immer orange (hardcoded). Fix: gr&uuml;n &gt;65 / gelb &gt;40 / rot &le;40.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Fehlende Felder erg&auml;nzt</strong>: EV/EBIT, FCF/Debt Cover, Shares YoY (Buyback-Signal) jetzt auch im Bericht sichtbar. Konsistenz mit wlDetail() hergestellt.</div>
-    </div>
-    <!-- v5.9.79 Snapshot-Status-Badge -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.79 &mdash; Snapshot-Status-Badge im DQ-Banner</div>
-    <div style="background:rgba(0,200,240,.05);border-left:3px solid #00c8f0;padding:8px 10px;border-radius:6px;font-size:11px;color:var(--mut)">
-      <div>&#10003; <strong style="color:#dce8f5">Snapshot-Status-Badge</strong>: DQ-Banner zeigt Archiv-Snapshot-Anzahl + letztes Datum + Milestone-Status. Farbe: gr&uuml;n=WL3-Meilenstein (&#8805;30 Snaps), gelb=IC-Test m&ouml;glich (&#8805;20), grau=aufbauend. Aktuell: 56+ Snaps &rarr; WL3 ab 20. Mai.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Forschungsgrundlage (Mai 2026)</strong>: JP Morgan Factor Views Q2/2026: Momentum-Dispersion auf 35-Jahres-Hoch (h&ouml;chste seit 1990). SPY-200MA-Filter und VIX-D&auml;mpfung kritisch. O&rsquo;Shaughnessy: Shareholder Yield +3.5%/Jahr &ndash; shares_change_yoy bereits in v5.9.78 im Display.</div>
-    </div>
-    <!-- v5.9.78 debtSc -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.78 &mdash; debtSc() Sektor-Split &middot; IC-Test-Ergebnis (Finanzwerte-Bias)</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">debtSc() Sektor-aware (IC-Test 2026-05)</strong>: Annual IC-Analyse ergab debt pooled IC = +0.103 (signifikant, IC-IR = 1.11) in Gegenrichtung. Ursache: Finanzwerte (Banken, Versicherungen, Financial Services) haben strukturell hohe D/E-Ratios (&gt;300%) die kein Risikosignal darstellen. Fix: fd.sector wird an debtSc() &uuml;bergeben &mdash; Finanzsektor erh&auml;lt neutralen Score 65, Non-Financials unveraendert. Quellen: yfinance sector (fund_juno v7.9.3+), IC-Analyse Mai 2026.</div>
-      <div>&#10003; <strong style="color:#dce8f5">IC-Test Befunde Mai 2026</strong>: FCF IC-IR = +1.39 (h&ouml;chste Stabilit&auml;t, Best&auml;tigung Gewicht), ROCE Quality-Bias best&auml;tigt, Beta regime-abh&auml;ngig. 8 Faktoren n=0 (mom_skip/evar/ev_ebit/eps_growth) &rarr; annual_backfill v1.3 geplant.</div>
-    </div>
-    <!-- v5.9.78 Buyback -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.78 &mdash; Buyback-Signal Display &middot; shares_change_yoy (O&rsquo;Shaughnessy Shareholder Yield)</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">shares_change_yoy: Buyback-Ampel</strong> &mdash; YoY-Ver&auml;nderung der Aktienanzahl aus fund_juno v7.9.23 (quarterly_balance_sheet). Jetzt in Fund-Tab-Karten und WL-Detail angezeigt. Negativ = Aktienr&uuml;ckkauf (gr&uuml;n/blau), Positiv = Verw&auml;sserung (rot). Kein Score-Einfluss &mdash; IC-Test ausstehend. Akademische Basis: O&rsquo;Shaughnessy (2012) &ldquo;What Works on Wall Street&rdquo;: Shareholder Yield (Div + Buyback) = st&auml;rkster Value-Faktor 1967&ndash;2009. Morningstar/Ibbotson 2024.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Evaluation Modell-Review 2026-05-17</strong>: IC-Test jetzt f&auml;llig (30+ Snapshots). Offene Score-Entscheidungen bis IC: fcf_debt_cover in debtSc(), shares_change_yoy in fSc(), norm_pe (Shiller-EPS), 6M-Momentum-Gewicht. Roadmap: v5.9.78+ nach IC-Ergebnissen.</div>
-    </div>
-
-    <!-- v5.9.76 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.76 &mdash; FCF/Debt + EV/EBIT Display &middot; MomRank &middot; Research Sprint (Buffett/Greenblatt/CANSLIM)</div>
-    <div>&#10003; <strong style="color:#dce8f5">FCF/Debt Coverage</strong>: fund_juno v7.9.22-Feld fcf_debt_cover jetzt in Fund-Tab-Karten und Synopse-Detail angezeigt. Buffett-Proxy: FCF/Schulden &gt;0.20 = tilgbar in &lt;5 Jahren. Quelle: O'Shaughnessy QVM + Buffett Annual Report 2024.</div>
-    <div>&#10003; <strong style="color:#dce8f5">EV/EBIT Display</strong>: ev_ebit (fund_juno v7.9.22) jetzt in Synopse-Detail sichtbar. valSc()-Verdrahtung war bereits in v5.9.70 korrekt &mdash; bisher nur Datenanzeige fehlend. Greenblatt Magic Formula: ROIC + EV/EBIT-Yield = Kern-Kombination.</div>
-    <div>&#10003; <strong style="color:#dce8f5">MomRank (CANSLIM-L)</strong>: calcMomRank() berechnet Momentum-Perzentil im Universe (0&ndash;100%). Angezeigt in Fund-Tab-Karten. CANSLIM: Relative Strength &ge;80 Pz = Market Leader. Kein Score-Einfluss &mdash; Display-only bis IC-Test (Snapshot 30).</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.23</strong>: +shares_change_yoy (YoY Aktienanzahl-Veraenderung via quarterly_balance_sheet). Negativ = Aktienrueckkauf. Kein Score-Einfluss &mdash; IC-Signal-Sammlung (O'Shaughnessy Shareholder Yield). Literatur: Morningstar/Ibbotson 2024.</div>
-    <!-- v5.9.75 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.75 &mdash; EV/EBIT++ &middot; MomRisk-Anzeige (Buffett 2024 / JP Morgan Q2 2026)</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">EV/EBIT h&ouml;her gewichtet in valSc()</strong>: Wenn beide Signale verf&uuml;gbar: EV/EBIT 0.25 &rarr; 0.30, EV/EBITDA 0.25 &rarr; 0.20. Quelle: Buffett Annual Letter 2024: &ldquo;EBITDA &mdash; a flawed favorite of Wall Street.&rdquo; D&amp;A ist ein realer Kostenfaktor; EV/EBIT bewertet ehrlicher. Kein Einfluss wenn nur EV/EBIT oder nur EV/EBITDA verf&uuml;gbar (Fallback-Kette unveraendert).</div>
-      <div>&#10003; <strong style="color:#dce8f5">MomRisk-Indikator im VIX-Banner</strong>: Zus&auml;tzlich zum VIX-Regime (Low/Elevated/CRISIS) erscheint jetzt ein Momentum-Crash-Risiko-Label. HOCH (rot): wenn Bond-Vol-Divergenz stark (VIX_BOND_DIV=strong). Erh&ouml;ht (orange): wenn Bond-Div mild ODER VIX &ge;20. Akademische Basis: Daniel &amp; Moskowitz (2016) Momentum Crashes; JP Morgan Factor Views Q2 2026: Dispersion zwischen Momentum-Gewinnern und -Verlierern auf h&ouml;chstem Stand seit 1990.</div>
-    </div>
-    <!-- v5.9.74 -->
-
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.74 &mdash; HC-Z&auml;hler konsistent (alle Signale)</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#ffd700">&#11088; HC-Z&auml;hler auf alle Signale ausgedehnt</strong>: Bisher z&auml;hlte HC nur BUY+STRONG Ticker. Badge (&#11088;) erscheint aber f&uuml;r alle Signale (inkl. PEG-BLK, HOLD, WATCH) wenn Score&ge;65+Mom+Sektor erf&uuml;llt. Z&auml;hler war damit zu niedrig. Jetzt: hcTotal = alle Ticker im Universum mit isHC()=true, unabh&auml;ngig vom Signal-Typ. Gilt f&uuml;r WL-Karte, Synopse-Bar und Synopse-HC-Karte.</div>
-    </div>
-
-    <!-- v5.9.73 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.73 &mdash; HC-Z&auml;hler in WL + Synopse-Bar korrigiert</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#ffd700">&#11088; HC-Karte in WL-KPIs</strong>: F&uuml;nfte Karte zeigt HC-Gesamtzahl (hcStrongs + hcBuys). Zeigt alle Titel mit Triple-Confirmation: Score &ge;65 + Momentum &gt;5% + Sektor-ETF &gt;+10%. Karte erscheint immer, unabh&auml;ngig vom HC-Filter-Status.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Synopse-Bar korrigiert</strong>: &#11088; zeigte bisher STRONG-BUY-Z&auml;hler (falsche Semantik). Jetzt zeigt &#11088; HC = echte Triple-Confirmation-Anzahl f&uuml;r das Gesamtuniverse (alle 269). STRONG wird separat als Zahl dahinter angezeigt.</div>
-    </div>
-
-    <!-- v5.9.72 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.72 &mdash; Triple-Confirmation in WL-Karten</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">Sektor-Ampel in jeder WL-Karte</strong>: Rechts neben Score-Badge erscheint das Ampel-Icon aus dem Depot-Tab (&#128202; gruen &gt;+10% | &#128993; gelb 0-10% | &#128308; rot &lt;0%). Tooltip zeigt Sektor + ETF-Return. Identisch zu Depot-Tab "Skt"-Spalte.</div>
-      <div>&#10003; <strong style="color:#ffd700">HC-Stern &#11088; in WL-Karten</strong>: Goldener Stern wenn Triple-Confirmation erfuellt (Score &ge;65 + Momentum &gt;5% + Sektor-ETF &gt;+10%). BUY/STRONG zeigt zusaetzlich Zeile "Triple: Score+Mom+Sektor | [Sektor-Name]".</div>
-    </div>
-
-    <!-- v5.9.71 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.71 &mdash; Synopse/WL-Bruecke + Hilfe-Erklaerung</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">Synopse-Vergleichszeile in WL</strong>: Kompakte Zeile unter den WL-Karten zeigt Gesamtuniverse-Zaehler (alle 269 Ticker, ungefiltert): STRONG / BUY / PEG-Blk / SELL. Erklaert sofort warum Synopse und WL unterschiedliche Zahlen zeigen koennen. HC-Filter-Status wird angezeigt.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Hilfe-Tab: Synopse vs. WL</strong>: Neuer Erklaerungsblock mit Perspektiven-Vergleich (Tagesaktion vs. Positionsmonitor), Ursachen fuer Zaehldifferenzen, und empfohlenem Workflow. v5.9.71</div>
-    </div>
-
-    <!-- v5.9.70 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.70 &mdash; EV/EBIT + EPS-Revision (Buffett/Damodaran + Twin Momentum)</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">EV/EBIT Signal (valSc)</strong>: Neues Value-Signal analog EV/EBITDA. Buffett (2002): D&amp;A ist realer Kostenfaktor &mdash; EBITDA ignoriert ihn. EV/EBIT sauberer f&uuml;r kapitalintensive Branchen (Industrials, Telcos, Utilities). Quelle: Damodaran. Beide verf&uuml;gbar: valSc = PEG&times;50% + EV/EBITDA&times;25% + EV/EBIT&times;25%. Fallback-Kette: beide &rarr; einzelne &rarr; PEG allein.</div>
-      <div>&#10003; <strong style="color:#dce8f5">EPS-Revision-Score (momSc)</strong>: Fundamentales Momentum als 3. Komponente in momSc(). Quelle: fd.eps_growth (earningsGrowth YoY aus yfinance). Normierung: 0% = Score 50, +40% &asymp; 98, &minus;40% &asymp; 2. Wenn verf&uuml;gbar: mom = MACD&times;45% + Skip-Mom&times;45% + EPS-Mom&times;10%. Gibt null zur&uuml;ck wenn kein eps_growth &rarr; Fallback auf bisherige 50/50-Formel. Akademisch: Validea Twin Momentum, O&rsquo;Shaughnessy 2012.</div>
-      <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.20</strong>: +ev_ebit (EV/EBIT aus enterpriseValue/EBIT) +eps_growth (earningsGrowth&times;100). Sanity: ev_ebit &gt;60&rarr;None; eps_growth &plusmn;200%.</div>
-    </div>
-
-    <!-- v5.9.69 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.69 — Bugfixes</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">Bericht-Modal</strong>: Kein Crash beim zweiten &Ouml;ffnen. Null-Check in rptInitSectors() verhindert sel.innerHTML-Fehler.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Allokation &larr; Depot</strong>: depotLoad() wird vor dpCalcTotal() aufgerufen &mdash; Aktienwert wird jetzt korrekt &uuml;bernommen.</div>
-    </div>
-
-    <!-- v5.9.67 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.67 — Beck-Regime &middot; Depot Export/Import &middot; Allokation aus Depot</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">Beck/GPO Markt-Regime</strong>: VIX-basierte Handlungsempfehlung im Allokations-Tab. VIX &lt;20 = Normal (Fidelity-Zielwerte), VIX 20-30 = Erh&ouml;ht (&minus;5pp Aktien), VIX &gt;30 = Krise (antizyklisch +10pp), VIX &gt;40 = Crash (Vollein). Quelle: Andreas Beck / Global Portfolio One 2019.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Allokation: Aktienwert aus Depot</strong>: Beim &Ouml;ffnen des Allokations-Tabs wird das AKTIEN-Feld automatisch mit dem aktuellen Depot-Aktienwert vorbelegt. Badge &ldquo;&#128202; Aus Depot&rdquo; zeigt die Herkunft.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Depot Export/Import</strong>: Positionen als JSON-Datei exportieren und importieren. Sicherung vor Cache-L&ouml;schung oder Ger&auml;tewechsel. Dateiname: stockiq_depot_DATUM.json.</div>
-    </div>
-
-    <!-- v5.9.66 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.66 — 287 Ticker &middot; Tab-Reihenfolge &middot; Bereinigung</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">Neue Ticker (+16 netto)</strong>: Defense Europa (RHM.DE, SAF.PA, HO.PA, RR.L, BAES.L), Halbleiter-Speicher (MU), Kanada (CNR, RY, SHOP). GSK-ADR und SHEL-ADR entfernt (Duplikate zu GSK.L / SHEL.L).</div>
-      <div>&#10003; <strong style="color:#dce8f5">Tab-Reihenfolge</strong>: Depot-Tab direkt nach WL2 (fr&uuml;her letzter Tab). Reihenfolge: Synopse &rarr; WL1 &rarr; WL2 &rarr; Depot &rarr; Fundamentals &rarr; Walk-Forward &rarr; Allokation &rarr; Hilfe &rarr; Roadmap.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Region-ETF-Makro (fund_juno v7.9.17)</strong>: EWC, EWA, EWJ, INDA etc. als Benchmark-Returns im __macro__-Block. Zeigt ob Kanada/Indien/Europa gerade out- oder underperformt.</div>
-    </div>
-
-    <!-- v5.9.65 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.65 — Signal-konforme Textanalyse &middot; RSI-Ersch&ouml;pfung</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">Signal-konforme Textanalyse im Bericht</strong>: Jede Aktie erh&auml;lt einen direkten, signalkonformen Analysetext. SELL MA &rarr; &ldquo;Kein Neueinstieg. Bestehende Positionen &uuml;berpr&uuml;fen.&rdquo; &mdash; kein widerspruchsfreier Generik-Text mehr. 4 Abs&auml;tze: Signal-Intro, St&auml;rken, Risiken, Technisches Fazit.</div>
-      <div>&#10003; <strong style="color:#dce8f5">BUY &#9888; (buy_rsi_warn)</strong>: RSI &gt;75 + Bearish Divergenz &rarr; BUY-Signal mit &Uuml;berhitzungswarnung. Anzeige in hellgr&uuml;n.</div>
-      <div>&#10003; <strong style="color:#dce8f5">WATCH RSI (watch_rsi)</strong>: RSI &gt;80 + Bearish Divergenz &rarr; BUY wird zu WATCH RSI. Zeigt Ersch&ouml;pfungsgefahr bei ATH-N&auml;he. Quelle: Connors Research &mdash; RSI-Divergenz signalisiert nachlassendes Momentum.</div>
-      <div>&#10003; <strong style="color:#dce8f5">HOLD/Watch-Filter</strong>: Zeigt jetzt auch HOLD SF, HOLD DVG, WATCH RSI (fr&uuml;her nur &ldquo;watch&rdquo;).</div>
-    </div>
-
-    <!-- v5.9.62-64 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.62&ndash;64 — Depot-Tab &middot; EUR-Kurse (fund_juno v7.9.11&ndash;16)</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">Depot-Tab (p3)</strong>: Neuer Tab f&uuml;r eigene Positionen. Eingabe: Ticker (aus WL2 oder manuell), Anzahl, Kaufkurs (EUR), Kaufdatum, W&auml;hrung. Gesamt-Performance-Kacheln + Positionen-Tabelle mit aktuellem Score und Signal. Zeitreihen-Chart aus Snapshots (ab fund_juno v7.9.11).</div>
-      <div>&#10003; <strong style="color:#dce8f5">EUR-normierte Kurse (fund_juno v7.9.11&ndash;16)</strong>: current_price_eur pro Ticker. USD&rarr;EUR via EURUSD=X, GBX/GBp&rarr;EUR via EURGBP=X (&divide;100 f&uuml;r London-Pence), JPY&rarr;EUR via EURJPY=X, HKD&rarr;EUR via EURHKD=X, CHF/SEK/NOK/DKK/CAD/AUD ebenfalls.</div>
-      <div>&#10003; <strong style="color:#dce8f5">GBp-Heuristik (v7.9.16)</strong>: .L-Ticker + GBP + Preis &gt;100 &rarr; yfinance-Bug erkannt &rarr; automatisch als Pence behandelt (&divide;100). Behebt SHEL.L/GSK.L-Kursfehler.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Persistenz</strong>: Depot-Positionen in localStorage (stockiq_depot_v1) &mdash; bleiben auf GitHub Pages dauerhaft erhalten.</div>
-    </div>
-
-    <!-- v5.9.59-61 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.59&ndash;61 — DVG &middot; SF-Default &middot; Allokation 5 Klassen</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#b07cf8">HOLD DVG (v5.9.59)</strong>: Deep Value Divergence &mdash; SELL-Signal unterdrueckt wenn Fund &ge;80 + RSI &lt;35 + Bullish Divergenz. Zeigt: gutes Unternehmen in technischer Schw&auml;chephase. Lila Badge im Detail-Panel mit Erkl&auml;rung. Gegenstück zu RSI &#9888;. Beispiel: PYPL &mdash; Fund 87, RSI 31, bull_regular.</div>
-      <div>&#10003; <strong style="color:#dce8f5">SF-Default = ein (v5.9.60)</strong>: Score Filter (Score &ge;55 &rarr; HOLD SF statt SELL) ist jetzt standardm&auml;&szlig;ig aktiv. Kann per SF-Button ausgeschaltet werden. Rationle: Qualit&auml;tstitel wie RIO (Score 71) oder QCOM (Score 73) sollen nicht automatisch verkauft werden.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Rohstoffe als 5. Assetklasse (v5.9.61)</strong>: Allokations-Tab erg&auml;nzt um Rohstoffe/Commodities-Eingabefeld. 5 Asset-IDs: stocks/bonds/gold/commod/cash. Rebalancing pr&uuml;ft alle f&uuml;nf.</div>
-    </div>
-
-    <!-- v5.9.58 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.58 — Konjunkturzyklus-Overlay (Fidelity / Hambro)</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">Zyklus-Overlay</strong>: 4 Phasen w&auml;hlbar: Early / Mid / Late / Rezession. Jede Phase hat eigene Sollwerte f&uuml;r alle 5 Assetklassen. Standard: Late-Cycle (Befund Sektor-Ranking Mai 2026: Energy +52%, Materials +33% f&uuml;hren). Quelle: Fidelity Business Cycle AART Jan 2025, BlackRock Hambro Webinar Mai 2026.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Late-Cycle Sollwerte</strong>: 50% Aktien / 12% Anleihen / 13% Gold / 13% Rohstoffe / 12% Cash. Rezessions-Sollwerte: 40/20/15/5/20%.</div>
-    </div>
-
-    <!-- v5.9.55-57 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.55&ndash;57 — Sektor-Bericht &middot; RSI-D&auml;mpfung &middot; PDF-Export</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">Sektor-Analyse-Bericht</strong>: Button &ldquo;&#128203; Bericht&rdquo; im Header. W&auml;hle Sektor + 2 Aktien &rarr; vollst&auml;ndiger Analysebericht: Sektor-Ranking (12M), Sektor&uuml;bersicht, Aktien-Vergleich, Detail-Karten, Textanalyse, Glossar. iOS-PDF-Export: &ldquo;Als PDF drucken&rdquo; &rarr; Teilen &rarr; PDF.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Sektor-Performance-Ranking</strong>: Alle Sektoren nach Ø 12M-Momentum sortiert + Sektor-ETF-Return (XLV/XLK/XLF etc. aus fund_juno v7.9.10). Zeigt Late-Cycle-Signatur: Energy/Materials/Utilities f&uuml;hren.</div>
-      <div>&#10003; <strong style="color:#dce8f5">RSI-D&auml;mpfung in momSc() (v5.9.57)</strong>: RSI &gt;75 &rarr; Momentum &times;0.85, RSI &gt;80 &rarr; &times;0.70. Verhindert &uuml;berh&ouml;hte Signale bei ATH-N&auml;he. BUY STRONG &rarr; BUY wenn RSI &gt;78. Quelle: Barroso/Santa-Clara 2015 (Momentum-Crash bei &Uuml;berhitzung).</div>
-    </div>
-
-    <!-- v5.9.47-54 -->
-    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.47&ndash;54 — GSR &middot; Bond-ETF &middot; V2X &middot; Makro-Auto-Fill</div>
-    <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
-      <div>&#10003; <strong style="color:#dce8f5">Gold-Silver-Ratio (GSR)</strong>: Spread-adjustiertes Switch-Signal im Allokations-Tab. Gold-Spread 4.5% (1oz M&uuml;nze), Silber-Spread 22% (inkl. 19% MwSt, ab 01.01.2025 Differenzbesteuerung aufgehoben). GSR &lt;70 &rarr; neutral, &gt;80 &rarr; Silber-Signal, &gt;90 &rarr; starkes Silber-Signal.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Bond-ETF Duration-Allokation</strong>: Laufzeit-Empfehlung nach Zinsniveau und Yield-Kurve. Normal/Invers/Flach &rarr; unterschiedliche Duration-Gewichtung (Short/Mid/Long). Quelle: Fidelity, Damodaran.</div>
-      <div>&#10003; <strong style="color:#dce8f5">V2X / VSTOXX (v5.9.46)</strong>: EU-Ticker (.DE, .PA, .MI, .SW, .L etc.) nutzen den europ&auml;ischen Angstbarometer V2X statt VIX f&uuml;r die Momentum-D&auml;mpfung. Beseitigt die US-VIX-Verzerrung bei europ&auml;ischen Titeln.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Makro-Auto-Fill (fund_juno v7.9.9)</strong>: Gold, Silber, US10Y, Yield-Curve werden nach JSON-Laden automatisch in GSR- und Bond-Tab eingetragen. Manuell &uuml;berschreibbar.</div>
-    </div>
-
-  </div>
-
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.44</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Owner Earnings Yield (Display)</strong>: Neues Feld im Detail-Panel: NI + D&amp;A &minus; CapEx / MarketCap. Buffetts (1986) robusteres Cashflow-Maß. Diff zu FCF sichtbar (z.B. NVO: OE +8% vs. FCF +0.2% = Growth-Capex-Effekt). Kein Einfluss auf Score bis IC-Best&auml;tigung.</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.7</strong>: owner_earnings_yield berechnet aus cashflow-Statement (D&amp;A + CapEx) + financials (Net Income). Sanity: &plusmn;50%.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.44</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Owner Earnings Yield (OWN.EARN.)</strong>: Neues Display-Feld im Fundamentals-Panel. Formel: (NI + D&amp;A &minus; CapEx) / MarketCap. Buffetts originale Definition (1986). Kein Einfluss auf Score bis IC-Best&auml;tigung (Ende Mai).</div>
-    <div>&#10003; <strong style="color:#dce8f5">NVO-Erkl&auml;rung</strong>: FCF +0.2% (kollabiert durch Fabrik-CapEx) vs. OE zeigt echten operativen Gewinn ohne Growth-Capex-Verzerrung. Relevant f&uuml;r Pharma, Industrie, Energie.</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.7</strong>: +owner_earnings_yield. Berechnung aus financials (NI), cashflow (D&amp;A + CapEx). Sanity &plusmn;50%.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.43</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">pegRelSc() Fallback-Fix</strong>: ADRs ohne sector-Feld (NVO, NOVOB, TSM etc.) nutzten bislang absolutes PEG. Neue Fallback-Kette: (1) Sektor-Median, (2) Globaler Median PEG_GLOBAL_MED, (3) Absolut. NVO zeigt jetzt &ldquo;PEG vs. glb Med.X.X&rdquo; statt &ldquo;PEG (abs.)&rdquo;.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Label-Update</strong>: Detail-Panel zeigt &ldquo;glb&rdquo; als Sektor-K&uuml;rzel wenn globaler Median verwendet wird.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.42</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Roadmap aktualisiert</strong>: Owner Earnings Yield als P1 (Juni) aufgenommen. NVO-Analyse (Mai 2026): FCF-Kollaps 30.8%&rarr;0.2% durch strategischen Fabrik-Capex (Ozempic) &mdash; kein Qualit&auml;tsverlust, sondern Growth-Investment. Buffetts Owner Earnings (OCF+Abschr.&minus;Capex) trennt Maintenance von Growth.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Offene Punkte neu priorisiert</strong>: Owner Earnings P1 (Juni) &middot; FCF/OE-Gewichtungsentscheidung P2 (nach IC) &middot; sektor-neutraler PEG bereits erledigt (v5.9.41) &rarr; aus offenen Punkten entfernt.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Score-Architektur</strong>: FCF-Zeile mit Hinweis auf geplante Owner Earnings Erg&auml;nzung.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.41</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Sektor-relativer PEG (pegRelSc)</strong>: PEG wird nicht mehr absolut bewertet, sondern relativ zum Sektor-Median. Ein Pharma-Titel mit PEG 2.5 ist nicht teurer als ein Tech-Titel mit PEG 2.5. Scale: 1 PEG-Einheit unter Median &rarr; +20 Score-Punkte.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Sektor-Mediane</strong>: buildSectorPegMed() wird einmalig nach JSON-Laden berechnet. Fallback: absolutes PEG wenn kein sector-Feld (r&uuml;ckw&auml;rtskompatibel).</div>
-    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: Neue Zeile &ldquo;PEG vs. Tech Med.2.4 &rarr; 66&rdquo; unter KGV/EG. Farbe: &ge;65 gr&uuml;n, &ge;40 gelb, &lt;40 rot.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Gewicht unveraendert</strong>: Value-Gewicht 20% bleibt &mdash; erst nach IC-Best&auml;tigung anpassen.</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Analogie zu v5.9.32 (EVAR-rel):</strong> Wie Zykliker bei EVAR mit Zyklikern verglichen werden, werden Wachstumstitel bei PEG mit Wachstumstiteln verglichen. Akademisch: Sektor-neutrales Value ist seit Fama/French bekannt als robusterer Faktor als absolutes Value.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.40</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Script-Workflow dokumentiert</strong>: Hilfe-Tab zeigt alle Python-Scripts mit empfohlenem Rhythmus (t&auml;glich / optional / j&auml;hrlich / Setup) und Erkl&auml;rung der IC-Analyse-Typen.</div>
-    <div>&#10003; <strong style="color:#dce8f5">IC-Interpretation</strong>: Annual-IC Mai 2026 Ergebnisse und Methodik erkl&auml;rt. NEUTRAL bei ROCE/FCF durch Quality-Screening-Bias dokumentiert.</div>
-  </div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Roadmap-Tab: Relevanz-Kommentare</strong>: Jede akademische Faktorl&uuml;cke erh&auml;lt Kurzkommentar mit Relevanz-Einstufung (HOCH/MITTEL/NIEDRIG) und Begr&uuml;ndung. EPS-Revisionen und Marktregime-Score als HOCH eingestuft; Net Debt/EBITDA als NIEDRIG-MITTEL.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.38</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Roadmap-Tab (Tab 7)</strong>: Neuer Tab &ldquo;&#128203; Roadmap&rdquo; mit immer aktuellem Entwicklungsstand &mdash; Produktions-Stack, Score-Architektur, akademische L&uuml;cken, Walk-Forward-Kennzahlen, priorisierte offene Punkte und Entwicklungsregeln. Ersetzt das externe PDF als lebendiges Dokument im Dashboard.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.37</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">IQR-Outlier-Filter in calcAnnualStats()</strong>: Tukey-Methode (Q1&minus;1.5&times;IQR / Q3+1.5&times;IQR) filtert Extremwerte vor Std-Abw-Berechnung. Behebt GOOGL-Artefakt: ROCE 2026=79% (Backfill-Fehler) wurde ohne Filter als Ausreisser mitgerechnet und hat Konsistenz-Score von ~80 auf 36 gedrueckt.</div>
-    <div>&#10003; <strong style="color:#dce8f5">GOOGL nach Fix</strong>: ROCE [26.6, 29.1, 35.7, 34.5] ohne Ausreisser → Std ~3.9pp → Score ~83 (vorher 36). Korrekte Einordnung als qualitativ konsistentes Unternehmen.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: Zeigt &ldquo;[1 Outlier]&rdquo; wenn ein Wert herausgefiltert wurde. Vollst&auml;ndige Transparenz.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Sicherheit</strong>: Fallback-Logik &mdash; wenn nach Filterung weniger als 3 Punkte verbleiben, werden alle Werte ungefiltert genutzt.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.36</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Konsistenz-Score (Phase 2)</strong>: Buffetts &ldquo;10-Year Consistency&rdquo;-Kriterium als 5. fSc()-Komponente. Basis: Std-Abweichung des ROCE &uuml;ber 6 Jahres-Snapshots (2021&ndash;2026). Kalibrierung: Universe-Median Std=3.1pp &rarr; Score 65. Stabile Titel (Std&lt;2pp) &rarr; Score 90&ndash;95. Volatile Titel (Std&gt;30pp, NVDA/PANW) &rarr; Score 5&ndash;15.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Neue Gewichtung fSc()</strong>: Mit annual.json geladen: ROCE 30% + FCF 30% + Value 20% + Debt 15% + Konsistenz 5%. Ohne annual.json: bisherige Formel (ROCE 35%) unvera&#776;ndert &mdash; r&uuml;ckw&auml;rtskompatibel.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: Neue Zeile &ldquo;Konsistenz (ROCE)&rdquo; zeigt Score + Std-Abw + Anzahl Jahre. Farbe: &ge;70 gr&uuml;n, &ge;45 gelb, &lt;45 rot.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Backfill 2021&ndash;2025</strong>: stockiq_annual.json enth&auml;lt [2021,2022,2023,2024,2025,2026]. ROCE/ROE vollst&auml;ndig historisch; FCF-Yield via hist. Kurs &times; akt. Shares (~95% genau).</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,229,122,.06);border-left:3px solid #00e57a;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Akademische Basis (Buffett 2024):</strong> &ldquo;The best business to own is one that over an extended period can employ large amounts of incremental capital at very high rates of return.&rdquo; Konsistenz &uuml;ber Zeit &mdash; nicht Einzel-ROCE &mdash; ist das Kern-Qualit&auml;tskriterium. Stabilste Titel: NESN.SW, 8058.T, BTI, MDT (Std &lt; 1pp). Volatilste: PANW, NVDA, SBUX (Turnaround/Growth-Phase).</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.35</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Jahres-Snapshot-Infrastruktur (Phase 1)</strong>: fund_juno v7.9.6 schreibt automatisch am 1. Mai (&plusmn;7 Tage) eine kompakte Datei <code>stockiq_annual.json</code>. Format: [{year, date, version, tickers:{roce,fcf,mom_skip,...}}]. Idempotent: mehrere Runs im Fenster &uuml;berschreiben denselben Jahres-Eintrag.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Annual JSON laden</strong>: Neuer gr&uuml;ner Button im Fundamentals-Tab. Laedt stockiq_annual.json optional dazu &mdash; kein Pflichtfeld, Dashboard funktioniert ohne es.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Jahres-Trend im Detail-Panel</strong>: Wenn annual.json geladen: zeigt ROCE, FCF und Mom-Skip der gespeicherten Jahre mit Pfeil-Indikator (&uarr;/&darr;/&rarr;). Kein Einfluss auf Score. Beispiel: &ldquo;ROCE: 2026: 24.1%  2027: 27.3%&rdquo; &uarr;</div>
-    <div>&#10003; <strong style="color:#dce8f5">Phase 2 (geplant ab 2028)</strong>: Sobald 3 Jahres-Snapshots vorliegen, wird Konsistenz-Score (Std-Abw ROCE/FCF) als optionale fSc()-Komponente integriert (Buffetts 10-Year-Consistency-Test approximiert).</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(255,159,28,.06);border-left:3px solid #ff9f1c;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Akademische Basis (Buffett 2024):</strong> &ldquo;The best business to own is one that over an extended period can employ large amounts of incremental capital at very high rates of return.&rdquo; Konsistenz &uuml;ber Zeit ist Buffetts Kern-Qualit&auml;tskriterium &mdash; einmaliger ROCE-Wert sagt wenig, 5-j&auml;hriger Trend sagt alles.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.34</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">EV/EBITDA Sanity-Fix (50x)</strong>: Cutoff von 100x auf 50x gesenkt. Werte &gt;50x werden als &ldquo;kein Signal&rdquo; behandelt (Score=50, neutral). Betrifft PANW (~93x), ZS (~80x), AXON (~70x) &mdash; deren EBITDA ist noch klein relativ zur Marktkapitalisierung, das EV-Multiple ist daher kein valides Value-Signal. Legitime Obergrenze: ASML ~30x, MSCI ~40x.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Scoring 35&ndash;50x</strong>: Neuer Wert 8 (statt 5) f&uuml;r 35&ndash;50x-Bereich &mdash; weiterhin sehr teuer, aber nicht mehr Minimum-Score.</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.5</strong>: Sanity-Grenze im Fetch-Code: ev_eb &gt; 50 &rarr; None. Betroffene Ticker liefern ev_ebitda=null &rarr; valSc f&auml;llt auf PEG-only zur&uuml;ck.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.33</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Skip-Month Momentum (mom_skip)</strong>: Akademischer Standard nach Jegadeesh/Titman 1993. Berechnung: 11M-Return (Monat&minus;12 bis Monat&minus;1, letzter Monat ausgeschlossen). Verhindert Short-Term-Reversal durch Bid-Ask-Bounce und Microstructure-Effekte. Vorteil &uuml;ber 12M-Raw: ~0.5&ndash;1% p.a. h&ouml;here Rendite in akademischen Studien.</div>
-    <div>&#10003; <strong style="color:#dce8f5">momSc() neu</strong>: Fallback-Kette: (1) mom_skip &rarr; (2) mom12m_ret &rarr; (3) mom12m-Position (Legacy). Normierung: Return &times; 0.9 + 50 &rarr; Score 5&ndash;95. Detail-Panel zeigt &ldquo;12M-Mom (skip)&rdquo; + &ldquo;12M (inkl.1M)&rdquo; zum Vergleich.</div>
-    <div>&#10003; <strong style="color:#dce8f5">mom12m Skalierungsbug behoben</strong>: Alter Code: norm = 50 + raw (raw war Position 0&ndash;100 &rarr; alle &gt;50 wurden auf 100 gecappt). Neuer Code: Position direkt als Score (0&ndash;100). Betraf alle Ticker ohne JSON-Fundamentaldaten.</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.4</strong>: +mom_skip (11M-Return) +mom12m_ret (echter 12M-Return). Quelle: tk.history(period=&ldquo;13mo&rdquo;, interval=&ldquo;1mo&rdquo;) &mdash; sehr leichtgewichtig (13 Datenpunkte pro Ticker).</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Akademische Basis:</strong> Jegadeesh &amp; Titman (1993) &mdash; Skip-Month outperformt 12M-Raw. Fama/French (1996) best&auml;tigen: Monats-Lag eliminiert Reversal-Noise. Asness (1994): gilt auch cross-sectional f&uuml;r internationale Aktien.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.32</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Sektor-relatives EVAR (EVAR-rel)</strong>: EVAR wird nicht mehr absolut bewertet, sondern relativ zum Sektor-Median. META (EVAR=5, Tech-Median~35) erh&auml;lt Score 50 statt 5 — Zykliker werden mit Zyklikern verglichen.</div>
-    <div>&#10003; <strong style="color:#dce8f5">evarRelSc()-Funktion</strong>: Diff = EVAR_ticker &minus; EVAR_Sektor-Median. Score = 50 + Diff &times; 1.5, Cap 5&ndash;95. Rueckwaerts-kompatibel: ohne sector-Feld (altes JSON) → absoluter Fallback.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: EVAR-Box zeigt Rohwert + relativen Score (z.B. &ldquo;15 &#8594; 48&rdquo;). Risk-Zeile: &ldquo;&beta;0.35 | EVAR 15 vs.55(Healthcare)&rdquo;.</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.3</strong>: +sector + industry Felder (yfinance info.sector / info.industry). Juno-Output zeigt EVAR-Median pro Sektor.</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Hintergrund:</strong> IC-Analyse S20 (April 2026) zeigte 21% der Ticker mit EVAR=5 (Minimum), darunter META, QCOM, HON, POOL. Ursache: Einmalige EPS-Schocks (COVID-Basiseffekt, Regulierung, Commodity-Zyklus) treiben YoY-Std ins Extreme. Sektor-Normierung hebt diesen Bias systematisch auf.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.31</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">IS Win-Rate Fix</strong>: Walk-Forward zeigte &ldquo;n/a&rdquo; obwohl IS-WR im JSON vorhanden. 3-stufige Fallback-Kette: (1) global_stats.standard.win_rate, (2) meta.is_win_rate (neu in alpha_juno v6b_6m-u4), (3) OOS + overfitting_gap_pp aus meta.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Ticker-Anzeige Fix</strong>: Walk-Forward zeigte &ldquo;? Ticker&rdquo;. Dashboard sucht jetzt meta.n_tickers ODER n_tickers_loaded ODER n_tickers_total (alle Varianten kompatibel).</div>
-    <div>&#10003; <strong style="color:#dce8f5">alpha_juno v6b_6m-u4</strong>: SPY-Filter 4 Versuche: SPY tk.history &rarr; SPY download &rarr; <strong>^GSPC tk.history</strong> &rarr; ^GSPC download. Behebt Juno-Fehler &ldquo;keine Daten verfuegbar&rdquo;. Zus&auml;tzlich: meta.n_tickers + meta.is_win_rate in JSON-Output.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.30</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">EV/EBITDA — Enhanced Value-Signal</strong>: Zweites Value-Signal neben PEG. Enterprise Value umfasst Schulden und Cash, EBITDA normalisiert Abschreibungen. Robusterer Vergleich als KGV besonders bei kapitalintensiven und hoch-verschuldeten Unternehmen.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Kombinierter Value-Score</strong>: valSc = PEG&times;0.60 + EV/EBITDA&times;0.40. Gewichte unveraendert: Value 20% + FCF 30% + ROCE 35% + Debt 15%. R&uuml;ckwaertskompatibel: ohne EV/EBITDA-Daten = bisherige PEG-only Formel.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: Neues EV/EBITDA-Feld neben EVAR in der Fundamentals-Box. Farbe: <span style="color:#00e57a">&lt;12x gr&uuml;n</span> &nbsp;<span style="color:#f0c000">12-20x gelb</span> &nbsp;<span style="color:#ff6666">&gt;25x rot</span>.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Hilfe-Tab Glossar</strong>: EV/EBITDA-Erkl&auml;rung + akademische Quelle (Loughran/Wellman 2011).</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.1</strong>: Fetch via yfinance enterpriseToEbitda, Fallback: enterpriseValue/ebitda. Sanity: negatives EBITDA und &gt;100x → None.</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(240,192,0,.06);border-left:3px solid #f0c000;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Akademische Basis:</strong> Loughran &amp; Wellman (2011) &mdash; EV/EBITDA outperformt P/E als Faktor bei US-Aktien 1963&ndash;2009. Besonders stark bei defensiven Sektoren (Industrie, Healthcare, Konsumg&uuml;ter). MSCI Enhanced Value Index nutzt EV/EBITDA als einen von drei Kern-Deskriptoren neben P/B und P/FCF.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.29</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">EVAR — Earnings Variability Score</strong>: Neues MSCI-Quality-Deskriptor-Feld aus fund_juno v7.9. Score 0-100 (100=maximal stabil). Berechnung: Std der quarterly Net Income YoY-Wachstumsraten. Fallback: earningsQuarterlyGrowth-Proxy.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Risk-Score erweitert</strong>: Wenn EVAR vorhanden: Risk = stat&times;0.50 + Beta&times;0.40 + EVAR&times;0.10. Ohne EVAR: bisherige Formel stat&times;0.60 + Beta&times;0.40 (r&uuml;ckw&auml;rtskompatibel).</div>
-    <div>&#10003; <strong style="color:#dce8f5">Detail-Panel</strong>: Risk-Zeile zeigt jetzt &beta;-Wert UND EVAR wenn vorhanden (z.B. &ldquo;Risk 20% | &beta;1.20 | EVAR 72&rdquo;).</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.9.0</strong>: calc_evar_score() mit 3-stufiger Fallback-Logik. Neue Zusammenfassung: stabil(&ge;70) / volatil(&lt;40) Z&auml;hler.</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Akademische Basis:</strong> MSCI Quality Index nutzt ROE + D/E + Earnings Variability als drei Kerndeskriptoren. EVAR-Pr&auml;mie (1964-2023): 4.7% p.a., Sharpe 0.47 (Alpha Architect / AQR). Stabile Gewinne = defensiver Quality-Anker in Abschwunphasen.</div>
-  </div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.28</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Ticker-Bereinigung</strong>: 278 &rarr; 260 Ticker. Entfernt: 7 Fehler-Ticker (HELN.SW, BALN.SW, FCA.MI, MMC, ANSS, STM.PA, NZYMB) + 12 EM-Ticker ohne zuverl&auml;ssige yfinance-Daten.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Behalten</strong>: 0700.HK (Tencent), 1211.HK (BYD), 005930.KS (Samsung) &mdash; relevante Einzeltitel mit Investitionsrelevanz.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Neu: 3750.HK (CATL)</strong>: Weltgr&ouml;&szlig;ter EV-Batteriehersteller, HK-Listing seit April 2024.</div>
-    <div>&#10003; <strong style="color:#dce8f5">DQ-Effekt</strong>: stat-Ticker sinkt von ~19 auf ~4-5 (nur verbleibende HK/EM-Exoten). DQ-Banner sollte jetzt fast permanent gr&uuml;n sein.</div>
-  </div>
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.27</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">DQ-Banner (Datenqualit&auml;t)</strong>: Synopse zeigt jetzt prominent: JSON-Ladestand (n/278), AI/JSON/stat-Verteilung, Trend- und RSI-Qualit&auml;t, Sanity-Flag-Z&auml;hler. Farbe: gr&uuml;n=alles ok, gelb=&lt;20 stat, rot=&gt;20 stat.</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.8</strong>: Neue Felder trend (SMA200-Abstand, 5-95 skaliert) und rsi_val (relativeStrengthIndex14 + 52W-Proxy-Fallback). Dashboard &uuml;bernimmt beide Felder automatisch beim JSON-Laden und setzt s.trend + s.rsi je Ticker.</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno v7.7.1</strong>: Sanity-Checks div_yield &gt;25% und shareholder_return &gt;30% &rarr; None (behebt GSK 327%-Anomalie).</div>
-    <div>&#10003; <strong style="color:#dce8f5">ALIAS_REV</strong>: Reverse-Alias-Mapping fuer trend/rsi_val-Lookup (stocks_t &rarr; yfinance-key).</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,230,118,.06);border-left:3px solid #00e676;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Nach n&auml;chstem Juno-Lauf:</strong> DQ-Banner zeigt Trend+RSI als live (gr&uuml;n) statt stat. Score-Qualit&auml;t steigt auf ~85% der Felder verl&auml;sslich.</div>
-  </div>
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.26</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Score-Qualit&auml;ts-Badge (neu)</strong>: scoreQuality() klassifiziert Scores als AI (JSON+mom12m), JSON (nur Fund/Risk), oder stat (Platzhalter). Badge erscheint neben Score-Zahl in WL1, WL2 und Synopse-Detail.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Score-Farbe ged&auml;mpft bei stat</strong>: scColQ() faerbt Score grau (#456278) wenn keine JSON-Daten geladen &rarr; verhindert Fehlinterpretation von Platzhalter-Scores.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Trend 20% als stat markiert</strong>: Synopse-Detail zeigt Trend-Wert grau + "stat" &mdash; da s.trend nie durch JSON ueberschrieben wird (P2: fund_juno_v7.8 geplant).</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(255,171,0,.06);border-left:3px solid #ffab00;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Interpretation:</strong> <span style="color:#00e676">AI</span> = verlässlich | <span style="color:#00c8f0">JSON</span> = Fund/Risk ok, Mom teilweise | <span style="color:#456278">stat</span> = Platzhalter, Score nur als Orientierung. P2-Plan: Trend-Feld in fund_juno_v7.8 ergänzen (SMA200-Abstand als Proxy).</div>
-  </div>
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.25</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">SF/DR-Filter in WL1</strong>: Score-Filter (SF) und Dividenden-Hold (DR) jetzt auch im WL1-Tab als Buttons. Synchron mit Synopse &mdash; ein Toggle wirkt auf beide Tabs gleichzeitig.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Hilfe-Tab aktualisiert</strong>: Scripts auf v7_7/v6b_6m, 278 Ticker, aktuelle OOS-Metriken. Piotroski und VIX-Regime ins Glossar. Doppelter div-Tag entfernt.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Download-Filename</strong>: Korrigiert auf stockiq-v5.9.25.html.</div>
-  </div>
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.24</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">VIX-Regime-Daempfung (neu)</strong>: Momentum-Score wird je nach VIX-Level skaliert. Zone 1 VIX&lt;20: &times;1.00 (volle Wirkung). Zone 2 VIX 20-30: &times;0.60 (moderate Daempfung). Zone 3 VIX&gt;30: &times;0.20 (Crash-Schutz). Akademische Basis: Barroso/Santa-Clara 2015, Daniel/Moskowitz 2016.</div>
-    <div>&#10003; <strong style="color:#dce8f5">VIX-Banner in Synopse</strong>: Regime-Anzeige oben in der Synopse (gruen/gelb/rot). Zeigt aktuellen VIX-Wert und aktive Daempfung. Erscheint sobald VIX aus JSON geladen.</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno_v7.7</strong>: Fetcht ^VIX taeglich und speichert in <code>__macro__</code>-Eintrag. Dashboard liest VIX_LEVEL automatisch beim JSON-Laden.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Soft-Scaling statt Hard-Block</strong>: VIX-Daempfung skaliert Momentum Richtung Neutral (50), nicht auf 0 &mdash; konsistent mit Piotroski B1-Logik.</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(255,171,0,.06);border-left:3px solid #ffab00;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Hinweis:</strong> VIX erst nach naechstem fund_juno_v7.7-Lauf im Banner sichtbar. Bis dahin: kein Einfluss (VIX_LEVEL=null &rarr; Faktor &times;1.00).</div>
-  </div>
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.23</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">5 neue Portfolio-Ticker</strong>: HELN.SW (Helvetia Baloise), BKW.SW (BKW AG), KNIN.SW (K&uuml;hne+Nagel), HOLN.SW (Holcim), SIX2.DE (Sixt SE). Jetzt 278 Ticker.</div>
-    <div>&#10003; <strong style="color:#dce8f5">ALIAS-Mapping</strong>: Alle 5 neuen Ticker korrekt gemappt (yfinance-Suffix &rarr; STOCKS-t).</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno_v7_7.py</strong>: Ticker-Liste auf 278 erweitert.</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Hinweis:</strong> Statische Kursdaten (p, chg, rsi etc.) werden beim naechsten fund_juno-Lauf automatisch aktualisiert.</div>
-  </div>
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.22</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">DR/SF-Grund in WL1</strong>: HOLD SF/DR/SF+D-Karten zeigen jetzt Begr&uuml;ndungszeile (Score &ge; SF-Schwelle / Div &ge; DR-Schwelle) &mdash; identisch zur Synopse-Detailansicht.</div>
-    <div>&#10003; <strong style="color:#dce8f5">DR/SF-Grund in WL2</strong>: HOLD-Eintr&auml;ge zeigen ebenfalls SF- und DR-Zeile. Badge-Farbe #b07cf8 (lila) wie in WL1/Synopse.</div>
-    <div>&#10003; <strong style="color:#dce8f5">WL2 SELL-Begr&uuml;ndung</strong>: Sell-Signal-Zeile auch in WL2 sichtbar (war vorher nur in WL1/Synopse).</div>
-    <div>&#10003; <strong style="color:#dce8f5">WL2 HOLD-Label korrekt</strong>: HOLD SF / HOLD DR / HOLD SF+D werden jetzt mit korrektem Badge und Farbe angezeigt (war vorher WATCH).</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">fund_juno_v7.7</strong>: Zwischenspeichern alle 50 Ticker (separates Script-Update &mdash; iOS-Hintergrundproblem teilweise entsch&auml;rft).</div>
-  </div>
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.21</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Piotroski B1-Daempfung (neu)</strong>: Piotroski-Score &lt; 2 bei mind. 2 messbaren Kriterien &rarr; Fund-Score &times;0.85. Badge zeigt rot-gestrichelten Rand + "&#9660; Fund &times;0.85" wenn aktiv. Fliesst via fSc() in Composite Score und BUY/HOLD/SELL ein.</div>
-    <div>&#10003; <strong style="color:#dce8f5">Piotroski Mini-Score (neu)</strong>: 5-Punkte Quality-Filter auf jedem Fundamentals-Ticker-Card. Kriterien: ROA&gt;0 (ROCE-Proxy), CFO&gt;0 (FCF-Proxy), Accruals OK*, GrossMargin-Trend*, Debt Safe. *=benoetigt fund_juno_v7.7.</div>
-    <div>&#10003; <strong style="color:#dce8f5">pioScore() + pioBadge()</strong>: Neue Scoring-Funktionen. Rueckgabe {score, max, pending, criteria[]}. Pending-Kriterien werden als ? angezeigt bis fund_juno_v7.7 geladen.</div>
-    <div>&#10003; <strong style="color:#dce8f5">fund_juno_v7.7 (separates Script)</strong>: Neue Felder accruals_ok (CFO &gt; NetIncome) und gross_margin_ok (YoY Verbesserung) via yfinance.</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Basis:</strong> Alle v5.9.20-Features erhalten (Allokations-Tab, Header-Fix). Naechste Version: Sektor-neutraler PEG (v5.9.22).</div>
-  </div>
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.20</div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;font-size:12px;color:var(--mut);line-height:1.8;margin-bottom:12px">
-    <div>&#10003; <strong style="color:#dce8f5">Header-Fix</strong>: Version korrekt auf v5.9.20 (war v5.9.18/v5.9.19 inkonsistent).</div>
-    <div>&#10003; <strong style="color:#dce8f5">Allokations-Tab (neu)</strong>: Portfolio Ist vs. Soll-Vergleich. Ziel-Allokation 60/20/15/5. Rebalancing-Alert &plusmn;7pp (rot), Randzone &plusmn;4-7pp (gelb). Eurobetrag-Kalkulation. Persistenz via localStorage. Basis: Gap-Analyse April 2026.</div>
-    <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Basis:</strong> Alle v5.9.17-Features erhalten. Naechste Version: Piotroski Mini-Score (v5.9.21).</div>
-  </div>
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.17</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div>&#10003; <strong style="color:#dce8f5">Dividenden-Hold-Filter (DR)</strong>: SELL wird unterdrueckt wenn Dividendenrendite &ge; max(Floor 3.5%, Bund+2pp). Heute bei Bund 2.6%: Schwelle 4.6%.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Option 3 Referenzzins</strong>: Schwelle = max(Mindest-%, Bund+Spread). Schutzt vor Nullzins-Aushoelung und passt sich Zinszyklen an. Damodaran Equity Risk Premium Logik.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Drei Signal-Varianten</strong>: HOLD SF (Score), HOLD DR (Dividende), HOLD SF+D (beide). Jede mit eigenem Why-Text im Detail-View.</div>
-      <div>&#10003; <strong style="color:#dce8f5">DR-Button + Bund%-Eingabe</strong>: In der Synopse-Leiste. Bund-Satz manuell anpassen (quartalsweise). Filter nur aktiv wenn JSON geladen und div_yield vorhanden.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Detail-View DR-Zeile</strong>: Zeigt DR vs. Schwelle mit Farb-Feedback (aktiv wenn DR-Filter an).</div>
-      <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Methodisch:</strong> Nur Dashboard-Feature fuer Live-Entscheidungen, nicht im Backtest. Bewertungsprinzip: Dividendenrendite als Sicherheitspuffer gegen technische SELL-Signale &mdash; konsistent mit Dividend Discount und Equity Risk Premium Theorie.</div>
-    </div>
-  </div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Aenderungen v5.9.16</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div>&#10003; <strong style="color:#dce8f5">Low-Volatility / Beta-Faktor</strong>: Akademisch validierter Faktor (MSCI/BlackRock 1963&ndash;2024). Beta &lt; 0.8 = Bonus, &gt; 1.5 = Malus. Fliesst zu 40% in Risk-Score ein. Risk-Gewicht: 15% &rarr; 20%.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Schuldenqualitaet (Debt Safety)</strong>: debtToEquity als 4. Fund-Dimension (15%). Erkennt Bilanzrisiko (Ma/Yang/Ye 2024: Quality = Profitabilitaet + Wachstum + Ausschuettung + Sicherheit).</div>
-      <div>&#10003; <strong style="color:#dce8f5">Gewichts-Kalibrierung</strong>: Trend 25% &rarr; 20%, Risk 15% &rarr; 20%. Naehert sich akademischem Multi-Faktor-Optimum an.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Fund-Score-Formel</strong>: ROCE 50%&rarr;35%, FCF 35%&rarr;30%, PEG 15%&rarr;20%, Debt Safety 0%&rarr;15%.</div>
-      <div>&#10003; <strong style="color:#dce8f5">fund_juno_v7_4</strong>: beta + debtToEquity aus yfinance neu im JSON. sanitize() verhindert NaN-Parse-Fehler.</div>
-      <div style="margin-top:6px;padding:8px 10px;background:rgba(176,124,248,.06);border-left:3px solid #b07cf8;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Basis:</strong> Alle v5.9.15-Features erhalten: 273 Ticker, WL2, Score-Filter, momSc(), volAdj(), Hysterese-Exit, 12M-Momentum.</div>
-    </div>
-  </div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.9.8 &ndash; v5.9.15</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div>&#10003; <strong style="color:#dce8f5">RSI-Filter (v5.9.8, in v5.9.15 entfernt)</strong>: RSI &gt; 72 = RSI-BLK (orange). Kein BUY-Signal bei ueberkauftem Markt.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Soogo Shoosha komplett</strong>: +Marubeni (8002T), +Sumitomo (8053T), +Toyota Tsusho (8015T). Alle 6 Soogo Shoosha.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Signal-History (v5.9.8)</strong>: Walk-Forward Tab zeigt Signalaenderungen zwischen Archiv-Snapshots. Filter: Alle / Geaendert / BUY / SELL.</div>
-      <div>&#10003; <strong style="color:#dce8f5">NaN-Fix fund_juno_v7_3</strong>: JSON-Export bereinigt NaN/Inf zu null. Parse-Fehler im Dashboard behoben.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Walk-Forward Format v3+v4 kompatibel</strong>: loadWF() normalisiert beide JSON-Formate automatisch.</div>
-      <div>&#10003; <strong style="color:#dce8f5">WL2 Suchfeld (v5.9.12)</strong>: Suche nach Ticker-Symbol und Klarname. WL2-Mitglieder oben gepinnt.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Sync-Button Synopse</strong>: WL2-Filter jetzt auch direkt in der Synopse schaltbar.</div>
-    </div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;color:#ff9f1c">&#128260; Versionshistorie</div>
+    <div style="font-size:11px;color:var(--mut);line-height:1.6;margin-bottom:10px">Detaillierte Methodik-Dokumentation in der technischen Dokumentation (intern).</div>
+    <table style="width:100%;border-collapse:collapse;font-family:monospace;font-size:10px">
+      <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a;width:80px">v5.9.81</td><td style="padding:5px 8px;color:#dce8f5">Hilfe-Tab: Anwender-Bereinigung (IP-Schutz Phase 1)</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
+      <tr style="background:#0c1420"><td style="padding:5px 8px;color:#00c8f0">v5.9.80</td><td style="padding:5px 8px;color:#dce8f5">Bericht-Fix: EVAR (rel.) + Risk-Farbe + Shares YoY + EV/EBIT</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00c8f0">v5.9.79</td><td style="padding:5px 8px;color:#dce8f5">Snapshot-Status-Badge im DQ-Banner</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
+      <tr style="background:#0c1420"><td style="padding:5px 8px;color:#00c8f0">v5.9.78</td><td style="padding:5px 8px;color:#dce8f5">Buyback-Signal (Shares YoY) &middot; debtSc Sektor-aware</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 8px;color:#456278">v5.9.76</td><td style="padding:5px 8px;color:#dce8f5">FCF/Debt Display &middot; EV/EBIT &middot; MomRank (CANSLIM)</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
+      <tr style="background:#0c1420"><td style="padding:5px 8px;color:#456278">v5.9.75</td><td style="padding:5px 8px;color:#dce8f5">EV/EBIT Gewichtung &middot; MomRisk-Indikator</td><td style="padding:5px 8px;color:#456278">Apr 2026</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 8px;color:#456278">v5.9.72&ndash;74</td><td style="padding:5px 8px;color:#dce8f5">Triple-Confirmation &middot; HC-Z&auml;hler &middot; Sektor-Ampel in WL</td><td style="padding:5px 8px;color:#456278">Apr 2026</td></tr>
+      <tr style="background:#0c1420"><td style="padding:5px 8px;color:#456278">v5.9.70</td><td style="padding:5px 8px;color:#dce8f5">EV/EBIT Signal &middot; EPS-Revision-Momentum</td><td style="padding:5px 8px;color:#456278">Apr 2026</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 8px;color:#456278">v5.9.69</td><td style="padding:5px 8px;color:#dce8f5">Depot-Tab &middot; DVG-Hold &middot; Beck-Regime</td><td style="padding:5px 8px;color:#456278">Mrz 2026</td></tr>
+      <tr style="background:#0c1420"><td style="padding:5px 8px;color:#456278">v5.9.67</td><td style="padding:5px 8px;color:#dce8f5">Beck/GPO Markt-Regime &middot; Allokation aus Depot</td><td style="padding:5px 8px;color:#456278">Mrz 2026</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 8px;color:#456278">v5.9.62&ndash;65</td><td style="padding:5px 8px;color:#dce8f5">Depot-Tab &middot; EUR-Kurse &middot; Signal-konforme Textanalyse</td><td style="padding:5px 8px;color:#456278">Feb 2026</td></tr>
+      <tr style="background:#0c1420"><td style="padding:5px 8px;color:#456278">v5.9.58&ndash;61</td><td style="padding:5px 8px;color:#dce8f5">Konjunkturzyklus-Overlay &middot; DVG &middot; Rohstoffe als Assetklasse</td><td style="padding:5px 8px;color:#456278">Jan 2026</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 8px;color:#456278">v5.9.55&ndash;57</td><td style="padding:5px 8px;color:#dce8f5">Sektor-Bericht &middot; PDF-Export &middot; RSI-D&auml;mpfung</td><td style="padding:5px 8px;color:#456278">Jan 2026</td></tr>
+      <tr style="background:#0c1420"><td style="padding:5px 8px;color:#456278">v5.9.47&ndash;54</td><td style="padding:5px 8px;color:#dce8f5">GSR &middot; Bond-ETF &middot; V2X &middot; Makro-Auto-Fill</td><td style="padding:5px 8px;color:#456278">Dez 2025</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 8px;color:#456278">v5.9.36&ndash;45</td><td style="padding:5px 8px;color:#dce8f5">Konsistenz-Score &middot; Jahres-Snapshots &middot; Owner Earnings</td><td style="padding:5px 8px;color:#456278">Nov 2025</td></tr>
+      <tr style="background:#0c1420"><td style="padding:5px 8px;color:#456278">v5.9.29&ndash;35</td><td style="padding:5px 8px;color:#dce8f5">EVAR &middot; EV/EBITDA &middot; Skip-Momentum &middot; Sektor-PEG</td><td style="padding:5px 8px;color:#456278">Okt 2025</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 8px;color:#456278">v5.9.16&ndash;28</td><td style="padding:5px 8px;color:#dce8f5">Beta/Low-Vol &middot; Piotroski &middot; VIX-Regime &middot; DQ-Monitor</td><td style="padding:5px 8px;color:#456278">Sep 2025</td></tr>
+      <tr style="background:#0c1420"><td style="padding:5px 8px;color:#456278">v5.3&ndash;v5.9.15</td><td style="padding:5px 8px;color:#dce8f5">Grundarchitektur: MACD &middot; 200MA &middot; WL2 &middot; Walk-Forward</td><td style="padding:5px 8px;color:#456278">2025</td></tr>
+    </table>
   </div>
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.9.5 / v5.9.6</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div>&#10003; <strong style="color:#dce8f5">WL2 (Tab 3)</strong>: Eigene Ticker-Auswahl aus allen 258. + WL2 / &#10003; WL2 Toggle je Zeile.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Sync-Button</strong>: Schaltet Synopse + WL1 auf WL2-Filterung. Tunnel zwischen Alle und WL2.</div>
-      <div>&#10003; <strong style="color:#dce8f5">A-Z Sort</strong>: Umschalter Score/Alphabet in WL1.</div>
-      <div>&#10003; <strong style="color:#dce8f5">Exit-Hysterese v5.9.6</strong>: SELL ZL nur wenn MACD ueber ZL <em>und</em> Histogramm negativ. Verhindert vorzeitige Exits in laufenden Trends (z.B. GOOGL, AMZN).</div>
-      <div>&#10003; <strong style="color:#dce8f5">exitSignal-Fix</strong>: Logikfehler korrigiert (redundanter aboveZL-Case entfernt).</div>
-      <div>&#10003; <strong style="color:#dce8f5">Mitsui &amp; Co (8031T) v5.9.7</strong>: Soogo Shoosha Gruppe komplett (Mitsubishi, Itochu, Mitsui). Yahoo: 8031.T.</div>
-      <div>&#10003; <strong style="color:#dce8f5">WL2 Persistenz v5.9.7</strong>: WL2-Auswahl wird automatisch in localStorage gespeichert. Bleibt nach App-Neustart erhalten. Nur manuell aenderbar (kein Auto-Reset).</div>
-      <div>&#10003; <strong style="color:#dce8f5">WL2 Export/Import (v5.9.16)</strong>: JSON-Export sichert WL2 dauerhaft. Import stellt sie nach Versions-Update oder auf neuem Geraet wieder her. Wichtig: localStorage ist pro Origin &mdash; lokale Datei und GitHub Pages teilen KEINEN gemeinsamen Speicher.</div>
-      <div style="margin-top:6px;padding:8px 10px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;font-size:11px;color:var(--mut)"><strong style="color:#dce8f5">Lernprinzip:</strong> Exit-Logik wird kontinuierlich gegen reale Signale validiert. Naechste Pruefung: Reduziert Hysterese False Exits ohne echte SELL-Signale zu verzoegern?</div>
-    </div>
-  </div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.9</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div>&#10003; <strong style="color:#dce8f5">12M-Preis-Momentum (mom12m)</strong>: Neues Feld in fund_juno_v7.py &rarr; JSON</div>
-      <div>&#10003; <strong style="color:#dce8f5">momSc() Funktion</strong>: Momentum-Score = 50% MACD/RSI-Signal + 50% 12M-Preis-Momentum</div>
-      <div>&#10003; <strong style="color:#dce8f5">Normierung</strong>: mom12m -50%..+50% wird auf 0..100 skaliert (0%=50, +50%=100)</div>
-      <div>&#10003; <strong style="color:#dce8f5">Fallback</strong>: Ohne JSON unveraendert statischer Wert (rueckwaertskompatibel)</div>
-      <div>&#10003; <strong style="color:#dce8f5">Detail-View</strong>: 12M-Mom Zeile sichtbar (gruen &gt;+20%, blau 0-20%, gelb -15-0%, rot &lt;-15%)</div>
-      <div>&#10003; <strong style="color:#dce8f5">Forschungsbasis</strong>: FCF+Momentum-Kombination +755% vs. +248% (Quant Investing / Europa-Backtest)</div>
-    </div>
-  </div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.4</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div>&#10003; <strong style="color:#dce8f5">Signalbasierter Exit</strong>: SELL wenn EINE Entry-Bedingung wegfaellt (ZL / Hist / 200MA)</div>
-      <div>&#10003; <strong style="color:#dce8f5">Granulare SELL-Typen</strong>: SELL ZL, SELL HIST, SELL MA, SELL (alle drei)</div>
-      <div>&#10003; <strong style="color:#dce8f5">Exit-Konsistenz</strong>: Dashboard und alpha_juno_v3.py verwenden identische Logik</div>
-      <div>&#10003; <strong style="color:#dce8f5">Sell-Begruendung</strong>: Watchlist und Detail-View zeigen Grund des SELL-Signals</div>
-    </div>
-  </div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128260; Aenderungen v5.3 / v5.3.1 / v5.3.2</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div>&#10003; <strong style="color:#dce8f5">ATR-Hist-Filter</strong>: Histogramm muss &gt; ATR&times;0.05</div>
-      <div>&#10003; <strong style="color:#dce8f5">STRONG BUY</strong>: Neue Signalkategorie bei bull_hidden / bull_regular Divergenz</div>
-      <div>&#10003; <strong style="color:#dce8f5">ROCE-Formel</strong>: Python v4 korrigiert auf EBIT / (EK + LT-Schulden)</div>
-      <div>&#10003; <strong style="color:#dce8f5">Div+Buyback</strong>: Shareholder Return dynamisch aus yfinance</div>
-      <div>&#10003; <strong style="color:#dce8f5">Zaehler-Fix</strong>: Analysiert X/41 korrekt</div>
-    </div>
-  </div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:#ff6666">&#9888; Disclaimer</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.6">StockIQ ist ein privates Analyse-Tool und stellt <strong style="color:#dce8f5">keine Anlageberatung</strong> dar. Backtesting-Ergebnisse sind optimistisch verzerrt und kein Garant fuer zukuenftige Performance.</div>
   </div>
@@ -1143,7 +758,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.80 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.81 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -1494,7 +1109,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.80 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.81 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
