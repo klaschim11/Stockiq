@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.78</title>
+<title>StockIQ v5.9.79</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.78 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.79 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -728,6 +728,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Neu seit v5.9.45 (Mai 2026)</div>
 
+    <!-- v5.9.79 Snapshot-Status-Badge -->
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.79 &mdash; Snapshot-Status-Badge im DQ-Banner</div>
+    <div style="background:rgba(0,200,240,.05);border-left:3px solid #00c8f0;padding:8px 10px;border-radius:6px;font-size:11px;color:var(--mut)">
+      <div>&#10003; <strong style="color:#dce8f5">Snapshot-Status-Badge</strong>: DQ-Banner zeigt Archiv-Snapshot-Anzahl + letztes Datum + Milestone-Status. Farbe: gr&uuml;n=WL3-Meilenstein (&#8805;30 Snaps), gelb=IC-Test m&ouml;glich (&#8805;20), grau=aufbauend. Aktuell: 56+ Snaps &rarr; WL3 ab 20. Mai.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Forschungsgrundlage (Mai 2026)</strong>: JP Morgan Factor Views Q2/2026: Momentum-Dispersion auf 35-Jahres-Hoch (h&ouml;chste seit 1990). SPY-200MA-Filter und VIX-D&auml;mpfung kritisch. O&rsquo;Shaughnessy: Shareholder Yield +3.5%/Jahr &ndash; shares_change_yoy bereits in v5.9.78 im Display.</div>
+    </div>
     <!-- v5.9.78 debtSc -->
     <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.78 &mdash; debtSc() Sektor-Split &middot; IC-Test-Ergebnis (Finanzwerte-Bias)</div>
     <div style="background:#0a1628;border-radius:8px;padding:10px;font-size:11px;color:var(--mut);line-height:1.8;margin-bottom:8px">
@@ -1130,7 +1136,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.78 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.79 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -1481,7 +1487,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.78 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.79 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2544,6 +2550,14 @@ function rSyn(){
   dqH+='<div style="font-family:monospace;font-size:8px;color:#456278">Trend:'+trendQstr+'</div>';
   dqH+='<div style="font-family:monospace;font-size:8px;color:#456278">RSI:'+rsiQstr+'</div>';
   if(nSanity) dqH+='<div style="font-family:monospace;font-size:8px;color:#ff5252">&#9888; Sanity:'+nSanity+'</div>';
+  /* Snapshot-Status-Badge v5.9.79 */
+  var snapN=(_archive&&_archive.length)?_archive.length:0;
+  var snapMile='',snapCol2='#456278';
+  if(snapN>=30){snapMile='WL3';snapCol2='#00e676';}
+  else if(snapN>=20){snapMile='IC:ok';snapCol2='#f0c000';}
+  else{snapMile='IC:'+(20-snapN)+'f';snapCol2='#456278';}
+  var snapDateStr=snapN>0?(' '+_archive[0].date):'';
+  dqH+='<div style="font-family:monospace;font-size:8px;color:'+snapCol2+'">&#128247;'+snapN+snapDateStr+' '+snapMile+'</div>';
   dqH+='</div>';
   if(el)el.innerHTML=vixH+dqH+kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('&#11088; HC',hcs,'Score\u226565+Sektor+Mom','#ffd700')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
 
