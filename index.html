@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.79</title>
+<title>StockIQ v5.9.80</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.79 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.80 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -728,6 +728,13 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128260; Neu seit v5.9.45 (Mai 2026)</div>
 
+    <!-- v5.9.80 Bericht-Fix -->
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.80 &mdash; Bericht-Fix: EVAR (rel.) + Risk-Farbe + Shares YoY + EV/EBIT</div>
+    <div style="background:rgba(255,63,63,.05);border-left:3px solid #ff3f3f;padding:8px 10px;border-radius:6px;font-size:11px;color:var(--mut)">
+      <div>&#10003; <strong style="color:#dce8f5">EVAR (rel.) Bug behoben</strong>: rptDetailCard() verwendete fd.evar (raw) statt evarRelSc() (sektor-relativ). Fix: evarRelSc(tk) mit Fallback auf fd.evar. Betrifft Score-Breakdown-Anzeige im Bericht (cSc selbst war korrekt).</div>
+      <div>&#10003; <strong style="color:#dce8f5">Risk-Farbe dynamisch</strong>: Bericht zeigte Risk-Komponente immer orange (hardcoded). Fix: gr&uuml;n &gt;65 / gelb &gt;40 / rot &le;40.</div>
+      <div>&#10003; <strong style="color:#dce8f5">Fehlende Felder erg&auml;nzt</strong>: EV/EBIT, FCF/Debt Cover, Shares YoY (Buyback-Signal) jetzt auch im Bericht sichtbar. Konsistenz mit wlDetail() hergestellt.</div>
+    </div>
     <!-- v5.9.79 Snapshot-Status-Badge -->
     <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:4px;margin-top:10px">v5.9.79 &mdash; Snapshot-Status-Badge im DQ-Banner</div>
     <div style="background:rgba(0,200,240,.05);border-left:3px solid #00c8f0;padding:8px 10px;border-radius:6px;font-size:11px;color:var(--mut)">
@@ -1136,7 +1143,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.79 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.80 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -1487,7 +1494,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.79 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.80 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -5727,11 +5734,13 @@ function rptDetailCard(tk, num){
 
   /* Score-Komponenten */
   out += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:12px">';
+  var riskV=Math.round(rptRisk(st));
+  var riskColV=riskV>65?'#00e57a':riskV>40?'#ffab00':'#ff5252';
   var comps = [
     {l:'Momentum', v:Math.round(momSc(st)), c:'#00c8f0'},
     {l:'Trend', v:Math.round(st.trend||0), c:'#7a9bb5'},
     {l:'Fund', v:Math.round(fSc(st)), c:'#00e57a'},
-    {l:'Risk', v:Math.round(rptRisk(st)), c:'#ffab00'},
+    {l:'Risk', v:riskV, c:riskColV},
   ];
   for(var ci=0;ci<comps.length;ci++){
     out += '<div style="text-align:center;padding:8px 4px;background:#0a1628;border:1px solid #1a3050;border-radius:6px">';
@@ -5741,7 +5750,10 @@ function rptDetailCard(tk, num){
   }
   out += '</div>';
 
-  /* Fundamentals-Grid */
+  /* Fundamentals-Grid (v5.9.80: EVAR rel fix + ev_ebit + fcf_debt_cover) */
+  var evarRelV=evarRelSc(tk);
+  var evarDispV=evarRelV!=null?Math.round(evarRelV):(fd.evar!=null?Math.round(fd.evar):'n/a');
+  var evarColV=typeof evarDispV==='number'?(evarDispV>=60?'#00e57a':evarDispV>=30?'#ffab00':'#ff5252'):'#7a9bb5';
   out += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">';
   var fkpis = [
     {l:'FCF Yield', v:fd.fcf!=null?fd.fcf.toFixed(1)+'%':'n/a', c:fd.fcf>5?'#00e57a':fd.fcf>2?'#ffab00':'#ff5252'},
@@ -5749,7 +5761,7 @@ function rptDetailCard(tk, num){
     {l:'ROCE', v:fd.roce!=null?fd.roce.toFixed(1)+'%':'n/a', c:fd.roce>15?'#00e57a':fd.roce>8?'#ffab00':'#dce8f5'},
     {l:'PEG', v:fd.peg!=null?fd.peg.toFixed(2):'n/a', c:fd.peg<2?'#00e57a':fd.peg<3?'#ffab00':'#ff5252'},
     {l:'EV/EBITDA', v:fd.ev_ebitda!=null?fd.ev_ebitda.toFixed(1)+'x':'n/a', c:fd.ev_ebitda<15?'#00e57a':fd.ev_ebitda<25?'#ffab00':'#ff5252'},
-    {l:'EVAR (rel.)', v:fd.evar!=null?Math.round(fd.evar):'n/a', c:fd.evar>60?'#00e57a':fd.evar>30?'#ffab00':'#ff5252'},
+    {l:'EVAR (rel.)', v:evarDispV, c:evarColV},
   ];
   for(var fi2=0;fi2<fkpis.length;fi2++){
     out += '<div style="padding:7px 8px;background:#0a1628;border:1px solid #1a3050;border-radius:6px">';
@@ -5757,6 +5769,15 @@ function rptDetailCard(tk, num){
     out += '<div style="font-size:14px;font-weight:700;color:' + fkpis[fi2].c + '">' + fkpis[fi2].v + '</div>';
     out += '</div>';
   }
+  out += '</div>';
+  /* EV/EBIT + FCF/Debt Cover (v5.9.80) */
+  var eveitR=fd.ev_ebit!=null?fd.ev_ebit.toFixed(1)+'x':'n/a';
+  var eveitC=fd.ev_ebit!=null?(fd.ev_ebit<15?'#00e57a':fd.ev_ebit<25?'#ffab00':'#ff5252'):'#7a9bb5';
+  var fdcR=fd.fcf_debt_cover!=null?(fd.fcf_debt_cover>=10?'&gt;10x':fd.fcf_debt_cover.toFixed(2)+'x'):'n/a';
+  var fdcC=fd.fcf_debt_cover!=null?(fd.fcf_debt_cover>=0.20?'#00e57a':fd.fcf_debt_cover>=0.05?'#ffab00':'#ff5252'):'#7a9bb5';
+  out += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">';
+  out += '<div style="padding:7px 8px;background:#0a1628;border:1px solid #1a3050;border-radius:6px"><div style="font-family:monospace;font-size:8px;color:#7a9bb5">EV/EBIT</div><div style="font-size:14px;font-weight:700;color:'+eveitC+'">'+eveitR+'</div></div>';
+  out += '<div style="padding:7px 8px;background:#0a1628;border:1px solid #1a3050;border-radius:6px"><div style="font-family:monospace;font-size:8px;color:#7a9bb5">FCF/DEBT</div><div style="font-size:14px;font-weight:700;color:'+fdcC+'">'+fdcR+'</div></div>';
   out += '</div>';
 
   /* Jahres-Trend wenn vorhanden */
@@ -5788,6 +5809,17 @@ function rptDetailCard(tk, num){
   out += '<div style="color:#7a9bb5">Beta: <span style="color:#dce8f5">' + (fd.beta!=null?fd.beta.toFixed(2):'n/a') + '</span></div>';
   out += '<div style="color:#7a9bb5">Div+Buyback: <span style="color:#dce8f5">' + (fd.shareholder_return!=null?fd.shareholder_return.toFixed(1)+'%':'n/a') + '</span></div>';
   out += '</div>';
+  /* Shares YoY: Buyback-Signal v5.9.80 (O'Shaughnessy Shareholder Yield) */
+  var scyRpt=fd.shares_change_yoy!==null&&fd.shares_change_yoy!==undefined?fd.shares_change_yoy:null;
+  if(scyRpt!==null){
+    var scyRptCol=scyRpt<-3?'#00e57a':scyRpt<0?'#00c8f0':scyRpt<2?'#7a9bb5':'#ff5252';
+    var scyRptLbl=scyRpt<-3?'Buyback++':scyRpt<0?'Buyback':scyRpt<2?'Stabil':'Dilution';
+    var scyRptSign=scyRpt<0?'':'+';
+    out += '<div style="margin-top:8px;padding:6px 8px;background:rgba(255,255,255,.03);border:1px solid #1a3050;border-radius:6px;display:flex;justify-content:space-between;font-family:monospace;font-size:10px">';
+    out += '<span style="color:#7a9bb5">Shares YoY (Buyback)</span>';
+    out += '<span style="color:'+scyRptCol+';font-weight:700">'+scyRptLbl+' ('+scyRptSign+scyRpt.toFixed(1)+'%)</span>';
+    out += '</div>';
+  }
   out += '</div>';
   return out;
 }
