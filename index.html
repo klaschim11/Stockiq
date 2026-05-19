@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.82</title>
+<title>StockIQ v5.9.83</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.82 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.83 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -179,7 +179,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 3: FUNDAMENTALS -->
 <div class="page" id="p3">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128181; Fundamentals</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG + EV/EBITDA + Schuldenqualit&auml;t + Piotroski + <strong style="color:#00e57a">Konsistenz</strong> &middot; fund_score = 30% ROCE + 30% FCF + 20% Value + 15% Debt + 5% Konsistenz (v5.9.36)</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">FCF Yield + ROCE/ROE + PEG + EV/EBITDA + Schuldenqualit&auml;t + Piotroski + <strong style="color:#00e57a">Konsistenz</strong> &middot; Multifaktor-Bewertung aus Profitabilit&auml;t, Value und Sicherheit</div>
   <div class="g2" style="margin-bottom:14px">
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
       <div style="font-size:13px;font-weight:700;color:#00e57a;margin-bottom:10px">&#128228; JSON laden</div>
@@ -224,7 +224,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         <div><strong style="color:#dce8f5">ROCE</strong> = EBIT / (EK + LT-Schulden) &mdash; korrigiert v5.3</div>
         <div><strong style="color:#dce8f5">ROE</strong> = Fallback wenn ROCE n/a</div>
         <div><strong style="color:#dce8f5">Div+Buyback</strong> = Shareholder Return (neu)</div>
-        <div><strong style="color:#dce8f5">fund_score</strong> = 30% ROCE + 30% FCF + 20% valSc (PEG-rel&times;50% + EV/EBITDA&times;20% + EV/EBIT&times;30%) + 15% Debt Safety + 5% Konsistenz (v5.9.75)</div>
+        <div><strong style="color:#dce8f5">fund_score</strong> = Multifaktor-Score aus Profitabilit&auml;t (ROCE, FCF), Value (PEG-rel., EV/EBITDA, EV/EBIT), Schuldenqualit&auml;t und Konsistenz</div>
       </div>
     </div>
   </div>
@@ -759,7 +759,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.82 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.83 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Lernender Entwicklungsplan</div>
 
   <!-- ── Produktions-Stack ── -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Produktions-Stack</div>
@@ -1110,7 +1110,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.82 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.83 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -3687,7 +3687,7 @@ function loadWF(inp){
       var nTk=(WF_DATA.meta)?(WF_DATA.meta.n_tickers||WF_DATA.meta.n_tickers_loaded||WF_DATA.meta.n_tickers_total||WF_DATA.meta.tickers||'?'):'?';
       if(mm)mm.textContent='Geladen: '+nTk+' Ticker'+ver;
       rWF();
-    }catch(err){if(dm)dm.style.background='#ff6666';if(mm)mm.textContent='Fehler: '+err.message;}
+    }catch(err){if(dm)dm.style.background='#ff6666';if(mm)mm.textContent='Fehler: '+err.message+' (NaN/Inf in JSON? -> alpha_juno v7 verwenden)';}
   };
   reader.readAsText(file);
 }
