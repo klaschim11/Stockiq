@@ -3241,25 +3241,52 @@ function archExportJSON(){
     n_snapshots: _archive.length,
     snapshots:   _archive
   }, null, 2);
-  /* iOS Safari: Blob-Download via a.click() funktioniert nicht.
-     Loesung: JSON in neuem Tab oeffnen -> Teilen-Button -> "In Dateien sichern" */
-  var blob = new Blob([json], {type:'application/json'});
-  var url  = URL.createObjectURL(blob);
-  var w    = window.open(url, '_blank');
-  if(!w){
-    /* Popup blockiert: Fallback -> Textarea zum Kopieren */
-    var ta = document.createElement('textarea');
-    ta.value = json;
-    ta.style.cssText = 'position:fixed;top:10px;left:10px;right:10px;height:80vh;z-index:9999;font-size:9px;font-family:monospace;background:#0c1420;color:#00e57a;border:2px solid #00e57a;border-radius:8px;padding:8px';
-    document.body.appendChild(ta);
-    ta.focus(); ta.select();
-    var btn = document.createElement('button');
-    btn.textContent = 'X Schliessen';
-    btn.style.cssText = 'position:fixed;top:10px;right:10px;z-index:10000;padding:8px 14px;background:#ff5252;color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer';
-    btn.onclick = function(){ document.body.removeChild(ta); document.body.removeChild(btn); };
-    document.body.appendChild(btn);
-    alert('Popup blockiert. JSON wird angezeigt — oben rechts kopieren oder Screenshot.');
-  }
+  /* iOS Safari: Blob-Download nicht zuverlaessig.
+     Loesung: Modal mit JSON-Text + Kopieren-Button.
+     In Juno: Neue Datei erstellen -> Text einfuegen -> als .json speichern. */
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(6,14,26,.97);z-index:9999;display:flex;flex-direction:column;padding:12px';
+  var hdr = document.createElement('div');
+  hdr.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-shrink:0';
+  hdr.innerHTML = '<span style="font-family:monospace;font-size:11px;color:#00c8f0">stockiq_archive_'+new Date().toISOString().slice(0,10)+'.json &mdash; '+_archive.length+' Snapshots</span>';
+  var btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:8px;flex-shrink:0;margin-bottom:8px';
+  var copyBtn = document.createElement('button');
+  copyBtn.textContent = 'Kopieren';
+  copyBtn.style.cssText = 'flex:1;padding:10px;background:#00e57a;color:#060e1a;border:none;border-radius:8px;font-family:monospace;font-size:13px;font-weight:700;cursor:pointer';
+  copyBtn.onclick = function(){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(json).then(function(){
+        copyBtn.textContent = 'Kopiert!';
+        setTimeout(function(){ copyBtn.textContent = 'Kopieren'; }, 2000);
+      });
+    } else {
+      ta.select();
+      document.execCommand('copy');
+      copyBtn.textContent = 'Kopiert!';
+      setTimeout(function(){ copyBtn.textContent = 'Kopieren'; }, 2000);
+    }
+  };
+  var closeBtn = document.createElement('button');
+  closeBtn.textContent = 'X';
+  closeBtn.style.cssText = 'padding:10px 16px;background:#ff5252;color:#fff;border:none;border-radius:8px;font-family:monospace;font-size:13px;font-weight:700;cursor:pointer';
+  closeBtn.onclick = function(){ document.body.removeChild(overlay); };
+  btnRow.appendChild(copyBtn);
+  btnRow.appendChild(closeBtn);
+  var hint = document.createElement('div');
+  hint.style.cssText = 'font-family:monospace;font-size:10px;color:#7a9bb5;margin-bottom:6px;flex-shrink:0';
+  hint.textContent = 'Kopieren -> Juno -> Neue Datei -> Einf\u00fcgen -> als stockiq_snapshots.json speichern';
+  var ta = document.createElement('textarea');
+  ta.value = json;
+  ta.style.cssText = 'flex:1;font-size:9px;font-family:monospace;background:#0c1420;color:#00e57a;border:1px solid #1a2a3a;border-radius:8px;padding:8px;resize:none';
+  ta.readOnly = true;
+  overlay.appendChild(hdr);
+  overlay.appendChild(btnRow);
+  overlay.appendChild(hint);
+  overlay.appendChild(ta);
+  document.body.appendChild(overlay);
+  ta.focus();
+  ta.select();
 }
 
 function archExportCSV(){
