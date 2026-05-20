@@ -3235,22 +3235,31 @@ function archSnapshot(){
 }
 
 function archExportJSON(){
-  /* Exportiert alle Snapshots als JSON-Download */
   if(_archive.length === 0){ alert('Kein Archiv vorhanden.'); return; }
-  var blob = new Blob([JSON.stringify({
+  var json = JSON.stringify({
     export_date: fmtDate(Date.now()),
     n_snapshots: _archive.length,
     snapshots:   _archive
-  }, null, 2)], {type:'application/json'});
-  var url = URL.createObjectURL(blob);
-  var a   = document.createElement('a');
-  a.href  = url;
-  a.download = 'stockiq_archive_'+new Date().toISOString().slice(0,10)+'.json';
-  /* iOS Safari: Link muss im DOM sein vor click() */
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  }, null, 2);
+  /* iOS Safari: Blob-Download via a.click() funktioniert nicht.
+     Loesung: JSON in neuem Tab oeffnen -> Teilen-Button -> "In Dateien sichern" */
+  var blob = new Blob([json], {type:'application/json'});
+  var url  = URL.createObjectURL(blob);
+  var w    = window.open(url, '_blank');
+  if(!w){
+    /* Popup blockiert: Fallback -> Textarea zum Kopieren */
+    var ta = document.createElement('textarea');
+    ta.value = json;
+    ta.style.cssText = 'position:fixed;top:10px;left:10px;right:10px;height:80vh;z-index:9999;font-size:9px;font-family:monospace;background:#0c1420;color:#00e57a;border:2px solid #00e57a;border-radius:8px;padding:8px';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    var btn = document.createElement('button');
+    btn.textContent = 'X Schliessen';
+    btn.style.cssText = 'position:fixed;top:10px;right:10px;z-index:10000;padding:8px 14px;background:#ff5252;color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer';
+    btn.onclick = function(){ document.body.removeChild(ta); document.body.removeChild(btn); };
+    document.body.appendChild(btn);
+    alert('Popup blockiert. JSON wird angezeigt — oben rechts kopieren oder Screenshot.');
+  }
 }
 
 function archExportCSV(){
