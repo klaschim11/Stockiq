@@ -855,17 +855,17 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:14px">
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;padding:10px;text-align:center">
       <div style="font-family:monospace;font-size:9px;color:var(--mut)">OOS WR</div>
-      <div style="font-size:18px;font-weight:700;color:#00e57a">59.8%</div>
+      <div style="font-size:18px;font-weight:700;color:#00e57a">60.5%</div>
       <div style="font-family:monospace;font-size:9px;color:var(--mut)">6M OOS avg</div>
     </div>
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;padding:10px;text-align:center">
       <div style="font-family:monospace;font-size:9px;color:var(--mut)">STABILITAET</div>
-      <div style="font-size:18px;font-weight:700;color:#00e57a">2.1pp</div>
+      <div style="font-size:18px;font-weight:700;color:#00e57a">2.3pp</div>
       <div style="font-family:monospace;font-size:9px;color:var(--mut)">StdAbw Fenster</div>
     </div>
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;padding:10px;text-align:center">
       <div style="font-family:monospace;font-size:9px;color:var(--mut)">IS WR</div>
-      <div style="font-size:18px;font-weight:700;color:#00e57a">60.9%</div>
+      <div style="font-size:18px;font-weight:700;color:#00e57a">61.0%</div>
       <div style="font-family:monospace;font-size:9px;color:var(--mut)">In-Sample</div>
     </div>
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;padding:10px;text-align:center">
@@ -3246,7 +3246,10 @@ function archExportJSON(){
   var a   = document.createElement('a');
   a.href  = url;
   a.download = 'stockiq_archive_'+new Date().toISOString().slice(0,10)+'.json';
+  /* iOS Safari: Link muss im DOM sein vor click() */
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
 
@@ -3269,7 +3272,10 @@ function archExportCSV(){
   var a    = document.createElement('a');
   a.href   = url;
   a.download = 'stockiq_archive_'+new Date().toISOString().slice(0,10)+'.csv';
+  /* iOS Safari: Link muss im DOM sein vor click() */
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
 
