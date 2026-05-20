@@ -1,0 +1,10 @@
+stockiq_deploy.py
+stockiq_fundamentals*.json
+stockiq_snapshots*.json
+stockiq_annual*.json
+stockiq_config*.json
+stockiq_wl3_results.json
+stockiq_annual_ic_results.json
+stockiq_alpha_results*.json
+*.pyc
+__pycache__/
