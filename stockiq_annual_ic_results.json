@@ -1,0 +1,543 @@
+{
+  "meta": {
+    "version": "annual_ic_v1.2",
+    "generated": "2026-05-20T15:36:16.327768Z",
+    "year_pairs": [
+      [
+        2021,
+        2022
+      ],
+      [
+        2022,
+        2023
+      ],
+      [
+        2023,
+        2024
+      ],
+      [
+        2024,
+        2025
+      ]
+    ],
+    "n_tickers": 260,
+    "n_errors": 0,
+    "duration_s": 136.4
+  },
+  "pooled": {
+    "roce": {
+      "ic": -0.0525,
+      "t": -1.45,
+      "sig": false,
+      "n": 764,
+      "icir": -0.21,
+      "year_ics": [
+        0.2117,
+        -0.1214,
+        -0.2051
+      ],
+      "direction_ok": false
+    },
+    "fcf": {
+      "ic": 0.0652,
+      "t": 1.8,
+      "sig": false,
+      "n": 757,
+      "icir": 1.7,
+      "year_ics": [
+        0.0874,
+        0.0103,
+        0.0738
+      ],
+      "direction_ok": true
+    },
+    "roe": {
+      "ic": -0.0011,
+      "t": -0.03,
+      "sig": false,
+      "n": 752,
+      "icir": 0.05,
+      "year_ics": [
+        0.2307,
+        -0.0678,
+        -0.1401
+      ],
+      "direction_ok": false
+    },
+    "peg": {
+      "ic": 0.048,
+      "t": 1.53,
+      "sig": false,
+      "n": 1017,
+      "icir": 0.83,
+      "year_ics": [
+        0.1576,
+        0.068,
+        -0.0154,
+        0.0097
+      ],
+      "direction_ok": false
+    },
+    "beta": {
+      "ic": -0.0186,
+      "t": -0.6,
+      "sig": false,
+      "n": 1033,
+      "icir": -0.1,
+      "year_ics": [
+        -0.518,
+        0.2598,
+        0.1192,
+        0.0156
+      ],
+      "direction_ok": true
+    },
+    "debt": {
+      "ic": 0.0951,
+      "t": 2.52,
+      "sig": true,
+      "n": 700,
+      "icir": 0.96,
+      "year_ics": [
+        -0.0359,
+        0.1189,
+        0.1726
+      ],
+      "direction_ok": false
+    },
+    "mom_skip": {
+      "ic": null,
+      "t": null,
+      "sig": null,
+      "n": 0,
+      "icir": null,
+      "year_ics": [],
+      "direction_ok": null
+    },
+    "evar": {
+      "ic": null,
+      "t": null,
+      "sig": null,
+      "n": 0,
+      "icir": null,
+      "year_ics": [],
+      "direction_ok": null
+    },
+    "ev_ebitda": {
+      "ic": null,
+      "t": null,
+      "sig": null,
+      "n": 0,
+      "icir": null,
+      "year_ics": [],
+      "direction_ok": null
+    },
+    "ev_ebit": {
+      "ic": -0.1426,
+      "t": -3.69,
+      "sig": true,
+      "n": 658,
+      "icir": -0.94,
+      "year_ics": [
+        -0.0646,
+        -0.002,
+        -0.3156
+      ],
+      "direction_ok": true
+    },
+    "eps_growth": {
+      "ic": 0.0824,
+      "t": 1.85,
+      "sig": false,
+      "n": 501,
+      "icir": 1.23,
+      "year_ics": [
+        0.1887,
+        0.1912,
+        -0.0177
+      ],
+      "direction_ok": true
+    },
+    "owner_earnings_yield": {
+      "ic": 0.1547,
+      "t": 4.19,
+      "sig": true,
+      "n": 717,
+      "icir": 1.43,
+      "year_ics": [
+        0.088,
+        0.0512,
+        0.2685
+      ],
+      "direction_ok": true
+    },
+    "fcf_debt_cover": {
+      "ic": -0.0449,
+      "t": -1.2,
+      "sig": false,
+      "n": 722,
+      "icir": -0.1,
+      "year_ics": [
+        0.2052,
+        0.0172,
+        -0.2853
+      ],
+      "direction_ok": false
+    },
+    "shares_change_yoy": {
+      "ic": null,
+      "t": null,
+      "sig": null,
+      "n": 0,
+      "icir": null,
+      "year_ics": [],
+      "direction_ok": null
+    }
+  },
+  "by_year": {
+    "2021_2022": {
+      "roce": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 2
+      },
+      "fcf": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 2
+      },
+      "roe": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 2
+      },
+      "peg": {
+        "ic": 0.1576,
+        "t": 2.53,
+        "sig": true,
+        "n": 254
+      },
+      "beta": {
+        "ic": -0.518,
+        "t": -9.69,
+        "sig": true,
+        "n": 258
+      },
+      "debt": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 2
+      },
+      "mom_skip": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "evar": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "ev_ebitda": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "ev_ebit": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 3
+      },
+      "eps_growth": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "owner_earnings_yield": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 2
+      },
+      "fcf_debt_cover": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 2
+      },
+      "shares_change_yoy": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      }
+    },
+    "2022_2023": {
+      "roce": {
+        "ic": 0.2117,
+        "t": 3.39,
+        "sig": true,
+        "n": 247
+      },
+      "fcf": {
+        "ic": 0.0874,
+        "t": 1.36,
+        "sig": false,
+        "n": 244
+      },
+      "roe": {
+        "ic": 0.2307,
+        "t": 3.69,
+        "sig": true,
+        "n": 244
+      },
+      "peg": {
+        "ic": 0.068,
+        "t": 1.08,
+        "sig": false,
+        "n": 254
+      },
+      "beta": {
+        "ic": 0.2598,
+        "t": 4.3,
+        "sig": true,
+        "n": 258
+      },
+      "debt": {
+        "ic": -0.0359,
+        "t": -0.54,
+        "sig": false,
+        "n": 227
+      },
+      "mom_skip": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "evar": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "ev_ebitda": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "ev_ebit": {
+        "ic": -0.0646,
+        "t": -0.94,
+        "sig": false,
+        "n": 211
+      },
+      "eps_growth": {
+        "ic": 0.1887,
+        "t": 0.74,
+        "sig": false,
+        "n": 17
+      },
+      "owner_earnings_yield": {
+        "ic": 0.088,
+        "t": 1.33,
+        "sig": false,
+        "n": 228
+      },
+      "fcf_debt_cover": {
+        "ic": 0.2052,
+        "t": 3.19,
+        "sig": true,
+        "n": 233
+      },
+      "shares_change_yoy": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      }
+    },
+    "2023_2024": {
+      "roce": {
+        "ic": -0.1214,
+        "t": -1.95,
+        "sig": false,
+        "n": 257
+      },
+      "fcf": {
+        "ic": 0.0103,
+        "t": 0.16,
+        "sig": false,
+        "n": 255
+      },
+      "roe": {
+        "ic": -0.0678,
+        "t": -1.08,
+        "sig": false,
+        "n": 253
+      },
+      "peg": {
+        "ic": -0.0154,
+        "t": -0.25,
+        "sig": false,
+        "n": 254
+      },
+      "beta": {
+        "ic": 0.1192,
+        "t": 1.92,
+        "sig": false,
+        "n": 258
+      },
+      "debt": {
+        "ic": 0.1189,
+        "t": 1.84,
+        "sig": false,
+        "n": 237
+      },
+      "mom_skip": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "evar": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "ev_ebitda": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "ev_ebit": {
+        "ic": -0.002,
+        "t": -0.03,
+        "sig": false,
+        "n": 218
+      },
+      "eps_growth": {
+        "ic": 0.1912,
+        "t": 2.94,
+        "sig": true,
+        "n": 229
+      },
+      "owner_earnings_yield": {
+        "ic": 0.0512,
+        "t": 0.79,
+        "sig": false,
+        "n": 241
+      },
+      "fcf_debt_cover": {
+        "ic": 0.0172,
+        "t": 0.27,
+        "sig": false,
+        "n": 242
+      },
+      "shares_change_yoy": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      }
+    },
+    "2024_2025": {
+      "roce": {
+        "ic": -0.2051,
+        "t": -3.35,
+        "sig": true,
+        "n": 258
+      },
+      "fcf": {
+        "ic": 0.0738,
+        "t": 1.18,
+        "sig": false,
+        "n": 256
+      },
+      "roe": {
+        "ic": -0.1401,
+        "t": -2.24,
+        "sig": true,
+        "n": 253
+      },
+      "peg": {
+        "ic": 0.0097,
+        "t": 0.15,
+        "sig": false,
+        "n": 255
+      },
+      "beta": {
+        "ic": 0.0156,
+        "t": 0.25,
+        "sig": false,
+        "n": 259
+      },
+      "debt": {
+        "ic": 0.1726,
+        "t": 2.67,
+        "sig": true,
+        "n": 234
+      },
+      "mom_skip": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "evar": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "ev_ebitda": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      },
+      "ev_ebit": {
+        "ic": -0.3156,
+        "t": -4.98,
+        "sig": true,
+        "n": 226
+      },
+      "eps_growth": {
+        "ic": -0.0177,
+        "t": -0.28,
+        "sig": false,
+        "n": 255
+      },
+      "owner_earnings_yield": {
+        "ic": 0.2685,
+        "t": 4.35,
+        "sig": true,
+        "n": 246
+      },
+      "fcf_debt_cover": {
+        "ic": -0.2853,
+        "t": -4.64,
+        "sig": true,
+        "n": 245
+      },
+      "shares_change_yoy": {
+        "ic": null,
+        "t": null,
+        "sig": null,
+        "n": 0
+      }
+    }
+  }
+}

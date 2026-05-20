@@ -1,0 +1,40 @@
+{
+  "dashboard_version": "5.9.85",
+  "fund_juno_version": "7.9.23",
+  "alpha_juno_version": "6b_6m-u4",
+  "doku_version": "2.2",
+  "ticker_count": "269",
+  "snapshot_count": "58",
+  "oos_wr": "60.1%",
+  "is_wr": "61.0%",
+  "stabilitaet": "2.0pp",
+  "naechster_schritt": "IC-Test v1.2 wiederholen nach backfill_v1.3 (ev_ebit) + WL3 naechster Run Mitte Juli 2026",
+  "offene_punkte": [
+    "IC-Test v1.2 wiederholen nach backfill_v1.3 (ev_ebit bekommt Daten)",
+    "WL3 naechster belastbarer Run: Mitte Juli 2026 (30-60d-Bucket)",
+    "shares_change_yoy -> fSc() nach IC-Bestaetigung",
+    "norm_pe (Shiller-EPS) nach IC-Test"
+  ],
+  "doku_versionen": {
+    "skill_md": "5.9.85",
+    "methodik_intern": "5.9.85",
+    "anwender_leitfaden": "5.9.85",
+    "scripts_reference": "5.9.85",
+    "roadmap_tab": "5.9.85"
+  },
+  "techdoku_offen": [],
+  "lokale_dokumente": [
+    {
+      "datei": "stockiq_methodik_intern_v5985.html",
+      "beschreibung": "Formeln + IC-Befunde (intern, nie GitHub)"
+    },
+    {
+      "datei": "stockiq_anwender_leitfaden_v5985.html",
+      "beschreibung": "Workflow + Scripts (public)"
+    },
+    {
+      "datei": "stockiq_scripts_reference_v5985.md",
+      "beschreibung": "Scripts-Inventar + Einsatzregeln"
+    }
+  ]
+}
