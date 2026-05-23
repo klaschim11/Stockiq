@@ -195,10 +195,10 @@ if (vMatch) {
 }
 
 // Script-Bloecke zaehlen
-if (blocks.length === 13) {
-  ok('Script-Block-Anzahl: 13 (erwartet)');
+if (blocks.length === 14) {
+  ok('Script-Block-Anzahl: 14 (erwartet: 14, v5.9.86 +Sektoren-Block)');
 } else {
-  err('Script-Block-Anzahl: ' + blocks.length + ' (erwartet: 13)');
+  err('Script-Block-Anzahl: ' + blocks.length + ' (erwartet: 14)');
 }
 
 // ── 7. ALIAS-Konsistenz ───────────────────────────────────

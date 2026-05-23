@@ -13,7 +13,7 @@ Vollständiger Entwicklungskontext. Vor jedem Feature/Bugfix/Script-Edit vollst�
 
 | DATEI | VERSION | ZWECK |
 |-------|---------|-------|
-| `stockiq-v5.9.85.html` | v5.9.85 | Dashboard (iOS Safari, GitHub Pages) |
+| `index.html` | v5.9.86 | Dashboard (iOS Safari, GitHub Pages) — Tab 8 Sektoren (RSS + 3M-Skip + Dispersion) |
 | `stockiq_fund_juno_v7_9_23.py` | v7.9.23 | Fund + VIX + Piotroski + trend + rsi_val + neue Felder |
 | `stockiq_alpha_juno_v6b_6m.py` | v6b_6m-u4 | Walk-Forward 6M OOS |
 | `stockiq_annual_ic_v1_2.py` | v1.2 | Faktor-IC-Analyse (14 Faktoren, ausgeführt Mai 2026) |
@@ -22,7 +22,7 @@ Vollständiger Entwicklungskontext. Vor jedem Feature/Bugfix/Script-Edit vollst�
 | `stockiq_deploy.py` | v1.0 | GitHub Pages Auto-Deploy via REST API |
 | `stockiq_uebergabe_v6_2.py` | v6.2 | Handover-Generator |
 
-GitHub Pages: klaschim11.github.io/Stockiq | 269 Ticker | 7 Tabs | 13 Script-Blöcke
+GitHub Pages: klaschim11.github.io/Stockiq | 269 Ticker | 8 Tabs | 14 Script-Blöcke
 
 ---
 
@@ -166,12 +166,12 @@ Farbe: grün=ok | gelb=<20 stat | rot=>=20 stat
 
 ## 6 — TAB / STORAGE / TICKER
 
-Tabs: p0=Synopse | p1=WL1 | p2=WL2 | p3=Fund | p4=WF | p5=Allok | p6=Hilfe
+Tabs: goTab(0)=p0 Synopse | goTab(1)=p1 WL1 | goTab(2)=p2 WL2 | goTab(3)=p8 Depot | goTab(4)=p3 Fund | goTab(5)=p4 WF | goTab(6)=p5 Allok | goTab(7)=p9 Sektoren | goTab(8)=p6 Hilfe | goTab(9)=p7 Roadmap
 
 Storage-Keys (NICHT ändern!):
 - 'stockiq_fund_v515' | 'stockiq_wl2_v59' | 'stockiq_alloc_v520'
 
-Ticker-Stand 278: 13 Script-Blöcke
+Ticker-Stand 278: 14 Script-Blöcke (v5.9.86: +Sektoren-Block)
 Entfernt: HELN.SW, BALN.SW, FCA.MI, MMC, ANSS, STM.PA, NZYM-B.CO + 12 EM-Exoten
 
 ALIAS-Mapping (Dashboard + fund_juno + alpha_juno IDENTISCH halten!):
