@@ -2933,9 +2933,9 @@ function storeDel(key){
 /* ================================================================
    ARCHIV-SYSTEM
    Snapshot = Timestamp + Signal/Score/Technisch je Ticker
-   Max. 60 Snapshots (ca. 2 Monate bei taeglich)
+   Max. 120 Snapshots (ca. 4 Monate bei taeglich)
    ================================================================ */
-var ARCH_MAX = 60;
+var ARCH_MAX = 120;
 var _archive = [];  // im RAM, wird beim Start aus Storage geladen
 
 function archLoad(){
