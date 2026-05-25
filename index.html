@@ -3144,13 +3144,13 @@ function syncSnapshotsFromRepo() {
     .then(function(remoteData) {
       var remoteSnaps = Array.isArray(remoteData) ? remoteData : (remoteData.snapshots || []);
       var remoteCount = remoteSnaps.length || 0;
-      var localData = localStorage.getItem("stockiq_snapshots");
-      var localCount = 0;
-      if (localData) {
-        try { localCount = JSON.parse(localData).length || 0; } catch(e) {}
-      }
+      var localCount = _archive ? _archive.length : 0;
       if (remoteCount > localCount) {
-        localStorage.setItem("stockiq_snapshots", JSON.stringify(remoteSnaps));
+        try {
+          localStorage.setItem("stockiq_arch_v515", JSON.stringify(remoteSnaps));
+        } catch(eq) {}
+        _archive = remoteSnaps;
+        updArchStatus();
         showSyncHint("Snapshots aus Repo geladen (" + remoteCount + ")");
       }
     })
