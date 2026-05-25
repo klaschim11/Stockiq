@@ -3154,7 +3154,8 @@ function syncSnapshotsFromRepo() {
         showSyncHint("Snapshots aus Repo geladen (" + remoteCount + ")");
       }
     })
-    .catch(function() {
+    .catch(function(err) {
+      console.log("fetch error:", err);
       showSyncHint("Snapshot-Sync nicht verfuegbar");
     });
 }
@@ -3979,7 +3980,7 @@ document.addEventListener('DOMContentLoaded', function(){
     try{ rSyn(); }catch(e2){}
   }
   try{ initAlloc(); }catch(e3){}
-  try{ syncSnapshotsFromRepo(); }catch(e4){}
+  syncSnapshotsFromRepo();
 });
 </script>
 <script>
