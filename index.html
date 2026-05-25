@@ -3150,6 +3150,8 @@ function syncSnapshotsFromRepo() {
           localStorage.setItem("stockiq_arch_v515", JSON.stringify(remoteSnaps));
         } catch(eq) {}
         _archive = remoteSnaps;
+        console.log("syncSnap _archive[0]:", _archive[0]);
+        console.log("syncSnap _archive[1]:", _archive[1]);
         updArchStatus();
         showSyncHint("Snapshots aus Repo geladen (" + remoteCount + ")");
       }
