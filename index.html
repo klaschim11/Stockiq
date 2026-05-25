@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.91</title>
+<title>StockIQ v5.9.92</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -64,7 +64,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.91 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v5.9.92 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -76,60 +76,24 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px">
-    <button class="tab active" onclick="goTab(0,this)">&#9889; Synopse <span class="chip" id="cnt">--</span></button>
-    <button class="tab" onclick="goTab(1,this)">&#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
-    <button class="tab" onclick="goTab(2,this)">&#11088; WL2 <span class="chip s" id="wl2-cnt">0</span></button>
-    <button class="tab" onclick="goTab(3,this);initDepot()">&#128200; Depot</button>
-    <button class="tab" onclick="goTab(4,this)">&#128181; Fundamentals <span class="chip ai">AI</span></button>
-    <button class="tab" onclick="goTab(5,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
-    <button class="tab" onclick="goTab(6,this)">&#9878; Allokation</button>
+    <button id="tb1" class="tab active" onclick="goTab(1,this)">&#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
+    <button id="tb2" class="tab" onclick="goTab(2,this)">&#11088; WL2 <span class="chip s" id="wl2-cnt">0</span></button>
+    <button id="tb3" class="tab" onclick="goTab(3,this);initDepot()">&#128200; Depot</button>
+    <button id="tb4" class="tab" onclick="goTab(4,this)">&#128181; Fundamentals <span class="chip ai">AI</span></button>
+    <button id="tb5" class="tab" onclick="goTab(5,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
+    <button id="tb6" class="tab" onclick="goTab(6,this)">&#9878; Allokation</button>
     <!-- v5.9.86: Tab 8 Sektoren -->
-    <button class="tab" onclick="goTab(7,this)">&#127759; Sektoren</button>
-    <button class="tab" onclick="goTab(8,this)">&#128218; Hilfe</button>
-    <button class="tab" onclick="goTab(9,this)">&#128203; Roadmap</button>
+    <button id="tb7" class="tab" onclick="goTab(7,this)">&#127759; Sektoren</button>
+    <button id="tb8" class="tab" onclick="goTab(8,this)">&#128218; Hilfe</button>
+    <button id="tb9" class="tab" onclick="goTab(9,this)">&#128203; Roadmap</button>
+    <button id="btnExpert" onclick="toggleExpertenModus()" style="font-size:0.8em;padding:2px 8px;margin-left:12px;background:#555;color:#ccc;border:1px solid #777;border-radius:3px;cursor:pointer">Exp</button>
   </div>
 </header>
 
-<!-- TAB 0: SYNOPSE -->
-<div class="page" id="p0" style="display:block">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-    <div style="font-size:20px;font-weight:800">Signal-Synopse</div>
-    <div style="display:flex;gap:6px">
-      <button id="sync-btn-syn" onclick="toggleSync(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">&#128257; Alle</button>
-      <button id="sf-btn" onclick="toggleSellFilter(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
-      <button id="hc-btn" onclick="toggleHCFilter(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">HC: aus</button>
-      <button id="dr-btn" onclick="toggleDivFilter(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
-      <span id="dr-config" style="display:none;align-items:center;gap:4px">
-        <span style="font-family:monospace;font-size:9px;color:var(--mut)">Bund%</span>
-        <input id="bund-input" type="number" value="2.6" min="0" max="10" step="0.1"
-          style="width:48px;padding:3px 6px;background:#0c1420;border:1px solid #1a2a3a;border-radius:8px;color:#dce8f5;font-family:monospace;font-size:10px;text-align:center"
-          oninput="updBundRate(this.value)">
-      </span>
-    </div>
-  </div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px">MACD ZL + 200MA + ATR-Hist-Filter + Divergenz &middot; Mom 25% Trend 25% Fund 35% Risk 15% &middot; PEG-Block &gt;=3.0</div>
-  <div class="g4" id="s0"></div>
-
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#11088; STRONG BUY <span style="font-size:11px;color:var(--mut);font-weight:400">(ZL + 200MA + PEG + Bull-Divergenz)</span></div>
-  <div class="g3" id="s_strong" style="margin-bottom:14px"></div>
-
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#9679; Top 3 Kaufsignale</div>
-  <div class="g3" id="s1" style="margin-bottom:14px"></div>
-  <div id="s2" style="margin-bottom:14px"></div>
-  <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#9679; Top 3 Verkauf / Meiden</div>
-  <div class="g3" id="s3" style="margin-bottom:16px"></div>
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
-      <div><div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;margin-bottom:5px">Methodik v5.3</div><div style="font-size:11px;color:var(--mut);line-height:1.6">Long: MACD <strong style="color:#dce8f5">unter ZL</strong>, Hist <strong style="color:#dce8f5">&gt; ATR&times;0.05</strong>, <strong style="color:#dce8f5">ueber 200MA</strong>, PEG &lt; 3.0. RSI kein Filter. <strong style="color:#ff9f1c">STRONG BUY</strong> = + Bull-Divergenz.</div></div>
-      <div><div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;margin-bottom:5px">Datenbasis</div><div style="font-size:11px;color:var(--mut);line-height:1.6">Echte Kurse + Indikatoren via Python/Juno. JSON laden = sofortige Aktualisierung aller Signale.</div></div>
-      <div><div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;margin-bottom:5px">Disclaimer</div><div style="font-size:11px;color:var(--mut);line-height:1.6">Keine Anlageberatung. Immer eigene Due Diligence.</div></div>
-    </div>
-  </div>
-</div>
-
 <!-- TAB 1: WATCHLIST -->
-<div class="page" id="p1">
+<div class="page" id="p1" style="display:block">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">Watchlist &mdash; <span id="wl-hdr-cnt">--</span> Ticker</div>
+  <div id="spyPhaseBanner" style="padding:6px 12px;margin-bottom:8px;border-radius:4px;font-size:0.9em;font-weight:bold;display:none;"></div>
   <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:10px">Gruppiert: BUY &middot; HOLD &middot; SELL &mdash; Antippen = Detail</div>
   <!-- Sync-Toggle + Sort -->
   <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
@@ -486,7 +450,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.91 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.92 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -771,7 +735,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.91 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.92 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -785,6 +749,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+        <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a">v5.9.92</td><td style="padding:5px 8px;color:#dce8f5">Sprint5-A: Experten-Toggle (Fund+WF), SPY-Marktphasen-Banner in WL, Synopse entfernt</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
         <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a">v5.9.91</td><td style="padding:5px 8px;color:#dce8f5">Snapshot-Sync via fetch (Remote gewinnt, UI-Hinweis im Archiv-Banner)</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
         <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a">v5.9.90</td><td style="padding:5px 8px;color:#dce8f5">Bond-Regime-Anzeige im Synopse-Banner (SPY + Zinsen stabil/steigen/stark)</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
         <tr style="background:#0c1420"><td style="padding:5px 8px;color:#00e57a">v5.9.88</td><td style="padding:5px 8px;color:#dce8f5">Roadmap-Tab bereinigt &middot; +29 Ticker &middot; ARCH_MAX 120</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
@@ -1954,14 +1919,56 @@ tick();setInterval(tick,1000);
      TAB NAVIGATION
      ============================================================ -->
 <script>
+var _expertenModus = false;
+
+function toggleExpertenModus() {
+  _expertenModus = !_expertenModus;
+  try { localStorage.setItem("stockiq_experten", _expertenModus ? "1" : "0"); } catch(e) {}
+  applyExpertenModus();
+}
+
+function renderSpyPhaseBanner() {
+  var el = document.getElementById("spyPhaseBanner");
+  if (!el) { return; }
+  var macro = (window.FD && FD['__macro__']) ? FD['__macro__'] : null;
+  if (!macro) { el.style.display = "none"; return; }
+  var above = macro.spy_above_200ma;
+  if (above === true || above === "true") {
+    el.innerHTML = "Marktphase: Investierbar &mdash; SPY &gt; 200MA";
+    el.style.background = "#1a4a1a";
+    el.style.color = "#7fc97f";
+    el.style.border = "1px solid #2a7a2a";
+  } else {
+    el.innerHTML = "Marktphase: Vorsicht &mdash; SPY &lt; 200MA";
+    el.style.background = "#4a3a0a";
+    el.style.color = "#d4aa40";
+    el.style.border = "1px solid #8a6a10";
+  }
+  el.style.display = "block";
+}
+
+function applyExpertenModus() {
+  var expertenTabs = ["tb4", "tb5"];
+  var btn = document.getElementById("btnExpert");
+  for (var i = 0; i < expertenTabs.length; i++) {
+    var el = document.getElementById(expertenTabs[i]);
+    if (el) { el.style.display = _expertenModus ? "" : "none"; }
+  }
+  if (btn) {
+    btn.style.background = _expertenModus ? "#2a6" : "#555";
+    btn.style.color = _expertenModus ? "#fff" : "#ccc";
+    btn.title = _expertenModus ? "Experten-Modus aktiv" : "Experten-Modus";
+  }
+}
+
 function goTab(n,btn){
-  var pgs=['p0','p1','p2','p8','p3','p4','p5','p9','p6','p7'],i; /* v5.9.86: p9=Sektoren(7), p6=Hilfe(8), p7=Road(9) */
+  var pgs=['p1','p1','p2','p8','p3','p4','p5','p9','p6','p7'],i; /* v5.9.92: p0(Synopse) entfernt, p1=Watchlist Standard */
   for(i=0;i<pgs.length;i++){var pg=document.getElementById(pgs[i]);if(pg)pg.style.display='none';}
   var tabs=document.querySelectorAll('.tab');
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
   var pg2=document.getElementById(pgs[n]);if(pg2)pg2.style.display='block';
   if(btn)btn.classList.add('active');
-  if(n===0)rSyn();if(n===1)rWL();if(n===2)rWL2();if(n===3)rFund();
+  if(n===0)rSyn();if(n===1){rWL();renderSpyPhaseBanner();}if(n===2)rWL2();if(n===3)rFund();
   if(n===4){rWF();try{archHistRend();}catch(e){}}
   if(n===5)rAlloc();
   if(n===7){var sm=window.FD?FD['__macro__']:null;var el=document.getElementById('sektoren-content');if(el)el.innerHTML=renderSektorTab(sm);}
@@ -3990,6 +3997,9 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   try{ initAlloc(); }catch(e3){}
   syncSnapshotsFromRepo();
+  try { _expertenModus = localStorage.getItem("stockiq_experten") === "1"; } catch(e) { _expertenModus = false; }
+  applyExpertenModus();
+  renderSpyPhaseBanner();
 });
 </script>
 <script>
