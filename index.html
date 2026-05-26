@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v5.9.93</title>
+<title>StockIQ v5.9.95</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -450,7 +450,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.93 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v5.9.95 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -467,60 +467,15 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#9889; Schnellstart</div>
     <div style="font-size:13px;color:var(--mut);line-height:1.8">
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. Synopse</strong> &mdash; Startseite. STRONG BUY (Divergenz), BUY, PEG-geblockt, Verkaufssignale.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. Watchlist</strong> &mdash; Alle Ticker nach Score oder A-Z. Sync-Button filtert auf WL2. Antippen = Detail.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. WL2</strong> &mdash; Eigene Auswahl. Ticker per + WL2 hinzufuegen. Sync-Button in WL1 aktiviert WL2-Filter auf Synopse + WL1. Export (JSON) sichert WL2 geraeteuebergreifend. Import stellt WL2 wieder her.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Fundamentals</strong> &mdash; stockiq_fundamentals.json laden. ROCE-Formel korrigiert (EK + LT-Schulden), Div+Buyback neu.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">5. Walk-Forward</strong> &mdash; stockiq_alpha_results.json laden. Signal-History zeigt Aenderungen zwischen Snapshots.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. Watchlist</strong> &mdash; Alle 298 Ticker nach Score. SPY-Marktphasen-Banner oben (gruen = SPY ueber 200MA / gelb = darunter). Antippen = Detail.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. WL2</strong> &mdash; Eigene Auswahl. Ticker per + WL2 hinzufuegen. Sync filtert Watchlist auf eigene Titel. Export/Import sichert geraeteuebergreifend.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. Fundamentals</strong> &mdash; Scores aus scores.json (taeglich automatisch aktualisiert). <strong style="color:#00e57a">Exp</strong>-Button (oben rechts) blendet ROCE, PEG, IC-Detail ein/aus.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Walk-Forward</strong> &mdash; Strategie-Validierung OOS 6M. <strong style="color:#00e57a">Exp</strong>-Button blendet IS/OOS-Fenster-Detail ein/aus.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">5. Sektoren</strong> &mdash; RSS-Signale + 3M-Skip-Momentum, 11 SPDR-ETFs. Dispersion-Signal.</div>
       <div><strong style="color:#dce8f5">6. Hilfe</strong> &mdash; Diese Seite.</div>
     </div>
   </div>
-  <!-- v5.9.71: Synopse vs Watchlist Erklaerung -->
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00e57a">&#128270; Synopse vs. Watchlist &mdash; Unterschiede</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.8">
-      <div style="margin-bottom:10px">Beide Tabs zeigen dieselben Signale &mdash; aber aus verschiedenen Perspektiven. Die Zaehlungen <strong style="color:#dce8f5">koennen abweichen</strong>, weil unterschiedliche Filter aktiv sind.</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
-        <div style="background:#0a1628;border-left:3px solid #ff9f1c;border-radius:6px;padding:10px">
-          <div style="font-size:11px;font-weight:700;color:#ff9f1c;margin-bottom:6px">&#9889; SYNOPSE</div>
-          <div style="font-size:11px;color:var(--mut);line-height:1.7">
-            <div>&#8594; <strong style="color:#dce8f5">Tagesaktion</strong>: Was tue ich heute?</div>
-            <div>&#8594; Immer <strong style="color:#dce8f5">alle 269 Ticker</strong> (kein WL2-Filter)</div>
-            <div>&#8594; Zeigt <strong style="color:#dce8f5">Top 3 je Signal</strong></div>
-            <div>&#8594; VIX-Regime + DQ-Status sichtbar</div>
-            <div>&#8594; SF/HC/DR-Filter wirken</div>
-          </div>
-        </div>
-        <div style="background:#0a1628;border-left:3px solid #00e57a;border-radius:6px;padding:10px">
-          <div style="font-size:11px;font-weight:700;color:#00e57a;margin-bottom:6px">&#128202; WATCHLIST</div>
-          <div style="font-size:11px;color:var(--mut);line-height:1.7">
-            <div>&#8594; <strong style="color:#dce8f5">Positionsmonitor</strong>: Was halte ich?</div>
-            <div>&#8594; Optional nur <strong style="color:#dce8f5">WL2</strong> (eigene Titel)</div>
-            <div>&#8594; Zeigt <strong style="color:#dce8f5">alle Titel</strong> nach Score</div>
-            <div>&#8594; Drei Gruppen: BUY / HOLD / SELL</div>
-            <div>&#8594; SF/HC/DR-Filter wirken identisch</div>
-          </div>
-        </div>
-      </div>
-      <div style="background:rgba(255,82,82,.08);border-left:3px solid #ff5252;border-radius:6px;padding:10px;margin-bottom:8px">
-        <div style="font-size:11px;font-weight:700;color:#ff6666;margin-bottom:4px">&#9888; Warum Synopse STRONG=12 und WL STRONG=2 zeigen kann:</div>
-        <div style="font-size:11px;color:var(--mut);line-height:1.7">
-          <div>&#8226; WL-Filter <strong style="color:#dce8f5">HC: ein</strong> aktiv &rarr; WL zeigt nur Triple-Confirmation-Titel</div>
-          <div>&#8226; WL-Sync-Button auf <strong style="color:#dce8f5">[&gt;] WL2</strong> &rarr; WL zeigt nur deine 39 WL2-Titel</div>
-          <div>&#8226; Synopse laeuft immer ueber alle 269 Ticker</div>
-        </div>
-      </div>
-      <div style="background:rgba(0,200,240,.07);border-left:3px solid #00c8f0;border-radius:6px;padding:10px">
-        <div style="font-size:11px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#128161; Empfohlener Workflow:</div>
-        <div style="font-size:11px;color:var(--mut);line-height:1.7">
-          <div><strong style="color:#dce8f5">1. Synopse</strong> &rarr; Marktlage + VIX + Top-Signale einschaetzen</div>
-          <div><strong style="color:#dce8f5">2. WL (Alle)</strong> &rarr; Synopse-Vergleichszeile zeigt Gesamtuniverse-Zaehler</div>
-          <div><strong style="color:#dce8f5">3. WL (WL2)</strong> &rarr; Sync-Button: nur eigene Positionen pruefen</div>
-          <div><strong style="color:#dce8f5">Filter synchron halten:</strong> SF/HC/DR gelten fuer beide Tabs gleichzeitig</div>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#11088; Signal-Logik v5.9.x</div>
@@ -637,7 +592,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <strong style="color:#dce8f5">Was Walk-Forward nicht tut:</strong> OOS-Ergebnisse beeinflussen Synopse und Watchlist nicht. Live-Signale basieren ausschliesslich auf den aktuellen MACD/200MA/PEG-Kriterien. Eine Verknuepfung waere methodisch falsch (Look-ahead-Bias).
     </div>
     <div style="font-size:13px;font-weight:700;color:#f0c000;margin-bottom:8px">Stichproben-Problem bei strengen Filtern</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Strategie filtert streng. Mit 262 Tickern und 6M OOS: typisch 50&ndash;150 Trades pro Fenster. Faustregel: Erst ab ca. 30 Trades/Fenster sind Aussagen sinnvoll. Mit v6b_6m (SPY-Filter, 4 Fenster) ist diese Schwelle in allen Fenstern klar erreicht.</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Strategie filtert streng. Mit 298 Tickern und 6M OOS: typisch 50-150 Trades pro Fenster. Faustregel: Erst ab ca. 30 Trades/Fenster sind Aussagen sinnvoll. Mit v6b_6m (SPY-Filter, 4 Fenster) ist diese Schwelle in allen Fenstern klar erreicht.</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
       <div style="background:rgba(0,229,122,.06);border:1px solid rgba(0,229,122,.2);border-radius:8px;padding:10px">
         <div style="font-family:monospace;font-size:10px;color:#00e57a;margin-bottom:4px">&#9679; STATISTISCH ROBUST</div>
@@ -649,7 +604,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       </div>
     </div>
     <div style="padding:10px 12px;background:rgba(240,192,0,.06);border-left:3px solid #f0c000;border-radius:6px;font-size:12px;color:var(--mut);line-height:1.6">
-      <strong style="color:#00e57a">Aktuelle Situation (Mai 2026):</strong> 269 Ticker, 4 Fenster, ~80&ndash;120 OOS-Trades/Fenster. <strong style="color:#dce8f5">Statistisch belastbar.</strong> Alle 4 Fenster konsistent positiv. SPY-Filter eliminiert Baermarkt-Eintraege. Produktions-Script: stockiq_alpha_juno_v6b_6m.
+      <strong style="color:#00e57a">Aktuelle Situation (Mai 2026):</strong> 298 Ticker, 4 Fenster, ~80-120 OOS-Trades/Fenster. <strong style="color:#dce8f5">Statistisch belastbar.</strong> Alle 4 Fenster konsistent positiv. SPY-Filter eliminiert Baermarkt-Eintraege. Produktions-Script: stockiq_alpha_juno_v6b_6m.
     </div>
   </div>
 
@@ -659,8 +614,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
       <!-- Taeglich -->
       <div style="font-family:monospace;font-size:10px;color:#00e57a;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Taeglich</div>
-      <div style="margin-bottom:8px"><strong style="color:#dce8f5">fund_juno_v7.9.6.py</strong> &mdash; 260 Ticker, FCF, ROCE, EVAR, EV/EBITDA, mom_skip, sector &rarr; stockiq_fundamentals.json + stockiq_snapshots.json<br>
-      <span style="color:#7a9bb5;font-size:10px">Automatisch: 1. Mai &plusmn;7 Tage &rarr; zus&auml;tzlich stockiq_annual.json (Jahres-Snapshot)</span></div>
+      <div style="margin-bottom:8px"><strong style="color:#dce8f5">fund_juno_v7.9.28.py</strong> (Juno/iPhone) &mdash; 298 Ticker, FCF, ROCE, EVAR, EV/EBITDA, mom_skip, above200, RSI &rarr; stockiq_fundamentals.json<br>
+      <span style="color:#7a9bb5;font-size:10px">Privat (nicht im Repo). Automatisch: 1. Mai +/-7 Tage stockiq_annual.json.</span></div>
+      <div style="margin-bottom:8px"><strong style="color:#dce8f5">stockiq_score.py</strong> (Windows) &mdash; Berechnet alle Scores aus fundamentals.json &rarr; stockiq_scores.json &rarr; git push &rarr; Dashboard aktualisiert<br>
+      <span style="color:#7a9bb5;font-size:10px">Privat (nicht im Repo). Kein JSON-Upload ins Dashboard mehr noetig.</span></div>
 
       <!-- Optional taeglich -->
       <div style="font-family:monospace;font-size:10px;color:#f0c000;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Optional (nach Bedarf)</div>
@@ -735,7 +692,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.93 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v5.9.95 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -750,6 +707,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       </thead>
       <tbody>
         <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a">v5.9.92</td><td style="padding:5px 8px;color:#dce8f5">Sprint5-A: Experten-Toggle (Fund+WF), SPY-Marktphasen-Banner in WL, Synopse entfernt</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
+        <tr style="background:#0c1420"><td style="padding:5px 8px;color:#00e57a">v5.9.95</td><td style="padding:5px 8px;color:#dce8f5">Phase C: Detail-Panel liest peg_rel_sc, evar_rel_sc, cons_sc, pio_sc aus scores.json. Bug-Fix: spy_above_200ma, above200, macd_cross, atr, sw korrekt in scores.json. +high52w_ratio Stub.</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
+        <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a">v5.9.94</td><td style="padding:5px 8px;color:#dce8f5">Hilfe-Tab aktualisiert: scores.json-Workflow, Exp-Toggle, SPY-Banner, Synopse-Sektion entfernt. 298 Ticker.</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
         <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a">v5.9.93</td><td style="padding:5px 8px;color:#dce8f5">Sprint5-B: loadScores(), Dashboard laedt stockiq_scores.json (Score-Lookup via _scoresIdx)</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
         <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a">v5.9.91</td><td style="padding:5px 8px;color:#dce8f5">Snapshot-Sync via fetch (Remote gewinnt, UI-Hinweis im Archiv-Banner)</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
         <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a">v5.9.90</td><td style="padding:5px 8px;color:#dce8f5">Bond-Regime-Anzeige im Synopse-Banner (SPY + Zinsen stabil/steigen/stark)</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
@@ -897,7 +856,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.90 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v5.9.95 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2179,7 +2138,7 @@ function wlDetail(ticker){
   out+='<div style="'+row+'"><span style="color:var(--mut)">Trend 20%</span><span style="color:#456278">'+s.trend+' stat</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Fund 35%</span><span>'+fs2+(fs2!==s.fund?' AI':' stat')+'</span></div>';
   /* Konsistenz-Badge (v5.9.36) */
-  var cs2=consScore(s.t);
+  var cs2=getScField(s.t, "cons_sc", consScore(s.t));
   var as2=calcAnnualStats(s.t);
   if(cs2!==null&&as2){
     var csColor=cs2>=70?'#00e57a':cs2>=45?'#f0c000':'#ff6666';
@@ -2188,7 +2147,7 @@ function wlDetail(ticker){
   }
   var fdBeta=FD[s.t];var betaVal=fdBeta&&fdBeta.beta!==null&&fdBeta.beta!==undefined?fdBeta.beta:null;
   var evarVal=fdBeta&&fdBeta.evar!==null&&fdBeta.evar!==undefined?fdBeta.evar:null;
-  var eRel=evarRelSc(s.t);
+  var eRel=getScField(s.t, "evar_rel_sc", evarRelSc(s.t));
   var rSc2=s.risk;
   if(betaVal!==null&&eRel!==null){rSc2=Math.round(s.risk*0.50+betaSc(betaVal)*0.40+eRel*0.10);}
   else if(betaVal!==null){rSc2=Math.round(s.risk*0.60+betaSc(betaVal)*0.40);}
@@ -2225,7 +2184,7 @@ function wlDetail(ticker){
   out+='<div style="'+row+'"><span style="color:var(--mut)">KGV / EG</span><span>'+s.pe+'x / '+(s.eg||'-')+'%</span></div>';
   /* PEG sektor-relativ (v5.9.41) */
   if(s.peg!=null){
-    var pegRel=pegRelSc(s);
+    var pegRel=getScField(s.t, "peg_rel_sc", pegRelSc(s));
     var fd_pg=FD[s.t];
     var secPegMed=(fd_pg&&fd_pg.sector&&SECTOR_PEG_MED[fd_pg.sector]!=null)?SECTOR_PEG_MED[fd_pg.sector]:null;
     var secName=(fd_pg&&fd_pg.sector)?fd_pg.sector.split(' ')[0]:'glb';
@@ -2253,7 +2212,7 @@ function wlDetail(ticker){
     /* EV/EBITDA + EVAR — zweite Zeile Value-Qualitaet (v5.9.30) */
     var evebDisp=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda.toFixed(1)+'x':'n/a';
     var evebColor=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?(fd.ev_ebitda<12?'#00e57a':fd.ev_ebitda<20?'#f0c000':'#ff6666'):'#7a9bb5';
-    var evarRel=evarRelSc(s.t);
+    var evarRel=getScField(s.t, "evar_rel_sc", evarRelSc(s.t));
     var evarLabel=fd.sector?'EVAR (rel.)':'EVAR (abs.)';
     var evarDispFull=fd.evar!=null?(fd.evar+(evarRel!=null&&fd.sector?' &#8594;'+evarRel:'')):'n/a';
     var evarScore=evarRel!=null?evarRel:fd.evar;
@@ -2960,6 +2919,18 @@ function loadScores() {
     .catch(function(e) {
       console.warn("scores.json nicht verfuegbar: " + e);
     });
+}
+
+function getScField(ticker, field, fallback) {
+  var sc = _scoresIdx && _scoresIdx[ticker];
+  if (!sc) { return fallback; }
+  var v = sc[field];
+  if (v === null || v === undefined) { return fallback; }
+  return v;
+}
+
+function getHigh52wRatio(ticker) {
+  return getScField(ticker, "high52w_ratio", null);
 }
 
 function applyFund(fund){
