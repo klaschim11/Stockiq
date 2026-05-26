@@ -2921,6 +2921,13 @@ function loadScores() {
     });
 }
 
+function betaSc(b) {
+  if (b === null || b === undefined || isNaN(b)) { return 50; }
+  if (b <= 0.5) { return 90; }
+  if (b >= 2.0) { return 10; }
+  return Math.round(90 - (b - 0.5) / 1.5 * 80);
+}
+
 function getScField(ticker, field, fallback) {
   var sc = _scoresIdx && _scoresIdx[ticker];
   if (!sc) { return fallback; }
