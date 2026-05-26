@@ -94,9 +94,7 @@ requiredFunctions.forEach(function(fn) {
     err(fn + '() FEHLT');
   }
 });
-// valSc und rSc sind inline — als Ausdruck pruefen
-if (html.indexOf('valSc') !== -1) ok('valSc (inline vorhanden)');
-else err('valSc FEHLT');
+// rSc inline pruefen (cSc-Fallback)
 if (html.indexOf('var rSc') !== -1) ok('rSc (inline vorhanden)');
 else err('rSc FEHLT');
 

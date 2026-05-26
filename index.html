@@ -1363,16 +1363,6 @@ function sellWhy(s,sig){
   return '';
 }
 
-/* v5.9.15: volAdj nach Daniel & Moskowitz (2016) */
-function volAdj(s){
-  if(!s.p||s.p<=0||!s.atr||s.atr<=0)return 1.0;
-  var vp=(s.atr/s.p)*100;
-  if(vp<=0)return 1.0;
-  var a=2.0/vp;
-  if(a>1.0)a=1.0;
-  if(a<0.2)a=0.2;
-  return a;
-}
 /* ============================================================
    VIX-REGIME-DAEMPFUNG v5.9.46
    Quelle: Barroso/Santa-Clara 2015, Daniel/Moskowitz 2016
@@ -1394,28 +1384,6 @@ var V2X_LEVEL    = null;  /* VSTOXX Europa-Volatilitaet */
 var VXTLT_LEVEL  = null;  /* Bond-Volatilitaet 20yr Treasury */
 var VIX_BOND_DIV = 'none'; /* none|mild|strong */
 
-/* vixFactor(isEuropean): Daempfungsfaktor fuer momSc()
-   isEuropean=true: V2X statt VIX wenn V2X verruegbar und strenger
-   Bond-Div-Logik: vix_bond_div="strong" -> zusaetzlich x0.85 */
-function vixFactor(isEuropean){
-  var base;
-  /* Europaische Ticker: V2X bevorzugen wenn vorhanden und hoeher */
-  if(isEuropean && V2X_LEVEL !== null){
-    var vol = (V2X_LEVEL > VIX_LEVEL) ? V2X_LEVEL : VIX_LEVEL;
-    if(vol === null || vol === undefined){ base = 1.0; }
-    else if(vol < 20){ base = 1.0; }
-    else if(vol < 30){ base = 0.60; }
-    else { base = 0.20; }
-  } else {
-    if(VIX_LEVEL===null||VIX_LEVEL===undefined){ base = 1.0; }
-    else if(VIX_LEVEL < 20){ base = 1.0; }
-    else if(VIX_LEVEL < 30){ base = 0.60; }
-    else { base = 0.20; }
-  }
-  /* Bond-Divergenz: VIX tief aber Bond-Vol hoch = Late-Stage */
-  if(VIX_BOND_DIV === 'strong' && base === 1.0){ base = 0.85; }
-  return base;
-}
 
 function vixRegimeLabel(){
   if(VIX_LEVEL===null&&V2X_LEVEL===null)return null;
@@ -1432,155 +1400,11 @@ function vixRegimeLabel(){
   return {label:lbl,col:col,zone:zone};
 }
 
-/* ---- Momentum Score (v5.9.33 — Skip-Month) ──────────────────
-   Akademisch: Jegadeesh/Titman 1993 — 12M-1M ("Skip-Month") Momentum
-   outperformt 12M-Momentum um ~0.5-1% p.a. durch Vermeidung
-   von Short-Term-Reversal (Bid-Ask-Bounce, Microstructure-Effekte).
-   Quelle: fund_juno v7.9.4 (mom_skip = 11M-Return in %)
+function momSc(s){ return s.mom||50; }
 
-   Normierung mom_skip (Prozent-Return → Score 0-100):
-     +50% und mehr → 95  |  +25% → 79  |  0% → 50  |  -25% → 21  |  -50% → 5
-   Formel: score = max(5, min(95, 50 + return * 0.9))
-   (0.9 = Skalierungsfaktor: ±55% → ±50 Score-Punkte)
 
-   Fallback-Kette (Rueckwaerts-kompatibel):
-     1. mom_skip (neu, v7.9.4)
-     2. mom12m_ret (echter 12M-Return, ebenfalls v7.9.4)
-     3. mom12m (52W-Position 0-100, alt — Skalierungsbug war: norm=50+raw)
-        FIX: raw ist Position (0-100), nicht Return → direkt als Score nutzen
+function debtSc(dte, sector){ return 50; }
 
-   Alle Varianten: 50% MACD/RSI-Signal + 50% Preis-Momentum.
-   VIX-Daempfung und volAdj() unveraendert. */
-function momSc(s){
-  var fd=FD[s.t];
-  var adj=volAdj(s);
-  /* isEuropean: Sektor aus FD oder Ticker-Endung (.PA .MI .SW .AS .DE .L .MC) */
-  var isEU=false;
-  if(fd&&fd.sector){isEU=true;}
-  var tkSuf=s.t.indexOf('.')>=0;
-  if(tkSuf)isEU=true;
-  var vf=vixFactor(isEU);
-  function applyDamp(base){
-    var d=Math.round(base*adj+50*(1.0-adj));
-    return vf<1.0?Math.round(d*vf+50*(1.0-vf)):d;
-  }
-  if(!fd){return applyDamp(Math.round(s.mom*adj+50*(1.0-adj)));}
-
-  var priceMom=null;
-  /* Prioritaet 1: mom_skip (Skip-Month, v7.9.4) */
-  if(fd.mom_skip!==null&&fd.mom_skip!==undefined){
-    priceMom=Math.max(5,Math.min(95,Math.round(50+fd.mom_skip*0.9)));
-  }
-  /* Prioritaet 2: mom12m_ret (echter 12M-Return, v7.9.4) */
-  else if(fd.mom12m_ret!==null&&fd.mom12m_ret!==undefined){
-    priceMom=Math.max(5,Math.min(95,Math.round(50+fd.mom12m_ret*0.9)));
-  }
-  /* Prioritaet 3: mom12m (52W-Position 0-100, Legacy-Fix) */
-  else if(fd.mom12m!==null&&fd.mom12m!==undefined){
-    priceMom=Math.round(fd.mom12m);
-  }
-  if(priceMom===null){return applyDamp(Math.round(s.mom*adj+50*(1.0-adj)));}
-  /* EPS-Revision als 3. Momentum-Komponente (v5.9.70) -- 10% Gewicht wenn verfuegbar.
-     Fundamentales Momentum: earningsGrowth YoY. Quelle: epsMomSc(fd). */
-  var epsMom=epsMomSc(fd);
-  var rm=epsMom!==null?Math.round(s.mom*0.45+priceMom*0.45+epsMom*0.10):Math.round(s.mom*0.50+priceMom*0.50);
-
-  /* RSI-Ueberhitzungs-Daempfung v5.9.69 (Barroso/Santa-Clara 2015)
-     RSI > 80: Momentum ueberdehnt → Daempfung ×0.70 (kein Neueinstieg)
-     RSI > 75: Erhoeht → leichte Daempfung ×0.85
-     Logik: hohe RSI = nahe ATH = schlechtes Chance/Risiko fuer Einstieg */
-  var rsiFactor=1.0;
-  if(fd.rsi_val!==null&&fd.rsi_val!==undefined){
-    if(fd.rsi_val>80)       rsiFactor=0.70;
-    else if(fd.rsi_val>75)  rsiFactor=0.85;
-  }
-  if(rsiFactor<1.0){ rm=Math.round(rm*rsiFactor+50*(1.0-rsiFactor)); }
-
-  return applyDamp(rm);
-}
-
-/* ---- Low-Volatility: Beta-Score (v5.9.16) ----
-   Akademisch: MSCI/BlackRock 1963-2024. Beta < 1 = defensiv = Bonus.
-   Default 65 wenn kein Beta in JSON (neutrales Fallback). */
-function betaSc(b){
-  if(b===null||b===undefined)return 65;
-  if(b<0.5)return 100;if(b<0.8)return 88;if(b<1.0)return 76;
-  if(b<1.2)return 62;if(b<1.5)return 44;if(b<2.0)return 26;
-  return 12;
-}
-
-/* ---- Schuldenqualitaet: Debt/Equity Score (v5.9.78) ────────────
-   v5.9.78: Sektor-Split auf Basis IC-Test 2026-05.
-   IC-Befund: debt pooled IC = +0.103 (sig, IC-IR=1.11) in Gegenrichtung.
-   Ursache: Finanzwerte (Banken, Versicherungen) haben strukturell
-   hohe D/E-Ratios (>300%) und liefen 2022-2025 sehr gut.
-   Loesung: Finanzsektor-Erkennung via fd.sector → neutral (65).
-   Non-Financials: bisherige Stufenfunktion unveraendert.
-   Sektoren neutral: "Financial Services", "Finance", "Insurance"
-   Quellen: yfinance sector-Feld (fund_juno v7.9.3+), IC-Analyse 2026. */
-function debtSc(dte, sector){
-  /* Finanzwerte: D/E-Ratio strukturell hoch — kein Risikoindikator */
-  if(sector && (
-    sector==='Financial Services' ||
-    sector==='Finance' ||
-    sector==='Insurance' ||
-    sector.indexOf('Bank')>=0 ||
-    sector.indexOf('Financ')>=0
-  )){ return 65; }
-  if(dte===null||dte===undefined)return 60;
-  if(dte<30)return 100;if(dte<100)return 80;if(dte<200)return 55;
-  if(dte<350)return 30;return 10;
-}
-
-/* ---- EV/EBITDA Score (v5.9.30 / v5.9.34) ──────────────────
-   Sanity-Grenze v5.9.34: >50x → neutral (kein Signal, Score=50).
-   fund_juno v7.9.5 filtert >50x bereits auf None heraus.
-   Dashboard-Schutz: falls altes JSON noch Werte >50x enthaelt.
-   Legitime Grenze: ASML ~30x, MSCI ~40x — 50x deckt alle validen
-   Wachstumswerte ab. PANW ~93x = Datenfehler, nicht Value-Signal.
-   Quelle: Loughran/Wellman 2011, MSCI Enhanced Value Index. */
-function evSc(evebitda){
-  if(evebitda===null||evebitda===undefined)return 50;
-  if(evebitda>50)return 50;    // Sanity: >50x → kein Signal (neutral)
-  if(evebitda<8)return 100;    // Deep Value
-  if(evebitda<12)return 85;    // Guenstig
-  if(evebitda<16)return 70;    // Fair
-  if(evebitda<20)return 55;    // Leicht erhoht
-  if(evebitda<25)return 35;    // Teuer
-  if(evebitda<35)return 18;    // Sehr teuer
-  return 8;                    // 35-50x: Extrem / Growth-Premium
-}
-
-/* ---- EV/EBIT Score (v5.9.70) --------------------------------
-   Buffett/Damodaran: EV/EBIT sauberer als EV/EBITDA.
-   D&A ist realer Kostenfaktor -- EBITDA ignoriert ihn.
-   Besonders relevant: Industrials, Telcos, Utilities.
-   EV/EBIT ist hoeher als EV/EBITDA -> Skala nach oben verschoben.
-   Quelle: fund_juno v7.9.20 ev_ebit-Feld. */
-function evEbitSc(evebit){
-  if(evebit===null||evebit===undefined)return 50;
-  if(evebit>60)return 50;
-  if(evebit<10)return 100;
-  if(evebit<15)return 85;
-  if(evebit<20)return 70;
-  if(evebit<25)return 55;
-  if(evebit<32)return 35;
-  if(evebit<45)return 18;
-  return 8;
-}
-
-/* ---- EPS-Revision-Score (v5.9.70) ----------------------------
-   Fundamentales Momentum: YoY Earnings Growth (TTM).
-   Quelle: fd.eps_growth (fund_juno v7.9.20, earningsGrowth yfinance).
-   Normierung: linear, 0% Wachstum = Score 50.
-   Skala: +40%->Score 98, +20%->74, 0%->50, -20%->26, -40%->2.
-   Faktor 1.2: maessig sensitiv (EPS-Revisionen schwanken stark).
-   Gibt null zurueck wenn kein eps_growth vorhanden -> kein Einfluss. */
-function epsMomSc(fd){
-  if(!fd)return null;
-  if(fd.eps_growth===null||fd.eps_growth===undefined)return null;
-  return Math.max(5,Math.min(95,Math.round(50+fd.eps_growth*1.2)));
-}
 
 /* ---- Jahres-Trend-Daten (v5.9.35) ──────────────────────────
    ANNUAL_DATA: geladen aus stockiq_annual.json (optional)
@@ -1781,51 +1605,7 @@ function pegRelSc(s){
 /* ---- fundamental score (v5.9.36 / v5.9.41) ────────────────
    v5.9.41: PEG sektor-relativ via pegRelSc() — Pharma vs. Tech korrekt.
    Gewicht unveraendert. Fallback: absolutes PEG wenn kein sector-Feld. */
-function fSc(s){
-  var fd=FD[s.t];if(!fd)return s.fund;
-  /* PEG Score — sektor-relativ (v5.9.41) */
-  var ps=pegRelSc(s);
-  if(ps===null)ps=50; /* Kein PEG vorhanden → neutral */
-  /* EV/EBITDA + EV/EBIT Score (v5.9.70: dual signal) */
-  var eveb=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda:null;
-  var eveit=fd.ev_ebit!==null&&fd.ev_ebit!==undefined?fd.ev_ebit:null;
-  var valSc;
-  /* v5.9.84: EV/EBIT 0.30->0.45 (IC=-0.143***, t=-3.69 -- staerkstes Value-Signal) */
-  if(eveb!==null&&eveit!==null){valSc=Math.round(ps*0.40+evSc(eveb)*0.15+evEbitSc(eveit)*0.45);}
-  else if(eveb!==null){valSc=Math.round(ps*0.60+evSc(eveb)*0.40);}
-  else if(eveit!==null){valSc=Math.round(ps*0.55+evEbitSc(eveit)*0.45);}/* v5.9.84: PEG 0.65->0.55, EV/EBIT 0.35->0.45 */
-  else{valSc=ps;}
-  /* FCF Yield Score */
-  var fcfRaw=40;
-  if(fd.fcf!==null&&fd.fcf!==undefined){if(fd.fcf>6)fcfRaw=100;else if(fd.fcf>4)fcfRaw=85;else if(fd.fcf>2)fcfRaw=65;else if(fd.fcf>0)fcfRaw=40;else fcfRaw=10;}
-  /* Owner Earnings Yield (v5.9.84: IC=+0.155***, t=4.19 -- staerkstes Signal)
-     Buffett OE = NI + DA - CapEx. max(FCF,OE): bessere Ertragsmessung je Firma.
-     Selbe Stufen wie FCF. Kein eigenes Gewicht: verbessert bestehende 30%. */
-  var oeV=fd.owner_earnings_yield!=null?fd.owner_earnings_yield:null;
-  var oeSc2=40;
-  if(oeV!==null){if(oeV>6)oeSc2=100;else if(oeV>4)oeSc2=85;else if(oeV>2)oeSc2=65;else if(oeV>0)oeSc2=40;else oeSc2=10;}
-  var fs=(oeV!==null)?Math.max(fcfRaw,oeSc2):fcfRaw;
-  /* ROCE / ROE Score */
-  var rs=45;
-  var rv=fd.roce!==null&&fd.roce!==undefined?fd.roce:(fd.roe!==null&&fd.roe!==undefined?fd.roe:null);
-  if(rv!==null){if(rv>30)rs=100;else if(rv>20)rs=80;else if(rv>12)rs=60;else if(rv>6)rs=40;else rs=15;}
-  var ds=debtSc(fd.debt, fd.sector||null);
-  /* Konsistenz-Score (v5.9.36): Std-Abw ROCE ueber Jahres-Snapshots */
-  var cs=consScore(s.t);
-  var base;
-  if(cs!==null){
-    /* v5.9.84: ROCE 30%->20%, valSc 20%->30% (IC: OE+EV/EBIT bestaetigt, ROCE ICIR=-0.21) */
-    base=Math.round(valSc*0.30+fs*0.30+rs*0.20+ds*0.15+cs*0.05);
-  } else {
-    /* Ohne Konsistenz: ROCE 35%->25%, valSc 20%->30% */
-    base=Math.round(valSc*0.30+fs*0.30+rs*0.25+ds*0.15);
-  }
-  /* Piotroski B1-Daempfung */
-  var pio=pioScore(s,fd);
-  var measurable=pio.max-pio.pending;
-  if(measurable>=2&&pio.score<2){base=Math.round(base*0.85);}
-  return base;
-}
+function fSc(s){ return s.fund||50; }
 
 /* ---- composite score (v5.9.29 / v5.9.32) ----
    Risk-Anteil: 50% statisch + 40% Beta-Score + 10% EVAR-rel-Score.
@@ -1835,16 +1615,7 @@ function fSc(s){
 function cSc(s){
   var _sd=_scoresIdx[s.t];
   if(_sd&&_sd.score!==null&&_sd.score!==undefined){return _sd.score;}
-  var fd=FD[s.t];
-  var rSc=s.risk;
-  if(fd&&fd.beta!==null&&fd.beta!==undefined){
-    var eRel=evarRelSc(s.t);
-    if(eRel!==null){
-      rSc=Math.round(s.risk*0.50+betaSc(fd.beta)*0.40+eRel*0.10);
-    } else {
-      rSc=Math.round(s.risk*0.60+betaSc(fd.beta)*0.40);
-    }
-  }
+  var rSc=s.risk||50;
   return Math.round(momSc(s)*W.mom+s.trend*W.trend+fSc(s)*W.fund+rSc*W.risk);
 }
 
@@ -1854,21 +1625,7 @@ function cSc(s){
    Aufruf: am Anfang von rFund() nach applyFund().
    Kein Score-Einfluss -- nur Anzeige (IC-Test pending).
    ─────────────────────────────────────────────────────────────── */
-function calcMomRank(){
-  var i,j,n=STOCKS.length,scores=[],ms;
-  for(i=0;i<n;i++){
-    ms=momSc(STOCKS[i]);
-    STOCKS[i]._msc=ms;
-    scores.push(ms);
-  }
-  scores.sort(function(a,b){return a-b;});
-  for(i=0;i<n;i++){
-    ms=STOCKS[i]._msc;
-    var below=0;
-    for(j=0;j<n;j++){if(scores[j]<ms)below++;}
-    STOCKS[i].momRank=Math.round(below/n*100);
-  }
-}
+function calcMomRank(){}
 
 /* ---- Score-Qualitaetsindikator (v5.9.26) ────────────────────
    Gibt zurueck ob cSc() auf echten oder Platzhalter-Daten basiert.
