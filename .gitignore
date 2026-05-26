@@ -8,3 +8,21 @@ stockiq_annual_ic_results.json
 stockiq_alpha_results*.json
 *.pyc
 __pycache__/
+
+# Algorithmen (Schutzziel A)
+fund_juno*.py
+stockiq_score.py
+
+# Lokale Arbeits-Dateien
+auftrag_claude_code_*.md
+SKILL_stockiq-dev_*.md
+stockiq_uebergabe_*.md
+stockiq_studie_*.html
+stockiq-v*.html
+
+# Veraltete Versionen
+stockiq_wl3_signal_tracking*.py
+stockiq_annual_backfill*.py
+stockiq_annual_ic*.py
+stockiq_score_v*.py
+doku_status.json
