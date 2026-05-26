@@ -2119,6 +2119,8 @@ function wlDetail(ticker){
   out+='<div><div style="font-size:20px;font-weight:800;color:'+scColQ(sc,s)+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+s.n+'</div></div>';
   out+='<div style="text-align:right"><div style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:9px;color:var(--mut)">/100 '+sqBadge(s)+'</div></div></div>';
   out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">'+why+'</div>';
+  var tvUrl='https://www.tradingview.com/chart/?symbol='+s.t;
+  out+='<a href="'+tvUrl+'" target="_blank" style="font-size:11px;color:#00c8f0;text-decoration:none;font-family:monospace;opacity:0.7">&#128200; Chart</a>';
   /* DVG-Banner: visueller Hinweis bei hold_dvg (Option C) */
   if(sig==='hold_dvg'){
     var dvgFundV=Math.round(fSc(s));
