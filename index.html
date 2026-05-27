@@ -3714,8 +3714,8 @@ function archHistRend(){
 
   /* Index: Ticker -> Eintrag aus letztem Snapshot */
   var latestMap = {}, prevMap = {}, i;
-  for(i=0;i<latest.entries.length;i++) latestMap[latest.entries[i].t] = latest.entries[i];
-  if(prev){ for(i=0;i<prev.entries.length;i++) prevMap[prev.entries[i].t] = prev.entries[i]; }
+  if(latest && latest.entries){ for(i=0;i<latest.entries.length;i++) latestMap[latest.entries[i].t] = latest.entries[i]; }
+  if(prev && prev.entries){ for(i=0;i<prev.entries.length;i++) prevMap[prev.entries[i].t] = prev.entries[i]; }
 
   /* Signal-Farbe */
   function sigCol(sig){
