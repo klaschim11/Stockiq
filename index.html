@@ -57,8 +57,21 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   @page { margin:1.5cm; size:A4; }
 }
 </style>
+<style>
+#chartModal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.78);z-index:9999;align-items:center;justify-content:center}
+#chartModal.open{display:flex}
+.cm-inner{position:relative;width:92vw;height:82vh;max-width:1100px;background:#0c1420;border-radius:12px;overflow:hidden;border:1px solid #1a2a3a}
+.cm-close{position:absolute;top:8px;right:12px;z-index:10;background:rgba(0,0,0,.65);border:none;color:#dce8f5;font-size:20px;cursor:pointer;padding:2px 9px;border-radius:6px;line-height:1.4}
+.cm-inner iframe{width:100%;height:100%;border:none;display:block}
+</style>
 </head>
 <body>
+<div id="chartModal" onclick="if(event.target===this){closeChart();}">
+  <div class="cm-inner">
+    <button class="cm-close" onclick="closeChart()">&#10005;</button>
+    <iframe id="cm-frame" src="" allowfullscreen></iframe>
+  </div>
+</div>
 <div class="wrap">
 <header style="padding:0;background:rgba(6,10,16,.97);border-bottom:1px solid #1a2a3a">
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
@@ -2119,8 +2132,7 @@ function wlDetail(ticker){
   out+='<div><div style="font-size:20px;font-weight:800;color:'+scColQ(sc,s)+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+s.n+'</div></div>';
   out+='<div style="text-align:right"><div style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:9px;color:var(--mut)">/100 '+sqBadge(s)+'</div></div></div>';
   out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">'+why+'</div>';
-  var tvUrl='https://www.tradingview.com/chart/?symbol='+s.t;
-  out+='<a href="'+tvUrl+'" target="_blank" style="font-size:11px;color:#00c8f0;text-decoration:none;font-family:monospace;opacity:0.7">&#128200; Chart</a>';
+  out+='<button onclick="openChart(\''+s.t+'\')" style="font-size:11px;color:#00c8f0;background:none;border:none;cursor:pointer;font-family:monospace;padding:0;opacity:0.7;margin-top:4px">&#128200; Chart</button>';
   /* DVG-Banner: visueller Hinweis bei hold_dvg (Option C) */
   if(sig==='hold_dvg'){
     var dvgFundV=Math.round(fSc(s));
@@ -2940,6 +2952,38 @@ function getScField(ticker, field, fallback) {
 
 function getHigh52wRatio(ticker) {
   return getScField(ticker, "high52w_ratio", null);
+}
+
+function buildTvSymbol(ticker) {
+  var NAMED = {'ITX':'BME:ITX','AI':'EURONEXT:AI','SAN':'BME:SAN','SAND':'OMX:SAND'};
+  if (NAMED[ticker]) { return NAMED[ticker]; }
+  var dot = ticker.indexOf('.');
+  if (dot < 0) { return ticker; }
+  var sym = ticker.slice(0, dot);
+  var sfx = ticker.slice(dot + 1);
+  var EX = {
+    'L':'LSE','T':'TSE','PA':'EURONEXT','MC':'BME','ST':'OMX',
+    'DE':'XETRA','AS':'EURONEXT','SW':'SWX','AX':'ASX','TO':'TSX',
+    'HK':'HKEX','KS':'KRX','NS':'NSE','TW':'TWSE','SI':'SGX',
+    'JK':'IDX','MX':'BMV','CO':'OMXCPH','OL':'OSE','HE':'OMXHEX','MI':'MIL'
+  };
+  var ex = EX[sfx];
+  return ex ? ex + ':' + sym : ticker;
+}
+
+function openChart(ticker) {
+  var sym = buildTvSymbol(ticker);
+  var url = 'https://www.tradingview.com/chart/?symbol=' + encodeURIComponent(sym) +
+            '&interval=D&theme=dark&studies=RSI%40tv-basicstudies%7CMACD%40tv-basicstudies';
+  var frame = document.getElementById('cm-frame');
+  var modal = document.getElementById('chartModal');
+  if (frame && modal) { frame.src = url; modal.className = 'open'; }
+}
+
+function closeChart() {
+  var frame = document.getElementById('cm-frame');
+  var modal = document.getElementById('chartModal');
+  if (frame && modal) { frame.src = ''; modal.className = ''; }
 }
 
 function applyFund(fund){
