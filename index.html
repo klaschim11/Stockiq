@@ -496,6 +496,20 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128202; TradingView-Setup</div>
+    <div style="font-size:13px;color:var(--mut);line-height:1.8">
+      <div style="margin-bottom:6px">StockIQ-Signale basieren auf SMA200, MACD und RSI. Einmalig als Chart-Template in TradingView speichern:</div>
+      <div style="padding:10px 12px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;margin-bottom:10px;font-family:monospace;font-size:11px">
+        <div style="color:#00c8f0;margin-bottom:3px">&#10003; SMA 200 &mdash; Periode 200 (Trendfilter, above200)</div>
+        <div style="color:#00c8f0;margin-bottom:3px">&#10003; MACD 12/26/9 mit Histogramm (macd_cross, macd_hist)</div>
+        <div style="color:#00c8f0;margin-bottom:3px">&#10003; RSI 14 (rsi_val &mdash; &Uuml;berkauft-Check)</div>
+      </div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">Speichern:</strong> Indikatoren setzen &rarr; Layouts-Icon oben rechts &rarr; <strong style="color:#00e57a">Als Standard speichern</strong>. Dann bei jedem Chart-Aufruf via Dashboard automatisch geladen.</div>
+      <div style="padding:8px 10px;background:rgba(255,159,28,.06);border-left:3px solid #ff9f1c;border-radius:6px;font-family:monospace;font-size:10px;color:var(--mut)">ChandeMO (Chande Momentum Oscillator): Werte &gt;75 signalisieren kurzfristige &Uuml;berdehnung &mdash; erh&ouml;htes R&uuml;ckschlagsrisiko. Nicht in StockIQ-Score verdrahtet, nuetzlich als pers&ouml;nlicher Timing-Filter.</div>
+    </div>
+  </div>
+
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#11088; Signal-Logik v5.9.x</div>
     <div style="padding:10px 12px;background:rgba(255,159,28,.07);border-left:3px solid #ff9f1c;border-radius:6px;margin-bottom:10px;font-family:monospace;font-size:11px">
       <div style="color:#ff9f1c;margin-bottom:3px">&#11088; STRONG BUY = alle BUY-Kriterien + bull_hidden oder bull_regular Divergenz</div>
