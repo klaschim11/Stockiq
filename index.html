@@ -69,7 +69,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="chartModal" onclick="if(event.target===this){closeChart();}">
   <div class="cm-inner">
     <button class="cm-close" onclick="closeChart()">&#10005;</button>
-    <iframe id="cm-frame" src="" allowfullscreen></iframe>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;padding:20px">
+      <div id="chartModalTicker" style="font-size:28px;font-family:monospace;color:#00c8f0;font-weight:bold"></div>
+      <div style="font-size:12px;color:#888;text-align:center">TradingView Chart mit SMA200, MACD, RSI</div>
+      <a id="chartModalUrl" href="" target="_blank" style="background:#00c8f0;color:#000;padding:12px 32px;border-radius:6px;font-family:monospace;font-size:14px;font-weight:bold;text-decoration:none">Chart in TradingView oeffnen</a>
+      <div style="font-size:10px;color:#555">Oeffnet in neuem Tab</div>
+    </div>
   </div>
 </div>
 <div class="wrap">
@@ -1251,31 +1256,34 @@ function exitSignal(s){
   return null;
 }
 
-/* Quality-Gate: STRONG -> BUY bei schwachen Fundamentals.
-   Score bleibt unveraendert. Gibt true zurueck wenn Gate greift. */
+/* Quality-Gate: STRONG -> BUY bei schwachen Fundamentals oder Score < 65.
+   Gibt "buy" oder "strong" zurueck. */
 function strongQualityGate(s) {
   var sc = _scoresIdx && _scoresIdx[s.t];
   var fd = FD && FD[s.t];
-  /* Bedingung A: FCF/Debt Cover kritisch (< 0.05) */
+  // Gate D: Mindestscore fuer STRONG
+  var score = sc ? sc.score : (s.score || 0);
+  if (score < 65) { return "buy"; }
+  // Gate A: FCF/Debt kritisch
   var fcfDebt = (sc && sc.fcf_debt_cover !== null && sc.fcf_debt_cover !== undefined)
                   ? sc.fcf_debt_cover
                   : (fd && fd.fcf_debt_cover !== null && fd.fcf_debt_cover !== undefined
                      ? fd.fcf_debt_cover : null);
-  if (fcfDebt !== null && fcfDebt < 0.05) { return true; }
-  /* Bedingung B+C: kein Moat + hohe Schulden + volatile Gewinne */
+  if (fcfDebt !== null && fcfDebt < 0.05) { return "buy"; }
+  // Gate B+C: kein Moat + hohe Verschuldung + volatile Gewinne
   var moat   = sc ? (sc.moat || '').toLowerCase() : '';
   var debtEq = sc ? sc.debt_eq : null;
   var evarSc = sc ? (sc.evar_rel_sc !== null && sc.evar_rel_sc !== undefined
                      ? sc.evar_rel_sc
                      : (sc.evar !== null && sc.evar !== undefined ? sc.evar : 50))
                   : 50;
-  if (moat === 'none' && debtEq !== null && debtEq > 100 && evarSc < 20) { return true; }
-  return false;
+  if (moat === 'none' && debtEq !== null && debtEq > 100 && evarSc < 20) { return "buy"; }
+  return "strong";
 }
 
 function mSig(s){
   var _sd=_scoresIdx[s.t];
-  if(_sd&&_sd.signal){var _raw=_sd.signal;return (_raw==='strong'&&strongQualityGate(s))?'buy':_raw;}
+  if(_sd&&_sd.signal){var _raw=_sd.signal;return _raw==='strong' ? strongQualityGate(s) : _raw;}
   /* --- BUY-Seite: alle Bedingungen muessen erfuellt sein --- */
   /* v5.9.15: RSI-Filter entfernt (kein OOS-Effekt, Chong&Ng 2008) */
   var zl  = s.macdCross === 'below_zero';
@@ -1289,7 +1297,7 @@ function mSig(s){
     var rsiOverheat = rsiVal > 78;
     if(isDivBull(s)){
       if(pgBk(s)) return 'pb';
-      return rsiOverheat ? 'buy' : (strongQualityGate(s) ? 'buy' : 'strong');  /* RSI>78 oder Quality-Gate */
+      return rsiOverheat ? 'buy' : strongQualityGate(s);  /* RSI>78 oder Quality-Gate */
     }
     if(pgBk(s)) return 'pb';
     /* RSI-Erschoepfungs-Signal v5.9.69: BUY abschwaechen bei Bearish Div + hohem RSI */
@@ -2157,7 +2165,7 @@ function wlDetail(ticker){
   out+='<div><div style="font-size:20px;font-weight:800;color:'+scColQ(sc,s)+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+s.n+'</div></div>';
   out+='<div style="text-align:right"><div style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:9px;color:var(--mut)">/100 '+sqBadge(s)+'</div></div></div>';
   out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">'+why+'</div>';
-  if(wasGated){out+='<div style="font-size:9px;color:#7a9bb5;margin-bottom:6px">&#9660; Score-Gate: Fundamentals (FCF/Debt oder Moat/Debt) unter Schwelle &rarr; BUY</div>';}
+  if(wasGated){out+='<div style="font-size:9px;color:#7a9bb5;margin-bottom:6px">&#9660; Score-Gate aktiv: Fundamentals oder Score unter Schwelle &rarr; BUY</div>';}
   out+='<button onclick="openChart(\''+s.t+'\')" style="font-size:11px;color:#00c8f0;background:none;border:none;cursor:pointer;font-family:monospace;padding:0;opacity:0.7;margin-top:4px">&#128200; Chart</button>';
   /* DVG-Banner: visueller Hinweis bei hold_dvg (Option C) */
   if(sig==='hold_dvg'){
@@ -3001,15 +3009,16 @@ function openChart(ticker) {
   var sym = buildTvSymbol(ticker);
   var url = 'https://www.tradingview.com/chart/?symbol=' + encodeURIComponent(sym) +
             '&interval=D&theme=dark&studies=RSI%40tv-basicstudies%7CMACD%40tv-basicstudies';
-  var frame = document.getElementById('cm-frame');
+  var link = document.getElementById('chartModalUrl');
+  var tickerEl = document.getElementById('chartModalTicker');
   var modal = document.getElementById('chartModal');
-  if (frame && modal) { frame.src = url; modal.className = 'open'; }
+  if (link && modal) { link.href = url; if (tickerEl) { tickerEl.textContent = sym; } modal.className = 'open'; }
 }
 
 function closeChart() {
-  var frame = document.getElementById('cm-frame');
+  var link = document.getElementById('chartModalUrl');
   var modal = document.getElementById('chartModal');
-  if (frame && modal) { frame.src = ''; modal.className = ''; }
+  if (link && modal) { link.href = ''; modal.className = ''; }
 }
 
 function applyFund(fund){
