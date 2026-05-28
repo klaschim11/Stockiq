@@ -2780,7 +2780,8 @@ function archSnapshot(){
         hist: s.hist || null,
         a200: s.above200 ? 1 : 0,
         macd: s.macdLine || null,
-        peg:  s.peg  || null
+        peg:  s.peg  || null,
+        sr:   s.sector_rank || null
       });
     }catch(se){ /* einzelnen Ticker ueberspringen */ }
   }
