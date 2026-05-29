@@ -2969,12 +2969,15 @@ function loadScores() {
       return r.json();
     })
     .then(function(data) {
-      _scores = data;
+      var scores = data.scores || data;
+      var mac = data.__macro__ || null;
+      if (mac) { if (window.FD) { FD['__macro__'] = mac; } macro = mac; }
+      _scores = scores;
       _scoresIdx = {};
-      for (var i = 0; i < data.length; i++) {
-        _scoresIdx[data[i].ticker] = data[i];
+      for (var i = 0; i < scores.length; i++) {
+        _scoresIdx[scores[i].ticker] = scores[i];
       }
-      console.log("scores.json geladen: " + data.length + " Ticker");
+      console.log("scores.json geladen: " + scores.length + " Ticker");
       if (typeof rWL === "function") { try { rWL(); } catch(e) {} }
       if (typeof archSnapshot === "function") { try { archSnapshot(); } catch(e) {} }
     })
