@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.0.6</title>
+<title>StockIQ v6.0.7</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.0.6 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.0.7 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -464,7 +464,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.0.6 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.0.7 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -720,7 +720,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.0.6 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.0.7 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -884,7 +884,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.0.6 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.0.7 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2759,32 +2759,34 @@ function archSave(){
 }
 
 function archSnapshot(){
-  if(Object.keys(FD).length === 0) return;
+  if(!_scoresIdx || Object.keys(_scoresIdx).length === 0) return;
   var ts = Date.now();
   var snap = { ts: ts, date: fmtDate(ts), entries: [] };
   for(var i=0;i<STOCKS.length;i++){
     try{
-      var s  = STOCKS[i];
-      var sig = mSig(s);
-      var sc  = cSc(s);
+      var s   = STOCKS[i];
+      var sc0 = _scoresIdx[s.t];
+      if(!sc0) continue;
+      var sig = sc0.signal || 'watch';
+      var sc  = sc0.score  || 0;
       snap.entries.push({
         t:    s.t,
         sig:  sig,
         sc:   sc,
-        p:    s.p    || null,
-        rsi:  s.rsi  || null,
-        hist: s.hist || null,
-        a200: s.above200 ? 1 : 0,
-        macd: s.macdLine || null,
-        peg:  s.peg  || null,
-        sr:   s.sector_rank || null
+        p:    s.p           || null,
+        rsi:  sc0.rsi       || null,
+        hist: sc0.macd_hist || null,
+        a200: sc0.above200  ? 1 : 0,
+        macd: sc0.macd_hist || null,
+        peg:  sc0.peg       || null,
+        sr:   sc0.sector_rank || null
       });
     }catch(se){ /* einzelnen Ticker ueberspringen */ }
   }
   /* v5.9.86: Sektor-Signale einmal pro Snapshot (nicht je Ticker) */
   try {
     if (typeof getSectorSignalsForSnapshot === 'function') {
-      var sSnap = getSectorSignalsForSnapshot(window.FD ? FD['__macro__'] : null);
+      var sSnap = getSectorSignalsForSnapshot(FD && FD['__macro__'] ? FD['__macro__'] : null);
       if (sSnap.sector_status) { snap.sector_status = sSnap.sector_status; }
       if (sSnap.sector_dispersion !== null && sSnap.sector_dispersion !== undefined) { snap.sector_dispersion = sSnap.sector_dispersion; }
       if (sSnap.sector_rss_bull !== undefined) { snap.sector_rss_bull = sSnap.sector_rss_bull; }
@@ -2974,6 +2976,7 @@ function loadScores() {
       }
       console.log("scores.json geladen: " + data.length + " Ticker");
       if (typeof rWL === "function") { try { rWL(); } catch(e) {} }
+      if (typeof archSnapshot === "function") { try { archSnapshot(); } catch(e) {} }
     })
     .catch(function(e) {
       console.warn("scores.json nicht verfuegbar: " + e);
