@@ -96,9 +96,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px">
     <button id="tb1" class="tab active" onclick="goTab(1,this)">&#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
     <button id="tb2" class="tab" onclick="goTab(2,this)">&#11088; WL2 <span class="chip s" id="wl2-cnt">0</span></button>
-    <button id="tb3" class="tab" onclick="goTab(3,this);initDepot()">&#128200; Depot</button>
-    <button id="tb4" class="tab" onclick="goTab(4,this)">&#128181; Fundamentals <span class="chip ai">AI</span></button>
-    <button id="tb5" class="tab" onclick="goTab(5,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
+    <button id="tb3" class="tab" onclick="goTab(3,this);initDepot()">&#128200; Depot</button>    <button id="tb5" class="tab" onclick="goTab(5,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
     <button id="tb6" class="tab" onclick="goTab(6,this)">&#9878; Allokation</button>
     <!-- v5.9.86: Tab 8 Sektoren -->
     <button id="tb7" class="tab" onclick="goTab(7,this)">&#127759; Sektoren</button>
@@ -197,9 +195,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         <div style="font-family:monospace;font-size:11px;color:var(--acc);margin-bottom:8px" id="arch-status">Lade...</div>
         <div style="display:flex;gap:8px">
           <button onclick="archExportJSON()" style="font-family:monospace;font-size:10px;color:var(--grn);background:transparent;border:1px solid rgba(0,229,122,.4);border-radius:6px;padding:4px 10px;cursor:pointer">&#8595; JSON</button>
-          <button onclick="archExportCSV()" style="font-family:monospace;font-size:10px;color:var(--grn);background:transparent;border:1px solid rgba(0,229,122,.4);border-radius:6px;padding:4px 10px;cursor:pointer">&#8595; CSV</button>
-          <button onclick="if(confirm('Archiv wirklich loeschen?')){storeDel(ARCH_KEY);_archive=[];updArchStatus()}" style="font-family:monospace;font-size:10px;color:var(--mut);background:transparent;border:1px solid #1a2a3a;border-radius:6px;padding:4px 10px;cursor:pointer">&#128465; Archiv</button>
-        </div>
+          <button onclick="archExportCSV()" style="font-family:monospace;font-size:10px;color:var(--grn);background:transparent;border:1px solid rgba(0,229,122,.4);border-radius:6px;padding:4px 10px;cursor:pointer">&#8595; CSV</button>        </div>
       </div>
     </div>
     <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
@@ -1727,7 +1723,7 @@ function renderSpyPhaseBanner() {
 }
 
 function applyExpertenModus() {
-  var expertenTabs = ["tb4", "tb5"];
+  var expertenTabs = ["tb5"];
   var btn = document.getElementById("btnExpert");
   for (var i = 0; i < expertenTabs.length; i++) {
     var el = document.getElementById(expertenTabs[i]);
