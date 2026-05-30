@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="version" content="5.9.15">
+<meta name="version" content="6.0.10">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.0.9</title>
+<title>StockIQ v6.0.10</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.0.9 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.0.10 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -96,7 +96,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px">
     <button id="tb1" class="tab active" onclick="goTab(1,this)">&#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
     <button id="tb2" class="tab" onclick="goTab(2,this)">&#11088; WL2 <span class="chip s" id="wl2-cnt">0</span></button>
-    <button id="tb3" class="tab" onclick="goTab(3,this);initDepot()">&#128200; Depot</button>    <button id="tb5" class="tab" onclick="goTab(5,this)">&#128200; Walk-Forward <span class="chip n">OOS</span></button>
+    <button id="tb3" class="tab" onclick="goTab(3,this);initDepot()">&#128200; Depot</button>
     <button id="tb6" class="tab" onclick="goTab(6,this)">&#9878; Allokation</button>
     <!-- v5.9.86: Tab 8 Sektoren -->
     <button id="tb7" class="tab" onclick="goTab(7,this)">&#127759; Sektoren</button>
@@ -462,7 +462,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.0.9 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.0.10 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -718,7 +718,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.0.9 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.0.10 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -882,7 +882,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.0.9 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.0.10 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
