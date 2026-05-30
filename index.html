@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="version" content="6.0.10">
+<meta name="version" content="6.0.12">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.0.10</title>
+<title>StockIQ v6.0.12</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.0.10 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.0.12 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -359,7 +359,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:18px;font-size:10px;color:var(--mut);line-height:1.7">
   <strong style="color:#dce8f5">Spread-Basis: 1oz M&uuml;nze (Philharmoniker / Maple Leaf) &mdash; Deutschland 2026</strong><br>
-  <strong style="color:#ffab00">Gold:</strong> MwSt-frei (§25c UStG) &middot; Kauf ~3&ndash;5% Aufgeld &middot; Verkauf ~2&ndash;3% unter Spot &rarr; Round-Trip ~5&ndash;7%<br>
+  <strong style="color:#ffab00">Gold:</strong> MwSt-frei (Â§25c UStG) &middot; Kauf ~3&ndash;5% Aufgeld &middot; Verkauf ~2&ndash;3% unter Spot &rarr; Round-Trip ~5&ndash;7%<br>
   <strong style="color:#ff5252">Silber ab 01.01.2025:</strong> <strong>19% MwSt auf Gesamtpreis</strong> (Differenzbesteuerung abgeschafft, JStG 2024) &middot; + ~3&ndash;5% Aufgeld = <strong>~22&ndash;24% Kauf-Aufschlag</strong><br>
   <strong style="color:#7a9bb5">Ausnahme:</strong> Gebrauchtware / Privatankauf kann noch differenzbesteuert sein (~10&ndash;12% Aufschlag, aber Verf&uuml;gbarkeit begrenzt)<br>
   <strong style="color:#dce8f5">Switch-Hurdle (Gold &rarr; Silber):</strong> ~3% (Gold-Verkauf) + ~22% (Silber-Kauf) = <strong style="color:#ff5252">~25%</strong> &mdash; wirtschaftlich nur bei extremen GSR-Niveaus sinnvoll.<br>
@@ -403,12 +403,18 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <strong style="color:#dce8f5">1pp Zinsanstieg</strong> kostet bei 7J-Duration ~7% Kursverlust.
 </div>
 
+<div style="margin-top:16px">
+<div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:2px">&#127942; ETF-Score Rangliste</div>
+<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:10px">Momentum 40% + Trend 35% + Risk 25%</div>
+<div id="etf-score-list"><div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:16px 0">Sektor-Daten nicht verfuegbar.</div></div>
+</div>
+
 </div>
 </div>
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.0.10 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.0.12 &middot; Stand Mai 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -526,7 +532,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">BETA / LOW-VOL (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Beta = Kursvolatilitaet relativ zum Markt. <span style="color:#00e57a">&lt; 0.8</span> defensiv (Bonus) &nbsp;<span style="color:#f0c000">0.8&ndash;1.2</span> markt&auml;hnlich &nbsp;<span style="color:#ff6666">&gt; 1.5</span> spekulativ (Malus). Fliesst in den Risk-Score ein. Akademisch: MSCI/BlackRock 1963&ndash;2024.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DEBT/EQ % (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Verschuldungsgrad (yfinance debtToEquity). <span style="color:#00e57a">&lt; 100</span> konservativ &nbsp;<span style="color:#f0c000">100&ndash;200</span> normal &nbsp;<span style="color:#ff6666">&gt; 200</span> risikoreich. Fliesst als Sicherheitsdimension in den Fundamental-Score ein. Finanzwerte werden separat bewertet (strukturell hohe D/E-Ratios).</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PEG-RATIO</div><div style="font-size:12px;color:var(--mut)">KGV / Gewinnwachstum%. <span style="color:#00e57a">&lt;1.0</span> unterbewertet &nbsp;<span style="color:#00c8f0">1.0-1.5</span> fair &nbsp;<span style="color:#f0c000">1.5-2.0</span> leicht teuer &nbsp;<span style="color:#ff6666">&gt;=2.0</span> BUY blockiert.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EVAR — Sektor-relatives Stability-Score (v5.9.32)</div><div style="font-size:12px;color:var(--mut)">Earnings Variability: Stabilit&auml;t der quarterly Net Income YoY-Wachstumsraten. Score 0&ndash;100 (100=maximal stabil). Ab v5.9.32 <strong style="color:#dce8f5">sektor-relativ</strong>: Zykliker werden mit Zyklikern verglichen. Quelle: MSCI Quality Index (dritter Kerndeskriptor neben ROE + D/E). Daten: fund_juno v7.9.3+.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EVAR â€” Sektor-relatives Stability-Score (v5.9.32)</div><div style="font-size:12px;color:var(--mut)">Earnings Variability: Stabilit&auml;t der quarterly Net Income YoY-Wachstumsraten. Score 0&ndash;100 (100=maximal stabil). Ab v5.9.32 <strong style="color:#dce8f5">sektor-relativ</strong>: Zykliker werden mit Zyklikern verglichen. Quelle: MSCI Quality Index (dritter Kerndeskriptor neben ROE + D/E). Daten: fund_juno v7.9.3+.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EV/EBITDA (v5.9.30)</div><div style="font-size:12px;color:var(--mut)">Enterprise Value / EBITDA &mdash; robusteres Value-Signal als P/E oder PEG. EV umfasst Marktkapitalisierung + Schulden &minus; Cash; EBITDA eliminiert Abschreibungseffekte. <span style="color:#00e57a">&lt;12x</span> guenstig &nbsp;<span style="color:#f0c000">12&ndash;20x</span> fair bis erhoht &nbsp;<span style="color:#ff6666">&gt;25x</span> teuer. Fliesst in den Value-Score ein. Quelle: Loughran/Wellman 2011.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">FCF YIELD</div><div style="font-size:12px;color:var(--mut)">FreeCashflow / Marktkapitalisierung. <span style="color:#00e57a">&gt;4%</span> stark &nbsp;<span style="color:#00c8f0">2-4%</span> gut &nbsp;<span style="color:#f0c000">0-2%</span> schwach &nbsp;<span style="color:#ff6666">&lt;0%</span> negativ.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ROCE / ROE</div><div style="font-size:12px;color:var(--mut)">ROCE = EBIT / (EK + LT-Schulden). Fallback ROE wenn nicht verfuegbar. <span style="color:#00e57a">&gt;25%</span> Burggraben &nbsp;<span style="color:#00c8f0">15-25%</span> stark.</div></div>
@@ -558,7 +564,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#b07cf8">&#128193; Python-Scripts — Uebersicht und Rhythmus</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#b07cf8">&#128193; Python-Scripts â€” Uebersicht und Rhythmus</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.8">
 
       <!-- Taeglich -->
@@ -641,7 +647,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.0.10 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.0.12 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -734,7 +740,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v5.9.69
   </div>
 
-  <!-- ── Position hinzufügen ── -->
+  <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
     <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:10px">&#43; Position hinzuf&uuml;gen</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
@@ -778,10 +784,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button onclick="dpAdd()" style="width:100%;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#43; Position hinzuf&uuml;gen</button>
   </div>
 
-  <!-- ── Gesamt-Performance Kacheln ── -->
+  <!-- â”€â”€ Gesamt-Performance Kacheln â”€â”€ -->
   <div id="dp-summary" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px"></div>
 
-  <!-- ── Zeitreihen-Chart ── -->
+  <!-- â”€â”€ Zeitreihen-Chart â”€â”€ -->
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <div style="font-size:12px;font-weight:700;color:#dce8f5">&#128200; Depotwert-Verlauf</div>
@@ -791,7 +797,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div id="dp-chart-msg" style="font-family:monospace;font-size:9px;color:var(--mut);margin-top:6px;text-align:center"></div>
   </div>
 
-  <!-- ── Positionen-Tabelle ── -->
+  <!-- â”€â”€ Positionen-Tabelle â”€â”€ -->
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <div style="font-size:12px;font-weight:700;color:#dce8f5">Positionen</div>
@@ -805,7 +811,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.0.10 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.0.12 &middot; Claude (Anthropic) &middot; Mai 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1222,7 +1228,7 @@ function mSig(s){
     var fd3 = FD[s.t];
     var rsiVal = fd3 && fd3.rsi_val !== null && fd3.rsi_val !== undefined ? fd3.rsi_val : 50;
     /* RSI-Cap v5.9.69: kein BUY STRONG bei RSI > 78 (ATH/Ueberhitzung)
-       Begruendung: Chance/Risiko fuer Neueinstieg ungünstig nahe ATH.
+       Begruendung: Chance/Risiko fuer Neueinstieg ungÃ¼nstig nahe ATH.
        Methodisch: Amplitude des Signals begrenzen, nicht Signal entfernen. */
     var rsiOverheat = rsiVal > 78;
     if(isDivBull(s)){
@@ -1256,9 +1262,9 @@ function mSig(s){
 
     /* Deep Value Divergence Override v5.9.69 (Option B+C)
        Bedingung: Fund > 80 + RSI < 35 + Bullish Divergenz
-       Logik: "Good company, weak chart" — Fundamentals dominieren
+       Logik: "Good company, weak chart" â€” Fundamentals dominieren
        Quellen: Piotroski 2000 (Value-Turnaround), ChatGPT-Analyse PYPL Mai 2026
-       Signal: 'hold_dvg' — visuell als "HOLD DVG" mit Erklaerungs-Badge */
+       Signal: 'hold_dvg' â€” visuell als "HOLD DVG" mit Erklaerungs-Badge */
     var fdDvg = FD[s.t];
     if(fdDvg){
       var dvgFund  = fSc(s);
@@ -1305,12 +1311,12 @@ function sellWhy(s,sig){
    Zone 1 VIX < 20:  volle Momentum-Wirkung (x1.00)
    Zone 2 VIX 20-30: moderate Daempfung      (x0.60)
    Zone 3 VIX > 30:  starke Daempfung        (x0.20)
-   V2X-Logik (Europa-Ticker): wenn V2X > 20 und VIX < 20 → Daempfung x0.60
-   Bond-Div-Logik: VIX_BOND_DIV="strong" → zusaetzliche Daempfung x0.85
+   V2X-Logik (Europa-Ticker): wenn V2X > 20 und VIX < 20 â†’ Daempfung x0.60
+   Bond-Div-Logik: VIX_BOND_DIV="strong" â†’ zusaetzliche Daempfung x0.85
    VIX-Quelle:  fd['__macro__'].vix   aus fund_juno v7.9.8
    V2X-Quelle:  fd['__macro__'].v2x   (VSTOXX ^V2TX)
    VXTLT-Quelle: fd['__macro__'].vxtlt + vix_bond_div
-   Fallback: null → kein Einfluss (x1.00)
+   Fallback: null â†’ kein Einfluss (x1.00)
    ============================================================ */
 var VIX_LEVEL    = null;  /* wird in applyFund() gesetzt */
 var V2X_LEVEL    = null;  /* VSTOXX Europa-Volatilitaet */
@@ -1322,9 +1328,9 @@ function vixRegimeLabel(){
   if(VIX_LEVEL===null&&V2X_LEVEL===null)return null;
   var vix = VIX_LEVEL || 0;
   var lbl, col, zone;
-  if(vix<20){lbl='VIX '+vix.toFixed(1)+' — Low Vol';col='#00e676';zone=1;}
-  else if(vix<30){lbl='VIX '+vix.toFixed(1)+' — Elevated';col='#ffab00';zone=2;}
-  else{lbl='VIX '+vix.toFixed(1)+' — CRISIS';col='#ff5252';zone=3;}
+  if(vix<20){lbl='VIX '+vix.toFixed(1)+' â€” Low Vol';col='#00e676';zone=1;}
+  else if(vix<30){lbl='VIX '+vix.toFixed(1)+' â€” Elevated';col='#ffab00';zone=2;}
+  else{lbl='VIX '+vix.toFixed(1)+' â€” CRISIS';col='#ff5252';zone=3;}
   /* V2X-Zusatz */
   if(V2X_LEVEL!==null){lbl+=' | V2X '+V2X_LEVEL.toFixed(1);}
   /* Bond-Div-Warnung */
@@ -1339,10 +1345,10 @@ function momSc(s){ return s.mom||50; }
 function debtSc(dte, sector){ return 50; }
 
 
-/* ---- Jahres-Trend-Daten (v5.9.35) ──────────────────────────
+/* ---- Jahres-Trend-Daten (v5.9.35) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    ANNUAL_DATA: geladen aus stockiq_annual.json (optional)
    Format: [{year, date, version, tickers:{t:{roce,fcf,...}}}]
-   Kein Einfluss auf Score — nur Anzeige im Detail-Panel.
+   Kein Einfluss auf Score â€” nur Anzeige im Detail-Panel.
    getAnnualTrend(ticker, field): Array [{year, val}] aufsteigend.
    trendArrow(values): Pfeil-Anzeige hoch/runter/neutral. */
 var ANNUAL_DATA = [];
@@ -1365,17 +1371,17 @@ function trendArrow(pts){
   return diff>0?'<span style="color:#00e57a">&#8593;</span>':'<span style="color:#ff6666">&#8595;</span>';
 }
 
-/* ---- Konsistenz-Score (v5.9.36) ─────────────────────────────
-   Buffetts "10-Year Consistency" Kriterium — approximiert via
+/* ---- Konsistenz-Score (v5.9.36) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Buffetts "10-Year Consistency" Kriterium â€” approximiert via
    Std-Abweichung von ROCE und FCF ueber verfuegbare Jahres-Snapshots.
    Benoetigt: ANNUAL_DATA geladen mit mind. 3 validen ROCE-Werten.
 
    Kalibrierung (aus Backfill-Analyse Mai 2026):
      Median Universe Std ROCE = 3.1pp
-     Std < 2pp  (z.B. NESN.SW, 8058.T) → Score 90-95
-     Std = 3pp  (Universe-Median)       → Score 65
-     Std = 10pp (erhoeht)               → Score 40
-     Std = 30pp (NVDA, zyklisch)        → Score 10
+     Std < 2pp  (z.B. NESN.SW, 8058.T) â†’ Score 90-95
+     Std = 3pp  (Universe-Median)       â†’ Score 65
+     Std = 10pp (erhoeht)               â†’ Score 40
+     Std = 30pp (NVDA, zyklisch)        â†’ Score 10
      Formel: score = max(5, min(95, round(95 - std * 3.0)))
 
    Einfluss auf fSc():
@@ -1386,7 +1392,7 @@ function trendArrow(pts){
    Reine Anzeige wenn < 3 Datenpunkte (keine Score-Aenderung). */
 function calcAnnualStats(t){
   /* Berechnet Mittelwert und Std-Abw von ROCE und FCF aus ANNUAL_DATA.
-     v5.9.37: IQR-Outlier-Filter — entfernt Werte ausserhalb Q1-1.5*IQR / Q3+1.5*IQR.
+     v5.9.37: IQR-Outlier-Filter â€” entfernt Werte ausserhalb Q1-1.5*IQR / Q3+1.5*IQR.
      Grund: Backfill-Artefakte (z.B. GOOGL 2026: ROCE=79% statt ~35%)
      oder Einmalereignisse (Abschreibungen, Spinoffs) verzerren Std-Abw massiv.
      Mindestens 3 Werte nach Filterung erforderlich, sonst keine Filterung. */
@@ -1432,7 +1438,7 @@ function consScore(t){
   /* Konsistenz-Score 0-100 (hoch=stabil).
      Primaer: ROCE-Std (IQR-gefiltert). Sekundaer: FCF-Std.
      Fallback: null (kein Einfluss auf fSc).
-     Kalibrierung: Std=0pp→95, Std=3.1pp(Median)→86, Std=10pp→65, Std=30pp→5 */
+     Kalibrierung: Std=0ppâ†’95, Std=3.1pp(Median)â†’86, Std=10ppâ†’65, Std=30ppâ†’5 */
   var as=calcAnnualStats(t);
   if(!as)return null;
   var std=null;
@@ -1441,12 +1447,12 @@ function consScore(t){
   if(std===null)return null;
   return Math.max(5,Math.min(95,Math.round(95-std*3.0)));
 }
-/* ---- Sektor-EVAR-Mediane (v5.9.32) ────────────────────────
+/* ---- Sektor-EVAR-Mediane (v5.9.32) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Berechnet einmalig nach JSON-Laden via buildSectorEvarMed().
    SECTOR_EVAR_MED = { "Technology": 35, "Healthcare": 60, ... }
-   Problem v5.9.29-31: EVAR absolut → Zykliker (META, QCOM) =5
-   Loesung: EVAR_ticker vs. Sektor-Median → relativer Score.
-   Rueckwaerts-kompatibel: ohne sector-Feld → globaler Median. */
+   Problem v5.9.29-31: EVAR absolut â†’ Zykliker (META, QCOM) =5
+   Loesung: EVAR_ticker vs. Sektor-Median â†’ relativer Score.
+   Rueckwaerts-kompatibel: ohne sector-Feld â†’ globaler Median. */
 var SECTOR_EVAR_MED={};
 var EVAR_GLOBAL_MED=57;
 function buildSectorEvarMed(){
@@ -1469,19 +1475,19 @@ function buildSectorEvarMed(){
   Object.keys(raw).forEach(function(s){SECTOR_EVAR_MED[s]=med(raw[s]);});
 }
 /* evarRelSc(ticker): 0-100, 50=Sektor-Median
-   Diff +30pp → Score ~95 | Diff -30pp → Score ~5
-   Wenn kein sector-Feld (altes JSON ohne v7.9.3) → abs. Fallback */
+   Diff +30pp â†’ Score ~95 | Diff -30pp â†’ Score ~5
+   Wenn kein sector-Feld (altes JSON ohne v7.9.3) â†’ abs. Fallback */
 function evarRelSc(t){
   var fd=FD[t];
   if(!fd||fd.evar==null)return null;
-  /* Kein sector-Feld → absoluter Fallback (Rueckwaerts-kompatibel) */
+  /* Kein sector-Feld â†’ absoluter Fallback (Rueckwaerts-kompatibel) */
   if(!fd.sector)return Math.round(fd.evar/10*9+5);
   var med=SECTOR_EVAR_MED[fd.sector]!=null?SECTOR_EVAR_MED[fd.sector]:EVAR_GLOBAL_MED;
   return Math.max(5,Math.min(95,Math.round(50+(fd.evar-med)*1.5)));
 }
 
-/* ---- Sektor-PEG-Mediane (v5.9.41) ─────────────────────────
-   Analogon zu SECTOR_EVAR_MED — berechnet Median-PEG pro Sektor.
+/* ---- Sektor-PEG-Mediane (v5.9.41) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Analogon zu SECTOR_EVAR_MED â€” berechnet Median-PEG pro Sektor.
    Benoetigt: sector-Feld in FD (fund_juno v7.9.3+).
    Beispiel-Mediane: Tech ~2.4 | Healthcare ~1.8 | Industrials ~1.5
    Wird einmalig nach JSON-Laden aufgerufen (buildSectorPegMed). */
@@ -1507,8 +1513,8 @@ function buildSectorPegMed(){
   Object.keys(raw).forEach(function(s){SECTOR_PEG_MED[s]=med(raw[s]);});
 }
 /* pegRelSc(s): 0-100, 50=Sektor-Median-PEG des Titels.
-   PEG ist invertiert: niedrig=gut → diff = sectorMed - s.peg
-   Scale: 1 PEG-Einheit unter Median → +20 Score-Punkte.
+   PEG ist invertiert: niedrig=gut â†’ diff = sectorMed - s.peg
+   Scale: 1 PEG-Einheit unter Median â†’ +20 Score-Punkte.
    Fallback-Kette (v5.9.43):
      1. Sektor-Median (sector vorhanden)
      2. Globaler Median PEG_GLOBAL_MED (kein sector, z.B. ADRs)
@@ -1517,7 +1523,7 @@ function pegRelSc(s){
   if(s.peg==null||s.peg<=0)return null;
   var fd=FD[s.t];
   var sec=(fd&&fd.sector)?fd.sector:null;
-  /* Median: Sektor → Global → null */
+  /* Median: Sektor â†’ Global â†’ null */
   var medPeg=null;
   if(sec&&SECTOR_PEG_MED[sec]!=null){
     medPeg=SECTOR_PEG_MED[sec];
@@ -1535,15 +1541,15 @@ function pegRelSc(s){
   return Math.max(5,Math.min(95,Math.round(50+diff*20)));
 }
 
-/* ---- fundamental score (v5.9.36 / v5.9.41) ────────────────
-   v5.9.41: PEG sektor-relativ via pegRelSc() — Pharma vs. Tech korrekt.
+/* ---- fundamental score (v5.9.36 / v5.9.41) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   v5.9.41: PEG sektor-relativ via pegRelSc() â€” Pharma vs. Tech korrekt.
    Gewicht unveraendert. Fallback: absolutes PEG wenn kein sector-Feld. */
 function fSc(s){ return s.fund||50; }
 
 /* ---- composite score (v5.9.29 / v5.9.32) ----
    Risk-Anteil: 50% statisch + 40% Beta-Score + 10% EVAR-rel-Score.
    EVAR-rel (v5.9.32): sektor-relatives EVAR (Zykliker vs. Zykliker).
-   Fallback: ohne EVAR → 60/40; ohne Beta → stat allein.
+   Fallback: ohne EVAR â†’ 60/40; ohne Beta â†’ stat allein.
    Gewichte: Mom 25% | Trend 20% | Fund 35% | Risk 20% */
 function cSc(s){
   var _sd=_scoresIdx[s.t];
@@ -1552,21 +1558,21 @@ function cSc(s){
   return Math.round(momSc(s)*W.mom+s.trend*W.trend+fSc(s)*W.fund+rSc*W.risk);
 }
 
-/* ---- Momentum Percentile-Rank (v5.9.76) ─────────────────────
+/* ---- Momentum Percentile-Rank (v5.9.76) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    CANSLIM-L: Relative Strength >= 80 Pz = Leader im Universe.
    calcMomRank(): berechnet s.momRank (0-100) fuer alle STOCKS.
    Aufruf: am Anfang von rFund() nach applyFund().
    Kein Score-Einfluss -- nur Anzeige (IC-Test pending).
-   ─────────────────────────────────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function calcMomRank(){}
 
-/* ---- Score-Qualitaetsindikator (v5.9.26) ────────────────────
+/* ---- Score-Qualitaetsindikator (v5.9.26) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Gibt zurueck ob cSc() auf echten oder Platzhalter-Daten basiert.
    Kriterien:
-     'ai'   = JSON geladen + mom12m vorhanden → Score verlässlich
-     'json' = JSON geladen, mom12m fehlt → Fund/Risk ok, Mom teilweise
-     'stat' = kein JSON → Platzhalter dominieren, Score nicht verlässlich
-   ──────────────────────────────────────────────────────────────── */
+     'ai'   = JSON geladen + mom12m vorhanden â†’ Score verlÃ¤sslich
+     'json' = JSON geladen, mom12m fehlt â†’ Fund/Risk ok, Mom teilweise
+     'stat' = kein JSON â†’ Platzhalter dominieren, Score nicht verlÃ¤sslich
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function scoreQuality(s){
   var fd=FD[s.t];
   if(!fd) return 'stat';
@@ -1587,7 +1593,7 @@ function sqBadge(s){
   return '<span style="font-family:monospace;font-size:7px;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,.07);color:#456278;margin-left:4px">stat</span>';
 }
 
-/* Score-Farbe: bei stat-Qualitaet gedämpft */
+/* Score-Farbe: bei stat-Qualitaet gedÃ¤mpft */
 function scColQ(sc, s){
   if(scoreQuality(s)==='stat') return '#456278';  /* grau: Platzhalter */
   return scCol(sc);
@@ -1637,7 +1643,7 @@ function renderSpyPhaseBanner() {
 
 
 function goTab(n,btn){
-  var pgs=['p1','p1','p2','p8','p3','p1','p5','p9','p6','p7'],i; /* v6.0.10: p4(WF) entfernt */
+  var pgs=['p1','p1','p2','p8','p3','p1','p5','p9','p6','p7'],i; /* v6.0.12: p4(WF) entfernt */
   for(i=0;i<pgs.length;i++){var pg=document.getElementById(pgs[i]);if(pg)pg.style.display='none';}
   var tabs=document.querySelectorAll('.tab');
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
@@ -1691,7 +1697,7 @@ function rSyn(){
     vixH='<div style="grid-column:1/-1;padding:7px 12px;background:'+vixBg+';border:1px solid '+vrl.col+';border-radius:8px;display:flex;align-items:center;gap:8px;margin-bottom:4px">';
     vixH+='<div style="font-family:monospace;font-size:9px;font-weight:700;color:'+vrl.col+'">&#9632; '+vrl.label+'</div>';
     if(vrl.zone===2){vixH+='<div style="font-family:monospace;font-size:8px;color:#ffab00">Mom. &times;0.60</div>';}
-    if(vrl.zone===3){vixH+='<div style="font-family:monospace;font-size:8px;color:#ff5252">Mom. &times;0.20 — CRASH-SCHUTZ AKTIV</div>';}
+    if(vrl.zone===3){vixH+='<div style="font-family:monospace;font-size:8px;color:#ff5252">Mom. &times;0.20 â€” CRASH-SCHUTZ AKTIV</div>';}
     /* P-A2: SPY + Bond-Regime-Anzeige */
     var macro=(window.FD&&FD['__macro__'])?FD['__macro__']:null;
     if(macro&&macro.spy_above_200ma!==undefined){
@@ -2078,7 +2084,7 @@ function wlDetail(ticker){
   /* DVG-Banner: visueller Hinweis bei hold_dvg (Option C) */
   if(sig==='hold_dvg'){
     var dvgFundV=Math.round(fSc(s));
-    var dvgRsiV=FD[s.t]&&FD[s.t].rsi_val!==null?Math.round(FD[s.t].rsi_val):'—';
+    var dvgRsiV=FD[s.t]&&FD[s.t].rsi_val!==null?Math.round(FD[s.t].rsi_val):'â€”';
     out+='<div style="margin-bottom:10px;padding:8px 10px;background:rgba(176,124,248,.07);border:1px solid rgba(176,124,248,.3);border-radius:8px;font-size:10px">';
     out+='<div style="font-weight:700;color:#b07cf8;margin-bottom:3px">&#128202; Deep Value Divergence (DVG)</div>';
     out+='<div style="font-family:monospace;font-size:9px;color:#dce8f5;line-height:1.6">';
@@ -2165,7 +2171,7 @@ function wlDetail(ticker){
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+rl2+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">MOAT</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+'</div></div>';
     out+='</div>';
-    /* EV/EBITDA + EVAR — zweite Zeile Value-Qualitaet (v5.9.30) */
+    /* EV/EBITDA + EVAR â€” zweite Zeile Value-Qualitaet (v5.9.30) */
     var evebDisp=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda.toFixed(1)+'x':'n/a';
     var evebColor=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?(fd.ev_ebitda<12?'#00e57a':fd.ev_ebitda<20?'#f0c000':'#ff6666'):'#7a9bb5';
     var evarRel=getScField(s.t, "evar_rel_sc", evarRelSc(s.t));
@@ -2187,7 +2193,7 @@ function wlDetail(ticker){
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EV/EBIT</div><div style="font-family:monospace;font-size:11px;color:'+eveitColor2+'">'+eveitDisp2+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">FCF/DEBT</div><div style="font-family:monospace;font-size:11px;color:'+fdcCol+'">'+fdcStr+'</div></div>';
     out+='</div>';
-    /* Owner Earnings Yield (v5.9.44) — Buffett NI+D&A-CapEx/MC */
+    /* Owner Earnings Yield (v5.9.44) â€” Buffett NI+D&A-CapEx/MC */
     var oeVal=fd.owner_earnings_yield!=null?fd.owner_earnings_yield:null;
     if(oeVal!==null){
       var oeColor=oeVal>4?'#00e57a':oeVal>0?'#f0c000':'#ff6666';
@@ -2397,7 +2403,7 @@ function wl2Load(){
     var raw = storeGet(WL2_KEY);
     if(!raw) return;
     var arr = JSON.parse(raw);
-    /* v5.9.69: Migration alter Japan-Keys '8031T' → '8031.T' */
+    /* v5.9.69: Migration alter Japan-Keys '8031T' â†’ '8031.T' */
     arr = arr.map(function(t){
       return /^\d{4}T$/.test(t) ? t.slice(0,-1) + '.T' : t;
     });
@@ -2993,7 +2999,7 @@ function applyFund(fund){
     "2454.TW":"2454TW","D05.SI":"D05SI","BBCA.JK":"BBCAJK",
     "WALMEX.MX":"WALMEXMX","FEMSAUBD.MX":"FEMSAUBD","005930.KS":"005930KS"
   };
-  /* Reverse ALIAS: stocks_t → yfinance-key (fuer trend/rsi_val Lookup) */
+  /* Reverse ALIAS: stocks_t â†’ yfinance-key (fuer trend/rsi_val Lookup) */
   var ALIAS_REV={};
   var _ak=Object.keys(ALIAS);
   for(var _ai=0;_ai<_ak.length;_ai++) ALIAS_REV[ALIAS[_ak[_ai]]]=_ak[_ai];
@@ -3048,7 +3054,7 @@ function applyFund(fund){
       }
     }
   }
-  /* v7.8: trend + rsi_val aus JSON in STOCKS-Array übernehmen */
+  /* v7.8: trend + rsi_val aus JSON in STOCKS-Array Ã¼bernehmen */
   var i_pre;
   for(i_pre=0;i_pre<STOCKS.length;i_pre++){
     var sym_pre=STOCKS[i_pre].t;
@@ -3058,7 +3064,7 @@ function applyFund(fund){
       STOCKS[i_pre].trend=fd_pre.trend;
     if(fd_pre.rsi_val!==null&&fd_pre.rsi_val!==undefined)
       STOCKS[i_pre].rsi=fd_pre.rsi_val;
-    /* v7.9: evar bleibt in FD[t] — cSc() liest es direkt von dort */
+    /* v7.9: evar bleibt in FD[t] â€” cSc() liest es direkt von dort */
     /* v7.9.3: Sektor-EVAR-Mediane nach vollstaendigem FD-Aufbau berechnen */
     buildSectorEvarMed();
     /* v5.9.41: Sektor-PEG-Mediane berechnen (nach STOCKS + FD geladen) */
@@ -3068,9 +3074,9 @@ function applyFund(fund){
   for(i2=0;i2<keys.length;i2++){
     if(fund[keys[i2]]&&typeof fund[keys[i2]]==='object'){
       FD[keys[i2]]=fund[keys[i2]];
-      /* 1) Expliziter ALIAS (z.B. ITX.MC → INDITEX) */
+      /* 1) Expliziter ALIAS (z.B. ITX.MC â†’ INDITEX) */
       if(ALIAS[keys[i2]])FD[ALIAS[keys[i2]]]=fund[keys[i2]];
-      /* 2) Suffix-Strip-Fallback: NESN.SW→NESN, AZN.L→AZN, 7203.T→7203 */
+      /* 2) Suffix-Strip-Fallback: NESN.SWâ†’NESN, AZN.Lâ†’AZN, 7203.Tâ†’7203 */
       var dotIdx=keys[i2].lastIndexOf('.');
       if(dotIdx>0){
         var stripped=keys[i2].slice(0,dotIdx);
@@ -3187,10 +3193,10 @@ function loadFund(inp){
   reader.readAsText(file);
 }
 
-/* ---- Annual JSON laden (v5.9.69) ───────────────────────────
-   Laedt stockiq_annual.json → ANNUAL_DATA.
+/* ---- Annual JSON laden (v5.9.69) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Laedt stockiq_annual.json â†’ ANNUAL_DATA.
    Akzeptiert: Array [...] | Objekt {years:[...]} | Single {year:...}
-   Kein Pflichtfeld — Dashboard funktioniert ohne annual.json.
+   Kein Pflichtfeld â€” Dashboard funktioniert ohne annual.json.
    Nach dem Laden: refresht alle offenen Detail-Panels. */
 function loadAnnual(inp){
   var file=inp.files[0];if(!file)return;
@@ -3204,12 +3210,12 @@ function loadAnnual(inp){
         /* Fall 1: direktes Array [{year,tickers,...}] */
         arr=parsed;
       } else if(parsed && typeof parsed==='object'){
-        /* Fall 2: Objekt mit Array-Wert — suche ersten Array-Key */
+        /* Fall 2: Objekt mit Array-Wert â€” suche ersten Array-Key */
         var keys=Object.keys(parsed);
         for(var ki=0;ki<keys.length;ki++){
           if(Array.isArray(parsed[keys[ki]])){arr=parsed[keys[ki]];break;}
         }
-        /* Fall 3: Single-Objekt mit year-Key → in Array wrappen */
+        /* Fall 3: Single-Objekt mit year-Key â†’ in Array wrappen */
         if(!arr && parsed.year !== undefined){
           arr=[parsed];
         }
@@ -3285,7 +3291,7 @@ function initFund(){
 <script>
 /* ============================================================
    PIOTROSKI MINI-SCORE v5.9.21
-   5 von 9 Kriterien — Quelle: Piotroski (2000) Stanford
+   5 von 9 Kriterien â€” Quelle: Piotroski (2000) Stanford
    P1: ROA > 0    (ROCE/ROE-Proxy, immer verfuegbar)
    P2: CFO > 0    (FCF-Proxy, immer verfuegbar)
    P3: Accruals   (CFO > NI, neu via fund_juno_v7.7: fd.accruals_ok)
@@ -3310,7 +3316,7 @@ function pioScore(s, fd) {
   if (p2) score++;
   criteria.push({label:'CFO>0', ok:p2, src:'Proxy'});
 
-  /* P3: Accruals OK — fd.accruals_ok aus fund_juno_v7.7 */
+  /* P3: Accruals OK â€” fd.accruals_ok aus fund_juno_v7.7 */
   if (fd && fd.accruals_ok !== null && fd.accruals_ok !== undefined) {
     var p3 = (fd.accruals_ok === true || fd.accruals_ok === 1);
     if (p3) score++;
@@ -3320,7 +3326,7 @@ function pioScore(s, fd) {
     criteria.push({label:'Accruals', ok:null, src:'v7.7'});
   }
 
-  /* P4: Delta Gross Margin positiv — fd.gross_margin_ok aus fund_juno_v7.7 */
+  /* P4: Delta Gross Margin positiv â€” fd.gross_margin_ok aus fund_juno_v7.7 */
   if (fd && fd.gross_margin_ok !== null && fd.gross_margin_ok !== undefined) {
     var p4 = (fd.gross_margin_ok === true || fd.gross_margin_ok === 1);
     if (p4) score++;
@@ -3513,7 +3519,7 @@ document.addEventListener('DOMContentLoaded', function(){
 document.addEventListener('DOMContentLoaded', function(){
   try{
     wl2Load(); /* WL2 aus persistentem Speicher laden */
-    wl2CheckOrigin(); /* Origin-Warnung prüfen */
+    wl2CheckOrigin(); /* Origin-Warnung prÃ¼fen */
   }catch(e){ console.warn('WL2 init fehlgeschlagen: '+e.message); }
   try{
     initFund();
@@ -3563,12 +3569,29 @@ var CYCLE_ALLOC = {
 };
 var CURRENT_CYCLE = 'late';
 function buildAllocTargets(cycle){
+  var profileTargets = null;
+  try {
+    var raw = localStorage.getItem('stockiq_profile');
+    if(raw){
+      var p = JSON.parse(raw);
+      var ori = p.orientierung || 'ausgewogen';
+      if(ori === 'kapital'){
+        profileTargets = {stocks:30, commod:10, bonds:30, gold:10, cash:20};
+      } else if(ori === 'rendite'){
+        profileTargets = {stocks:65, commod:20, bonds:5, gold:10, cash:0};
+      } else {
+        profileTargets = {stocks:50, commod:15, bonds:15, gold:10, cash:10};
+      }
+    }
+  } catch(e){}
   var ca = CYCLE_ALLOC[cycle] || CYCLE_ALLOC['mid'];
   var result = [];
   for(var bi=0;bi<ALLOC_BASE.length;bi++){
     var b = ALLOC_BASE[bi];
-    result.push({id:b.id, label:b.label, icon:b.icon,
-                 soll:ca[b.id]||0, col:b.col, colAmber:b.colAmber, colRed:b.colRed});
+    var soll = profileTargets ? (profileTargets[b.id] !== undefined ? profileTargets[b.id] : 0) : (ca[b.id]||0);
+    var lbl = (profileTargets && b.id === 'commod') ? 'ETFs' : b.label;
+    result.push({id:b.id, label:lbl, icon:b.icon,
+                 soll:soll, col:b.col, colAmber:b.colAmber, colRed:b.colRed});
   }
   return result;
 }
@@ -3613,6 +3636,7 @@ function allocClear(){
 }
 
 function rAlloc(){
+  ALLOC_TARGETS = buildAllocTargets(CURRENT_CYCLE);
   var ids = ['stocks','bonds','gold','commod','cash'];
   var vals = [];
   var total = 0;
@@ -3719,6 +3743,7 @@ function rAlloc(){
       rebalEl.style.display = 'none';
     }
   }
+  try { renderEtfScoreList(); } catch(e) {}
 }
 
 /* ============================================================
@@ -3757,7 +3782,7 @@ function dpFillWL2(){
       if(wl2.indexOf(STOCKS[i].t) >= 0){
         var opt = document.createElement('option');
         opt.value = STOCKS[i].t;
-        opt.textContent = STOCKS[i].t + ' — ' + (STOCKS[i].n||'');
+        opt.textContent = STOCKS[i].t + ' â€” ' + (STOCKS[i].n||'');
         sel.appendChild(opt);
       }
     }
@@ -3816,7 +3841,7 @@ function dpClearAll(){
   dpRender();
 }
 
-/* Aktuellen Kurs aus FD[] — EUR-normiert (v5.9.69) */
+/* Aktuellen Kurs aus FD[] â€” EUR-normiert (v5.9.69) */
 function dpCurrentPrice(tk){
   var fd = FD[tk];
   if(!fd) return null;
@@ -3825,7 +3850,7 @@ function dpCurrentPrice(tk){
   /* Fallback: raw price nur wenn Waehrung EUR */
   if(fd.current_price && fd.current_price > 0 && fd.price_currency === 'EUR')
     return fd.current_price;
-  /* Kein verlässlicher EUR-Preis verfügbar */
+  /* Kein verlÃ¤sslicher EUR-Preis verfÃ¼gbar */
   return null;
 }
 
@@ -3835,8 +3860,8 @@ function dpPriceNote(tk){
   if(!fd || !fd.price_currency) return '';
   if(fd.price_currency === 'EUR') return '';
   if(!fd.current_price_eur && fd.current_price)
-    return ' (' + fd.price_currency + ' — kein EUR-Kurs)';
-  return ' (' + fd.price_currency + '→EUR)';
+    return ' (' + fd.price_currency + ' â€” kein EUR-Kurs)';
+  return ' (' + fd.price_currency + 'â†’EUR)';
 }
 
 /* Gesamt-Wertberechnung */
@@ -3906,7 +3931,7 @@ function dpRenderTable(){
     var pnlC = pnl === null ? '#7a9bb5' : pnl >= 0 ? '#00e57a' : '#ff5252';
 
     /* Score + Signal aus STOCKS */
-    var sc = '—'; var sigLbl = '—'; var sigC = '#7a9bb5';
+    var sc = 'â€”'; var sigLbl = 'â€”'; var sigC = '#7a9bb5';
     for(var j=0;j<STOCKS.length;j++){
       if(STOCKS[j].t===p.t){
         sc = Math.round(cSc(STOCKS[j]));
@@ -4123,7 +4148,7 @@ function dpImport(evt){
     try {
       var data = JSON.parse(e.target.result);
       var positions = data.positions || data;  /* direktes Array oder Wrapper */
-      if(!Array.isArray(positions)) throw new Error('Ungültiges Format');
+      if(!Array.isArray(positions)) throw new Error('UngÃ¼ltiges Format');
       var valid = positions.filter(function(p){
         return p.t && p.shares > 0 && p.buyPrice > 0;
       });
@@ -4132,7 +4157,7 @@ function dpImport(evt){
         if(/^\d{4}T$/.test(p.t)) p.t = p.t.slice(0,-1) + '.T';
         return p;
       });
-      if(valid.length === 0) throw new Error('Keine gültigen Positionen');
+      if(valid.length === 0) throw new Error('Keine gÃ¼ltigen Positionen');
       if(DEPOT_POSITIONS.length > 0){
         if(!confirm('Vorhandene ' + DEPOT_POSITIONS.length + ' Positionen ersetzen durch ' + valid.length + ' aus Import?')) return;
       }
@@ -4145,7 +4170,7 @@ function dpImport(evt){
     }
   };
   reader.readAsText(file);
-  evt.target.value = '';  /* Reset für erneuten Import */
+  evt.target.value = '';  /* Reset fÃ¼r erneuten Import */
 }
 
 /* Alles rendern */
@@ -4186,7 +4211,7 @@ function allocPrefillFromDepot(){
   } catch(e){}
 }
 
-/* isHC: Triple-Confirmation-Check (v5.9.69) — zentrale Funktion */
+/* isHC: Triple-Confirmation-Check (v5.9.69) â€” zentrale Funktion */
 function isHC(s, sc){
   try{
     if(!sc) sc = cSc(s);
@@ -4389,7 +4414,7 @@ function renderZielKacheln(c){
 
 
 /* ============================================================
-   GSR — Gold-Silver-Ratio Signal v5.9.47
+   GSR â€” Gold-Silver-Ratio Signal v5.9.47
    Spread-adjustierte Switch-Empfehlung
    ============================================================ */
 function rGSR(){
@@ -4441,7 +4466,7 @@ function rGSR(){
     sigText = 'GSR niedrig. Gold relativ attraktiv vs. Silber (MwSt-Vorteil).';
     sigIcon = '&#8600;';
   } else if(gsr >= 55 && gsr <= 80){
-    signal = 'NEUTRAL — im historischen Bereich';
+    signal = 'NEUTRAL â€” im historischen Bereich';
     sigCol  = '#7a9bb5';
     sigText = 'GSR im normalen Bereich (55-80). Kein Switch wirtschaftlich sinnvoll. Historisch ~65.';
     sigIcon = '&#8594;';
@@ -4460,7 +4485,7 @@ function rGSR(){
   out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #332200;border-radius:8px">';
   out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">GSR</div>';
   out += '<div style="font-size:20px;font-weight:800;color:#ffab00">' + gsr.toFixed(1) + '</div>';
-  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">Ø ~65</div></div>';
+  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">Ã˜ ~65</div></div>';
   out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a2a3a;border-radius:8px">';
   out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">SPREAD gesamt</div>';
   out += '<div style="font-size:20px;font-weight:800;color:' + (combinedSpread > 25 ? '#ff5252' : combinedSpread > 20 ? '#ffab00' : '#dce8f5') + '">' + combinedSpread.toFixed(1) + '%</div>';
@@ -4501,13 +4526,13 @@ function rBondETF(){
   var w = {ultra:0, short:0, mid:0, long:0, infl:0};
 
   if(curve === 'inverted'){
-    /* Invers: kein Laufzeit-Aufpreis → kurz halten */
+    /* Invers: kein Laufzeit-Aufpreis â†’ kurz halten */
     w.ultra = 30; w.short = 50; w.mid = 15; w.long = 0; w.infl = 5;
   } else if(curve === 'flat'){
-    /* Flach: minimale Laufzeit-Kompensation → kurz bis mittel */
+    /* Flach: minimale Laufzeit-Kompensation â†’ kurz bis mittel */
     w.ultra = 15; w.short = 40; w.mid = 30; w.long = 10; w.infl = 5;
   } else if(curve === 'steepening'){
-    /* Steepening: lange Laufzeiten werden attraktiver → mittel bis lang */
+    /* Steepening: lange Laufzeiten werden attraktiver â†’ mittel bis lang */
     if(bund >= 3.5){
       w.ultra = 5; w.short = 15; w.mid = 35; w.long = 35; w.infl = 10;
     } else {
@@ -4522,14 +4547,14 @@ function rBondETF(){
     } else if(bund < 3.5){
       w.ultra = 10; w.short = 25; w.mid = 35; w.long = 20; w.infl = 10;
     } else {
-      /* Hohes Zinsniveau: Yields locken → mittel bis lang */
+      /* Hohes Zinsniveau: Yields locken â†’ mittel bis lang */
       w.ultra = 5; w.short = 15; w.mid = 35; w.long = 35; w.infl = 10;
     }
   }
 
   /* Portfoliorisiko: Zinsaenderungsrisiko bei 1pp Anstieg */
   var avgDur = (w.ultra*0.5 + w.short*2.0 + w.mid*5.0 + w.long*8.5 + w.infl*7.0) / 100;
-  var riskPp = (avgDur * 1.0).toFixed(1); /* ~Duration × 1pp */
+  var riskPp = (avgDur * 1.0).toFixed(1); /* ~Duration Ã— 1pp */
 
   /* HTML aufbauen */
   var wKeys = ['ultra','short','mid','long','infl'];
@@ -4588,7 +4613,7 @@ function rBondETF(){
 </script>
 <!-- ============================================================
      SEKTOR-BERICHT MODAL v5.9.51
-     Sektorvergleich + 2 Aktien-Detail + window.print() → PDF
+     Sektorvergleich + 2 Aktien-Detail + window.print() â†’ PDF
      ============================================================ -->
 <div id="rpt-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:9000;overflow-y:auto;-webkit-overflow-scrolling:touch">
   <div id="rpt-overlay-bg" onclick="rptClose()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7)"></div>
@@ -4700,7 +4725,7 @@ function rptFillStocks(){
     for(var k=0;k<inSec.length;k++){
       var opt = document.createElement('option');
       opt.value = inSec[k].t;
-      opt.textContent = inSec[k].t + ' — ' + (inSec[k].n || '') + ' (' + Math.round(cSc(inSec[k])) + ')';
+      opt.textContent = inSec[k].t + ' â€” ' + (inSec[k].n || '') + ' (' + Math.round(cSc(inSec[k])) + ')';
       if(inSec[k].t === defaultTk) opt.selected = true;
       sel.appendChild(opt);
     }
@@ -4730,7 +4755,7 @@ function rptBuild(){
 
   var out = '';
 
-  /* ── Titel-Block ── */
+  /* â”€â”€ Titel-Block â”€â”€ */
   out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a3a5c;border-radius:10px;padding:16px;margin-bottom:14px">';
   out += '<div class="rpt-h1" style="font-size:18px;font-weight:800;color:#00c8f0;margin-bottom:4px">StockIQ Sektor-Analyse</div>';
   out += '<div class="rpt-h2" style="font-size:14px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#128202; ' + sec + ' &mdash; ' + dateStr + '</div>';
@@ -4738,18 +4763,18 @@ function rptBuild(){
   out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v5.9.69</div>';
   out += '</div>';
 
-  /* ── 0. Sektor-Performance-Ranking (alle Sektoren) ── */
+  /* â”€â”€ 0. Sektor-Performance-Ranking (alle Sektoren) â”€â”€ */
   out += rptSectorRanking();
 
-  /* ── 1. Sektorvergleich: Statistik-Kacheln ── */
+  /* â”€â”€ 1. Sektorvergleich: Statistik-Kacheln â”€â”€ */
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">1. Sektor&uuml;bersicht &mdash; ' + sec + '</div>';
   out += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">';
   var kpis = [
     {l:'Anz. Titel', v:secStocks.length, u:''},
-    {l:'Ø Score', v:stats.avgScore.toFixed(1), u:'/100'},
-    {l:'Ø FCF Yield', v:stats.avgFcf !== null ? stats.avgFcf.toFixed(1)+'%' : 'n/a', u:''},
-    {l:'Ø ROCE', v:stats.avgRoce !== null ? stats.avgRoce.toFixed(1)+'%' : 'n/a', u:''},
+    {l:'Ã˜ Score', v:stats.avgScore.toFixed(1), u:'/100'},
+    {l:'Ã˜ FCF Yield', v:stats.avgFcf !== null ? stats.avgFcf.toFixed(1)+'%' : 'n/a', u:''},
+    {l:'Ã˜ ROCE', v:stats.avgRoce !== null ? stats.avgRoce.toFixed(1)+'%' : 'n/a', u:''},
   ];
   for(var ki=0;ki<kpis.length;ki++){
     out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">';
@@ -4785,36 +4810,36 @@ function rptBuild(){
     out += '<td style="padding:5px 7px;color:#dce8f5;font-size:9px">' + (rs.n||'') + '</td>';
     out += '<td style="padding:5px 7px;text-align:center;color:#dce8f5;font-weight:700">' + rsc + '</td>';
     out += '<td style="padding:5px 7px;text-align:center;color:' + sigC + ';font-size:9px">' + rsig + '</td>';
-    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.fcf!=null?rfd.fcf.toFixed(1)+'%':'—') + '</td>';
-    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.roce!=null?rfd.roce.toFixed(1)+'%':'—') + '</td>';
-    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.peg!=null?rfd.peg.toFixed(2):'—') + '</td>';
+    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.fcf!=null?rfd.fcf.toFixed(1)+'%':'â€”') + '</td>';
+    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.roce!=null?rfd.roce.toFixed(1)+'%':'â€”') + '</td>';
+    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.peg!=null?rfd.peg.toFixed(2):'â€”') + '</td>';
     out += '</tr>';
   }
   out += '</table>';
   if(secStocks.length > 10) out += '<div style="font-family:monospace;font-size:9px;color:#7a9bb5;margin-top:4px">+ ' + (secStocks.length-10) + ' weitere Titel im Sektor</div>';
   out += '</div>';
 
-  /* ── 2. Aktien-Detail ── */
+  /* â”€â”€ 2. Aktien-Detail â”€â”€ */
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">2. Aktien-Vergleich &amp; Analyse</div>';
   out += rptCompareBlock(tk1, tk2);
   out += '</div>';
 
-  /* ── 3. Detail-Karten ── */
+  /* â”€â”€ 3. Detail-Karten â”€â”€ */
   out += rptDetailCard(tk1, '3a');
   out += rptDetailCard(tk2, '3b');
 
-  /* ── 4. Regelbasierte Textanalyse ── */
+  /* â”€â”€ 4. Regelbasierte Textanalyse â”€â”€ */
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">4. Textliche Analyse</div>';
   out += rptTextAnalysis(tk1, stats);
   out += rptTextAnalysis(tk2, stats);
   out += '</div>';
 
-  /* ── 5. Glossar ── */
+  /* â”€â”€ 5. Glossar â”€â”€ */
   out += rptGlossar();
 
-  /* ── Disclaimer ── */
+  /* â”€â”€ Disclaimer â”€â”€ */
   out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a2a3a;border-radius:8px;padding:10px;margin-bottom:10px">';
   out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5;line-height:1.5">';
   out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v5.9.78 generiert. ';
@@ -4826,7 +4851,7 @@ function rptBuild(){
   document.getElementById('rpt-output').innerHTML = out;
   document.getElementById('rpt-print-btn').style.display = 'block';
 
-  /* Controls einklappen — Bericht sichtbar machen */
+  /* Controls einklappen â€” Bericht sichtbar machen */
   var ctrl = document.getElementById('rpt-controls');
   ctrl.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">' +
     '<div style="font-family:monospace;font-size:10px;color:#00e57a">&#10003; Bericht erstellt: ' +
@@ -4869,7 +4894,7 @@ function rptCompareBlock(tk1, tk2){
       '<td style="padding:5px 8px;text-align:center;color:'+c1+';font-weight:700">' + v1 + '</td>' +
       '<td style="padding:5px 8px;text-align:center;color:'+c2+';font-weight:700">' + v2 + '</td></tr>';
   }
-  function fmtN(v, suf){ return v!=null ? v.toFixed(1)+suf : '—'; }
+  function fmtN(v, suf){ return v!=null ? v.toFixed(1)+suf : 'â€”'; }
 
   var out='';
   out += '<table class="rpt-tbl" style="width:100%;border-collapse:collapse;font-size:11px">';
@@ -4883,7 +4908,7 @@ function rptCompareBlock(tk1, tk2){
   out += row('FCF Yield %', fmtN(fd1.fcf,'%'), fmtN(fd2.fcf,'%'), true);
   out += row('ROCE %', fmtN(fd1.roce,'%'), fmtN(fd2.roce,'%'), true);
   out += row('OE Yield %', fmtN(fd1.owner_earnings_yield,'%'), fmtN(fd2.owner_earnings_yield,'%'), true);
-  out += row('PEG', fd1.peg!=null?fd1.peg.toFixed(2):'—', fd2.peg!=null?fd2.peg.toFixed(2):'—', false);
+  out += row('PEG', fd1.peg!=null?fd1.peg.toFixed(2):'â€”', fd2.peg!=null?fd2.peg.toFixed(2):'â€”', false);
   out += row('EV/EBITDA', fmtN(fd1.ev_ebitda,'x'), fmtN(fd2.ev_ebitda,'x'), false);
   out += row('Beta', fmtN(fd1.beta,''), fmtN(fd2.beta,''), false);
   out += row('Debt/Equity %', fmtN(fd1.debt,'%'), fmtN(fd2.debt,'%'), false);
@@ -5030,7 +5055,7 @@ var SECTOR_ETF_MAP = {
   'Technology':              {etf:'XLK', name:'Technology Select SPDR'},
 };
 
-/* ── Sektor-Performance-Ranking (v5.9.55) ── */
+/* â”€â”€ Sektor-Performance-Ranking (v5.9.55) â”€â”€ */
 function rptSectorRanking(){
   /* Sektor-Statistiken berechnen */
   var secData = {};
@@ -5063,7 +5088,7 @@ function rptSectorRanking(){
     }
     var avgSc = 0; for(var k2=0;k2<d.scores.length;k2++) avgSc+=d.scores[k2];
     avgSc = avgSc/d.scores.length;
-    var etfInfo = SECTOR_ETF_MAP[sec] || {etf:'—', name:''};
+    var etfInfo = SECTOR_ETF_MAP[sec] || {etf:'â€”', name:''};
     var etfMom = (etfData[etfInfo.etf] && etfData[etfInfo.etf].mom12m !== null) ?
       etfData[etfInfo.etf].mom12m : null;
     rows.push({sec:sec, etf:etfInfo.etf, etfName:etfInfo.name,
@@ -5081,21 +5106,21 @@ function rptSectorRanking(){
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">&#128202; Sektor-Performance-Ranking (12M)</div>';
   out += '<div style="font-family:monospace;font-size:9px;color:#7a9bb5;margin-bottom:10px">';
-  out += 'Aktien-Ø: 12M-Momentum aller Sektortitel (aus FD[]) &middot; ETF-Return: Sektor-ETF (fund_juno v7.9.10)</div>';
+  out += 'Aktien-Ã˜: 12M-Momentum aller Sektortitel (aus FD[]) &middot; ETF-Return: Sektor-ETF (fund_juno v7.9.10)</div>';
 
   out += '<table class="rpt-tbl" style="width:100%;border-collapse:collapse;font-size:10px">';
   out += '<tr><th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">#</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:left">Sektor</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">ETF</th>';
-  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">Aktien-Ø 12M</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">Aktien-Ã˜ 12M</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">ETF 12M</th>';
-  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">Ø Score</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">Ã˜ Score</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">n</th></tr>';
 
   for(var ri=0;ri<rows.length;ri++){
     var r = rows[ri];
     var rowBg = ri % 2 === 0 ? '#0a1628' : '#0c1a2e';
-    var momStr = r.avgMom !== null ? (r.avgMom >= 0 ? '+' : '') + r.avgMom.toFixed(1) + '%' : '—';
+    var momStr = r.avgMom !== null ? (r.avgMom >= 0 ? '+' : '') + r.avgMom.toFixed(1) + '%' : 'â€”';
     var momC = r.avgMom === null ? '#7a9bb5' : r.avgMom > 10 ? '#00e57a' : r.avgMom > 0 ? '#a5d6a7' : '#ff7043';
     var etfStr = r.etfMom !== null ? (r.etfMom >= 0 ? '+' : '') + r.etfMom.toFixed(1) + '%' : 'n/a*';
     var etfC = r.etfMom === null ? '#7a9bb5' : r.etfMom > 10 ? '#00e57a' : r.etfMom > 0 ? '#a5d6a7' : '#ff7043';
@@ -5117,7 +5142,7 @@ function rptSectorRanking(){
   return out;
 }
 
-/* ── Regelbasierte Textanalyse signal-konform (v5.9.69) ── */
+/* â”€â”€ Regelbasierte Textanalyse signal-konform (v5.9.69) â”€â”€ */
 function rptTextAnalysis(tk, secStats){
   var st = null;
   for(var i=0;i<STOCKS.length;i++){ if(STOCKS[i].t===tk){st=STOCKS[i];break;} }
@@ -5131,13 +5156,13 @@ function rptTextAnalysis(tk, secStats){
   function nn(v){ return v !== null && v !== undefined && !isNaN(v); }
   function pct(v,d){ return (v>=0?'+':'')+v.toFixed(d||1)+'%'; }
 
-  /* ── Signal-Kategorie bestimmen ── */
+  /* â”€â”€ Signal-Kategorie bestimmen â”€â”€ */
   var isBuySignal  = rawSig==='strong'||rawSig==='buy'||rawSig==='pb';
   var isSellSignal = isSell(rawSig);
   var isHoldSig    = isHoldSF(rawSig);
   var isWatchSig   = rawSig==='watch'||rawSig==='weak';
 
-  /* ── Persistenz aus Snapshots ── */
+  /* â”€â”€ Persistenz aus Snapshots â”€â”€ */
   var persistCount = 0; var snapCount = 0;
   try {
     var snaps = JSON.parse(localStorage.getItem('stockiq_snapshots')||'[]');
@@ -5145,7 +5170,7 @@ function rptTextAnalysis(tk, secStats){
       var snap = snaps[si];
       if(!snap||!snap.tickers||!snap.tickers[tk]) continue;
       snapCount++;
-      /* Signal aus Snapshot-Daten rekonstruieren — vereinfacht via trend */
+      /* Signal aus Snapshot-Daten rekonstruieren â€” vereinfacht via trend */
       var snapTk = snap.tickers[tk];
       if(snapTk.trend !== null && snapTk.trend !== undefined && snapTk.trend < 0) persistCount++;
     }
@@ -5158,7 +5183,7 @@ function rptTextAnalysis(tk, secStats){
       persistText = 'Kurs durchgehend &uuml;ber 200MA in ' + snapCount + ' Snapshots.';
   }
 
-  /* ── P1: Signal-Intro — direkt und konform ── */
+  /* â”€â”€ P1: Signal-Intro â€” direkt und konform â”€â”€ */
   var p1 = '';
   var scDiff = secStats && nn(secStats.avgScore) ? Math.round(sc - secStats.avgScore) : null;
   var scDiffTxt = scDiff !== null ?
@@ -5170,9 +5195,9 @@ function rptTextAnalysis(tk, secStats){
     p1 = '<strong>' + name + ' wird aktuell als <span style="color:#ff5252">' + sig +
          '</span> eingestuft</strong> (Score ' + sc + '/100). ';
     if(rawSig==='sell_ma')
-      p1 += 'Der Kurs hat die 200-Tage-Linie unterschritten — der Aufw&auml;rtstrend ist technisch gebrochen. ';
+      p1 += 'Der Kurs hat die 200-Tage-Linie unterschritten â€” der Aufw&auml;rtstrend ist technisch gebrochen. ';
     else if(rawSig==='sell_zl')
-      p1 += 'Der MACD hat die Nulllinie nach unten durchbrochen — ein Momentum-Umkehrsignal. ';
+      p1 += 'Der MACD hat die Nulllinie nach unten durchbrochen â€” ein Momentum-Umkehrsignal. ';
     else
       p1 += 'Mehrere technische Exit-Signale sind aktiv. ';
     if(persistText) p1 += persistText + ' ';
@@ -5183,13 +5208,13 @@ function rptTextAnalysis(tk, secStats){
     p1 = name + ' zeigt ein <strong>Deep Value Divergence</strong>-Signal (Score ' + sc + '/100). ';
     p1 += 'Das technische Bild ist belastet (unter 200MA), aber Fundamentals (Fund ' +
           Math.round(fSc(st)) + '/100) und RSI im &uuml;berverkauften Bereich deuten auf nachlassenden Verkaufsdruck hin. ';
-    p1 += '<strong>Handlungskonsequenz: Beobachten — Einstieg pr&uuml;fen wenn Kurs &uuml;ber 200MA zur&uuml;ckkehrt.</strong>';
+    p1 += '<strong>Handlungskonsequenz: Beobachten â€” Einstieg pr&uuml;fen wenn Kurs &uuml;ber 200MA zur&uuml;ckkehrt.</strong>';
     p1 += scDiffTxt;
 
   } else if(isHoldSig){
     p1 = name + ' wird durch den <strong>Score Filter als HOLD</strong> eingestuft (Score ' + sc + '/100). ';
     p1 += 'Das technische Exit-Signal wird durch die fundamentale St&auml;rke (Score &ge;55) neutralisiert. ';
-    p1 += '<strong>Handlungskonsequenz: Qualit&auml;tsposition halten — kein Verkauf auf Basis des technischen Signals allein.</strong>';
+    p1 += '<strong>Handlungskonsequenz: Qualit&auml;tsposition halten â€” kein Verkauf auf Basis des technischen Signals allein.</strong>';
     p1 += scDiffTxt;
 
   } else if(rawSig==='strong'){
@@ -5206,90 +5231,90 @@ function rptTextAnalysis(tk, secStats){
 
   } else {
     p1 = name + ' zeigt kein klares Kauf- oder Verkaufssignal (Score ' + sc + '/100, ' + sig + '). ';
-    p1 += '<strong>Handlungskonsequenz: Beobachten — kein Handlungsbedarf.</strong>';
+    p1 += '<strong>Handlungskonsequenz: Beobachten â€” kein Handlungsbedarf.</strong>';
     p1 += scDiffTxt;
   }
 
-  /* ── P2: Stärken (nur relevante, signal-kontextuell) ── */
+  /* â”€â”€ P2: StÃ¤rken (nur relevante, signal-kontextuell) â”€â”€ */
   var strengths = [];
   if(nn(fd.roce)){
-    if(fd.roce >= 30) strengths.push('ROCE ' + fd.roce.toFixed(1) + '% — starker wirtschaftlicher Burggraben.');
-    else if(fd.roce >= 15) strengths.push('ROCE ' + fd.roce.toFixed(1) + '% — solide Kapitaleffizienz.');
+    if(fd.roce >= 30) strengths.push('ROCE ' + fd.roce.toFixed(1) + '% â€” starker wirtschaftlicher Burggraben.');
+    else if(fd.roce >= 15) strengths.push('ROCE ' + fd.roce.toFixed(1) + '% â€” solide Kapitaleffizienz.');
   }
   if(nn(fd.owner_earnings_yield) && nn(fd.fcf)){
     var oeDiff = fd.owner_earnings_yield - fd.fcf;
     if(oeDiff > 5)
-      strengths.push('OE Yield (' + fd.owner_earnings_yield.toFixed(1) + '%) vs. FCF (' + fd.fcf.toFixed(1) + '%): +' + oeDiff.toFixed(1) + 'pp Growth-Capex — Buffett-Indikator f&uuml;r Wachstumsinvestitionen.');
+      strengths.push('OE Yield (' + fd.owner_earnings_yield.toFixed(1) + '%) vs. FCF (' + fd.fcf.toFixed(1) + '%): +' + oeDiff.toFixed(1) + 'pp Growth-Capex â€” Buffett-Indikator f&uuml;r Wachstumsinvestitionen.');
     else if(nn(fd.fcf) && fd.fcf >= 6)
-      strengths.push('FCF Yield ' + fd.fcf.toFixed(1) + '% — starke Cashgenerierung.');
+      strengths.push('FCF Yield ' + fd.fcf.toFixed(1) + '% â€” starke Cashgenerierung.');
   } else if(nn(fd.fcf) && fd.fcf >= 6){
-    strengths.push('FCF Yield ' + fd.fcf.toFixed(1) + '% — starke Cashgenerierung.');
+    strengths.push('FCF Yield ' + fd.fcf.toFixed(1) + '% â€” starke Cashgenerierung.');
   }
   if(fd.moat && fd.moat !== 'none')
-    strengths.push('Morningstar Moat: ' + fd.moat.toUpperCase() + ' — strukturelle Wettbewerbsvorteile.');
+    strengths.push('Morningstar Moat: ' + fd.moat.toUpperCase() + ' â€” strukturelle Wettbewerbsvorteile.');
   if(nn(fd.evar) && fd.evar >= 65)
-    strengths.push('EVAR ' + Math.round(fd.evar) + ' — &uuml;berdurchschnittlich stabile Ertragsentwicklung.');
+    strengths.push('EVAR ' + Math.round(fd.evar) + ' â€” &uuml;berdurchschnittlich stabile Ertragsentwicklung.');
   if(nn(fd.peg) && fd.peg < 1.5)
-    strengths.push('PEG ' + fd.peg.toFixed(2) + ' — attraktive Wachstumsbewertung.');
+    strengths.push('PEG ' + fd.peg.toFixed(2) + ' â€” attraktive Wachstumsbewertung.');
   if(nn(fd.beta) && fd.beta < 0.5)
-    strengths.push('Beta ' + fd.beta.toFixed(2) + ' — defensives, marktunkorreliertes Profil.');
+    strengths.push('Beta ' + fd.beta.toFixed(2) + ' â€” defensives, marktunkorreliertes Profil.');
 
   var p2 = strengths.length > 0 ?
     '<strong>St&auml;rken:</strong> ' + strengths.join(' ') :
     '<strong>Fundamentales Bild:</strong> Keine herausragenden Einzelkennzahlen identifiziert.';
 
-  /* ── P3: Risiken — signal-priorisiert ── */
+  /* â”€â”€ P3: Risiken â€” signal-priorisiert â”€â”€ */
   var risks = [];
   if(isSellSignal){
     var rsi3 = fd.rsi_val !== null && fd.rsi_val !== undefined ? Math.round(fd.rsi_val) : null;
     risks.push('<strong>Technischer Abw&auml;rtstrend aktiv</strong> (' + sig + '). ' +
       (persistText ? persistText + ' ' : '') +
-      (rsi3 !== null ? 'RSI ' + rsi3 + (rsi3 < 35 ? ' — &uuml;berverkauft, Reversal-Potenzial m&ouml;glich.' : ' — kein extremer &Uuml;berverkauf.') : ''));
+      (rsi3 !== null ? 'RSI ' + rsi3 + (rsi3 < 35 ? ' â€” &uuml;berverkauft, Reversal-Potenzial m&ouml;glich.' : ' â€” kein extremer &Uuml;berverkauf.') : ''));
   }
   if(nn(fd.peg) && fd.peg > 3)
-    risks.push('PEG ' + fd.peg.toFixed(2) + ' — ambitionierte Bewertung erfordert stabiles Gewinnwachstum.');
+    risks.push('PEG ' + fd.peg.toFixed(2) + ' â€” ambitionierte Bewertung erfordert stabiles Gewinnwachstum.');
   if(nn(fd.fcf) && fd.fcf < 2 && (!nn(fd.owner_earnings_yield) || fd.owner_earnings_yield < 5))
-    risks.push('FCF Yield ' + fd.fcf.toFixed(1) + '% — schwache laufende Cashgenerierung.');
+    risks.push('FCF Yield ' + fd.fcf.toFixed(1) + '% â€” schwache laufende Cashgenerierung.');
   if(nn(fd.debt) && fd.debt > 80)
-    risks.push('Debt/Equity ' + fd.debt.toFixed(0) + '% — erh&ouml;hte Verschuldung.');
+    risks.push('Debt/Equity ' + fd.debt.toFixed(0) + '% â€” erh&ouml;hte Verschuldung.');
   if(nn(fd.mom_skip) && fd.mom_skip < -20)
-    risks.push('12M-Momentum ' + pct(fd.mom_skip) + ' — anhaltender Kursrückgang.');
+    risks.push('12M-Momentum ' + pct(fd.mom_skip) + ' â€” anhaltender KursrÃ¼ckgang.');
   if(nn(fd.evar) && fd.evar < 30)
-    risks.push('EVAR ' + Math.round(fd.evar) + ' — hohe Ertragsschwankung (zyklisches Profil).');
+    risks.push('EVAR ' + Math.round(fd.evar) + ' â€” hohe Ertragsschwankung (zyklisches Profil).');
 
   var p3 = risks.length > 0 ?
     '<strong>Risiken:</strong> ' + risks.join(' ') :
     '<strong>Risikoprofil:</strong> Keine kritischen Warnsignale identifiziert.';
 
-  /* ── P4: Technisches Bild + Signal-konformes Fazit ── */
+  /* â”€â”€ P4: Technisches Bild + Signal-konformes Fazit â”€â”€ */
   var rsi4 = fd.rsi_val !== null && fd.rsi_val !== undefined ? Math.round(fd.rsi_val) : null;
   var p4 = '<strong>Technisches Bild:</strong> ';
   if(nn(rsi4)){
-    if(rsi4 < 30) p4 += 'RSI ' + rsi4 + ' — &uuml;berverkauft. Statistisch erh&ouml;hte Reversalwahrscheinlichkeit. ';
-    else if(rsi4 < 45) p4 += 'RSI ' + rsi4 + ' — schwaches Momentum. ';
-    else if(rsi4 > 78) p4 += 'RSI ' + rsi4 + ' — &uuml;berhitzt. Konsolidierungsrisiko erh&ouml;ht. ';
-    else if(rsi4 > 70) p4 += 'RSI ' + rsi4 + ' — erh&ouml;htes Niveau, aber noch nicht extrem. ';
-    else p4 += 'RSI ' + rsi4 + ' — neutrales Niveau. ';
+    if(rsi4 < 30) p4 += 'RSI ' + rsi4 + ' â€” &uuml;berverkauft. Statistisch erh&ouml;hte Reversalwahrscheinlichkeit. ';
+    else if(rsi4 < 45) p4 += 'RSI ' + rsi4 + ' â€” schwaches Momentum. ';
+    else if(rsi4 > 78) p4 += 'RSI ' + rsi4 + ' â€” &uuml;berhitzt. Konsolidierungsrisiko erh&ouml;ht. ';
+    else if(rsi4 > 70) p4 += 'RSI ' + rsi4 + ' â€” erh&ouml;htes Niveau, aber noch nicht extrem. ';
+    else p4 += 'RSI ' + rsi4 + ' â€” neutrales Niveau. ';
   }
   if(nn(fd.mom_skip)) p4 += '12M-Momentum: ' + pct(fd.mom_skip) + '. ';
 
-  /* Signal-konformes Fazit — kein Widerspruch zum Signal */
+  /* Signal-konformes Fazit â€” kein Widerspruch zum Signal */
   if(isSellSignal){
     p4 += '<strong>Fazit: Solange der Kurs unter der 200MA notiert, &uuml;berwiegen die technischen Risiken. ';
     p4 += nn(rsi4) && rsi4 < 35 ?
-      'RSI im &uuml;berverkauften Bereich — Reversal beobachten, aber kein Einstieg vor Trendumkehr-Best&auml;tigung.</strong>' :
+      'RSI im &uuml;berverkauften Bereich â€” Reversal beobachten, aber kein Einstieg vor Trendumkehr-Best&auml;tigung.</strong>' :
       'Kein Einstieg vor Trendumkehr-Best&auml;tigung (&Uuml;berschreiten der 200MA mit positivem MACD).</strong>';
   } else if(rawSig==='hold_dvg'){
-    p4 += '<strong>Fazit: Turnaround-Kandidat — fundamentale St&auml;rke intakt, technische Best&auml;tigung steht aus.</strong>';
+    p4 += '<strong>Fazit: Turnaround-Kandidat â€” fundamentale St&auml;rke intakt, technische Best&auml;tigung steht aus.</strong>';
   } else if(isHoldSig){
-    p4 += '<strong>Fazit: Qualit&auml;tsposition — technischer Druck vorhanden, aber Fundamentals rechtfertigen das Halten.</strong>';
+    p4 += '<strong>Fazit: Qualit&auml;tsposition â€” technischer Druck vorhanden, aber Fundamentals rechtfertigen das Halten.</strong>';
   } else if(isBuySignal){
-    p4 += '<strong>Fazit: Technisches und fundamentales Bild konvergieren positiv — Kaufgelegenheit unter Ber&uuml;cksichtigung der Positionsgr&ouml;&szlig;e.</strong>';
+    p4 += '<strong>Fazit: Technisches und fundamentales Bild konvergieren positiv â€” Kaufgelegenheit unter Ber&uuml;cksichtigung der Positionsgr&ouml;&szlig;e.</strong>';
   } else {
-    p4 += '<strong>Fazit: Kein klares Signal — Marktbeobachtung beibehalten.</strong>';
+    p4 += '<strong>Fazit: Kein klares Signal â€” Marktbeobachtung beibehalten.</strong>';
   }
 
-  /* ── Ausgabe ── */
+  /* â”€â”€ Ausgabe â”€â”€ */
   var out = '';
   out += '<div style="background:#060e1a;border:1px solid #1a3050;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div style="font-size:12px;font-weight:700;color:#00c8f0;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">&#129302; Analyse: ' + name + ' (' + tk + ')</div>';
@@ -5301,7 +5326,7 @@ function rptTextAnalysis(tk, secStats){
   return out;
 }
 
-/* ── Kompaktes Glossar (v5.9.55) ── */
+/* â”€â”€ Kompaktes Glossar (v5.9.55) â”€â”€ */
 function rptGlossar(){
   var terms = [
     {t:'Score /100', d:'Gewichteter Gesamt-Score: Momentum 25% + Trend 20% + Fundamentals 35% + Risk 20%. Schwellen: &ge;65 = BUY-Bereich, &lt;45 = SELL-Bereich.'},
@@ -5316,10 +5341,10 @@ function rptGlossar(){
     {t:'EVAR', d:'Earnings Variability Score 0&ndash;100. Misst Stabilit&auml;t der Ertr&auml;ge &uuml;ber Zeit. Sektor-relativ normiert. &gt;60 = stabil, &lt;30 = zyklisch.'},
     {t:'Beta', d:'Marktsensitivit&auml;t. &lt;0.5 = defensiv, 1.0 = Markt, &gt;1.5 = aggressiv. Negatives Beta = Gegenkorrelation zum Markt.'},
     {t:'Konsistenz (consScore)', d:'IQR-gefilterte Standardabweichung der ROCE-Historie (aus annual.json). Geringe Std-Abw = hohe Konsistenz = Buffett-Qualit&auml;tsmerkmal.'},
-    {t:'MACD', d:'Moving Average Convergence Divergence. ZL = Nulllinie. Histogramm > 0 = Aufwärtsmomentum. SELL-Signal: Histogramm negativ + unter 200MA.'},
+    {t:'MACD', d:'Moving Average Convergence Divergence. ZL = Nulllinie. Histogramm > 0 = AufwÃ¤rtsmomentum. SELL-Signal: Histogramm negativ + unter 200MA.'},
     {t:'RSI', d:'Relative Strength Index (14). &lt;30 = &uuml;berverkauft (Kaufgelegenheit m&ouml;glich), &gt;70 = &uuml;berkauft, 40&ndash;60 = neutral.'},
     {t:'Divergenz', d:'bull_regular: RSI steigt bei fallendem Kurs = nachlassender Verkaufsdruck, m&ouml;gliche Trendwende. bear_regular: Gegenst&uuml;ck (Kauf-Warnsignal).'},
-    {t:'SELL MA', d:'Signal: Kurs hat die 200-Tage-Linie (SMA200) unterschritten &mdash; Aufwärtstrend gebrochen. Unabh&auml;ngig vom MACD-Signal.'},
+    {t:'SELL MA', d:'Signal: Kurs hat die 200-Tage-Linie (SMA200) unterschritten &mdash; AufwÃ¤rtstrend gebrochen. Unabh&auml;ngig vom MACD-Signal.'},
     {t:'HOLD DVG', d:'Deep Value Divergence: Technisches SELL-Signal unterdrueckt weil Fund &ge;80 + RSI &lt;35 + Bullish Divergenz gleichzeitig. Zeigt: gutes Unternehmen in technischer Schwaechephase. Beobachten auf 200MA-Rueckkehr. (v5.9.69)'},
     {t:'Moat', d:'Wirtschaftlicher Burggraben nach Morningstar: Wide (sehr stark), Narrow (moderat), None (kein struktureller Vorteil). Wichtig f&uuml;r langfristige Haltestrategien.'},
   ];
@@ -5515,6 +5540,75 @@ function calcSectorSignals(macro) {
   return result;
 }
 
+function calcEtfScores(sectors) {
+  var i, valid = [];
+  for(i = 0; i < sectors.length; i++){
+    if(sectors[i]) valid.push(sectors[i]);
+  }
+  if(valid.length === 0) return [];
+  function rankNorm(arr) {
+    var sorted = arr.slice().sort(function(a,b){ return b - a; });
+    var scores = [], k, l, pos;
+    for(k = 0; k < arr.length; k++){
+      pos = 0;
+      for(l = 0; l < sorted.length; l++){ if(sorted[l] === arr[k]){ pos = l; break; } }
+      scores.push(valid.length > 1 ? Math.round((1 - pos / (valid.length - 1)) * 100) : 50);
+    }
+    return scores;
+  }
+  var momArr = [], trendArr = [], riskArr = [];
+  for(i = 0; i < valid.length; i++){
+    momArr.push(valid[i].mom3mSkip !== null ? valid[i].mom3mSkip : -9999);
+    trendArr.push(valid[i].rssD30 !== null ? valid[i].rssD30 : -9999);
+    riskArr.push(valid[i].ret30d !== null ? valid[i].ret30d : -9999);
+  }
+  var momS = rankNorm(momArr);
+  var trendS = rankNorm(trendArr);
+  var riskS = rankNorm(riskArr);
+  var result2 = [];
+  for(i = 0; i < valid.length; i++){
+    result2.push({sym:valid[i].sym, name:valid[i].name,
+      score:Math.round(momS[i]*0.40 + trendS[i]*0.35 + riskS[i]*0.25)});
+  }
+  result2.sort(function(a,b){ return b.score - a.score; });
+  return result2;
+}
+
+function renderEtfScoreList() {
+  var el = document.getElementById('etf-score-list');
+  if(!el) return;
+  var sm = window.FD ? FD['__macro__'] : null;
+  if(!sm || !sm.sector_etfs){
+    el.innerHTML = '<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:16px 0">Sektor-Daten nicht verfuegbar.</div>';
+    return;
+  }
+  var sigs = calcSectorSignals(sm);
+  if(!sigs.computed){
+    el.innerHTML = '<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:16px 0">Sektor-Daten nicht berechnet.</div>';
+    return;
+  }
+  var scores = calcEtfScores(sigs.sectors);
+  if(scores.length === 0){
+    el.innerHTML = '<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:16px 0">Keine ETF-Daten.</div>';
+    return;
+  }
+  var out = '<table style="width:100%;border-collapse:collapse;font-family:monospace;font-size:11px">';
+  out += '<tr><th style="text-align:left;padding:4px 6px;color:var(--mut);font-weight:normal">Rang</th>';
+  out += '<th style="text-align:left;padding:4px 6px;color:var(--mut);font-weight:normal">ETF</th>';
+  out += '<th style="text-align:right;padding:4px 6px;color:var(--mut);font-weight:normal">Score</th></tr>';
+  for(var i = 0; i < scores.length; i++){
+    var s = scores[i];
+    var sc = s.score >= 70 ? '#00e57a' : (s.score >= 40 ? '#9ab8d0' : '#ff6666');
+    out += '<tr style="border-top:1px solid #1a2a3a">';
+    out += '<td style="padding:5px 6px;color:var(--mut)">' + (i+1) + '</td>';
+    out += '<td style="padding:5px 6px"><strong>' + s.sym + '</strong> <span style="color:var(--mut)">' + s.name + '</span></td>';
+    out += '<td style="padding:5px 6px;text-align:right;font-weight:700;color:' + sc + '">' + s.score + '</td>';
+    out += '</tr>';
+  }
+  out += '</table>';
+  el.innerHTML = out;
+}
+
 function renderSektorTab(macro) {
   var sigs = calcSectorSignals(macro);
   if (!sigs.computed) {
@@ -5682,7 +5776,7 @@ function renderProfileBadge(profile){
   var labels={lt2:'<2J','2-5':'2-5J','5-10':'5-10J',gt10:'>10J',
     kapital:'Kapitalerhalt',ausgewogen:'Ausgewogen',rendite:'Rendite-Max',
     aktien:'Nur Aktien','aktien-etfs':'Aktien+ETFs',alle:'Alle Klassen'};
-  var txt=(labels[profile.orientierung]||'?')+' · '+(labels[profile.horizont]||'?');
+  var txt=(labels[profile.orientierung]||'?')+' Â· '+(labels[profile.horizont]||'?');
   var el=document.getElementById('profile-text');if(el){el.textContent=txt;}
   var badge=document.getElementById('profile-badge');
   if(badge){badge.style.display='inline-flex';badge.style.alignItems='center';badge.style.gap='4px';}
@@ -5695,3 +5789,4 @@ document.addEventListener('DOMContentLoaded',function(){
 </script>
 </body>
 </html>
+
