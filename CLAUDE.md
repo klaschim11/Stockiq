@@ -1,5 +1,5 @@
 # StockIQ — CLAUDE.md
-Version: v5.9.93 | Stand: 25. Mai 2026 | Sprint 5 Phase A+B abgeschlossen
+Version: v6.0.13 | Stand: 31. Mai 2026 | Sprint 10 abgeschlossen
 
 ---
 
@@ -17,12 +17,12 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 
 | Datei | Version | Zweck |
 |-------|---------|-------|
-| `index.html` | v5.9.93 | Dashboard (laedt scores.json) |
+| `index.html` | v6.0.13 | Dashboard (laedt scores.json) |
 | `fund_juno_v7.9.27.py` | v7.9.27 | Fundamentaldaten + Makro (Juno/iPhone, PRIVAT) |
 | `stockiq_score.py` | v1.0 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
 | `stockiq_alpha_juno_v6b_6m.py` | v6b_6m-u4 | Walk-Forward PRODUKTION |
 | `stockiq_wl3_signal_tracking_v1_5.py` | v1.5 | WL3 IC-Analyse (Windows) |
-| `stockiq_test.js` | aktuell | QA: 27 Tests, 0 Fehler |
+| `stockiq_test.js` | aktuell | QA: 27 Tests, 0 Fehler (2 Warnungen: EV/EBIT + max(FCF,OE) veraltet) |
 
 **Schutzziel A**: `fund_juno*.py` und `stockiq_score.py` sind in `.gitignore` —
 sie liegen NICHT im Repo.
@@ -48,7 +48,7 @@ git push origin main
 
 ---
 
-## ARCHITEKTUR (ab v5.9.93)
+## ARCHITEKTUR (ab v6.0.13)
 
 ```
 LOKAL (privat, nicht im Repo):
@@ -109,7 +109,8 @@ NIEMALS: /* */ Kommentare als Anker
 ### Node-Validierung (PFLICHT nach jeder Aenderung)
 ```powershell
 node stockiq_test.js index.html
-# Erwartet: 27 Tests / 0 Fehler (14 Script-Bloecke erwartet)
+# Erwartet: 27 Tests / 0 Fehler (13 Script-Bloecke erwartet)
+# 2 bekannte Warnungen: EV/EBIT + max(FCF,OE) veraltet (kein Fehler)
 # Kein Deploy ohne gruenen Test!
 ```
 
@@ -152,13 +153,31 @@ Strategie: MACD ZL + ATR*0.05 + SMA200 + SPY-Filter
 
 ---
 
-## OFFENE PUNKTE (Stand 25.05.2026)
+## SPRINT 10 (abgeschlossen, Mai 2026)
 
 ```
-P1  v5.9.94  Hilfe-Tab aktualisieren (Synopse weg, Experten-Toggle, neuer Workflow)
-P2  README.md + CLAUDE.md committen
+v6.0.10  Walk-Forward komplett aus index.html entfernt
+         (Tab, JS-Bloecke, Dead Code bereinigt)
+
+v6.0.11  Onboarding-Dialog (3 Schritte: Horizont / Orientierung / Klassen)
+         + Profil-Badge im Header
+
+v6.0.12  ETF-Score calcEtfScores() im Sektoren-Tab
+         Formel: Mom*0.40 + Trend*0.35 + Risk*0.25
+
+v6.0.13  Allokations-Tab S/E/A/G/C profil-abhaengig
+         + ETF-Rangliste + Hilfe-Tab aktualisiert
+```
+
+---
+
+## OFFENE PUNKTE (Stand 31.05.2026)
+
+```
+P1  DONE     Hilfe-Tab aktualisiert (v6.0.13)
+P2  DONE     Walk-Forward entfernt (v6.0.10)
 P3  Phase C  Detail-Panel -> scores.json (optional)
-P4  Sektor-IC-Test (~Mitte Juni 2026, +10 Snapshots)
+P4  Sektor-IC-Test: ~Mitte Juni 2026 (+10 Snapshots, sr-Feld benoetigt)
 P5  alpha_juno auf 298 Ticker (nach IC-Test, OOS-pflichtig)
 WL3 Naechster Run: Mitte Juli 2026
 ```
@@ -181,5 +200,5 @@ WL3 Naechster Run: Mitte Juli 2026
 
 ---
 
-*StockIQ CLAUDE.md | v5.9.93 | 25. Mai 2026*
+*StockIQ CLAUDE.md | v6.0.13 | 31. Mai 2026*
 *298 Ticker | 66 Snapshots | OOS AVG 60.1% | Schutzziel A aktiv*
