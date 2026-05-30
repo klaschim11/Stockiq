@@ -102,6 +102,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button id="tb7" class="tab" onclick="goTab(7,this)">&#127759; Sektoren</button>
     <button id="tb8" class="tab" onclick="goTab(8,this)">&#128218; Hilfe</button>
     <button id="tb9" class="tab" onclick="goTab(9,this)">&#128203; Roadmap</button>  </div>
+<div id="profile-badge" style="display:none;font-family:monospace;font-size:10px;color:var(--mut);padding:3px 8px;border:1px solid #1a2a3a;border-radius:20px;cursor:pointer;margin:4px 8px" onclick="showOnboarding()"><span id="profile-text">--</span> <span style="color:var(--acc)">&#9998;</span></div>
 </header>
 
 <!-- TAB 1: WATCHLIST -->
@@ -210,61 +211,6 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div class="g4" id="f0" style="margin-bottom:14px"></div>
   <div style="font-size:15px;font-weight:700;margin-bottom:8px">Fundamentals je Ticker</div>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px" id="f1"></div>
-</div>
-
-<!-- TAB 4: WALK-FORWARD -->
-<div class="page" id="p4">
-  <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128200; Walk-Forward</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:14px" id="wf-subtitle">12M Training / 6M OOS rollierend &middot; Out-of-Sample Validierung</div>
-  <div class="g2" style="margin-bottom:14px">
-    <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
-      <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:10px">&#128228; JSON laden</div>
-      <label for="wfi" style="border:2px dashed #223040;border-radius:8px;padding:16px;text-align:center;cursor:pointer;margin-bottom:10px;display:block">
-        <div style="font-size:18px;margin-bottom:4px">&#128193;</div>
-        <div style="font-size:12px;font-weight:700;margin-bottom:2px">stockiq_alpha_results.json</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_alpha_juno_v6b_6m.py</div>
-        <input type="file" id="wfi" accept=".json" onchange="loadWF(this)" style="display:none">
-      </label>
-      <div style="display:flex;align-items:center;gap:8px;font-family:monospace;font-size:11px;color:var(--mut)">
-        <div style="width:8px;height:8px;border-radius:50%;background:#7a9bb5" id="wdot"></div>
-        <span id="wmsg">Warte auf JSON...</span>
-      </div>
-    </div>
-    <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px">
-      <div style="font-size:13px;font-weight:700;color:#b07cf8;margin-bottom:10px">&#128301; Methodik</div>
-      <div style="font-size:12px;color:var(--mut);line-height:1.9">
-        <div><strong style="color:#dce8f5">Training:</strong> 12 Monate In-Sample</div>
-        <div><strong style="color:#dce8f5">Test:</strong> 6 Monate Out-of-Sample</div>
-        <div><strong style="color:#dce8f5">Ziel:</strong> OOS WR &gt; IS WR = kein Overfitting</div>
-      </div>
-    </div>
-  </div>
-  <div id="wres" style="display:none">
-    <div class="g4" id="w0" style="margin-bottom:14px"></div>
-    <div style="font-size:15px;font-weight:700;margin-bottom:8px">Win-Rate je Fenster (OOS)</div>
-    <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">
-      <canvas id="wcan" style="width:100%;height:150px"></canvas>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:14px" id="w1"></div>
-    <div class="g2" style="margin-bottom:14px">
-      <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px" id="w2"></div>
-      <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px" id="w3"></div>
-    </div>
-  </div>
-
-  <!-- SIGNAL-HISTORY (immer sichtbar wenn Archiv vorhanden) -->
-  <div id="arch-hist-wrap" style="margin-top:6px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px">&#128337; Signal-History <span style="font-size:11px;color:var(--mut);font-weight:400">aus Archiv-Snapshots</span></div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-      <button class="tf active" onclick="archHistFilt('all',this)">Alle Ticker</button>
-      <button class="tf" onclick="archHistFilt('changed',this)">Signal geaendert</button>
-      <button class="tf" onclick="archHistFilt('buy',this)">BUY/STRONG</button>
-      <button class="tf" onclick="archHistFilt('sell',this)">SELL</button>
-    </div>
-    <div id="arch-hist-list">
-      <div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Archiv-Snapshots vorhanden. Fundamentals laden und Snapshot erstellen.</div>
-    </div>
-  </div>
 </div>
 
 <!-- TAB 5: HILFE -->
@@ -482,9 +428,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. Watchlist</strong> &mdash; Alle 298 Ticker nach Score. SPY-Marktphasen-Banner oben (gruen = SPY ueber 200MA / gelb = darunter). Antippen = Detail.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. WL2</strong> &mdash; Eigene Auswahl. Ticker per + WL2 hinzufuegen. Sync filtert Watchlist auf eigene Titel. Export/Import sichert geraeteuebergreifend.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. Fundamentals</strong> &mdash; Scores aus scores.json (taeglich automatisch aktualisiert). <strong style="color:#00e57a">Exp</strong>-Button (oben rechts) blendet ROCE, PEG, IC-Detail ein/aus.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Walk-Forward</strong> &mdash; Strategie-Validierung OOS 6M. <strong style="color:#00e57a">Exp</strong>-Button blendet IS/OOS-Fenster-Detail ein/aus.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">5. Sektoren</strong> &mdash; RSS-Signale + 3M-Skip-Momentum, 11 SPDR-ETFs. Dispersion-Signal.</div>
-      <div><strong style="color:#dce8f5">6. Hilfe</strong> &mdash; Diese Seite.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Sektoren</strong> &mdash; RSS-Signale + 3M-Skip-Momentum, 11 SPDR-ETFs. Dispersion-Signal.</div>
+      <div><strong style="color:#dce8f5">5. Hilfe</strong> &mdash; Diese Seite.</div>
     </div>
   </div>
 
@@ -611,28 +556,6 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">OVERFITTING-GAP</div><div style="font-size:12px;color:var(--mut)">IS Win-Rate minus OOS Win-Rate. <span style="color:#00e57a">&lt;5pp</span> = kein Overfitting &nbsp;<span style="color:#f0c000">5-15pp</span> = leicht &nbsp;<span style="color:#ff6666">&gt;15pp</span> = stark. Negativ = OOS besser als IS (bei kleinen Stichproben: Zufall).</div></div>
   </div>
 
-  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:12px;color:#f0c000">&#128202; Walk-Forward: Interpretation &amp; Grenzen</div>
-    <div style="padding:10px 12px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;margin-bottom:12px;font-size:12px;color:var(--mut);line-height:1.7">
-      <strong style="color:#dce8f5">Was Walk-Forward zeigt:</strong> Ob die Strategie in der Vergangenheit auf ungesehenen Daten (OOS) funktioniert haette. Reines Validierungsinstrument, kein Prognose-Tool.<br><br>
-      <strong style="color:#dce8f5">Was Walk-Forward nicht tut:</strong> OOS-Ergebnisse beeinflussen Synopse und Watchlist nicht. Live-Signale basieren ausschliesslich auf den aktuellen MACD/200MA/PEG-Kriterien. Eine Verknuepfung waere methodisch falsch (Look-ahead-Bias).
-    </div>
-    <div style="font-size:13px;font-weight:700;color:#f0c000;margin-bottom:8px">Stichproben-Problem bei strengen Filtern</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Strategie filtert streng. Mit 298 Tickern und 6M OOS: typisch 50-150 Trades pro Fenster. Faustregel: Erst ab ca. 30 Trades/Fenster sind Aussagen sinnvoll. Mit v6b_6m (SPY-Filter, 4 Fenster) ist diese Schwelle in allen Fenstern klar erreicht.</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
-      <div style="background:rgba(0,229,122,.06);border:1px solid rgba(0,229,122,.2);border-radius:8px;padding:10px">
-        <div style="font-family:monospace;font-size:10px;color:#00e57a;margin-bottom:4px">&#9679; STATISTISCH ROBUST</div>
-        <div style="font-size:11px;color:var(--mut);line-height:1.6">OOS WR &gt; 55%<br>Stabilitaet &lt; 8pp<br>Gap &lt; 5pp<br>n &gt; 30 Trades/Fenster</div>
-      </div>
-      <div style="background:rgba(255,63,63,.06);border:1px solid rgba(255,63,63,.2);border-radius:8px;padding:10px">
-        <div style="font-family:monospace;font-size:10px;color:#ff6666;margin-bottom:4px">&#9679; NICHT AUSSAGEKRAEFTIG</div>
-        <div style="font-size:11px;color:var(--mut);line-height:1.6">n &lt; 10 Trades/Fenster<br>Stabilitaet &gt; 25pp<br>Ergebnisse = Rauschen</div>
-      </div>
-    </div>
-    <div style="padding:10px 12px;background:rgba(240,192,0,.06);border-left:3px solid #f0c000;border-radius:6px;font-size:12px;color:var(--mut);line-height:1.6">
-      <strong style="color:#00e57a">Aktuelle Situation (Mai 2026):</strong> 298 Ticker, 4 Fenster, ~80-120 OOS-Trades/Fenster. <strong style="color:#dce8f5">Statistisch belastbar.</strong> Alle 4 Fenster konsistent positiv. SPY-Filter eliminiert Baermarkt-Eintraege. Produktions-Script: stockiq_alpha_juno_v6b_6m.
-    </div>
-  </div>
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#b07cf8">&#128193; Python-Scripts — Uebersicht und Rhythmus</div>
@@ -1192,7 +1115,6 @@ var STOCKS=[
 var FD = {};
 /* v5.9.16: Risk 0.15->0.20, Trend 0.25->0.20 (Low-Vol-Faktor, MSCI/BlackRock 1963-2024) */
 var W = {mom:0.25,trend:0.20,fund:0.35,risk:0.20};
-var WF_DATA = null;
 var WL_FILTER = 'all';
 var WL_SEL = null;
 var WL2 = {};          /* Ticker-Keys die in WL2 sind: {AAPL:true, MSFT:true, ...} */
@@ -1715,15 +1637,13 @@ function renderSpyPhaseBanner() {
 
 
 function goTab(n,btn){
-  var pgs=['p1','p1','p2','p8','p3','p4','p5','p9','p6','p7'],i; /* v5.9.92: p0(Synopse) entfernt, p1=Watchlist Standard */
+  var pgs=['p1','p1','p2','p8','p3','p1','p5','p9','p6','p7'],i; /* v6.0.10: p4(WF) entfernt */
   for(i=0;i<pgs.length;i++){var pg=document.getElementById(pgs[i]);if(pg)pg.style.display='none';}
   var tabs=document.querySelectorAll('.tab');
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
   var pg2=document.getElementById(pgs[n]);if(pg2)pg2.style.display='block';
   if(btn)btn.classList.add('active');
-  if(n===0)rSyn();if(n===1){rWL();renderSpyPhaseBanner();}if(n===2)rWL2();if(n===3)rFund();
-  if(n===4){rWF();try{archHistRend();}catch(e){}}
-  if(n===5)rAlloc();
+  if(n===0)rSyn();if(n===1){rWL();renderSpyPhaseBanner();}if(n===2)rWL2();if(n===3)rFund();  if(n===5)rAlloc();
   if(n===7){var sm=window.FD?FD['__macro__']:null;var el=document.getElementById('sektoren-content');if(el)el.innerHTML=renderSektorTab(sm);}
 }
 </script>
@@ -3518,123 +3438,6 @@ function rFund(){
 }
 </script>
 
-<!-- ============================================================
-     WALK-FORWARD
-     ============================================================ -->
-<script>
-function loadWF(inp){
-  var file=inp.files[0];if(!file)return;
-  var dm=document.getElementById('wdot');var mm=document.getElementById('wmsg');
-  var reader=new FileReader();
-  reader.onload=function(e){
-    try{
-      WF_DATA=JSON.parse(e.target.result);
-      /* Format-Normalisierung: v3 (global_stats) und v4 (summary) vereinheitlichen */
-      if(!WF_DATA.global_stats && WF_DATA.summary){
-        var s=WF_DATA.summary;
-        WF_DATA.global_stats={
-          standard:{win_rate:s.avg_is_wr||0, avg_return:0, n_signals:s.total_trades||0},
-          alpha:   {win_rate:s.avg_oos_wr||0, avg_return:0, n_signals:s.n_oos_windows||0}
-        };
-      }
-      /* walk_forward Eintraege normalisieren (fehlende Felder mit Fallback) */
-      var wf=WF_DATA.walk_forward||[];
-      for(var i=0;i<wf.length;i++){
-        var w=wf[i];
-        if(!w.start)  w.start  = w.oos_start||'--';
-        if(!w.end)    w.end    = w.oos_end||'--';
-        if(w.win_rate===undefined||w.win_rate===null) w.win_rate = w.oos_wr||0;
-        if(!w.n_signals) w.n_signals = w.oos_trades||0;
-        if(w.avg_return===undefined||w.avg_return===null) w.avg_return = 0;
-        if(!w.window) w.window = i+1;
-      }
-      if(dm)dm.style.background='#00e57a';
-      var ver=(WF_DATA.meta&&WF_DATA.meta.version)?(' v:'+WF_DATA.meta.version):'';
-      var nTk=(WF_DATA.meta)?(WF_DATA.meta.n_tickers||WF_DATA.meta.n_tickers_loaded||WF_DATA.meta.n_tickers_total||WF_DATA.meta.tickers||'?'):'?';
-      if(mm)mm.textContent='Geladen: '+nTk+' Ticker'+ver;
-      rWF();
-    }catch(err){if(dm)dm.style.background='#ff6666';if(mm)mm.textContent='Fehler: '+err.message+' (NaN/Inf in JSON? -> alpha_juno v7 verwenden)';}
-  };
-  reader.readAsText(file);
-}
-
-function rWF(){
-  if(!WF_DATA)return;
-  var wres=document.getElementById('wres');if(wres)wres.style.display='block';
-  var wf=WF_DATA.walk_forward||[];var gs=WF_DATA.global_stats||WF_DATA.summary||{};
-  /* Subtitle dynamisch aus JSON-Meta (wf_oos_months) */
-  var oosMths=(WF_DATA.meta&&WF_DATA.meta.wf_oos_months)?WF_DATA.meta.wf_oos_months:6;
-  var isMths=(WF_DATA.meta&&WF_DATA.meta.wf_is_months)?WF_DATA.meta.wf_is_months:12;
-  var sub=document.getElementById('wf-subtitle');
-  if(sub)sub.textContent=isMths+'M Training / '+oosMths+'M OOS rollierend \u00b7 Out-of-Sample Validierung';
-  /* v3: global_stats.standard/alpha -- v4: summary.avg_is_wr -- v5.9.31: meta.is_win_rate Fallback */
-  var stdWR = gs.standard ? gs.standard.win_rate : (gs.avg_is_wr || gs.standard_wr || 0);
-  /* IS-WR Fallback-Kette (v5.9.31): meta.is_win_rate → meta.overfitting_gap_pp + OOS */
-  if(!(stdWR>0)){
-    var meta=WF_DATA.meta||{};
-    if(meta.is_win_rate!==null&&meta.is_win_rate!==undefined&&meta.is_win_rate>0){
-      stdWR=meta.is_win_rate;
-    } else if(meta.overfitting_gap_pp!==null&&meta.overfitting_gap_pp!==undefined){
-      /* IS = OOS + Gap (Identitaet aus Backtest-Logik) */
-      var oosRef=gs.alpha?gs.alpha.win_rate:(gs.avg_oos_wr||0);
-      if(oosRef>0) stdWR=Math.round((oosRef+meta.overfitting_gap_pp)*10)/10;
-    }
-  }
-  /* OOS AVG aus walk_forward-Array berechnen (immer vorhanden, auch bei Interim-JSON) */
-  var wfAWR=0,i;
-  if(wf.length){for(i=0;i<wf.length;i++)wfAWR+=wf[i].win_rate;wfAWR=+(wfAWR/wf.length).toFixed(1);}
-  /* Alpha WR: aus global_stats wenn vorhanden, sonst Fallback auf wfAWR (OOS-Avg) */
-  var rawOOS = gs.alpha ? gs.alpha.win_rate : gs.avg_oos_wr;
-  var alpWR,alpSub;
-  if(rawOOS!==null&&rawOOS!==undefined&&rawOOS>0){
-    alpWR=rawOOS;alpSub=oosMths+'M OOS';
-  } else if(wfAWR>0){
-    alpWR=wfAWR;alpSub='OOS-Avg ('+oosMths+'M)';
-  } else {
-    alpWR=0;alpSub='Fallback: Gesamt-WR';
-  }
-  /* IS WR: 'n/a' wenn nicht im JSON (Interim-JSON hat kein global_stats) */
-  var stdDisp=(stdWR>0)?stdWR+'%':'n/a';
-  var stdC=(stdWR>0)?(stdWR>=60?'#00e57a':'#f0c000'):'#7a9bb5';
-  var stab='n/a',stabC='#00c8f0';
-  if(wf.length>1){var mn=wfAWR,va=0;for(i=0;i<wf.length;i++)va+=(wf[i].win_rate-mn)*(wf[i].win_rate-mn);var sd=Math.sqrt(va/wf.length);stab=sd.toFixed(1)+'pp';stabC=sd<8?'#00e57a':sd<15?'#00c8f0':'#ff6666';}
-  var oof=+(alpWR-wfAWR).toFixed(1);var oofC=oof<5?'#00e57a':oof<15?'#f0c000':'#ff6666';
-  var w0=document.getElementById('w0');
-  if(w0)w0.innerHTML=kpiCard('IS Win-Rate',stdDisp,'',stdC)+kpiCard('Alpha WR',alpWR+'%',alpSub,'#00e57a')+kpiCard('OOS Avg',wfAWR+'%','',wfAWR>=60?'#00e57a':'#f0c000')+kpiCard('Stabilitaet',stab,'',stabC);
-  setTimeout(function(){drawWFC(wf);},80);
-  var cards='';
-  for(i=0;i<wf.length;i++){
-    var w=wf[i];var wC=w.win_rate>=60?'#00e57a':w.win_rate>=50?'#00c8f0':'#ff6666';var aC=w.avg_return>=0?'#00e57a':'#ff6666';
-    cards+='<div style="background:#0c1420;border:1px solid #1a2a3a;border-left:3px solid '+wC+';border-radius:10px;padding:12px">';
-    cards+='<div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-family:monospace;font-size:9px;color:var(--mut)">Fenster '+w.window+'</span><span style="font-family:monospace;font-size:10px">'+w.start+' - '+w.end+'</span></div>';
-    cards+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px">';
-    cards+='<div style="background:rgba(255,255,255,.04);border-radius:5px;padding:6px 8px"><div style="font-family:monospace;font-size:8px;color:var(--mut)">WR</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:'+wC+'">'+w.win_rate+'%</div></div>';
-    cards+='<div style="background:rgba(255,255,255,.04);border-radius:5px;padding:6px 8px"><div style="font-family:monospace;font-size:8px;color:var(--mut)">AVG RET</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:'+aC+'">'+(w.avg_return>=0?'+':'')+w.avg_return+'%</div></div>';
-    cards+='<div style="background:rgba(255,255,255,.04);border-radius:5px;padding:6px 8px"><div style="font-family:monospace;font-size:8px;color:var(--mut)">SIGNALE</div><div style="font-family:monospace;font-size:13px;font-weight:700">'+w.n_signals+'</div></div>';
-    cards+='</div></div>';
-  }
-  var w1=document.getElementById('w1');if(w1)w1.innerHTML=cards||'<div style="color:var(--mut);font-family:monospace;font-size:11px">Keine WF-Fenster</div>';
-  var oof2=oof<5?'Kein Overfitting.':oof<15?'Leichtes Overfitting.':'Starkes Overfitting!';
-  var w2=document.getElementById('w2');if(w2)w2.innerHTML=kpiCard('Stabilitaet',stab,'StdAbw OOS WR',stabC);
-  var w3=document.getElementById('w3');if(w3)w3.innerHTML=kpiCard('Overfitting-Gap',oof.toFixed(1)+'pp','IS vs. OOS',oofC)+'<div style="margin-top:8px;font-size:11px;color:var(--mut)">'+oof2+'</div>';
-  try{ archHistRend(); }catch(e){ /* Signal-History noch nicht geladen */ }
-}
-
-function drawWFC(wf){
-  var cv=document.getElementById('wcan');if(!cv||!wf||wf.length<1)return;
-  var W2=cv.parentElement.offsetWidth||700,H=150;cv.width=W2;cv.height=H;
-  var ctx=cv.getContext('2d');ctx.fillStyle='#060a10';ctx.fillRect(0,0,W2,H);
-  var pad=30,bw=(W2-pad*2)/Math.max(wf.length,1),i;
-  for(i=0;i<wf.length;i++){
-    var wr=Math.min(Math.max(wf[i].win_rate,30),80);var bH=(wr-30)/50*(H-2*pad);
-    var x=pad+i*bw+bw*.1;var bwb=bw*.8;
-    var c2=wf[i].win_rate>=60?'rgba(0,229,122,.8)':wf[i].win_rate>=50?'rgba(0,200,240,.7)':'rgba(255,63,63,.7)';
-    ctx.fillStyle=c2;ctx.fillRect(x,H-pad-bH,bwb,bH);
-    ctx.fillStyle='rgba(220,232,245,.6)';ctx.font='8px monospace';
-    ctx.fillText(wf[i].win_rate+'%',x+2,H-pad-bH-3);ctx.fillText('F'+wf[i].window,x+bwb*.1,H-6);
-  }
-}
-</script>
 
 <script>
 /* Error-Tracking: zeigt exakte Fehlerquelle in Console */
@@ -3689,122 +3492,6 @@ function dlDataUrl(){
 }
 </script>
 
-<!-- ============================================================
-     SIGNAL-HISTORY (Archiv-Auswertung)
-     ============================================================ -->
-<script>
-var ARCH_HIST_FILT = 'all';
-
-function archHistFilt(f, btn){
-  ARCH_HIST_FILT = f;
-  var btns = document.querySelectorAll('#arch-hist-wrap .tf'), i;
-  for(i=0;i<btns.length;i++){
-    btns[i].style.borderColor='#223040';btns[i].style.color='var(--mut)';
-    btns[i].classList.remove('active');
-  }
-  if(btn){btn.style.borderColor='var(--acc)';btn.style.color='var(--acc)';btn.classList.add('active');}
-  archHistRend();
-}
-
-function archHistRend(){
-  var el = document.getElementById('arch-hist-list'); if(!el) return;
-  if(!_archive || _archive.length < 1){
-    el.innerHTML = '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Noch keine Archiv-Snapshots. Fundamentals laden und Snapshot erstellen.</div>';
-    return;
-  }
-
-  /* Letzten und vorletzten Snapshot fuer Signal-Vergleich */
-  var latest  = _archive[0];
-  var prev    = _archive.length > 1 ? _archive[1] : null;
-
-  /* Index: Ticker -> Eintrag aus letztem Snapshot */
-  var latestMap = {}, prevMap = {}, i;
-  if(latest && latest.entries){ for(i=0;i<latest.entries.length;i++) latestMap[latest.entries[i].t] = latest.entries[i]; }
-  if(prev && prev.entries){ for(i=0;i<prev.entries.length;i++) prevMap[prev.entries[i].t] = prev.entries[i]; }
-
-  /* Signal-Farbe */
-  function sigCol(sig){
-    if(sig==='strong') return '#ff9f1c';
-    if(sig==='buy')    return '#00e57a';
-    if(sig==='rsi_block'||sig==='pb') return '#e8a020';
-    if(sig==='sell'||sig==='sell_zl'||sig==='sell_hist'||sig==='sell_ma') return '#ff6666';
-    if(sig==='weak')   return '#ff9966';
-    return '#7a9bb5';
-  }
-  function sigLbl(sig){
-    if(sig==='strong')       return 'STRONG';
-    if(sig==='buy')          return 'BUY';
-    if(sig==='buy_rsi_warn') return 'BUY \u26a0';   /* RSI-Überhitzungswarnung */
-    if(sig==='watch_rsi')    return 'WATCH RSI';    /* RSI-Erschöpfung */
-    if(sig==='pb')           return 'PEG-BLK';
-    if(sig==='rsi_block')    return 'RSI-BLK';
-    if(sig==='sell')         return 'SELL';
-    if(sig==='sell_zl')      return 'SELL ZL';
-    if(sig==='sell_hist')    return 'SELL HIST';
-    if(sig==='sell_ma')      return 'SELL MA';
-    if(sig==='weak')         return 'WEAK';
-    return 'WATCH';
-  }
-
-  /* Tickers sortiert nach Score (latest) */
-  var entries = latest.entries.slice();
-  entries.sort(function(a,b){ return (b.sc||0)-(a.sc||0); });
-
-  var out = '';
-  /* Header: Snapshot-Datum(en) */
-  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">';
-  out += 'Aktuell: <strong style="color:#dce8f5">'+latest.date+'</strong>';
-  if(prev) out += ' &nbsp;|&nbsp; Vorher: '+prev.date;
-  out += ' &nbsp;|&nbsp; '+_archive.length+' Snapshots gesamt';
-  out += '</div>';
-
-  var shown = 0;
-  for(i=0;i<entries.length;i++){
-    var e = entries[i];
-    var ep = prevMap[e.t] || null;
-    var changed = ep && ep.sig !== e.sig;
-    var isBuy   = e.sig==='strong'||e.sig==='buy';
-    var isSellS = e.sig==='sell'||e.sig==='sell_zl'||e.sig==='sell_hist'||e.sig==='sell_ma';
-
-    /* Filter */
-    if(ARCH_HIST_FILT==='changed' && !changed) continue;
-    if(ARCH_HIST_FILT==='buy'     && !isBuy)   continue;
-    if(ARCH_HIST_FILT==='sell'    && !isSellS)  continue;
-
-    shown++;
-    var sc2 = sigCol(e.sig);
-    var borderL = changed ? 'border-left:3px solid #b07cf8;' : '';
-    var rowBg   = changed ? 'background:rgba(176,124,248,.05);' : 'background:#0c1420;';
-
-    out += '<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderL+'border-radius:8px;padding:10px 13px;margin-bottom:5px">';
-    out += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
-    out += '<div style="display:flex;align-items:center;gap:8px">';
-    out += '<span style="font-size:14px;font-weight:800">'+e.t+'</span>';
-    if(changed){
-      out += '<span style="font-family:monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(176,124,248,.15);color:#b07cf8">'+sigLbl(ep.sig)+' &rarr; '+sigLbl(e.sig)+'</span>';
-    } else {
-      out += '<span style="font-family:monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.05);color:'+sc2+'">'+sigLbl(e.sig)+'</span>';
-    }
-    out += '</div>';
-    out += '<span style="font-size:16px;font-weight:800;color:'+sc2+'">'+e.sc+'</span>';
-    out += '</div>';
-    out += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-family:monospace;font-size:9px;color:var(--mut)">';
-    out += '<span>P: '+(e.p!==null?e.p:'--')+'</span>';
-    out += '<span>RSI: <span style="color:'+(e.rsi>72?'#ff6666':e.rsi<30?'#00e57a':'#dce8f5')+'">'+(e.rsi||'--')+'</span></span>';
-    out += '<span>Hist: '+(e.hist!==null?e.hist:'--')+'</span>';
-    out += '<span>200MA: <span style="color:'+(e.a200?'#00e57a':'#ff6666')+'">'+(e.a200?'&#10003;':'&#10007;')+'</span></span>';
-    out += '</div>';
-    out += '</div>';
-  }
-
-  if(shown === 0){
-    out += '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Keine Eintraege fuer diesen Filter.</div>';
-  }
-  el.innerHTML = out;
-}
-
-/* archHistRend wird von goTab(4) via rWF aufgerufen -- direkt integriert */
-</script>
 
 <script>
 /* Fehleranzeige-Element im DOM */
@@ -5938,6 +5625,73 @@ function getSectorSignalsForSnapshot(macro) {
     sector_laggards:   laggards
   };
 }
+</script>
+<div id="onboarding-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(6,10,16,.92);z-index:9000;align-items:center;justify-content:center"><div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:16px;padding:24px;max-width:360px;width:90%"><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px" id="ob-step-label">Schritt 1 / 3</div><div style="font-size:16px;font-weight:700;margin-bottom:16px;color:#dce8f5" id="ob-question">--</div><div id="ob-options" style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px"></div><div style="display:flex;justify-content:space-between;align-items:center"><button id="ob-back" onclick="obBack()" style="font-family:monospace;font-size:11px;padding:6px 14px;border-radius:8px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">Zurueck</button><button id="ob-next" onclick="obNext()" style="font-family:monospace;font-size:11px;padding:6px 14px;border-radius:8px;border:none;color:#000;background:var(--acc);cursor:pointer">Weiter</button></div></div></div>
+<script>
+var OB_STEP=0;
+var OB_SEL=[null,null,null];
+var OB_KEY='stockiq_profile';
+var OB_QUESTIONS=[
+  {label:'Schritt 1 / 3',q:'Dein Anlagehorizont?',opts:[
+    {v:'lt2',t:'Unter 2 Jahre'},{v:'2-5',t:'2 bis 5 Jahre'},
+    {v:'5-10',t:'5 bis 10 Jahre'},{v:'gt10',t:'Ueber 10 Jahre'}]},
+  {label:'Schritt 2 / 3',q:'Deine Anlageorientierung?',opts:[
+    {v:'kapital',t:'Kapitalerhalt'},{v:'ausgewogen',t:'Ausgewogen'},
+    {v:'rendite',t:'Rendite-Maximierung'}]},
+  {label:'Schritt 3 / 3',q:'Bekannte Anlageklassen?',opts:[
+    {v:'aktien',t:'Nur Aktien'},{v:'aktien-etfs',t:'Aktien + ETFs'},
+    {v:'alle',t:'Alle Klassen (Anleihen, Gold, Cash)'}]}
+];
+function showOnboarding(){
+  OB_STEP=0;
+  var raw=null;try{raw=localStorage.getItem(OB_KEY);}catch(e){}
+  if(raw){try{var p=JSON.parse(raw);OB_SEL[0]=p.horizont||null;OB_SEL[1]=p.orientierung||null;OB_SEL[2]=p.klassen||null;}catch(e){OB_SEL=[null,null,null];}}
+  else{OB_SEL=[null,null,null];}
+  obRender();
+  var ov=document.getElementById('onboarding-overlay');if(ov){ov.style.display='flex';}
+}
+function obRender(){
+  var step=OB_QUESTIONS[OB_STEP];
+  document.getElementById('ob-step-label').textContent=step.label;
+  document.getElementById('ob-question').textContent=step.q;
+  var cont=document.getElementById('ob-options');cont.innerHTML='';
+  for(var i=0;i<step.opts.length;i++){
+    var opt=step.opts[i];var sel=OB_SEL[OB_STEP]===opt.v;
+    var btn=document.createElement('button');
+    btn.setAttribute('data-v',opt.v);btn.textContent=opt.t;
+    btn.style.cssText='font-family:monospace;font-size:12px;padding:10px 14px;border-radius:8px;cursor:pointer;text-align:left;border:1px solid '+(sel?'var(--acc)':'#1a2a3a')+';color:'+(sel?'var(--acc)':'var(--mut)')+';background:'+(sel?'rgba(0,200,240,.08)':'transparent')+';';
+    btn.onclick=(function(v){return function(){obSelect(v);};})(opt.v);
+    cont.appendChild(btn);
+  }
+  var backBtn=document.getElementById('ob-back');if(backBtn){backBtn.style.display=OB_STEP===0?'none':'inline-block';}
+  var nextBtn=document.getElementById('ob-next');if(nextBtn){nextBtn.textContent=OB_STEP===2?'Speichern':'Weiter';}
+}
+function obSelect(v){OB_SEL[OB_STEP]=v;obRender();}
+function obNext(){
+  if(!OB_SEL[OB_STEP]){return;}
+  if(OB_STEP<2){OB_STEP++;obRender();}
+  else{
+    var profile={horizont:OB_SEL[0],orientierung:OB_SEL[1],klassen:OB_SEL[2]};
+    try{localStorage.setItem(OB_KEY,JSON.stringify(profile));}catch(e){}
+    var ov=document.getElementById('onboarding-overlay');if(ov){ov.style.display='none';}
+    renderProfileBadge(profile);
+  }
+}
+function obBack(){if(OB_STEP>0){OB_STEP--;obRender();}}
+function renderProfileBadge(profile){
+  var labels={lt2:'<2J','2-5':'2-5J','5-10':'5-10J',gt10:'>10J',
+    kapital:'Kapitalerhalt',ausgewogen:'Ausgewogen',rendite:'Rendite-Max',
+    aktien:'Nur Aktien','aktien-etfs':'Aktien+ETFs',alle:'Alle Klassen'};
+  var txt=(labels[profile.orientierung]||'?')+' · '+(labels[profile.horizont]||'?');
+  var el=document.getElementById('profile-text');if(el){el.textContent=txt;}
+  var badge=document.getElementById('profile-badge');
+  if(badge){badge.style.display='inline-flex';badge.style.alignItems='center';badge.style.gap='4px';}
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var raw=null;try{raw=localStorage.getItem(OB_KEY);}catch(e){}
+  if(!raw){showOnboarding();}
+  else{try{var p=JSON.parse(raw);renderProfileBadge(p);}catch(e){};}
+});
 </script>
 </body>
 </html>

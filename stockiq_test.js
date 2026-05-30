@@ -81,7 +81,6 @@ var requiredFunctions = [
   'function cSc',
   'function mSig',
   'function loadFund',
-  'function loadWF',
   'function archSnapshot',
   'function archExportJSON',
   'function wl2Export',
@@ -147,10 +146,10 @@ if (badMatches && badMatches.length > 0) {
 
 // label for pattern vorhanden
 var labelMatches = html.match(/<label\s+for="[^"]+"/g);
-if (labelMatches && labelMatches.length >= 2) {
+if (labelMatches && labelMatches.length >= 1) {
   ok('File inputs als <label for> (' + labelMatches.length + 'x)');
 } else {
-  warn('Weniger als 2 <label for> file inputs gefunden');
+  warn('Weniger als 1 <label for> file input gefunden');
 }
 
 // ── 5. Score-Gewichte ─────────────────────────────────────
@@ -193,10 +192,10 @@ if (vMatch) {
 }
 
 // Script-Bloecke zaehlen
-if (blocks.length === 14) {
-  ok('Script-Block-Anzahl: 14 (erwartet: 14, v5.9.86 +Sektoren-Block)');
+if (blocks.length === 13) {
+  ok('Script-Block-Anzahl: 13 (erwartet: 13, v6.0.11 +Onboarding)');
 } else {
-  err('Script-Block-Anzahl: ' + blocks.length + ' (erwartet: 14)');
+  err('Script-Block-Anzahl: ' + blocks.length + ' (erwartet: 13)');
 }
 
 // ── 7. ALIAS-Konsistenz ───────────────────────────────────
