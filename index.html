@@ -101,9 +101,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <!-- v5.9.86: Tab 8 Sektoren -->
     <button id="tb7" class="tab" onclick="goTab(7,this)">&#127759; Sektoren</button>
     <button id="tb8" class="tab" onclick="goTab(8,this)">&#128218; Hilfe</button>
-    <button id="tb9" class="tab" onclick="goTab(9,this)">&#128203; Roadmap</button>
-    <button id="btnExpert" onclick="toggleExpertenModus()" style="font-size:0.8em;padding:2px 8px;margin-left:12px;background:#555;color:#ccc;border:1px solid #777;border-radius:3px;cursor:pointer">Exp</button>
-  </div>
+    <button id="tb9" class="tab" onclick="goTab(9,this)">&#128203; Roadmap</button>  </div>
 </header>
 
 <!-- TAB 1: WATCHLIST -->
@@ -1694,13 +1692,6 @@ tick();setInterval(tick,1000);
      TAB NAVIGATION
      ============================================================ -->
 <script>
-var _expertenModus = false;
-
-function toggleExpertenModus() {
-  _expertenModus = !_expertenModus;
-  try { localStorage.setItem("stockiq_experten", _expertenModus ? "1" : "0"); } catch(e) {}
-  applyExpertenModus();
-}
 
 function renderSpyPhaseBanner() {
   var el = document.getElementById("spyPhaseBanner");
@@ -1722,19 +1713,6 @@ function renderSpyPhaseBanner() {
   el.style.display = "block";
 }
 
-function applyExpertenModus() {
-  var expertenTabs = ["tb5"];
-  var btn = document.getElementById("btnExpert");
-  for (var i = 0; i < expertenTabs.length; i++) {
-    var el = document.getElementById(expertenTabs[i]);
-    if (el) { el.style.display = _expertenModus ? "" : "none"; }
-  }
-  if (btn) {
-    btn.style.background = _expertenModus ? "#2a6" : "#555";
-    btn.style.color = _expertenModus ? "#fff" : "#ccc";
-    btn.title = _expertenModus ? "Experten-Modus aktiv" : "Experten-Modus";
-  }
-}
 
 function goTab(n,btn){
   var pgs=['p1','p1','p2','p8','p3','p4','p5','p9','p6','p7'],i; /* v5.9.92: p0(Synopse) entfernt, p1=Watchlist Standard */
@@ -3861,8 +3839,6 @@ document.addEventListener('DOMContentLoaded', function(){
   try{ initAlloc(); }catch(e3){}
   syncSnapshotsFromRepo();
   loadScores();
-  try { _expertenModus = localStorage.getItem("stockiq_experten") === "1"; } catch(e) { _expertenModus = false; }
-  applyExpertenModus();
   renderSpyPhaseBanner();
 });
 </script>

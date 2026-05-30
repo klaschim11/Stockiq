@@ -1,4 +1,3 @@
-stockiq_deploy.py
 stockiq_fundamentals*.json
 stockiq_snapshots*.json
 stockiq_annual*.json
@@ -12,6 +11,15 @@ __pycache__/
 # Algorithmen (Schutzziel A)
 fund_juno*.py
 stockiq_score.py
+
+# Lokale Scripts + Workflow
+run_daily*.ps1
+run_daily*.bat
+stockiq_dev_archive_update*.py
+stockiq_generate_uebergabe*.py
+stockiq_dev_archive*.json
+Archiv/
+dev/
 
 # Lokale Arbeits-Dateien
 auftrag_claude_code_*.md
