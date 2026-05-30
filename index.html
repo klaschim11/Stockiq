@@ -433,7 +433,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:13px;color:var(--mut);line-height:1.8">
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. Watchlist</strong> &mdash; Alle 298 Ticker nach Score. SPY-Marktphasen-Banner oben (gruen = SPY ueber 200MA / gelb = darunter). Antippen = Detail.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. WL2</strong> &mdash; Eigene Auswahl. Ticker per + WL2 hinzufuegen. Sync filtert Watchlist auf eigene Titel. Export/Import sichert geraeteuebergreifend.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. Fundamentals</strong> &mdash; Scores aus scores.json (taeglich automatisch aktualisiert). <strong style="color:#00e57a">Exp</strong>-Button (oben rechts) blendet ROCE, PEG, IC-Detail ein/aus.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. Fundamentals</strong> &mdash; Tagesaktuelle Scores aus scores.json. <strong style="color:#00e57a">Exp</strong>-Button oben rechts = Experten-Modus ein/aus (ROCE, PEG, Debt, Moat, IC-Detail).</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Sektoren</strong> &mdash; RSS-Signale + 3M-Skip-Momentum, 11 SPDR-ETFs. Dispersion-Signal.</div>
       <div><strong style="color:#dce8f5">5. Hilfe</strong> &mdash; Diese Seite.</div>
     </div>
@@ -564,38 +564,45 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#b07cf8">&#128193; Python-Scripts â€” Uebersicht und Rhythmus</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#b07cf8">&#128193; Taeglich-Workflow (scores.json-Architektur)</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.8">
 
-      <!-- Taeglich -->
-      <div style="font-family:monospace;font-size:10px;color:#00e57a;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Taeglich</div>
-      <div style="margin-bottom:8px"><strong style="color:#dce8f5">fund_juno_v7.9.28.py</strong> (Juno/iPhone) &mdash; 298 Ticker, FCF, ROCE, EVAR, EV/EBITDA, mom_skip, above200, RSI &rarr; stockiq_fundamentals.json<br>
-      <span style="color:#7a9bb5;font-size:10px">Privat (nicht im Repo). Automatisch: 1. Mai +/-7 Tage stockiq_annual.json.</span></div>
-      <div style="margin-bottom:8px"><strong style="color:#dce8f5">stockiq_score.py</strong> (Windows) &mdash; Berechnet alle Scores aus fundamentals.json &rarr; stockiq_scores.json &rarr; git push &rarr; Dashboard aktualisiert<br>
-      <span style="color:#7a9bb5;font-size:10px">Privat (nicht im Repo). Kein JSON-Upload ins Dashboard mehr noetig.</span></div>
+      <!-- Schritt 1 -->
+      <div style="font-family:monospace;font-size:10px;color:#00e57a;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Schritt 1 &mdash; Juno (iPhone, ~10 Min)</div>
+      <div style="margin-bottom:10px"><strong style="color:#dce8f5">fund_juno_v7.9.27.py</strong> &mdash; 298 Ticker: FCF, ROCE, EVAR, EV/EBITDA, mom_skip, above200, RSI, VIX, SPY-Closes &rarr; <strong style="color:#00c8f0">stockiq_fundamentals.json</strong><br>
+      <span style="color:#7a9bb5;font-size:10px">Privat, nicht im Repo. Ergebnis: ~300 KB JSON auf iCloud.</span></div>
 
-      <!-- Optional taeglich -->
+      <!-- Schritt 2 -->
+      <div style="font-family:monospace;font-size:10px;color:#00e57a;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Schritt 2 &mdash; Scores berechnen (Windows, ~5 Sek)</div>
+      <div style="margin-bottom:10px"><strong style="color:#dce8f5">stockiq_score.py</strong> &mdash; Liest fundamentals.json, berechnet alle Score-Faktoren lokal &rarr; <strong style="color:#00c8f0">stockiq_scores.json</strong><br>
+      <span style="color:#7a9bb5;font-size:10px">Privat, nicht im Repo. Dashboard berechnet keine Scores mehr im Browser.</span></div>
+
+      <!-- Schritt 3 -->
+      <div style="font-family:monospace;font-size:10px;color:#00e57a;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Schritt 3 &mdash; Deployen (Git, ~10 Sek)</div>
+      <div style="margin-bottom:6px;padding:8px 10px;background:rgba(0,229,122,.05);border-left:3px solid #00e57a;border-radius:6px;font-family:monospace;font-size:10px;color:#dce8f5">
+        git add stockiq_scores.json<br>
+        git commit -m "scores: update DATUM"<br>
+        git push origin main
+      </div>
+      <div style="margin-bottom:14px;font-size:11px;color:var(--mut)">Nach dem Push laedt das Dashboard die neuen Scores automatisch beim naechsten Seitenaufruf.</div>
+
+      <!-- Optional -->
       <div style="font-family:monospace;font-size:10px;color:#f0c000;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Optional (nach Bedarf)</div>
-      <div style="margin-bottom:8px"><strong style="color:#dce8f5">alpha_juno_v6b_6m-u4.py</strong> &mdash; Walk-Forward 6M OOS, SPY/GSPC-Filter &rarr; stockiq_alpha_results.json (~30 Min)<br>
-      <span style="color:#7a9bb5;font-size:10px">Empfohlen: 1&times;/Woche oder nach groesseren Marktbewegungen</span></div>
+      <div style="margin-bottom:8px"><strong style="color:#dce8f5">alpha_juno_v6b_6m-u4.py</strong> &mdash; Walk-Forward 6M OOS, SPY-Filter (~30 Min)<br>
+      <span style="color:#7a9bb5;font-size:10px">1&times;/Woche oder nach groesseren Marktbewegungen</span></div>
 
       <!-- Jaehrlich -->
       <div style="font-family:monospace;font-size:10px;color:#00c8f0;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Jaehrlich (Mai)</div>
-      <div style="margin-bottom:4px"><strong style="color:#dce8f5">annual_backfill_v1.x.py</strong> &mdash; Historische Jahres-Fundamentaldaten (ROCE/FCF 5+ Jahre) &rarr; stockiq_annual.json<br>
-      <span style="color:#7a9bb5;font-size:10px">Nur wenn neues Jahr benoetigt. fund_juno ergaenzt aktuelles Jahr automatisch.</span></div>
-      <div style="margin-bottom:8px"><strong style="color:#dce8f5">annual_ic_v1.0.py</strong> &mdash; Faktor-IC-Analyse (Faktorwert Dez &rarr; Jahresrendite Folgejahr) &rarr; stockiq_annual_ic_results.json<br>
-      <span style="color:#7a9bb5;font-size:10px">Sinnvoll: 1&times; nach annual.json-Update (Mai). Neue Ergebnisse erst nach neuem Jahres-Datenpunkt.</span></div>
+      <div style="margin-bottom:4px"><strong style="color:#dce8f5">annual_backfill_v1.x.py</strong> &mdash; Historische ROCE/FCF 5+ Jahre &rarr; stockiq_annual.json<br>
+      <span style="color:#7a9bb5;font-size:10px">fund_juno ergaenzt aktuelles Jahr automatisch.</span></div>
+      <div style="margin-bottom:12px"><strong style="color:#dce8f5">annual_ic_v1.0.py</strong> &mdash; Faktor-IC-Analyse (Faktorwert Dez &rarr; Jahresrendite) &rarr; stockiq_annual_ic_results.json<br>
+      <span style="color:#7a9bb5;font-size:10px">Sinnvoll: 1&times; nach annual.json-Update.</span></div>
 
-      <!-- Einmalig -->
-      <div style="font-family:monospace;font-size:10px;color:#ff9f1c;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Einmalig / Setup</div>
-      <div style="margin-bottom:12px"><strong style="color:#dce8f5">%pip install yfinance</strong> &mdash; Juno-Einrichtung</div>
-
-      <!-- IC-Erklaerung (vereinfacht) -->
+      <!-- IC-Erklaerung -->
       <div style="padding:10px 12px;background:rgba(176,124,248,.06);border-left:3px solid #b07cf8;border-radius:6px;font-size:11px;color:var(--mut);line-height:1.7">
         <strong style="color:#dce8f5">Faktor-IC (Information Coefficient):</strong><br>
-        IC misst wie gut ein Faktor die zuk&uuml;nftige Rendite-Rangordnung vorhersagt. Ein positiver IC best&auml;tigt, dass der Faktor als Signal taugt. Negative oder neutrale ICs f&uuml;hren zur Modell-Anpassung.<br><br>
-        <strong style="color:#dce8f5">Zwei IC-Typen in StockIQ:</strong><br>
-        <strong style="color:#00c8f0">Annual-IC</strong>: Langfrist-Validierung 1&times;/Jahr (Mai). Basis: Jahres-Fundamentaldaten &rarr; Jahresrendite.<br>
+        Misst wie gut ein Faktor die kuenftige Rendite-Rangordnung vorhersagt. Positiver IC = Signal taugt. Negative/neutrale ICs fuehren zur Modell-Anpassung.<br><br>
+        <strong style="color:#00c8f0">Annual-IC</strong>: Langfrist-Validierung 1&times;/Jahr (Mai) &mdash; Jahres-Fundamentaldaten &rarr; Jahresrendite.<br>
         <strong style="color:#00c8f0">30-Tage-IC</strong> (geplant): Kurzfrist-Validierung 1&times;/Monat ab &ge;20 Snapshots.
       </div>
     </div>
@@ -607,7 +614,6 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <tr style="background:#0c1420"><td style="padding:5px 8px;color:#00e57a;width:80px">v5.9.86</td><td style="padding:5px 8px;color:#dce8f5">&#127759; Tab 8 Sektoren: RSS + 3M-Skip-Momentum + Dispersion-Signal (11 SPDR-ETFs) &middot; Snapshot-Persistenz</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a;width:80px">v5.9.85</td><td style="padding:5px 8px;color:#dce8f5">&#128202; Chart-Export: WL2 &rarr; stockiq_wl2_export.json (Ticker + Score + Kennzahlen fuer stockiq_chart.py)</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
       <tr style="background:#0c1420"><td style="padding:5px 8px;color:#00e57a;width:80px">v5.9.84</td><td style="padding:5px 8px;color:#dce8f5">IC-Score-Update: OE-Yield max(FCF,OE) &middot; EV/EBIT 0.30-&gt;0.45 &middot; ROCE 30%&rarr;20% &middot; valSc 20%&rarr;30%</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00e57a;width:80px">v5.9.83</td><td style="padding:5px 8px;color:#dce8f5">Synopse = Top-3-Spiegel der WL-Filter (HC + WL2 konsistent)</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
       <tr style="background:#0c1420"><td style="padding:5px 8px;color:#00e57a">v5.9.81</td><td style="padding:5px 8px;color:#dce8f5">Hilfe-Tab: Anwender-Bereinigung (IP-Schutz Phase 1)</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
       <tr style="background:#0c1420"><td style="padding:5px 8px;color:#00c8f0">v5.9.80</td><td style="padding:5px 8px;color:#dce8f5">Bericht-Fix: EVAR (rel.) + Risk-Farbe + Shares YoY + EV/EBIT</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 8px;color:#00c8f0">v5.9.79</td><td style="padding:5px 8px;color:#dce8f5">Snapshot-Status-Badge im DQ-Banner</td><td style="padding:5px 8px;color:#456278">Mai 2026</td></tr>
