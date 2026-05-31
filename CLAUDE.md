@@ -1,5 +1,5 @@
 # StockIQ — CLAUDE.md
-Version: v6.0.13 | Stand: 31. Mai 2026 | Sprint 10 abgeschlossen
+Version: v6.1.1 | Stand: 31. Mai 2026 | Sprint 11 abgeschlossen
 
 ---
 
@@ -8,7 +8,7 @@ Version: v6.0.13 | Stand: 31. Mai 2026 | Sprint 10 abgeschlossen
 StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 - **Dashboard**: klaschim11.github.io/Stockiq (`index.html`)
 - **Repo lokal**: `C:\Users\klasc\Stockiq`
-- **Ticker**: 298 | **Snapshots**: 66 (25.04.–25.05.2026)
+- **Ticker**: 299 | **Snapshots**: laufend
 - **OOS AVG**: 60.1% | **Stabilitaet**: 2.8pp
 
 ---
@@ -17,23 +17,23 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 
 | Datei | Version | Zweck |
 |-------|---------|-------|
-| `index.html` | v6.0.13 | Dashboard (laedt scores.json) |
-| `fund_juno_v7.9.27.py` | v7.9.27 | Fundamentaldaten + Makro (Juno/iPhone, PRIVAT) |
-| `stockiq_score.py` | v1.0 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
+| `index.html` | v6.1.1 | Dashboard (laedt scores.json) |
+| `fund_juno_v7_9_29.py` | v7.9.29 | Fundamentaldaten + Makro (Juno/iPhone, PRIVAT) |
+| `stockiq_score.py` | v1.3 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
 | `stockiq_alpha_juno_v6b_6m.py` | v6b_6m-u4 | Walk-Forward PRODUKTION |
-| `stockiq_wl3_signal_tracking_v1_5.py` | v1.5 | WL3 IC-Analyse (Windows) |
-| `stockiq_test.js` | aktuell | QA: 27 Tests, 0 Fehler (2 Warnungen: EV/EBIT + max(FCF,OE) veraltet) |
+| `stockiq_wl3_signal_tracking_v1_6.py` | v1.6 | WL3 IC-Analyse (Windows) |
+| `stockiq_test.js` | aktuell | QA: 26 Tests, 0 Fehler (2 Warnungen: EV/EBIT + max(FCF,OE) veraltet) |
 
 **Schutzziel A**: `fund_juno*.py` und `stockiq_score.py` sind in `.gitignore` —
 sie liegen NICHT im Repo.
 
 ---
 
-## TAEGLICH-WORKFLOW (stabil ab v5.9.93)
+## TAEGLICH-WORKFLOW
 
 ```powershell
 # 1. Daten holen (Juno, iPhone, ~10 Min)
-fund_juno_v7.9.27.py  ->  stockiq_fundamentals.json  (iCloud)
+fund_juno_v7_9_29.py  ->  stockiq_fundamentals.json  (iCloud)
 
 # 2. Scores berechnen (Windows, ~5 Sek)
 python stockiq_score.py  ->  stockiq_scores.json
@@ -46,20 +46,22 @@ git push origin main
 # -> Dashboard laedt scores.json automatisch
 ```
 
+Oder 1-Click: `run_daily.bat` (erledigt Schritte 1-4 automatisch).
+
 ---
 
-## ARCHITEKTUR (ab v6.0.13)
+## ARCHITEKTUR (ab v6.1.1)
 
 ```
 LOKAL (privat, nicht im Repo):
-  fund_juno_v7.9.27.py      Datenabruf (298 Ticker, 35 Felder)
+  fund_juno_v7_9_29.py      Datenabruf (299 Ticker, 35 Felder)
   stockiq_score.py           Score-Portierung aus index.html
   stockiq_fundamentals.json  Rohdaten
 
 REPO (oeffentlich, GitHub Pages):
   index.html                 Dashboard-Shell + Render-Logik
-  stockiq_scores.json        298 Ticker, tagesaktuelle Scores + Signale
-  stockiq_snapshots.json     66 Eintraege (ARCH_MAX=120)
+  stockiq_scores.json        299 Ticker, tagesaktuelle Scores + Signale
+  stockiq_snapshots.json     Snapshot-Archiv (ARCH_MAX=120)
   stockiq_test.js            QA
   CLAUDE.md                  diese Datei
   .gitignore                 Schutzziel A
@@ -84,10 +86,6 @@ momSc() = volAdjScore() * vixFactor
 rSc = s.risk*0.60 + betaSc(beta)*0.40
 ```
 
-**scores.json**: `stockiq_score.py` berechnet alle Scores lokal und schreibt
-fertige Werte. `index.html` liest nur noch `_scoresIdx[s.t]` — keine
-Berechnung im Browser mehr (ausser Render-Dependencies in Phase C).
-
 ---
 
 ## ENGINEERING-REGELN
@@ -109,7 +107,7 @@ NIEMALS: /* */ Kommentare als Anker
 ### Node-Validierung (PFLICHT nach jeder Aenderung)
 ```powershell
 node stockiq_test.js index.html
-# Erwartet: 27 Tests / 0 Fehler (13 Script-Bloecke erwartet)
+# Erwartet: 26 Tests / 0 Fehler (13 Script-Bloecke erwartet)
 # 2 bekannte Warnungen: EV/EBIT + max(FCF,OE) veraltet (kein Fehler)
 # Kein Deploy ohne gruenen Test!
 ```
@@ -129,10 +127,8 @@ cd C:\Users\klasc\Stockiq
 git pull origin main
 node stockiq_test.js index.html   # MUSS gruen sein
 git add index.html stockiq_scores.json
-git commit -m "v5.9.XX: Beschreibung"
+git commit -m "v6.1.X: Beschreibung"
 git push origin main
-# Credential Manager konfiguriert (PAT, kein Passwort)
-# Claude Code kann nicht interaktiv pushen -> manuell im Terminal
 ```
 
 ---
@@ -149,7 +145,8 @@ Strategie: MACD ZL + ATR*0.05 + SMA200 + SPY-Filter
 **Widerlegte Hypothesen (nicht wieder oeffnen ohne neue Evidenz):**
 - Statische Score-Filter (Score>=65): OOS WR -3pp
 - RSI-Filter / Hysterese: NULL Effekt
-- Bond-Regime Entry-Daempfer: -3.2 bis -3.9pp (gefilterte Trades waren die BESTEN)
+- Bond-Regime Entry-Daempfer: -3.2 bis -3.9pp
+- Business-Cycle-Sektor-Rotation: kein Beweis (Molchanov 2024)
 
 ---
 
@@ -171,15 +168,44 @@ v6.0.13  Allokations-Tab S/E/A/G/C profil-abhaengig
 
 ---
 
+## SPRINT 11 (abgeschlossen, 31. Mai 2026)
+
+```
+v6.1.0  P0 + P1 kombiniert:
+  - 9 Textfixes (Version, fund_juno-Referenz, Ticker-Anzahl)
+  - WL2-Tab entfernt: 7 -> 6 Tabs
+  - WL1 zweizeilige Filterstruktur:
+      Zeile 1: Signal-Buttons + Sort (Score/A-Z) + SPY-Badge
+      Zeile 2: Sektorfilter-Dropdown + SF/HC/DR + Favoriten + Export/Import
+  - Stern-Toggle pro Titelzeile (Favoriten direkt in WL1)
+  - buildSectorOptions(): Sektor-Dropdown dynamisch aus scores.json
+  - goTab() + pgs-Array: 6 Tabs neu verdrahtet
+  - 4 tote Funktionen entfernt (rWL2, wl2CheckOrigin, wl2SelAll, wl2ChartExport)
+
+v6.1.1  Bugfixes + Suchfeld:
+  - Suchfeld (Ticker/Name live-Filter) statt SPY-Banner
+  - SPY-Phase als kompakter Badge in Zeile 1 (spy-phase-badge Span)
+  - dpFillWL2(): Encoding-Fix + A-Z-Sort nach Klarname
+  - Allokation-Subtitle Versionsstring aktualisiert
+```
+
+---
+
 ## OFFENE PUNKTE (Stand 31.05.2026)
 
 ```
-P1  DONE     Hilfe-Tab aktualisiert (v6.0.13)
-P2  DONE     Walk-Forward entfernt (v6.0.10)
-P3  Phase C  Detail-Panel -> scores.json (optional)
+P2  Allokations-Tab Umbau (Sprint 12):
+    - Eingabefelder neu: S/E/A/G/R/C
+    - buildAllocTargets(profil, phase) verdrahten
+    - detectCyclePhase() + Phasen-Dropdown
+    - fund_juno: curve_slope_bps in __macro__
+
+P3  Hilfe/Roadmap Bereinigung (Sprint 12):
+    - Versionshistorie aus Hilfe entfernen
+    - Roadmap: Sprint 4-11 ergaenzen
+
 P4  Sektor-IC-Test: ~Mitte Juni 2026 (+10 Snapshots, sr-Feld benoetigt)
-P5  alpha_juno auf 298 Ticker (nach IC-Test, OOS-pflichtig)
-WL3 Naechster Run: Mitte Juli 2026
+P5  WL3 Run: Mitte Juli 2026
 ```
 
 ---
@@ -191,7 +217,7 @@ WL3 Naechster Run: Mitte Juli 2026
 + 6M-Fenster: Stab. 2.8pp vs. 3M: 10.0pp
 + Owner Earnings: IC=+0.155 ***
 + EV/EBIT: IC=-0.143 ***
-+ WL3 7-14d: IC=+0.0361 ***
++ WL3 7-14d: IC=+0.036 ***
 - Bond-Regime Entry-Daempfer: WIDERLEGT
 - Statische Score-Filter: WIDERLEGT
 - RSI-Filter: WIDERLEGT
@@ -200,5 +226,5 @@ WL3 Naechster Run: Mitte Juli 2026
 
 ---
 
-*StockIQ CLAUDE.md | v6.0.13 | 31. Mai 2026*
-*298 Ticker | 66 Snapshots | OOS AVG 60.1% | Schutzziel A aktiv*
+*StockIQ CLAUDE.md | v6.1.1 | 31. Mai 2026*
+*299 Ticker | OOS AVG 60.1% | Schutzziel A aktiv*
