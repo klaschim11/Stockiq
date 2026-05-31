@@ -1,6 +1,1808 @@
 {
-  "n_snapshots": 2,
+  "n_snapshots": 3,
   "snapshots": [
+    {
+      "ts": 1780209660497,
+      "date": "31.05.2026",
+      "entries": [
+        {
+          "t": "TTE.PA",
+          "sig": "buy",
+          "sc": 85,
+          "sr": 2
+        },
+        {
+          "t": "ENI.MI",
+          "sig": "buy",
+          "sc": 80,
+          "sr": 2
+        },
+        {
+          "t": "8053.T",
+          "sig": "buy",
+          "sc": 78,
+          "sr": 3
+        },
+        {
+          "t": "8015.T",
+          "sig": "buy",
+          "sc": 78,
+          "sr": 3
+        },
+        {
+          "t": "HSBA.L",
+          "sig": "buy",
+          "sc": 78,
+          "sr": 11
+        },
+        {
+          "t": "PSX",
+          "sig": "buy",
+          "sc": 78,
+          "sr": 2
+        },
+        {
+          "t": "2914.T",
+          "sig": "buy",
+          "sc": 77,
+          "sr": 10
+        },
+        {
+          "t": "MPC",
+          "sig": "buy",
+          "sc": 77,
+          "sr": 2
+        },
+        {
+          "t": "RIO",
+          "sig": "buy",
+          "sc": 75,
+          "sr": 4
+        },
+        {
+          "t": "SHEL.L",
+          "sig": "buy",
+          "sc": 75,
+          "sr": 2
+        },
+        {
+          "t": "COP",
+          "sig": "buy",
+          "sc": 75,
+          "sr": 2
+        },
+        {
+          "t": "OXY",
+          "sig": "buy",
+          "sc": 75,
+          "sr": 2
+        },
+        {
+          "t": "SHEL",
+          "sig": "buy",
+          "sc": 75,
+          "sr": 2
+        },
+        {
+          "t": "VLO",
+          "sig": "buy",
+          "sc": 75,
+          "sr": 2
+        },
+        {
+          "t": "JNJ",
+          "sig": "buy",
+          "sc": 74,
+          "sr": 5
+        },
+        {
+          "t": "BTI",
+          "sig": "buy",
+          "sc": 74,
+          "sr": 10
+        },
+        {
+          "t": "XOM",
+          "sig": "buy",
+          "sc": 74,
+          "sr": 2
+        },
+        {
+          "t": "INVE-B.ST",
+          "sig": "buy",
+          "sc": 74,
+          "sr": 11
+        },
+        {
+          "t": "ABBN.SW",
+          "sig": "buy",
+          "sc": 73,
+          "sr": 3
+        },
+        {
+          "t": "CVX",
+          "sig": "buy",
+          "sc": 73,
+          "sr": 2
+        },
+        {
+          "t": "BP.L",
+          "sig": "buy",
+          "sc": 73,
+          "sr": 2
+        },
+        {
+          "t": "6501.T",
+          "sig": "buy",
+          "sc": 73,
+          "sr": 3
+        },
+        {
+          "t": "8002.T",
+          "sig": "buy",
+          "sc": 72,
+          "sr": 3
+        },
+        {
+          "t": "MNST",
+          "sig": "buy",
+          "sc": 72,
+          "sr": 10
+        },
+        {
+          "t": "CPG.L",
+          "sig": "buy",
+          "sc": 72,
+          "sr": 6
+        },
+        {
+          "t": "BATS.L",
+          "sig": "buy",
+          "sc": 72,
+          "sr": 10
+        },
+        {
+          "t": "9983.T",
+          "sig": "buy",
+          "sc": 72,
+          "sr": 6
+        },
+        {
+          "t": "ODFL",
+          "sig": "buy",
+          "sc": 71,
+          "sr": 3
+        },
+        {
+          "t": "UNH",
+          "sig": "buy",
+          "sc": 71,
+          "sr": 5
+        },
+        {
+          "t": "NOVN.SW",
+          "sig": "buy",
+          "sc": 71,
+          "sr": 5
+        },
+        {
+          "t": "6367.T",
+          "sig": "buy",
+          "sc": 71,
+          "sr": 3
+        },
+        {
+          "t": "DECK",
+          "sig": "buy",
+          "sc": 71,
+          "sr": 6
+        },
+        {
+          "t": "ASRNL.AS",
+          "sig": "buy",
+          "sc": 71,
+          "sr": 11
+        },
+        {
+          "t": "AAPL",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 1
+        },
+        {
+          "t": "GOOGL",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 9
+        },
+        {
+          "t": "ALV.DE",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 11
+        },
+        {
+          "t": "8316.T",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 11
+        },
+        {
+          "t": "8411.T",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 11
+        },
+        {
+          "t": "8306.T",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 11
+        },
+        {
+          "t": "9433.T",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 9
+        },
+        {
+          "t": "GWW",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 3
+        },
+        {
+          "t": "VOD.L",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 9
+        },
+        {
+          "t": "BBVA.MC",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 11
+        },
+        {
+          "t": "6503.T",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 3
+        },
+        {
+          "t": "FORTUM.HE",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 7
+        },
+        {
+          "t": "LLY",
+          "sig": "hold",
+          "sc": 69,
+          "sr": 5
+        },
+        {
+          "t": "BAS.DE",
+          "sig": "hold",
+          "sc": 69,
+          "sr": 4
+        },
+        {
+          "t": "6098.T",
+          "sig": "hold",
+          "sc": 69,
+          "sr": 9
+        },
+        {
+          "t": "RY",
+          "sig": "hold",
+          "sc": 68,
+          "sr": 11
+        },
+        {
+          "t": "4507.T",
+          "sig": "hold",
+          "sc": 68,
+          "sr": 5
+        },
+        {
+          "t": "4063.T",
+          "sig": "hold",
+          "sc": 68,
+          "sr": 4
+        },
+        {
+          "t": "CNA.L",
+          "sig": "hold",
+          "sc": 68,
+          "sr": 7
+        },
+        {
+          "t": "MRK.DE",
+          "sig": "hold",
+          "sc": 67,
+          "sr": 5
+        },
+        {
+          "t": "AZN",
+          "sig": "hold",
+          "sc": 67,
+          "sr": 5
+        },
+        {
+          "t": "GSK.L",
+          "sig": "hold",
+          "sc": 67,
+          "sr": 5
+        },
+        {
+          "t": "ENEL.MI",
+          "sig": "hold",
+          "sc": 67,
+          "sr": 7
+        },
+        {
+          "t": "EQIX",
+          "sig": "hold",
+          "sc": 67,
+          "sr": 8
+        },
+        {
+          "t": "VOLV-B.ST",
+          "sig": "hold",
+          "sc": 67,
+          "sr": 3
+        },
+        {
+          "t": "IBE.MC",
+          "sig": "hold",
+          "sc": 67,
+          "sr": 7
+        },
+        {
+          "t": "6594.T",
+          "sig": "hold",
+          "sc": 67,
+          "sr": 3
+        },
+        {
+          "t": "QCOM",
+          "sig": "hold",
+          "sc": 66,
+          "sr": 1
+        },
+        {
+          "t": "8058.T",
+          "sig": "hold",
+          "sc": 66,
+          "sr": 3
+        },
+        {
+          "t": "NTES",
+          "sig": "hold",
+          "sc": 66,
+          "sr": 9
+        },
+        {
+          "t": "FANG",
+          "sig": "hold",
+          "sc": 66,
+          "sr": 2
+        },
+        {
+          "t": "AVGO",
+          "sig": "hold",
+          "sc": 65,
+          "sr": 1
+        },
+        {
+          "t": "WST",
+          "sig": "hold",
+          "sc": 65,
+          "sr": 5
+        },
+        {
+          "t": "9984.T",
+          "sig": "hold",
+          "sc": 65,
+          "sr": 9
+        },
+        {
+          "t": "GS",
+          "sig": "hold",
+          "sc": 65,
+          "sr": 11
+        },
+        {
+          "t": "MS",
+          "sig": "hold",
+          "sc": 65,
+          "sr": 11
+        },
+        {
+          "t": "SAN.MC",
+          "sig": "hold",
+          "sc": 65,
+          "sr": 11
+        },
+        {
+          "t": "4502.T",
+          "sig": "hold",
+          "sc": 65,
+          "sr": 5
+        },
+        {
+          "t": "AMZN",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 6
+        },
+        {
+          "t": "ASML",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 1
+        },
+        {
+          "t": "REGN",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 5
+        },
+        {
+          "t": "PANW",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 1
+        },
+        {
+          "t": "AI.PA",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 4
+        },
+        {
+          "t": "BNP.PA",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 11
+        },
+        {
+          "t": "CNR",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 2
+        },
+        {
+          "t": "FCX",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 4
+        },
+        {
+          "t": "RWE.DE",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 7
+        },
+        {
+          "t": "BIDU",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 9
+        },
+        {
+          "t": "ENB",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 2
+        },
+        {
+          "t": "8001.T",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 3
+        },
+        {
+          "t": "LRCX",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 1
+        },
+        {
+          "t": "DTE.DE",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 9
+        },
+        {
+          "t": "6954.T",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 3
+        },
+        {
+          "t": "FAST",
+          "sig": "hold",
+          "sc": 62,
+          "sr": 3
+        },
+        {
+          "t": "8035.T",
+          "sig": "hold",
+          "sc": 62,
+          "sr": 1
+        },
+        {
+          "t": "PLD",
+          "sig": "hold",
+          "sc": 62,
+          "sr": 8
+        },
+        {
+          "t": "BA.L",
+          "sig": "hold",
+          "sc": 62,
+          "sr": 3
+        },
+        {
+          "t": "6723.T",
+          "sig": "hold",
+          "sc": 62,
+          "sr": 1
+        },
+        {
+          "t": "JD",
+          "sig": "hold",
+          "sc": 62,
+          "sr": 6
+        },
+        {
+          "t": "AMAT",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 1
+        },
+        {
+          "t": "8031.T",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 3
+        },
+        {
+          "t": "KLAC",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 1
+        },
+        {
+          "t": "SIE.DE",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 3
+        },
+        {
+          "t": "4543.T",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 5
+        },
+        {
+          "t": "6146.T",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 1
+        },
+        {
+          "t": "HEN3.DE",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 10
+        },
+        {
+          "t": "LSEG.L",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 11
+        },
+        {
+          "t": "6702.T",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 1
+        },
+        {
+          "t": "NVDA",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 1
+        },
+        {
+          "t": "NVO",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 5
+        },
+        {
+          "t": "NESN.SW",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 10
+        },
+        {
+          "t": "V",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 11
+        },
+        {
+          "t": "OR.PA",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 10
+        },
+        {
+          "t": "6758.T",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 1
+        },
+        {
+          "t": "6902.T",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 6
+        },
+        {
+          "t": "7203.T",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 6
+        },
+        {
+          "t": "CAT",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 3
+        },
+        {
+          "t": "HON",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 3
+        },
+        {
+          "t": "HSY",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 10
+        },
+        {
+          "t": "PDD",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 6
+        },
+        {
+          "t": "VER.VI",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 7
+        },
+        {
+          "t": "WMB",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 2
+        },
+        {
+          "t": "APH",
+          "sig": "hold",
+          "sc": 60,
+          "sr": 1
+        },
+        {
+          "t": "MU",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 1
+        },
+        {
+          "t": "CDNS",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 1
+        },
+        {
+          "t": "TT",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 3
+        },
+        {
+          "t": "CME",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 11
+        },
+        {
+          "t": "ULVR.L",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 10
+        },
+        {
+          "t": "DGE.L",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 10
+        },
+        {
+          "t": "6861.T",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 1
+        },
+        {
+          "t": "4519.T",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 5
+        },
+        {
+          "t": "SIX2.DE",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 3
+        },
+        {
+          "t": "PHIA.AS",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 5
+        },
+        {
+          "t": "ASSA-B.ST",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 3
+        },
+        {
+          "t": "ISP.MI",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 11
+        },
+        {
+          "t": "YUMC",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 6
+        },
+        {
+          "t": "EOAN.DE",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 7
+        },
+        {
+          "t": "ANET",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 1
+        },
+        {
+          "t": "RJF",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 11
+        },
+        {
+          "t": "SREN.SW",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 11
+        },
+        {
+          "t": "9432.T",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 9
+        },
+        {
+          "t": "JPM",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 11
+        },
+        {
+          "t": "PH",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 3
+        },
+        {
+          "t": "BMW.DE",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 6
+        },
+        {
+          "t": "ADS.DE",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 6
+        },
+        {
+          "t": "IFX.DE",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 1
+        },
+        {
+          "t": "4901.T",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 3
+        },
+        {
+          "t": "7267.T",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 6
+        },
+        {
+          "t": "PGR",
+          "sig": "hold",
+          "sc": 57,
+          "sr": 11
+        },
+        {
+          "t": "YUM",
+          "sig": "hold",
+          "sc": 57,
+          "sr": 6
+        },
+        {
+          "t": "MC.PA",
+          "sig": "hold",
+          "sc": 57,
+          "sr": 6
+        },
+        {
+          "t": "SAN.PA",
+          "sig": "hold",
+          "sc": 57,
+          "sr": 5
+        },
+        {
+          "t": "DXCM",
+          "sig": "hold",
+          "sc": 57,
+          "sr": 5
+        },
+        {
+          "t": "MSCI",
+          "sig": "hold",
+          "sc": 57,
+          "sr": 11
+        },
+        {
+          "t": "BABA",
+          "sig": "hold",
+          "sc": 57,
+          "sr": 6
+        },
+        {
+          "t": "MSFT",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 1
+        },
+        {
+          "t": "TMO",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 5
+        },
+        {
+          "t": "DE",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 3
+        },
+        {
+          "t": "ITW",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 3
+        },
+        {
+          "t": "CARR",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 3
+        },
+        {
+          "t": "EW",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 5
+        },
+        {
+          "t": "BURL",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 6
+        },
+        {
+          "t": "MUV2.DE",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 11
+        },
+        {
+          "t": "5401.T",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 4
+        },
+        {
+          "t": "WSO",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 3
+        },
+        {
+          "t": "4523.T",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 5
+        },
+        {
+          "t": "VOW3.DE",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 6
+        },
+        {
+          "t": "REL.L",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 3
+        },
+        {
+          "t": "3382.T",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 10
+        },
+        {
+          "t": "TME",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 9
+        },
+        {
+          "t": "MA",
+          "sig": "watch",
+          "sc": 54,
+          "sr": 11
+        },
+        {
+          "t": "ADP",
+          "sig": "watch",
+          "sc": 54,
+          "sr": 1
+        },
+        {
+          "t": "MBG.DE",
+          "sig": "watch",
+          "sc": 54,
+          "sr": 6
+        },
+        {
+          "t": "PGHN.SW",
+          "sig": "watch",
+          "sc": 54,
+          "sr": 11
+        },
+        {
+          "t": "SBUX",
+          "sig": "watch",
+          "sc": 53,
+          "sr": 6
+        },
+        {
+          "t": "COST",
+          "sig": "watch",
+          "sc": 53,
+          "sr": 10
+        },
+        {
+          "t": "ADBE",
+          "sig": "watch",
+          "sc": 53,
+          "sr": 1
+        },
+        {
+          "t": "SAP.DE",
+          "sig": "watch",
+          "sc": 53,
+          "sr": 1
+        },
+        {
+          "t": "DSY.PA",
+          "sig": "watch",
+          "sc": 53,
+          "sr": 1
+        },
+        {
+          "t": "HCA",
+          "sig": "watch",
+          "sc": 53,
+          "sr": 5
+        },
+        {
+          "t": "LULU",
+          "sig": "watch",
+          "sc": 53,
+          "sr": 6
+        },
+        {
+          "t": "AMT",
+          "sig": "watch",
+          "sc": 53,
+          "sr": 8
+        },
+        {
+          "t": "TCOM",
+          "sig": "watch",
+          "sc": 53,
+          "sr": 6
+        },
+        {
+          "t": "BILI",
+          "sig": "watch",
+          "sc": 53,
+          "sr": 9
+        },
+        {
+          "t": "MCD",
+          "sig": "watch",
+          "sc": 52,
+          "sr": 6
+        },
+        {
+          "t": "EVD.DE",
+          "sig": "watch",
+          "sc": 52,
+          "sr": 9
+        },
+        {
+          "t": "HD",
+          "sig": "watch",
+          "sc": 52,
+          "sr": 6
+        },
+        {
+          "t": "ACN",
+          "sig": "watch",
+          "sc": 52,
+          "sr": 1
+        },
+        {
+          "t": "BLK",
+          "sig": "watch",
+          "sc": 52,
+          "sr": 11
+        },
+        {
+          "t": "VRSK",
+          "sig": "watch",
+          "sc": 52,
+          "sr": 3
+        },
+        {
+          "t": "BRK-B",
+          "sig": "watch",
+          "sc": 51,
+          "sr": 11
+        },
+        {
+          "t": "LISP.SW",
+          "sig": "watch",
+          "sc": 51,
+          "sr": 10
+        },
+        {
+          "t": "NEM.DE",
+          "sig": "watch",
+          "sc": 51,
+          "sr": 1
+        },
+        {
+          "t": "CRM",
+          "sig": "watch",
+          "sc": 51,
+          "sr": 1
+        },
+        {
+          "t": "MCO",
+          "sig": "watch",
+          "sc": 51,
+          "sr": 11
+        },
+        {
+          "t": "WKL.AS",
+          "sig": "watch",
+          "sc": 51,
+          "sr": 3
+        },
+        {
+          "t": "META",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 9
+        },
+        {
+          "t": "CTAS",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 3
+        },
+        {
+          "t": "ROL",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 6
+        },
+        {
+          "t": "SPGI",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 11
+        },
+        {
+          "t": "ICE",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 11
+        },
+        {
+          "t": "MDT",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 5
+        },
+        {
+          "t": "FERG",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 3
+        },
+        {
+          "t": "BEI.DE",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 10
+        },
+        {
+          "t": "FRE.DE",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 5
+        },
+        {
+          "t": "8267.T",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 6
+        },
+        {
+          "t": "LI",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 6
+        },
+        {
+          "t": "SRT3.DE",
+          "sig": "watch",
+          "sc": 49,
+          "sr": 5
+        },
+        {
+          "t": "EQT.ST",
+          "sig": "watch",
+          "sc": 49,
+          "sr": 11
+        },
+        {
+          "t": "NOW",
+          "sig": "watch",
+          "sc": 48,
+          "sr": 1
+        },
+        {
+          "t": "SYK",
+          "sig": "watch",
+          "sc": 48,
+          "sr": 5
+        },
+        {
+          "t": "BKNG",
+          "sig": "watch",
+          "sc": 48,
+          "sr": 6
+        },
+        {
+          "t": "ABT",
+          "sig": "watch",
+          "sc": 48,
+          "sr": 5
+        },
+        {
+          "t": "BSX",
+          "sig": "watch",
+          "sc": 48,
+          "sr": 5
+        },
+        {
+          "t": "9020.T",
+          "sig": "watch",
+          "sc": 48,
+          "sr": 3
+        },
+        {
+          "t": "PYPL",
+          "sig": "watch",
+          "sc": 47,
+          "sr": 11
+        },
+        {
+          "t": "CWST",
+          "sig": "watch",
+          "sc": 47,
+          "sr": 3
+        },
+        {
+          "t": "RMS.PA",
+          "sig": "watch",
+          "sc": 47,
+          "sr": 6
+        },
+        {
+          "t": "BRO",
+          "sig": "watch",
+          "sc": 47,
+          "sr": 11
+        },
+        {
+          "t": "GEBN.SW",
+          "sig": "watch",
+          "sc": 47,
+          "sr": 3
+        },
+        {
+          "t": "POOL",
+          "sig": "watch",
+          "sc": 47,
+          "sr": 3
+        },
+        {
+          "t": "ROP",
+          "sig": "watch",
+          "sc": 47,
+          "sr": 1
+        },
+        {
+          "t": "XPEV",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "BEKE",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "ZTO",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "005930.KS",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "0700.HK",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "1211.HK",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "3750.HK",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "7751.T",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "AIR.PA",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "ATCO-A.ST",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "AXP",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "BAC",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "BKW.SW",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "CAP.PA",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "CB",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "CFR.SW",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "DBK.DE",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "EN.PA",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "ERG.MI",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "EXPN.L",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "G.MI",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "HDB",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "HEIA.AS",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "HOLN.SW",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "INGA.AS",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "INTU",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "ITX.MC",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "KER.PA",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "LDO.MI",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "LR.PA",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "ORCL",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "RACE.MI",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "SAND.ST",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "SLHN.SW",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "STLAM.MI",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "SU.PA",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "TSM",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "UCG.MI",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "ZURN.SW",
+          "sig": "watch",
+          "sc": 47,
+          "sr": null
+        },
+        {
+          "t": "SNPS",
+          "sig": "watch",
+          "sc": 46,
+          "sr": 1
+        },
+        {
+          "t": "ROG.SW",
+          "sig": "watch",
+          "sc": 46,
+          "sr": 5
+        },
+        {
+          "t": "NFLX",
+          "sig": "watch",
+          "sc": 46,
+          "sr": 9
+        },
+        {
+          "t": "NIO",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "FTNT",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "KNIN.SW",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "RHM.DE",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "SAF.PA",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "HO.PA",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "RR.L",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "BAES.L",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "NOVO-B.CO",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "NEE",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "CEG",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "WEC",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "DUK",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "SO",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "SSE.L",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "NG.L",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "EDP.LS",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "ENGI.PA",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "NTGY.MC",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "SLB",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "EOG",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "EQNR.OL",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "CNQ",
+          "sig": "watch",
+          "sc": 46,
+          "sr": null
+        },
+        {
+          "t": "TSLA",
+          "sig": "watch",
+          "sc": 45,
+          "sr": 6
+        },
+        {
+          "t": "MTD",
+          "sig": "watch",
+          "sc": 45,
+          "sr": 5
+        },
+        {
+          "t": "IDXX",
+          "sig": "watch",
+          "sc": 45,
+          "sr": 5
+        },
+        {
+          "t": "NKE",
+          "sig": "watch",
+          "sc": 45,
+          "sr": 6
+        },
+        {
+          "t": "WDAY",
+          "sig": "watch",
+          "sc": 45,
+          "sr": 1
+        },
+        {
+          "t": "CPRT",
+          "sig": "watch",
+          "sc": 45,
+          "sr": 3
+        },
+        {
+          "t": "4568.T",
+          "sig": "watch",
+          "sc": 45,
+          "sr": 5
+        },
+        {
+          "t": "LONN.SW",
+          "sig": "watch",
+          "sc": 44,
+          "sr": 5
+        },
+        {
+          "t": "ZS",
+          "sig": "watch",
+          "sc": 44,
+          "sr": 1
+        },
+        {
+          "t": "EFX",
+          "sig": "watch",
+          "sc": 43,
+          "sr": 3
+        },
+        {
+          "t": "7974.T",
+          "sig": "watch",
+          "sc": 43,
+          "sr": 9
+        },
+        {
+          "t": "TRMB",
+          "sig": "watch",
+          "sc": 42,
+          "sr": 1
+        },
+        {
+          "t": "MELI",
+          "sig": "watch",
+          "sc": 41,
+          "sr": 6
+        },
+        {
+          "t": "CSGP",
+          "sig": "watch",
+          "sc": 41,
+          "sr": 8
+        },
+        {
+          "t": "FICO",
+          "sig": "watch",
+          "sc": 40,
+          "sr": 1
+        },
+        {
+          "t": "4661.T",
+          "sig": "sell",
+          "sc": 39,
+          "sr": 6
+        },
+        {
+          "t": "SHOP",
+          "sig": "sell",
+          "sc": 38,
+          "sr": 1
+        },
+        {
+          "t": "ISRG",
+          "sig": "sell",
+          "sc": 37,
+          "sr": 5
+        },
+        {
+          "t": "AXON",
+          "sig": "sell",
+          "sc": 35,
+          "sr": 3
+        }
+      ],
+      "spy_above_200ma": true,
+      "vix": 15.32
+    },
     {
       "ts": 1780120103360,
       "date": "30.05.2026",
