@@ -222,10 +222,16 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:12px">&#128221; Aktueller Portfoliowert eingeben</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">AKTIEN (EUR) <span id="alloc-depot-badge" style="display:none;color:#00c8f0;font-size:8px">&#128202; Aus Depot</span></div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">EINZELAKTIEN (EUR) <span id="alloc-depot-badge" style="display:none;color:#00c8f0;font-size:8px">&#128202; Aus Depot</span></div>
       <input id="ai-stocks" type="number" min="0" step="100" placeholder="z.B. 60000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
+    </div>
+    <div>
+      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">ETFs (EUR)</div>
+      <input id="ai-etfs" type="number" min="0" step="100" placeholder="z.B. 15000"
+          style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
+          oninput="rAlloc()">
     </div>
     <div>
       <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">ANLEIHEN / RENTEN (EUR)</div>
@@ -275,7 +281,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="cycle-info" style="font-family:monospace;font-size:9px;color:var(--mut);padding:6px 8px;background:rgba(255,171,0,.05);border-left:3px solid #ffab00;border-radius:4px;margin-bottom:8px">
     &#9654; <strong style="color:#ffab00">Late Cycle</strong> &mdash; Energy &amp; Rohstoffe f&uuml;hren. Defensive Sektoren aufbauen. Cash erh&ouml;hen. <span style="color:#7a9bb5">(Befund: Sektor-Ranking Mai 2026)</span>
   </div>
-  <div id="cycle-targets" style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px"></div>
+  <div id="cycle-targets" style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px"></div>
 </div>
 
 <!-- ERGEBNIS-SEKTION -->
@@ -3455,54 +3461,109 @@ var ALLOC_KEY = 'stockiq_alloc_v520';
 /* ALLOC_TARGETS: wird durch buildAllocTargets(CURRENT_CYCLE) gesetzt (v5.9.69)
    Initialisierung erst in initAlloc() nach DOM-Ready */
 var ALLOC_TARGETS = [];
+var ALLOC_MATRIX = {
+  "kapital": {
+    "early":     {stocks:28, etfs:10, bonds:20, gold:10, commod:5,  cash:27},
+    "mid":       {stocks:28, etfs:10, bonds:17, gold:8,  commod:7,  cash:30},
+    "late":      {stocks:20, etfs:8,  bonds:13, gold:15, commod:9,  cash:35},
+    "recession": {stocks:20, etfs:5,  bonds:12, gold:18, commod:0,  cash:45}
+  },
+  "ausgewogen": {
+    "early":     {stocks:50, etfs:15, bonds:15, gold:8,  commod:7,  cash:5},
+    "mid":       {stocks:50, etfs:15, bonds:12, gold:5,  commod:8,  cash:10},
+    "late":      {stocks:35, etfs:15, bonds:10, gold:12, commod:13, cash:15},
+    "recession": {stocks:20, etfs:10, bonds:30, gold:15, commod:5,  cash:20}
+  },
+  "rendite": {
+    "early":     {stocks:58, etfs:20, bonds:5,  gold:4,  commod:8,  cash:5},
+    "mid":       {stocks:58, etfs:20, bonds:5,  gold:4,  commod:8,  cash:5},
+    "late":      {stocks:42, etfs:20, bonds:5,  gold:10, commod:15, cash:8},
+    "recession": {stocks:30, etfs:10, bonds:25, gold:15, commod:5,  cash:15}
+  }
+};
 var ALLOC_BASE = [
-  {id:'stocks', label:'Aktien',    icon:'&#9776;',   col:'#00e676', colAmber:'#ffab00', colRed:'#ff5252'},
-  {id:'bonds',  label:'Anleihen',  icon:'&#128196;', col:'#00c8f0', colAmber:'#ffab00', colRed:'#ff5252'},
-  {id:'gold',   label:'Gold',      icon:'&#127875;', col:'#ffab00', colAmber:'#ff9f1c', colRed:'#ff5252'},
-  {id:'commod', label:'Rohstoffe', icon:'&#9883;',   col:'#ff9f1c', colAmber:'#ffab00', colRed:'#ff5252'},
-  {id:'cash',   label:'Cash',      icon:'&#128181;', col:'#b388ff', colAmber:'#ffab00', colRed:'#ff5252'}
+  {id:'stocks', label:'Einzelaktien', icon:'&#9776;',   col:'#00e676', colAmber:'#ffab00', colRed:'#ff5252'},
+  {id:'etfs',   label:'ETFs',         icon:'&#128202;', col:'#00bcd4', colAmber:'#ffab00', colRed:'#ff5252'},
+  {id:'bonds',  label:'Anleihen',     icon:'&#128196;', col:'#00c8f0', colAmber:'#ffab00', colRed:'#ff5252'},
+  {id:'gold',   label:'Gold',         icon:'&#127875;', col:'#ffab00', colAmber:'#ff9f1c', colRed:'#ff5252'},
+  {id:'commod', label:'Rohstoffe',    icon:'&#9883;',   col:'#ff9f1c', colAmber:'#ff8000', colRed:'#ff9883'},
+  {id:'cash',   label:'Cash',         icon:'&#128181;', col:'#b388ff', colAmber:'#ffab00', colRed:'#ff5252'}
 ];
 var CYCLE_ALLOC = {
-  early:    {stocks:65, bonds:15, gold:8,  commod:5,  cash:7,
-             label:'Early Cycle', col:'#00e57a',
-             note:'Zykliker &amp; Finanzwerte f&uuml;hren. Hochwertige Aktien maximal gewichten.'},
-  mid:      {stocks:60, bonds:15, gold:10, commod:7,  cash:8,
-             label:'Mid Cycle', col:'#00c8f0',
-             note:'Breiteste Outperformance. Tech, Industrie &amp; Healthcare f&uuml;hren.'},
-  late:     {stocks:50, bonds:12, gold:13, commod:13, cash:12,
-             label:'Late Cycle', col:'#ffab00',
-             note:'Energy &amp; Rohstoffe f&uuml;hren. Defensive Sektoren aufbauen. Cash erh&ouml;hen.'},
-  recession:{stocks:40, bonds:20, gold:15, commod:5,  cash:20,
-             label:'Rezession', col:'#ff5252',
-             note:'Defensive Minimalposition. Anleihen &amp; Cash als Schutz. Rohstoffe reduzieren.'}
+  early:     {stocks:65, bonds:15, gold:8,  commod:5,  cash:7,
+              label:'Early Cycle', col:'#00e57a',
+              note:'Zykliker &amp; Finanzwerte f&uuml;hren. Hochwertige Aktien maximal gewichten.'},
+  mid:       {stocks:60, bonds:15, gold:10, commod:7,  cash:8,
+              label:'Mid Cycle', col:'#00c8f0',
+              note:'Breiteste Outperformance. Tech, Industrie &amp; Healthcare f&uuml;hren.'},
+  late:      {stocks:50, bonds:12, gold:13, commod:13, cash:12,
+              label:'Late Cycle', col:'#ffab00',
+              note:'Energy &amp; Rohstoffe f&uuml;hren. Defensive Sektoren aufbauen. Cash erh&ouml;hen.'},
+  recession: {stocks:40, bonds:20, gold:15, commod:5,  cash:20,
+              label:'Rezession', col:'#ff5252',
+              note:'Defensive Minimalposition. Anleihen &amp; Cash als Schutz. Rohstoffe reduzieren.'}
 };
-var CURRENT_CYCLE = 'late';
+var CURRENT_CYCLE = 'mid';
 function buildAllocTargets(cycle){
-  var profileTargets = null;
+  var profil = 'ausgewogen';
   try {
     var raw = localStorage.getItem('stockiq_profile');
     if(raw){
       var p = JSON.parse(raw);
-      var ori = p.orientierung || 'ausgewogen';
-      if(ori === 'kapital'){
-        profileTargets = {stocks:30, commod:10, bonds:30, gold:10, cash:20};
-      } else if(ori === 'rendite'){
-        profileTargets = {stocks:65, commod:20, bonds:5, gold:10, cash:0};
-      } else {
-        profileTargets = {stocks:50, commod:15, bonds:15, gold:10, cash:10};
-      }
+      profil = p.orientierung || 'ausgewogen';
     }
   } catch(e){}
-  var ca = CYCLE_ALLOC[cycle] || CYCLE_ALLOC['mid'];
+  var ph = cycle || CURRENT_CYCLE;
+  var matrix = ALLOC_MATRIX[profil] || ALLOC_MATRIX['ausgewogen'];
+  var targets = matrix[ph] || matrix['mid'];
   var result = [];
   for(var bi=0;bi<ALLOC_BASE.length;bi++){
     var b = ALLOC_BASE[bi];
-    var soll = profileTargets ? (profileTargets[b.id] !== undefined ? profileTargets[b.id] : 0) : (ca[b.id]||0);
-    var lbl = (profileTargets && b.id === 'commod') ? 'ETFs' : b.label;
-    result.push({id:b.id, label:lbl, icon:b.icon,
+    var soll = targets[b.id] || 0;
+    result.push({id:b.id, label:b.label, icon:b.icon,
                  soll:soll, col:b.col, colAmber:b.colAmber, colRed:b.colRed});
   }
   return result;
+}
+function detectCyclePhase(vix, spyAbove200ma, curveSlope){
+  var slope = (curveSlope !== null && curveSlope !== undefined) ? curveSlope : 50;
+  if(!spyAbove200ma && vix > 25){ return 'recession'; }
+  if(spyAbove200ma && vix >= 18 && slope < 50){ return 'late'; }
+  if(spyAbove200ma && vix < 18 && slope > 100){ return 'early'; }
+  return 'mid';
+}
+function renderCyclePhaseBadge(){
+  try {
+    if(typeof FD === 'undefined' || !FD || !FD['__macro__']){ return; }
+    var mac = FD['__macro__'];
+    var vix = mac.vix || 0;
+    var spy = !!mac.spy_above_200ma;
+    var slope = (typeof mac.curve_slope_bps === 'number') ? mac.curve_slope_bps : null;
+    var autoPhase = detectCyclePhase(vix, spy, slope);
+    var stored = null;
+    try { stored = localStorage.getItem('stockiq_cycle_phase'); } catch(ex){}
+    if(!stored){
+      stored = autoPhase;
+      try { localStorage.setItem('stockiq_cycle_phase', stored); } catch(ex){}
+    }
+    CURRENT_CYCLE = stored;
+    var phaseCols = {early:'#00e57a', mid:'#00c8f0', late:'#ffab00', recession:'#ff5252'};
+    var phaseNames = {early:'Early', mid:'Mid', late:'Late', recession:'Rezession'};
+    var isManual = (stored !== autoPhase);
+    var slopeStr = (slope !== null) ? (' | Kurve ' + (slope >= 0 ? '+' : '') + slope + 'bps') : '';
+    var spyStr = spy ? ' | SPY: gruen' : ' | SPY: rot';
+    var modeStr = isManual ? ' (manuell)' : ' (auto)';
+    var pcol = phaseCols[stored] || '#dce8f5';
+    var pname = phaseNames[stored] || stored;
+    var ca = CYCLE_ALLOC[stored] || CYCLE_ALLOC['mid'];
+    var html = '<strong style="color:' + pcol + '">' + pname + modeStr + '</strong>'
+      + '<span style="color:var(--mut);font-size:9px"> &mdash; VIX ' + vix.toFixed(1)
+      + slopeStr + spyStr + '</span>'
+      + '<br><span style="color:var(--mut);font-size:9px">' + ca.note + '</span>';
+    var el = document.getElementById('cycle-info');
+    if(el){ el.innerHTML = html; }
+    highlightCycleBtn(stored);
+  } catch(ex){}
 }
 var ALLOC_TOL = 7;
 var ALLOC_AMBER = 4;
@@ -3512,7 +3573,7 @@ function allocLoad(){
     var raw = localStorage.getItem(ALLOC_KEY);
     if(!raw) return;
     var data = JSON.parse(raw);
-    var ids = ['stocks','bonds','gold','commod','cash'];
+    var ids = ['stocks','etfs','bonds','gold','commod','cash'];
     for(var i=0;i<ids.length;i++){
       var el = document.getElementById('ai-'+ids[i]);
       if(el && data[ids[i]] !== undefined) el.value = data[ids[i]];
@@ -3523,7 +3584,7 @@ function allocLoad(){
 function allocSave(){
   try {
     var data = {};
-    var ids = ['stocks','bonds','gold','commod','cash'];
+    var ids = ['stocks','etfs','bonds','gold','commod','cash'];
     for(var i=0;i<ids.length;i++){
       var el = document.getElementById('ai-'+ids[i]);
       data[ids[i]] = el ? (parseFloat(el.value)||0) : 0;
@@ -3535,7 +3596,7 @@ function allocSave(){
 }
 
 function allocClear(){
-  var ids = ['stocks','bonds','gold','commod','cash'];
+  var ids = ['stocks','etfs','bonds','gold','commod','cash'];
   for(var i=0;i<ids.length;i++){
     var el = document.getElementById('ai-'+ids[i]);
     if(el) el.value = '';
@@ -3546,7 +3607,7 @@ function allocClear(){
 
 function rAlloc(){
   ALLOC_TARGETS = buildAllocTargets(CURRENT_CYCLE);
-  var ids = ['stocks','bonds','gold','commod','cash'];
+  var ids = ['stocks','etfs','bonds','gold','commod','cash'];
   var vals = [];
   var total = 0;
   for(var i=0;i<ids.length;i++){
@@ -4095,6 +4156,7 @@ function dpRender(){
 
 function initAlloc(){
   allocLoad();
+  renderCyclePhaseBadge();
   ALLOC_TARGETS = buildAllocTargets(CURRENT_CYCLE);
   renderCycleTargets(CURRENT_CYCLE);
   renderZielKacheln(CURRENT_CYCLE);
@@ -4270,12 +4332,10 @@ function highlightCycleBtn(c){
 /* Zyklus-Button-Highlighting + Targets neu setzen */
 function setCycle(c){
   CURRENT_CYCLE = c;
+  try { localStorage.setItem('stockiq_cycle_phase', c); } catch(ex){}
   ALLOC_TARGETS = buildAllocTargets(c);
   highlightCycleBtn(c);
-  /* Info-Text aktualisieren */
-  var ca = CYCLE_ALLOC[c];
-  var el = document.getElementById('cycle-info');
-  if(el) el.innerHTML = '<strong style="color:' + ca.col + '">' + ca.label + '</strong> &mdash; ' + ca.note;
+  renderCyclePhaseBadge();
   renderCycleTargets(c);
   renderZielKacheln(c);
   rAlloc();
