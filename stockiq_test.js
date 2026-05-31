@@ -84,7 +84,6 @@ var requiredFunctions = [
   'function archSnapshot',
   'function archExportJSON',
   'function wl2Export',
-  'function wl2ChartExport',
   'function calcEtfScores',
 ];
 requiredFunctions.forEach(function(fn) {

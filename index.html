@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.0.12</title>
+<title>StockIQ v6.1.0</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.0.12 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.1.0 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -95,13 +95,11 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px">
     <button id="tb1" class="tab active" onclick="goTab(1,this)">&#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
-    <button id="tb2" class="tab" onclick="goTab(2,this)">&#11088; WL2 <span class="chip s" id="wl2-cnt">0</span></button>
-    <button id="tb3" class="tab" onclick="goTab(3,this);initDepot()">&#128200; Depot</button>
-    <button id="tb6" class="tab" onclick="goTab(6,this)">&#9878; Allokation</button>
-    <!-- v5.9.86: Tab 8 Sektoren -->
-    <button id="tb7" class="tab" onclick="goTab(7,this)">&#127759; Sektoren</button>
-    <button id="tb8" class="tab" onclick="goTab(8,this)">&#128218; Hilfe</button>
-    <button id="tb9" class="tab" onclick="goTab(9,this)">&#128203; Roadmap</button>  </div>
+    <button id="tb2" class="tab" onclick="goTab(2,this);initDepot()">&#128200; Depot</button>
+    <button id="tb3" class="tab" onclick="goTab(3,this)">&#9878; Allokation</button>
+    <button id="tb4" class="tab" onclick="goTab(4,this)">&#127759; Sektoren</button>
+    <button id="tb5" class="tab" onclick="goTab(5,this)">&#128218; Hilfe</button>
+    <button id="tb6" class="tab" onclick="goTab(6,this)">&#128203; Roadmap</button>  </div>
 <div id="profile-badge" style="display:none;font-family:monospace;font-size:10px;color:var(--mut);padding:3px 8px;border:1px solid #1a2a3a;border-radius:20px;cursor:pointer;margin:4px 8px" onclick="showOnboarding()"><span id="profile-text">--</span> <span style="color:var(--acc)">&#9998;</span></div>
 </header>
 
@@ -110,53 +108,35 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">Watchlist &mdash; <span id="wl-hdr-cnt">--</span> Ticker</div>
   <div id="spyPhaseBanner" style="padding:6px 12px;margin-bottom:8px;border-radius:4px;font-size:0.9em;font-weight:bold;display:none;"></div>
   <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:10px">Gruppiert: BUY &middot; HOLD &middot; SELL &mdash; Antippen = Detail</div>
-  <!-- Sync-Toggle + Sort -->
-  <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
-    <button id="sync-btn" onclick="toggleSync(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">&#128257; Alle</button>
-    <button onclick="wlSetSort('score',this)" id="sort-score" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid var(--acc);color:var(--acc);background:rgba(0,200,240,.08);cursor:pointer">Score</button>
-    <button onclick="wlSetSort('alpha',this)" id="sort-alpha" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">A-Z</button>
-    <button id="wl-sf-btn" onclick="toggleSellFilter(document.getElementById('sf-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
-    <button id="wl-hc-btn" onclick="toggleHCFilter(document.getElementById('hc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">HC: aus</button>
-    <button id="wl-dr-btn" onclick="toggleDivFilter(document.getElementById('dr-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
-  </div>
-  <div class="g4" id="wl-kpi" style="margin-bottom:8px"></div>
-  <!-- v5.9.71: Synopse-Vergleichszeile -->
-  <div id="wl-syn-bar" style="background:rgba(255,159,28,.06);border:1px solid rgba(255,159,28,.2);border-radius:8px;padding:7px 12px;margin-bottom:10px;display:flex;align-items:center;flex-wrap:wrap;gap:6px"></div>
-  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+  <!-- v6.1.0: Zweizeilige Filterstruktur -->
+  <!-- Zeile 1: Signal + Sort -->
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
     <button class="tf active" onclick="wlFilt('all',this)">Alle</button>
     <button class="tf" onclick="wlFilt('strong',this)">&#11088; STRONG</button>
     <button class="tf" onclick="wlFilt('buy',this)">BUY</button>
     <button class="tf" onclick="wlFilt('pb',this)">PEG-Block</button>
     <button class="tf" onclick="wlFilt('sell',this)">SELL</button>
     <button class="tf" onclick="wlFilt('watch',this)">HOLD/Watch</button>
+    <button onclick="wlSetSort('score',this)" id="sort-score" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid var(--acc);color:var(--acc);background:rgba(0,200,240,.08);cursor:pointer">Score</button>
+    <button onclick="wlSetSort('alpha',this)" id="sort-alpha" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">A-Z</button>
   </div>
+  <!-- Zeile 2: Kontext-Filter -->
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap;padding:5px 8px;background:#080e18;border-radius:8px">
+    <select id="wl-sector-filter" onchange="wlSetSector(this.value)" style="font-family:monospace;font-size:10px;padding:4px 8px;border-radius:12px;border:1px solid #1a2a3a;color:var(--mut);background:#0c1420;cursor:pointer;outline:none"><option value="">Alle Sektoren</option></select>
+    <button id="wl-sf-btn" onclick="toggleSellFilter(document.getElementById('sf-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
+    <button id="wl-hc-btn" onclick="toggleHCFilter(document.getElementById('hc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">HC: aus</button>
+    <button id="wl-dr-btn" onclick="toggleDivFilter(document.getElementById('dr-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
+    <button id="sync-btn" onclick="toggleSync(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">&#9733; Fav (<span id="wl2-cnt">0</span>)</button>
+    <button onclick="wl2Export()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8595; Export</button>
+    <label style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8593; Import<input type="file" accept=".json" onchange="wl2Import(this)" style="display:none"></label>
+  </div>
+  <div class="g4" id="wl-kpi" style="margin-bottom:8px"></div>
+  <!-- v5.9.71: Synopse-Vergleichszeile -->
+  <div id="wl-syn-bar" style="background:rgba(255,159,28,.06);border:1px solid rgba(255,159,28,.2);border-radius:8px;padding:7px 12px;margin-bottom:10px;display:flex;align-items:center;flex-wrap:wrap;gap:6px"></div>
   <div id="wl-list"></div>
   <div id="wl-detail" style="display:none;margin-top:8px"></div>
 </div>
 
-<!-- TAB 2: WL2 -->
-<div class="page" id="p2">
-  <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#11088; Watchlist 2 &mdash; Meine Auswahl</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:10px">Ticker aus WL1 hinzufuegen &mdash; Sync-Button filtert Synopse + WL1 auf diese Auswahl</div>
-  <!-- Suchfeld -->
-  <div style="margin-bottom:10px;position:relative">
-    <input id="wl2-search" type="text" placeholder="&#128269; Suche Ticker oder Name..." oninput="rWL2()"
-      style="width:100%;box-sizing:border-box;padding:9px 12px 9px 36px;background:#0c1420;border:1px solid #223040;border-radius:10px;color:var(--txt);font-family:monospace;font-size:12px;outline:none">
-    <span style="position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none">&#128269;</span>
-  </div>
-  <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
-    <div style="font-family:monospace;font-size:10px;color:var(--mut)">Ausgewaehlt: <span id="wl2-sel-cnt" style="color:#ff9f1c;font-weight:700">0</span> Ticker</div>
-    <button onclick="wl2Clear()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(255,63,63,.4);color:#ff6666;background:transparent;cursor:pointer">&#10006; Leeren</button>
-    <button onclick="wl2SelAll()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(0,200,240,.4);color:var(--acc);background:transparent;cursor:pointer">Alle BUY</button>
-    <button onclick="wl2Export()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8595; Export</button>
-    <button onclick="wl2ChartExport()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(0,229,122,.4);color:#00e57a;background:transparent;cursor:pointer">&#128202; Charts</button>
-    <label style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8593; Import<input type="file" accept=".json" onchange="wl2Import(this)" style="display:none"></label>
-  </div>
-  <div id="wl2-origin-warn" style="display:none;font-family:monospace;font-size:10px;color:#f0c000;background:rgba(240,192,0,.07);border:1px solid rgba(240,192,0,.25);border-radius:8px;padding:8px 12px;margin-bottom:10px">
-    &#9888; Lokale Datei: localStorage nicht mit GitHub Pages geteilt. Export/Import nutzen um WL2 zu uebertragen.
-  </div>
-  <div id="wl2-list"></div>
-</div>
 
 <!-- TAB 3: FUNDAMENTALS -->
 <div class="page" id="p3">
@@ -168,7 +148,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <label for="ffi" style="border:2px dashed #223040;border-radius:8px;padding:16px;text-align:center;cursor:pointer;margin-bottom:10px;display:block">
         <div style="font-size:18px;margin-bottom:4px">&#128193;</div>
         <div style="font-size:12px;font-weight:700;margin-bottom:2px">stockiq_fundamentals.json</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7_9_23.py</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">stockiq_fund_juno_v7_9_29.py</div>
         <input type="file" id="ffi" accept=".json" onchange="loadFund(this)" style="display:none">
       </label>
       <div style="display:flex;align-items:center;gap:8px;font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:8px">
@@ -414,7 +394,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.0.12 &middot; Stand Mai 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.1.0 &middot; Stand Mai/Juni 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -431,8 +411,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#9889; Schnellstart</div>
     <div style="font-size:13px;color:var(--mut);line-height:1.8">
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. Watchlist</strong> &mdash; Alle 298 Ticker nach Score. SPY-Marktphasen-Banner oben (gruen = SPY ueber 200MA / gelb = darunter). Antippen = Detail.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. WL2</strong> &mdash; Eigene Auswahl. Ticker per + WL2 hinzufuegen. Sync filtert Watchlist auf eigene Titel. Export/Import sichert geraeteuebergreifend.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. Watchlist</strong> &mdash; Alle 299 Ticker nach Score. SPY-Marktphasen-Banner oben (gruen = SPY ueber 200MA / gelb = darunter). Antippen = Detail.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. Depot</strong> &mdash; Portfolio-Tracking. Positionen hinzufuegen, Wertentwicklung und Zeitreihe aus Snapshots.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. Fundamentals</strong> &mdash; Tagesaktuelle Scores aus scores.json. <strong style="color:#00e57a">Exp</strong>-Button oben rechts = Experten-Modus ein/aus (ROCE, PEG, Debt, Moat, IC-Detail).</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Sektoren</strong> &mdash; RSS-Signale + 3M-Skip-Momentum, 11 SPDR-ETFs. Dispersion-Signal.</div>
       <div><strong style="color:#dce8f5">5. Hilfe</strong> &mdash; Diese Seite.</div>
@@ -455,7 +435,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#11088; Signal-Logik v5.9.x</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#11088; Signal-Logik</div>
     <div style="padding:10px 12px;background:rgba(255,159,28,.07);border-left:3px solid #ff9f1c;border-radius:6px;margin-bottom:10px;font-family:monospace;font-size:11px">
       <div style="color:#ff9f1c;margin-bottom:3px">&#11088; STRONG BUY = alle BUY-Kriterien + bull_hidden oder bull_regular Divergenz</div>
     </div>
@@ -569,7 +549,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
       <!-- Schritt 1 -->
       <div style="font-family:monospace;font-size:10px;color:#00e57a;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Schritt 1 &mdash; Juno (iPhone, ~10 Min)</div>
-      <div style="margin-bottom:10px"><strong style="color:#dce8f5">fund_juno_v7.9.27.py</strong> &mdash; 298 Ticker: FCF, ROCE, EVAR, EV/EBITDA, mom_skip, above200, RSI, VIX, SPY-Closes &rarr; <strong style="color:#00c8f0">stockiq_fundamentals.json</strong><br>
+      <div style="margin-bottom:10px"><strong style="color:#dce8f5">fund_juno_v7.9.29.py</strong> &mdash; 299 Ticker: FCF, ROCE, EVAR, EV/EBITDA, mom_skip, above200, RSI, VIX, SPY-Closes &rarr; <strong style="color:#00c8f0">stockiq_fundamentals.json</strong><br>
       <span style="color:#7a9bb5;font-size:10px">Privat, nicht im Repo. Ergebnis: ~300 KB JSON auf iCloud.</span></div>
 
       <!-- Schritt 2 -->
@@ -653,7 +633,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.0.12 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.1.0 &middot; Juni 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -751,9 +731,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:10px">&#43; Position hinzuf&uuml;gen</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
       <div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">TICKER (aus WL2 w&auml;hlen)</div>
+        <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">TICKER (aus Favoriten)</div>
         <select id="dp-sel-wl2" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:11px;font-family:monospace">
-          <option value="">-- WL2 laden --</option>
+          <option value="">-- aus Favoriten waehlen --</option>
         </select>
       </div>
       <div>
@@ -817,7 +797,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.0.12 &middot; Claude (Anthropic) &middot; Mai 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.1.0 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1131,6 +1111,7 @@ var WL_FILTER = 'all';
 var WL_SEL = null;
 var WL2 = {};          /* Ticker-Keys die in WL2 sind: {AAPL:true, MSFT:true, ...} */
 var WL2_SYNC = false;  /* true = Synopse+WL1 nur WL2-Ticker zeigen */
+var WL_SECTOR_FILTER = '';  /* v6.1.0: '' = alle Sektoren */
 var WL_SORT = 'score'; /* 'score' oder 'alpha' */
 var SELL_SCORE_FILTER = true;   /* v5.9.69: Standard-ein (IC-Validierung Ende Mai) */
 var HC_FILTER = false;              /* v5.9.69: High-Conviction-Filter (Triple-Confirmation) */
@@ -1649,14 +1630,14 @@ function renderSpyPhaseBanner() {
 
 
 function goTab(n,btn){
-  var pgs=['p1','p1','p2','p8','p3','p1','p5','p9','p6','p7'],i; /* v6.0.12: p4(WF) entfernt */
+  var pgs=['p1','p1','p8','p5','p9','p6','p7'],i; /* v6.1.0: WL2 entfernt, 6 Tabs */
   for(i=0;i<pgs.length;i++){var pg=document.getElementById(pgs[i]);if(pg)pg.style.display='none';}
   var tabs=document.querySelectorAll('.tab');
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
   var pg2=document.getElementById(pgs[n]);if(pg2)pg2.style.display='block';
   if(btn)btn.classList.add('active');
-  if(n===0)rSyn();if(n===1){rWL();renderSpyPhaseBanner();}if(n===2)rWL2();if(n===3)rFund();  if(n===5)rAlloc();
-  if(n===7){var sm=window.FD?FD['__macro__']:null;var el=document.getElementById('sektoren-content');if(el)el.innerHTML=renderSektorTab(sm);}
+  if(n===0)rSyn();if(n===1){rWL();renderSpyPhaseBanner();}if(n===2){rFund();initDepot();}
+  if(n===4){var sm=window.FD?FD['__macro__']:null;var el=document.getElementById('sektoren-content');if(el)el.innerHTML=renderSektorTab(sm);}
 }
 </script>
 
@@ -1771,7 +1752,7 @@ function rSyn(){
   var filterActive=(HC_FILTER||WL2_SYNC);
   if(filterActive){
     var filterParts=[];
-    if(WL2_SYNC) filterParts.push('WL2 ('+pool.length+' Titel)');
+    if(WL2_SYNC) filterParts.push('Fav ('+pool.length+' Titel)');
     if(HC_FILTER) filterParts.push('HC: Triple-Confirmation');
     var totalStr='Gesamt-Universe: '+strongs+' STRONG / '+buys+' BUY / '+sells+' SELL';
     filterInfoH='<div style="grid-column:1/-1;padding:5px 12px;background:rgba(255,159,28,.06);border:1px solid rgba(255,159,28,.2);border-radius:6px;margin-bottom:4px;font-family:monospace;font-size:9px;color:#ff9f1c">';
@@ -1910,6 +1891,7 @@ function wlRend(scored){
     s=scored[i].s;sc=scored[i].sc;sig=mSig(s);
     /* HC-Filter v5.9.69: isHC() Triple-Confirmation */
     if(HC_FILTER && (sig==='buy'||sig==='strong'||sig==='pb') && !isHC(s,sc)) continue;
+    if(WL_SECTOR_FILTER){var _fdSec=FD[s.t];if(!_fdSec||_fdSec.sector!==WL_SECTOR_FILTER)continue;}
     if(WL_FILTER!=='all'){
       if(WL_FILTER==='strong'&&sig!=='strong')continue;
       if(WL_FILTER==='buy'&&sig!=='buy')continue;
@@ -1956,7 +1938,9 @@ function wlRend(scored){
     var h='<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderLeft+'border-radius:8px;padding:11px 13px;margin-bottom:6px;cursor:pointer" onclick="wlDetail(\''+s.t+'\')">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
     h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+s.n+'</span></div>';
-    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span><span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+'</div></div>';
+    var _sC=WL2[s.t]?'#ff9f1c':'#456278';
+    var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
+    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span><span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
@@ -2347,7 +2331,6 @@ function toggleSync(btn){
   var i;
   for(i=0;i<syncBtns.length;i++){
     var b = syncBtns[i]; if(!b) continue;
-    b.textContent    = WL2_SYNC ? '[>] WL2' : '[<] Alle';
     b.style.borderColor = WL2_SYNC ? '#ff9f1c' : '#1a2a3a';
     b.style.color       = WL2_SYNC ? '#ff9f1c' : 'var(--mut)';
     b.style.background  = WL2_SYNC ? 'rgba(255,159,28,.1)' : 'transparent';
@@ -2371,6 +2354,34 @@ function wlSetSort(mode, btn){
     btn.style.background  = 'rgba(0,200,240,.08)';
   }
   rWL();
+}
+
+/* ---- Sektor-Filter (v6.1.0) ---- */
+function wlSetSector(val){
+  WL_SECTOR_FILTER = val;
+  rWL();
+}
+
+function buildSectorOptions(){
+  var sel = document.getElementById('wl-sector-filter');
+  if(!sel) return;
+  var counts = {}, i, t, sec, k;
+  for(i=0;i<STOCKS.length;i++){
+    t = STOCKS[i].t;
+    var fd = FD[t];
+    sec = (fd && fd.sector) ? fd.sector : null;
+    if(sec){ if(!counts[sec]) counts[sec] = 0; counts[sec]++; }
+  }
+  var sectors = [];
+  for(k in counts){ if(counts.hasOwnProperty(k)) sectors.push(k); }
+  sectors.sort();
+  sel.innerHTML = '<option value="">Alle Sektoren</option>';
+  for(i=0;i<sectors.length;i++){
+    var opt = document.createElement('option');
+    opt.value = sectors[i];
+    opt.textContent = sectors[i] + ' (' + counts[sectors[i]] + ')';
+    sel.appendChild(opt);
+  }
 }
 
 /* ---- getActiveStocks: respektiert WL2_SYNC ---- */
@@ -2426,7 +2437,6 @@ function wl2Toggle(ticker){
   else { WL2[ticker] = true; }
   wl2Save();
   updWL2Cnt();
-  rWL2();
 }
 
 function wl2Clear(){
@@ -2434,19 +2444,6 @@ function wl2Clear(){
   WL2 = {};
   wl2Save();
   updWL2Cnt();
-  rWL2();
-}
-
-function wl2SelAll(){
-  var i, s, sig;
-  for(i=0;i<STOCKS.length;i++){
-    s = STOCKS[i];
-    sig = mSig(s);
-    if(sig === 'strong' || sig === 'buy') WL2[s.t] = true;
-  }
-  wl2Save();
-  updWL2Cnt();
-  rWL2();
 }
 
 /* ---- WL2 Export: JSON-Download ---- */
@@ -2457,45 +2454,6 @@ function wl2Export(){
   var a = document.createElement('a');
   a.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(data);
   a.download = 'stockiq_wl2_' + new Date().toISOString().slice(0,10) + '.json';
-  a.click();
-}
-
-/* ---- WL2 Chart-Export (v5.9.85): stockiq_wl2_export.json fuer stockiq_chart.py ---- */
-function wl2ChartExport(){
-  var tickers = Object.keys(WL2);
-  if(tickers.length === 0){alert('WL2 ist leer.');return;}
-  /* Scores + Kennzahlen aus FD fuer jedes WL2-Mitglied */
-  var entries = [];
-  for(var i=0;i<tickers.length;i++){
-    var t = tickers[i];
-    var fd = FD[t] || {};
-    var sc = null;
-    /* Score aus STOCKS-Array holen */
-    for(var j=0;j<STOCKS.length;j++){
-      if(STOCKS[j].t === t){ sc = STOCKS[j].score; break; }
-    }
-    entries.push({
-      ticker:  t,
-      score:   sc,
-      fcf:     fd.fcf  !== undefined ? fd.fcf  : null,
-      roce:    fd.roce !== undefined ? fd.roce : null,
-      owner_earnings_yield: fd.owner_earnings_yield !== undefined ? fd.owner_earnings_yield : null,
-      ev_ebit: fd.ev_ebit !== undefined ? fd.ev_ebit : null,
-      sector:  fd.sector || null
-    });
-  }
-  /* Score absteigend sortieren */
-  entries.sort(function(a,b){ return (b.score||0)-(a.score||0); });
-  var out = {
-    source:    'StockIQ WL2',
-    version:   '5.9.85',
-    generated: new Date().toISOString(),
-    n_tickers: entries.length,
-    tickers:   entries
-  };
-  var a = document.createElement('a');
-  a.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(out,null,2));
-  a.download = 'stockiq_wl2_export.json';
   a.click();
 }
 
@@ -2512,19 +2470,12 @@ function wl2Import(inp){
       for(var i=0;i<arr.length;i++){
         if(typeof arr[i]==='string'){WL2[arr[i]]=true;added++;}
       }
-      wl2Save();updWL2Cnt();rWL2();
+      wl2Save();updWL2Cnt();
       alert(added + ' Ticker importiert.');
     }catch(err){alert('Import-Fehler: '+err.message);}
   };
   reader.readAsText(file);
   inp.value = '';
-}
-
-/* ---- Origin-Warnung: lokale Datei vs. GitHub Pages ---- */
-function wl2CheckOrigin(){
-  var isLocal = (window.location.protocol === 'file:' || window.location.hostname === 'localhost');
-  var warn = document.getElementById('wl2-origin-warn');
-  if(warn) warn.style.display = isLocal ? 'block' : 'none';
 }
 
 function updWL2Cnt(){
@@ -2533,68 +2484,6 @@ function updWL2Cnt(){
   var e2 = document.getElementById('wl2-sel-cnt');if(e2) e2.textContent = n;
 }
 
-/* ---- rWL2: WL2-Tab rendern ---- */
-function rWL2(){
-  var el = document.getElementById('wl2-list'); if(!el) return;
-  var i, s, sc, sig, out = '';
-
-  /* Suchbegriff */
-  var searchEl = document.getElementById('wl2-search');
-  var q = searchEl ? searchEl.value.toLowerCase().trim() : '';
-
-  var scored = [], pool = STOCKS;
-  for(i=0;i<pool.length;i++) scored.push({s:pool[i], sc:cSc(pool[i])});
-
-  /* Sortierung: WL2-Mitglieder zuerst, dann nach Score */
-  scored.sort(function(a,b){
-    var aIn = WL2[a.s.t] ? 1 : 0;
-    var bIn = WL2[b.s.t] ? 1 : 0;
-    if(bIn !== aIn) return bIn - aIn;
-    return b.sc - a.sc;
-  });
-
-  var shown = 0;
-  for(i=0;i<scored.length;i++){
-    s = scored[i].s; sc = scored[i].sc; sig = mSig(s);
-    /* Suchfilter: Ticker oder Klarname */
-    if(q && s.t.toLowerCase().indexOf(q) === -1 && s.n.toLowerCase().indexOf(q) === -1) continue;
-    shown++;
-
-    var inWL2 = !!WL2[s.t];
-    var sc2 = sig==='strong'?'#ff9f1c':sig==='buy'?'#00e57a':sig==='pb'?'#f0c000':
-              sig==='rsi_block'?'#e8a020':isHoldSF(sig)?'#b07cf8':isSell(sig)||sig==='weak'?'#ff6666':'#7a9bb5';
-    var slbl = sig==='strong'?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG-BLK':
-               sig==='rsi_block'?'RSI-BLK':isHoldSF(sig)?holdSFLabel(sig):sig==='weak'?'WEAK':isSell(sig)?sellLabel(sig):'WATCH';
-    var rowBg = inWL2 ? 'background:#0f1e10;border:1px solid rgba(255,159,28,.4);' :
-                        'background:#0c1420;border:1px solid #1a2a3a;';
-    out += '<div style="'+rowBg+'border-radius:8px;padding:11px 13px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">';
-    out += '<div style="flex:1">';
-    out += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">';
-    out += '<span style="font-size:15px;font-weight:800">'+s.t+'</span>';
-    out += '<span style="font-size:11px;color:var(--mut)">'+s.n+'</span>';
-    out += '<span style="font-family:monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>';
-    out += '</div>';
-    out += '<div style="font-family:monospace;font-size:9px;color:var(--mut)">Score <span style="color:'+scColQ(sc,s)+'">'+sc+'</span>'+sqBadge(s)+' &nbsp; PEG '+pgLb(s)+' &nbsp; RSI '+s.rsi+'</div>';
-    if(isHoldSF(sig)){
-      var wl2Fd=FD[s.t];
-      var wl2Parts=[];
-      if(sig==='hold_sf'||sig==='hold_sf_both')wl2Parts.push('SF Score\u2265'+SELL_SCORE_MIN);
-      if(sig==='hold_sf_div'||sig==='hold_sf_both'){
-        var wl2Dy=wl2Fd&&wl2Fd.div_yield!==null&&wl2Fd.div_yield!==undefined?wl2Fd.div_yield.toFixed(1)+'%':'--';
-        wl2Parts.push('DR Div '+wl2Dy+'\u2265'+divThresh()+'%');
-      }
-      out+='<div style="font-family:monospace;font-size:8px;color:#b07cf8;margin-top:2px">&#9654; '+wl2Parts.join(' | ')+'</div>';
-    }
-    if(isSell(sig)){out+='<div style="font-family:monospace;font-size:8px;color:#ff6666;margin-top:2px">'+sellWhy(s,sig)+'</div>';}
-    out += '</div>';
-    out += '<button onclick="wl2Toggle(\''+s.t+'\')" style="font-family:monospace;font-size:11px;padding:6px 12px;border-radius:8px;border:1px solid '+(inWL2?'rgba(255,159,28,.6)':'rgba(0,200,240,.4)')+';color:'+(inWL2?'#ff9f1c':'var(--acc)')+';background:'+(inWL2?'rgba(255,159,28,.1)':'transparent')+';cursor:pointer;white-space:nowrap">'+(inWL2?'&#10003; WL2':'+ WL2')+'</button>';
-    out += '</div>';
-  }
-  if(!out){
-    out = '<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">'+(q?'Keine Treffer fuer "'+q+'"':'Keine Ticker')+'</div>';
-  }
-  el.innerHTML = out;
-}
 </script>
 
 <!-- ============================================================
@@ -3186,6 +3075,7 @@ function loadFund(inp){
       }
       var ts=Date.now();
       applyFund(fund);
+      buildSectorOptions();
       saveFundToCache(rawData, ts);
       var n=countLoaded();
       updateFundStatus(n, ts, false);
@@ -3282,6 +3172,7 @@ function initFund(){
     }
     var ts=cached.ts||null;
     applyFund(fund);
+    buildSectorOptions();
     var n=countLoaded();
     updateFundStatus(n, ts, true);
     rFund();rSyn();
@@ -3524,8 +3415,7 @@ document.addEventListener('DOMContentLoaded', function(){
 /* Falls kein Cache: rSyn() direkt aufrufen */
 document.addEventListener('DOMContentLoaded', function(){
   try{
-    wl2Load(); /* WL2 aus persistentem Speicher laden */
-    wl2CheckOrigin(); /* Origin-Warnung prÃ¼fen */
+    wl2Load(); /* Favoriten aus persistentem Speicher laden */
   }catch(e){ console.warn('WL2 init fehlgeschlagen: '+e.message); }
   try{
     initFund();
@@ -3781,7 +3671,7 @@ function initDepot(){
 function dpFillWL2(){
   var sel = document.getElementById('dp-sel-wl2');
   if(!sel) return;
-  sel.innerHTML = '<option value="">-- aus WL2 waehlen --</option>';
+  sel.innerHTML = '<option value="">-- aus Favoriten waehlen --</option>';
   try{
     var wl2 = JSON.parse(localStorage.getItem('stockiq_wl2_v59') || '[]');
     for(var i=0;i<STOCKS.length;i++){
