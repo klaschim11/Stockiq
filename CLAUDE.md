@@ -1,5 +1,5 @@
 # StockIQ — CLAUDE.md
-Version: v6.1.1 | Stand: 31. Mai 2026 | Sprint 11 abgeschlossen
+Version: v6.2.2 | Stand: 31. Mai 2026 | Sprint 11 abgeschlossen
 
 ---
 
@@ -17,7 +17,7 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 
 | Datei | Version | Zweck |
 |-------|---------|-------|
-| `index.html` | v6.1.1 | Dashboard (laedt scores.json) |
+| `index.html` | v6.2.2 | Dashboard (laedt scores.json) |
 | `fund_juno_v7_9_29.py` | v7.9.29 | Fundamentaldaten + Makro (Juno/iPhone, PRIVAT) |
 | `stockiq_score.py` | v1.3 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
 | `stockiq_alpha_juno_v6b_6m.py` | v6b_6m-u4 | Walk-Forward PRODUKTION |
@@ -50,7 +50,7 @@ Oder 1-Click: `run_daily.bat` (erledigt Schritte 1-4 automatisch).
 
 ---
 
-## ARCHITEKTUR (ab v6.1.1)
+## ARCHITEKTUR (ab v6.2.2)
 
 ```
 LOKAL (privat, nicht im Repo):
@@ -226,5 +226,5 @@ P5  WL3 Run: Mitte Juli 2026
 
 ---
 
-*StockIQ CLAUDE.md | v6.1.1 | 31. Mai 2026*
+*StockIQ CLAUDE.md | v6.2.2 | 31. Mai 2026*
 *299 Ticker | OOS AVG 60.1% | Schutzziel A aktiv*
