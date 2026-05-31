@@ -301,7 +301,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- ZIEL-INFO -->
 <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px">
   <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">&#128270; Ziel-Allokation (zyklus-adjustiert, v5.9.78)</div>
-  <div id="ziel-kacheln" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px"></div>
+  <div id="ziel-kacheln" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px"></div>
   <div style="font-family:monospace;font-size:9px;color:var(--mut);line-height:1.6">
     <strong style="color:#dce8f5">Basis (Hambro/BlackRock 2026):</strong> 55% Aktien / 15% Anleihen / 12% Gold / 8% Rohstoffe / 10% Cash<br>
     <strong style="color:#dce8f5">Quelle:</strong> Fidelity Business Cycle AART Jan 2025 &middot; BlackRock Hambro Webinar Mai 2026<br>
@@ -4345,19 +4345,12 @@ function setCycle(c){
 function renderCycleTargets(c){
   var el = document.getElementById('cycle-targets');
   if(!el) return;
-  var ca = CYCLE_ALLOC[c];
+  var items = buildAllocTargets(c);
   var out = '';
-  var items = [
-    {id:'stocks', l:'Aktien',    col:'#00e676'},
-    {id:'bonds',  l:'Anleihen',  col:'#00c8f0'},
-    {id:'gold',   l:'Gold',      col:'#ffab00'},
-    {id:'commod', l:'Rohst.',    col:'#ff9f1c'},
-    {id:'cash',   l:'Cash',      col:'#b388ff'},
-  ];
   for(var i=0;i<items.length;i++){
     out += '<div style="text-align:center;padding:6px 2px;background:#0a1628;border:1px solid #1a3050;border-radius:6px">';
-    out += '<div style="font-size:15px;font-weight:800;color:' + items[i].col + '">' + (ca[items[i].id]||0) + '%</div>';
-    out += '<div style="font-family:monospace;font-size:7px;color:var(--mut)">' + items[i].l + '</div>';
+    out += '<div style="font-size:15px;font-weight:800;color:' + items[i].col + '">' + items[i].soll + '%</div>';
+    out += '<div style="font-family:monospace;font-size:7px;color:var(--mut)">' + items[i].label + '</div>';
     out += '</div>';
   }
   el.innerHTML = out;
@@ -4367,19 +4360,12 @@ function renderCycleTargets(c){
 function renderZielKacheln(c){
   var el = document.getElementById('ziel-kacheln');
   if(!el) return;
-  var ca = CYCLE_ALLOC[c];
-  var items = [
-    {id:'stocks', l:'AKTIEN',    col:'#00e676'},
-    {id:'bonds',  l:'ANLEIHEN',  col:'#00c8f0'},
-    {id:'gold',   l:'GOLD',      col:'#ffab00'},
-    {id:'commod', l:'ROHST.',    col:'#ff9f1c'},
-    {id:'cash',   l:'CASH',      col:'#b388ff'},
-  ];
+  var items = buildAllocTargets(c);
   var out = '';
   for(var i=0;i<items.length;i++){
     out += '<div style="text-align:center;padding:8px 4px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">';
-    out += '<div style="font-size:17px;font-weight:700;color:' + items[i].col + '">' + (ca[items[i].id]||0) + '%</div>';
-    out += '<div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">' + items[i].l + '</div>';
+    out += '<div style="font-size:17px;font-weight:700;color:' + items[i].col + '">' + items[i].soll + '%</div>';
+    out += '<div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">' + items[i].label.toUpperCase() + '</div>';
     out += '</div>';
   }
   el.innerHTML = out;
