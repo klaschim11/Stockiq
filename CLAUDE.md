@@ -1,5 +1,5 @@
 # StockIQ — CLAUDE.md
-Version: v6.2.2 | Stand: 31. Mai 2026 | Sprint 11 abgeschlossen
+Version: v6.2.2 | Stand: 01. Juni 2026 | Sprint 12 abgeschlossen
 
 ---
 
@@ -191,7 +191,34 @@ v6.1.1  Bugfixes + Suchfeld:
 
 ---
 
-## OFFENE PUNKTE (Stand 31.05.2026)
+## SPRINT 12 (abgeschlossen, 01. Juni 2026)
+
+```
+v6.2.0  P2 Allokations-Tab Umbau:
+  - ALLOC_MATRIX 3x4 (Profil x Phase: kapital/ausgewogen/rendite x early/mid/late/recession)
+  - ALLOC_BASE +etfs (6 Positionen: Einzelaktien/ETFs/Anleihen/Gold/Rohstoffe/Cash)
+  - buildAllocTargets() Rewrite (liest ALLOC_MATRIX statt hartkodierten Zielen)
+  - detectCyclePhase(vix, spyAbove200ma, curveSlope) neu
+  - renderCyclePhaseBadge() neu (auto/manuell, VIX + curve_slope_bps + SPY)
+  - renderCycleTargets() + renderZielKacheln() auf buildAllocTargets() umgestellt
+  - fund_juno v7.9.30: curve_slope_bps (10Y minus 3M in bps)
+  - cycle-targets + ziel-kacheln: 5 -> 6 Spalten
+
+v6.2.1  P3 Versionsstrings + Hilfe/Roadmap:
+  - Versionsstrings auf v6.2.0/v6.2.1 aktualisiert
+  - Hilfe + Roadmap: neue Eintraege (Sprint 10-12)
+
+v6.2.2  Maintenance-Patch:
+  - Title + Header-Versionstring korrigiert
+  - Allokation GSR-Hinweis fund_juno v7.9.9+ -> v7.9.29+
+  - rptBuild() Bericht-Titel v5.9.69 -> v6.2.2
+  - rptFillStocks() Mojibake-Dash -> – (ES5-safe)
+  - Hilfe-Tab: Versionshistorie-Block entfernt
+```
+
+---
+
+## OFFENE PUNKTE (Stand 01.06.2026)
 
 ```
 P2  Allokations-Tab Umbau (Sprint 12):
@@ -226,5 +253,5 @@ P5  WL3 Run: Mitte Juli 2026
 
 ---
 
-*StockIQ CLAUDE.md | v6.2.2 | 31. Mai 2026*
+*StockIQ CLAUDE.md | v6.2.2 | 01. Juni 2026*
 *299 Ticker | OOS AVG 60.1% | Schutzziel A aktiv*
