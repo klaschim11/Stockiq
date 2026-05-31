@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.1.0</title>
+<title>StockIQ v6.1.1</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.1.0 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.1.1 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -106,9 +106,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 1: WATCHLIST -->
 <div class="page" id="p1" style="display:block">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">Watchlist &mdash; <span id="wl-hdr-cnt">--</span> Ticker</div>
-  <div id="spyPhaseBanner" style="padding:6px 12px;margin-bottom:8px;border-radius:4px;font-size:0.9em;font-weight:bold;display:none;"></div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:10px">Gruppiert: BUY &middot; HOLD &middot; SELL &mdash; Antippen = Detail</div>
-  <!-- v6.1.0: Zweizeilige Filterstruktur -->
+  <!-- v6.1.1: Suchfeld statt SPY-Banner -->
+  <div style="margin-bottom:8px;position:relative">
+    <input id="wl-search" type="text" placeholder="&#128269; Ticker oder Name suchen..."
+      oninput="wlSetSearch(this.value)"
+      style="width:100%;box-sizing:border-box;padding:8px 12px 8px 34px;background:#0c1420;border:1px solid #223040;border-radius:10px;color:var(--txt);font-family:monospace;font-size:12px;outline:none">
+    <span style="position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none;color:var(--mut)">&#128269;</span>
+  </div>
+  <!-- v6.1.1: Zweizeilige Filterstruktur -->
   <!-- Zeile 1: Signal + Sort -->
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
     <button class="tf active" onclick="wlFilt('all',this)">Alle</button>
@@ -119,6 +124,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button class="tf" onclick="wlFilt('watch',this)">HOLD/Watch</button>
     <button onclick="wlSetSort('score',this)" id="sort-score" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid var(--acc);color:var(--acc);background:rgba(0,200,240,.08);cursor:pointer">Score</button>
     <button onclick="wlSetSort('alpha',this)" id="sort-alpha" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">A-Z</button>
+    <span id="spy-phase-badge" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);display:none">SPY --</span>
   </div>
   <!-- Zeile 2: Kontext-Filter -->
   <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap;padding:5px 8px;background:#080e18;border-radius:8px">
@@ -201,7 +207,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v5.9.20</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.1.1</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -394,7 +400,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.1.0 &middot; Stand Mai/Juni 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.1.1 &middot; Stand Juni 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -633,7 +639,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.1.0 &middot; Juni 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.1.1 &middot; Juni 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -797,7 +803,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.1.0 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.1.1 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1112,6 +1118,7 @@ var WL_SEL = null;
 var WL2 = {};          /* Ticker-Keys die in WL2 sind: {AAPL:true, MSFT:true, ...} */
 var WL2_SYNC = false;  /* true = Synopse+WL1 nur WL2-Ticker zeigen */
 var WL_SECTOR_FILTER = '';  /* v6.1.0: '' = alle Sektoren */
+var WL_SEARCH = '';          /* v6.1.1: Suchfeld WL */
 var WL_SORT = 'score'; /* 'score' oder 'alpha' */
 var SELL_SCORE_FILTER = true;   /* v5.9.69: Standard-ein (IC-Validierung Ende Mai) */
 var HC_FILTER = false;              /* v5.9.69: High-Conviction-Filter (Triple-Confirmation) */
@@ -1609,23 +1616,23 @@ tick();setInterval(tick,1000);
 <script>
 
 function renderSpyPhaseBanner() {
-  var el = document.getElementById("spyPhaseBanner");
+  var el = document.getElementById("spy-phase-badge");
   if (!el) { return; }
   var macro = (window.FD && FD['__macro__']) ? FD['__macro__'] : null;
   if (!macro) { el.style.display = "none"; return; }
   var above = macro.spy_above_200ma;
   if (above === true || above === "true") {
-    el.innerHTML = "Marktphase: Investierbar &mdash; SPY &gt; 200MA";
-    el.style.background = "#1a4a1a";
+    el.textContent = "SPY > 200MA";
+    el.style.borderColor = "#2a7a2a";
     el.style.color = "#7fc97f";
-    el.style.border = "1px solid #2a7a2a";
+    el.style.background = "rgba(0,229,122,.08)";
   } else {
-    el.innerHTML = "Marktphase: Vorsicht &mdash; SPY &lt; 200MA";
-    el.style.background = "#4a3a0a";
+    el.textContent = "SPY < 200MA";
+    el.style.borderColor = "#8a6a10";
     el.style.color = "#d4aa40";
-    el.style.border = "1px solid #8a6a10";
+    el.style.background = "rgba(240,192,0,.06)";
   }
-  el.style.display = "block";
+  el.style.display = "inline-block";
 }
 
 
@@ -1892,6 +1899,7 @@ function wlRend(scored){
     /* HC-Filter v5.9.69: isHC() Triple-Confirmation */
     if(HC_FILTER && (sig==='buy'||sig==='strong'||sig==='pb') && !isHC(s,sc)) continue;
     if(WL_SECTOR_FILTER){var _fdSec=FD[s.t];if(!_fdSec||_fdSec.sector!==WL_SECTOR_FILTER)continue;}
+    if(WL_SEARCH){if(s.t.toLowerCase().indexOf(WL_SEARCH)===-1&&s.n.toLowerCase().indexOf(WL_SEARCH)===-1)continue;}
     if(WL_FILTER!=='all'){
       if(WL_FILTER==='strong'&&sig!=='strong')continue;
       if(WL_FILTER==='buy'&&sig!=='buy')continue;
@@ -2359,6 +2367,11 @@ function wlSetSort(mode, btn){
 /* ---- Sektor-Filter (v6.1.0) ---- */
 function wlSetSector(val){
   WL_SECTOR_FILTER = val;
+  rWL();
+}
+
+function wlSetSearch(val){
+  WL_SEARCH = val ? val.toLowerCase().trim() : '';
   rWL();
 }
 
@@ -3671,16 +3684,20 @@ function initDepot(){
 function dpFillWL2(){
   var sel = document.getElementById('dp-sel-wl2');
   if(!sel) return;
-  sel.innerHTML = '<option value="">-- aus Favoriten waehlen --</option>';
+  sel.innerHTML = '<option value=””>-- aus Favoriten waehlen --</option>';
   try{
     var wl2 = JSON.parse(localStorage.getItem('stockiq_wl2_v59') || '[]');
+    /* A-Z nach Klarname sortieren */
+    var favs = [];
     for(var i=0;i<STOCKS.length;i++){
-      if(wl2.indexOf(STOCKS[i].t) >= 0){
-        var opt = document.createElement('option');
-        opt.value = STOCKS[i].t;
-        opt.textContent = STOCKS[i].t + ' â€” ' + (STOCKS[i].n||'');
-        sel.appendChild(opt);
-      }
+      if(wl2.indexOf(STOCKS[i].t) >= 0) favs.push(STOCKS[i]);
+    }
+    favs.sort(function(a,b){ return (a.n||a.t) < (b.n||b.t) ? -1 : (a.n||a.t) > (b.n||b.t) ? 1 : 0; });
+    for(var j=0;j<favs.length;j++){
+      var opt = document.createElement('option');
+      opt.value = favs[j].t;
+      opt.textContent = (favs[j].n||favs[j].t) + ' (' + favs[j].t + ')';
+      sel.appendChild(opt);
     }
   } catch(e){}
   /* Bei WL2-Auswahl Ticker-Feld befuellen */
