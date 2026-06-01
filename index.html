@@ -1879,11 +1879,30 @@ function wlFilt(f,btn){
 }
 
 function wlReset(){
-  WL_FILTER='all';WL2_SYNC=false;WL_SECTOR_FILTER='';WL_SORT='score';
+  WL_FILTER='all';
+  WL2_SYNC=false;
+  WL_SECTOR_FILTER='';
+  WL_SORT='score';
+  SELL_SCORE_FILTER=false;
+  HC_FILTER=false;
+  DIV_HOLD_FILTER=false;
   var btns=document.querySelectorAll('.tf'),i;
-  for(i=0;i<btns.length;i++)btns[i].classList.remove('active');
-  var sd=document.getElementById('wl-sector-filter');if(sd)sd.value='';
-  var ss=document.getElementById('sort-score');if(ss)ss.classList.add('active');
+  for(i=0;i<btns.length;i++) btns[i].classList.remove('active');
+  var sd=document.getElementById('wl-sector-filter');
+  if(sd) sd.value='';
+  var ss=document.getElementById('sort-score');
+  if(ss) ss.classList.add('active');
+  var ab=document.querySelector('button[onclick="wlReset()"]');
+  if(ab) ab.classList.add('active');
+  var sfb=document.getElementById('sf-btn');
+  if(sfb) sfb.classList.remove('active');
+  var hcb=document.getElementById('hc-btn');
+  if(hcb) hcb.classList.remove('active');
+  var drb=document.getElementById('dr-btn');
+  if(drb) drb.classList.remove('active');
+  var syb=document.getElementById('sync-btn');
+  if(syb) syb.classList.remove('active');
+  rSyn();
   rWL();
 }
 
