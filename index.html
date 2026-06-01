@@ -106,35 +106,41 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <!-- TAB 1: WATCHLIST -->
 <div class="page" id="p1" style="display:block">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">Watchlist &mdash; <span id="wl-hdr-cnt">--</span> Ticker</div>
-  <!-- v6.1.1: Suchfeld statt SPY-Banner -->
+  <!-- v6.3.1: 4-Zeilen-Filterstruktur -->
+  <!-- Zeile 1: Signal-Filter -->
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px">
+    <button class="tf" onclick="wlFilt('strong',this)">&#11088; STRONG</button>
+    <button class="tf" onclick="wlFilt('buy',this)">BUY</button>
+    <button class="tf" onclick="wlFilt('pb',this)">PEG-Block</button>
+    <button class="tf" onclick="wlFilt('watch',this)">HOLD/Watch</button>
+    <button class="tf" onclick="wlFilt('sell',this)">SELL</button>
+  </div>
+  <!-- Zeile 2: ALLE / FAV / Sort / SPY-Badge -->
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px;align-items:center">
+    <button class="tf active" onclick="wlReset()">Alle</button>
+    <button id="sync-btn" onclick="toggleSync(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">&#9733; Fav (<span id="wl2-cnt">0</span>)</button>
+    <button onclick="wlSetSort('score',this)" id="sort-score" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid var(--acc);color:var(--acc);background:rgba(0,200,240,.08);cursor:pointer">Score</button>
+    <button onclick="wlSetSort('alpha',this)" id="sort-alpha" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">A-Z</button>
+    <span id="spy-phase-badge" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);display:none">SPY --</span>
+  </div>
+  <!-- Zeile 3: Sektor / Export / Import -->
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px;align-items:center">
+    <select id="wl-sector-filter" onchange="wlSetSector(this.value)" style="font-family:monospace;font-size:10px;padding:4px 8px;border-radius:12px;border:1px solid #1a2a3a;color:var(--mut);background:#0c1420;cursor:pointer;outline:none"><option value="">Alle Sektoren</option></select>
+    <button onclick="wl2Export()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8595; Export</button>
+    <label style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8593; Import<input type="file" accept=".json" onchange="wl2Import(this)" style="display:none"></label>
+  </div>
+  <!-- Zeile 4: HC / SF / DR -->
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;align-items:center">
+    <button id="wl-hc-btn" onclick="toggleHCFilter(document.getElementById('hc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">HC: aus</button>
+    <button id="wl-sf-btn" onclick="toggleSellFilter(document.getElementById('sf-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
+    <button id="wl-dr-btn" onclick="toggleDivFilter(document.getElementById('dr-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
+  </div>
+  <!-- Suchfeld -->
   <div style="margin-bottom:8px;position:relative">
     <input id="wl-search" type="text" placeholder="&#128269; Ticker oder Name suchen..."
       oninput="wlSetSearch(this.value)"
       style="width:100%;box-sizing:border-box;padding:8px 12px 8px 34px;background:#0c1420;border:1px solid #223040;border-radius:10px;color:var(--txt);font-family:monospace;font-size:12px;outline:none">
     <span style="position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none;color:var(--mut)">&#128269;</span>
-  </div>
-  <!-- v6.1.1: Zweizeilige Filterstruktur -->
-  <!-- Zeile 1: Signal + Sort -->
-  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
-    <button class="tf active" onclick="wlFilt('all',this)">Alle</button>
-    <button class="tf" onclick="wlFilt('strong',this)">&#11088; STRONG</button>
-    <button class="tf" onclick="wlFilt('buy',this)">BUY</button>
-    <button class="tf" onclick="wlFilt('pb',this)">PEG-Block</button>
-    <button class="tf" onclick="wlFilt('sell',this)">SELL</button>
-    <button class="tf" onclick="wlFilt('watch',this)">HOLD/Watch</button>
-    <button onclick="wlSetSort('score',this)" id="sort-score" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid var(--acc);color:var(--acc);background:rgba(0,200,240,.08);cursor:pointer">Score</button>
-    <button onclick="wlSetSort('alpha',this)" id="sort-alpha" style="font-family:monospace;font-size:10px;padding:5px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">A-Z</button>
-    <span id="spy-phase-badge" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);display:none">SPY --</span>
-  </div>
-  <!-- Zeile 2: Kontext-Filter -->
-  <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap;padding:5px 8px;background:#080e18;border-radius:8px">
-    <select id="wl-sector-filter" onchange="wlSetSector(this.value)" style="font-family:monospace;font-size:10px;padding:4px 8px;border-radius:12px;border:1px solid #1a2a3a;color:var(--mut);background:#0c1420;cursor:pointer;outline:none"><option value="">Alle Sektoren</option></select>
-    <button id="wl-sf-btn" onclick="toggleSellFilter(document.getElementById('sf-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
-    <button id="wl-hc-btn" onclick="toggleHCFilter(document.getElementById('hc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">HC: aus</button>
-    <button id="wl-dr-btn" onclick="toggleDivFilter(document.getElementById('dr-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
-    <button id="sync-btn" onclick="toggleSync(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">&#9733; Fav (<span id="wl2-cnt">0</span>)</button>
-    <button onclick="wl2Export()" style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8595; Export</button>
-    <label style="font-family:monospace;font-size:10px;padding:4px 10px;border-radius:12px;border:1px solid rgba(176,124,248,.4);color:#b07cf8;background:transparent;cursor:pointer">&#8593; Import<input type="file" accept=".json" onchange="wl2Import(this)" style="display:none"></label>
   </div>
   <div class="g4" id="wl-kpi" style="margin-bottom:8px"></div>
   <!-- v5.9.71: Synopse-Vergleichszeile -->
@@ -785,7 +791,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.1.1 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.3.1 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1872,6 +1878,15 @@ function wlFilt(f,btn){
   wlRend(getScored());
 }
 
+function wlReset(){
+  WL_FILTER='all';WL2_SYNC=false;WL_SECTOR_FILTER='';WL_SORT='score';
+  var btns=document.querySelectorAll('.tf'),i;
+  for(i=0;i<btns.length;i++)btns[i].classList.remove('active');
+  var sd=document.getElementById('wl-sector-filter');if(sd)sd.value='';
+  var ss=document.getElementById('sort-score');if(ss)ss.classList.add('active');
+  rWL();
+}
+
 function wlRend(scored){
   /* Drei Gruppen: BUY (strong+buy+pb+rsi_block), HOLD (watch+weak), SELL (alle sell_*) */
   var i,s,sc,sig;
@@ -2801,7 +2816,7 @@ function getHigh52wRatio(ticker) {
 }
 
 function buildTvSymbol(ticker) {
-  var NAMED = {'ITX':'BME:ITX','AI':'EURONEXT:AI','SAN':'BME:SAN','SAND':'OMX:SAND'};
+  var NAMED = {'ITX':'BME:ITX','AI':'EURONEXT:AI','SAN':'BME:SAN','SAND':'OMX:SAND','NEM':'XETRA:NEM','BAS':'XETRA:BAS'};
   if (NAMED[ticker]) { return NAMED[ticker]; }
   var dot = ticker.indexOf('.');
   if (dot < 0) { return ticker; }
