@@ -2,17 +2,29 @@
   "n_snapshots": 4,
   "snapshots": [
     {
-      "ts": 1780304173473,
+      "ts": 1780327887053,
       "date": "01.06.2026",
       "entries": [
         {
           "t": "TTE.PA",
-          "sig": "buy",
-          "sc": 84,
+          "sig": "hold",
+          "sc": 85,
           "sr": 2
         },
         {
           "t": "ENI.MI",
+          "sig": "hold",
+          "sc": 80,
+          "sr": 2
+        },
+        {
+          "t": "SLB",
+          "sig": "buy",
+          "sc": 80,
+          "sr": 2
+        },
+        {
+          "t": "PSX",
           "sig": "buy",
           "sc": 80,
           "sr": 2
@@ -24,22 +36,10 @@
           "sr": 1
         },
         {
-          "t": "SLB",
-          "sig": "buy",
-          "sc": 79,
-          "sr": 2
-        },
-        {
           "t": "8053.T",
           "sig": "buy",
           "sc": 78,
           "sr": 3
-        },
-        {
-          "t": "PSX",
-          "sig": "buy",
-          "sc": 78,
-          "sr": 2
         },
         {
           "t": "8015.T",
@@ -48,16 +48,34 @@
           "sr": 3
         },
         {
-          "t": "MPC",
+          "t": "HSBA.L",
           "sig": "buy",
+          "sc": 77,
+          "sr": 11
+        },
+        {
+          "t": "CNQ",
+          "sig": "hold",
           "sc": 77,
           "sr": 2
         },
         {
-          "t": "HSBA.L",
+          "t": "BTI",
           "sig": "buy",
           "sc": 76,
-          "sr": 11
+          "sr": 10
+        },
+        {
+          "t": "RIO",
+          "sig": "buy",
+          "sc": 76,
+          "sr": 4
+        },
+        {
+          "t": "XOM",
+          "sig": "hold",
+          "sc": 76,
+          "sr": 2
         },
         {
           "t": "2914.T",
@@ -67,25 +85,43 @@
         },
         {
           "t": "EQNR.OL",
+          "sig": "hold",
+          "sc": 76,
+          "sr": 2
+        },
+        {
+          "t": "OXY",
           "sig": "buy",
           "sc": 76,
           "sr": 2
         },
         {
-          "t": "CNQ",
+          "t": "MPC",
           "sig": "buy",
           "sc": 76,
           "sr": 2
         },
         {
-          "t": "RIO",
+          "t": "SHEL.L",
+          "sig": "hold",
+          "sc": 75,
+          "sr": 2
+        },
+        {
+          "t": "MNST",
           "sig": "buy",
           "sc": 75,
-          "sr": 4
+          "sr": 10
         },
         {
           "t": "COP",
-          "sig": "buy",
+          "sig": "hold",
+          "sc": 75,
+          "sr": 2
+        },
+        {
+          "t": "BP.L",
+          "sig": "hold",
           "sc": 75,
           "sr": 2
         },
@@ -96,14 +132,8 @@
           "sr": 11
         },
         {
-          "t": "OXY",
-          "sig": "buy",
-          "sc": 75,
-          "sr": 2
-        },
-        {
           "t": "SHEL",
-          "sig": "buy",
+          "sig": "hold",
           "sc": 75,
           "sr": 2
         },
@@ -114,26 +144,8 @@
           "sr": 2
         },
         {
-          "t": "BTI",
-          "sig": "buy",
-          "sc": 74,
-          "sr": 10
-        },
-        {
-          "t": "SHEL.L",
-          "sig": "buy",
-          "sc": 74,
-          "sr": 2
-        },
-        {
-          "t": "XOM",
-          "sig": "buy",
-          "sc": 74,
-          "sr": 2
-        },
-        {
           "t": "EN.PA",
-          "sig": "buy",
+          "sig": "hold",
           "sc": 74,
           "sr": 3
         },
@@ -144,6 +156,12 @@
           "sr": 2
         },
         {
+          "t": "JNJ",
+          "sig": "hold",
+          "sc": 73,
+          "sr": 5
+        },
+        {
           "t": "ABBN.SW",
           "sig": "buy",
           "sc": 73,
@@ -151,13 +169,7 @@
         },
         {
           "t": "CVX",
-          "sig": "buy",
-          "sc": 73,
-          "sr": 2
-        },
-        {
-          "t": "BP.L",
-          "sig": "buy",
+          "sig": "hold",
           "sc": 73,
           "sr": 2
         },
@@ -174,25 +186,25 @@
           "sr": 10
         },
         {
-          "t": "ZTO",
+          "t": "6501.T",
           "sig": "buy",
           "sc": 73,
           "sr": 3
         },
         {
-          "t": "6367.T",
-          "sig": "buy",
-          "sc": 72,
+          "t": "ZTO",
+          "sig": "hold",
+          "sc": 73,
           "sr": 3
         },
         {
-          "t": "MNST",
+          "t": "UNH",
           "sig": "buy",
           "sc": 72,
-          "sr": 10
+          "sr": 5
         },
         {
-          "t": "6501.T",
+          "t": "6367.T",
           "sig": "buy",
           "sc": 72,
           "sr": 3
@@ -204,14 +216,8 @@
           "sr": 6
         },
         {
-          "t": "G.MI",
-          "sig": "buy",
-          "sc": 72,
-          "sr": 11
-        },
-        {
           "t": "ENGI.PA",
-          "sig": "buy",
+          "sig": "hold",
           "sc": 72,
           "sr": 7
         },
@@ -222,25 +228,7 @@
           "sr": 3
         },
         {
-          "t": "UNH",
-          "sig": "buy",
-          "sc": 71,
-          "sr": 5
-        },
-        {
           "t": "8306.T",
-          "sig": "buy",
-          "sc": 71,
-          "sr": 11
-        },
-        {
-          "t": "DECK",
-          "sig": "buy",
-          "sc": 71,
-          "sr": 6
-        },
-        {
-          "t": "BBVA.MC",
           "sig": "buy",
           "sc": 71,
           "sr": 11
@@ -258,6 +246,12 @@
           "sr": 3
         },
         {
+          "t": "G.MI",
+          "sig": "buy",
+          "sc": 71,
+          "sr": 11
+        },
+        {
           "t": "AAPL",
           "sig": "buy",
           "sc": 70,
@@ -268,12 +262,6 @@
           "sig": "buy",
           "sc": 70,
           "sr": 9
-        },
-        {
-          "t": "NOVN.SW",
-          "sig": "buy",
-          "sc": 70,
-          "sr": 5
         },
         {
           "t": "8316.T",
@@ -292,6 +280,12 @@
           "sig": "buy",
           "sc": 70,
           "sr": 3
+        },
+        {
+          "t": "DECK",
+          "sig": "buy",
+          "sc": 70,
+          "sr": 6
         },
         {
           "t": "ASRNL.AS",
@@ -318,10 +312,22 @@
           "sr": 7
         },
         {
-          "t": "BAS.DE",
+          "t": "LLY",
           "sig": "hold",
           "sc": 69,
-          "sr": 4
+          "sr": 5
+        },
+        {
+          "t": "8002.T",
+          "sig": "hold",
+          "sc": 69,
+          "sr": 3
+        },
+        {
+          "t": "NOVN.SW",
+          "sig": "hold",
+          "sc": 69,
+          "sr": 5
         },
         {
           "t": "9433.T",
@@ -330,10 +336,22 @@
           "sr": 9
         },
         {
+          "t": "RY",
+          "sig": "hold",
+          "sc": 69,
+          "sr": 11
+        },
+        {
           "t": "VOD.L",
           "sig": "hold",
           "sc": 69,
           "sr": 9
+        },
+        {
+          "t": "BBVA.MC",
+          "sig": "hold",
+          "sc": 69,
+          "sr": 11
         },
         {
           "t": "KNIN.SW",
@@ -348,12 +366,6 @@
           "sr": 7
         },
         {
-          "t": "8002.T",
-          "sig": "hold",
-          "sc": 68,
-          "sr": 3
-        },
-        {
           "t": "ALV.DE",
           "sig": "hold",
           "sc": 68,
@@ -366,76 +378,40 @@
           "sr": 5
         },
         {
-          "t": "RY",
+          "t": "BAS.DE",
           "sig": "hold",
           "sc": 68,
-          "sr": 11
-        },
-        {
-          "t": "VOLV-B.ST",
-          "sig": "hold",
-          "sc": 68,
-          "sr": 3
-        },
-        {
-          "t": "ITX.MC",
-          "sig": "hold",
-          "sc": 68,
-          "sr": 6
-        },
-        {
-          "t": "AZN",
-          "sig": "hold",
-          "sc": 67,
-          "sr": 5
-        },
-        {
-          "t": "ENEL.MI",
-          "sig": "hold",
-          "sc": 67,
-          "sr": 7
-        },
-        {
-          "t": "IBE.MC",
-          "sig": "hold",
-          "sc": 67,
-          "sr": 7
+          "sr": 4
         },
         {
           "t": "4063.T",
           "sig": "hold",
-          "sc": 67,
+          "sc": 68,
           "sr": 4
-        },
-        {
-          "t": "CB",
-          "sig": "hold",
-          "sc": 67,
-          "sr": 11
         },
         {
           "t": "ERG.MI",
           "sig": "hold",
-          "sc": 67,
+          "sc": 68,
           "sr": 7
         },
         {
           "t": "INGA.AS",
           "sig": "hold",
-          "sc": 67,
+          "sc": 68,
           "sr": 11
         },
         {
-          "t": "SAND.ST",
+          "t": "FANG",
           "sig": "hold",
-          "sc": 67,
-          "sr": 3
+          "sc": 68,
+          "sr": 2
         },
         {
-          "t": "CNA.L",
+          "t": "ITX.MC",
           "sig": "hold",
           "sc": 67,
-          "sr": 7
+          "sr": 6
         },
         {
           "t": "QCOM",
@@ -444,10 +420,28 @@
           "sr": 1
         },
         {
-          "t": "GSK.L",
+          "t": "PANW",
           "sig": "hold",
           "sc": 66,
-          "sr": 5
+          "sr": 1
+        },
+        {
+          "t": "ENEL.MI",
+          "sig": "hold",
+          "sc": 66,
+          "sr": 7
+        },
+        {
+          "t": "MS",
+          "sig": "hold",
+          "sc": 66,
+          "sr": 11
+        },
+        {
+          "t": "CNR",
+          "sig": "hold",
+          "sc": 66,
+          "sr": 2
         },
         {
           "t": "EQIX",
@@ -456,16 +450,28 @@
           "sr": 8
         },
         {
+          "t": "IBE.MC",
+          "sig": "hold",
+          "sc": 66,
+          "sr": 7
+        },
+        {
           "t": "NTES",
           "sig": "hold",
           "sc": 66,
           "sr": 9
         },
         {
-          "t": "SU.PA",
+          "t": "CB",
           "sig": "hold",
           "sc": 66,
-          "sr": 3
+          "sr": 11
+        },
+        {
+          "t": "FTNT",
+          "sig": "hold",
+          "sc": 66,
+          "sr": 1
         },
         {
           "t": "UCG.MI",
@@ -474,13 +480,13 @@
           "sr": 11
         },
         {
-          "t": "FANG",
+          "t": "CNA.L",
           "sig": "hold",
           "sc": 66,
-          "sr": 2
+          "sr": 7
         },
         {
-          "t": "AVGO",
+          "t": "ASML",
           "sig": "hold",
           "sc": 65,
           "sr": 1
@@ -498,10 +504,22 @@
           "sr": 5
         },
         {
-          "t": "BNP.PA",
+          "t": "AZN",
           "sig": "hold",
           "sc": 65,
-          "sr": 11
+          "sr": 5
+        },
+        {
+          "t": "GSK.L",
+          "sig": "hold",
+          "sc": 65,
+          "sr": 5
+        },
+        {
+          "t": "9984.T",
+          "sig": "hold",
+          "sc": 65,
+          "sr": 9
         },
         {
           "t": "GS",
@@ -510,16 +528,10 @@
           "sr": 11
         },
         {
-          "t": "MS",
+          "t": "VOLV-B.ST",
           "sig": "hold",
           "sc": 65,
-          "sr": 11
-        },
-        {
-          "t": "SAN.MC",
-          "sig": "hold",
-          "sc": 65,
-          "sr": 11
+          "sr": 3
         },
         {
           "t": "6702.T",
@@ -534,31 +546,25 @@
           "sr": 5
         },
         {
-          "t": "SAF.PA",
+          "t": "BEKE",
+          "sig": "hold",
+          "sc": 65,
+          "sr": 8
+        },
+        {
+          "t": "SAND.ST",
           "sig": "hold",
           "sc": 65,
           "sr": 3
         },
         {
-          "t": "RR.L",
+          "t": "ENB",
           "sig": "hold",
           "sc": 65,
-          "sr": 3
+          "sr": 2
         },
         {
-          "t": "LR.PA",
-          "sig": "hold",
-          "sc": 65,
-          "sr": 3
-        },
-        {
-          "t": "AMZN",
-          "sig": "hold",
-          "sc": 64,
-          "sr": 6
-        },
-        {
-          "t": "ASML",
+          "t": "AVGO",
           "sig": "hold",
           "sc": 64,
           "sr": 1
@@ -570,34 +576,16 @@
           "sr": 3
         },
         {
-          "t": "REGN",
-          "sig": "hold",
-          "sc": 64,
-          "sr": 5
-        },
-        {
-          "t": "PANW",
-          "sig": "hold",
-          "sc": 64,
-          "sr": 1
-        },
-        {
           "t": "DTE.DE",
           "sig": "hold",
           "sc": 64,
           "sr": 9
         },
         {
-          "t": "9984.T",
+          "t": "BNP.PA",
           "sig": "hold",
           "sc": 64,
-          "sr": 9
-        },
-        {
-          "t": "CNR",
-          "sig": "hold",
-          "sc": 64,
-          "sr": 2
+          "sr": 11
         },
         {
           "t": "FCX",
@@ -612,16 +600,10 @@
           "sr": 7
         },
         {
-          "t": "BIDU",
+          "t": "SAN.MC",
           "sig": "hold",
           "sc": 64,
-          "sr": 9
-        },
-        {
-          "t": "BEKE",
-          "sig": "hold",
-          "sc": 64,
-          "sr": 8
+          "sr": 11
         },
         {
           "t": "005930.KS",
@@ -630,10 +612,16 @@
           "sr": 1
         },
         {
-          "t": "HOLN.SW",
+          "t": "SAF.PA",
           "sig": "hold",
           "sc": 64,
-          "sr": 4
+          "sr": 3
+        },
+        {
+          "t": "SU.PA",
+          "sig": "hold",
+          "sc": 64,
+          "sr": 3
         },
         {
           "t": "ZURN.SW",
@@ -642,22 +630,34 @@
           "sr": 11
         },
         {
-          "t": "ENB",
+          "t": "AMZN",
           "sig": "hold",
-          "sc": 64,
-          "sr": 2
+          "sc": 63,
+          "sr": 6
+        },
+        {
+          "t": "NVDA",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 1
+        },
+        {
+          "t": "CDNS",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 1
+        },
+        {
+          "t": "REGN",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 5
         },
         {
           "t": "LRCX",
           "sig": "hold",
           "sc": 63,
           "sr": 1
-        },
-        {
-          "t": "AI.PA",
-          "sig": "hold",
-          "sc": 63,
-          "sr": 4
         },
         {
           "t": "6954.T",
@@ -672,28 +672,46 @@
           "sr": 1
         },
         {
+          "t": "JD",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 6
+        },
+        {
+          "t": "BIDU",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 9
+        },
+        {
           "t": "7751.T",
           "sig": "hold",
           "sc": 63,
           "sr": 1
         },
         {
-          "t": "CFR.SW",
+          "t": "HOLN.SW",
           "sig": "hold",
           "sc": 63,
-          "sr": 6
+          "sr": 4
         },
         {
-          "t": "FTNT",
-          "sig": "hold",
-          "sc": 63,
-          "sr": 1
-        },
-        {
-          "t": "LDO.MI",
+          "t": "RR.L",
           "sig": "hold",
           "sc": 63,
           "sr": 3
+        },
+        {
+          "t": "LR.PA",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 3
+        },
+        {
+          "t": "ANET",
+          "sig": "hold",
+          "sc": 63,
+          "sr": 1
         },
         {
           "t": "KLAC",
@@ -702,16 +720,10 @@
           "sr": 1
         },
         {
-          "t": "FAST",
+          "t": "AI.PA",
           "sig": "hold",
           "sc": 62,
-          "sr": 3
-        },
-        {
-          "t": "SIE.DE",
-          "sig": "hold",
-          "sc": 62,
-          "sr": 3
+          "sr": 4
         },
         {
           "t": "8035.T",
@@ -720,31 +732,19 @@
           "sr": 1
         },
         {
-          "t": "PLD",
-          "sig": "hold",
-          "sc": 62,
-          "sr": 8
-        },
-        {
-          "t": "HEN3.DE",
-          "sig": "hold",
-          "sc": 62,
-          "sr": 10
-        },
-        {
           "t": "4502.T",
           "sig": "hold",
           "sc": 62,
           "sr": 5
         },
         {
-          "t": "JD",
+          "t": "CFR.SW",
           "sig": "hold",
           "sc": 62,
           "sr": 6
         },
         {
-          "t": "ATCO-A.ST",
+          "t": "LDO.MI",
           "sig": "hold",
           "sc": 62,
           "sr": 3
@@ -756,10 +756,40 @@
           "sr": 1
         },
         {
+          "t": "FAST",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 3
+        },
+        {
+          "t": "SIE.DE",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 3
+        },
+        {
           "t": "6758.T",
           "sig": "hold",
           "sc": 61,
           "sr": 1
+        },
+        {
+          "t": "PLD",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 8
+        },
+        {
+          "t": "HEN3.DE",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 10
+        },
+        {
+          "t": "LSEG.L",
+          "sig": "hold",
+          "sc": 61,
+          "sr": 11
         },
         {
           "t": "VER.VI",
@@ -768,16 +798,10 @@
           "sr": 7
         },
         {
-          "t": "NVDA",
+          "t": "MU",
           "sig": "hold",
           "sc": 60,
           "sr": 1
-        },
-        {
-          "t": "V",
-          "sig": "hold",
-          "sc": 60,
-          "sr": 11
         },
         {
           "t": "OR.PA",
@@ -822,58 +846,22 @@
           "sr": 10
         },
         {
-          "t": "BA.L",
-          "sig": "hold",
-          "sc": 60,
-          "sr": 3
-        },
-        {
-          "t": "LSEG.L",
-          "sig": "hold",
-          "sc": 60,
-          "sr": 11
-        },
-        {
           "t": "4901.T",
           "sig": "hold",
           "sc": 60,
           "sr": 3
         },
         {
-          "t": "EDP.LS",
+          "t": "ATCO-A.ST",
           "sig": "hold",
           "sc": 60,
-          "sr": 7
-        },
-        {
-          "t": "WMB",
-          "sig": "hold",
-          "sc": 60,
-          "sr": 2
-        },
-        {
-          "t": "APH",
-          "sig": "hold",
-          "sc": 60,
-          "sr": 1
-        },
-        {
-          "t": "MU",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 1
-        },
-        {
-          "t": "CDNS",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 1
-        },
-        {
-          "t": "TT",
-          "sig": "hold",
-          "sc": 59,
           "sr": 3
+        },
+        {
+          "t": "NVO",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 5
         },
         {
           "t": "NESN.SW",
@@ -882,40 +870,16 @@
           "sr": 10
         },
         {
-          "t": "CME",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 11
-        },
-        {
           "t": "6902.T",
           "sig": "hold",
           "sc": 59,
           "sr": 6
         },
         {
-          "t": "ADS.DE",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 6
-        },
-        {
-          "t": "SIX2.DE",
+          "t": "BA.L",
           "sig": "hold",
           "sc": 59,
           "sr": 3
-        },
-        {
-          "t": "PHIA.AS",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 5
-        },
-        {
-          "t": "ISP.MI",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 11
         },
         {
           "t": "PDD",
@@ -924,40 +888,34 @@
           "sr": 6
         },
         {
-          "t": "YUMC",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 6
-        },
-        {
-          "t": "HO.PA",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 3
-        },
-        {
-          "t": "NEE",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 7
-        },
-        {
-          "t": "SSE.L",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 7
-        },
-        {
-          "t": "EOAN.DE",
-          "sig": "hold",
-          "sc": 59,
-          "sr": 7
-        },
-        {
-          "t": "ANET",
+          "t": "CAP.PA",
           "sig": "hold",
           "sc": 59,
           "sr": 1
+        },
+        {
+          "t": "EDP.LS",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 7
+        },
+        {
+          "t": "APH",
+          "sig": "hold",
+          "sc": 59,
+          "sr": 1
+        },
+        {
+          "t": "MSFT",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 1
+        },
+        {
+          "t": "TT",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 3
         },
         {
           "t": "8031.T",
@@ -966,16 +924,22 @@
           "sr": 3
         },
         {
+          "t": "V",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 11
+        },
+        {
           "t": "RJF",
           "sig": "hold",
           "sc": 58,
           "sr": 11
         },
         {
-          "t": "MC.PA",
+          "t": "SREN.SW",
           "sig": "hold",
           "sc": 58,
-          "sr": 6
+          "sr": 11
         },
         {
           "t": "ULVR.L",
@@ -996,22 +960,34 @@
           "sr": 5
         },
         {
-          "t": "JPM",
+          "t": "DXCM",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 5
+        },
+        {
+          "t": "MSCI",
           "sig": "hold",
           "sc": 58,
           "sr": 11
         },
         {
-          "t": "PH",
+          "t": "ADS.DE",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 6
+        },
+        {
+          "t": "SIX2.DE",
           "sig": "hold",
           "sc": 58,
           "sr": 3
         },
         {
-          "t": "IFX.DE",
+          "t": "PHIA.AS",
           "sig": "hold",
           "sc": 58,
-          "sr": 1
+          "sr": 5
         },
         {
           "t": "ASSA-B.ST",
@@ -1020,7 +996,19 @@
           "sr": 3
         },
         {
+          "t": "ISP.MI",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 11
+        },
+        {
           "t": "7267.T",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 6
+        },
+        {
+          "t": "YUMC",
           "sig": "hold",
           "sc": 58,
           "sr": 6
@@ -1032,10 +1020,22 @@
           "sr": 10
         },
         {
-          "t": "NOVO-B.CO",
+          "t": "SSE.L",
           "sig": "hold",
           "sc": 58,
-          "sr": 5
+          "sr": 7
+        },
+        {
+          "t": "EOAN.DE",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 7
+        },
+        {
+          "t": "WMB",
+          "sig": "hold",
+          "sc": 58,
+          "sr": 2
         },
         {
           "t": "PGR",
@@ -1044,16 +1044,28 @@
           "sr": 11
         },
         {
-          "t": "YUM",
+          "t": "ADP",
           "sig": "hold",
           "sc": 57,
-          "sr": 6
+          "sr": 1
         },
         {
-          "t": "SREN.SW",
+          "t": "CME",
           "sig": "hold",
           "sc": 57,
           "sr": 11
+        },
+        {
+          "t": "SAP.DE",
+          "sig": "hold",
+          "sc": 57,
+          "sr": 1
+        },
+        {
+          "t": "MC.PA",
+          "sig": "hold",
+          "sc": 57,
+          "sr": 6
         },
         {
           "t": "7203.T",
@@ -1068,13 +1080,7 @@
           "sr": 9
         },
         {
-          "t": "DXCM",
-          "sig": "hold",
-          "sc": 57,
-          "sr": 5
-        },
-        {
-          "t": "MSCI",
+          "t": "JPM",
           "sig": "hold",
           "sc": 57,
           "sr": 11
@@ -1086,25 +1092,31 @@
           "sr": 6
         },
         {
+          "t": "IFX.DE",
+          "sig": "hold",
+          "sc": 57,
+          "sr": 1
+        },
+        {
           "t": "BABA",
           "sig": "hold",
           "sc": 57,
           "sr": 6
         },
         {
-          "t": "BAC",
+          "t": "HO.PA",
           "sig": "hold",
           "sc": 57,
-          "sr": 11
+          "sr": 3
         },
         {
-          "t": "CAP.PA",
+          "t": "YUM",
           "sig": "hold",
-          "sc": 57,
-          "sr": 1
+          "sc": 56,
+          "sr": 6
         },
         {
-          "t": "MSFT",
+          "t": "CRM",
           "sig": "hold",
           "sc": 56,
           "sr": 1
@@ -1116,25 +1128,13 @@
           "sr": 5
         },
         {
-          "t": "SAN.PA",
+          "t": "DSY.PA",
           "sig": "hold",
           "sc": 56,
-          "sr": 5
+          "sr": 1
         },
         {
-          "t": "DE",
-          "sig": "hold",
-          "sc": 56,
-          "sr": 3
-        },
-        {
-          "t": "ITW",
-          "sig": "hold",
-          "sc": 56,
-          "sr": 3
-        },
-        {
-          "t": "CARR",
+          "t": "PH",
           "sig": "hold",
           "sc": 56,
           "sr": 3
@@ -1146,16 +1146,10 @@
           "sr": 5
         },
         {
-          "t": "BURL",
+          "t": "REL.L",
           "sig": "hold",
           "sc": 56,
-          "sr": 6
-        },
-        {
-          "t": "MBG.DE",
-          "sig": "hold",
-          "sc": 56,
-          "sr": 6
+          "sr": 3
         },
         {
           "t": "5401.T",
@@ -1164,16 +1158,16 @@
           "sr": 4
         },
         {
-          "t": "AIR.PA",
-          "sig": "hold",
-          "sc": 56,
-          "sr": 3
-        },
-        {
-          "t": "AXP",
+          "t": "BAC",
           "sig": "hold",
           "sc": 56,
           "sr": 11
+        },
+        {
+          "t": "NOVO-B.CO",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 5
         },
         {
           "t": "SLHN.SW",
@@ -1182,10 +1176,52 @@
           "sr": 11
         },
         {
-          "t": "WSO",
+          "t": "NEE",
+          "sig": "hold",
+          "sc": 56,
+          "sr": 7
+        },
+        {
+          "t": "ADBE",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 1
+        },
+        {
+          "t": "ACN",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 1
+        },
+        {
+          "t": "SAN.PA",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 5
+        },
+        {
+          "t": "DE",
           "sig": "hold",
           "sc": 55,
           "sr": 3
+        },
+        {
+          "t": "ITW",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 3
+        },
+        {
+          "t": "CARR",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 3
+        },
+        {
+          "t": "MBG.DE",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 6
         },
         {
           "t": "VOW3.DE",
@@ -1200,10 +1236,22 @@
           "sr": 9
         },
         {
-          "t": "NG.L",
+          "t": "AIR.PA",
           "sig": "hold",
           "sc": 55,
-          "sr": 7
+          "sr": 3
+        },
+        {
+          "t": "AXP",
+          "sig": "hold",
+          "sc": 55,
+          "sr": 11
+        },
+        {
+          "t": "EVD.DE",
+          "sig": "watch",
+          "sc": 54,
+          "sr": 9
         },
         {
           "t": "MA",
@@ -1212,22 +1260,16 @@
           "sr": 11
         },
         {
-          "t": "ADP",
+          "t": "VRSK",
           "sig": "watch",
           "sc": 54,
-          "sr": 1
+          "sr": 3
         },
         {
-          "t": "SAP.DE",
+          "t": "BURL",
           "sig": "watch",
           "sc": 54,
-          "sr": 1
-        },
-        {
-          "t": "DSY.PA",
-          "sig": "watch",
-          "sc": 54,
-          "sr": 1
+          "sr": 6
         },
         {
           "t": "MUV2.DE",
@@ -1242,12 +1284,6 @@
           "sr": 11
         },
         {
-          "t": "REL.L",
-          "sig": "watch",
-          "sc": 54,
-          "sr": 3
-        },
-        {
           "t": "3382.T",
           "sig": "watch",
           "sc": 54,
@@ -1260,46 +1296,28 @@
           "sr": 7
         },
         {
-          "t": "KER.PA",
+          "t": "RACE.MI",
           "sig": "watch",
           "sc": 54,
           "sr": 6
         },
         {
-          "t": "SBUX",
+          "t": "NG.L",
           "sig": "watch",
-          "sc": 53,
-          "sr": 6
+          "sc": 54,
+          "sr": 7
         },
         {
-          "t": "COST",
-          "sig": "watch",
-          "sc": 53,
-          "sr": 10
-        },
-        {
-          "t": "EVD.DE",
-          "sig": "watch",
-          "sc": 53,
-          "sr": 9
-        },
-        {
-          "t": "ADBE",
+          "t": "NOW",
           "sig": "watch",
           "sc": 53,
           "sr": 1
         },
         {
-          "t": "ACN",
+          "t": "WSO",
           "sig": "watch",
           "sc": 53,
-          "sr": 1
-        },
-        {
-          "t": "HCA",
-          "sig": "watch",
-          "sc": 53,
-          "sr": 5
+          "sr": 3
         },
         {
           "t": "LULU",
@@ -1308,46 +1326,34 @@
           "sr": 6
         },
         {
-          "t": "TCOM",
-          "sig": "watch",
-          "sc": 53,
-          "sr": 6
-        },
-        {
-          "t": "BILI",
-          "sig": "watch",
-          "sc": 53,
-          "sr": 9
-        },
-        {
           "t": "DBK.DE",
           "sig": "watch",
           "sc": 53,
           "sr": 11
         },
         {
-          "t": "RACE.MI",
+          "t": "KER.PA",
           "sig": "watch",
           "sc": 53,
           "sr": 6
         },
         {
-          "t": "DUK",
-          "sig": "watch",
-          "sc": 53,
-          "sr": 7
-        },
-        {
-          "t": "MCD",
+          "t": "BRK-B",
           "sig": "watch",
           "sc": 52,
-          "sr": 6
+          "sr": 11
         },
         {
-          "t": "HD",
+          "t": "COST",
           "sig": "watch",
           "sc": 52,
-          "sr": 6
+          "sr": 10
+        },
+        {
+          "t": "NEM.DE",
+          "sig": "watch",
+          "sc": 52,
+          "sr": 1
         },
         {
           "t": "4523.T",
@@ -1356,46 +1362,22 @@
           "sr": 5
         },
         {
-          "t": "BLK",
-          "sig": "watch",
-          "sc": 52,
-          "sr": 11
-        },
-        {
           "t": "AMT",
           "sig": "watch",
           "sc": 52,
           "sr": 8
         },
         {
-          "t": "VRSK",
+          "t": "TCOM",
           "sig": "watch",
           "sc": 52,
-          "sr": 3
+          "sr": 6
         },
         {
-          "t": "WEC",
+          "t": "BILI",
           "sig": "watch",
           "sc": 52,
-          "sr": 7
-        },
-        {
-          "t": "LISP.SW",
-          "sig": "watch",
-          "sc": 51,
-          "sr": 10
-        },
-        {
-          "t": "NEM.DE",
-          "sig": "watch",
-          "sc": 51,
-          "sr": 1
-        },
-        {
-          "t": "CRM",
-          "sig": "watch",
-          "sc": 51,
-          "sr": 1
+          "sr": 9
         },
         {
           "t": "CTAS",
@@ -1410,6 +1392,18 @@
           "sr": 11
         },
         {
+          "t": "BLK",
+          "sig": "watch",
+          "sc": 51,
+          "sr": 11
+        },
+        {
+          "t": "HCA",
+          "sig": "watch",
+          "sc": 51,
+          "sr": 5
+        },
+        {
           "t": "WKL.AS",
           "sig": "watch",
           "sc": 51,
@@ -1422,16 +1416,34 @@
           "sr": 9
         },
         {
-          "t": "SO",
+          "t": "EXPN.L",
+          "sig": "watch",
+          "sc": 51,
+          "sr": 3
+        },
+        {
+          "t": "DUK",
           "sig": "watch",
           "sc": 51,
           "sr": 7
         },
         {
-          "t": "META",
+          "t": "MCD",
           "sig": "watch",
           "sc": 50,
-          "sr": 9
+          "sr": 6
+        },
+        {
+          "t": "SBUX",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 6
+        },
+        {
+          "t": "LISP.SW",
+          "sig": "watch",
+          "sc": 50,
+          "sr": 10
         },
         {
           "t": "SRT3.DE",
@@ -1440,7 +1452,7 @@
           "sr": 5
         },
         {
-          "t": "ROL",
+          "t": "HD",
           "sig": "watch",
           "sc": 50,
           "sr": 6
@@ -1452,40 +1464,40 @@
           "sr": 11
         },
         {
-          "t": "ICE",
-          "sig": "watch",
-          "sc": 50,
-          "sr": 11
-        },
-        {
           "t": "MDT",
           "sig": "watch",
           "sc": 50,
           "sr": 5
         },
         {
-          "t": "FERG",
-          "sig": "watch",
-          "sc": 50,
-          "sr": 3
-        },
-        {
-          "t": "BEI.DE",
-          "sig": "watch",
-          "sc": 50,
-          "sr": 10
-        },
-        {
-          "t": "LI",
+          "t": "NIO",
           "sig": "watch",
           "sc": 50,
           "sr": 6
         },
         {
-          "t": "EXPN.L",
+          "t": "WEC",
           "sig": "watch",
           "sc": 50,
+          "sr": 7
+        },
+        {
+          "t": "META",
+          "sig": "watch",
+          "sc": 49,
+          "sr": 9
+        },
+        {
+          "t": "CWST",
+          "sig": "watch",
+          "sc": 49,
           "sr": 3
+        },
+        {
+          "t": "BEI.DE",
+          "sig": "watch",
+          "sc": 49,
+          "sr": 10
         },
         {
           "t": "FRE.DE",
@@ -1506,10 +1518,34 @@
           "sr": 6
         },
         {
+          "t": "LI",
+          "sig": "watch",
+          "sc": 49,
+          "sr": 6
+        },
+        {
           "t": "1211.HK",
           "sig": "watch",
           "sc": 49,
           "sr": 6
+        },
+        {
+          "t": "ORCL",
+          "sig": "watch",
+          "sc": 49,
+          "sr": 1
+        },
+        {
+          "t": "SO",
+          "sig": "watch",
+          "sc": 49,
+          "sr": 7
+        },
+        {
+          "t": "SYK",
+          "sig": "watch",
+          "sc": 48,
+          "sr": 5
         },
         {
           "t": "BKNG",
@@ -1518,10 +1554,16 @@
           "sr": 6
         },
         {
-          "t": "ABT",
+          "t": "ROL",
           "sig": "watch",
           "sc": 48,
-          "sr": 5
+          "sr": 6
+        },
+        {
+          "t": "ICE",
+          "sig": "watch",
+          "sc": 48,
+          "sr": 11
         },
         {
           "t": "BSX",
@@ -1530,40 +1572,16 @@
           "sr": 5
         },
         {
-          "t": "NIO",
+          "t": "WDAY",
           "sig": "watch",
           "sc": 48,
-          "sr": 6
-        },
-        {
-          "t": "NOW",
-          "sig": "watch",
-          "sc": 47,
           "sr": 1
         },
         {
-          "t": "LLY",
+          "t": "ROP",
           "sig": "watch",
-          "sc": 47,
-          "sr": null
-        },
-        {
-          "t": "JNJ",
-          "sig": "watch",
-          "sc": 47,
-          "sr": null
-        },
-        {
-          "t": "SYK",
-          "sig": "watch",
-          "sc": 47,
-          "sr": null
-        },
-        {
-          "t": "BRK-B",
-          "sig": "watch",
-          "sc": 47,
-          "sr": null
+          "sc": 48,
+          "sr": 1
         },
         {
           "t": "PYPL",
@@ -1572,16 +1590,16 @@
           "sr": 11
         },
         {
-          "t": "CWST",
-          "sig": "watch",
-          "sc": 47,
-          "sr": 3
-        },
-        {
           "t": "BRO",
           "sig": "watch",
           "sc": 47,
           "sr": 11
+        },
+        {
+          "t": "ABT",
+          "sig": "watch",
+          "sc": 47,
+          "sr": 5
         },
         {
           "t": "POOL",
@@ -1590,10 +1608,10 @@
           "sr": 3
         },
         {
-          "t": "ROP",
+          "t": "FERG",
           "sig": "watch",
           "sc": 47,
-          "sr": 1
+          "sr": 3
         },
         {
           "t": "9020.T",
@@ -1612,12 +1630,6 @@
           "sig": "watch",
           "sc": 46,
           "sr": 1
-        },
-        {
-          "t": "NVO",
-          "sig": "watch",
-          "sc": 46,
-          "sr": null
         },
         {
           "t": "ROG.SW",
@@ -1644,18 +1656,6 @@
           "sr": 9
         },
         {
-          "t": "CPRT",
-          "sig": "watch",
-          "sc": 46,
-          "sr": 3
-        },
-        {
-          "t": "TSLA",
-          "sig": "watch",
-          "sc": 45,
-          "sr": 6
-        },
-        {
           "t": "MTD",
           "sig": "watch",
           "sc": 45,
@@ -1674,10 +1674,10 @@
           "sr": 6
         },
         {
-          "t": "WDAY",
+          "t": "CPRT",
           "sig": "watch",
           "sc": 45,
-          "sr": 1
+          "sr": 3
         },
         {
           "t": "RHM.DE",
@@ -1686,10 +1686,10 @@
           "sr": 3
         },
         {
-          "t": "CEG",
+          "t": "TSLA",
           "sig": "watch",
-          "sc": 45,
-          "sr": 7
+          "sc": 44,
+          "sr": 6
         },
         {
           "t": "LONN.SW",
@@ -1710,22 +1710,10 @@
           "sr": 5
         },
         {
-          "t": "HDB",
-          "sig": "watch",
-          "sc": 44,
-          "sr": 11
-        },
-        {
-          "t": "ORCL",
-          "sig": "watch",
-          "sc": 44,
-          "sr": 1
-        },
-        {
-          "t": "EFX",
+          "t": "FICO",
           "sig": "watch",
           "sc": 43,
-          "sr": 3
+          "sr": 1
         },
         {
           "t": "7974.T",
@@ -1734,28 +1722,40 @@
           "sr": 9
         },
         {
-          "t": "TRMB",
+          "t": "XPEV",
+          "sig": "watch",
+          "sc": 43,
+          "sr": 6
+        },
+        {
+          "t": "HDB",
+          "sig": "watch",
+          "sc": 43,
+          "sr": 11
+        },
+        {
+          "t": "CEG",
+          "sig": "watch",
+          "sc": 43,
+          "sr": 7
+        },
+        {
+          "t": "EFX",
           "sig": "watch",
           "sc": 42,
-          "sr": 1
+          "sr": 3
+        },
+        {
+          "t": "BAES.L",
+          "sig": "watch",
+          "sc": 42,
+          "sr": 3
         },
         {
           "t": "MELI",
           "sig": "watch",
-          "sc": 41,
-          "sr": 6
-        },
-        {
-          "t": "XPEV",
-          "sig": "watch",
-          "sc": 41,
-          "sr": 6
-        },
-        {
-          "t": "FICO",
-          "sig": "watch",
           "sc": 40,
-          "sr": 1
+          "sr": 6
         },
         {
           "t": "CSGP",
@@ -1764,16 +1764,10 @@
           "sr": 8
         },
         {
-          "t": "BAES.L",
+          "t": "TRMB",
           "sig": "watch",
           "sc": 40,
-          "sr": 3
-        },
-        {
-          "t": "STLAM.MI",
-          "sig": "watch",
-          "sc": 40,
-          "sr": 6
+          "sr": 1
         },
         {
           "t": "4661.T",
@@ -1784,24 +1778,30 @@
         {
           "t": "SHOP",
           "sig": "sell",
-          "sc": 38,
+          "sc": 39,
           "sr": 1
+        },
+        {
+          "t": "STLAM.MI",
+          "sig": "sell",
+          "sc": 39,
+          "sr": 6
         },
         {
           "t": "ISRG",
           "sig": "sell",
-          "sc": 37,
+          "sc": 38,
           "sr": 5
         },
         {
           "t": "AXON",
           "sig": "sell",
-          "sc": 36,
+          "sc": 38,
           "sr": 3
         }
       ],
       "spy_above_200ma": true,
-      "vix": 15.93
+      "vix": 16.06
     },
     {
       "ts": 1780243737551,
