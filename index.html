@@ -2781,6 +2781,15 @@ function loadScores() {
       var scores = data.scores || data;
       var mac = data.__macro__ || null;
       if (mac) { if (window.FD) { FD['__macro__'] = mac; } macro = mac; }
+      var PAGE_VERSION = '6.3.1';
+      if (mac && mac.dashboard_version
+          && mac.dashboard_version !== PAGE_VERSION
+          && !sessionStorage.getItem('siq_rl')) {
+        sessionStorage.setItem('siq_rl', '1');
+        location.reload(true);
+      } else {
+        sessionStorage.removeItem('siq_rl');
+      }
       _scores = scores;
       _scoresIdx = {};
       for (var i = 0; i < scores.length; i++) {
