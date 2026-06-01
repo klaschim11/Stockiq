@@ -2025,7 +2025,7 @@ function wlDetail(ticker){
   var minH=(s.atr*0.05).toFixed(2);
   var why='';
   if(isStrong)why='STRONG: ZL ok | >200MA | PEG '+pgLb(s)+' | '+(s.div==='bull_hidden'?'Bull Hidden Div':'Bull Regular Div')+' | Hist '+s.hist.toFixed(2)+' > '+minH;
-  else if(sig==='buy')why='ZL ok | Ueber 200MA | PEG '+pgLb(s)+' < 2.0 | Hist '+s.hist.toFixed(2)+' > '+minH;
+  else if(sig==='buy')why='ZL ok | Ueber 200MA | '+(s.above50ma?'Ueber 50MA':'Unter 50MA')+' | PEG '+pgLb(s)+' < 2.0 | Hist '+s.hist.toFixed(2)+' > '+minH;
   else if(sig==='pb')why='PEG '+pgLb(s)+' > 2.0 blockiert | ZL+200MA ok';
   else if(isRsiBlkD)why='RSI '+s.rsi+' > 72 -- ueberkauft | ZL+200MA ok | Warten auf Abkuehlung';
   else if(isHoldSfD){
@@ -2988,6 +2988,7 @@ function applyFund(fund){
       if(fd2.hist!==null&&fd2.hist!==undefined)STOCKS[i2].hist=fd2.hist;
       if(fd2.macdCross!==null&&fd2.macdCross!==undefined)STOCKS[i2].macdCross=fd2.macdCross;
       if(fd2.above200!==null&&fd2.above200!==undefined)STOCKS[i2].above200=fd2.above200;
+      if(fd2.price_vs_50ma_pct!==null&&fd2.price_vs_50ma_pct!==undefined)STOCKS[i2].above50ma=(fd2.price_vs_50ma_pct||0)>0;
       if(fd2.atr!==null&&fd2.atr!==undefined)STOCKS[i2].atr=fd2.atr;
       /* mom12m bleibt in FD[t] -- momSc() liest es direkt von dort */
     }
@@ -5373,10 +5374,10 @@ function calcSectorSignals(macro) {
     rssBullCount: 0,
     computed: false
   };
-  if (!macro || !macro.sector_etfs || !macro.spy_daily) { return result; }
-  var spyDaily = macro.spy_daily;
-  var spyN = spyDaily.length;
-  if (spyN < 32) { return result; }
+  if (!macro || !macro.sector_etfs) { return result; }
+  var hasSpy = (macro.spy_daily && macro.spy_daily.length >= 32);
+  var spyDaily = hasSpy ? macro.spy_daily : [];
+  var spyN = hasSpy ? macro.spy_daily.length : 0;
 
   var ETF_ORDER = ['XLK','XLF','XLV','XLE','XLI','XLP','XLY','XLB','XLC','XLRE','XLU'];
   var NAMES = {
@@ -5547,7 +5548,7 @@ function renderEtfScoreList() {
 function renderSektorTab(macro) {
   var sigs = calcSectorSignals(macro);
   if (!sigs.computed) {
-    return '<div style="padding:24px;color:#888;font-size:13px;">Sektor-Daten nicht verfuegbar.<br>fund_juno v7.9.25+ erforderlich (closes_daily + spy_daily).</div>';
+    return '<div style="padding:24px;color:#888;font-size:13px;">Sektor-Daten nicht verfuegbar.<br>fund_juno v7.9.29+ erforderlich (closes_daily + spy_daily).</div>';
   }
 
   function fmtPct(v) {

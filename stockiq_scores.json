@@ -69,7 +69,8 @@
         "price_usd": null,
         "closes_daily": []
       }
-    }
+    },
+    "spy_daily": []
   },
   "scores": [
     {
@@ -77,6 +78,7 @@
       "sector": "Energy",
       "currency": "EUR",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 84,
       "spy_above_200ma": null,
       "vix": null,
@@ -107,6 +109,8 @@
       "atr": 1.5664,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -114,6 +118,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 79,
       "spy_above_200ma": null,
       "vix": null,
@@ -144,6 +149,8 @@
       "atr": 14.51,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -151,6 +158,7 @@
       "sector": "Energy",
       "currency": "EUR",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 79,
       "spy_above_200ma": null,
       "vix": null,
@@ -181,6 +189,8 @@
       "atr": 0.521,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -188,6 +198,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 78,
       "spy_above_200ma": null,
       "vix": null,
@@ -218,6 +229,8 @@
       "atr": 234.0,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -225,6 +238,7 @@
       "sector": "Financial Services",
       "currency": "GBp",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 78,
       "spy_above_200ma": null,
       "vix": null,
@@ -255,6 +269,8 @@
       "atr": 30.077,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -262,6 +278,7 @@
       "sector": "Energy",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 78,
       "spy_above_200ma": null,
       "vix": null,
@@ -292,6 +309,8 @@
       "atr": 1.4614,
       "div": "bear_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -299,6 +318,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 77,
       "spy_above_200ma": null,
       "vix": null,
@@ -329,6 +349,8 @@
       "atr": 285.0,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -336,6 +358,7 @@
       "sector": "Consumer Defensive",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 76,
       "spy_above_200ma": null,
       "vix": null,
@@ -366,6 +389,8 @@
       "atr": 105.7857,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -373,6 +398,7 @@
       "sector": "Basic Materials",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 75,
       "spy_above_200ma": null,
       "vix": null,
@@ -403,6 +429,8 @@
       "atr": 2.955,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -410,6 +438,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 74,
       "spy_above_200ma": null,
       "vix": null,
@@ -440,6 +469,8 @@
       "atr": 4.1858,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -447,6 +478,7 @@
       "sector": "Consumer Defensive",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 74,
       "spy_above_200ma": null,
       "vix": null,
@@ -477,6 +509,8 @@
       "atr": 1.6257,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -484,6 +518,7 @@
       "sector": "Energy",
       "currency": "GBp",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 74,
       "spy_above_200ma": null,
       "vix": null,
@@ -514,6 +549,8 @@
       "atr": 56.1573,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -521,6 +558,7 @@
       "sector": "Energy",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 74,
       "spy_above_200ma": null,
       "vix": null,
@@ -551,6 +589,8 @@
       "atr": 4.1732,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -558,6 +598,7 @@
       "sector": "Energy",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 74,
       "spy_above_200ma": null,
       "vix": null,
@@ -588,6 +629,8 @@
       "atr": 3.0607,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -595,6 +638,7 @@
       "sector": "Financial Services",
       "currency": "SEK",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 74,
       "spy_above_200ma": null,
       "vix": null,
@@ -625,6 +669,8 @@
       "atr": 6.0036,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -632,6 +678,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 74,
       "spy_above_200ma": null,
       "vix": null,
@@ -662,6 +709,8 @@
       "atr": 0.9007,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -669,6 +718,7 @@
       "sector": "Industrials",
       "currency": "CHF",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 73,
       "spy_above_200ma": null,
       "vix": null,
@@ -699,6 +749,8 @@
       "atr": 1.9786,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -706,6 +758,7 @@
       "sector": "Energy",
       "currency": "GBp",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 73,
       "spy_above_200ma": null,
       "vix": null,
@@ -736,6 +789,8 @@
       "atr": 15.6947,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -743,6 +798,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 73,
       "spy_above_200ma": null,
       "vix": null,
@@ -773,6 +829,8 @@
       "atr": 0.6179,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -780,6 +838,7 @@
       "sector": "Energy",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 73,
       "spy_above_200ma": null,
       "vix": null,
@@ -810,6 +869,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -817,6 +878,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 72,
       "spy_above_200ma": null,
       "vix": null,
@@ -847,6 +909,8 @@
       "atr": 863.9286,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -854,6 +918,7 @@
       "sector": "Consumer Defensive",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 72,
       "spy_above_200ma": null,
       "vix": null,
@@ -884,6 +949,8 @@
       "atr": 1.7564,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -891,6 +958,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 72,
       "spy_above_200ma": null,
       "vix": null,
@@ -921,6 +989,8 @@
       "atr": 1.4464,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -928,6 +998,7 @@
       "sector": "Consumer Defensive",
       "currency": "GBp",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 72,
       "spy_above_200ma": null,
       "vix": null,
@@ -958,6 +1029,8 @@
       "atr": 205.4376,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -965,6 +1038,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 72,
       "spy_above_200ma": null,
       "vix": null,
@@ -995,6 +1069,8 @@
       "atr": 163.2143,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1002,6 +1078,7 @@
       "sector": "Consumer Cyclical",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 72,
       "spy_above_200ma": null,
       "vix": null,
@@ -1032,6 +1109,8 @@
       "atr": 2255.0,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1039,6 +1118,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 72,
       "spy_above_200ma": null,
       "vix": null,
@@ -1069,6 +1149,8 @@
       "atr": 0.6692,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1076,6 +1158,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 71,
       "spy_above_200ma": null,
       "vix": null,
@@ -1106,6 +1189,8 @@
       "atr": 7.4357,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1113,6 +1198,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 71,
       "spy_above_200ma": null,
       "vix": null,
@@ -1143,6 +1229,8 @@
       "atr": 9.525,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1150,6 +1238,7 @@
       "sector": "Healthcare",
       "currency": "CHF",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 71,
       "spy_above_200ma": null,
       "vix": null,
@@ -1180,6 +1269,8 @@
       "atr": 1.8871,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1187,6 +1278,7 @@
       "sector": "Financial Services",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 71,
       "spy_above_200ma": null,
       "vix": null,
@@ -1217,6 +1309,8 @@
       "atr": 82.0357,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1224,6 +1318,7 @@
       "sector": "Energy",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 71,
       "spy_above_200ma": null,
       "vix": null,
@@ -1254,6 +1349,8 @@
       "atr": 4.2185,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1261,6 +1358,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 71,
       "spy_above_200ma": null,
       "vix": null,
@@ -1291,6 +1389,8 @@
       "atr": 3.9257,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1298,6 +1398,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 71,
       "spy_above_200ma": null,
       "vix": null,
@@ -1328,6 +1429,8 @@
       "atr": 1.072,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1335,6 +1438,7 @@
       "sector": "Industrials",
       "currency": "HKD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 71,
       "spy_above_200ma": null,
       "vix": null,
@@ -1365,6 +1469,8 @@
       "atr": 26.8571,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1372,6 +1478,7 @@
       "sector": "Utilities",
       "currency": "EUR",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 71,
       "spy_above_200ma": null,
       "vix": null,
@@ -1402,6 +1509,8 @@
       "atr": 0.4407,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1409,6 +1518,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1439,6 +1549,8 @@
       "atr": 4.9657,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1446,6 +1558,7 @@
       "sector": "Communication Services",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1476,6 +1589,8 @@
       "atr": 9.8164,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1483,6 +1598,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1513,6 +1629,8 @@
       "atr": 6.6714,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1520,6 +1638,7 @@
       "sector": "Financial Services",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1550,6 +1669,8 @@
       "atr": 163.0714,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1557,6 +1678,7 @@
       "sector": "Financial Services",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1587,6 +1709,8 @@
       "atr": 269.0,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1594,6 +1718,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1624,6 +1749,8 @@
       "atr": 24.5579,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1631,6 +1758,7 @@
       "sector": "Communication Services",
       "currency": "GBp",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1661,6 +1789,8 @@
       "atr": 4.6357,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1668,6 +1798,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1698,6 +1829,8 @@
       "atr": 0.4546,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1705,6 +1838,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1735,6 +1869,8 @@
       "atr": 300.3571,
       "div": "bear_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1742,6 +1878,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1772,6 +1909,8 @@
       "atr": 194.6429,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1779,6 +1918,7 @@
       "sector": "Communication Services",
       "currency": "JPY",
       "signal": "buy",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 70,
       "spy_above_200ma": null,
       "vix": null,
@@ -1809,6 +1949,8 @@
       "atr": 479.3571,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1816,6 +1958,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 69,
       "spy_above_200ma": null,
       "vix": null,
@@ -1846,6 +1989,8 @@
       "atr": 33.4574,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1853,6 +1998,7 @@
       "sector": "Basic Materials",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 69,
       "spy_above_200ma": null,
       "vix": null,
@@ -1883,6 +2029,8 @@
       "atr": 1.065,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1890,6 +2038,7 @@
       "sector": "Communication Services",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 69,
       "spy_above_200ma": null,
       "vix": null,
@@ -1920,6 +2069,8 @@
       "atr": 78.3571,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1927,6 +2078,7 @@
       "sector": "Industrials",
       "currency": "CHF",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 69,
       "spy_above_200ma": null,
       "vix": null,
@@ -1957,6 +2109,8 @@
       "atr": 3.5,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -1964,6 +2118,7 @@
       "sector": "Utilities",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 69,
       "spy_above_200ma": null,
       "vix": null,
@@ -1994,6 +2149,8 @@
       "atr": 0.4136,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2001,6 +2158,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 68,
       "spy_above_200ma": null,
       "vix": null,
@@ -2031,6 +2189,8 @@
       "atr": 207.2857,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2038,6 +2198,7 @@
       "sector": "Utilities",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 68,
       "spy_above_200ma": null,
       "vix": null,
@@ -2068,6 +2229,8 @@
       "atr": 0.1783,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2075,6 +2238,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 68,
       "spy_above_200ma": null,
       "vix": null,
@@ -2105,6 +2269,8 @@
       "atr": 2.9307,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2112,6 +2278,7 @@
       "sector": "Utilities",
       "currency": "GBp",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 68,
       "spy_above_200ma": null,
       "vix": null,
@@ -2142,6 +2309,8 @@
       "atr": 5.3899,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2149,6 +2318,7 @@
       "sector": "Healthcare",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 67,
       "spy_above_200ma": null,
       "vix": null,
@@ -2179,6 +2349,8 @@
       "atr": 3.675,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2186,6 +2358,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 67,
       "spy_above_200ma": null,
       "vix": null,
@@ -2216,6 +2389,8 @@
       "atr": 3.555,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2223,6 +2398,7 @@
       "sector": "Healthcare",
       "currency": "GBp",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 67,
       "spy_above_200ma": null,
       "vix": null,
@@ -2253,6 +2429,8 @@
       "atr": 68.6817,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2260,6 +2438,7 @@
       "sector": "Industrials",
       "currency": "SEK",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 67,
       "spy_above_200ma": null,
       "vix": null,
@@ -2290,6 +2469,8 @@
       "atr": 6.3571,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2297,6 +2478,7 @@
       "sector": "Basic Materials",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 67,
       "spy_above_200ma": null,
       "vix": null,
@@ -2327,6 +2509,8 @@
       "atr": 277.0714,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2334,6 +2518,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 67,
       "spy_above_200ma": null,
       "vix": null,
@@ -2364,6 +2549,8 @@
       "atr": 6.1093,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2371,6 +2558,7 @@
       "sector": "Utilities",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 67,
       "spy_above_200ma": null,
       "vix": null,
@@ -2401,6 +2589,8 @@
       "atr": 0.5976,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2408,6 +2598,7 @@
       "sector": "Consumer Cyclical",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 67,
       "spy_above_200ma": null,
       "vix": null,
@@ -2438,6 +2629,8 @@
       "atr": 1.12,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2445,6 +2638,7 @@
       "sector": "Industrials",
       "currency": "SEK",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 67,
       "spy_above_200ma": null,
       "vix": null,
@@ -2475,6 +2669,8 @@
       "atr": 10.4786,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2482,6 +2678,7 @@
       "sector": "Utilities",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 67,
       "spy_above_200ma": null,
       "vix": null,
@@ -2512,6 +2709,8 @@
       "atr": 0.5486,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2519,6 +2718,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 66,
       "spy_above_200ma": null,
       "vix": null,
@@ -2549,6 +2749,8 @@
       "atr": 18.9479,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2556,6 +2758,7 @@
       "sector": "Real Estate",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 66,
       "spy_above_200ma": null,
       "vix": null,
@@ -2586,6 +2789,8 @@
       "atr": 18.9493,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2593,6 +2798,7 @@
       "sector": "Utilities",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 66,
       "spy_above_200ma": null,
       "vix": null,
@@ -2623,6 +2829,8 @@
       "atr": 0.2957,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2630,6 +2838,7 @@
       "sector": "Technology",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 66,
       "spy_above_200ma": null,
       "vix": null,
@@ -2660,6 +2869,8 @@
       "atr": 157.8571,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2667,6 +2878,7 @@
       "sector": "Communication Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 66,
       "spy_above_200ma": null,
       "vix": null,
@@ -2697,6 +2909,8 @@
       "atr": 3.9393,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2704,6 +2918,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 66,
       "spy_above_200ma": null,
       "vix": null,
@@ -2734,6 +2949,8 @@
       "atr": 0.5586,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2741,6 +2958,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 65,
       "spy_above_200ma": null,
       "vix": null,
@@ -2771,6 +2989,8 @@
       "atr": 16.1829,
       "div": "bear_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2778,6 +2998,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 65,
       "spy_above_200ma": null,
       "vix": null,
@@ -2808,6 +3029,8 @@
       "atr": 9.7114,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2815,6 +3038,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 65,
       "spy_above_200ma": null,
       "vix": null,
@@ -2845,6 +3069,8 @@
       "atr": 2.0735,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2852,6 +3078,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 65,
       "spy_above_200ma": null,
       "vix": null,
@@ -2882,6 +3109,8 @@
       "atr": 27.1757,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2889,6 +3118,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 65,
       "spy_above_200ma": null,
       "vix": null,
@@ -2919,6 +3149,8 @@
       "atr": 4.5386,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2926,6 +3158,7 @@
       "sector": "Healthcare",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "",
       "score": 65,
       "spy_above_200ma": null,
       "vix": null,
@@ -2956,6 +3189,8 @@
       "atr": 117.4643,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -2963,6 +3198,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 65,
       "spy_above_200ma": null,
       "vix": null,
@@ -2993,6 +3229,8 @@
       "atr": 9.6498,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3000,6 +3238,7 @@
       "sector": "Industrials",
       "currency": "GBp",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 65,
       "spy_above_200ma": null,
       "vix": null,
@@ -3030,6 +3269,8 @@
       "atr": 73.9549,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3037,6 +3278,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3067,6 +3309,8 @@
       "atr": 6.4236,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3074,6 +3318,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3104,6 +3349,8 @@
       "atr": 64.665,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3111,6 +3358,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3141,6 +3389,8 @@
       "atr": 196.6429,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3148,6 +3398,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3178,6 +3429,8 @@
       "atr": 48.5357,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3185,6 +3438,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3215,6 +3469,8 @@
       "atr": 22.0369,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3222,6 +3478,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3252,6 +3509,8 @@
       "atr": 13.1386,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3259,6 +3518,7 @@
       "sector": "Communication Services",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3289,6 +3549,8 @@
       "atr": 623.2857,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3296,6 +3558,7 @@
       "sector": "Energy",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3326,6 +3589,8 @@
       "atr": 3.5658,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3333,6 +3598,7 @@
       "sector": "Basic Materials",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3363,6 +3629,8 @@
       "atr": 2.87,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3370,6 +3638,7 @@
       "sector": "Communication Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3400,6 +3669,8 @@
       "atr": 7.0629,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3407,6 +3678,7 @@
       "sector": "Real Estate",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3437,6 +3709,8 @@
       "atr": 0.8014,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3444,6 +3718,7 @@
       "sector": "Technology",
       "currency": "KRW",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3474,6 +3749,8 @@
       "atr": 21107.1429,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3481,6 +3758,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3511,6 +3789,8 @@
       "atr": 1.7064,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3518,6 +3798,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3548,6 +3829,8 @@
       "atr": 3.6466,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3555,6 +3838,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3585,6 +3869,8 @@
       "atr": 7.9804,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3592,6 +3878,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3622,6 +3909,8 @@
       "atr": 1.7164,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3629,6 +3918,7 @@
       "sector": "Financial Services",
       "currency": "CHF",
       "signal": "hold",
+      "signal_text": "",
       "score": 64,
       "spy_above_200ma": null,
       "vix": null,
@@ -3659,6 +3949,8 @@
       "atr": 9.9857,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3666,6 +3958,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -3696,6 +3989,8 @@
       "atr": 14.58,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3703,6 +3998,7 @@
       "sector": "Communication Services",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -3733,6 +4029,8 @@
       "atr": 0.6343,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3740,6 +4038,7 @@
       "sector": "Basic Materials",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -3770,6 +4069,8 @@
       "atr": 3.0762,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3777,6 +4078,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -3807,6 +4109,8 @@
       "atr": 470.4286,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3814,6 +4118,7 @@
       "sector": "Utilities",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -3844,6 +4149,8 @@
       "atr": 1.3643,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3851,6 +4158,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -3881,6 +4189,8 @@
       "atr": 0.2509,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3888,6 +4198,7 @@
       "sector": "Technology",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -3918,6 +4229,8 @@
       "atr": 303.7143,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3925,6 +4238,7 @@
       "sector": "Technology",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -3955,6 +4269,8 @@
       "atr": 76.4286,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3962,6 +4278,7 @@
       "sector": "Consumer Cyclical",
       "currency": "CHF",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -3992,6 +4309,8 @@
       "atr": 5.2964,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -3999,6 +4318,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -4029,6 +4349,8 @@
       "atr": 4.9443,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4036,6 +4358,7 @@
       "sector": "Basic Materials",
       "currency": "CHF",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 63,
       "spy_above_200ma": null,
       "vix": null,
@@ -4066,6 +4389,8 @@
       "atr": 1.7634,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4073,6 +4398,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 62,
       "spy_above_200ma": null,
       "vix": null,
@@ -4103,6 +4429,8 @@
       "atr": 83.2524,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4110,6 +4438,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 62,
       "spy_above_200ma": null,
       "vix": null,
@@ -4140,6 +4469,8 @@
       "atr": 0.8571,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4147,6 +4478,7 @@
       "sector": "Technology",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 62,
       "spy_above_200ma": null,
       "vix": null,
@@ -4177,6 +4509,8 @@
       "atr": 2208.5714,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4184,6 +4518,7 @@
       "sector": "Real Estate",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 62,
       "spy_above_200ma": null,
       "vix": null,
@@ -4214,6 +4549,8 @@
       "atr": 2.2314,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4221,6 +4558,7 @@
       "sector": "Industrials",
       "currency": "GBp",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 62,
       "spy_above_200ma": null,
       "vix": null,
@@ -4251,6 +4589,8 @@
       "atr": 112.6453,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4258,6 +4598,7 @@
       "sector": "Healthcare",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "",
       "score": 62,
       "spy_above_200ma": null,
       "vix": null,
@@ -4288,6 +4629,8 @@
       "atr": 116.8571,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4295,6 +4638,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 62,
       "spy_above_200ma": null,
       "vix": null,
@@ -4325,6 +4669,8 @@
       "atr": 1.0532,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4332,6 +4678,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 61,
       "spy_above_200ma": null,
       "vix": null,
@@ -4362,6 +4709,8 @@
       "atr": 18.9553,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4369,6 +4718,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 61,
       "spy_above_200ma": null,
       "vix": null,
@@ -4399,6 +4749,8 @@
       "atr": 8.5286,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4406,6 +4758,7 @@
       "sector": "Technology",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "",
       "score": 61,
       "spy_above_200ma": null,
       "vix": null,
@@ -4436,6 +4789,8 @@
       "atr": 140.2143,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4443,6 +4798,7 @@
       "sector": "Consumer Defensive",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 61,
       "spy_above_200ma": null,
       "vix": null,
@@ -4473,6 +4829,8 @@
       "atr": 1.0557,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4480,6 +4838,7 @@
       "sector": "Financial Services",
       "currency": "GBp",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 61,
       "spy_above_200ma": null,
       "vix": null,
@@ -4510,6 +4869,8 @@
       "atr": 393.6314,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4517,6 +4878,7 @@
       "sector": "Industrials",
       "currency": "SEK",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 61,
       "spy_above_200ma": null,
       "vix": null,
@@ -4547,6 +4909,8 @@
       "atr": 4.3786,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4554,6 +4918,7 @@
       "sector": "Utilities",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "",
       "score": 61,
       "spy_above_200ma": null,
       "vix": null,
@@ -4584,6 +4949,8 @@
       "atr": 1.6179,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4591,6 +4958,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4621,6 +4989,8 @@
       "atr": 7.8079,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4628,6 +4998,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4658,6 +5029,8 @@
       "atr": 1.1329,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4665,6 +5038,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4695,6 +5069,8 @@
       "atr": 5.9097,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4702,6 +5078,7 @@
       "sector": "Consumer Defensive",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4732,6 +5109,8 @@
       "atr": 8.175,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4739,6 +5118,7 @@
       "sector": "Technology",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4769,6 +5149,8 @@
       "atr": 2805.0,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4776,6 +5158,7 @@
       "sector": "Healthcare",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4806,6 +5189,8 @@
       "atr": 83.9286,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4813,6 +5198,7 @@
       "sector": "Technology",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4843,6 +5229,8 @@
       "atr": 3554.2857,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4850,6 +5238,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4880,6 +5269,8 @@
       "atr": 27.9793,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4887,6 +5278,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4917,6 +5309,8 @@
       "atr": 5.3473,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4924,6 +5318,7 @@
       "sector": "Consumer Defensive",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4954,6 +5349,8 @@
       "atr": 5.4353,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4961,6 +5358,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -4991,6 +5389,8 @@
       "atr": 99.9286,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -4998,6 +5398,7 @@
       "sector": "Utilities",
       "currency": "GBp",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -5028,6 +5429,8 @@
       "atr": 71.7159,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5035,6 +5438,7 @@
       "sector": "Utilities",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 60,
       "spy_above_200ma": null,
       "vix": null,
@@ -5065,6 +5469,8 @@
       "atr": 0.0828,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5072,6 +5478,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5102,6 +5509,8 @@
       "atr": 64.9057,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5109,6 +5518,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5139,6 +5549,8 @@
       "atr": 11.5171,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5146,6 +5558,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5176,6 +5589,8 @@
       "atr": 11.3379,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5183,6 +5598,7 @@
       "sector": "Consumer Defensive",
       "currency": "CHF",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5213,6 +5629,8 @@
       "atr": 1.3879,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5220,6 +5638,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5250,6 +5669,8 @@
       "atr": 6.8514,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5257,6 +5678,7 @@
       "sector": "Consumer Defensive",
       "currency": "GBp",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5287,6 +5709,8 @@
       "atr": 161.2264,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5294,6 +5718,7 @@
       "sector": "Consumer Defensive",
       "currency": "GBp",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5324,6 +5749,8 @@
       "atr": 35.7354,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5331,6 +5758,7 @@
       "sector": "Consumer Cyclical",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5361,6 +5789,8 @@
       "atr": 50.3214,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5368,6 +5798,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5398,6 +5829,8 @@
       "atr": 2.0571,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5405,6 +5838,7 @@
       "sector": "Healthcare",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5435,6 +5869,8 @@
       "atr": 0.47,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5442,6 +5878,7 @@
       "sector": "Industrials",
       "currency": "SEK",
       "signal": "hold",
+      "signal_text": "",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5472,6 +5909,8 @@
       "atr": 6.8929,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5479,6 +5918,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5509,6 +5949,8 @@
       "atr": 0.123,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5516,6 +5958,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5546,6 +5989,8 @@
       "atr": 3.97,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5553,6 +5998,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5583,6 +6029,8 @@
       "atr": 0.9525,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5590,6 +6038,7 @@
       "sector": "Consumer Defensive",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5620,6 +6069,8 @@
       "atr": 1.5486,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5627,6 +6078,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5657,6 +6109,8 @@
       "atr": 5.5164,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5664,6 +6118,7 @@
       "sector": "Utilities",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5694,6 +6149,8 @@
       "atr": 2.3271,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5701,6 +6158,7 @@
       "sector": "Utilities",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 59,
       "spy_above_200ma": null,
       "vix": null,
@@ -5731,6 +6189,8 @@
       "atr": 0.4211,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5738,6 +6198,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 58,
       "spy_above_200ma": null,
       "vix": null,
@@ -5768,6 +6229,8 @@
       "atr": 180.7857,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5775,6 +6238,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 58,
       "spy_above_200ma": null,
       "vix": null,
@@ -5805,6 +6269,8 @@
       "atr": 3.8914,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5812,6 +6278,7 @@
       "sector": "Financial Services",
       "currency": "CHF",
       "signal": "hold",
+      "signal_text": "",
       "score": 58,
       "spy_above_200ma": null,
       "vix": null,
@@ -5842,6 +6309,8 @@
       "atr": 2.7286,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5849,6 +6318,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 58,
       "spy_above_200ma": null,
       "vix": null,
@@ -5879,6 +6349,8 @@
       "atr": 5.8886,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5886,6 +6358,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 58,
       "spy_above_200ma": null,
       "vix": null,
@@ -5916,6 +6389,8 @@
       "atr": 19.1171,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5923,6 +6398,7 @@
       "sector": "Consumer Cyclical",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 58,
       "spy_above_200ma": null,
       "vix": null,
@@ -5953,6 +6429,8 @@
       "atr": 1.7057,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5960,6 +6438,7 @@
       "sector": "Consumer Cyclical",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 58,
       "spy_above_200ma": null,
       "vix": null,
@@ -5990,6 +6469,8 @@
       "atr": 5.0429,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -5997,6 +6478,7 @@
       "sector": "Technology",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 58,
       "spy_above_200ma": null,
       "vix": null,
@@ -6027,6 +6509,8 @@
       "atr": 4.0686,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6034,6 +6518,7 @@
       "sector": "Financial Services",
       "currency": "CHF",
       "signal": "hold",
+      "signal_text": "",
       "score": 58,
       "spy_above_200ma": null,
       "vix": null,
@@ -6064,6 +6549,8 @@
       "atr": 16.6176,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6071,6 +6558,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6101,6 +6589,8 @@
       "atr": 4.3407,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6108,6 +6598,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6138,6 +6629,8 @@
       "atr": 2.9892,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6145,6 +6638,7 @@
       "sector": "Consumer Cyclical",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6175,6 +6669,8 @@
       "atr": 13.3339,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6182,6 +6678,7 @@
       "sector": "Healthcare",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6212,6 +6709,8 @@
       "atr": 1.4368,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6219,6 +6718,7 @@
       "sector": "Healthcare",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6249,6 +6749,8 @@
       "atr": 268.5714,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6256,6 +6758,7 @@
       "sector": "Consumer Cyclical",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6286,6 +6789,8 @@
       "atr": 82.6429,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6293,6 +6798,7 @@
       "sector": "Communication Services",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6323,6 +6829,8 @@
       "atr": 2.05,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6330,6 +6838,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6360,6 +6869,8 @@
       "atr": 2.905,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6367,6 +6878,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6397,6 +6909,8 @@
       "atr": 16.8343,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6404,6 +6918,7 @@
       "sector": "Consumer Cyclical",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6434,6 +6949,8 @@
       "atr": 52.6429,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6441,6 +6958,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6471,6 +6989,8 @@
       "atr": 5.1057,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6478,6 +6998,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "ZL ok | Hist ok",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6508,6 +7029,8 @@
       "atr": 1.0057,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6515,6 +7038,7 @@
       "sector": "Healthcare",
       "currency": "DKK",
       "signal": "hold",
+      "signal_text": "",
       "score": 57,
       "spy_above_200ma": null,
       "vix": null,
@@ -6545,6 +7069,8 @@
       "atr": 9.8929,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6552,6 +7078,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "ZL ok | Hist ok",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6582,6 +7109,8 @@
       "atr": 11.6645,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6589,6 +7118,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6619,6 +7149,8 @@
       "atr": 14.2971,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6626,6 +7158,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6656,6 +7189,8 @@
       "atr": 15.1564,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6663,6 +7198,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6693,6 +7229,8 @@
       "atr": 4.2279,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6700,6 +7238,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6730,6 +7269,8 @@
       "atr": 1.9821,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6737,6 +7278,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6767,6 +7309,8 @@
       "atr": 2.4307,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6774,6 +7318,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6804,6 +7349,8 @@
       "atr": 15.23,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6811,6 +7358,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6841,6 +7389,8 @@
       "atr": 11.4929,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6848,6 +7398,7 @@
       "sector": "Basic Materials",
       "currency": "JPY",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6878,6 +7429,8 @@
       "atr": 11.0,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6885,6 +7438,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6915,6 +7469,8 @@
       "atr": 5.4686,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6922,6 +7478,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "ZL ok | Hist ok",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6952,6 +7509,8 @@
       "atr": 5.6821,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6959,6 +7518,7 @@
       "sector": "Technology",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 56,
       "spy_above_200ma": null,
       "vix": null,
@@ -6989,6 +7549,8 @@
       "atr": 3.2907,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -6996,6 +7558,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "",
       "score": 55,
       "spy_above_200ma": null,
       "vix": null,
@@ -7026,6 +7589,8 @@
       "atr": 12.6307,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7033,6 +7598,7 @@
       "sector": "Consumer Cyclical",
       "currency": "EUR",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 55,
       "spy_above_200ma": null,
       "vix": null,
@@ -7063,6 +7629,8 @@
       "atr": 1.9586,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7070,6 +7638,7 @@
       "sector": "Industrials",
       "currency": "GBp",
       "signal": "hold",
+      "signal_text": "",
       "score": 55,
       "spy_above_200ma": null,
       "vix": null,
@@ -7100,6 +7669,8 @@
       "atr": 109.91,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7107,6 +7678,7 @@
       "sector": "Communication Services",
       "currency": "USD",
       "signal": "hold",
+      "signal_text": "Hist ok",
       "score": 55,
       "spy_above_200ma": null,
       "vix": null,
@@ -7137,6 +7709,8 @@
       "atr": 0.4246,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7144,6 +7718,7 @@
       "sector": "Utilities",
       "currency": "GBp",
       "signal": "hold",
+      "signal_text": "",
       "score": 55,
       "spy_above_200ma": null,
       "vix": null,
@@ -7174,6 +7749,8 @@
       "atr": 36.9484,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7181,6 +7758,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 54,
       "spy_above_200ma": null,
       "vix": null,
@@ -7211,6 +7789,8 @@
       "atr": 9.47,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7218,6 +7798,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 54,
       "spy_above_200ma": null,
       "vix": null,
@@ -7248,6 +7829,8 @@
       "atr": 5.9421,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7255,6 +7838,7 @@
       "sector": "Consumer Cyclical",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 54,
       "spy_above_200ma": null,
       "vix": null,
@@ -7285,6 +7869,8 @@
       "atr": 1.0918,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7292,6 +7878,7 @@
       "sector": "Financial Services",
       "currency": "CHF",
       "signal": "watch",
+      "signal_text": "",
       "score": 54,
       "spy_above_200ma": null,
       "vix": null,
@@ -7322,6 +7909,8 @@
       "atr": 19.0314,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7329,6 +7918,7 @@
       "sector": "Consumer Defensive",
       "currency": "JPY",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 54,
       "spy_above_200ma": null,
       "vix": null,
@@ -7359,6 +7949,8 @@
       "atr": 49.4643,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7366,6 +7958,7 @@
       "sector": "Utilities",
       "currency": "CHF",
       "signal": "watch",
+      "signal_text": "",
       "score": 54,
       "spy_above_200ma": null,
       "vix": null,
@@ -7396,6 +7989,8 @@
       "atr": 2.3714,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7403,6 +7998,7 @@
       "sector": "Consumer Cyclical",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 54,
       "spy_above_200ma": null,
       "vix": null,
@@ -7433,6 +8029,8 @@
       "atr": 8.8732,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7440,6 +8038,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Ueber 200MA",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7470,6 +8069,8 @@
       "atr": 2.5595,
       "div": "bear_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7477,6 +8078,7 @@
       "sector": "Consumer Defensive",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7507,6 +8109,8 @@
       "atr": 26.2521,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7514,6 +8118,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "ZL ok | Hist ok",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7544,6 +8149,8 @@
       "atr": 9.6943,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7551,6 +8158,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7581,6 +8189,8 @@
       "atr": 7.7664,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7588,6 +8198,7 @@
       "sector": "Technology",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7618,6 +8229,8 @@
       "atr": 5.4829,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7625,6 +8238,7 @@
       "sector": "Technology",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7655,6 +8269,8 @@
       "atr": 0.6026,
       "div": "bear_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7662,6 +8278,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7692,6 +8309,8 @@
       "atr": 11.3607,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7699,6 +8318,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7729,6 +8349,8 @@
       "atr": 4.4664,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7736,6 +8358,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7766,6 +8389,8 @@
       "atr": 1.4093,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7773,6 +8398,7 @@
       "sector": "Communication Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7803,6 +8429,8 @@
       "atr": 1.0234,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7810,6 +8438,7 @@
       "sector": "Financial Services",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7840,6 +8469,8 @@
       "atr": 0.7136,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7847,6 +8478,7 @@
       "sector": "Consumer Cyclical",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7877,6 +8509,8 @@
       "atr": 10.3179,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7884,6 +8518,7 @@
       "sector": "Utilities",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 53,
       "spy_above_200ma": null,
       "vix": null,
@@ -7914,6 +8549,8 @@
       "atr": 1.7447,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7921,6 +8558,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 52,
       "spy_above_200ma": null,
       "vix": null,
@@ -7951,6 +8589,8 @@
       "atr": 4.3729,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7958,6 +8598,7 @@
       "sector": "Communication Services",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 52,
       "spy_above_200ma": null,
       "vix": null,
@@ -7988,6 +8629,8 @@
       "atr": 1.946,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -7995,6 +8638,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 52,
       "spy_above_200ma": null,
       "vix": null,
@@ -8025,6 +8669,8 @@
       "atr": 8.1971,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8032,6 +8678,7 @@
       "sector": "Healthcare",
       "currency": "JPY",
       "signal": "watch",
+      "signal_text": "",
       "score": 52,
       "spy_above_200ma": null,
       "vix": null,
@@ -8062,6 +8709,8 @@
       "atr": 137.6429,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8069,6 +8718,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 52,
       "spy_above_200ma": null,
       "vix": null,
@@ -8099,6 +8749,8 @@
       "atr": 22.1907,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8106,6 +8758,7 @@
       "sector": "Real Estate",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 52,
       "spy_above_200ma": null,
       "vix": null,
@@ -8136,6 +8789,8 @@
       "atr": 4.6536,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8143,6 +8798,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 52,
       "spy_above_200ma": null,
       "vix": null,
@@ -8173,6 +8829,8 @@
       "atr": 6.4036,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8180,6 +8838,7 @@
       "sector": "Utilities",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 52,
       "spy_above_200ma": null,
       "vix": null,
@@ -8210,6 +8869,8 @@
       "atr": 1.7502,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8217,6 +8878,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 51,
       "spy_above_200ma": null,
       "vix": null,
@@ -8247,6 +8909,8 @@
       "atr": 6.4343,
       "div": "bull_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8254,6 +8918,7 @@
       "sector": "Consumer Defensive",
       "currency": "CHF",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 51,
       "spy_above_200ma": null,
       "vix": null,
@@ -8284,6 +8949,8 @@
       "atr": 212.1429,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8291,6 +8958,7 @@
       "sector": "Technology",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 51,
       "spy_above_200ma": null,
       "vix": null,
@@ -8321,6 +8989,8 @@
       "atr": 2.5717,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8328,6 +8998,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 51,
       "spy_above_200ma": null,
       "vix": null,
@@ -8358,6 +9029,8 @@
       "atr": 8.1,
       "div": "bear_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8365,6 +9038,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 51,
       "spy_above_200ma": null,
       "vix": null,
@@ -8395,6 +9069,8 @@
       "atr": 3.8745,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8402,6 +9078,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 51,
       "spy_above_200ma": null,
       "vix": null,
@@ -8432,6 +9109,8 @@
       "atr": 11.6589,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8439,6 +9118,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 51,
       "spy_above_200ma": null,
       "vix": null,
@@ -8469,6 +9149,8 @@
       "atr": 2.3473,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8476,6 +9158,7 @@
       "sector": "Communication Services",
       "currency": "HKD",
       "signal": "watch",
+      "signal_text": "",
       "score": 51,
       "spy_above_200ma": null,
       "vix": null,
@@ -8506,6 +9189,8 @@
       "atr": 13.1633,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8513,6 +9198,7 @@
       "sector": "Utilities",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 51,
       "spy_above_200ma": null,
       "vix": null,
@@ -8543,6 +9229,8 @@
       "atr": 1.3902,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8550,6 +9238,7 @@
       "sector": "Communication Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 50,
       "spy_above_200ma": null,
       "vix": null,
@@ -8580,6 +9269,8 @@
       "atr": 13.4986,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8587,6 +9278,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 50,
       "spy_above_200ma": null,
       "vix": null,
@@ -8617,6 +9309,8 @@
       "atr": 1.3579,
       "div": "bear_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8624,6 +9318,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 50,
       "spy_above_200ma": null,
       "vix": null,
@@ -8654,6 +9349,8 @@
       "atr": 11.137,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8661,6 +9358,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 50,
       "spy_above_200ma": null,
       "vix": null,
@@ -8691,6 +9389,8 @@
       "atr": 2.9043,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8698,6 +9398,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 50,
       "spy_above_200ma": null,
       "vix": null,
@@ -8728,6 +9429,8 @@
       "atr": 1.6257,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8735,6 +9438,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 50,
       "spy_above_200ma": null,
       "vix": null,
@@ -8765,6 +9469,8 @@
       "atr": 5.7268,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8772,6 +9478,7 @@
       "sector": "Consumer Defensive",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 50,
       "spy_above_200ma": null,
       "vix": null,
@@ -8802,6 +9509,8 @@
       "atr": 1.6486,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8809,6 +9518,7 @@
       "sector": "Healthcare",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "",
       "score": 50,
       "spy_above_200ma": null,
       "vix": null,
@@ -8839,6 +9549,8 @@
       "atr": 0.8937,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8846,6 +9558,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 50,
       "spy_above_200ma": null,
       "vix": null,
@@ -8876,6 +9589,8 @@
       "atr": 0.8389,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8883,6 +9598,7 @@
       "sector": "Industrials",
       "currency": "GBp",
       "signal": "watch",
+      "signal_text": "",
       "score": 50,
       "spy_above_200ma": null,
       "vix": null,
@@ -8913,6 +9629,8 @@
       "atr": 118.5214,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8920,6 +9638,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 49,
       "spy_above_200ma": null,
       "vix": null,
@@ -8950,6 +9669,8 @@
       "atr": 8.8221,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8957,6 +9678,7 @@
       "sector": "Healthcare",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 49,
       "spy_above_200ma": null,
       "vix": null,
@@ -8987,6 +9709,8 @@
       "atr": 8.8857,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -8994,6 +9718,7 @@
       "sector": "Financial Services",
       "currency": "SEK",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 49,
       "spy_above_200ma": null,
       "vix": null,
@@ -9024,6 +9749,8 @@
       "atr": 8.5983,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9031,6 +9758,7 @@
       "sector": "Consumer Cyclical",
       "currency": "JPY",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 49,
       "spy_above_200ma": null,
       "vix": null,
@@ -9061,6 +9789,8 @@
       "atr": 53.25,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9068,6 +9798,7 @@
       "sector": "Consumer Cyclical",
       "currency": "HKD",
       "signal": "watch",
+      "signal_text": "",
       "score": 49,
       "spy_above_200ma": null,
       "vix": null,
@@ -9098,6 +9829,8 @@
       "atr": 3.05,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9105,6 +9838,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 48,
       "spy_above_200ma": null,
       "vix": null,
@@ -9135,6 +9869,8 @@
       "atr": 6.7621,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9142,6 +9878,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 48,
       "spy_above_200ma": null,
       "vix": null,
@@ -9172,6 +9909,8 @@
       "atr": 5.4221,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9179,6 +9918,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 48,
       "spy_above_200ma": null,
       "vix": null,
@@ -9209,6 +9949,8 @@
       "atr": 1.7807,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9216,6 +9958,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 48,
       "spy_above_200ma": null,
       "vix": null,
@@ -9246,6 +9989,8 @@
       "atr": 1.9557,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9253,6 +9998,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 48,
       "spy_above_200ma": null,
       "vix": null,
@@ -9283,6 +10029,8 @@
       "atr": 1.9857,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9290,6 +10038,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 48,
       "spy_above_200ma": null,
       "vix": null,
@@ -9320,6 +10069,8 @@
       "atr": 0.3236,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9327,6 +10078,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 47,
       "spy_above_200ma": null,
       "vix": null,
@@ -9357,6 +10109,8 @@
       "atr": 1.0007,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9364,6 +10118,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 47,
       "spy_above_200ma": null,
       "vix": null,
@@ -9394,6 +10149,8 @@
       "atr": 2.8021,
       "div": "bear_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9401,6 +10158,7 @@
       "sector": "Consumer Cyclical",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 47,
       "spy_above_200ma": null,
       "vix": null,
@@ -9431,6 +10189,8 @@
       "atr": 48.7857,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9438,6 +10198,7 @@
       "sector": "Industrials",
       "currency": "CHF",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 47,
       "spy_above_200ma": null,
       "vix": null,
@@ -9468,6 +10229,8 @@
       "atr": 10.3143,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9475,6 +10238,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 47,
       "spy_above_200ma": null,
       "vix": null,
@@ -9505,6 +10269,8 @@
       "atr": 5.6863,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9512,6 +10278,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 47,
       "spy_above_200ma": null,
       "vix": null,
@@ -9542,6 +10309,8 @@
       "atr": 10.3871,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9549,6 +10318,7 @@
       "sector": "Industrials",
       "currency": "JPY",
       "signal": "watch",
+      "signal_text": "",
       "score": 47,
       "spy_above_200ma": null,
       "vix": null,
@@ -9579,6 +10349,8 @@
       "atr": 105.5714,
       "div": "bear_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9586,6 +10358,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 47,
       "spy_above_200ma": null,
       "vix": null,
@@ -9616,6 +10389,8 @@
       "atr": 22.4893,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9623,6 +10398,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 47,
       "spy_above_200ma": null,
       "vix": null,
@@ -9653,6 +10429,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9660,6 +10438,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Ueber 200MA",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -9690,6 +10469,8 @@
       "atr": 17.775,
       "div": "bear_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9697,6 +10478,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -9727,6 +10509,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9734,6 +10518,7 @@
       "sector": "Communication Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -9764,6 +10549,8 @@
       "atr": 2.2707,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9771,6 +10558,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -9801,6 +10589,8 @@
       "atr": 1.0664,
       "div": "bear_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9808,6 +10598,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -9838,6 +10629,8 @@
       "atr": 46.6415,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9845,6 +10638,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -9875,6 +10669,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9882,6 +10678,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -9912,6 +10709,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9919,6 +10718,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -9949,6 +10749,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9956,6 +10758,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -9986,6 +10789,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -9993,6 +10798,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -10023,6 +10829,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10030,6 +10838,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -10060,6 +10869,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10067,6 +10878,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -10097,6 +10909,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10104,6 +10918,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -10134,6 +10949,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10141,6 +10958,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -10171,6 +10989,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10178,6 +10998,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -10208,6 +11029,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10215,6 +11038,7 @@
       "sector": null,
       "currency": null,
       "signal": "watch",
+      "signal_text": "",
       "score": 46,
       "spy_above_200ma": null,
       "vix": null,
@@ -10245,6 +11069,8 @@
       "atr": null,
       "div": "none",
       "sw": null,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10252,6 +11078,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Ueber 200MA | Hist ok",
       "score": 45,
       "spy_above_200ma": null,
       "vix": null,
@@ -10282,6 +11109,8 @@
       "atr": 16.4543,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10289,6 +11118,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 45,
       "spy_above_200ma": null,
       "vix": null,
@@ -10319,6 +11149,8 @@
       "atr": 39.2086,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10326,6 +11158,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 45,
       "spy_above_200ma": null,
       "vix": null,
@@ -10356,6 +11189,8 @@
       "atr": 16.4836,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10363,6 +11198,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 45,
       "spy_above_200ma": null,
       "vix": null,
@@ -10393,6 +11229,8 @@
       "atr": 1.2929,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10400,6 +11238,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 45,
       "spy_above_200ma": null,
       "vix": null,
@@ -10430,6 +11269,8 @@
       "atr": 7.9943,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10437,6 +11278,7 @@
       "sector": "Utilities",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 45,
       "spy_above_200ma": null,
       "vix": null,
@@ -10467,6 +11309,8 @@
       "atr": 12.9029,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10474,6 +11318,7 @@
       "sector": "Healthcare",
       "currency": "CHF",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 44,
       "spy_above_200ma": null,
       "vix": null,
@@ -10504,6 +11349,8 @@
       "atr": 10.7162,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10511,6 +11358,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 44,
       "spy_above_200ma": null,
       "vix": null,
@@ -10541,6 +11389,8 @@
       "atr": 13.1541,
       "div": "none",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10548,6 +11398,7 @@
       "sector": "Healthcare",
       "currency": "JPY",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 44,
       "spy_above_200ma": null,
       "vix": null,
@@ -10578,6 +11429,8 @@
       "atr": 92.75,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10585,6 +11438,7 @@
       "sector": "Financial Services",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "",
       "score": 44,
       "spy_above_200ma": null,
       "vix": null,
@@ -10615,6 +11469,8 @@
       "atr": 0.615,
       "div": "bull_regular",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10622,6 +11478,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Ueber 200MA | ZL ok | Hist ok",
       "score": 44,
       "spy_above_200ma": null,
       "vix": null,
@@ -10652,6 +11509,8 @@
       "atr": 9.555,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10659,6 +11518,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 43,
       "spy_above_200ma": null,
       "vix": null,
@@ -10689,6 +11549,8 @@
       "atr": 6.158,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10696,6 +11558,7 @@
       "sector": "Communication Services",
       "currency": "JPY",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 43,
       "spy_above_200ma": null,
       "vix": null,
@@ -10726,6 +11589,8 @@
       "atr": 250.5714,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10733,6 +11598,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "ZL ok | Hist ok",
       "score": 42,
       "spy_above_200ma": null,
       "vix": null,
@@ -10763,6 +11629,8 @@
       "atr": 1.9629,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10770,6 +11638,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 41,
       "spy_above_200ma": null,
       "vix": null,
@@ -10800,6 +11669,8 @@
       "atr": 61.1321,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10807,6 +11678,7 @@
       "sector": "Consumer Cyclical",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 41,
       "spy_above_200ma": null,
       "vix": null,
@@ -10837,6 +11709,8 @@
       "atr": 0.7003,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10844,6 +11718,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 40,
       "spy_above_200ma": null,
       "vix": null,
@@ -10874,6 +11749,8 @@
       "atr": 55.7493,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10881,6 +11758,7 @@
       "sector": "Real Estate",
       "currency": "USD",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 40,
       "spy_above_200ma": null,
       "vix": null,
@@ -10911,6 +11789,8 @@
       "atr": 1.3479,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10918,6 +11798,7 @@
       "sector": "Industrials",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 40,
       "spy_above_200ma": null,
       "vix": null,
@@ -10948,6 +11829,8 @@
       "atr": 0.055,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10955,6 +11838,7 @@
       "sector": "Consumer Cyclical",
       "currency": "EUR",
       "signal": "watch",
+      "signal_text": "Hist ok",
       "score": 40,
       "spy_above_200ma": null,
       "vix": null,
@@ -10985,6 +11869,8 @@
       "atr": 0.2776,
       "div": "none",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -10992,6 +11878,7 @@
       "sector": "Consumer Cyclical",
       "currency": "JPY",
       "signal": "sell",
+      "signal_text": "Hist ok",
       "score": 39,
       "spy_above_200ma": null,
       "vix": null,
@@ -11022,6 +11909,8 @@
       "atr": 60.75,
       "div": "bull_regular",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -11029,6 +11918,7 @@
       "sector": "Technology",
       "currency": "USD",
       "signal": "sell",
+      "signal_text": "Hist ok",
       "score": 38,
       "spy_above_200ma": null,
       "vix": null,
@@ -11059,6 +11949,8 @@
       "atr": 5.341,
       "div": "bear_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -11066,6 +11958,7 @@
       "sector": "Healthcare",
       "currency": "USD",
       "signal": "sell",
+      "signal_text": "",
       "score": 37,
       "spy_above_200ma": null,
       "vix": null,
@@ -11096,6 +11989,8 @@
       "atr": 14.2757,
       "div": "bear_hidden",
       "sw": true,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     },
     {
@@ -11103,6 +11998,7 @@
       "sector": "Industrials",
       "currency": "USD",
       "signal": "sell",
+      "signal_text": "Hist ok",
       "score": 36,
       "spy_above_200ma": null,
       "vix": null,
@@ -11133,6 +12029,8 @@
       "atr": 24.3686,
       "div": "bull_hidden",
       "sw": false,
+      "price_vs_50ma_pct": null,
+      "mom3m_ret": null,
       "sector_rank": null
     }
   ]
