@@ -1894,17 +1894,40 @@ function wlReset(){
   if(ss) ss.classList.add('active');
   var ab=document.querySelector('button[onclick="wlReset()"]');
   if(ab) ab.classList.add('active');
-  var sfb=document.getElementById('sf-btn');
-  if(sfb) sfb.classList.remove('active');
-  var hcb=document.getElementById('hc-btn');
-  var _wlhc=document.getElementById('wl-hc-btn');if(_wlhc){_wlhc.classList.remove('active');}
-  if(hcb) hcb.classList.remove('active');
-  var drb=document.getElementById('dr-btn');
-  var _wldr=document.getElementById('wl-dr-btn');if(_wldr){_wldr.classList.remove('active');}
-  if(drb) drb.classList.remove('active');
-  var syb=document.getElementById('sync-btn');
-  var _sbsyn=document.getElementById('sync-btn-syn');if(_sbsyn){_sbsyn.classList.remove('active');}
-  if(syb) syb.classList.remove('active');
+  var _ri,_rj,_rk,_rl;
+  var _hcBtns=document.querySelectorAll('#hc-btn,#wl-hc-btn');
+  for(_ri=0;_ri<_hcBtns.length;_ri++){
+    _hcBtns[_ri].textContent='HC: aus';
+    _hcBtns[_ri].style.borderColor='#1a2a3a';
+    _hcBtns[_ri].style.color='var(--mut)';
+    _hcBtns[_ri].style.background='transparent';
+    _hcBtns[_ri].classList.remove('active');
+  }
+  var _sfBtns=document.querySelectorAll('#sf-btn,#sf-btn-wl,#wl-sf-btn');
+  for(_rj=0;_rj<_sfBtns.length;_rj++){
+    _sfBtns[_rj].textContent='SF: aus';
+    _sfBtns[_rj].style.borderColor='#1a2a3a';
+    _sfBtns[_rj].style.color='var(--mut)';
+    _sfBtns[_rj].style.background='transparent';
+    _sfBtns[_rj].classList.remove('active');
+  }
+  var _drBtns=document.querySelectorAll('#dr-btn,#wl-dr-btn');
+  for(_rk=0;_rk<_drBtns.length;_rk++){
+    _drBtns[_rk].textContent='DR: aus';
+    _drBtns[_rk].style.borderColor='#1a2a3a';
+    _drBtns[_rk].style.color='var(--mut)';
+    _drBtns[_rk].style.background='transparent';
+    _drBtns[_rk].classList.remove('active');
+  }
+  var _drcfg=document.getElementById('dr-config');
+  if(_drcfg) _drcfg.style.display='none';
+  var _syncBtns=document.querySelectorAll('#sync-btn,#sync-btn-syn');
+  for(_rl=0;_rl<_syncBtns.length;_rl++){
+    _syncBtns[_rl].style.borderColor='#1a2a3a';
+    _syncBtns[_rl].style.color='var(--mut)';
+    _syncBtns[_rl].style.background='transparent';
+    _syncBtns[_rl].classList.remove('active');
+  }
   rSyn();
   rWL();
 }
