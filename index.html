@@ -1897,10 +1897,13 @@ function wlReset(){
   var sfb=document.getElementById('sf-btn');
   if(sfb) sfb.classList.remove('active');
   var hcb=document.getElementById('hc-btn');
+  var _wlhc=document.getElementById('wl-hc-btn');if(_wlhc){_wlhc.classList.remove('active');}
   if(hcb) hcb.classList.remove('active');
   var drb=document.getElementById('dr-btn');
+  var _wldr=document.getElementById('wl-dr-btn');if(_wldr){_wldr.classList.remove('active');}
   if(drb) drb.classList.remove('active');
   var syb=document.getElementById('sync-btn');
+  var _sbsyn=document.getElementById('sync-btn-syn');if(_sbsyn){_sbsyn.classList.remove('active');}
   if(syb) syb.classList.remove('active');
   rSyn();
   rWL();
@@ -2294,6 +2297,7 @@ function wlDetail(ticker){
 /* ---- Score-Filter Toggle ---- */
 function toggleSellFilter(btn){
   SELL_SCORE_FILTER = !SELL_SCORE_FILTER;
+  var _ab=document.querySelector('button[onclick="wlReset()"]');if(_ab){_ab.classList.remove('active');}
   var sfBtns = document.querySelectorAll('#sf-btn, #sf-btn-wl, #wl-sf-btn'), i;
   for(i=0;i<sfBtns.length;i++){
     var b = sfBtns[i]; if(!b) continue;
@@ -2308,6 +2312,7 @@ function toggleSellFilter(btn){
 /* ---- High-Conviction-Filter Toggle (v5.9.69) ---- */
 function toggleHCFilter(btn){
   HC_FILTER = !HC_FILTER;
+  var _ab=document.querySelector('button[onclick="wlReset()"]');if(_ab){_ab.classList.remove('active');}
   var hcBtns = document.querySelectorAll('#hc-btn, #wl-hc-btn'), i;
   for(i=0;i<hcBtns.length;i++){
     var b = hcBtns[i]; if(!b) continue;
@@ -2322,6 +2327,7 @@ function toggleHCFilter(btn){
 /* ---- Dividenden-Hold-Filter Toggle (v5.9.17) ---- */
 function toggleDivFilter(btn){
   DIV_HOLD_FILTER = !DIV_HOLD_FILTER;
+  var _ab=document.querySelector('button[onclick="wlReset()"]');if(_ab){_ab.classList.remove('active');}
   var thr = divThresh();
   var drBtns = document.querySelectorAll('#dr-btn, #wl-dr-btn'), i;
   for(i=0;i<drBtns.length;i++){
@@ -2350,6 +2356,7 @@ function updBundRate(val){
 }
 function toggleSync(btn){
   WL2_SYNC = !WL2_SYNC;
+  var _ab=document.querySelector('button[onclick="wlReset()"]');if(_ab){_ab.classList.remove('active');}
   /* Alle Sync-Buttons aktualisieren */
   var syncBtns = [document.getElementById('sync-btn'), document.getElementById('sync-btn-syn')];
   var i;
@@ -2800,7 +2807,7 @@ function loadScores() {
       var scores = data.scores || data;
       var mac = data.__macro__ || null;
       if (mac) { if (window.FD) { FD['__macro__'] = mac; } macro = mac; }
-      var PAGE_VERSION = '6.3.1';
+      var PAGE_VERSION = '6.3.4';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
