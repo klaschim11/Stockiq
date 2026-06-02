@@ -2373,6 +2373,7 @@ function toggleSync(btn){
 /* ---- Sort-Umschalter ---- */
 function wlSetSort(mode, btn){
   WL_SORT = mode;
+  var _ab=document.querySelector('button[onclick="wlReset()"]');if(_ab){_ab.classList.remove('active');}
   var bs = document.querySelectorAll('#sort-score,#sort-alpha'), i;
   for(i=0;i<bs.length;i++){
     bs[i].style.borderColor = '#1a2a3a';
