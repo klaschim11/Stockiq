@@ -1099,6 +1099,7 @@ var STOCKS=[
   {t:'VLO',n:'Valero Energy',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
 ];
 var FD = {};
+var _scoresArr = [];
 /* v5.9.16: Risk 0.15->0.20, Trend 0.25->0.20 (Low-Vol-Faktor, MSCI/BlackRock 1963-2024) */
 var W = {mom:0.25,trend:0.20,fund:0.35,risk:0.20};
 var WL_FILTER = 'all';
@@ -2423,25 +2424,32 @@ function wlSetSearch(val){
 }
 
 function buildSectorOptions(){
-  var sel = document.getElementById('wl-sector-filter');
-  if(!sel) return;
-  var counts = {}, i, t, sec, k;
-  for(i=0;i<STOCKS.length;i++){
-    t = STOCKS[i].t;
-    var fd = FD[t];
-    sec = (fd && fd.sector) ? fd.sector : null;
-    if(sec){ if(!counts[sec]) counts[sec] = 0; counts[sec]++; }
+  var sel=document.getElementById('wl-sector-filter');
+  if(!sel){return;}
+  var current=sel.value;
+  var secs={},i;
+  if(_scoresArr&&_scoresArr.length>0){
+    for(i=0;i<_scoresArr.length;i++){
+      var sec=_scoresArr[i].sector;
+      if(sec){secs[sec]=1;}
+    }
+  }else{
+    var tks=Object.keys(FD);
+    for(i=0;i<tks.length;i++){
+      if(tks[i]==='__macro__'){continue;}
+      var s2=FD[tks[i]]&&FD[tks[i]].sector;
+      if(s2){secs[s2]=1;}
+    }
   }
-  var sectors = [];
-  for(k in counts){ if(counts.hasOwnProperty(k)) sectors.push(k); }
-  sectors.sort();
-  sel.innerHTML = '<option value="">Alle Sektoren</option>';
-  for(i=0;i<sectors.length;i++){
-    var opt = document.createElement('option');
-    opt.value = sectors[i];
-    opt.textContent = sectors[i] + ' (' + counts[sectors[i]] + ')';
+  var sorted=Object.keys(secs).sort();
+  while(sel.options.length>1){sel.remove(1);}
+  for(i=0;i<sorted.length;i++){
+    var opt=document.createElement('option');
+    opt.value=sorted[i];
+    opt.textContent=sorted[i];
     sel.appendChild(opt);
   }
+  sel.value=current||'';
 }
 
 /* ---- getActiveStocks: respektiert WL2_SYNC ---- */
@@ -2831,7 +2839,7 @@ function loadScores() {
       var scores = data.scores || data;
       var mac = data.__macro__ || null;
       if (mac) { if (window.FD) { FD['__macro__'] = mac; } macro = mac; }
-      var PAGE_VERSION = '6.3.4';
+      var PAGE_VERSION = '6.3.5';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -2841,6 +2849,8 @@ function loadScores() {
         sessionStorage.removeItem('siq_rl');
       }
       _scores = scores;
+      _scoresArr = scores;
+      buildSectorOptions();
       _scoresIdx = {};
       for (var i = 0; i < scores.length; i++) {
         _scoresIdx[scores[i].ticker] = scores[i];
