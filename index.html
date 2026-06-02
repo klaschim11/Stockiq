@@ -1942,7 +1942,8 @@ function wlRend(scored){
     /* HC-Filter v5.9.69: isHC() Triple-Confirmation */
     if(HC_FILTER && (sig==='buy'||sig==='strong'||sig==='pb') && !isHC(s,sc)) continue;
     if(WL_SECTOR_FILTER){
-      var _sec=(_scoresIdx[s.t]||(FD[s.t]&&FD[s.t].sector)||'');
+      var _secRaw=_scoresIdx[s.t];
+      var _sec=(typeof _secRaw==='string'?_secRaw:(_secRaw&&_secRaw.sector)||(FD[s.t]&&FD[s.t].sector)||'');
       if(_sec!==WL_SECTOR_FILTER){continue;}
     }
     if(WL_SEARCH){if(s.t.toLowerCase().indexOf(WL_SEARCH)===-1&&s.n.toLowerCase().indexOf(WL_SEARCH)===-1)continue;}
