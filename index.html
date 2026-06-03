@@ -1100,6 +1100,7 @@ var STOCKS=[
 ];
 var FD = {};
 var _scoresArr = [];
+var _names = {};
 /* v5.9.16: Risk 0.15->0.20, Trend 0.25->0.20 (Low-Vol-Faktor, MSCI/BlackRock 1963-2024) */
 var W = {mom:0.25,trend:0.20,fund:0.35,risk:0.20};
 var WL_FILTER = 'all';
@@ -1764,7 +1765,7 @@ function rSyn(){
     stH+='<div class="strong-buy-pulse" style="border:1px solid #ff9f1c;border-radius:10px;padding:14px;background:rgba(255,159,28,.08)">';
     stH+='<div style="display:flex;justify-content:space-between;align-items:flex-start">';
     stH+='<div><div style="font-size:18px;font-weight:800;color:#ff9f1c">'+s.t+'</div>';
-    stH+='<div style="font-size:11px;color:var(--mut);margin-bottom:4px">'+s.n+'</div></div>';
+    stH+='<div style="font-size:11px;color:var(--mut);margin-bottom:4px">'+dName(s)+'</div></div>';
     stH+='<div style="font-size:11px;color:#ff9f1c;font-family:monospace">&#11088;</div></div>';
     stH+='<div style="font-size:26px;font-weight:800;color:#ff9f1c;margin-bottom:4px">'+sc+'/100</div>';
     stH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">$'+s.p+' RSI:'+s.rsi+'</div>';
@@ -1779,7 +1780,7 @@ function rSyn(){
     s=sBuys[i].s;sc=sBuys[i].sc;
     bH+='<div style="border:1px solid #00e57a;border-radius:10px;padding:14px;background:rgba(0,229,122,.06)">';
     bH+='<div style="font-size:18px;font-weight:800;color:#00e57a">'+s.t+'</div>';
-    bH+='<div style="font-size:11px;color:var(--mut);margin-bottom:6px">'+s.n+'</div>';
+    bH+='<div style="font-size:11px;color:var(--mut);margin-bottom:6px">'+dName(s)+'</div>';
     bH+='<div style="font-size:26px;font-weight:800;color:#00e57a;margin-bottom:4px">'+sc+'/100</div>';
     bH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">$'+s.p+' RSI:'+s.rsi+'</div>';
     bH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">PEG:'+pgLb(s)+' KGV:'+s.pe+'x</div>';
@@ -1794,7 +1795,7 @@ function rSyn(){
       s=sPbs[i].s;sc=sPbs[i].sc;
       pbH+='<div style="border:1px solid rgba(240,192,0,.3);border-radius:10px;padding:14px;background:rgba(240,192,0,.05)">';
       pbH+='<div style="font-size:18px;font-weight:800;color:#f0c000">'+s.t+'</div>';
-      pbH+='<div style="font-size:11px;color:var(--mut);margin-bottom:6px">'+s.n+'</div>';
+      pbH+='<div style="font-size:11px;color:var(--mut);margin-bottom:6px">'+dName(s)+'</div>';
       pbH+='<div style="font-size:26px;font-weight:800;color:#f0c000;margin-bottom:4px">'+sc+'/100</div>';
       pbH+='<div style="font-family:monospace;font-size:9px;color:#f0c000">PEG '+pgLb(s)+' > 2.0 -- blockiert</div></div>';
     }
@@ -1809,7 +1810,7 @@ function rSyn(){
     sH+='<div style="border:1px solid rgba(255,63,63,.3);border-radius:10px;padding:14px;background:rgba(255,63,63,.06)">';
     sH+='<div style="display:flex;justify-content:space-between;align-items:flex-start">';
     sH+='<div><div style="font-size:18px;font-weight:800;color:#ff6666">'+s.t+'</div>';
-    sH+='<div style="font-size:11px;color:var(--mut);margin-bottom:4px">'+s.n+'</div></div>';
+    sH+='<div style="font-size:11px;color:var(--mut);margin-bottom:4px">'+dName(s)+'</div></div>';
     sH+='<div style="font-family:monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(255,63,63,.15);color:#ff6666">'+slbl3+'</div></div>';
     sH+='<div style="font-size:26px;font-weight:800;color:#ff6666;margin-bottom:4px">'+sc+'/100</div>';
     sH+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">$'+s.p+' RSI:'+s.rsi+'</div>';
@@ -1946,7 +1947,7 @@ function wlRend(scored){
       var _sec=(typeof _secRaw==='string'?_secRaw:(_secRaw&&_secRaw.sector)||(FD[s.t]&&FD[s.t].sector)||'');
       if(_sec!==WL_SECTOR_FILTER){continue;}
     }
-    if(WL_SEARCH){if(s.t.toLowerCase().indexOf(WL_SEARCH)===-1&&s.n.toLowerCase().indexOf(WL_SEARCH)===-1)continue;}
+    if(WL_SEARCH){if(s.t.toLowerCase().indexOf(WL_SEARCH)===-1&&s.n.toLowerCase().indexOf(WL_SEARCH)===-1&&dName(s).toLowerCase().indexOf(WL_SEARCH)===-1)continue;}
     if(WL_FILTER!=='all'){
       if(WL_FILTER==='strong'&&sig!=='strong')continue;
       if(WL_FILTER==='buy'&&sig!=='buy')continue;
@@ -1992,7 +1993,7 @@ function wlRend(scored){
       : '';
     var h='<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderLeft+'border-radius:8px;padding:11px 13px;margin-bottom:6px;cursor:pointer" onclick="wlDetail(\''+s.t+'\')">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
-    h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+s.n+'</span></div>';
+    h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
     h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span><span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
@@ -2121,7 +2122,7 @@ function wlDetail(ticker){
   var row='display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:3px';
   var out='<div style="background:#0c1420;border:1px solid #1a2a3a;border-left:3px solid '+sc2+';border-radius:12px;padding:16px">';
   out+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">';
-  out+='<div><div style="font-size:20px;font-weight:800;color:'+scColQ(sc,s)+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+s.n+'</div></div>';
+  out+='<div><div style="font-size:20px;font-weight:800;color:'+scColQ(sc,s)+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+dName(s)+'</div></div>';
   out+='<div style="text-align:right"><div style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:9px;color:var(--mut)">/100 '+sqBadge(s)+'</div></div></div>';
   out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">'+why+'</div>';
   if(wasGated){out+='<div style="font-size:9px;color:#7a9bb5;margin-bottom:6px">&#9660; Score-Gate aktiv: Fundamentals oder Score unter Schwelle &rarr; BUY</div>';}
@@ -2427,6 +2428,8 @@ function wlSetSearch(val){
   rWL();
 }
 
+
+function dName(s){ return (_names&&_names[s.t])||s.n; }
 function buildSectorOptions(){
   var sel=document.getElementById('wl-sector-filter');
   if(!sel){return;}
@@ -2866,6 +2869,12 @@ function loadScores() {
         _scoresIdx[scores[i].ticker] = scores[i];
       }
       console.log("scores.json geladen: " + scores.length + " Ticker");
+
+var _namesUrl='https://raw.githubusercontent.com/klaschim11/Stockiq/main/stockiq_ticker_names.json';
+fetch(_namesUrl)
+  .then(function(r){if(!r.ok){throw new Error('HTTP '+r.status);}return r.json();})
+  .then(function(data){_names=data;if(typeof rWL==='function'){try{rWL();}catch(e){}}})
+  .catch(function(e){console.log('ticker_names: '+e.message);});
       if (typeof rWL === "function") { try { rWL(); } catch(e) {} }
       if (typeof archSnapshot === "function") { try { archSnapshot(); } catch(e) {} }
       if (typeof renderSpyPhaseBanner === "function") { try { renderSpyPhaseBanner(); } catch(e) {} }
@@ -3402,7 +3411,7 @@ function rFund(){
     var rc4=rv4>25?'#00e57a':rv4>15?'#00c8f0':rv4>8?'#f0c000':'#ff6666';
     cards+='<div style="background:#0c1420;border:1px solid #1a2a3a;border-left:3px solid '+mC+';border-radius:10px;padding:12px">';
     cards+='<div style="display:flex;justify-content:space-between;margin-bottom:6px">';
-    cards+='<div><div style="font-size:13px;font-weight:700">'+s.t+'</div><div style="font-size:10px;color:var(--mut)">'+s.n+'</div></div>';
+    cards+='<div><div style="font-size:13px;font-weight:700">'+s.t+'</div><div style="font-size:10px;color:var(--mut)">'+dName(s)+'</div></div>';
     cards+='<div style="font-size:18px;font-weight:800;color:'+fcol+'">'+fs3+'</div></div>';
     cards+='<div style="font-family:monospace;font-size:8px;padding:2px 7px;border-radius:8px;background:rgba(255,255,255,.06);color:'+mC+';margin-bottom:6px;display:inline-block">'+fd4.moat.toUpperCase()+'</div>';
     cards+='<div style="font-size:10px;color:var(--mut);margin-bottom:6px;font-style:italic">'+(fd4.mr||'')+'</div>';
