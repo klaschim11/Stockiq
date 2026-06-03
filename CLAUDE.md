@@ -1,5 +1,5 @@
 # StockIQ — CLAUDE.md
-Version: v6.2.2 | Stand: 01. Juni 2026 | Sprint 12 abgeschlossen
+Version: v6.3.5 | Stand: 03. Juni 2026 | Sprint 14 abgeschlossen
 
 ---
 
@@ -17,52 +17,61 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 
 | Datei | Version | Zweck |
 |-------|---------|-------|
-| `index.html` | v6.2.2 | Dashboard (laedt scores.json) |
-| `fund_juno_v7_9_29.py` | v7.9.29 | Fundamentaldaten + Makro (Juno/iPhone, PRIVAT) |
-| `stockiq_score.py` | v1.3 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
+| `index.html` | v6.3.5 | Dashboard (laedt scores.json + ticker_names.json) |
+| `fund_juno_v7_9_29.py` | v7.9.32 | Fundamentaldaten + Makro + FRED breakeven (Windows, PRIVAT) |
+| `stockiq_score.py` | v1.4.3 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
 | `stockiq_alpha_juno_v6b_6m.py` | v6b_6m-u4 | Walk-Forward PRODUKTION |
 | `stockiq_wl3_signal_tracking_v1_6.py` | v1.6 | WL3 IC-Analyse (Windows) |
-| `stockiq_test.js` | aktuell | QA: 26 Tests, 0 Fehler (2 Warnungen: EV/EBIT + max(FCF,OE) veraltet) |
+| `stockiq_test.js` | aktuell | QA: 26 Tests, 0 Fehler (13 Script-Bloecke) |
+| `stockiq_ticker_names.json` | 2026-06-03 | 299 Klarnamen (yfinance longName, public) |
+| `hypotheses_status.json` | 2026-06-02 | 30 Hypothesen (lokal, gitignored) |
+| `hypotheses_update.py` | 2026-06-01 | SH-2/RH-4 Auto-Update (lokal, gitignored) |
+| `stockiq_filter_test_ui.js` | 2026-06-02 | Puppeteer UI-Test WL-Filter (lokal, gitignored) |
 
-**Schutzziel A**: `fund_juno*.py` und `stockiq_score.py` sind in `.gitignore` —
-sie liegen NICHT im Repo.
+**Schutzziel A**: `fund_juno*.py`, `stockiq_score.py`, `hypotheses_status.json`,
+`hypotheses_update.py` sind in `.gitignore` — sie liegen NICHT im Repo.
 
 ---
 
 ## TAEGLICH-WORKFLOW
 
 ```powershell
-# 1. Daten holen (Juno, iPhone, ~10 Min)
-fund_juno_v7_9_29.py  ->  stockiq_fundamentals.json  (iCloud)
+# 1. Daten holen (Windows, ~20 Min)
+python fund_juno_v7_9_29.py  ->  stockiq_fundamentals.json
 
 # 2. Scores berechnen (Windows, ~5 Sek)
 python stockiq_score.py  ->  stockiq_scores.json
 
-# 3. Deployen
+# 3. Hypothesen aktualisieren (optional)
+python hypotheses_update.py
+
+# 4. Deployen
 cd C:\Users\klasc\Stockiq
 git add stockiq_scores.json
 git commit -m "scores: update DATUM"
 git push origin main
-# -> Dashboard laedt scores.json automatisch
 ```
 
 Oder 1-Click: `run_daily.bat` (erledigt Schritte 1-4 automatisch).
 
 ---
 
-## ARCHITEKTUR (ab v6.2.2)
+## ARCHITEKTUR (ab v6.3.5)
 
 ```
 LOKAL (privat, nicht im Repo):
-  fund_juno_v7_9_29.py      Datenabruf (299 Ticker, 35 Felder)
-  stockiq_score.py           Score-Portierung aus index.html
+  fund_juno_v7_9_29.py      Datenabruf (299 Ticker, ~40 Felder)
+  stockiq_score.py           Score-Portierung aus index.html (v1.4.3)
   stockiq_fundamentals.json  Rohdaten
+  hypotheses_status.json     Hypothesenbaum (30 Hypothesen)
+  hypotheses_update.py       Auto-Update SH-2/RH-4
 
 REPO (oeffentlich, GitHub Pages):
   index.html                 Dashboard-Shell + Render-Logik
-  stockiq_scores.json        299 Ticker, tagesaktuelle Scores + Signale
+  stockiq_scores.json        299 Ticker, tagesaktuelle Scores + Signale + sector
+  stockiq_ticker_names.json  299 Klarnamen (yfinance longName)
   stockiq_snapshots.json     Snapshot-Archiv (ARCH_MAX=120)
-  stockiq_test.js            QA
+  stockiq_test.js            QA (26 Tests)
   CLAUDE.md                  diese Datei
   .gitignore                 Schutzziel A
 ```
@@ -107,7 +116,7 @@ NIEMALS: /* */ Kommentare als Anker
 ### Node-Validierung (PFLICHT nach jeder Aenderung)
 ```powershell
 node stockiq_test.js index.html
-# Erwartet: 26 Tests / 0 Fehler (13 Script-Bloecke erwartet)
+# Erwartet: 26 Tests / 0 Fehler (13 Script-Bloecke)
 # 2 bekannte Warnungen: EV/EBIT + max(FCF,OE) veraltet (kein Fehler)
 # Kein Deploy ohne gruenen Test!
 ```
@@ -127,7 +136,7 @@ cd C:\Users\klasc\Stockiq
 git pull origin main
 node stockiq_test.js index.html   # MUSS gruen sein
 git add index.html stockiq_scores.json
-git commit -m "v6.1.X: Beschreibung"
+git commit -m "v6.3.X: Beschreibung"
 git push origin main
 ```
 
@@ -150,89 +159,56 @@ Strategie: MACD ZL + ATR*0.05 + SMA200 + SPY-Filter
 
 ---
 
-## SPRINT 10 (abgeschlossen, Mai 2026)
+## SPRINT 13 (abgeschlossen, 02. Juni 2026)
 
 ```
-v6.0.10  Walk-Forward komplett aus index.html entfernt
-         (Tab, JS-Bloecke, Dead Code bereinigt)
+v6.3.1  WL-Filter: 4-Zeilen-Struktur, wlReset vollstaendig,
+        NEM+BAS XETRA-Fix, Footer-Version
 
-v6.0.11  Onboarding-Dialog (3 Schritte: Horizont / Orientierung / Klassen)
-         + Profil-Badge im Header
+v6.3.2  Auto-Cache-Buster via dashboard_version in scores.json
 
-v6.0.12  ETF-Score calcEtfScores() im Sektoren-Tab
-         Formel: Mom*0.40 + Trend*0.35 + Risk*0.25
-
-v6.0.13  Allokations-Tab S/E/A/G/C profil-abhaengig
-         + ETF-Rangliste + Hilfe-Tab aktualisiert
+v6.3.3  wlReset vollstaendig (Flags, Buttons, Synopse)
 ```
 
 ---
 
-## SPRINT 11 (abgeschlossen, 31. Mai 2026)
+## SPRINT 14 (abgeschlossen, 03. Juni 2026)
 
 ```
-v6.1.0  P0 + P1 kombiniert:
-  - 9 Textfixes (Version, fund_juno-Referenz, Ticker-Anzahl)
-  - WL2-Tab entfernt: 7 -> 6 Tabs
-  - WL1 zweizeilige Filterstruktur:
-      Zeile 1: Signal-Buttons + Sort (Score/A-Z) + SPY-Badge
-      Zeile 2: Sektorfilter-Dropdown + SF/HC/DR + Favoriten + Export/Import
-  - Stern-Toggle pro Titelzeile (Favoriten direkt in WL1)
-  - buildSectorOptions(): Sektor-Dropdown dynamisch aus scores.json
-  - goTab() + pgs-Array: 6 Tabs neu verdrahtet
-  - 4 tote Funktionen entfernt (rWL2, wl2CheckOrigin, wl2SelAll, wl2ChartExport)
+v6.3.4  WL-Filter Bugfixes:
+  - wlReset: Inline-Styles vollstaendig zuruecksetzen (HC/SF/DR/Sync)
+  - wlSetSort: deaktiviert Alle-Button korrekt
+  - Versionsstrings synchronisiert (title, header, footer, tabs)
+  - Puppeteer UI-Test (stockiq_filter_test_ui.js, 29/29 OK)
 
-v6.1.1  Bugfixes + Suchfeld:
-  - Suchfeld (Ticker/Name live-Filter) statt SPY-Banner
-  - SPY-Phase als kompakter Badge in Zeile 1 (spy-phase-badge Span)
-  - dpFillWL2(): Encoding-Fix + A-Z-Sort nach Klarname
-  - Allokation-Subtitle Versionsstring aktualisiert
-```
+v6.3.5  Sektor-Dropdown + Klarnamen:
+  - _scoresArr / _scoresIdx aus scores.json (loadScores)
+  - buildSectorOptions() liest _scoresArr (kein FD-Abhaengigkeit)
+  - wlRend Sektor-Filter: _scoresIdx[t].sector mit FD-Fallback
+  - stockiq_ticker_names.json (299 Ticker, yfinance longName)
+  - dName(s): Klarname-Lookup fuer alle WL-Zeilen
+  - WL_SEARCH: sucht auch in Klarnamen
+  - score.py v1.4.3: sector-Feld im Output
+  - fund_juno v7.9.32: breakeven_inflation via FRED T10YIE
+    + Fallback (us10y - 1.8pp), breakeven_source im __macro__
 
----
-
-## SPRINT 12 (abgeschlossen, 01. Juni 2026)
-
-```
-v6.2.0  P2 Allokations-Tab Umbau:
-  - ALLOC_MATRIX 3x4 (Profil x Phase: kapital/ausgewogen/rendite x early/mid/late/recession)
-  - ALLOC_BASE +etfs (6 Positionen: Einzelaktien/ETFs/Anleihen/Gold/Rohstoffe/Cash)
-  - buildAllocTargets() Rewrite (liest ALLOC_MATRIX statt hartkodierten Zielen)
-  - detectCyclePhase(vix, spyAbove200ma, curveSlope) neu
-  - renderCyclePhaseBadge() neu (auto/manuell, VIX + curve_slope_bps + SPY)
-  - renderCycleTargets() + renderZielKacheln() auf buildAllocTargets() umgestellt
-  - fund_juno v7.9.30: curve_slope_bps (10Y minus 3M in bps)
-  - cycle-targets + ziel-kacheln: 5 -> 6 Spalten
-
-v6.2.1  P3 Versionsstrings + Hilfe/Roadmap:
-  - Versionsstrings auf v6.2.0/v6.2.1 aktualisiert
-  - Hilfe + Roadmap: neue Eintraege (Sprint 10-12)
-
-v6.2.2  Maintenance-Patch:
-  - Title + Header-Versionstring korrigiert
-  - Allokation GSR-Hinweis fund_juno v7.9.9+ -> v7.9.29+
-  - rptBuild() Bericht-Titel v5.9.69 -> v6.2.2
-  - rptFillStocks() Mojibake-Dash -> – (ES5-safe)
-  - Hilfe-Tab: Versionshistorie-Block entfernt
+P_HYP  Hypothesen-Tab (dev/stockiq_dev.html):
+  - hypotheses_status.json (30 Hypothesen, Sprint 14 Init)
+  - hypotheses_update.py (SH-2/RH-4 Auto-Update)
+  - Dev-Dashboard Tab 5 mit Filter, Badges, Level-Gruppen
 ```
 
 ---
 
-## OFFENE PUNKTE (Stand 01.06.2026)
+## OFFENE PUNKTE (Stand 03.06.2026)
 
 ```
-P2  Allokations-Tab Umbau (Sprint 12):
-    - Eingabefelder neu: S/E/A/G/R/C
-    - buildAllocTargets(profil, phase) verdrahten
-    - detectCyclePhase() + Phasen-Dropdown
-    - fund_juno: curve_slope_bps in __macro__
-
-P3  Hilfe/Roadmap Bereinigung (Sprint 12):
-    - Versionshistorie aus Hilfe entfernen
-    - Roadmap: Sprint 4-11 ergaenzen
-
-P4  Sektor-IC-Test: ~Mitte Juni 2026 (+10 Snapshots, sr-Feld benoetigt)
+P4  Sektor-IC-Test: ~Mitte Juni 2026 (+10 Snapshots, sr-Feld)
 P5  WL3 Run: Mitte Juli 2026
+P6a TIPS-Fetch fixen: breakeven_inflation via FRED liefert
+    "estimated" (urllib-Timeout auf Windows) -> Ticket offen
+P7  Walk-Forward Tab: dev/stockiq_dev.html Tab 1 ausbauen
+P8  Ticker-Review: 7 Fehler-Ticker entfernen + 15 EM evaluieren
 ```
 
 ---
@@ -253,5 +229,5 @@ P5  WL3 Run: Mitte Juli 2026
 
 ---
 
-*StockIQ CLAUDE.md | v6.2.2 | 01. Juni 2026*
+*StockIQ CLAUDE.md | v6.3.5 | 03. Juni 2026*
 *299 Ticker | OOS AVG 60.1% | Schutzziel A aktiv*
