@@ -34,3 +34,7 @@ stockiq_annual_backfill*.py
 stockiq_annual_ic*.py
 stockiq_score_v*.py
 doku_status.json
+hypotheses_status.json
+hypotheses_update.py
+
+stockiq_filter_test_ui.js
