@@ -1,5 +1,5 @@
 # StockIQ — CLAUDE.md
-Version: v6.3.8 | Stand: 04. Juni 2026 | Sprint 15 laufend
+Version: v6.3.9 | Stand: 04. Juni 2026 | Sprint 15 laufend
 
 ---
 
@@ -17,13 +17,13 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 
 | Datei | Version | Zweck |
 |-------|---------|-------|
-| `index.html` | v6.3.8 | Dashboard (laedt scores.json + ticker_names.json) |
-| `fund_juno_v7_9_29.py` | v7.9.32 | Fundamentaldaten + Makro + FRED breakeven (Windows, PRIVAT) |
-| `stockiq_score.py` | v1.4.4 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
+| `index.html` | v6.3.9 | Dashboard (laedt scores.json + ticker_names.json) |
+| `fund_juno_v7_9_29.py` | v7.9.34 | Fundamentaldaten + Makro + FRED breakeven + price_to_book (Windows, PRIVAT) |
+| `stockiq_score.py` | v1.4.9 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
 | `stockiq_alpha_juno_v6b_6m.py` | v6b_6m-u4 | Walk-Forward PRODUKTION |
 | `stockiq_wl3_signal_tracking_v1_6.py` | v1.6 | WL3 IC-Analyse (Windows) |
 | `stockiq_test.js` | aktuell | QA: 26 Tests, 0 Fehler (13 Script-Bloecke) |
-| `stockiq_ticker_names.json` | 2026-06-03 | 299 Klarnamen (yfinance longName, public) |
+| `stockiq_ticker_names.json` | 2026-06-04 | 298 Klarnamen (yfinance longName, public) |
 | `hypotheses_status.json` | 2026-06-04 | 32 Hypothesen (lokal, gitignored) |
 | `hypotheses_update.py` | 2026-06-04 | SH-2/RH-4/TU-1 Auto-Update + --list (lokal, gitignored) |
 | `stockiq_filter_test_ui.js` | 2026-06-02 | Puppeteer UI-Test WL-Filter (lokal, gitignored) |
@@ -56,12 +56,12 @@ Oder 1-Click: `run_daily.bat` (erledigt Schritte 1-4 automatisch).
 
 ---
 
-## ARCHITEKTUR (ab v6.3.8)
+## ARCHITEKTUR (ab v6.3.9)
 
 ```
 LOKAL (privat, nicht im Repo):
-  fund_juno_v7_9_29.py      Datenabruf (299 Ticker, ~40 Felder)
-  stockiq_score.py           Score-Portierung aus index.html (v1.4.4)
+  fund_juno_v7_9_29.py      Datenabruf (298 Ticker, ~40 Felder + price_to_book)
+  stockiq_score.py           Score-Berechnung v1.4.9 (f_sc_standard/financial/utilities)
   stockiq_fundamentals.json  Rohdaten
   hypotheses_status.json     Hypothesenbaum (32 Hypothesen)
   hypotheses_update.py       Auto-Update SH-2/RH-4/TU-1 + --list
@@ -232,6 +232,18 @@ v6.3.8  mSig() Score-Filter + SH-4 Hypothese:
   - hypotheses_status.json: 33 Keys / 32 nicht-axiom
     n_active 3->4, Meta-Zaehler-Bug geschlossen
   - dashboard_version in score.py -> "6.3.8"
+
+v6.3.9  Sektor-Score-Architektur + P8a (Sprint 19):
+  - f_sc_financial(): P/B + ROE + EV/EBITDA + div_yield (Financial Services)
+  - f_sc_utilities(): EV/EBITDA + div_yield + P/B + ROE (Utilities)
+  - f_sc() als Router (gleiche Signatur wie f_sc_standard)
+  - FINANCIAL_SECTORS / UTILITY_SECTORS Konstanten in score.py
+  - fund_juno v7.9.34: price_to_book (yfinance priceToBook)
+  - ROG.SW entfernt: TICKERS + SECTOR_OVERRIDES + ticker_names.json
+  - score.py v1.4.9, dashboard_version 6.3.9
+  - breakeven_inflation: 2.67 (P6a behoben)
+  - Ticker: 299 -> 298
+  - git tag v6.3.9
 ```
 
 ---
@@ -241,10 +253,8 @@ v6.3.8  mSig() Score-Filter + SH-4 Hypothese:
 ```
 P4  Sektor-IC-Test: ~Mitte Juni 2026 (+10 Snapshots, sr-Feld)
 P5  WL3 Run: Mitte Juli 2026
-P6a TIPS-Fetch fixen: breakeven_inflation via FRED liefert
-    "estimated" (urllib-Timeout auf Windows) -> Ticket offen
 P7  Walk-Forward Tab: dev/stockiq_dev.html Tab 1 ausbauen
-P8  Ticker-Review: 7 Fehler-Ticker entfernen + 15 EM evaluieren
+P8c Neue Ticker-Kandidaten (nach IC-Validierung FH-10)
 ```
 
 ---
@@ -265,5 +275,5 @@ P8  Ticker-Review: 7 Fehler-Ticker entfernen + 15 EM evaluieren
 
 ---
 
-*StockIQ CLAUDE.md | v6.3.8 | 04. Juni 2026*
-*299 Ticker | OOS AVG 60.1% | Schutzziel A aktiv*
+*StockIQ CLAUDE.md | v6.3.9 | 04. Juni 2026*
+*298 Ticker | OOS AVG 60.1% | Schutzziel A aktiv*
