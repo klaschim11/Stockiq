@@ -38,3 +38,7 @@ hypotheses_status.json
 hypotheses_update.py
 
 stockiq_filter_test_ui.js
+
+# Lokale Hilfs-Scripts
+ticker_names_gen.py
+insert_onboarding.py
