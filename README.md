@@ -8,7 +8,7 @@ Quantitatives Aktien-Scoring-Dashboard fuer private Investoren.
 
 ## Was ist StockIQ?
 
-StockIQ bewertet taeglich 299 Aktien aus globalen Maerkten (USA, Europa, Japan, EM)
+StockIQ bewertet taeglich 298 Aktien aus globalen Maerkten (USA, Europa, Japan, EM)
 mit einem wissenschaftlich fundierten Composite Score und liefert klare
 BUY / HOLD / SELL-Signale.
 
@@ -25,7 +25,7 @@ Composite Score = Fundamentals 35% + Momentum 25% + Trend 20% + Risk 20%
 
 | Komponente | Inhalt |
 |---|---|
-| Fundamentals | PEG, EV/EBIT, FCF-Yield, Owner Earnings, ROCE, Verschuldung, Piotroski |
+| Fundamentals | PEG, EV/EBIT, FCF-Yield, Owner Earnings, ROCE, Verschuldung, Piotroski (Sektor-adaptiv ab v6.3.9) |
 | Momentum | RSI, 12M-Momentum, MACD-Signal, VIX-Daempfung |
 | Trend | SMA200-Abstand |
 | Risk | Beta, Volatilitaet |
@@ -38,7 +38,7 @@ Signale: **STRONG BUY / BUY / PEG-BLOCK / HOLD / WATCH / SELL**
 
 | Tab | Inhalt |
 |---|---|
-| 1. Watchlist | 299 Ticker nach Score, Signal-Filter, Sektor-Filter, Detail-Ansicht |
+| 1. Watchlist | 298 Ticker nach Score, Signal-Filter, Sektor-Filter, Detail-Ansicht |
 | 2. Depot | Portfolio-Positionen, Wertentwicklung, Zeitreihe aus Snapshots |
 | 3. Fundamentals | Tagesaktuelle Scores aus scores.json, Experten-Modus (ROCE, PEG, IC-Detail) |
 | 4. Sektoren | Sektor-Momentum-Raenge (11 SPDR-ETFs, RSS + 3M-Skip-Momentum, Dispersion) |
@@ -91,8 +91,8 @@ Der aktuelle Status ist immer im Marktphasen-Banner oben in der Watchlist sichtb
 - Datenfetching: Python / yfinance (iPhone + Juno)
 - Score-Berechnung: Python (lokal, privat)
 - Daten-Output: `stockiq_scores.json` (oeffentlich, nur Ergebnisse)
-- Klarnamen: `stockiq_ticker_names.json` (299 Ticker, yfinance longName)
-- Snapshots: `stockiq_snapshots.json` (automatische Sync beim Dashboard-Start)
+- Klarnamen: `stockiq_ticker_names.json` (298 Ticker, yfinance longName)
+- Snapshots: `stockiq_snapshots.json` (lokal, gitignored)
 - Walk-Forward: 6M OOS, SPY-Filter, OOS WR 60.1%, Stabilitaet 2.8pp
 
 ---
@@ -102,9 +102,8 @@ Der aktuelle Status ist immer im Marktphasen-Banner oben in der Watchlist sichtb
 | Datei | Zweck |
 |---|---|
 | `index.html` | Dashboard (komplette App) |
-| `stockiq_scores.json` | Tagesaktuelle Scores + Signale (299 Ticker) |
-| `stockiq_ticker_names.json` | Klarnamen (299 Ticker, yfinance longName) |
-| `stockiq_snapshots.json` | Historische Tages-Snapshots (Archiv) |
+| `stockiq_scores.json` | Tagesaktuelle Scores + Signale (298 Ticker) |
+| `stockiq_ticker_names.json` | Klarnamen (298 Ticker, yfinance longName) |
 | `stockiq_test.js` | QA-Tests (node stockiq_test.js index.html) |
 | `CLAUDE.md` | Entwicklungskontext fuer Claude Code |
 
@@ -112,4 +111,4 @@ Score-Algorithmen und Python-Scripts sind aus Datenschutzgruenden nicht im Repo.
 
 ---
 
-*StockIQ v6.3.8 | Juni 2026 | 299 Ticker | OOS WR 60.1%*
+*StockIQ v6.3.9 | Juni 2026 | 298 Ticker | OOS WR 60.1%*
