@@ -1,5 +1,5 @@
 # StockIQ — CLAUDE.md
-Version: v6.3.6 | Stand: 04. Juni 2026 | Sprint 15 laufend
+Version: v6.3.7 | Stand: 04. Juni 2026 | Sprint 15 laufend
 
 ---
 
@@ -17,9 +17,9 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 
 | Datei | Version | Zweck |
 |-------|---------|-------|
-| `index.html` | v6.3.6 | Dashboard (laedt scores.json + ticker_names.json) |
+| `index.html` | v6.3.7 | Dashboard (laedt scores.json + ticker_names.json) |
 | `fund_juno_v7_9_29.py` | v7.9.32 | Fundamentaldaten + Makro + FRED breakeven (Windows, PRIVAT) |
-| `stockiq_score.py` | v1.4.3 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
+| `stockiq_score.py` | v1.4.4 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
 | `stockiq_alpha_juno_v6b_6m.py` | v6b_6m-u4 | Walk-Forward PRODUKTION |
 | `stockiq_wl3_signal_tracking_v1_6.py` | v1.6 | WL3 IC-Analyse (Windows) |
 | `stockiq_test.js` | aktuell | QA: 26 Tests, 0 Fehler (13 Script-Bloecke) |
@@ -56,21 +56,21 @@ Oder 1-Click: `run_daily.bat` (erledigt Schritte 1-4 automatisch).
 
 ---
 
-## ARCHITEKTUR (ab v6.3.6)
+## ARCHITEKTUR (ab v6.3.7)
 
 ```
 LOKAL (privat, nicht im Repo):
   fund_juno_v7_9_29.py      Datenabruf (299 Ticker, ~40 Felder)
-  stockiq_score.py           Score-Portierung aus index.html (v1.4.3)
+  stockiq_score.py           Score-Portierung aus index.html (v1.4.4)
   stockiq_fundamentals.json  Rohdaten
   hypotheses_status.json     Hypothesenbaum (32 Hypothesen)
   hypotheses_update.py       Auto-Update SH-2/RH-4/TU-1 + --list
+  stockiq_snapshots.json     Snapshot-Archiv (lokal, gitignored ab v6.3.7)
 
 REPO (oeffentlich, GitHub Pages):
   index.html                 Dashboard-Shell + Render-Logik
   stockiq_scores.json        299 Ticker, tagesaktuelle Scores + Signale + sector
   stockiq_ticker_names.json  299 Klarnamen (yfinance longName)
-  stockiq_snapshots.json     Snapshot-Archiv (ARCH_MAX=120)
   stockiq_test.js            QA (26 Tests)
   CLAUDE.md                  diese Datei
   .gitignore                 Schutzziel A
@@ -215,6 +215,15 @@ v6.3.6  Hilfe-Tab + Roadmap-Tab aktualisiert:
   - TU-1 Readiness-Check (delta_score + prev_signal + n_transitions)
   - --list Flag: tabellarische Ausgabe aller Hypothesen-IDs + Status
   - hypotheses_status.json: 32 Hypothesen (TU-1 eingetragen)
+
+v6.3.7  Snapshot-Sync entfernt + Repo-Bereinigung:
+  - syncSnapshotsFromRepo() + showSyncHint() entfernt
+  - stockiq_snapshots.json: untracked (gitignored, lokal erhalten)
+  - PAGE_VERSION + alle UI-Versionsstrings auf v6.3.7
+  - dashboard_version in score.py -> "6.3.7"
+  - score.py v1.4.4: pb-Signal (PEG-Block-Logik portiert, BUG-01 behoben)
+  - Repo-Cleanup: dev_archive untracked, package.json committet,
+    README auf v6.3.6 aktualisiert (299 Ticker, 6 Tabs, ticker_names)
 ```
 
 ---
@@ -248,5 +257,5 @@ P8  Ticker-Review: 7 Fehler-Ticker entfernen + 15 EM evaluieren
 
 ---
 
-*StockIQ CLAUDE.md | v6.3.6 | 04. Juni 2026*
+*StockIQ CLAUDE.md | v6.3.7 | 04. Juni 2026*
 *299 Ticker | OOS AVG 60.1% | Schutzziel A aktiv*
