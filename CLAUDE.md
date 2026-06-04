@@ -1,5 +1,5 @@
 # StockIQ — CLAUDE.md
-Version: v6.3.5 | Stand: 03. Juni 2026 | Sprint 14 abgeschlossen
+Version: v6.3.6 | Stand: 04. Juni 2026 | Sprint 15 laufend
 
 ---
 
@@ -17,15 +17,15 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 
 | Datei | Version | Zweck |
 |-------|---------|-------|
-| `index.html` | v6.3.5 | Dashboard (laedt scores.json + ticker_names.json) |
+| `index.html` | v6.3.6 | Dashboard (laedt scores.json + ticker_names.json) |
 | `fund_juno_v7_9_29.py` | v7.9.32 | Fundamentaldaten + Makro + FRED breakeven (Windows, PRIVAT) |
 | `stockiq_score.py` | v1.4.3 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
 | `stockiq_alpha_juno_v6b_6m.py` | v6b_6m-u4 | Walk-Forward PRODUKTION |
 | `stockiq_wl3_signal_tracking_v1_6.py` | v1.6 | WL3 IC-Analyse (Windows) |
 | `stockiq_test.js` | aktuell | QA: 26 Tests, 0 Fehler (13 Script-Bloecke) |
 | `stockiq_ticker_names.json` | 2026-06-03 | 299 Klarnamen (yfinance longName, public) |
-| `hypotheses_status.json` | 2026-06-02 | 30 Hypothesen (lokal, gitignored) |
-| `hypotheses_update.py` | 2026-06-01 | SH-2/RH-4 Auto-Update (lokal, gitignored) |
+| `hypotheses_status.json` | 2026-06-04 | 32 Hypothesen (lokal, gitignored) |
+| `hypotheses_update.py` | 2026-06-04 | SH-2/RH-4/TU-1 Auto-Update + --list (lokal, gitignored) |
 | `stockiq_filter_test_ui.js` | 2026-06-02 | Puppeteer UI-Test WL-Filter (lokal, gitignored) |
 
 **Schutzziel A**: `fund_juno*.py`, `stockiq_score.py`, `hypotheses_status.json`,
@@ -56,15 +56,15 @@ Oder 1-Click: `run_daily.bat` (erledigt Schritte 1-4 automatisch).
 
 ---
 
-## ARCHITEKTUR (ab v6.3.5)
+## ARCHITEKTUR (ab v6.3.6)
 
 ```
 LOKAL (privat, nicht im Repo):
   fund_juno_v7_9_29.py      Datenabruf (299 Ticker, ~40 Felder)
   stockiq_score.py           Score-Portierung aus index.html (v1.4.3)
   stockiq_fundamentals.json  Rohdaten
-  hypotheses_status.json     Hypothesenbaum (30 Hypothesen)
-  hypotheses_update.py       Auto-Update SH-2/RH-4
+  hypotheses_status.json     Hypothesenbaum (32 Hypothesen)
+  hypotheses_update.py       Auto-Update SH-2/RH-4/TU-1 + --list
 
 REPO (oeffentlich, GitHub Pages):
   index.html                 Dashboard-Shell + Render-Logik
@@ -200,7 +200,26 @@ P_HYP  Hypothesen-Tab (dev/stockiq_dev.html):
 
 ---
 
-## OFFENE PUNKTE (Stand 03.06.2026)
+## SPRINT 15 (laufend, ab 04. Juni 2026)
+
+```
+v6.3.6  Hilfe-Tab + Roadmap-Tab aktualisiert:
+  - Hilfe: Schnellstart "6. Roadmap" ergaenzt
+  - Roadmap: Sprint 13+14 in Versionsübersicht eingetragen
+  - Roadmap: Geplante Features P1-P3 (erledigt) -> P4-P8 ersetzt
+  - Roadmap: Footer Mai -> Juni 2026
+  - Alle 7 Versionsstrings synchronisiert (title, header, Allokation,
+    Hilfe, Roadmap, Footer, JS-String)
+
+  hypotheses_update.py:
+  - TU-1 Readiness-Check (delta_score + prev_signal + n_transitions)
+  - --list Flag: tabellarische Ausgabe aller Hypothesen-IDs + Status
+  - hypotheses_status.json: 32 Hypothesen (TU-1 eingetragen)
+```
+
+---
+
+## OFFENE PUNKTE (Stand 04.06.2026)
 
 ```
 P4  Sektor-IC-Test: ~Mitte Juni 2026 (+10 Snapshots, sr-Feld)
@@ -229,5 +248,5 @@ P8  Ticker-Review: 7 Fehler-Ticker entfernen + 15 EM evaluieren
 
 ---
 
-*StockIQ CLAUDE.md | v6.3.5 | 03. Juni 2026*
+*StockIQ CLAUDE.md | v6.3.6 | 04. Juni 2026*
 *299 Ticker | OOS AVG 60.1% | Schutzziel A aktiv*
