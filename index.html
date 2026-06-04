@@ -2791,7 +2791,19 @@ function loadScores() {
     .then(function(data) {
       var scores = data.scores || data;
       var mac = data.__macro__ || null;
-      if (mac) { if (window.FD) { FD['__macro__'] = mac; } macro = mac; }
+      if (mac) {
+        if (window.FD) { FD['__macro__'] = mac; }
+        macro = mac;
+        if (mac.gold_eur && mac.gold_eur > 0) {
+          var _gIn = document.getElementById('gsr-gold');
+          if (_gIn) { _gIn.value = Math.round(mac.gold_eur); }
+        }
+        if (mac.silver_eur && mac.silver_eur > 0) {
+          var _sIn = document.getElementById('gsr-silver');
+          if (_sIn) { _sIn.value = mac.silver_eur.toFixed(2); }
+        }
+        if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
+      }
       var PAGE_VERSION = '6.3.9';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
