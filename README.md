@@ -112,4 +112,4 @@ Score-Algorithmen und Python-Scripts sind aus Datenschutzgruenden nicht im Repo.
 
 ---
 
-*StockIQ v6.3.6 | Juni 2026 | 299 Ticker | OOS WR 60.1%*
+*StockIQ v6.3.8 | Juni 2026 | 299 Ticker | OOS WR 60.1%*
