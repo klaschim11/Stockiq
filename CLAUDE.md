@@ -1,5 +1,5 @@
 # StockIQ — CLAUDE.md
-Version: v6.3.7 | Stand: 04. Juni 2026 | Sprint 15 laufend
+Version: v6.3.8 | Stand: 04. Juni 2026 | Sprint 15 laufend
 
 ---
 
@@ -17,7 +17,7 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 
 | Datei | Version | Zweck |
 |-------|---------|-------|
-| `index.html` | v6.3.7 | Dashboard (laedt scores.json + ticker_names.json) |
+| `index.html` | v6.3.8 | Dashboard (laedt scores.json + ticker_names.json) |
 | `fund_juno_v7_9_29.py` | v7.9.32 | Fundamentaldaten + Makro + FRED breakeven (Windows, PRIVAT) |
 | `stockiq_score.py` | v1.4.4 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
 | `stockiq_alpha_juno_v6b_6m.py` | v6b_6m-u4 | Walk-Forward PRODUKTION |
@@ -56,7 +56,7 @@ Oder 1-Click: `run_daily.bat` (erledigt Schritte 1-4 automatisch).
 
 ---
 
-## ARCHITEKTUR (ab v6.3.7)
+## ARCHITEKTUR (ab v6.3.8)
 
 ```
 LOKAL (privat, nicht im Repo):
@@ -224,6 +224,14 @@ v6.3.7  Snapshot-Sync entfernt + Repo-Bereinigung:
   - score.py v1.4.4: pb-Signal (PEG-Block-Logik portiert, BUG-01 behoben)
   - Repo-Cleanup: dev_archive untracked, package.json committet,
     README auf v6.3.6 aktualisiert (299 Ticker, 6 Tabs, ticker_names)
+
+v6.3.8  mSig() Score-Filter + SH-4 Hypothese:
+  - mSig() Z.1199: isSell(_raw) + Score >= 55 -> 'hold'
+    (scores.json-Pfad, konsistent mit SELL_SCORE_FILTER Z.1229)
+  - SH-4 eingetragen: "Score-SELL-Gate" (aktiv, test: ~Feb 2027)
+  - hypotheses_status.json: 33 Keys / 32 nicht-axiom
+    n_active 3->4, Meta-Zaehler-Bug geschlossen
+  - dashboard_version in score.py -> "6.3.8"
 ```
 
 ---
@@ -257,5 +265,5 @@ P8  Ticker-Review: 7 Fehler-Ticker entfernen + 15 EM evaluieren
 
 ---
 
-*StockIQ CLAUDE.md | v6.3.7 | 04. Juni 2026*
+*StockIQ CLAUDE.md | v6.3.8 | 04. Juni 2026*
 *299 Ticker | OOS AVG 60.1% | Schutzziel A aktiv*
