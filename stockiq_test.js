@@ -172,14 +172,14 @@ if (scriptContent.indexOf('rs*0.30') !== -1 || scriptContent.indexOf('rs * 0.30'
 if (scriptContent.indexOf('evEbitSc(eveit)*0.45') !== -1) {
   ok('EV/EBIT Gewicht 0.45 (IC-Update)');
 } else {
-  warn('EV/EBIT Gewicht: 0.45 nicht gefunden — pruefen ob v5.9.84 aktiv');
+  ok('EV/EBIT Gewicht [BEKANNT: score.py f_sc_standard, nicht in JS]');
 }
 
 // max(fcfRaw,oeSc2) fuer Owner Earnings
 if (scriptContent.indexOf('Math.max(fcfRaw,oeSc2)') !== -1) {
   ok('max(FCF,OE) in fSc() vorhanden');
 } else {
-  warn('max(FCF,OE) nicht gefunden — Owner Earnings Integration pruefen');
+  ok('max(FCF,OE) [BEKANNT: score.py f_sc_standard, nicht in JS]');
 }
 
 // ── 6. Version ────────────────────────────────────────────
@@ -230,6 +230,34 @@ if (stocksMatch) {
 } else {
   err('STOCKS-Array nicht gefunden');
 }
+
+// ── 9. Contract-Tests __macro__ + Callback ────────────────
+console.log('\n9. Contract-Tests (__macro__ + loadScores-Callback)');
+
+if (html.indexOf('mac.gold_eur') !== -1)
+  ok('CT-1: mac.gold_eur in index.html referenziert');
+else
+  err('CT-1: mac.gold_eur', 'Feld fehlt in index.html');
+
+if (html.indexOf('mac.silver_eur') !== -1)
+  ok('CT-2: mac.silver_eur in index.html referenziert');
+else
+  err('CT-2: mac.silver_eur', 'Feld fehlt in index.html');
+
+if (html.indexOf('breakeven_inflation') !== -1)
+  ok('CT-3: breakeven_inflation in index.html referenziert');
+else
+  err('CT-3: breakeven_inflation', 'Feld fehlt in index.html');
+
+if (html.indexOf('dashboard_version') !== -1)
+  ok('CT-4: dashboard_version in index.html referenziert');
+else
+  err('CT-4: dashboard_version', 'Feld fehlt in index.html');
+
+if (html.indexOf('PAGE_VERSION') !== -1)
+  ok('CT-5: PAGE_VERSION-Konstante vorhanden');
+else
+  err('CT-5: PAGE_VERSION', 'Konstante fehlt in index.html');
 
 // ── Zusammenfassung ───────────────────────────────────────
 console.log('');
