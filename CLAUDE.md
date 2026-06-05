@@ -8,7 +8,7 @@ Version: v6.3.9 | Stand: 04. Juni 2026 | Sprint 15 laufend
 StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 - **Dashboard**: klaschim11.github.io/Stockiq (`index.html`)
 - **Repo lokal**: `C:\Users\klasc\Stockiq`
-- **Ticker**: 299 | **Snapshots**: laufend
+- **Ticker**: 298 | **Snapshots**: laufend
 - **OOS AVG**: 60.1% | **Stabilitaet**: 2.8pp
 
 ---
@@ -18,7 +18,7 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 | Datei | Version | Zweck |
 |-------|---------|-------|
 | `index.html` | v6.3.9 | Dashboard (laedt scores.json + ticker_names.json) |
-| `fund_juno_v7_9_29.py` | v7.9.34 | Fundamentaldaten + Makro + FRED breakeven + price_to_book (Windows, PRIVAT) |
+| `fund_juno_v7_9_29.py` | v7.9.35 | Fundamentaldaten + Makro + FRED breakeven + price_to_book (Windows, PRIVAT) |
 | `stockiq_score.py` | v1.4.9 | Score-Berechnung -> scores.json (Windows, PRIVAT) |
 | `stockiq_alpha_juno_v6b_6m.py` | v6b_6m-u4 | Walk-Forward PRODUKTION |
 | `stockiq_wl3_signal_tracking_v1_6.py` | v1.6 | WL3 IC-Analyse (Windows) |
@@ -69,8 +69,8 @@ LOKAL (privat, nicht im Repo):
 
 REPO (oeffentlich, GitHub Pages):
   index.html                 Dashboard-Shell + Render-Logik
-  stockiq_scores.json        299 Ticker, tagesaktuelle Scores + Signale + sector
-  stockiq_ticker_names.json  299 Klarnamen (yfinance longName)
+  stockiq_scores.json        298 Ticker, tagesaktuelle Scores + Signale + sector
+  stockiq_ticker_names.json  298 Klarnamen (yfinance longName)
   stockiq_test.js            QA (26 Tests)
   CLAUDE.md                  diese Datei
   .gitignore                 Schutzziel A
@@ -244,6 +244,8 @@ v6.3.9  Sektor-Score-Architektur + P8a (Sprint 19):
   - breakeven_inflation: 2.67 (P6a behoben)
   - Ticker: 299 -> 298
   - git tag v6.3.9
+  + fund_juno v7.9.35: gold_eur/silver_eur (__macro__), history()-Fallback fuer Futures
+  + GSR Auto-Fill in loadScores()-Callback (Async-Timing)
 ```
 
 ---
@@ -255,6 +257,28 @@ P4  Sektor-IC-Test: ~Mitte Juni 2026 (+10 Snapshots, sr-Feld)
 P5  WL3 Run: Mitte Juli 2026
 P7  Walk-Forward Tab: dev/stockiq_dev.html Tab 1 ausbauen
 P8c Neue Ticker-Kandidaten (nach IC-Validierung FH-10)
+```
+
+---
+
+## ENGINEERING-LEKTIONEN
+
+```
+FUTURES / FX via yfinance (gelernt v7.9.35):
+  fetch_price() via info.get("regularMarketPrice") liefert None fuer:
+    GC=F (Gold), SI=F (Silber), EURUSD=X, andere Futures/FX
+  IMMER history()-Fallback fuer Futures-Symbole verwenden:
+    val = fetch_price(sym)
+    if val is None:
+        _h = yf.Ticker(sym).history(period="2d")
+        if not _h.empty: val = float(_h["Close"].iloc[-1])
+
+ASYNC-TIMING in loadScores() (gelernt v6.3.9):
+  gold_eur/silver_eur Auto-Fill MUSS im .then()-Callback von loadScores()
+  stehen, NICHT in initAlloc() oder initFund() allein.
+  Grund: loadScores() ist async (fetch) -- zum Zeitpunkt von initAlloc()
+  sind die Daten aus scores.json noch nicht verfuegbar.
+  Muster: if(mac.gold_eur) { document.getElementById('gsr-gold').value = ... }
 ```
 
 ---
