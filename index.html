@@ -1853,7 +1853,7 @@ function rWL(){
   var synBar=document.getElementById('wl-syn-bar');
   if(synBar){
     var hcActv=HC_FILTER?' <span style="font-size:9px;color:#ffd700">(HC-Filter aktiv)</span>':'';
-    synBar.innerHTML='<span style="font-size:10px;color:var(--mut);margin-right:8px">Synopse (alle 269):</span>'
+    synBar.innerHTML='<span style="font-size:10px;color:var(--mut);margin-right:8px">Synopse (alle ' + _scoresArr.length + '):</span>'
       +'<span style="font-size:10px;color:#ffd700;margin-right:10px">&#11088; HC&nbsp;'+synHC+'</span>'
       +'<span style="font-size:10px;color:#ff9f1c;margin-right:8px">STRONG&nbsp;'+synStrong+'</span>'
       +'<span style="font-size:10px;color:#00e57a;margin-right:8px">BUY&nbsp;'+synBuy+'</span>'
