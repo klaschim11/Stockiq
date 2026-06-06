@@ -2808,7 +2808,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = '6.3.10';
+      var PAGE_VERSION = '6.3.11';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -3513,7 +3513,7 @@ var ALLOC_MATRIX = {
     "early":     {stocks:50, etfs:15, bonds:15, gold:8,  commod:7,  cash:5},
     "mid":       {stocks:50, etfs:15, bonds:12, gold:5,  commod:8,  cash:10},
     "late":      {stocks:35, etfs:15, bonds:10, gold:12, commod:13, cash:15},
-    "recession": {stocks:20, etfs:10, bonds:30, gold:15, commod:5,  cash:20}
+    "recession": {stocks:20, etfs:10, bonds:18, gold:21, commod:5,  cash:26}
   },
   "rendite": {
     "early":     {stocks:58, etfs:20, bonds:5,  gold:4,  commod:8,  cash:5},
