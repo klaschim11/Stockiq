@@ -9,7 +9,7 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 - **Dashboard**: klaschim11.github.io/Stockiq (`index.html`)
 - **Repo lokal**: `C:\Users\klasc\Stockiq`
 - **Ticker**: 298 | **Snapshots**: laufend
-- **OOS AVG**: 60.1% | **Stabilitaet**: 2.8pp
+- **OOS AVG**: 59.5% (301 Ticker, Baseline 06.06.2026) | **Stabilitaet**: 3.0pp
 
 ---
 
@@ -145,8 +145,8 @@ git push origin main
 ## WALK-FORWARD (PRODUKTION: v6b_6m-u4)
 
 ```
-OOS AVG: 60.1% | Stabilitaet: 2.8pp
-Fenster: F1 57.8% / F2 63.6% / F3 59.1% / F4 63.7%
+OOS AVG: 59.5% (301 Ticker, Baseline 06.06.2026) | Stabilitaet: 3.0pp
+Fenster: F1 60.7% / F2 62.7% / F3 54.9% / F4 61.3%
 Strategie: MACD ZL + ATR*0.05 + SMA200 + SPY-Filter
            + Trail 10%@+3% + SL-8%
 ```
@@ -304,4 +304,4 @@ ASYNC-TIMING in loadScores() (gelernt v6.3.9):
 ---
 
 *StockIQ CLAUDE.md | v6.3.9 | 04. Juni 2026*
-*298 Ticker | OOS AVG 60.1% | Schutzziel A aktiv*
+*301 Ticker (NZYM-B.CO skipped) | OOS AVG 59.5% | Schutzziel A aktiv*
