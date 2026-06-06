@@ -1,6 +1,6 @@
 {
   "__macro__": {
-    "dashboard_version": "6.3.9",
+    "dashboard_version": "6.3.10",
     "spy_above_200ma": true,
     "vix": 21.51,
     "sector_etfs": {
