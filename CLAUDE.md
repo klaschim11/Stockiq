@@ -250,10 +250,11 @@ v6.3.9  Sektor-Score-Architektur + P8a (Sprint 19):
 
 ---
 
-## OFFENE PUNKTE (Stand 04.06.2026)
+## OFFENE PUNKTE (Stand 06.06.2026)
 
 ```
-P4  Sektor-IC-Test: ~Mitte Juni 2026 (+10 Snapshots, sr-Feld)
+P4  ABGESCHLOSSEN: RH-5 validiert (06.06.2026)
+    Naechster Schritt: sektorFactor in momSc() nach Walk-Forward OOS>=60.1%
 P5  WL3 Run: Mitte Juli 2026
 P7  Walk-Forward Tab: dev/stockiq_dev.html Tab 1 ausbauen
 P8c Neue Ticker-Kandidaten (nach IC-Validierung FH-10)
@@ -291,6 +292,9 @@ ASYNC-TIMING in loadScores() (gelernt v6.3.9):
 + Owner Earnings: IC=+0.155 ***
 + EV/EBIT: IC=-0.143 ***
 + WL3 7-14d: IC=+0.036 ***
++ Sektor-Momentum IC: 7d=-0.128** | 14d=-0.157*** | 30d=-0.102** (RH-5 validiert, P4)
+  IC negativ: Rang 1 (bester Sektor) -> positive Forward-Returns
+  n=39/32/16 Perioden | 2026-04-01 bis 2026-06-06 | script: stockiq_sektor_ic_v1.py
 - Bond-Regime Entry-Daempfer: WIDERLEGT
 - Statische Score-Filter: WIDERLEGT
 - RSI-Filter: WIDERLEGT
