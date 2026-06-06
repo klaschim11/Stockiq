@@ -259,6 +259,31 @@ if (html.indexOf('PAGE_VERSION') !== -1)
 else
   err('CT-5: PAGE_VERSION', 'Konstante fehlt in index.html');
 
+var scoresPath = path.join(path.dirname(path.resolve(file)), 'stockiq_scores.json');
+if (fs.existsSync(scoresPath)) {
+  try {
+    var scJson = JSON.parse(fs.readFileSync(scoresPath, 'utf8'));
+    var scVer = scJson && scJson.__macro__ && scJson.__macro__.dashboard_version;
+    var pvM = html.match(/var PAGE_VERSION\s*=\s*['"]([^'"]+)['"]/);
+    var pVer = pvM ? pvM[1] : null;
+    if (pVer && scVer) {
+      if (pVer === scVer) {
+        ok('CT-6: PAGE_VERSION (' + pVer + ') == scores.dashboard_version');
+      } else {
+        err('CT-6: Versions-Mismatch', 'PAGE_VERSION=' + pVer + ' vs dashboard_version=' + scVer);
+      }
+    } else if (!pVer) {
+      err('CT-6: PAGE_VERSION nicht erkannt');
+    } else {
+      warn('CT-6: dashboard_version fehlt in __macro__');
+    }
+  } catch(e) {
+    warn('CT-6: scores.json Lesefehler -- ' + e.message);
+  }
+} else {
+  warn('CT-6: stockiq_scores.json nicht gefunden -- skip');
+}
+
 // ── Zusammenfassung ───────────────────────────────────────
 console.log('');
 console.log('='.repeat(55));
