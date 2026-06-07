@@ -13,6 +13,17 @@ StockIQ ist ein privates, quantitatives Aktien-Scoring-System.
 
 ---
 
+## SPRINT-ABSCHLUSS-PFLICHT (nicht ueberspringen)
+Jeder Sprint / jede Session endet zwingend mit:
+1. stockiq_uebergabe_YYYYMMDD_v{N}.md erstellen
+   -> Pfad: C:\Users\klasc\Stockiq\Doku_aktuell\aktuell_sprint\
+2. Memory-Update (Versionen, erledigte Tasks, offene Punkte)
+3. SKILL-Datei pruefen: voller Pfad immer explizit angeben
+   -> C:\Users\klasc\Stockiq\Doku_aktuell\aktuell_sprint\SKILL_stockiq-dev_v6311_sprint26.md
+KEIN Ausnahmefall. Auch bei Zeitdruck: Uebergabe zuerst, dann Abbruch.
+
+---
+
 ## PRODUKTIONS-STACK
 
 | Datei | Version | Zweck |
