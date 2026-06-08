@@ -46,3 +46,7 @@ requirements.txt
 
 # Logs
 logs/
+
+# FMP Pilot
+fmp_pilot.py
+fmp_pilot_results.json
