@@ -42,3 +42,7 @@ stockiq_filter_test_ui.js
 # Lokale Hilfs-Scripts
 ticker_names_gen.py
 insert_onboarding.py
+requirements.txt
+
+# Logs
+logs/

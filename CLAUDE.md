@@ -315,4 +315,4 @@ ASYNC-TIMING in loadScores() (gelernt v6.3.9):
 ---
 
 *StockIQ CLAUDE.md | v6.3.9 | 04. Juni 2026*
-*301 Ticker (NZYM-B.CO skipped) | OOS AVG 59.5% | Schutzziel A aktiv*
+*305 Ticker (WL3 v1.7) | OOS AVG 59.5% | Schutzziel A aktiv*

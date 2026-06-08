@@ -401,11 +401,6 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <strong style="color:#dce8f5">1pp Zinsanstieg</strong> kostet bei 7J-Duration ~7% Kursverlust.
 </div>
 
-<div style="margin-top:16px">
-<div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:2px">&#127942; ETF-Score Rangliste</div>
-<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:10px">Momentum 40% + Trend 35% + Risk 25%</div>
-<div id="etf-score-list"><div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:16px 0">Sektor-Daten nicht verfuegbar.</div></div>
-</div>
 
 </div>
 </div>
@@ -2808,7 +2803,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = '6.3.11';
+      var PAGE_VERSION = '6.4.0';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -5671,9 +5666,14 @@ function renderSektorTab(macro) {
   for (var ii = 0; ii < sectors.length; ii++) {
     var s = sectors[ii];
     if (!s) { continue; }
-    var rowBg = (ii % 2 === 0) ? '#0d1117' : '#161b22';
-    var rankStr = (s.rank3m !== null) ? s.rank3m : '-';
-    var rankCol = (s.rank3m !== null && s.rank3m <= 3) ? '#3fb950' : ((s.rank3m !== null && s.rank3m >= 9) ? '#f85149' : '#8b949e');
+    var isTop = (s.rank3m !== null && s.rank3m <= 4);
+    var isBot = (s.rank3m !== null && s.rank3m >= 8);
+    var rowBg = isTop ? 'rgba(0,229,122,0.08)' : (isBot ? 'rgba(255,82,82,0.08)' : (ii % 2 === 0 ? '#0d1117' : '#161b22'));
+    var rankStr = (s.rank3m !== null) ? '' + s.rank3m : '-';
+    var rankCol = isTop ? '#3fb950' : (isBot ? '#f85149' : '#8b949e');
+    var badge = isTop
+      ? ' <span title="Top-4 Sektoren: +2.09%/M (sektor_ic, 2020-2026)" style="background:#0d2118;color:#3fb950;font-size:9px;padding:1px 4px;border-radius:3px;margin-left:3px;">TOP</span>'
+      : (isBot ? ' <span title="Bottom-4 Sektoren: +1.06%/M (sektor_ic, 2020-2026)" style="background:#2d0f0f;color:#f85149;font-size:9px;padding:1px 4px;border-radius:3px;margin-left:3px;">BOT</span>' : '');
 
     h += '<tr style="background:' + rowBg + ';border-bottom:1px solid #21262d;">';
     h += '<td style="padding:7px 10px;color:#c9d1d9;font-weight:600;">' + s.name + '</td>';
@@ -5681,7 +5681,7 @@ function renderSektorTab(macro) {
     h += '<td style="padding:7px 8px;text-align:right;">' + fmtPct(s.rssD7) + '</td>';
     h += '<td style="padding:7px 8px;text-align:right;">' + fmtPct(s.rssD30) + '</td>';
     h += '<td style="padding:7px 8px;text-align:right;">' + fmtRet(s.mom3mSkip) + '</td>';
-    h += '<td style="padding:7px 8px;text-align:center;font-weight:700;color:' + rankCol + ';">' + rankStr + '</td>';
+    h += '<td style="padding:7px 8px;text-align:center;font-weight:700;color:' + rankCol + ';">' + rankStr + badge + '</td>';
     h += '<td style="padding:7px 8px;text-align:right;">' + fmtRet(s.ret30d) + '</td>';
     h += '</tr>';
   }
@@ -5696,6 +5696,67 @@ function renderSektorTab(macro) {
   h += 'Quellen: Moskowitz/Grinblatt 1999, Mamais/Thomakos/Vlamis 2025.';
   h += '</div>';
 
+  h += renderSectorConc();
+
+  /* ETF-Score Rangliste (verschoben aus Allokations-Tab v6.4.0) */
+  var etfScores = calcEtfScores(sigs.sectors);
+  if (etfScores.length > 0) {
+    h += '<div style="margin-top:16px;border-top:1px solid #21262d;padding-top:12px;">';
+    h += '<div style="font-family:monospace;font-size:11px;font-weight:700;color:#00c8f0;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">ETF-Score Rangliste</div>';
+    h += '<div style="font-family:monospace;font-size:9px;color:#8b949e;margin-bottom:8px;">Momentum 40% + Trend 35% + Risk 25%</div>';
+    h += '<table style="width:100%;border-collapse:collapse;font-family:monospace;font-size:11px;">';
+    h += '<tr><th style="text-align:left;padding:4px 6px;color:#8b949e;font-weight:normal;">Rang</th>';
+    h += '<th style="text-align:left;padding:4px 6px;color:#8b949e;font-weight:normal;">ETF</th>';
+    h += '<th style="text-align:right;padding:4px 6px;color:#8b949e;font-weight:normal;">Score</th></tr>';
+    for (var ei = 0; ei < etfScores.length; ei++) {
+      var es = etfScores[ei];
+      var ec = es.score >= 70 ? '#00e57a' : (es.score >= 40 ? '#9ab8d0' : '#ff6666');
+      h += '<tr style="border-top:1px solid #1a2a3a;">';
+      h += '<td style="padding:5px 6px;color:#8b949e;">' + (ei + 1) + '</td>';
+      h += '<td style="padding:5px 6px;"><strong>' + es.sym + '</strong> <span style="color:#8b949e;">' + es.name + '</span></td>';
+      h += '<td style="padding:5px 6px;text-align:right;font-weight:700;color:' + ec + ';">' + es.score + '</td>';
+      h += '</tr>';
+    }
+    h += '</table></div>';
+  }
+
+  return h;
+}
+
+function renderSectorConc() {
+  if (!window._scoresArr || _scoresArr.length === 0) { return ''; }
+  var BUY_SIGS = {'buy':1,'strong':1,'pb':1,'buy_rsi_warn':1};
+  var secBuy = {}, secTotal = {};
+  for (var i = 0; i < _scoresArr.length; i++) {
+    var t = _scoresArr[i];
+    var sec = t.sector || 'Unbekannt';
+    secTotal[sec] = (secTotal[sec] || 0) + 1;
+    if (BUY_SIGS[t.signal]) { secBuy[sec] = (secBuy[sec] || 0) + 1; }
+  }
+  var rows = [];
+  var secs = Object.keys(secBuy);
+  for (var j = 0; j < secs.length; j++) {
+    var s = secs[j];
+    var n = secBuy[s];
+    var tot = secTotal[s] || 1;
+    rows.push({sec:s, n:n, pct:Math.round(n / tot * 100)});
+  }
+  rows.sort(function(a,b){ return b.n - a.n; });
+  var h = '<div style="margin-top:16px;border-top:1px solid #21262d;padding-top:12px;">';
+  h += '<div style="font-size:11px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">BUY-Konzentration</div>';
+  h += '<table style="width:100%;border-collapse:collapse;font-size:11px;">';
+  h += '<tr style="color:#8b949e;"><th style="text-align:left;padding:3px 6px;">Sektor</th><th style="text-align:center;padding:3px 6px;">BUY</th><th style="text-align:right;padding:3px 6px;">Anteil</th></tr>';
+  for (var k = 0; k < rows.length; k++) {
+    var r = rows[k];
+    var bg = k % 2 === 0 ? '#0d1117' : '#161b22';
+    var col = r.pct >= 20 ? '#3fb950' : (r.pct >= 10 ? '#7ee787' : '#c9d1d9');
+    h += '<tr style="background:' + bg + '">';
+    h += '<td style="padding:4px 6px;color:#c9d1d9;">' + r.sec + '</td>';
+    h += '<td style="padding:4px 6px;text-align:center;font-weight:700;color:' + col + ';">' + r.n + '</td>';
+    h += '<td style="padding:4px 6px;text-align:right;color:#8b949e;">' + r.pct + '%</td>';
+    h += '</tr>';
+  }
+  h += '</table></div>';
   return h;
 }
 
