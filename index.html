@@ -5733,13 +5733,14 @@ function renderSectorConc() {
     secTotal[sec] = (secTotal[sec] || 0) + 1;
     if (BUY_SIGS[t.signal]) { secBuy[sec] = (secBuy[sec] || 0) + 1; }
   }
-  var rows = [];
+  var totalBuy = 0;
   var secs = Object.keys(secBuy);
-  for (var j = 0; j < secs.length; j++) {
-    var s = secs[j];
+  for (var j = 0; j < secs.length; j++) { totalBuy += secBuy[secs[j]]; }
+  var rows = [];
+  for (var j2 = 0; j2 < secs.length; j2++) {
+    var s = secs[j2];
     var n = secBuy[s];
-    var tot = secTotal[s] || 1;
-    rows.push({sec:s, n:n, pct:Math.round(n / tot * 100)});
+    rows.push({sec:s, n:n, pct:Math.round(n / totalBuy * 100)});
   }
   rows.sort(function(a,b){ return b.n - a.n; });
   var h = '<div style="margin-top:16px;border-top:1px solid #21262d;padding-top:12px;">';
