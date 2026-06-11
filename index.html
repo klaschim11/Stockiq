@@ -4300,16 +4300,21 @@ function rSektorAmpel(){
 }
 function getSektorBadge(ticker){
   try{
-    var fd=FD[ticker]; if(!fd||!fd.sector) return '';
+    var fd=FD[ticker];
+    var skt = (fd && fd.sector) ? fd.sector :
+      (_scoresIdx && typeof _scoresIdx === 'object' &&
+       _scoresIdx[ticker] && typeof _scoresIdx[ticker] === 'object' ?
+       _scoresIdx[ticker].sector : null);
+    if(!skt) return '';
     var map={'Healthcare':'XLV','Technology':'XLK','Financial Services':'XLF',
       'Financials':'XLF','Energy':'XLE','Consumer Staples':'XLP',
       'Consumer Defensive':'XLP','Consumer Cyclical':'XLY',
       'Consumer Discretionary':'XLY','Industrials':'XLI',
       'Basic Materials':'XLB','Materials':'XLB',
       'Real Estate':'XLRE','Utilities':'XLU','Communication Services':'XLC'};
-    var etf=map[fd.sector]; if(!etf) return '';
+    var etf=map[skt]; if(!etf) return '';
     var mom=getSektorMom(etf); var c=getSektorColor(mom);
-    return '<span style="font-size:9px;color:'+c.col+';margin-left:3px" title="'+fd.sector+' '+c.label+'">'+c.icon+'</span>';
+    return '<span style="font-size:9px;color:'+c.col+';margin-left:3px" title="'+skt+' '+c.label+'">'+c.icon+'</span>';
   } catch(e){return '';}
 }
 
