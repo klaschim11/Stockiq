@@ -779,7 +779,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.3.10 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.4.1 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -3944,8 +3944,8 @@ function dpRenderTable(){
     /* Score + Signal aus _scoresIdx (live scores.json) -- DDB-8 */
     var sc_entry = (_scoresIdx && typeof _scoresIdx === 'object') ? _scoresIdx[p.t] : null;
     var sc_valid = sc_entry && typeof sc_entry === 'object';
-    var sc     = sc_valid && sc_entry.sc  !== undefined ? Math.round(sc_entry.sc)  : '--';
-    var dp_sig = sc_valid && sc_entry.sig !== undefined ? sc_entry.sig              : '';
+    var sc     = sc_valid && sc_entry.score  !== undefined ? Math.round(sc_entry.score)  : '--';
+    var dp_sig = sc_valid && sc_entry.signal !== undefined ? sc_entry.signal              : '';
     var sigLbl = dp_sig === 'strong'       ? 'STRONG' :
                  dp_sig === 'buy'          ? 'BUY'    :
                  dp_sig === 'buy_rsi_warn' ? 'BUY'    :
