@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.4.5</title>
+<title>StockIQ v6.4.6</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.4.5 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.4.6 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -143,10 +143,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <span style="position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none;color:var(--mut)">&#128269;</span>
   </div>
   <div class="g4" id="wl-kpi" style="margin-bottom:8px"></div>
-  <!-- v5.9.71: Synopse-Vergleichszeile -->
-  <div id="wl-syn-bar" style="background:rgba(255,159,28,.06);border:1px solid rgba(255,159,28,.2);border-radius:8px;padding:7px 12px;margin-bottom:10px;display:flex;align-items:center;flex-wrap:wrap;gap:6px"></div>
-  <div id="wl-list"></div>
+
   <div id="wl-detail" style="display:none;margin-top:8px"></div>
+  <div id="wl-list"></div>
 </div>
 
 
@@ -213,7 +212,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.4.5</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.4.6</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -407,7 +406,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.4.5 &middot; Stand Juni 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.4.6 &middot; Stand Juni 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -620,7 +619,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.4.5 &middot; Juni 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.4.6 &middot; Juni 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -705,7 +704,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.4.5 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.4.6 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -779,7 +778,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.4.5 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.4.6 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1576,8 +1575,10 @@ function scColQ(sc, s){
   if(scoreQuality(s)==='stat') return '#456278';  /* grau: Platzhalter */
   return scCol(sc);
 }
-function kpiCard(label,val,sub,vc){
-  var h='<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px">';
+function kpiCard(label,val,sub,vc,oc){
+  var cs=oc?'cursor:pointer;':'';
+  var oa=oc?' onclick="'+oc+'"':'';
+  var h='<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;'+cs+'"'+oa+'>';
   h+='<div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">'+label+'</div>';
   h+='<div style="font-size:24px;font-weight:800;color:'+(vc||'#00c8f0')+'">'+val+'</div>';
   if(sub)h+='<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-top:3px">'+sub+'</div>';
@@ -1836,11 +1837,11 @@ function rWL(){
   var dispBuys    = HC_FILTER ? hcBuys    : buys;
   var kpi=document.getElementById('wl-kpi');
   if(kpi)kpi.innerHTML=
-    kpiCard('STRONG',dispStrongs,'ZL+Div+200MA+PEG','#ff9f1c')
-    +kpiCard('BUY',dispBuys,'ZL+200MA+PEG','#00e57a')
-    +kpiCard('&#11088; HC',hcTotal,'Score+Mom+Sektor (alle Sig.)','#ffd700')
-    +kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000')
-    +kpiCard('Sell/Weak',sells,'','#ff6666');
+    kpiCard('STRONG',dispStrongs,'ZL+Div+200MA+PEG','#ff9f1c',"wlFilt('strong',null)")
+    +kpiCard('BUY',dispBuys,'ZL+200MA+PEG','#00e57a',"wlFilt('buy',null)")
+    +kpiCard('&#11088; HC',hcTotal,'Score+Mom+Sektor (alle Sig.)','#ffd700',"document.getElementById('wl-hc-btn').click()")
+    +kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000',"wlFilt('pb',null)")
+    +kpiCard('Sell/Weak',sells,'','#ff6666',"wlFilt('sell',null)");
   /* ---- v5.9.73: Synopse-Bar mit echtem HC-Zaehler (nicht STRONG-Zaehler) ---- */
   var synPool=getActiveStocks(), synStrong=0, synBuy=0, synSell=0, synPB=0, synHC=0;
   for(var _i=0;_i<synPool.length;_i++){
@@ -2806,7 +2807,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = '6.4.0';
+      var PAGE_VERSION = '6.4.6';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -4789,7 +4790,7 @@ function rptBuild(){
   out += '<div class="rpt-h1" style="font-size:18px;font-weight:800;color:#00c8f0;margin-bottom:4px">StockIQ Sektor-Analyse</div>';
   out += '<div class="rpt-h2" style="font-size:14px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#128202; ' + sec + ' &mdash; ' + dateStr + '</div>';
   out += '<div class="rpt-mut" style="font-family:monospace;font-size:9px;color:#7a9bb5">';
-  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v6.4.5</div>';
+  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v6.4.6</div>';
   out += '</div>';
 
   /* â”€â”€ 0. Sektor-Performance-Ranking (alle Sektoren) â”€â”€ */
@@ -5885,4 +5886,5 @@ document.addEventListener('DOMContentLoaded',function(){
 </script>
 </body>
 </html>
+
 
