@@ -18,6 +18,11 @@ run_daily*.bat
 stockiq_dev_archive_update*.py
 stockiq_generate_uebergabe*.py
 stockiq_dev_archive*.json
+stockiq_signal_returns.csv
+stockiq_hold_sf_returns.csv
+stockiq_signal_return_tracker.py
+stockiq_archive_backfill.py
+stockiq_dev_archive_backup_*.json
 Archiv/
 dev/
 
@@ -50,3 +55,7 @@ logs/
 # FMP Pilot
 fmp_pilot.py
 fmp_pilot_results.json
+
+# AH-1 Regime-Ampel
+stockiq_regime_calc.py
+stockiq_regime_status.json
