@@ -4245,7 +4245,6 @@ function initAlloc(){
   rGSR();
   rBondETF();
   rBeckRegime();            /* v5.9.69: Beck-Krisen-Regime */
-  rSektorAmpel();           /* v5.9.69: Sektor-Ampel */
 }
 
 /* Aktienwert aus Depot-Tab vorbelegen (v5.9.69) */
@@ -4253,13 +4252,14 @@ function allocPrefillFromDepot(){
   try {
     depotLoad();  /* sicherstellen dass Depot geladen */
     var tot = dpCalcTotal();
-    if(tot && tot.hasPrice > 0 && tot.val > 0){
+    var _pVal = (tot && tot.hasPrice > 0 && tot.val > 0) ? tot.val : (tot && tot.cost > 0 ? tot.cost : 0);
+    var _pLbl = (tot && tot.hasPrice > 0 && tot.val > 0) ? 'Mkt' : 'EK';
+    if(_pVal > 0){
       var el = document.getElementById('ai-stocks');
       if(el){
-        /* Depot-Wert immer setzen (autoritaetive Quelle fuer Aktienwert) */
-        el.value = Math.round(tot.val);
+        el.value = Math.round(_pVal);
         var badge = document.getElementById('alloc-depot-badge');
-        if(badge) badge.style.display = 'inline';
+        if(badge){ badge.style.display = 'inline'; badge.textContent = '📊 Depot (' + _pLbl + ')'; }
       }
     }
   } catch(e){}
