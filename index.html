@@ -5707,6 +5707,7 @@ function renderSektorTab(macro) {
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">3M-Skip</th>';
   h += '<th style="padding:7px 8px;text-align:center;border-bottom:1px solid #30363d;">Rang</th>';
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">30d Ret.</th>';
+  h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">12M Ret.</th>';
   h += '</tr>';
   h += '</thead><tbody>';
 
@@ -5731,6 +5732,7 @@ function renderSektorTab(macro) {
     h += '<td style="padding:7px 8px;text-align:right;">' + fmtRet(s.mom3mSkip) + '</td>';
     h += '<td style="padding:7px 8px;text-align:center;font-weight:700;color:' + rankCol + ';">' + rankStr + badge + '</td>';
     h += '<td style="padding:7px 8px;text-align:right;">' + fmtRet(s.ret30d) + '</td>';
+    h += '<td style="padding:7px 8px;text-align:right;">' + fmtRet(getSektorMom(s.sym)) + '</td>';
     h += '</tr>';
   }
 
