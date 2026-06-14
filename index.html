@@ -2849,6 +2849,14 @@ function loadScores() {
         }
       }
       console.log("scores.json geladen: " + scores.length + " Ticker");
+      /* AR-C1: Algo-Phase in localStorage setzen (Option A, Sprint 38) */
+      if(mac && typeof detectCyclePhase === 'function'){
+        var _arVix = mac.vix || 0;
+        var _arSpy = !!mac.spy_above_200ma;
+        var _arSlp = (typeof mac.curve_slope_bps === 'number') ? mac.curve_slope_bps : null;
+        var _arPhase = detectCyclePhase(_arVix, _arSpy, _arSlp);
+        try { localStorage.setItem('stockiq_cycle_phase', _arPhase); } catch(ex){}
+      }
 
 var _namesUrl='https://raw.githubusercontent.com/klaschim11/Stockiq/main/stockiq_ticker_names.json';
 fetch(_namesUrl)
