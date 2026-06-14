@@ -5691,7 +5691,7 @@ function renderSektorTab(macro) {
   h += '<div style="flex:1;min-width:130px;background:#161b22;border-radius:8px;padding:12px 16px;border:1px solid #30363d;">';
   h += '<div style="font-size:10px;color:#8b949e;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Dispersion 30d</div>';
   h += '<div style="font-size:22px;font-weight:700;color:' + dColor + ';">' + dStr + '</div>';
-  h += '<div style="font-size:11px;color:#8b949e;margin-top:3px;">StdDev 11-Sektoren-Returns</div>';
+  h += '<div style="font-size:11px;color:#8b949e;margin-top:3px;">StdDev 30d-Returns aller 11 Sektoren &bull; &gt;15%: breite Rotation aktiv</div>';
   h += '</div>';
   h += '</div>';
 
@@ -5705,7 +5705,7 @@ function renderSektorTab(macro) {
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">RSS &Delta;7d</th>';
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">RSS &Delta;30d</th>';
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">3M-Skip</th>';
-  h += '<th style="padding:7px 8px;text-align:center;border-bottom:1px solid #30363d;">Rang</th>';
+  h += '<th title="3M-Skip-Momentum: 3-Monats-Return des ETF, letzte 21 Tage ausgeblendet (verhindert Kurzfrist-Reversal-Verzerrung). Rang 1 = staerkster Sektor." style="padding:7px 8px;text-align:center;border-bottom:1px solid #30363d;cursor:help;">Rang</th>';
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">30d Ret.</th>';
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">12M Ret.</th>';
   h += '</tr>';
@@ -5740,10 +5740,10 @@ function renderSektorTab(macro) {
 
   /* Legende */
   h += '<div style="margin-top:12px;font-size:11px;color:#8b949e;border-top:1px solid #21262d;padding-top:10px;line-height:1.6;">';
-  h += 'RSS = Sektor-ETF / SPY (relative Staerke). Rang = 3M-Skip-Momentum (1=staerkster Sektor, skip letzte 21 Tage). ';
+  h += 'RSS = Sektor-ETF / SPY (relative Staerke). Rang = 3M-Skip-Momentum: 3-Monats-Return des ETF, letzte 21 Tage ausgeblendet (verhindert Kurzfrist-Reversal-Verzerrung). Rang 1 = staerkster Sektor.';
   h += 'Dispersion = StdDev der 30d-Returns aller 11 Sektoren. ';
   h += 'Status: Stable &lt;10% | Building 10-15% | Imminent 15-20% | Active &gt;20%. ';
-  h += 'Quellen: Moskowitz/Grinblatt 1999, Mamais/Thomakos/Vlamis 2025.';
+  h += '12M Ret. = absoluter ETF-Return letzte 12 Monate. Quellen: Moskowitz/Grinblatt 1999, Mamais/Thomakos/Vlamis 2025.';
   h += '</div>';
 
   h += renderSectorConc();
