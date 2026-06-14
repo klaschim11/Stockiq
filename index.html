@@ -2858,7 +2858,30 @@ function loadScores() {
         try { localStorage.setItem('stockiq_cycle_phase', _arPhase); } catch(ex){}
       }
 
-var _namesUrl='https://raw.githubusercontent.com/klaschim11/Stockiq/main/stockiq_ticker_names.json';
+/* DDB-8: Depot-Verlauf Preis-Snapshot (einmal pro Tag) */
+      (function(){
+        try{
+          var _sNow=new Date();
+          var _sD=_sNow.getFullYear()+'-'+(_sNow.getMonth()<9?'0':'')+(_sNow.getMonth()+1)+'-'+(_sNow.getDate()<10?'0':'')+_sNow.getDate();
+          var _sKey='stockiq_snapshots_v1';
+          var _sRaw=localStorage.getItem(_sKey);
+          var _sArr=_sRaw?JSON.parse(_sRaw):[];
+          if(!Array.isArray(_sArr))_sArr=[];
+          if(_sArr.length===0||_sArr[0].date!==_sD){
+            var _sTk={};
+            for(var _si=0;_si<_scoresArr.length;_si++){
+              var _se=_scoresArr[_si];
+              if(_se&&_se.ticker&&_se.price!==null&&_se.price!==undefined){
+                _sTk[_se.ticker]={current_price:_se.price};
+              }
+            }
+            _sArr.unshift({date:_sD,tickers:_sTk});
+            if(_sArr.length>180)_sArr=_sArr.slice(0,180);
+            localStorage.setItem(_sKey,JSON.stringify(_sArr));
+          }
+        }catch(ex){}
+      })();
+      var _namesUrl='https://raw.githubusercontent.com/klaschim11/Stockiq/main/stockiq_ticker_names.json';
 fetch(_namesUrl)
   .then(function(r){if(!r.ok){throw new Error('HTTP '+r.status);}return r.json();})
   .then(function(data){_names=data;if(typeof rWL==='function'){try{rWL();}catch(e){}}})
