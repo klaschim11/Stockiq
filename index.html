@@ -1632,7 +1632,7 @@ function goTab(n,btn){
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
   var pg2=document.getElementById(pgs[n]);if(pg2)pg2.style.display='block';
   if(btn)btn.classList.add('active');
-  if(n===0)rSyn();if(n===1){rWL();renderSpyPhaseBanner();}if(n===2){rFund();initDepot();}
+  if(n===0)rSyn();if(n===1){rWL();renderSpyPhaseBanner();}if(n===2){rFund();initDepot();}if(n===3){initAlloc();}
   if(n===4){var sm=window.FD?FD['__macro__']:null;var el=document.getElementById('sektoren-content');if(el)el.innerHTML=renderSektorTab(sm);}
 }
 </script>
