@@ -80,3 +80,48 @@ test_*.py
 *_test.js
 sektor_ic*.py
 stockiq_alpha*.py
+
+# ===================================
+# GITHUB-REGEL (Sprint 41, 15.06.26)
+# Nur Dashboard-Dateien im Repo.
+# Alles andere ist lokal.
+# ===================================
+
+# Doku und Sprint-Unterlagen
+Doku_aktuell/
+
+# Engineering und Tests
+CLAUDE.md
+tests/
+utils/
+experiments/
+debugs/
+logs/
+
+# Node-Konfiguration
+package.json
+package-lock.json
+node_modules/
+
+# Python
+*.py
+*.pyc
+__pycache__/
+.pytest_cache/
+
+# Datendateien (lokal)
+stockiq_dev_archive*.json
+stockiq_fundamentals.json
+stockiq_snapshots.json
+stockiq_signal_returns.csv
+stockiq_hold_sf_returns.csv
+hypotheses_status.json
+stockiq_wl3_results.json
+stockiq_sektor_ic_results.json
+
+# Backups
+*.bak*
+*_backup_*
+
+# Claude local
+.claude/
