@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>StockIQ Research Sprint 2 — Walk-Forward + Lernendes System (Mai 2026)</title>
+<style>
+  :root{
+    --bg:#fafafa; --fg:#1c1c1c; --mut:#666; --line:#d4d4d4;
+    --green:#1a7a4a; --yellow:#c8881a; --red:#8a3232;
+    --blue:#1a4a7a; --purple:#5b2a7a; --orange:#a8541a;
+    --cyan:#1a6a7a;
+    --card-bg:#fff; --card-line:#e0e0e0;
+  }
+  html,body{background:var(--bg);color:var(--fg);font:14px/1.55 "Inter","Segoe UI",system-ui,sans-serif;margin:0;padding:0}
+  .doc{max-width:880px;margin:0 auto;padding:30px 40px 60px}
+  h1{font-size:28px;font-weight:700;margin:0 0 4px;letter-spacing:-0.5px}
+  h1 + .sub{font-size:13px;color:var(--mut);margin-bottom:24px}
+  h2{font-size:19px;font-weight:600;margin:32px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--fg)}
+  h3{font-size:15px;font-weight:600;margin:18px 0 8px}
+  h4{font-size:13px;font-weight:600;margin:14px 0 4px;color:var(--mut);text-transform:uppercase;letter-spacing:0.5px}
+  p{margin:6px 0 10px}
+  ul,ol{margin:6px 0 12px;padding-left:22px}
+  li{margin:3px 0}
+  code{font-family:"JetBrains Mono","Consolas",monospace;font-size:12px;background:#f0f0f0;padding:1px 5px;border-radius:3px}
+  pre{background:#1c1c1c;color:#e4e4e4;padding:10px 14px;border-radius:6px;font-size:12px;line-height:1.45;overflow-x:auto}
+  pre code{background:none;color:inherit;padding:0}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12.5px}
+  th,td{border:1px solid var(--card-line);padding:6px 10px;text-align:left;vertical-align:top}
+  th{background:#f0f0f0;font-weight:600}
+  .card{background:var(--card-bg);border:1px solid var(--card-line);border-radius:6px;padding:14px 18px;margin:10px 0 14px;border-left:4px solid var(--blue)}
+  .card.green{border-left-color:var(--green)}
+  .card.yellow{border-left-color:var(--yellow)}
+  .card.red{border-left-color:var(--red)}
+  .card.purple{border-left-color:var(--purple)}
+  .card.orange{border-left-color:var(--orange)}
+  .card.cyan{border-left-color:var(--cyan)}
+  .pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;letter-spacing:0.3px}
+  .pill-green{background:#dff5e8;color:var(--green)}
+  .pill-yellow{background:#fdf2db;color:var(--yellow)}
+  .pill-red{background:#f7dcdc;color:var(--red)}
+  .pill-blue{background:#dde9f5;color:var(--blue)}
+  .pill-mut{background:#e5e5e5;color:var(--mut)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+  .mut{color:var(--mut)}
+  .small{font-size:12px}
+  .quote{border-left:3px solid var(--mut);padding:4px 14px;margin:8px 0;font-style:italic;color:#333}
+  .key{background:#fffbe6;border:1px solid #f0e3a0;border-radius:6px;padding:10px 14px;margin:10px 0;font-size:13px}
+  .toc{font-size:12.5px;color:var(--mut)}
+  .toc a{color:var(--blue);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .meta{font-size:11.5px;color:var(--mut);background:#f0f0f0;padding:8px 12px;border-radius:4px;margin-bottom:18px}
+  hr{border:none;border-top:1px solid var(--line);margin:24px 0}
+  footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--mut);text-align:center}
+  .src{font-size:11.5px;color:var(--mut);margin-top:4px}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<h1>StockIQ Research Sprint 2</h1>
+<div class="sub">Walk-Forward Erweiterung &middot; Lernendes System &middot; Buffett/Abel 2025 &middot; Mai 2026</div>
+
+<div class="meta">
+<strong>Dashboard:</strong> v5.9.85 &middot; <strong>fund_juno:</strong> v7.9.23 &middot; <strong>alpha_juno:</strong> v6b_6m-u4<br>
+<strong>Ticker:</strong> 269 &middot; <strong>Snapshots:</strong> 58 &middot; <strong>OOS WR:</strong> 60.5%% &middot; <strong>Stabilitaet:</strong> 2.3pp<br>
+<strong>Auftrag:</strong> A1+A2 / B2+B3 / C1 / D1 sofort &middot; <strong>Erstellt:</strong> 2026-05-21
+</div>
+
+<div class="card cyan">
+<strong>Executive Summary</strong><br>
+StockIQ v5.9.85 ist gegen die akademischen Kern-Faktoren und Buffett-Prinzipien <strong>solide aufgestellt</strong>. Sprint 2 identifiziert <strong>drei priorisierte Hebel</strong>, die ueber die in Sprint 1 abgedeckten Punkte hinausgehen:
+<ol>
+<li><strong>alpha_juno_v7 — Dual-Regime-Filter VIX + MOVE.</strong> Apr-Mai 2026 zeigte: VIX bei 18 waehrend MOVE bei 85-95. VIX allein hat das Bond-Volatilitaets-Regime nicht erkannt. Erwartung: +1-2pp OOS WR ODER Stabilitaets-Gewinn 0.5-1pp.</li>
+<li><strong>Phase 4 — IC-basierte dynamische Gewichtung.</strong> Voraussetzungen sind nun erfuellt (Annual IC + 58 Snapshots). Empfehlung: <strong>nicht</strong> sofort produktiv, sondern erst Schatten-Modell mit alpha_juno_v8 A/B-Test gegen statische Gewichte. Deploy-Schwelle: +1pp OOS WR.</li>
+<li><strong>Buffett/Abel 2025 — Capital Allocation Discipline.</strong> Drei neue Modell-Inputs: (a) <em>Konzentration in High-Conviction-Ideas</em> &rarr; Allokations-Tab um Top-N-Konvergenz-Metrik erweitern; (b) <em>Cash als Optionalitaet</em> &rarr; Bandbreite 3-15%% statt fix 5%%; (c) <em>Net Buyback Yield</em> &rarr; shares_change_yoy nach IC-Test in fSc() integrieren.</li>
+</ol>
+Keine sofortigen Score-Aenderungen empfohlen — alle drei Hebel zuerst durch Walk-Forward / IC-Test absichern (empirischer Arbiter, gemaess StockIQ-Prinzip).
+</div>
+
+<div class="toc">
+<strong>Inhalt:</strong>
+<a href="#a">A. Buffett/Abel 2025</a> &middot;
+<a href="#b">B. MOVE-Index &amp; Dual Regime</a> &middot;
+<a href="#c">C. alpha_juno_v7 Spezifikation</a> &middot;
+<a href="#d">D. Phase 4 Lernendes System</a> &middot;
+<a href="#e">E. Roadmap &amp; Schwellen</a> &middot;
+<a href="#f">F. Quellen</a>
+</div>
+
+<hr>
+
+<!-- ============== A — Buffett/Abel 2025 ============== -->
+<h2 id="a">A &mdash; Buffett 2025 / Abel-Letter (FY 2025)</h2>
+
+<h3>A.1 Kontext</h3>
+<p>Buffetts Februar-2025-Brief war sein <strong>letzter klassischer Annual Letter</strong>; Greg Abel ist seit 1. Januar 2026 CEO. Abels erster Brief (Feb 2026, Berichtsjahr 2025) ist daher <em>der</em> aktuelle Berkshire-Grundsatztext. Beide Briefe enthalten Aussagen, die fuer StockIQ relevant sind — vor allem zu Cash-Optionalitaet, Konzentration und Capital Allocation.</p>
+
+<div class="card">
+<h4>Berkshire-Performance 2025 (Abel-Letter, Feb 2026)</h4>
+<table>
+<tr><th>Kennzahl</th><th>2025</th><th>2024</th><th>5J-Mittel</th></tr>
+<tr><td>Operating Earnings</td><td>$44.5 Mrd</td><td>$47.4 Mrd</td><td>$37.5 Mrd</td></tr>
+<tr><td>Net Cash from Operations</td><td>$46 Mrd</td><td>—</td><td>>$40 Mrd</td></tr>
+<tr><td>Cash + US-Treasuries</td><td colspan="3">$370 Mrd (Rekord-Optionalitaet)</td></tr>
+<tr><td>P&amp;C Combined Ratio</td><td>87.1%%</td><td>—</td><td>90.7%% (5J)</td></tr>
+<tr><td>Acquisitions 2025</td><td colspan="3">OxyChem (Occidental-Spin) + Bell Laboratories (Rodent Control)</td></tr>
+</table>
+<div class="src">Quelle: Berkshire Hathaway 2025 Annual Report, S. 8-10.</div>
+</div>
+
+<h3>A.2 Capital-Allocation-Prinzipien — wortwoertlich</h3>
+<div class="quote">
+<ul>
+<li>Invest in businesses that we thoroughly understand, with durable advantages and long-term economic prospects;</li>
+<li>Partner with high integrity leaders who understand their customers and act like owners;</li>
+<li>Avoid businesses that undermine the fabric of society or could jeopardize Berkshire's reputation;</li>
+<li><strong>Act quickly and concentrate our capital in a few high conviction ideas;</strong> and</li>
+<li>Maintain discipline and let compounding unfold.</li>
+</ul>
+<div class="src">Abel, 2025 Annual Letter, S. 5</div>
+</div>
+
+<h3>A.3 Drei direkte Implikationen fuer StockIQ</h3>
+
+<div class="card green">
+<h4>A.3.1 &mdash; Cash als strategische Optionalitaet (Allokations-Tab)</h4>
+<p>Abel formuliert Cash als <em>"strategic asset to be deployed at the right time. It allows us to act decisively, invest when others are tentative or fearful."</em> Berkshire haelt 2025 ~$370 Mrd, davon ~$300 Mrd ueber dem operativen Bedarf — d.h. die Cash-Allokation ist <em>antizyklisch</em>.</p>
+<p>StockIQ hat aktuell <strong>fix 5%% Cash</strong>. Empfehlung: Bandbreite einfuehren, regimegesteuert.</p>
+<table>
+<tr><th>Regime</th><th>VIX</th><th>MOVE</th><th>SPY/200MA</th><th>Cash-Ziel</th></tr>
+<tr><td><span class="pill pill-green">Risk-On</span></td><td>&lt;20</td><td>&lt;60</td><td>&gt;1.05x</td><td>3%%</td></tr>
+<tr><td><span class="pill pill-blue">Normal</span></td><td>20-25</td><td>60-90</td><td>1.00-1.05x</td><td>5-7%%</td></tr>
+<tr><td><span class="pill pill-yellow">Defensive</span></td><td>25-30</td><td>90-120</td><td>0.95-1.00x</td><td>10%%</td></tr>
+<tr><td><span class="pill pill-red">Stress</span></td><td>&gt;30</td><td>&gt;120</td><td>&lt;0.95x</td><td>15%% (dry powder)</td></tr>
+</table>
+<p class="small mut">Implementierung: Allokations-Tab um <code>cash_target_dynamic</code>-Feld erweitern, abhaengig von Regime-Score. Sanity-Cap: Aktien-Allokation darf nicht unter 50%% fallen.</p>
+</div>
+
+<div class="card green">
+<h4>A.3.2 &mdash; Konzentration in High-Conviction-Ideas</h4>
+<p>Buffett und Abel betonen wiederholt <em>"act quickly and concentrate our capital in a few high conviction ideas"</em>. Berkshire haelt &gt;60%% des Aktien-Portfolios in den Top-5-Positionen (Apple, BAC, AmEx, Coke, Chevron — historisch). Das steht im Spannungsverhaeltnis zu einem 269-Ticker-Universum.</p>
+<p>Das Universum selbst ist <em>nicht</em> das Portfolio — das war nie die Intention. Aber: Die WL2 (manuelle Watchlist) sollte explizit auf Konzentration optimiert sein.</p>
+<h4>Konkrete Empfehlung</h4>
+<ol>
+<li><strong>Konvergenz-Metrik</strong> in WL2: Anzeige, wie oft ein Ticker in Top-20 nach <em>verschiedenen</em> Score-Komponenten erscheint (cSc, momSc, fSc, Owner Earnings allein). Wenn ein Ticker in 4 von 4 Top-20-Listen ist &rarr; High-Conviction.</li>
+<li><strong>Top-N-Konzentrations-KPI</strong>: in Synopse anzeigen, wie viel Prozent des hypothetischen 100%-Aktien-Allokations-Equivalents in den Top-10 vs. Top-20 vs. Top-50 entfaellt. Ziel: &gt;40%% in Top-10, gemaess Buffett-Konzentrations-Prinzip.</li>
+</ol>
+</div>
+
+<div class="card green">
+<h4>A.3.3 &mdash; Share Repurchases / Buybacks (shares_change_yoy)</h4>
+<p>Abel im Detail: <em>"Share repurchases are another important capital allocation option. We will buy back Berkshire shares when they trade below our estimate of intrinsic value [...]. These purchases allow shareholders to own an incrementally larger piece of Berkshire's businesses, without deploying any additional capital of their own."</em></p>
+<p>StockIQ hat <code>shares_change_yoy</code> seit fund_juno v7.9.23 als Display-Feld (Sprint 1 Quick-Win B). IC-Test steht noch aus. <strong>Empfehlung Sprint 2:</strong></p>
+<ol>
+<li>Bei Snapshot 30 (~Mitte Juni 2026): IC-Test <code>shares_change_yoy</code> &rarr; Forward-Return.</li>
+<li>Wenn IC &lt; -0.05 (Rueckkaeufe &rarr; bessere Rendite, Vorzeichen: negativer share_change = positiver Effekt): Integration in fSc() mit 5%% Gewicht, FCF-Gewicht entsprechend reduzieren auf 25%%.</li>
+<li>Wenn IC nicht signifikant: <strong>nicht</strong> integrieren, weiterhin Display-only.</li>
+</ol>
+</div>
+
+<h3>A.4 Was nicht aendert</h3>
+<p>Drei Buffett/Abel-2025-Themen sind <em>bereits</em> sauber im Modell verankert und brauchen keine Aenderung:</p>
+<ul>
+<li><strong>EBITDA-Kritik</strong> &rarr; v5.9.84 EV/EBIT Gewicht 0.45 (IC=-0.143 ***)</li>
+<li><strong>Owner Earnings</strong> &rarr; v5.9.84 <code>max(FCF, OwnerEarnings)</code> in fSc() (IC=+0.155 ***)</li>
+<li><strong>Long-term Horizon</strong> &rarr; Walk-Forward 6M-OOS-Fenster, Score Filter (SF&ge;55) gegen Quality-Verkauf bei technischer Schwaeche</li>
+</ul>
+
+<hr>
+
+<!-- ============== B — MOVE-Index ============== -->
+<h2 id="b">B &mdash; MOVE-Index als zweiter Regime-Filter</h2>
+
+<h3>B.1 Warum MOVE als Ergaenzung zu VIX?</h3>
+
+<div class="card">
+<p>Der ICE BofA MOVE Index misst implizite Volatilitaet auf US-Treasuries (Optionen auf 2/5/10/30J). Er ist das "VIX-Aequivalent fuer Anleihen" — und reagiert in mehreren historischen Stress-Phasen <strong>vor dem VIX</strong>.</p>
+<p>Schluesselbefund Schwab 2024: <em>"Back in March 2023 when banking industry troubles percolated, the MOVE Index began climbing several days before corresponding moves in the VIX."</em> Genau der Mechanismus, der Apr-Mai 2026 erneut sichtbar war.</p>
+</div>
+
+<h3>B.2 Empirische Schwellen (FRED + soa.org Sept 2025 + financialcontent.com Dez 2025)</h3>
+
+<table>
+<tr><th>MOVE-Range</th><th>Regime</th><th>Empirik</th><th>Faktor (StockIQ)</th></tr>
+<tr><td><span class="pill pill-green">&lt; 60</span></td><td>Calm</td><td>&gt;80%% S&amp;P-WR 3-6M (Dez 2025)</td><td>1.00</td></tr>
+<tr><td><span class="pill pill-blue">60 - 90</span></td><td>Normal</td><td>Default-Range 2024-2025</td><td>0.80</td></tr>
+<tr><td><span class="pill pill-yellow">90 - 120</span></td><td>Elevated</td><td>Maerz 2026: 95 (9-Monats-Hoch)</td><td>0.50</td></tr>
+<tr><td><span class="pill pill-red">&gt; 120</span></td><td>Stress</td><td>SVB-Krise Maerz 2023: 198</td><td>0.20</td></tr>
+</table>
+<div class="src">Quellen: FRED ICE BofA MOVE Index Series; Schwab Learn "What's the MOVE Index"; financialcontent.com 22.12.2025; availinvest.com 15.03.2026.</div>
+
+<h3>B.3 Aktuelle Lage Mai 2026</h3>
+<p>Per Mai 2026: VIX ~18, MOVE laut letztem Datenpunkt ~70-80 (vom Maerz-Hoch zurueckgekommen). Beide Indikatoren in <em>Normal</em>-Range — kein akuter Stress, aber der Maerz-Spike auf 95 zeigte, dass <strong>VIX allein das Bond-Regime nicht abbildet</strong>.</p>
+
+<div class="key">
+<strong>Praktischer Befund:</strong> Apr-Mai 2026: VIX um 18 (Low), MOVE 80-95 (Elevated). Eine VIX-basierte Regime-Logik haette dieses Risiko-Episode <em>vollstaendig verfehlt</em>. Genau das ist die empirische Begruendung fuer alpha_juno_v7.
+</div>
+
+<hr>
+
+<!-- ============== C — alpha_juno_v7 ============== -->
+<h2 id="c">C &mdash; alpha_juno_v7 Spezifikation (Walk-Forward)</h2>
+
+<h3>C.1 Architektur-Aenderung gegenueber v6b_6m-u4</h3>
+
+<table>
+<tr><th>Komponente</th><th>v6b_6m-u4 (Produktion)</th><th>v7 (Vorschlag)</th></tr>
+<tr><td>Marktphasen-Filter</td><td>SPY &gt; SMA200 (binaer)</td><td>SPY &gt; SMA200 (binaer) — unveraendert</td></tr>
+<tr><td>Momentum-Daempfung</td><td>vixFactor (3-stufig)</td><td><strong>regime_factor = min(vixFactor, bondFactor)</strong></td></tr>
+<tr><td>bondFactor</td><td>—</td><td><strong>NEU</strong>: MOVE &lt;60 / 60-90 / 90-120 / &gt;120 = 1.00 / 0.80 / 0.50 / 0.20</td></tr>
+<tr><td>Datenquelle MOVE</td><td>—</td><td><strong>^MOVE</strong> oder ^TNX 5d-bps-Change als Proxy</td></tr>
+<tr><td>Trail Stop</td><td>10%% @ +3%%</td><td>unveraendert</td></tr>
+<tr><td>Stop Loss</td><td>-8%%</td><td>unveraendert</td></tr>
+<tr><td>OOS-Fenster</td><td>4x 6M</td><td>unveraendert</td></tr>
+</table>
+
+<h3>C.2 Implementierungs-Skizze (Python, fund_juno v7.9.24)</h3>
+
+<pre><code># fund_juno v7.9.24 — MOVE-Integration
+def fetch_move_index():
+    """Versuch 1: ^MOVE direkt. Versuch 2: Proxy via ^TNX 5d-Change."""
+    try:
+        mv = yf.Ticker("^MOVE").history(period="5d")
+        if not mv.empty:
+            return round(float(mv['Close'].iloc[-1]), 1), str(mv.index[-1].date())
+    except Exception:
+        pass
+    # Proxy: 5d-Change in 10Y-Yield (bps) skaliert
+    try:
+        tnx = yf.Ticker("^TNX").history(period="10d")
+        if len(tnx) >= 6:
+            change_bps = (float(tnx['Close'].iloc[-1]) - float(tnx['Close'].iloc[-6])) * 100
+            # Empirische Skalierung: 25bps ~ MOVE 100
+            move_proxy = 60 + abs(change_bps) * 1.6
+            return round(move_proxy, 1), str(tnx.index[-1].date())
+    except Exception:
+        pass
+    return None, None
+
+# In Macro-Block ergaenzen:
+macro['move_index'], macro['move_date'] = fetch_move_index()
+</code></pre>
+
+<pre><code># alpha_juno v7 — Dual-Regime-Logik (Walk-Forward)
+def bond_factor(move):
+    if move is None: return 1.0  # neutral wenn keine Daten
+    if move &lt; 60:   return 1.00
+    if move &lt; 90:   return 0.80
+    if move &lt; 120:  return 0.50
+    return 0.20
+
+def regime_factor(vix, move):
+    return min(vix_factor(vix), bond_factor(move))
+
+# In Signal-Generation:
+mom_score_adjusted = mom_score_raw * regime_factor(vix, move)
+</code></pre>
+
+<h3>C.3 Validation-Protokoll (PFLICHT vor Deploy)</h3>
+
+<div class="card orange">
+<ol>
+<li><strong>Backtest-A/B</strong>: v6b_6m-u4 vs. v7 ueber identische 4x6M-Fenster.</li>
+<li><strong>Akzeptanz-Schwellen:</strong>
+  <ul>
+  <li>OOS WR v7 &ge; OOS WR v6b - 0.5pp (kein signifikanter Verlust); IDEAL +1pp</li>
+  <li>Stabilitaet v7 &le; 3.0pp (heutige 2.3pp duerfen nicht stark schwanken)</li>
+  <li>Kein Fenster unter 50%% (wie heute)</li>
+  <li>Trades/Fenster nicht unter 60 (statistische Belastbarkeit)</li>
+  </ul>
+</li>
+<li><strong>Rollback-Kriterium</strong>: Wenn alpha_juno_v7 weniger Trades generiert (zu defensiv), bondFactor-Schwellen lockern (z.B. 60-100 &rarr; 0.85 statt 0.80).</li>
+<li><strong>Doku-Update</strong>: Methodik-Doku Abschnitt 3.3 (VIX Regime Dampening) um MOVE-Block erweitern.</li>
+</ol>
+</div>
+
+<h3>C.4 Was NICHT mit aufgenommen wird</h3>
+<ul>
+<li><strong>VIX als Entry-Filter</strong>: gemaess Whaley 2009 / Banerjee et al. 2007 reagiert VIX asymmetrisch — extreme VIX-Werte koennen contrarian-bullish sein. Daher bleibt VIX <em>nur</em> Momentum-Daempfer, nicht Entry-Filter.</li>
+<li><strong>Sektor-Faktoren als Regime-Komponente</strong>: kein robuster akademischer Konsens. Spaeter, falls 3-Regime-Modell sich als unzureichend erweist.</li>
+<li><strong>Bonus-Faktor bei sehr ruhigen Maerkten</strong> (VIX&lt;15 + MOVE&lt;55): keine Daten-Basis fuer Multiplikator &gt; 1.0. Risiko von Overfit.</li>
+</ul>
+
+<hr>
+
+<!-- ============== D — Phase 4 ============== -->
+<h2 id="d">D &mdash; Phase 4: Lernendes System (IC-basierte dynamische Gewichtung)</h2>
+
+<h3>D.1 Ausgangslage</h3>
+<p>Sprint 1 hatte Phase 4 als P5-Ziel skizziert. Sprint 2 spezifiziert die Architektur basierend auf aktueller Literatur (Arxiv 2508.18592 / 2509.01393, beide 2025) und den eigenen Annual-IC-Ergebnissen.</p>
+
+<div class="card purple">
+<h4>Annual IC Mai 2026 — Befunde</h4>
+<table>
+<tr><th>Faktor</th><th>IC</th><th>IC-IR</th><th>Status</th><th>Implikation fuer dyn. Gewicht</th></tr>
+<tr><td>owner_earnings_yield</td><td>+0.155</td><td>+1.43</td><td><span class="pill pill-green">stark</span></td><td>Gewicht erhoehen</td></tr>
+<tr><td>ev_ebit</td><td>-0.143</td><td>-0.94</td><td><span class="pill pill-green">stark</span></td><td>Gewicht erhoehen</td></tr>
+<tr><td>debt (D/E)</td><td>+0.103</td><td>+1.11</td><td><span class="pill pill-yellow">Gegenrichtung</span></td><td>Sektor-Fix v5.9.78 OK, neu testen</td></tr>
+<tr><td>roce / fcf / peg / beta / mom12m</td><td colspan="3">NEUTRAL (alle innerhalb [-0.05, +0.05])</td><td>Status quo</td></tr>
+</table>
+<p class="small mut">Anmerkung: Universum ist bereits Quality-vorgefiltert (Survivor + Anwender-Auswahl), daher sehen FCF/ROCE/Beta keine grosse Trennschaerfe mehr. Bekannte Limitation.</p>
+</div>
+
+<h3>D.2 Methodik-Vorschlag</h3>
+
+<div class="card purple">
+<h4>D.2.1 — IC-Mean Weighting (Arxiv 2508.18592)</h4>
+<p>Das August-2025-Paper "Combined ML for stock selection — dynamic weighting" zeigt: <strong>IC-Mean-basierte Gewichtung schlaegt evaluation-metric-basierte Gewichtung</strong> in Backtests und Predictive Performance. Empfohlene Formel fuer StockIQ:</p>
+<pre><code>W_factor(t) = softmax( IC_mean(factor, t-4Q..t) * ICIR(factor, t-4Q..t) )
+
+# Mit Smoothing (Stabilitaet > schnelle Anpassung):
+W_new = 0.7 * W_old + 0.3 * W_target
+
+# Mit Cap (Diversifikations-Schutz):
+W_new = clip(W_new, 0.05, 0.50)
+</code></pre>
+</div>
+
+<div class="card purple">
+<h4>D.2.2 — Alpha-Decay-Detection (Arxiv 2509.01393)</h4>
+<p>Das September-2025-Paper zu adaptivem Alpha-Weighting betont: <em>"trading signals often lose their effectiveness over time due to changes in market conditions [...]. Alpha Decay in quantitative finance."</em></p>
+<p>Konkrete Regel fuer StockIQ:</p>
+<pre><code>IF ICIR(factor, rolling 1Y) &lt; 0.5:
+    W_factor *= 0.5    # Gewicht halbieren
+IF ICIR &lt; 0.0 ueber 2 Quartale:
+    W_factor = 0       # Faktor deaktivieren, Alarm im Dashboard
+</code></pre>
+<p>Schutz vor: Faktor-Crowding (zu viele andere Marktteilnehmer nutzen denselben Faktor), Strukturbruch (z.B. ZIRP-Ende), Datenqualitaets-Verfall.</p>
+</div>
+
+<div class="card purple">
+<h4>D.2.3 — Korrelations-Check (Pairwise &lt; 0.7)</h4>
+<p>Gleiches Paper: <em>"We remove alphas with absolute pairwise correlation exceeding 0.7."</em> StockIQ-Faktoren teilweise redundant:</p>
+<table>
+<tr><th>Faktor-Paar</th><th>Erwartete Korrelation</th><th>Aktion</th></tr>
+<tr><td>FCF &lt;-&gt; Owner Earnings</td><td>&gt;0.85</td><td>v5.9.84 max() statt Summe: OK</td></tr>
+<tr><td>EV/EBIT &lt;-&gt; EV/EBITDA</td><td>&gt;0.90</td><td>Pruefen ob EV/EBITDA noch noetig (IC=neutral)</td></tr>
+<tr><td>momSc &lt;-&gt; trend</td><td>0.4-0.6</td><td>OK, unterschiedliche Zeithorizonte</td></tr>
+<tr><td>beta &lt;-&gt; volatility</td><td>0.7-0.85</td><td>Bereits zusammen in rSc()</td></tr>
+</table>
+</div>
+
+<h3>D.3 Architektur: Wann produktiv?</h3>
+
+<div class="card yellow">
+<h4>D.3.1 — Was JETZT noch nicht reicht</h4>
+<ul>
+<li>Nur 1 Annual-IC-Datenpunkt verfuegbar (Mai 2026). Fuer rolling 4Q braucht es <strong>mindestens 3-4 Annual-Snapshots</strong> &rarr; verfuegbar fruehestens Mai 2028.</li>
+<li>WL3-Run im Dashboard-Archiv-Format steht noch aus (letzter Run hatte fund_juno-Proxy-Belastung).</li>
+<li>Bei nur 58 Snapshots ist die Statistik fragil &mdash; eine fehlerhafte Gewichts-Anpassung kann mehr Schaden als Nutzen anrichten.</li>
+</ul>
+
+<h4>D.3.2 — Was bis Q3 2026 sinnvoll ist</h4>
+<ul>
+<li><strong>Schatten-Modell</strong>: alpha_juno_v8 (parallel zu v7) berechnet bei jedem Walk-Forward-Run sowohl statisches als auch IC-dynamisches Gewicht — <em>ohne Trading-Konsequenz</em>. Vergleich nach 4-6 Quartalen.</li>
+<li><strong>Quarterly IC-Tracking</strong>: WL3-Run kommt aktuell ad-hoc. Etablierung als Routine alle 3 Monate, IC-Verlauf-Chart in Tab 6 (Roadmap) anzeigen.</li>
+<li><strong>Korrelations-Audit</strong>: einmalig pruefen, ob EV/EBITDA aus valSc() entfernt werden kann (heute 0.15 Gewicht trotz IC neutral).</li>
+</ul>
+
+<h4>D.3.3 — Deploy-Bedingungen v6.0</h4>
+<p>StockIQ v6.0 mit dynamischer Gewichtung wird produktiv, wenn <strong>alle</strong> Punkte erfuellt:</p>
+<ol>
+<li>&ge; 3 Annual-IC-Snapshots verfuegbar (Mai 2026, 2027, 2028)</li>
+<li>Schatten-Modell zeigt ueber 4+ Quartale konsistent +1pp OOS WR ODER -0.5pp Stabilitaet</li>
+<li>Keine Faktor-Gewicht-Schwingungen &gt; 10pp/Quartal (signalisiert Overfit)</li>
+<li>Akademisch validierte Methodik im Methodik-Doku verankert</li>
+</ol>
+<p class="small mut">Konservative Timeline: Q3 2028. Aggressive Timeline (wenn Schatten-Modell stark): Q2 2027.</p>
+</div>
+
+<hr>
+
+<!-- ============== E — Roadmap ============== -->
+<h2 id="e">E &mdash; Konsolidierte Roadmap Mai 2026</h2>
+
+<table>
+<tr><th>Prio</th><th>Aktion</th><th>Voraussetzung</th><th>Ziel-Version</th><th>Aufwand</th><th>Erwarteter Nutzen</th></tr>
+<tr>
+<td><span class="pill pill-red">P0</span></td>
+<td>WL3-Run im Dashboard-Archiv-Format</td>
+<td>—</td>
+<td>—</td>
+<td>30 Min</td>
+<td>Validierung IC-Vorzeichen, Basis fuer P5/P6</td>
+</tr>
+<tr>
+<td><span class="pill pill-red">P1</span></td>
+<td>fund_juno v7.9.24: MOVE-Index Feld + Macro-Block</td>
+<td>P0</td>
+<td>v7.9.24</td>
+<td>1-2h</td>
+<td>Datenbasis fuer alpha_juno_v7</td>
+</tr>
+<tr>
+<td><span class="pill pill-red">P1</span></td>
+<td>alpha_juno_v7 mit Dual-Regime (VIX + MOVE)</td>
+<td>P1</td>
+<td>v7</td>
+<td>3-4h</td>
+<td>+0.5-2pp OOS WR / Stabilitaet</td>
+</tr>
+<tr>
+<td><span class="pill pill-yellow">P2</span></td>
+<td>Cash-Allokation regimegesteuert 3-15%%</td>
+<td>P1 (MOVE-Feld)</td>
+<td>v5.9.87</td>
+<td>1h</td>
+<td>Buffett/Abel-Optionalitaet</td>
+</tr>
+<tr>
+<td><span class="pill pill-yellow">P2</span></td>
+<td>WL2 Konvergenz-Metrik (Top-N Cross-Score)</td>
+<td>—</td>
+<td>v5.9.88</td>
+<td>2-3h</td>
+<td>High-Conviction-Auswahl</td>
+</tr>
+<tr>
+<td><span class="pill pill-yellow">P3</span></td>
+<td>shares_change_yoy IC-Test (Snapshot 30)</td>
+<td>Snapshot 30+</td>
+<td>—</td>
+<td>1h</td>
+<td>Entscheidung: in fSc() oder bleibt Display</td>
+</tr>
+<tr>
+<td><span class="pill pill-yellow">P3</span></td>
+<td>EV/EBITDA-Korrelations-Audit</td>
+<td>—</td>
+<td>v5.9.89</td>
+<td>1-2h</td>
+<td>Eventuelle Vereinfachung valSc()</td>
+</tr>
+<tr>
+<td><span class="pill pill-blue">P4</span></td>
+<td>Annual-IC Folge-Snapshot (Mai 2027)</td>
+<td>1 Jahr</td>
+<td>—</td>
+<td>30 Min</td>
+<td>2. Datenpunkt fuer IC-Trend</td>
+</tr>
+<tr>
+<td><span class="pill pill-blue">P4</span></td>
+<td>alpha_juno_v8 Schatten-Modell (dyn. Gewichte)</td>
+<td>P4 + 3 IC-Snapshots</td>
+<td>v8</td>
+<td>6-10h</td>
+<td>Basis fuer v6.0-Entscheid</td>
+</tr>
+<tr>
+<td><span class="pill pill-mut">P5</span></td>
+<td>v6.0 Deploy mit dyn. Gewichtung</td>
+<td>Schatten-Modell 4Q konsistent positiv</td>
+<td>v6.0</td>
+<td>4-6h</td>
+<td>Lernendes System produktiv</td>
+</tr>
+</table>
+
+<div class="key">
+<strong>Schwellen-Disziplin:</strong> Keine der P1-P5-Aenderungen wird produktiv ohne Walk-Forward A/B oder IC-Validierung. Das ist der StockIQ-Grundsatz seit v5.9.15 (RSI-Filter-Eliminierung). Auch im Sprint 2 unveraendert.
+</div>
+
+<hr>
+
+<!-- ============== F — Quellen ============== -->
+<h2 id="f">F &mdash; Quellen Sprint 2</h2>
+
+<h4>Buffett / Berkshire</h4>
+<ul>
+<li>Berkshire Hathaway Inc. (2025): <em>2025 Annual Report to Shareholders</em> (Greg Abel, erster Brief). berkshirehathaway.com/2025ar/2025ar.pdf &middot; berkshirehathaway.com/letters/2025ltr.pdf</li>
+<li>Buffett, W. (2025): <em>Annual Letter to Shareholders</em>, Februar 2025 (Berichtsjahr 2024, letzter Letter als CEO). berkshirehathaway.com/letters/2024ltr.pdf</li>
+<li>CNN Business, Nov 2025: "Warren Buffett says 'I'm going quiet' in final letter as Berkshire Hathaway CEO" (Hintergrund CEO-Wechsel).</li>
+</ul>
+
+<h4>MOVE-Index / Regime-Modellierung</h4>
+<ul>
+<li>Charles Schwab (Aug 2024): "What's the MOVE Index and Why It Might Matter?" — schwab.com/learn/story/whats-move-index-and-why-it-might-matter</li>
+<li>Society of Actuaries (Sept 2025): "Using Bond and Equity Volatility Indices for Investment Allocation" — soa.org/sections/investment/investment-newsletter/2025/september/rr-2025-09-bitalvo</li>
+<li>FinancialContent (22.12.2025): "Calm in the Credit Markets: What the MOVE Index's All-Clear Means for Equities in 2026"</li>
+<li>Avail Investment (15.03.2026): "Chart Of The Week: When The Bond Market Gets Nervous" — availinvest.com</li>
+<li>FRED, St. Louis Fed: CBOE VIX Series; ICE BofA MOVE Index Series</li>
+</ul>
+
+<h4>Dynamische Faktor-Gewichtung</h4>
+<ul>
+<li>Arxiv 2508.18592 (Aug 2025): "Combined machine learning for stock selection strategy based on dynamic weighting methods" — IC-Mean Weighting Konzept.</li>
+<li>Arxiv 2509.01393 (Sept 2025): "Adaptive Alpha Weighting with PPO: Enhancing Prompt-Based LLM-Generated Alphas in Quant Trading" — Alpha-Decay, Pairwise-Korrelations-Filter.</li>
+<li>Arxiv 2410.14841: "Dynamic Factor Allocation Leveraging Regime-Switching Signals" — Sparse Jump Model fuer Regime-Detection.</li>
+<li>Whaley, R.E. (2009): "Understanding the VIX." Journal of Portfolio Management, 35(3). (Asymmetrische VIX-Reaktion — bestaetigt: VIX nicht als Entry-Filter.)</li>
+<li>Banerjee, P.S.; Doran, J.S.; Peterson, D.R. (2007): "Implied Volatility and Future Portfolio Returns." JBF, 31(10).</li>
+</ul>
+
+<h4>Bereits in Sprint 1 verarbeitet (Referenz)</h4>
+<ul>
+<li>Buffett (2024 Letter): EBITDA-Kritik &rarr; v5.9.84 EV/EBIT 0.45</li>
+<li>AQR / Asness: 5 robuste Faktoren, Momentum 2024 = 96. Perzentile</li>
+<li>Greenblatt: Magic Formula (ROIC + EV/EBIT)</li>
+<li>O'Neil CANSLIM: SPY 200MA als dominanter Filter</li>
+<li>Berkin/Swedroe: Quality, Value, Momentum, LowVol, Size</li>
+</ul>
+
+<footer>
+StockIQ Research Sprint 2 &middot; v5.9.85 &middot; Mai 2026<br>
+Erstellt: claude.ai + project knowledge &middot; Diese Datei: lokal, nie auf GitHub
+</footer>
+
+</div>
+</body>
+</html>

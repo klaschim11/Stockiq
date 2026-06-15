@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StockIQ_dev Analyst-Leitfaden v1.2</title>
+<style>
+  :root {
+    --bg:#060e1a; --card:#0c1420; --border:#1a2a3a;
+    --cyan:#00c8f0; --green:#00e57a; --yellow:#f0c000;
+    --orange:#ff9f1c; --red:#ff5252; --purple:#b07cf8;
+    --mut:#7a9bb5; --txt:#dce8f5;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--txt); font-family:system-ui,sans-serif;
+         font-size:13px; line-height:1.7; padding:20px; max-width:900px; margin:0 auto; }
+  h1 { font-size:24px; color:var(--purple); margin-bottom:4px; }
+  h2 { font-size:16px; color:var(--cyan); margin:28px 0 10px;
+       border-bottom:1px solid var(--border); padding-bottom:6px; }
+  h3 { font-size:13px; color:var(--yellow); margin:16px 0 6px; font-weight:700; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px;
+          padding:14px 16px; margin-bottom:12px; }
+  .card.green  { border-left:3px solid var(--green); }
+  .card.cyan   { border-left:3px solid var(--cyan); }
+  .card.yellow { border-left:3px solid var(--yellow); }
+  .card.orange { border-left:3px solid var(--orange); }
+  .card.red    { border-left:3px solid var(--red); }
+  .card.purple { border-left:3px solid var(--purple); }
+  .card.mut    { border-left:3px solid var(--mut); }
+  .card.new    { border-left:3px solid var(--green); background:#081a0e; }
+  table { width:100%; border-collapse:collapse; font-size:12px; margin:8px 0; }
+  th { background:#0a1628; color:var(--txt); padding:6px 10px; text-align:left; font-weight:700; }
+  td { padding:6px 10px; border-bottom:1px solid var(--border); color:var(--mut); vertical-align:top; }
+  td:first-child { color:var(--txt); font-weight:600; }
+  tr:nth-child(even) td { background:rgba(255,255,255,.02); }
+  code { background:#0a1220; border:1px solid var(--border); border-radius:4px;
+         padding:1px 6px; font-family:monospace; font-size:12px; color:var(--cyan); }
+  pre { background:#0a1220; border:1px solid var(--border); border-radius:8px;
+        padding:12px; font-family:monospace; font-size:11px; color:var(--green);
+        overflow-x:auto; margin:8px 0; line-height:1.5; }
+  .step { display:flex; gap:12px; margin-bottom:10px; align-items:flex-start; }
+  .step-num { background:var(--purple); color:#fff; font-weight:900; font-size:13px;
+              width:26px; height:26px; border-radius:50%; display:flex;
+              align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+  .step-body { flex:1; }
+  .tab-pill { display:inline-block; padding:3px 12px; border-radius:12px; font-size:11px;
+              font-weight:700; margin:2px; }
+  .t1 { background:rgba(0,200,240,.15);  color:var(--cyan);   border:1px solid var(--cyan); }
+  .t2 { background:rgba(0,229,122,.12);  color:var(--green);  border:1px solid var(--green); }
+  .t3 { background:rgba(176,124,248,.12);color:var(--purple); border:1px solid var(--purple); }
+  .t4 { background:rgba(240,192,0,.12);  color:var(--yellow); border:1px solid var(--yellow); }
+  .t5 { background:rgba(255,159,28,.15); color:var(--orange); border:1px solid var(--orange); }
+  .badge { display:inline-block; padding:2px 8px; border-radius:8px; font-size:10px;
+           font-weight:700; font-family:monospace; margin-left:6px; vertical-align:middle; }
+  .badge-new  { background:rgba(0,229,122,.2);  color:var(--green);  border:1px solid var(--green); }
+  .badge-upd  { background:rgba(0,200,240,.15); color:var(--cyan);   border:1px solid var(--cyan); }
+  .badge-pend { background:rgba(176,124,248,.15);color:var(--purple);border:1px solid var(--purple); }
+  .mut { color:var(--mut); font-size:11px; }
+  .status-ok   { color:var(--green); font-weight:700; }
+  .status-act  { color:var(--cyan);  font-weight:700; }
+  .status-pend { color:var(--mut);   font-weight:700; }
+  .status-ref  { color:var(--red);   font-weight:700; }
+  details { margin-bottom:10px; }
+  details > summary {
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:12px 16px; cursor:pointer; list-style:none; display:flex;
+    align-items:center; gap:10px; user-select:none;
+    color:var(--txt); font-weight:700; font-size:13px;
+  }
+  details > summary::-webkit-details-marker { display:none; }
+  details > summary::before {
+    content:"▶"; color:var(--purple); font-size:10px; transition:transform 0.2s;
+  }
+  details[open] > summary::before { transform:rotate(90deg); }
+  .details-body { background:var(--card); border:1px solid var(--border);
+                  border-top:none; border-radius:0 0 10px 10px; padding:14px 16px; }
+  .ddb-item { background:var(--card); border:1px solid var(--border); border-radius:8px;
+              padding:12px 14px; margin-bottom:8px; }
+  .ddb-item .ddb-id { font-family:monospace; font-size:11px; font-weight:700;
+                       color:var(--orange); margin-bottom:4px; }
+  .ddb-item .ddb-title { font-size:13px; font-weight:700; color:var(--txt); margin-bottom:4px; }
+  .ddb-item .ddb-desc  { font-size:11px; color:var(--mut); line-height:1.55; }
+  .ddb-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+  .chk { list-style:none; }
+  .chk li { padding:3px 0; font-size:12px; color:var(--mut); }
+  .chk li::before { content:"[ ] "; font-family:monospace; color:var(--border); }
+  footer { margin-top:32px; padding-top:12px; border-top:1px solid var(--border);
+           font-family:monospace; font-size:10px; color:var(--mut); text-align:center; }
+</style>
+</head>
+<body>
+
+<h1>StockIQ_dev</h1>
+<div style="font-size:14px;color:var(--mut);margin-bottom:4px">
+  Analyst-Leitfaden v1.1 &mdash; 08. Juni 2026
+  <span class="badge badge-upd">UPDATE</span>
+</div>
+<div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:20px">
+  v1.0 Mai 2026 (Sprint 10) | v1.1 Juni 2026 (Sprint 28) &middot;
+  DDB-1..5 Erweiterungen dokumentiert &middot; 5 Tabs (4 vorhanden + Tab 5 geplant)
+</div>
+
+<!-- ============================================================ -->
+<h2>1. Was ist StockIQ_dev?</h2>
+<div class="card purple">
+  <p>StockIQ_dev ist das lokale Analyst-Dashboard fuer die technische &Uuml;berwachung und Weiterentwicklung von StockIQ.
+  Es trennt die Entwickler-Perspektive (Walk-Forward, IC-Analyse, Snapshot-Trends, Hypothesen-Status)
+  vom &ouml;ffentlichen Anwender-Dashboard und b&uuml;ndelt alle empirischen Tests an einem Ort.</p>
+  <table style="margin-top:12px">
+    <tr><th>Eigenschaft</th><th>Anwender-Dashboard</th><th>Analyst-Dashboard</th></tr>
+    <tr><td>URL</td><td>klaschim11.github.io/Stockiq</td><td>localhost:8080/dev/</td></tr>
+    <tr><td>Deployment</td><td>GitHub Pages (oeffentlich)</td><td>Lokal (privat)</td></tr>
+    <tr><td>JavaScript</td><td>ES5 (iOS-kompatibel)</td><td>Modern (kein Constraint)</td></tr>
+    <tr><td>Datenquellen</td><td>stockiq_scores.json</td><td>dev_archive + alpha_results + hypotheses_status</td></tr>
+    <tr><td>Zweck</td><td>Signale &amp; Allokation</td><td>Modell-Validierung &amp; Hypothesen-Tracking</td></tr>
+  </table>
+</div>
+
+<h3>Tab-&Uuml;bersicht (Stand Sprint 28)</h3>
+<div class="card cyan">
+  <table>
+    <tr><th>Tab</th><th>Inhalt</th><th>Status</th><th>Datenquelle</th></tr>
+    <tr>
+      <td><span class="tab-pill t1">Tab 1</span> Walk-Forward</td>
+      <td>OOS Win Rate, Fenster, Exit-Breakdown, Hyp.-Log</td>
+      <td><span class="badge badge-upd">DDB-3</span></td>
+      <td><code>stockiq_alpha_results.json</code></td>
+    </tr>
+    <tr>
+      <td><span class="tab-pill t2">Tab 2</span> Snapshot-Analyse</td>
+      <td>Signal-Verteilung, Score-Drift, sw-Verteilung, Transitionen</td>
+      <td><span class="badge badge-upd">DDB-2</span></td>
+      <td><code>stockiq_dev_archive.json</code></td>
+    </tr>
+    <tr>
+      <td><span class="tab-pill t3">Tab 3</span> IC-&Uuml;bersicht</td>
+      <td>Annual IC, Sektor-IC historisch, IC-Readiness</td>
+      <td><span class="badge badge-upd">DDB-4</span></td>
+      <td><code>stockiq_sektor_ic_results.json</code></td>
+    </tr>
+    <tr>
+      <td><span class="tab-pill t4">Tab 4</span> System-Status</td>
+      <td>Datei-Alter, Stack-Versionen, Snapshots, AH-1-Ampel</td>
+      <td><span class="badge badge-upd">DDB-5</span></td>
+      <td><code>stockiq_scores.json (__macro__)</code></td>
+    </tr>
+    <tr>
+      <td><span class="tab-pill t5">Tab 5</span> Hypothesen <span class="badge badge-new">NEU</span></td>
+      <td>Status aller 36 Hyp., Trigger-Kalender, Ergebnisse</td>
+      <td><span class="badge badge-pend">DDB-1 Sprint 28</span></td>
+      <td><code>hypotheses_status.json</code></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<h2>2. Voraussetzungen &amp; Start</h2>
+
+<div class="card green">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <strong>Lokalen HTTP-Server starten</strong><br>
+      <code>cd C:\Users\klasc\Stockiq</code> &nbsp; dann &nbsp; <code>python -m http.server 8080</code><br>
+      <span class="mut">Terminal offen lassen.</span>
+<div style="margin-top:8px;padding:8px 12px;background:rgba(255,82,82,.12);border:1px solid #ff5252;border-radius:6px;color:#ff5252;font-weight:700;">
+PFLICHT: Nicht als file:// oeffnen -- nur via localhost!
+file:// blockiert alle JSON-Fetches (CORS). Alle Tabs zeigen dann "nicht gefunden".
+</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <strong>Dashboard aufrufen</strong><br>
+      <code>http://localhost:8080/dev/stockiq_dev.html</code>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <strong>Voraussetzung: run_daily.bat ausgefuehrt</strong><br>
+      <span class="mut">Erzeugt die taeglich aktualisierten JSON-Dateien.</span>
+<table style="margin-top:8px;font-size:11px">
+<tr><th>Datei</th><th>Schreiber</th><th>Fehlt wenn</th></tr>
+<tr><td>stockiq_scores.json</td><td>run_daily (taegl.)</td><td>run_daily nicht ausgefuehrt</td></tr>
+<tr><td>stockiq_dev_archive.json</td><td>run_daily (taegl.)</td><td>run_daily nicht ausgefuehrt</td></tr>
+<tr><td>stockiq_alpha_results.json</td><td>alpha_juno (manuell)</td><td>alpha_juno nie gestartet</td></tr>
+<tr><td>hypotheses_status.json</td><td>run_daily (taegl.)</td><td>run_daily nicht ausgefuehrt</td></tr>
+</table>
+    </div>
+  </div>
+</div>
+
+<div class="card cyan">
+  <h3 style="margin-top:0">JSON-Quellen (relative Pfade aus dev/)</h3>
+  <table>
+    <tr><th>Datei</th><th>Tab</th><th>Inhalt</th><th>Schreiber</th></tr>
+    <tr>
+      <td><code>../stockiq_alpha_results.json</code></td>
+      <td><span class="tab-pill t1">Tab 1</span></td>
+      <td>Walk-Forward-Ergebnisse aller Laeufe</td>
+      <td>alpha_juno.py (manuell)</td>
+    </tr>
+    <tr>
+      <td><code>../stockiq_dev_archive.json</code></td>
+      <td><span class="tab-pill t2">Tab 2</span></td>
+      <td>Taegl. Snapshots (sig, sc, sr, p, p50, prev_sig, delta_sc, sw, ...)</td>
+      <td>archive_update.py v1.2</td>
+    </tr>
+    <tr>
+      <td><code>../stockiq_scores.json</code></td>
+      <td><span class="tab-pill t2">Tab 2</span> <span class="tab-pill t4">Tab 4</span></td>
+      <td>Aktuelle Scores + __macro__ (SPY, VIX, curve_slope_bps, ...)</td>
+      <td>score.py (taeglich)</td>
+    </tr>
+    <tr>
+      <td><code>../stockiq_sektor_ic_results.json</code></td>
+      <td><span class="tab-pill t3">Tab 3</span></td>
+      <td>sektor_ic_historisch.py Ergebnisse (ICIR, t-Wert, Top/Bot-Sektoren)</td>
+      <td>sektor_ic_historisch.py (manuell)</td>
+    </tr>
+    <tr>
+      <td><code>../stockiq_annual_ic_results.json</code></td>
+      <td><span class="tab-pill t3">Tab 3</span></td>
+      <td>Annual IC-Analyse (FH-1..3 Ergebnisse, 14 Faktoren)</td>
+      <td>ic_analysis.py (jaehrlich)</td>
+    </tr>
+    <tr>
+      <td><code>../hypotheses_status.json</code></td>
+      <td><span class="tab-pill t5">Tab 5</span></td>
+      <td>Status aller 36 Hypothesen (validiert/aktiv/ausstehend/widerlegt)</td>
+      <td>hypotheses_update.py (taeglich)</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<h2>3. Tab 1: Walk-Forward <span class="badge badge-upd">DDB-3 Update</span></h2>
+
+<div class="card cyan">
+  <p>Zeigt die aktuellen Walk-Forward-Ergebnisse der Produktionsstrategie (alpha_juno v6b_6m-u4).</p>
+  <table style="margin-top:10px">
+    <tr><th>Anzeige</th><th>Aktueller Wert</th><th>Was bedeutet das</th></tr>
+    <tr>
+      <td>OOS AVG</td>
+      <td><strong class="status-ok">59.5%</strong></td>
+      <td>Durchschnitt ueber alle Walk-Forward-Fenster. Ziel: &gt;55%. Grenzwert: kein Fenster unter 50%.</td>
+    </tr>
+    <tr>
+      <td>Stabilitaet</td>
+      <td><strong class="status-ok">3.0pp</strong></td>
+      <td>Max-Min-Spanne der Fenster-Win-Rates. Kleiner = robuster. Zielwert: &lt;5pp.</td>
+    </tr>
+    <tr>
+      <td>Ticker-Universum</td>
+      <td><strong>305</strong></td>
+      <td>WL3 v1.7. alpha_juno und scores.json synchron.</td>
+    </tr>
+    <tr>
+      <td>Baseline-Vergleich</td>
+      <td>6M vs. 3M</td>
+      <td>6M siegt klar: gleiche Win-Rate, Stabilitaet 3.0pp vs. ~10pp bei 3M.</td>
+    </tr>
+    <tr>
+      <td>Exit-Breakdown</td>
+      <td>Trail/SL/Zeit</td>
+      <td>Anteil der drei Exit-Typen je Fenster. Erklaert Strategie-Verhalten.</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card yellow">
+  <h3 style="margin-top:0">Hypothesen-Log (Walk-Forward-Ergebnisse)</h3>
+  <table>
+    <tr><th>Hypothese</th><th>Ergebnis</th><th>OOS-Delta</th><th>Status</th></tr>
+    <tr>
+      <td>RH-1: SPY 200MA-Filter</td>
+      <td>+23pp OOS WR</td>
+      <td style="color:var(--green)">+23pp</td>
+      <td><span class="status-ok">VALIDIERT</span></td>
+    </tr>
+    <tr>
+      <td>RH-4: 50MA-Gate (v1.4.11)</td>
+      <td>Entry-Filter im MACD-Pfad aktiv seit 01.06.2026</td>
+      <td><em>laufend</em></td>
+      <td><span class="status-act">AKTIV</span></td>
+    </tr>
+    <tr>
+      <td>WH-1: RSI Entry-Filter</td>
+      <td>Kein OOS-Effekt. Hysterese-Varianten getestet.</td>
+      <td style="color:var(--red)">~0pp</td>
+      <td><span class="status-ref">REFUTIERT</span></td>
+    </tr>
+    <tr>
+      <td>WH-2: Bond-Regime-Daempfer</td>
+      <td>-3.2pp bis -3.9pp OOS WR</td>
+      <td style="color:var(--red)">-3.5pp</td>
+      <td><span class="status-ref">REFUTIERT</span></td>
+    </tr>
+    <tr>
+      <td>WH-3: Score-Filter cSc &ge;65</td>
+      <td>-3pp OOS WR (statische Scores nicht rueckwirkend)</td>
+      <td style="color:var(--red)">-3pp</td>
+      <td><span class="status-ref">REFUTIERT</span></td>
+    </tr>
+    <tr>
+      <td>PH-3 / WH-4: sektorFactor Filter</td>
+      <td>OOS -2.7pp, F3=46.7% (K.O.-Kriterium &lt;50%)</td>
+      <td style="color:var(--red)">-2.7pp</td>
+      <td><span class="status-ref">REFUTIERT (06.06.2026)</span></td>
+    </tr>
+  </table>
+</div>
+
+<div class="card mut">
+  <strong>Wann Walk-Forward neu ausfuehren?</strong> Nur bei Strategie-Aenderungen, nicht taeglich (~30-45 Min Laufzeit).
+  Naechster Pflicht-Lauf: WL3 Run Mitte Juli 2026 (P5), dann wenn RH-4 nach Trigger-Datum ausgewertet wird.
+</div>
+
+<!-- ============================================================ -->
+<h2>4. Tab 2: Snapshot-Analyse <span class="badge badge-upd">DDB-2 Erweiterung</span></h2>
+
+<div class="card green">
+  <p>Zeigt die Entwicklung von Signalen, Scores und Signal-Qualitaet ueber Zeit.
+  Waechst automatisch mit jedem run_daily-Lauf. Aktuell: <strong>12+ Snapshots</strong> (Start 29.05.2026).</p>
+  <table style="margin-top:10px">
+    <tr><th>Anzeige</th><th>Was bedeutet das</th><th>Verfuegbar ab</th></tr>
+    <tr>
+      <td>Signal-Verteilung</td>
+      <td>Anteil BUY/WATCH/SELL je Snapshot. Erkennt Marktphasen-Verschiebungen.</td>
+      <td>Snap 1</td>
+    </tr>
+    <tr>
+      <td>Score-Drift</td>
+      <td>Durchschnittlicher cSc ueber Zeit. Fallend = Marktdruck oder Universum-Qualitaet sinkt.</td>
+      <td>Snap 2</td>
+    </tr>
+    <tr>
+      <td>Sektor-Konzentration BUY</td>
+      <td>Anteil BUY(Sektor)/BUY(gesamt). Rotationsmuster erkennbar.</td>
+      <td>Snap 1 + scores.json</td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--green)">sw-Verteilung</strong> <span class="badge badge-new">DDB-2</span></td>
+      <td>Anteil sw=False (MACD-HOLD) vs. sw=True (Score-HOLD) unter allen HOLD-Signalen.
+          Direkte Datenbasis fuer TU-2. Erwartet: ~90% MACD-Pfad (sw=False).</td>
+      <td>Snap 11+</td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--green)">HOLD-&gt;BUY Transitionen</strong> <span class="badge badge-new">DDB-2</span></td>
+      <td>Zaehler: wieviele Ticker wechselten seit letztem Snapshot von HOLD auf BUY?
+          Bereitschaftsindikator fuer TU-1-Test (~20+ Transitionen benoetigt).</td>
+      <td>Snap 11+</td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--green)">delta_sc Durchschnitt</strong> <span class="badge badge-new">DDB-2</span></td>
+      <td>Mittlere Score-Aenderung vs. Vortag. Zeigt Marktdynamik und Score-Stabilitaet.</td>
+      <td>Snap 11+</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card cyan">
+  <h3 style="margin-top:0">Dev-Archive Format v1.2</h3>
+  <pre>{
+  "n_snapshots": 12,
+  "snapshots": [
+    {
+      "ts":   1748556000000,
+      "date": "2026-06-08",
+      "entries": [
+        {
+          "t":        "AAPL",
+          "sig":      "buy",
+          "sc":       78,
+          "sr":       3,
+          "p":        221.50,
+          "p50":      195.30,
+          "prev_sig": "hold",
+          "delta_sc": 4,
+          "sw":       false,
+          "oe":       0.072,
+          "ev_eb":    24.1,
+          "fcf":      0.034,
+          "pio":      7,
+          "acr":      -0.021
+        },
+        ...
+      ]
+    }
+  ]
+}</pre>
+  <div class="mut">
+    Felder ab Snap 1: t, sig, sc, sr, p, p50, m3, oe, ev_eb, fcf, pio, acr<br>
+    Felder ab Snap 11 (archive_update v1.2): prev_sig, delta_sc, sw<br>
+    sw=False = MACD-Pfad (HOLD wegen fehlender Entry-Bedingung)<br>
+    sw=True  = Score-Pfad HOLD (Score 55-69, MACD-Felder fehlend)
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>5. Tab 3: IC-&Uuml;bersicht <span class="badge badge-upd">DDB-4 Umbau</span></h2>
+
+<div class="card purple">
+  <p>Zeigt den Stand der Information-Coefficient-Analysen. Ab DDB-4: JSON-basiert statt hardcoded.</p>
+  <table style="margin-top:10px">
+    <tr><th>Bereich</th><th>Inhalt</th><th>Naechste Aktualisierung</th></tr>
+    <tr>
+      <td>Annual IC (FH-1..3)</td>
+      <td>IC aus <code>stockiq_annual_ic_results.json</code> (14 Faktoren, 4 Jahrespaare 2021-2025)</td>
+      <td>Mai 2027 (naechstes Maifenster)</td>
+    </tr>
+    <tr>
+      <td>Sektor-IC historisch (RH-5)</td>
+      <td>sektor_ic_historisch.py: ICIR=-0.209, t=-1.834, p&lt;0.05 einseitig. Top-4 +2.09%/M, Bot-4 +1.06%/M</td>
+      <td>~Juli 2026 (P4-Rerun bei ~30 Snapshots)</td>
+    </tr>
+    <tr>
+      <td>IC-Readiness FH-3b</td>
+      <td>Zaehler: N Snapshots mit fcf_trend_yoy vorhanden. Testbar bei ~20 Snapshots.</td>
+      <td>Laufend (nach fund_juno v7.9.38)</td>
+    </tr>
+    <tr>
+      <td>WL3 Signal-Tracking</td>
+      <td>IC: cSc vs. 6M Forward-Return. Benoetigt p-Feld + 6M Vorlaufzeit.</td>
+      <td>~Dez 2026 (erste 6M-Fenster)</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card yellow">
+  <h3 style="margin-top:0">Validierte IC-Ergebnisse (Stand Sprint 28)</h3>
+  <table>
+    <tr><th>Faktor</th><th>IC</th><th>t-Wert</th><th>ICIR</th><th>Hypothese</th><th>Status</th></tr>
+    <tr>
+      <td>Owner Earnings Yield</td>
+      <td class="status-ok">+0.155</td>
+      <td class="status-ok">4.19</td>
+      <td class="status-ok">1.43</td>
+      <td>FH-1</td>
+      <td><span class="status-ok">VALIDIERT</span></td>
+    </tr>
+    <tr>
+      <td>EV/EBIT</td>
+      <td class="status-ok">-0.143</td>
+      <td class="status-ok">4.02</td>
+      <td class="status-ok">-</td>
+      <td>FH-2</td>
+      <td><span class="status-ok">VALIDIERT</span></td>
+    </tr>
+    <tr>
+      <td>FCF Yield</td>
+      <td class="status-ok">+0.062</td>
+      <td style="color:var(--yellow)">1.82</td>
+      <td class="status-ok">1.39</td>
+      <td>FH-3</td>
+      <td><span class="status-ok">VALIDIERT</span></td>
+    </tr>
+    <tr>
+      <td>Sektor-Momentum (14d)</td>
+      <td class="status-ok">-0.157</td>
+      <td class="status-ok">-3.332</td>
+      <td style="color:var(--yellow)">-0.209</td>
+      <td>RH-5</td>
+      <td><span class="status-ok">VALIDIERT</span></td>
+    </tr>
+  </table>
+  <div class="mut" style="margin-top:6px">
+    Signifikanzchwellen: |IC| &gt; 0.05, |t| &ge; 2.0 (explorativ), t &ge; 3.0 (produktionsreif, MH-1).
+    Sektor-IC: ICIR=-0.209, t=-1.834, p&lt;0.05 einseitig (Hebel-A-Standard).
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>6. Tab 4: System-Status <span class="badge badge-upd">DDB-5 Erweiterung</span></h2>
+
+<div class="card yellow">
+  <table style="margin-top:0">
+    <tr><th>Anzeige</th><th>Was pruefen</th></tr>
+    <tr>
+      <td>Datei-Alter</td>
+      <td>scores.json, alpha_results.json, dev_archive.json, hypotheses_status.json &mdash; aelter als 2 Tage = run_daily noetig</td>
+    </tr>
+    <tr>
+      <td>Stack-Versionen</td>
+      <td>fund_juno v7.9.3x, score.py v1.4.11, alpha_juno v6b_6m-u4, dashboard v6.4.0 &mdash; alle auf aktuellem Stand?</td>
+    </tr>
+    <tr>
+      <td>Snapshot-Zaehler</td>
+      <td>n_snapshots in dev_archive.json. Wachsend (Mo-Fr). Ziele: 20+ Juli / 130+ Dez 2026</td>
+    </tr>
+    <tr>
+      <td>Hypothesen-Zaehler</td>
+      <td>n_active / n_validated / n_refuted aus hypotheses_status.json. Aktuell: 7 / 6 / 4</td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--green)">AH-1 Regime-Ampel</strong> <span class="badge badge-new">DDB-5</span></td>
+      <td>Rolling 12M Korr(SPY, TLT). Gruen = negativ (klassisch), Gelb = nahe 0, Rot = positiv (Trigger-Zone).
+          Datenbasis: __macro__ oder direkter yfinance-fetch.</td>
+    </tr>
+    <tr>
+      <td>Trigger-Kalender</td>
+      <td>Naechste anstehende Hypothesen-Tests mit Datum und Voraussetzung</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card cyan">
+  <h3 style="margin-top:0">AH-1 Regime-Ampel &mdash; Implementierungs-Logik</h3>
+  <pre>// Korrelation SPY/TLT rolling 12M
+// Datenbasis: yfinance fetch 'SPY', 'TLT' (oder aus __macro__ wenn verfuegbar)
+// Berechnung: Pearson Korr ueber letzte 252 Handelstage
+// Ausgabe:
+//   corr < -0.1  -> GRUEN  (klassische Hedge-Funktion intakt)
+//   -0.1 to +0.1 -> GELB   (Uebergangsregime, beobachten)
+//   corr > +0.1  -> ROT    (AH-1 Trigger-Zone, Rezession abwarten)</pre>
+</div>
+
+<!-- ============================================================ -->
+<h2>7. Tab 5: Hypothesen-Status <span class="badge badge-new">NEU -- DDB-1</span></h2>
+
+<div class="card new">
+  <p>Zentrales Validierungs-Cockpit. Liest <code>hypotheses_status.json</code> (taeglich aktualisiert von hypotheses_update.py)
+  und zeigt den Status aller 36 Hypothesen auf einen Blick. Dies ist die wichtigste Einzelerweiterung
+  des Dev-Dashboards &mdash; Tab 5 macht das Hypothesen-Tracking erstmals sichtbar und navigierbar.</p>
+</div>
+
+<div class="card green">
+  <h3 style="margin-top:0">Geplante Anzeige-Elemente</h3>
+  <table>
+    <tr><th>Element</th><th>Inhalt</th></tr>
+    <tr>
+      <td>Status-Summary</td>
+      <td>4 KPI-Karten: Aktiv (7) / Validiert (6) / Refutiert (4) / Ausstehend (17+)</td>
+    </tr>
+    <tr>
+      <td>Tabelle alle Hypothesen</td>
+      <td>ID | Praefix | Label | Status | Trigger-Datum | Ergebnis-Snippet
+          Sortierbar nach Status und Trigger-Datum</td>
+    </tr>
+    <tr>
+      <td>Trigger-Kalender</td>
+      <td>Naechste anstehende Tests mit Datum, Methode, Voraussetzung (Snapshot-Schwellen)</td>
+    </tr>
+    <tr>
+      <td>Aktive Hypothesen Detail</td>
+      <td>Fuer jede aktive Hyp.: aktueller Beobachtungsstand, Fortschrittsbalken bis Trigger</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card cyan">
+  <h3 style="margin-top:0">Datenbasis: hypotheses_status.json (Schema)</h3>
+  <pre>{
+  "_meta": {
+    "last_updated":  "2026-06-08",
+    "n_hypotheses":  36,
+    "n_validated":   6,
+    "n_active":      7,
+    "n_pending":     17,
+    "n_refuted":     4
+  },
+  "hypotheses": {
+    "SH-2": {
+      "label":       "OOS Win Rate > 55% (Walk-Forward)",
+      "level":       "system",
+      "status":      "validiert",
+      "trigger":     null,
+      "last_updated":"2026-06-06",
+      "result": {
+        "oos_wr":      0.595,
+        "stability_pp":3.0,
+        "n_windows":   4,
+        "verdict":     "validiert"
+      }
+    },
+    "TU-2": {
+      "label":       "sw=False HOLD->BUY outperforms sw=True",
+      "level":       "transition",
+      "status":      "aktiv",
+      "trigger":     "2026-12-01",
+      "depends_on":  "TU-1",
+      "notes":       "Voraussetzung: archive_update v1.2 (ab Snap 11)"
+    }
+  }
+}</pre>
+</div>
+
+<div class="card yellow">
+  <h3 style="margin-top:0">Trigger-Kalender (Stand Sprint 28)</h3>
+  <table>
+    <tr><th>Zeitpunkt</th><th>Hypothesen</th><th>Methode</th><th>Voraussetzung</th></tr>
+    <tr><td>~Juli 2026</td><td>TU-1, WL3 Run (P5)</td><td>Transition-Analyse, Walk-Forward</td><td>~20 Snapshots mit prev_sig</td></tr>
+    <tr><td>~Juli 2026</td><td>P4-Sektor-IC Rerun</td><td>sektor_ic_historisch.py</td><td>~30 Snapshots sr-Feld</td></tr>
+    <tr><td>~Aug 2026</td><td>FH-10: Financial Services IC</td><td>IC-Analyse</td><td>f_sc_financial Archiv-Daten</td></tr>
+    <tr><td>~Okt 2026</td><td>FH-3b: FCF-Trend YoY IC</td><td>IC-Analyse</td><td>~20 Snap. fcf_trend_yoy (ab v7.9.38)</td></tr>
+    <tr><td>~Dez 2026</td><td>TU-2: sw-Qualitaet HOLD-&gt;BUY</td><td>Transition-Analyse</td><td>TU-1 nicht refutiert + 30+ Transitionen</td></tr>
+    <tr><td>~Feb 2027</td><td>SH-4: Score-SELL-Gate Walk-Forward</td><td>Walk-Forward</td><td>Laeuft seit 04.06.2026</td></tr>
+    <tr><td>~Feb 2027</td><td>SH-1, FH-1..9, SH-3</td><td>IC-Analyse</td><td>~20 Snap. + 6M Forward-Return</td></tr>
+    <tr><td>Naechste Rezession</td><td>AH-1: Bond Safe-Haven</td><td>Beobachtung (Korr. SPY/TLT)</td><td>SPY&lt;200MA + VIX&gt;25 &ge;4 Wochen</td></tr>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<h2>8. Technische Hintergruende</h2>
+
+<details>
+<summary>Score-Architektur (cSc = fSc*0.35 + momSc*0.25 + trendSc*0.20 + rSc*0.20)</summary>
+<div class="details-body">
+  <table>
+    <tr><th>Komponente</th><th>Gewicht</th><th>Kern-Faktoren</th><th>Routing</th></tr>
+    <tr><td>fSc (Fundamental)</td><td>35%</td><td>OE-Yield (IC+0.155), EV/EBIT (IC-0.143), FCF Yield (IC+0.062), ROCE, PEG</td>
+        <td>f_sc() Standard | f_sc_financial() | f_sc_utilities()</td></tr>
+    <tr><td>momSc (Momentum)</td><td>25%</td><td>12M-Skip Mom., EPS-Wachstum, VIX-Daempfung (Whaley 2009)</td><td>momSc() alle Sektoren gleich</td></tr>
+    <tr><td>trendSc (Trend)</td><td>20%</td><td>MACD, RSI-Signal, MA-Filter</td><td>trendSc()</td></tr>
+    <tr><td>rSc (Risiko)</td><td>20%</td><td>Beta, EVAR (rel.), FCF/Debt</td><td>rSc()</td></tr>
+  </table>
+</div>
+</details>
+
+<details>
+<summary>Signal-Pfade (score.py v1.4.11 -- MACD-Primaerpfad + Fallback)</summary>
+<div class="details-body">
+  <p><strong>MACD-Primaerpfad (~90% der Ticker):</strong><br>
+  Eintritt: above200 + sw + macd_cross + macd_hist + atr alle not None<br>
+  sw = bool(hist_now &lt; 0) &mdash; fund_juno Ticker-Feld<br>
+  ok = zl AND hist_ok() AND above200 AND NOT sw AND above_50ma (RH-4, v1.4.11)<br>
+  Signale: strong | pb | buy | buy_rsi_warn | watch_rsi | watch | sell | sell_zl | sell_ma | sell_hist</p>
+  <p style="margin-top:8px"><strong>Fallback Score-Pfad:</strong><br>
+  score &ge;70 AND above_50ma -&gt; buy | score &ge;70 -&gt; hold | score &ge;55 -&gt; hold | score &ge;40 -&gt; watch | else -&gt; sell</p>
+  <p style="margin-top:8px"><strong>SH-4 Gate (v1.4.11):</strong> isSell AND cSc &ge;55 -&gt; "hold" (Score-Override)</p>
+</div>
+</details>
+
+<details>
+<summary>Literatur-Grundlagen (Auswahl)</summary>
+<div class="details-body">
+  <table>
+    <tr><th>Quelle</th><th>StockIQ-Anwendung</th></tr>
+    <tr><td>Fama/French (1992, 1996)</td><td>Multifaktor-Grundstruktur (Size, Value, Profitability)</td></tr>
+    <tr><td>Asness/Moskowitz/Pedersen (2013)</td><td>Value + Momentum universell (Kern-Kombination)</td></tr>
+    <tr><td>Piotroski (2000)</td><td>F-Score Bilanzkraft (pioScore Gate in fSc)</td></tr>
+    <tr><td>Moskowitz/Grinblatt (1999)</td><td>Industry/Sector Momentum (Tab 8 Grundlage)</td></tr>
+    <tr><td>Novy-Marx (2013)</td><td>Gross Profitability als Qualitaetsproxy (OE, FCF)</td></tr>
+    <tr><td>Harvey/Liu/Zhu (2016)</td><td>t &gt; 3.0 Schwelle (MH-1) bei Multiple-Testing</td></tr>
+    <tr><td>Faber (2007)</td><td>SPY 200MA-Filter +23pp (RH-1, dominierender Faktor)</td></tr>
+    <tr><td>Whaley (2009)</td><td>VIX asymmetrisch: Daempfung in momSc bei VIX &gt;20/30</td></tr>
+    <tr><td>Buffett/Abel (ab 2026)</td><td>Owner Earnings, EV/EBIT &uuml;ber EV/EBITDA, FCF-Trend-Warnung</td></tr>
+  </table>
+</div>
+</details>
+
+<!-- ============================================================ -->
+<h2>9. DDB Implementierungs-Checkliste</h2>
+
+<div class="card orange">
+  <p>Diese Checkliste trackt die ausstehenden Dev-Dashboard-Erweiterungen (DDB-1 bis DDB-5).
+  Abarbeitungsreihenfolge nach Prioritaet: DDB-1 hat hoechsten ROI, da hypotheses_status.json
+  bereits vorhanden ist und nur eine Lese-Funktion benoetigt.</p>
+</div>
+
+<div class="ddb-grid">
+
+  <div class="ddb-item" style="border-left:3px solid var(--orange)">
+    <div class="ddb-id">DDB-1 &mdash; Sprint 28 &mdash; ~2h</div>
+    <div class="ddb-title">Tab 5: Hypothesen-Status-Tab</div>
+    <div class="ddb-desc">
+      JSON-Load hypotheses_status.json. Status-Summary (4 KPI-Karten).
+      Tabelle aller 36 Hypothesen mit Farbkodierung.
+      Trigger-Kalender. Detail-Karten fuer aktive Hypothesen.
+    </div>
+    <ul class="chk" style="margin-top:8px">
+      <li>goTab(5) in index.html registrieren</li>
+      <li>loadHypotheses() Funktion schreiben</li>
+      <li>Status-KPI-Karten rendern</li>
+      <li>Hypothesen-Tabelle (alle 36) aufbauen</li>
+      <li>Trigger-Kalender Abschnitt</li>
+      <li>node stockiq_test.js + Puppeteer gruen</li>
+    </ul>
+  </div>
+
+  <div class="ddb-item" style="border-left:3px solid var(--green)">
+    <div class="ddb-id">DDB-2 &mdash; Sprint 28 &mdash; ~1h</div>
+    <div class="ddb-title">Tab 2: Archive v1.2 Felder</div>
+    <div class="ddb-desc">
+      sw-Verteilung ueber Zeit (MACD vs. Score-HOLD).
+      HOLD-&gt;BUY Transitionszaehler je Snapshot.
+      delta_sc Durchschnitt. Nur wenn n_snapshots &ge; 11.
+    </div>
+    <ul class="chk" style="margin-top:8px">
+      <li>sw-Felder aus archive entries lesen</li>
+      <li>Verteilungs-Chart oder Tabelle je Snapshot</li>
+      <li>Transitions-Zaehler prev_sig == "hold" AND sig == "buy"</li>
+      <li>Guard: nur rendern wenn Felder vorhanden (Snap &ge;11)</li>
+    </ul>
+  </div>
+
+  <div class="ddb-item" style="border-left:3px solid var(--cyan)">
+    <div class="ddb-id">DDB-3 &mdash; Sprint 28 &mdash; ~30 Min</div>
+    <div class="ddb-title">Tab 1: Daten-Update</div>
+    <div class="ddb-desc">
+      OOS 60.1% -&gt; 59.5%, Ticker 299 -&gt; 305.
+      Hypothesen-Log: RH-4 (50MA-Gate, aktiv seit 01.06.2026)
+      und PH-3/WH-4 (sektorFactor, REFUTIERT -2.7pp) ergaenzen.
+    </div>
+    <ul class="chk" style="margin-top:8px">
+      <li>Baseline-Werte in alpha_results.json oder HTML-Konstanten anpassen</li>
+      <li>Hyp.-Log Eintrag RH-4 hinzufuegen</li>
+      <li>Hyp.-Log Eintrag PH-3 mit Ergebnis-Zahlen</li>
+    </ul>
+  </div>
+
+  <div class="ddb-item" style="border-left:3px solid var(--purple)">
+    <div class="ddb-id">DDB-4 &mdash; Sprint 29 &mdash; ~1-2h</div>
+    <div class="ddb-title">Tab 3: IC aus JSON laden</div>
+    <div class="ddb-desc">
+      stockiq_sektor_ic_results.json laden (ICIR=-0.209, t=-1.834, Top-4/Bot-4 Spreads).
+      stockiq_annual_ic_results.json statt Hardcode.
+      IC-Readiness-Indikator fuer FH-3b (N Snapshots fcf_trend_yoy).
+    </div>
+    <ul class="chk" style="margin-top:8px">
+      <li>loadIC() async-Funktion (Promise.all fuer beide JSONs)</li>
+      <li>Sektor-IC historisch als eigene Karte</li>
+      <li>Annual IC dynamisch rendern</li>
+      <li>Readiness-Zaehler fuer FH-3b</li>
+    </ul>
+  </div>
+
+  <div class="ddb-item" style="border-left:3px solid var(--yellow)">
+    <div class="ddb-id">DDB-5 &mdash; Sprint 29 &mdash; ~1h</div>
+    <div class="ddb-title">Tab 4: AH-1 Regime-Ampel</div>
+    <div class="ddb-desc">
+      Rolling 12M Korr(SPY, TLT) berechnen.
+      3-Farb-Ampel (gruen/gelb/rot) + numerischer Wert.
+      Datenbasis: __macro__ Erweiterung oder direkter yfinance-fetch.
+    </div>
+    <ul class="chk" style="margin-top:8px">
+      <li>SPY/TLT Preis-Daten quelle klaeren (__macro__ vs. fetch)</li>
+      <li>Korrelations-Berechnung implementieren</li>
+      <li>Ampel-Widget + Erklaerungstext</li>
+      <li>Trigger-Bedingung klar formulieren</li>
+    </ul>
+  </div>
+
+  <div class="ddb-item" style="border-left:3px solid var(--mut)">
+    <div class="ddb-id">DDB-6 &mdash; Sprint 30 &mdash; ~30 Min</div>
+    <div class="ddb-title">fcf_trend_yoy Coverage-Monitor</div>
+    <div class="ddb-desc">
+      Erst nach fund_juno v7.9.38 Deployment sinnvoll.
+      Zeigt: N Ticker mit validem fcf_trend_yoy / 305 gesamt.
+      Sicherstellung Datenbasis fuer FH-3b IC-Test Oktober 2026.
+    </div>
+    <ul class="chk" style="margin-top:8px">
+      <li>Nach v7.9.38 Deployment: aus fundamentals.json zaehlen</li>
+      <li>Fortschrittsbalken + "Testbereit ab ~N Coverage"</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  StockIQ_dev Analyst-Leitfaden v1.2 &middot; 08. Juni 2026 &middot; Lokal (nicht deployed) &middot;
+  v1.0 Mai 2026 (Sprint 10) &middot; v1.1 DDB-Roadmap Sprint 28 (DDB-1..6)
+</footer>
+
+</body>
+</html>

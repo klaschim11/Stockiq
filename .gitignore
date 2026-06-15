@@ -59,3 +59,24 @@ fmp_pilot_results.json
 # AH-1 Regime-Ampel
 stockiq_regime_calc.py
 stockiq_regime_status.json
+
+# --- Sprint 41: Verzeichniskonzept (15.06.2026) ---
+
+# Debug-Outputs (nie produktiv, nie public)
+debugs/
+
+# Einmalige Pilot-Scripts und Interim-Ergebnisse
+experiments/
+
+# Testergebnis-Daten (JSON/CSV, kein Quellcode)
+tests/results/
+
+# --- Algorithmen (nie public) ---
+*.py
+utils/
+tests/*.py
+tests/*.js
+test_*.py
+*_test.js
+sektor_ic*.py
+stockiq_alpha*.py

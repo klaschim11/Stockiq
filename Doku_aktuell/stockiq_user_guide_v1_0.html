@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StockIQ — User Guide v1.0</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{--ink:#0d1117;--ink-light:#3a4a5a;--ink-muted:#6a7e94;--accent:#1a5fa8;--accent2:#c8881a;--accent3:#1a8a5a;--rule:#c8d4e0;--bg-soft:#f4f7fb;--bg-accent:#eaf1fa;--gold:#c8881a;--red:#a83232;--green:#1a7a4a;--font-head:'Playfair Display',Georgia,serif;--font-body:'Source Serif 4',Georgia,serif;--font-mono:'JetBrains Mono','Courier New',monospace;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-body);font-size:10.5pt;line-height:1.75;color:var(--ink);background:#fff;}
+@media print{
+  @page{margin:18mm 20mm 18mm 24mm;}
+  @page cover{size:A4 landscape;margin:0;}
+  @page land{size:A4 landscape;margin:18mm 20mm;}
+  .cover{page:cover;}
+  .no-print{display:none!important;}
+  a{color:inherit;text-decoration:none;}
+  /* Automatische Seitenzahlen */
+  body{counter-reset:page-counter;}
+  .page-break{counter-increment:page-counter;}
+  .doc-footer::after{
+    content:" \2014  Seite " counter(page-counter);
+    font-family:var(--font-mono);font-size:7pt;color:var(--ink-muted);
+  }
+
+  /* ── COVER PRINT OVERRIDES: weisser Hintergrund, dunkle Schrift ── */
+  .cover{background:#fff!important;color:var(--ink)!important;}
+  .cover-left{background:#fff!important;padding:36px 32px 32px 40px!important;}
+  .cover-left::after{background:var(--accent2)!important;}
+  .cover-right{background:#f4f7fb!important;border-left:4px solid var(--accent2);padding:32px 32px 32px 40px!important;}
+  .cover-eyebrow{color:var(--accent2)!important;}
+  .cover-title{color:var(--ink)!important;}
+  .cover-title span{color:var(--accent2)!important;}
+  .cover-subtitle{color:var(--ink-light)!important;}
+  .cover-tagline{color:var(--ink-muted)!important;border-left-color:var(--accent2)!important;}
+  .cover-meta{color:var(--ink-muted)!important;}
+  .cover-meta span{color:var(--ink)!important;}
+  .cover-right-title{color:var(--ink-muted)!important;}
+  .cover-stat{background:#fff!important;border:1.5px solid var(--rule)!important;box-shadow:0 1px 4px rgba(0,0,0,.07);}
+  .cover-stat-val{color:var(--accent2)!important;}
+  .cover-stat-label{color:var(--ink-muted)!important;}
+  .cover-stat-sub{color:var(--ink-muted)!important;}
+}
+@media screen{body{max-width:920px;margin:0 auto;padding:20px;}.cover{min-height:560px;}}
+.page-break{page-break-before:always;}
+.no-break{page-break-inside:avoid;}
+.print-bar{position:sticky;top:0;z-index:100;background:var(--ink);color:#fff;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:9pt;}
+.print-btn{background:var(--accent2);color:#fff;border:none;padding:6px 18px;border-radius:4px;font-family:var(--font-mono);font-size:9pt;cursor:pointer;font-weight:600;}
+@media print{.print-bar{display:none;}}
+
+/* COVER */
+.cover{background:var(--ink);color:#fff;width:100%;display:flex;flex-direction:column;}
+.cover-grid{display:grid;grid-template-columns:58% 42%;min-height:560px;flex:1;}
+.cover-left{background:var(--ink);padding:52px 48px 40px 56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;}
+.cover-left::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent2) 0%,var(--accent) 60%,transparent 100%);}
+.cover-right{background:linear-gradient(145deg,#0d2240 0%,#1a3a6a 50%,#0d2240 100%);padding:40px 40px 40px 48px;display:flex;flex-direction:column;justify-content:center;gap:18px;}
+.cover-eyebrow{font-family:var(--font-mono);font-size:7.5pt;letter-spacing:.18em;color:var(--accent2);text-transform:uppercase;margin-bottom:18px;}
+.cover-title{font-family:var(--font-head);font-size:46pt;font-weight:900;line-height:1.0;color:#fff;margin-bottom:10px;}
+.cover-title span{color:var(--accent2);}
+.cover-subtitle{font-family:var(--font-body);font-size:12.5pt;font-weight:300;color:rgba(255,255,255,.6);line-height:1.5;margin-bottom:28px;max-width:330px;}
+.cover-tagline{font-family:var(--font-body);font-style:italic;font-size:10.5pt;color:rgba(255,255,255,.4);border-left:2px solid var(--accent2);padding-left:14px;margin-bottom:36px;}
+.cover-meta{font-family:var(--font-mono);font-size:7.5pt;color:rgba(255,255,255,.32);line-height:2.1;}
+.cover-meta span{color:rgba(255,255,255,.58);}
+.cover-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 16px;}
+.cover-stat-val{font-family:var(--font-head);font-size:24pt;font-weight:700;color:var(--accent2);line-height:1.1;}
+.cover-stat-label{font-family:var(--font-mono);font-size:7pt;color:rgba(255,255,255,.48);letter-spacing:.08em;text-transform:uppercase;margin-top:3px;}
+.cover-stat-sub{font-family:var(--font-body);font-size:8pt;color:rgba(255,255,255,.3);margin-top:4px;font-style:italic;}
+.cover-right-title{font-family:var(--font-mono);font-size:7pt;letter-spacing:.14em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:4px;}
+
+/* HEADERS / FOOTERS */
+.doc-header{display:flex;justify-content:space-between;align-items:center;padding:0 0 10px 0;border-bottom:1px solid var(--rule);margin-bottom:26px;}
+.doc-header-left{font-family:var(--font-mono);font-size:7.5pt;color:var(--ink-muted);letter-spacing:.06em;}
+.doc-header-right{font-family:var(--font-mono);font-size:7.5pt;color:var(--accent2);font-weight:600;}
+.doc-footer{display:flex;justify-content:space-between;align-items:center;padding:10px 0 0 0;border-top:1px solid var(--rule);margin-top:28px;font-family:var(--font-mono);font-size:7pt;color:var(--ink-muted);}
+
+/* TOC */
+.toc-page{padding:36px 0;}
+.toc-title{font-family:var(--font-head);font-size:26pt;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.toc-rule{width:56px;height:3px;background:var(--accent2);margin-bottom:28px;}
+.toc-chapter{display:flex;align-items:baseline;gap:0;margin-bottom:4px;border-bottom:1px dotted var(--rule);padding-bottom:4px;}
+.toc-chapter:last-child{border-bottom:none;}
+.toc-num{font-family:var(--font-mono);font-size:8pt;color:var(--accent2);font-weight:600;min-width:34px;}
+.toc-name{font-family:var(--font-body);font-size:10.5pt;color:var(--ink);flex:1;}
+.toc-name.sub{font-size:9.5pt;color:var(--ink-light);padding-left:18px;}
+.toc-dots{flex:1;border-bottom:1px dotted var(--rule);margin:0 8px;position:relative;top:-3px;}
+.toc-page-num{font-family:var(--font-mono);font-size:8pt;color:var(--ink-muted);min-width:22px;text-align:right;}
+.toc-phase{font-family:var(--font-mono);font-size:7pt;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-top:18px;margin-bottom:8px;padding:3px 8px;background:var(--bg-accent);border-radius:3px;display:inline-block;}
+
+/* CHAPTER */
+.chapter-page{padding:28px 0;}
+.chapter-num{font-family:var(--font-mono);font-size:7.5pt;letter-spacing:.18em;color:var(--accent2);text-transform:uppercase;margin-bottom:8px;}
+.chapter-title{font-family:var(--font-head);font-size:26pt;font-weight:700;color:var(--ink);line-height:1.15;margin-bottom:6px;}
+.chapter-rule{width:56px;height:3px;background:var(--accent2);margin-bottom:22px;}
+.chapter-lead{font-size:12pt;color:var(--ink-light);font-style:italic;line-height:1.65;margin-bottom:26px;max-width:520px;}
+
+/* TYPOGRAPHY */
+h2{font-family:var(--font-head);font-size:14pt;font-weight:700;color:var(--ink);margin:26px 0 9px 0;padding-bottom:5px;border-bottom:1px solid var(--rule);}
+h3{font-family:var(--font-head);font-size:12pt;font-weight:700;color:var(--accent);margin:18px 0 7px 0;}
+h4{font-family:var(--font-body);font-size:10.5pt;font-weight:600;color:var(--ink);margin:14px 0 5px 0;}
+p{margin-bottom:11px;}
+strong{font-weight:600;color:var(--ink);}
+em{color:var(--ink-light);}
+a{color:var(--accent);}
+code{font-family:var(--font-mono);font-size:8.5pt;background:var(--bg-soft);padding:1px 5px;border-radius:3px;}
+
+/* CALLOUTS */
+.callout{padding:12px 16px;border-radius:6px;margin:16px 0;page-break-inside:avoid;}
+.callout-key{background:var(--bg-accent);border-left:4px solid var(--accent);}
+.callout-insight{background:#fdf6ec;border-left:4px solid var(--accent2);}
+.callout-warn{background:#fdf0f0;border-left:4px solid var(--red);}
+.callout-formula{background:#f0f6f0;border-left:4px solid var(--green);font-family:var(--font-mono);font-size:8.5pt;line-height:1.9;}
+.callout-title{font-family:var(--font-mono);font-size:7.5pt;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;font-weight:600;}
+.callout-key .callout-title{color:var(--accent);}
+.callout-insight .callout-title{color:var(--accent2);}
+.callout-warn .callout-title{color:var(--red);}
+.callout-formula .callout-title{color:var(--green);}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:9.5pt;page-break-inside:avoid;}
+thead tr{background:var(--ink);color:#fff;}
+thead th{font-family:var(--font-mono);font-size:7.5pt;letter-spacing:.06em;text-transform:uppercase;padding:8px 10px;text-align:left;font-weight:600;}
+tbody tr:nth-child(even){background:var(--bg-soft);}
+tbody td{padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.5;}
+tbody tr:last-child td{border-bottom:2px solid var(--ink);}
+
+/* SCORE PILLARS */
+.score-arch{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin:18px 0;}
+.score-pillar{border-radius:8px;overflow:hidden;page-break-inside:avoid;}
+.score-pillar-head{padding:9px 11px;font-family:var(--font-mono);font-size:7.5pt;font-weight:600;letter-spacing:.06em;color:#fff;}
+.score-pillar-body{background:var(--bg-soft);padding:10px 11px;}
+.score-pillar-weight{font-family:var(--font-head);font-size:20pt;font-weight:900;line-height:1;margin-bottom:4px;}
+.score-pillar-items{font-family:var(--font-body);font-size:8pt;color:var(--ink-light);line-height:1.7;}
+.pillar-mom .score-pillar-head{background:#1a5fa8;} .pillar-mom .score-pillar-weight{color:#1a5fa8;}
+.pillar-trnd .score-pillar-head{background:#1a7a4a;} .pillar-trnd .score-pillar-weight{color:#1a7a4a;}
+.pillar-fund .score-pillar-head{background:#c8881a;} .pillar-fund .score-pillar-weight{color:#c8881a;}
+.pillar-risk .score-pillar-head{background:#8a3232;} .pillar-risk .score-pillar-weight{color:#8a3232;}
+
+/* LEARNING LOOP */
+.loop-diagram{display:flex;align-items:stretch;margin:18px 0;gap:0;}
+.loop-step{flex:1;text-align:center;padding:12px 6px;background:var(--bg-soft);border-top:3px solid var(--accent);}
+.loop-arrow{font-size:14pt;color:var(--rule);padding:0 3px;flex-shrink:0;display:flex;align-items:center;}
+.loop-step-icon{font-size:14pt;margin-bottom:4px;}
+.loop-step-title{font-family:var(--font-mono);font-size:6.5pt;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px;}
+.loop-step-desc{font-family:var(--font-body);font-size:7.5pt;color:var(--ink-light);line-height:1.5;}
+
+/* FOOTNOTES */
+.footnote-block{border-top:1px solid var(--rule);margin-top:22px;padding-top:10px;font-size:8pt;color:var(--ink-muted);line-height:1.7;}
+</style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+  <span>StockIQ User Documentation v2.2 &mdash; Complete Edition: Ch.1&ndash;10</span>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <span style="font-family:var(--font-mono);font-size:8pt;color:rgba(255,255,255,.5)">Safari: Teilen &#8594; Als PDF</span>
+    <button class="print-btn" onclick="
+      try{
+        var w=window.open('','_blank');
+        if(w){w.document.write(document.documentElement.outerHTML);w.document.close();w.focus();setTimeout(function(){w.print();},800);}
+        else{window.print();}
+      }catch(e){window.print();}
+    ">&#128438; Drucken / PDF</button>
+  </div>
+</div>
+</head>
+<body>
+<div class="print-bar no-print">
+  <span>StockIQ User Guide v1.0 &mdash; Ch.1&ndash;7</span>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <span style="font-family:var(--font-mono);font-size:8pt;color:rgba(255,255,255,.5)">Safari: Teilen &#8594; Als PDF</span>
+    <button class="print-btn" onclick="try{var w=window.open('','_blank');if(w){w.document.write(document.documentElement.outerHTML);w.document.close();w.focus();setTimeout(function(){w.print();},800);}else{window.print();}}catch(e){window.print();}">&#128438; Drucken / PDF</button>
+  </div>
+</div>
+<!-- COVER: PUBLIC -->
+<div class="cover">
+  <div class="cover-grid">
+    <div class="cover-left">
+      <div>
+        <div class="cover-eyebrow">Quantitative Investment System &mdash; User Guide</div>
+        <div class="cover-title">Stock<span>IQ</span></div>
+        <div class="cover-subtitle">Evidence-based stock scoring and portfolio management. Built on academic factor research. Refined by empirical walk-forward testing.</div>
+        <div class="cover-tagline">"We don't predict markets. We measure quality, momentum and risk."</div>
+      </div>
+      <div class="cover-meta">
+        <div>DOCUMENT &nbsp;<span>User Guide v1.0</span></div>
+        <div>DASHBOARD &nbsp;<span>v5.9.78 &middot; klaschim11.github.io/Stockiq</span></div>
+        <div>UNIVERSE &nbsp;<span>269 Tickers &middot; Global Equities</span></div>
+        <div>PUBLISHED &nbsp;<span>May 2026</span></div>
+      </div>
+    </div>
+    <div class="cover-right">
+      <div>
+        <div class="cover-right-title">System Overview</div>
+        <div class="cover-stat">
+          <div class="cover-stat-val">60.1%</div>
+          <div class="cover-stat-label">Walk-Forward Win Rate</div>
+          <div class="cover-stat-sub">Independently validated &middot; 4 OOS windows</div>
+        </div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val">269</div>
+        <div class="cover-stat-label">Global Tickers Monitored</div>
+        <div class="cover-stat-sub">US &middot; Europe &middot; Japan &middot; EM</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val">4</div>
+        <div class="cover-stat-label">Independent Score Pillars</div>
+        <div class="cover-stat-sub">Momentum &middot; Trend &middot; Fundamentals &middot; Risk</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val">7</div>
+        <div class="cover-stat-label">Signal Types</div>
+        <div class="cover-stat-sub">Strong Buy &middot; Buy &middot; Hold &middot; Watch &middot; Sell</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- TOC: PUBLIC -->
+<div class="page-break chapter-page toc-page">
+  <div class="doc-header">
+    <span class="doc-header-left">STOCKIQ USER GUIDE</span>
+    <span class="doc-header-right">Table of Contents</span>
+  </div>
+  <div class="toc-title">Table of Contents</div>
+  <div class="toc-rule"></div>
+
+  <div class="toc-phase">Part 1 &mdash; Understanding the System</div>
+  <div class="toc-chapter"><span class="toc-num">01</span><span class="toc-name">How StockIQ Learns</span><span class="toc-dots"></span><span class="toc-page-num">3</span></div>
+  <div class="toc-chapter"><span class="toc-num">02</span><span class="toc-name">Score Architecture &amp; Signals</span><span class="toc-dots"></span><span class="toc-page-num">6</span></div>
+
+  <div class="toc-phase">Part 2 &mdash; The Score Components</div>
+  <div class="toc-chapter"><span class="toc-num">03</span><span class="toc-name">Momentum Indicators</span><span class="toc-dots"></span><span class="toc-page-num">10</span></div>
+  <div class="toc-chapter"><span class="toc-num">04</span><span class="toc-name">Fundamental Indicators</span><span class="toc-dots"></span><span class="toc-page-num">14</span></div>
+  <div class="toc-chapter"><span class="toc-num">05</span><span class="toc-name">Risk Indicators &amp; Sector Signals</span><span class="toc-dots"></span><span class="toc-page-num">19</span></div>
+
+  <div class="toc-phase">Part 3 &mdash; Acting on Signals</div>
+  <div class="toc-chapter"><span class="toc-num">06</span><span class="toc-name">Signal Logic &amp; Filter Matrix</span><span class="toc-dots"></span><span class="toc-page-num">22</span></div>
+  <div class="toc-chapter"><span class="toc-num">07</span><span class="toc-name">Portfolio Allocation by Business Cycle</span><span class="toc-dots"></span><span class="toc-page-num">25</span></div>
+
+  <div style="margin-top:28px;padding:14px 16px;background:var(--bg-soft);border-radius:6px;border-left:3px solid var(--accent2);">
+    <div style="font-family:var(--font-mono);font-size:7.5pt;color:var(--accent2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Note on Methodology</div>
+    <div style="font-size:9pt;color:var(--ink-light);line-height:1.8;">This guide explains how to use StockIQ and interpret its signals. The precise mathematical methodology &mdash; factor weights, IC analysis, walk-forward architecture &mdash; is documented separately in the StockIQ Technical Reference (internal).</div>
+  </div>
+</div>
+    <span class="doc-header-left">CHAPTER 01 &mdash; THE LEARNING SYSTEM</span>
+    <span class="doc-header-right">StockIQ v5.9.78</span>
+  </div>
+
+  <div class="chapter-num">Chapter 01</div>
+  <div class="chapter-title">The Learning System</div>
+  <div class="chapter-rule"></div>
+  <div class="chapter-lead">StockIQ is not a static screener. It is a systematic, self-improving investment analysis framework that grows more accurate as it accumulates data, validates its own assumptions, and refines its decision rules through empirical feedback.</div>
+
+  <h2>1.1 &mdash; Philosophy and Design Goals</h2>
+  <p>Most retail investment tools offer either a fixed screener (rules set once and never revisited) or a black-box recommendation engine (rules never disclosed). StockIQ occupies a deliberately different position: a <strong>transparent, hypothesis-driven system</strong> with explicit factor weights, documented academic sources, and a built-in feedback loop that tests whether its own assumptions hold up over time.</p>
+  <p>The system draws on five intellectual traditions, each contributing a distinct dimension to the final recommendation:</p>
+
+  <table>
+    <thead><tr><th>Tradition</th><th>Key Contributors</th><th>StockIQ Application</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Quantitative Factor Investing</strong></td><td>Fama &amp; French, Novy-Marx, Jegadeesh &amp; Titman</td><td>Systematic scoring across Momentum, Value, Quality, Risk pillars</td></tr>
+      <tr><td><strong>Value Investing</strong></td><td>Warren Buffett / Berkshire Letters 1977&ndash;2025</td><td>Owner Earnings, ROCE, earnings consistency, moat identification</td></tr>
+      <tr><td><strong>Business Cycle Macro</strong></td><td>Fidelity AART 2025, BlackRock Hambro 2026</td><td>Cycle-adjusted target allocation, sector rotation overlay</td></tr>
+      <tr><td><strong>Risk Management</strong></td><td>Barroso &amp; Santa-Clara 2015, Andreas Beck / GPO 2019</td><td>VIX-scaled momentum dampening, crisis regime overlays</td></tr>
+      <tr><td><strong>Walk-Forward Validation</strong></td><td>Pardo 2008</td><td>Out-of-sample strategy testing, overfitting prevention</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-key no-break">
+    <div class="callout-title">Core Design Principle</div>
+    <p>Every factor weight in StockIQ is a <strong>hypothesis, not a permanent truth</strong>. The system measures its own assumptions through Information Coefficient (IC) analysis and adjusts weights only when empirical evidence justifies the change. No weight is modified based on intuition alone. This discipline separates a learning system from an opinion engine.</p>
+  </div>
+
+  <h2>1.2 &mdash; The Daily Snapshot Cycle</h2>
+  <p>The foundation of the learning system is the <strong>daily snapshot</strong>: a complete cross-section of all 269 tickers with their fundamental data, price momentum, and scoring signals, captured and archived every trading day. This growing time-series is the raw material for factor validation and strategy improvement.</p>
+
+  <div class="loop-diagram no-break">
+    <div class="loop-step"><div class="loop-step-icon">&#9749;</div><div class="loop-step-title">Data Fetch</div><div class="loop-step-desc">fund_juno.py downloads 22 fields per ticker via yfinance. ~10 min on iOS.</div></div>
+    <div class="loop-arrow">&#8250;</div>
+    <div class="loop-step"><div class="loop-step-icon">&#128202;</div><div class="loop-step-title">Scoring</div><div class="loop-step-desc">Dashboard computes cSc() for all 269 tickers. 4 pillars, 9 sub-factors.</div></div>
+    <div class="loop-arrow">&#8250;</div>
+    <div class="loop-step"><div class="loop-step-icon">&#128247;</div><div class="loop-step-title">Archive</div><div class="loop-step-desc">Scored universe saved to stockiq_snapshots.json. 50+ entries accumulated (Apr&ndash;May 2026).</div></div>
+    <div class="loop-arrow">&#8250;</div>
+    <div class="loop-step"><div class="loop-step-icon">&#128270;</div><div class="loop-step-title">IC Analysis</div><div class="loop-step-desc">Spearman IC: factor value today vs. 6M forward return. Runs after 20 snapshots.</div></div>
+    <div class="loop-arrow">&#8250;</div>
+    <div class="loop-step"><div class="loop-step-icon">&#9881;</div><div class="loop-step-title">Refinement</div><div class="loop-step-desc">IC-significant factors receive higher weights. Always evidence-based, never intuitive.</div></div>
+  </div>
+
+  <p>The snapshot archive serves three purposes simultaneously: it enables <strong>factor IC measurement</strong> (do factor values today predict returns in 6 months?), <strong>signal outcome tracking</strong> (did the BUY signals issued on date X actually outperform?), and <strong>consistency scoring</strong> (how stable is each company's ROCE over multiple years?).</p>
+
+  <div class="callout callout-insight no-break">
+    <div class="callout-title">Annual Snapshot Architecture</div>
+    <p>In addition to daily snapshots, StockIQ maintains an <strong>annual snapshot</strong> (auto-generated each May 1st &plusmn;7 days) covering 2021&ndash;2026. Annual data is used for multi-year IC analysis, earnings consistency scoring, and historical backfill of factor values. The annual data reveals longer-term factor decay rates that daily data cannot capture.</p>
+  </div>
+
+  <h2>1.3 &mdash; Factor IC Validation Loop</h2>
+  <p>The <strong>Information Coefficient (IC)</strong> is the statistical backbone of the learning system. It measures how well a factor value observed today predicts the stock's return over the following 6 months, using Spearman rank correlation (rank-based, robust to outliers).</p>
+
+  <div class="callout callout-key no-break"><div class="callout-title">Technical Note</div><p style="font-style:italic;color:var(--ink-light);">The precise calculation methodology for this indicator is documented in the StockIQ Technical Reference (internal).</p></div>
+
+<!-- ===================== CH 2 ===================== -->
+<div class="page-break chapter-page">
+  <div class="doc-header">
+    <span class="doc-header-left">CHAPTER 02 &mdash; SCORE ARCHITECTURE</span>
+    <span class="doc-header-right">StockIQ v5.9.78</span>
+  </div>
+
+  <div class="chapter-num">Chapter 02</div>
+  <div class="chapter-title">Score Architecture</div>
+  <div class="chapter-rule"></div>
+  <div class="chapter-lead">Every ticker in the StockIQ universe receives a composite score from 0 to 100, computed from four independent pillars. The composite score drives all BUY, HOLD, and SELL signals. Understanding the architecture is essential to interpreting StockIQ recommendations correctly.</div>
+
+  <h2>2.1 &mdash; The Four Pillars</h2>
+  <p>The composite score <code>cSc()</code> combines four independently computed components. Each pillar captures a distinct and academically documented return driver. No single factor dominates: the multi-pillar structure reduces the risk of any one signal being wrong.</p>
+
+  <div class="score-arch no-break">
+    <div class="score-pillar pillar-mom">
+      <div class="score-pillar-head">MOMENTUM</div>
+      <div class="score-pillar-body">
+        <div class="score-pillar-weight">25%</div>
+        <div class="score-pillar-items">Skip-Month Price Mom. (11M)<br>MACD Zero-Line Cross<br>EPS Revision (earnings mom.)<br>VIX Dampening (&times;1.0/0.6/0.2)<br>RSI Overextension Check</div>
+      </div>
+    </div>
+    <div class="score-pillar pillar-trnd">
+      <div class="score-pillar-head">TREND</div>
+      <div class="score-pillar-body">
+        <div class="score-pillar-weight">20%</div>
+        <div class="score-pillar-items">200-Day MA Distance<br>MACD Histogram Filter<br>ATR Volatility Filter<br>Bull / Hidden Divergence</div>
+      </div>
+    </div>
+    <div class="score-pillar pillar-fund">
+      <div class="score-pillar-head">FUNDAMENTALS</div>
+      <div class="score-pillar-body">
+        <div class="score-pillar-weight">35%</div>
+        <div class="score-pillar-items">ROCE (30% of pillar)<br>FCF Yield (30%)<br>Value: PEG + EV/EBIT (20%)<br>Debt Safety (15%)<br>Earnings Consistency (5%)</div>
+      </div>
+    </div>
+    <div class="score-pillar pillar-risk">
+      <div class="score-pillar-head">RISK</div>
+      <div class="score-pillar-body">
+        <div class="score-pillar-weight">20%</div>
+        <div class="score-pillar-items">Static Score (Piotroski)<br>Beta (market sensitivity)<br>EVAR (earnings variability)<br>Sector-relative normalization</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-key no-break"><div class="callout-title">Technical Note</div><p style="font-style:italic;color:var(--ink-light);">The precise calculation methodology for this indicator is documented in the StockIQ Technical Reference (internal).</p></div>
+
+<!-- ===================== CHAPTER 03 ===================== -->
+<div class="page-break chapter-page">
+  <div class="doc-header">
+    <span class="doc-header-left">CHAPTER 03 &mdash; MOMENTUM INDICATORS</span>
+    <span class="doc-header-right">StockIQ v5.9.78</span>
+  </div>
+
+  <div class="chapter-num">Chapter 03</div>
+  <div class="chapter-title">Momentum Indicators</div>
+  <div class="chapter-rule"></div>
+  <div class="chapter-lead">Momentum is the oldest and most replicated anomaly in finance. Stocks that have outperformed recently tend to continue outperforming &mdash; and stocks that have lagged tend to continue lagging &mdash; across time horizons of 3 to 12 months. StockIQ implements five distinct momentum signals, each addressing a different facet of price and earnings acceleration, and combines them under a unified VIX-regime dampening framework.</div>
+
+  <div class="callout callout-key no-break">
+    <div class="callout-title">Academic Foundation</div>
+    <p>Jegadeesh &amp; Titman (1993) first documented cross-sectional price momentum with U.S. data. Asness, Moskowitz &amp; Pedersen (2013) confirmed it in 46 countries across four asset classes. A 2025 meta-study covering 150 years and 46 countries reaffirmed momentum as the most consistent return premium ever documented &mdash; outperforming even the value and size factors in long-run predictability (Alpha Architect / Basilico 2025). J.P. Morgan Factor Views (Q2 2026) note momentum as the leading equity factor in Q1 2026, though with its widest winner-loser dispersion since 1990, underscoring the importance of the VIX dampening framework.</p>
+  </div>
+
+  <h2>3.1 &mdash; Skip-Month Price Momentum</h2>
+  <p>The skip-month (or &ldquo;11-1&rdquo;) momentum measure is StockIQ&rsquo;s primary price momentum signal. It is based directly on the original Jegadeesh &amp; Titman (1993) paper, which found that ranking stocks by their 12-month trailing return minus the most recent month &mdash; thereby skipping the last month &mdash; produces the strongest and most consistent momentum signal.</p>
+
+  <p>Skipping the final month is essential. The most recent month&rsquo;s return exhibits <strong>short-term reversal</strong> (Jegadeesh 1990): stocks that spike in the final month frequently mean-revert in the next period. Including it would contaminate the momentum signal with noise from market microstructure and bid-ask bounce effects. The skip-month window captures only the durable trend component.</p>
+
+  <div class="callout callout-key no-break"><div class="callout-title">Technical Note</div><p style="font-style:italic;color:var(--ink-light);">The precise calculation methodology for this indicator is documented in the StockIQ Technical Reference (internal).</p></div>
+
+<!-- ===================== CHAPTER 04 ===================== -->
+<div class="page-break chapter-page">
+  <div class="doc-header">
+    <span class="doc-header-left">CHAPTER 04 &mdash; FUNDAMENTAL INDICATORS</span>
+    <span class="doc-header-right">StockIQ v5.9.78</span>
+  </div>
+
+  <div class="chapter-num">Chapter 04</div>
+  <div class="chapter-title">Fundamental Indicators</div>
+  <div class="chapter-rule"></div>
+  <div class="chapter-lead">Fundamentals carry the largest weight in StockIQ (35%) because business quality is the most durable return driver. Where momentum can crash in days and trend can reverse in weeks, a company with high returns on capital, strong free cash flow, and low debt compounds quietly and persistently. This chapter documents all nine fundamental signals &mdash; their academic derivation, StockIQ formula, parameter rationale, and known data limitations.</div>
+
+  <div class="callout callout-insight no-break">
+    <div class="callout-title">Buffett (2024): EBITDA is Flawed &mdash; EBIT is Honest</div>
+    <p>In his 2024 annual letter, Warren Buffett described EBITDA as &ldquo;a flawed favorite of Wall Street.&rdquo; His critique: adding back depreciation and amortization creates a misleading picture of earnings power, because real assets wear out and require capital expenditure to maintain. StockIQ&rsquo;s valuation framework reflects this: <strong>EV/EBIT</strong> (which keeps D&amp;A as a real cost) is given equal or greater weight than EV/EBITDA in the dual-signal <code>valSc()</code> computation. Owner Earnings (Buffett 1986) go further, explicitly adjusting for growth capex vs. maintenance capex.</p>
+  </div>
+
+  <h2>4.1 &mdash; ROCE: Return on Capital Employed</h2>
+  <p>ROCE is the cornerstone of the Fundamentals pillar, carrying <strong>30% weight</strong> within <code>fSc()</code>. It measures how efficiently a company generates profit from the capital committed to the business &mdash; both equity and debt. Unlike Return on Equity (ROE), ROCE is not inflated by financial leverage: a company that borrows heavily to boost ROE will not score well on ROCE. This makes ROCE a purer measure of operational quality.</p>
+
+  <div class="callout callout-key no-break"><div class="callout-title">Technical Note</div><p style="font-style:italic;color:var(--ink-light);">The precise calculation methodology for this indicator is documented in the StockIQ Technical Reference (internal).</p></div>
+
+<!-- ===================== CH 5 ===================== -->
+<div class="page-break chapter-page">
+  <div class="doc-header">
+    <span class="doc-header-left">CHAPTER 05 &mdash; RISK INDICATORS &amp; SECTOR SIGNALS</span>
+    <span class="doc-header-right">StockIQ v5.9.78</span>
+  </div>
+  <div class="chapter-num">Chapter 05</div>
+  <div class="chapter-title">Risk Indicators &amp; Sector Signals</div>
+  <div class="chapter-rule"></div>
+  <div class="chapter-lead">Risk is not a single number. StockIQ measures it across three independent dimensions: market sensitivity (Beta), earnings predictability (EVAR), and macro regime (VIX). Together they form the Risk pillar, contributing 20% to the composite score.</div>
+
+  <h2>5.1 &mdash; Beta: Market Sensitivity</h2>
+  <p>Beta measures how much a stock amplifies or dampens overall market movements. A Beta of 1.5 means the stock typically moves 50% more than the market in either direction. Beta is sourced directly from yfinance (<code>info.get('beta')</code>) and reflects the trailing 5-year weekly regression against the S&amp;P 500.</p>
+
+  <div class="callout callout-key no-break"><div class="callout-title">Technical Note</div><p style="font-style:italic;color:var(--ink-light);">The precise calculation methodology for this indicator is documented in the StockIQ Technical Reference (internal).</p></div>
+
+<!-- ===================== CH 6 ===================== -->
+<div class="page-break chapter-page">
+  <div class="doc-header">
+    <span class="doc-header-left">CHAPTER 06 &mdash; SIGNAL LOGIC &amp; FILTER MATRIX</span>
+    <span class="doc-header-right">StockIQ v5.9.78</span>
+  </div>
+  <div class="chapter-num">Chapter 06</div>
+  <div class="chapter-title">Signal Logic &amp; Filter Matrix</div>
+  <div class="chapter-rule"></div>
+  <div class="chapter-lead">A composite score of 70 does not automatically produce a BUY signal. Signals require technical structure confirmation. This chapter documents the complete decision tree: how scores and technical conditions combine to produce actionable recommendations.</div>
+
+  <h2>6.1 &mdash; Signal Hierarchy</h2>
+  <p>StockIQ produces one signal per ticker per session. Signals follow a strict priority hierarchy: a higher-priority condition always overrides a lower-priority one. The hierarchy reflects a deliberate design choice &mdash; technical structure must confirm fundamental quality before capital is deployed.</p>
+
+  <table>
+    <thead><tr><th>Priority</th><th>Signal</th><th>Core Conditions</th><th>Typical Score Range</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong style="color:#c8881a">&#11088; STRONG BUY</strong></td><td>MACD ZL-cross + 200MA above + PEG &lt;3 + Dividend signal + Bull/Hidden Divergence + ATR-Hist filter</td><td>60&ndash;81</td></tr>
+      <tr><td>2</td><td><strong style="color:#1a7a4a">BUY</strong></td><td>MACD Zero-Line cross + price above 200-day MA + PEG &lt; 3.0</td><td>55&ndash;81</td></tr>
+      <tr><td>3</td><td><strong style="color:#c8881a">PEG-BLOCKED</strong></td><td>BUY conditions met but PEG &ge; 3.0 (valuation stretch)</td><td>55&ndash;80</td></tr>
+      <tr><td>4</td><td><strong style="color:#6a7e94">RSI-BLOCKED</strong></td><td>BUY conditions met but RSI &gt; 72 (overbought; momentum overextended)</td><td>55&ndash;80</td></tr>
+      <tr><td>5</td><td><strong style="color:#6a7e94">PULLBACK (PB)</strong></td><td>Score &ge;65 + MACD weakening + price near 200MA (tactical entry zone)</td><td>65&ndash;80</td></tr>
+      <tr><td>6</td><td><strong style="color:#6a7e94">HOLD SF+D</strong></td><td>Score &ge;55 AND dividend yield &ge; minimum threshold (income + quality hold)</td><td>55&ndash;75</td></tr>
+      <tr><td>7</td><td><strong style="color:#6a7e94">HOLD DVG</strong></td><td>Hidden bullish divergence detected; score moderate</td><td>50&ndash;70</td></tr>
+      <tr><td>8</td><td><strong style="color:#3a4a5a">WATCH</strong></td><td>No active trigger; score acceptable; monitoring mode</td><td>45&ndash;70</td></tr>
+      <tr><td>9</td><td><strong style="color:#3a4a5a">WEAK</strong></td><td>Sideways price structure + decaying momentum</td><td>40&ndash;60</td></tr>
+      <tr><td>10</td><td><strong style="color:#8a3232">SELL / MA-SELL</strong></td><td>MACD bearish cross, or price below 200MA, or score &lt; 45</td><td>&lt;55</td></tr>
+    </tbody>
+  </table>
+
+  <h2>6.2 &mdash; Score Filter Override (SF &ge;55)</h2>
+  <p>The Score Filter is one of the most consequential design decisions in StockIQ. When enabled (default: on), it <strong>suppresses SELL signals</strong> for companies with composite score &ge;55. The reasoning: a fundamentally excellent company that briefly loses its 200-day MA due to temporary market weakness does not warrant an exit. Walk-forward testing confirmed this filter preserves capital in quality names during correction phases.</p>
+
+  <div class="callout callout-warn no-break">
+    <div class="callout-title">When to Disable the Score Filter</div>
+    <p>The SF toggle is accessible per-session in Synopse and Watchlist views. Disable it when: (1) you want to see raw technical sell signals regardless of fundamental quality, or (2) during confirmed macro bear markets (SPY &lt; 200MA) where even quality names may require tactical exits. Re-enable when market returns above the 200-day MA.</p>
+  </div>
+
+  <h2>6.3 &mdash; SPY Market-Phase Filter</h2>
+  <p>The most powerful single variable in the entire alpha_juno walk-forward system. When the S&amp;P 500 (SPY proxy) trades below its 200-day moving average, the system enters a <strong>defensive regime</strong>: buy signals are suppressed entirely. This single filter lifted out-of-sample win rate from approximately 36% to 59%+ in walk-forward testing.</p>
+
+  <div class="callout callout-key no-break">
+    <div class="callout-title">Why the 200MA Filter Dominates</div>
+    <p>The 200-day MA is the most widely observed technical level by institutional investors. When SPY breaks below it, it signals a potential regime change: bear market conditions where momentum strategies historically fail. The filter&rsquo;s power is not predictive but <em>regime-filtering</em> &mdash; it prevents deploying capital during conditions where the underlying strategy has negative expected value.</p>
+  </div>
+
+  <h2>6.4 &mdash; VIX MomRisk Banner</h2>
+  <p>Separate from the SPY filter, the VIX MomRisk Banner provides a real-time qualitative warning about momentum crash risk. It appears at the top of the Synopse tab and dynamically updates with each session.</p>
+
+  <table>
+    <thead><tr><th>VIX Level</th><th>Banner Color</th><th>momSc() Multiplier</th><th>Interpretation</th></tr></thead>
+    <tbody>
+      <tr><td>VIX &lt; 20</td><td style="color:#1a7a4a">&#9646; Green</td><td>&times; 1.00</td><td>Low Vol &mdash; full momentum signal active</td></tr>
+      <tr><td>VIX 20&ndash;30</td><td style="color:#c8881a">&#9646; Amber</td><td>&times; 0.60</td><td>Elevated &mdash; momentum dampened; quality factors take precedence</td></tr>
+      <tr><td>VIX &gt; 30</td><td style="color:#8a3232">&#9646; Red</td><td>&times; 0.20</td><td>Crisis &mdash; momentum nearly muted; defensive posture</td></tr>
+    </tbody>
+  </table>
+
+  <h2>6.5 &mdash; WL3 Signal Tracking Methodology</h2>
+  <p>WL3 is the empirical validation layer for signal quality. For every BUY/SELL/STRONG signal issued, the forward return over multiple horizons is subsequently measured and correlated with the score at time of signal. The Information Coefficient between score and forward return &mdash; the <strong>Signal IC</strong> &mdash; measures whether StockIQ&rsquo;s score differential actually translates into return differential.</p>
+
+  <div class="callout callout-key no-break"><div class="callout-title">Technical Note</div><p style="font-style:italic;color:var(--ink-light);">The precise calculation methodology for this indicator is documented in the StockIQ Technical Reference (internal).</p></div>
+
+<!-- ===================== CH 7 ===================== -->
+<div class="page-break chapter-page">
+  <div class="doc-header">
+    <span class="doc-header-left">CHAPTER 07 &mdash; PORTFOLIO ALLOCATION BY BUSINESS CYCLE</span>
+    <span class="doc-header-right">StockIQ v5.9.78</span>
+  </div>
+  <div class="chapter-num">Chapter 07</div>
+  <div class="chapter-title">Portfolio Allocation by Business Cycle</div>
+  <div class="chapter-rule"></div>
+  <div class="chapter-lead">Signal quality is necessary but not sufficient. Capital allocation &mdash; how much to invest in equities vs. bonds vs. gold vs. cash &mdash; determines the absolute performance of the portfolio. StockIQ provides a cycle-adjusted allocation framework anchored in academic asset rotation research.</div>
+
+  <h2>7.1 &mdash; Base Allocation</h2>
+  <p>The baseline strategic allocation reflects a long-horizon wealth-building stance for a private investor with a multi-year time horizon. It is not a short-term tactical overlay but a structural framework that adjusts at the macro level.</p>
+
+  <div class="callout callout-key no-break"><div class="callout-title">Technical Note</div><p style="font-style:italic;color:var(--ink-light);">The precise calculation methodology for this indicator is documented in the StockIQ Technical Reference (internal).</p></div>
+
+
+</body>
+</html>

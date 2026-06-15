@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StockIQ Anwender-Leitfaden v5.9.95</title>
+<style>
+  :root {
+    --bg:#060e1a; --card:#0c1420; --border:#1a2a3a;
+    --cyan:#00c8f0; --green:#00e57a; --yellow:#f0c000;
+    --orange:#ff9f1c; --red:#ff5252; --purple:#b07cf8;
+    --mut:#7a9bb5; --txt:#dce8f5;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--txt); font-family:system-ui,sans-serif;
+         font-size:13px; line-height:1.7; padding:20px; max-width:860px; margin:0 auto; }
+  h1 { font-size:24px; color:var(--orange); margin-bottom:4px; }
+  h2 { font-size:16px; color:var(--cyan); margin:28px 0 10px;
+       border-bottom:1px solid var(--border); padding-bottom:6px; }
+  h3 { font-size:13px; color:var(--yellow); margin:16px 0 6px; font-weight:700; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px;
+          padding:14px 16px; margin-bottom:12px; }
+  .card.green  { border-left:3px solid var(--green); }
+  .card.cyan   { border-left:3px solid var(--cyan); }
+  .card.yellow { border-left:3px solid var(--yellow); }
+  .card.orange { border-left:3px solid var(--orange); }
+  .card.red    { border-left:3px solid var(--red); }
+  table { width:100%; border-collapse:collapse; font-size:12px; margin:8px 0; }
+  th { background:#0a1628; color:var(--txt); padding:6px 10px; text-align:left; font-weight:700; }
+  td { padding:6px 10px; border-bottom:1px solid var(--border); color:var(--mut); vertical-align:top; }
+  td:first-child { color:var(--txt); font-weight:600; }
+  tr:nth-child(even) td { background:rgba(255,255,255,.02); }
+  .step { display:flex; gap:12px; margin-bottom:10px; align-items:flex-start; }
+  .step-num { background:var(--cyan); color:#060e1a; font-weight:900; font-size:13px;
+              width:26px; height:26px; border-radius:50%; display:flex;
+              align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+  .step-body { flex:1; }
+  .sig { display:inline-block; padding:3px 10px; border-radius:12px; font-size:11px;
+         font-family:monospace; font-weight:700; }
+  .sig-buy    { background:rgba(0,229,122,.15); color:var(--green);  border:1px solid var(--green); }
+  .sig-strong { background:rgba(255,159,28,.15); color:var(--orange); border:1px solid var(--orange); }
+  .sig-hold   { background:rgba(0,200,240,.12);  color:var(--cyan);   border:1px solid var(--cyan); }
+  .sig-sell   { background:rgba(255,82,82,.12);  color:var(--red);    border:1px solid var(--red); }
+  .sig-watch  { background:rgba(122,155,181,.1); color:var(--mut);    border:1px solid var(--mut); }
+  .sig-pb     { background:rgba(240,192,0,.12);  color:var(--yellow); border:1px solid var(--yellow); }
+  .mut { color:var(--mut); font-size:11px; }
+  footer { margin-top:32px; padding-top:12px; border-top:1px solid var(--border);
+           font-family:monospace; font-size:10px; color:var(--mut); text-align:center; }
+</style>
+</head>
+<body>
+
+<h1>StockIQ</h1>
+<div style="font-size:14px;color:var(--mut);margin-bottom:4px">Anwender-Leitfaden v5.9.95 &mdash; Mai 2026</div>
+<div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:20px">
+  klaschim11.github.io/Stockiq &middot; 298 Ticker &middot; Taeglich aktualisiert
+</div>
+
+<!-- ============================================================ -->
+<h2>1. Was ist StockIQ?</h2>
+<div class="card cyan">
+  <p>StockIQ ist ein quantitatives Aktienanalyse-Dashboard. Es bewertet taeglich 270 Aktien aus globalen Maerkten (USA, Europa, Japan, EM) mit einem wissenschaftlich fundierten Composite Score und liefert klare BUY/HOLD/SELL-Signale.</p>
+  <p style="margin-top:8px;color:var(--mut);font-size:12px">&#9888; StockIQ ist ein privates Analyse-Werkzeug und stellt keine Anlageberatung dar. Alle Signale sind Entscheidungshilfen, keine Kauf- oder Verkaufsempfehlungen.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>2. Täglicher Workflow</h2>
+
+<div class="card green">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <strong>Daten abrufen (Juno App)</strong><br>
+      <span class="mut">stockiq_fund_juno_v7_9_23.py ausfuehren &rarr; stockiq_fundamentals.json wird erstellt (~8-12 Min)</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <strong>StockIQ oeffnen</strong><br>
+      <span class="mut">klaschim11.github.io/Stockiq in Safari aufrufen (oder Home-Screen-Icon)</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <strong>JSON laden (Fundamentals-Tab)</strong><br>
+      <span class="mut">stockiq_fundamentals.json in die Drop-Zone ziehen. Snapshot wird automatisch gespeichert.</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <strong>Signale pruefen (Synopse)</strong><br>
+      <span class="mut">Top STRONG BUY und BUY anzeigen. Filter nach Bedarf aktivieren (HC, WL2).</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <strong>Charts erstellen (optional, bei Bedarf)</strong><br>
+      <span class="mut">WL2-Tab &rarr; &#128202; Charts &rarr; stockiq_wl2_export.json speichern &rarr; Juno: stockiq_chart.py &rarr; PNG-Charts in stockiq_charts/</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-body">
+      <strong>Walk-Forward laden (optional, woechentlich)</strong><br>
+      <span class="mut">stockiq_alpha_juno.py ausfuehren (~25 Min) &rarr; stockiq_alpha_results.json im Walk-Forward-Tab laden</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>3. Tabs &amp; Funktionen</h2>
+
+<div class="card cyan">
+  <table>
+    <tr><th>Tab</th><th>Inhalt</th><th>Typische Nutzung</th></tr>
+    <tr>
+      <td>&#127775; Synopse</td>
+      <td>Signal-Uebersicht, Top 3 BUY/SELL, KPI-Karten</td>
+      <td>Taeglich: erster Blick auf aktuelle Signallage</td>
+    </tr>
+    <tr>
+      <td>&#128202; Watchlist</td>
+      <td>Alle 270 Ticker nach Score oder A-Z, gefiltert</td>
+      <td>Ticker suchen, Detail-Analyse aufrufen</td>
+    </tr>
+    <tr>
+      <td>&#11088; WL2</td>
+      <td>Persoenliche Auswahl (persistent)</td>
+      <td>Eigenes Portfolio-Universum verwalten</td>
+    </tr>
+    <tr>
+      <td>&#128202; Fundamentals</td>
+      <td>JSON laden, Kennzahlen, Archiv-Snapshots</td>
+      <td>Datenpflege, Archiv-Export fuer Analyse</td>
+    </tr>
+    <tr>
+      <td>&#128201; Walk-Forward</td>
+      <td>Strategie-Backtest, Win-Rate je Fenster</td>
+      <td>Woechentlich: Strategie-Gesundheit pruefen</td>
+    </tr>
+    <tr>
+      <td>&#128209; Allokation</td>
+      <td>Portfolio-Verteilung, Depot-Eingabe</td>
+      <td>Ist/Soll-Vergleich, Rebalancing-Hinweise</td>
+    </tr>
+    <tr>
+      <td>&#127759; Roadmap</td>
+      <td>Entwicklungsplan, akademische Grundlagen</td>
+      <td>Bei Bedarf: Methodik-Ueberblick</td>
+    </tr>
+    <tr>
+      <td>&#10067; Hilfe</td>
+      <td>Bedienung, Signal-Erklaerung, Glossar</td>
+      <td>Nachschlagen bei Fragen</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<h2>4. Signal-Logik</h2>
+
+<div class="card orange">
+  <h3 style="margin-top:0">Signal-Uebersicht</h3>
+  <table>
+    <tr><th>Signal</th><th>Bedeutung</th><th>Handlung</th></tr>
+    <tr>
+      <td><span class="sig sig-strong">STRONG BUY</span></td>
+      <td>Alle BUY-Kriterien + Bullish Divergenz (MACD/Kurs). Staerkstes Einstiegssignal.</td>
+      <td>Priorisierter Einstieg pruefen</td>
+    </tr>
+    <tr>
+      <td><span class="sig sig-buy">BUY</span></td>
+      <td>MACD-Kreuzung unter Nulllinie + Kurs ueber 200MA + PEG &lt; 3.0</td>
+      <td>Einstieg pruefen</td>
+    </tr>
+    <tr>
+      <td><span class="sig sig-hold">HOLD SF</span></td>
+      <td>Technisches SELL-Signal, aber Score stark genug um Position zu halten</td>
+      <td>Position halten, beobachten</td>
+    </tr>
+    <tr>
+      <td><span class="sig sig-hold">HOLD DR</span></td>
+      <td>Technisches SELL, aber Dividendenrendite attraktiv (Div-Yield-Schwelle)</td>
+      <td>Position halten fuer Dividende</td>
+    </tr>
+    <tr>
+      <td><span class="sig sig-sell">SELL</span></td>
+      <td>Exit-Bedingung erfuellt: MACD ueber Nulllinie, Histogramm negativ, oder Kurs unter 200MA</td>
+      <td>Ausstieg pruefen</td>
+    </tr>
+    <tr>
+      <td><span class="sig sig-pb">PEG-BLOCK</span></td>
+      <td>Technisch kaufbar, aber PEG &ge; 3.0 (Ueberbewertung). Kein BUY-Signal.</td>
+      <td>Beobachten, kein Einstieg</td>
+    </tr>
+    <tr>
+      <td><span class="sig sig-watch">WATCH</span></td>
+      <td>Keine aktive Bedingung. Keine klare Richtung.</td>
+      <td>Weiter beobachten</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card cyan">
+  <h3 style="margin-top:0">BUY-Bedingungen (alle vier muessen erfuellt sein)</h3>
+  <div style="font-family:monospace;font-size:11px;color:var(--green);background:#0a1628;padding:10px;border-radius:6px">
+    1. MACD-Kreuzung unter der Nulllinie (Momentum dreht positiv)<br>
+    2. MACD-Histogramm &gt; ATR &times; 0.05 (Qualitaetsfilter)<br>
+    3. Kurs ueber dem 200-Tage-Durchschnitt (Markttrend positiv)<br>
+    4. PEG-Ratio &lt; 3.0 (keine extreme Ueberbewertung)
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>5. Score und Kennzahlen erklaert</h2>
+
+<div class="card yellow">
+  <table>
+    <tr><th>Kennzahl</th><th>Was es bedeutet</th><th>Gut wenn...</th></tr>
+    <tr>
+      <td>Score (0-100)</td>
+      <td>Gesamtbewertung aus Momentum, Trend, Fundamentaldaten und Risiko</td>
+      <td>&ge; 65: starke Position</td>
+    </tr>
+    <tr>
+      <td>FCF Yield</td>
+      <td>Freier Cashflow geteilt durch Marktkapitalisierung. Zeigt echte Ertragskraft.</td>
+      <td>&gt; 4%: attraktiv</td>
+    </tr>
+    <tr>
+      <td>ROCE</td>
+      <td>Kapitalrendite (EBIT / eingesetztes Kapital). Misst Effizienz der Kapitalnutzung.</td>
+      <td>&gt; 15%: sehr gut</td>
+    </tr>
+    <tr>
+      <td>OE Yield</td>
+      <td>Owner Earnings Yield nach Buffett. Bereinigter Cashflow als Prozent des Marktwerts.</td>
+      <td>&gt; 3%: attraktiv</td>
+    </tr>
+    <tr>
+      <td>PEG</td>
+      <td>KGV / Wachstumsrate. Verbindet Bewertung mit Wachstum.</td>
+      <td>&lt; 2.0: fair bewertet</td>
+    </tr>
+    <tr>
+      <td>EV/EBITDA</td>
+      <td>Unternehmenswert / Betriebsergebnis. Vergleich ueber Kapitalstruktur hinweg.</td>
+      <td>&lt; 15x: guenstig</td>
+    </tr>
+    <tr>
+      <td>EV/EBIT</td>
+      <td>Wie EV/EBITDA, aber Abschreibungen beruecksichtigt (Buffett-bevorzugt).</td>
+      <td>&lt; 15x: guenstig</td>
+    </tr>
+    <tr>
+      <td>EVAR (rel.)</td>
+      <td>Stabilitaet der Gewinne im Sektor-Vergleich (0-100). Hoher Wert = stabile Ertraege.</td>
+      <td>&gt; 60: stabil</td>
+    </tr>
+    <tr>
+      <td>Beta</td>
+      <td>Kursvolatilitaet relativ zum Markt. &lt;1 = defensiv, &gt;1.5 = spekulativ.</td>
+      <td>&lt; 1.0: konservativ</td>
+    </tr>
+    <tr>
+      <td>Shares YoY</td>
+      <td>Veraenderung der Aktienanzahl. Negativ = Aktienrueckkauf (bullish).</td>
+      <td>&lt; -3%: starker Rueckkauf</td>
+    </tr>
+    <tr>
+      <td>MOAT</td>
+      <td>Wettbewerbsvorteil nach Morningstar: WIDE / NARROW / NONE</td>
+      <td>WIDE: nachhaltig</td>
+    </tr>
+    <tr>
+      <td>12M-Mom</td>
+      <td>11-Monats-Kursrendite (ohne letzten Monat). Akademisches Momentum-Signal.</td>
+      <td>&gt; 10%: positiver Trend</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<h2>6. Filter &amp; Einstellungen</h2>
+
+<div class="card green">
+  <table>
+    <tr><th>Filter</th><th>Wirkung</th><th>Empfehlung</th></tr>
+    <tr>
+      <td>SF (Score-Filter)</td>
+      <td>SELL-Signale werden unterdrueckt wenn Score stark. Zeigt HOLD statt SELL.</td>
+      <td>Standard: ein. Zeigt langfristig starke Positionen.</td>
+    </tr>
+    <tr>
+      <td>HC (High Conviction)</td>
+      <td>Nur Titel mit Triple-Confirmation: Score &ge;65 + positives Momentum + Sektor-Staerke.</td>
+      <td>Fuer fokussierte Selektion. Synopse und WL zeigen dann nur HC-Titel.</td>
+    </tr>
+    <tr>
+      <td>WL2-Sync</td>
+      <td>Synopse und Watchlist filtern auf persoenliche WL2-Auswahl.</td>
+      <td>Wenn eigenes Portfolio-Universum im Fokus steht.</td>
+    </tr>
+    <tr>
+      <td>DR (Dividend-Hold)</td>
+      <td>SELL wird unterdrueckt bei hoher Dividendenrendite.</td>
+      <td>Fuer Dividenden-fokussierte Strategie.</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<h2>7. DQ-Monitor (Datenqualitaet)</h2>
+
+<div class="card cyan">
+  <p style="margin-bottom:8px">Der DQ-Monitor im Synopse-Banner zeigt den Status der geladenen Daten:</p>
+  <table>
+    <tr><th>Anzeige</th><th>Bedeutung</th></tr>
+    <tr><td>VIX 18.4 (Low)</td><td>Aktuelle Marktvolatilitaet. Low/Elevated/Crisis beeinflusst Momentum-Score.</td></tr>
+    <tr><td>&#128247; 57 WL3</td><td>Anzahl gespeicherter Snapshots. WL3 = Signal-Tracking aktiv (&ge;30 Snaps).</td></tr>
+    <tr><td>Sanity: N</td><td>N Ticker mit Datenproblemen (z.B. fehlendes PEG, Kurs = 0).</td></tr>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<h2>8. Erste Schritte &mdash; Setup</h2>
+
+<div class="card orange">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <strong>GitHub Pages URL bookmarken</strong><br>
+      <span class="mut">klaschim11.github.io/Stockiq in Safari &rarr; Teilen &rarr; Zum Home-Bildschirm. So bleibt der Cache dauerhaft.</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <strong>Juno-Scripts installieren</strong><br>
+      <span class="mut">stockiq_fund_juno.py und stockiq_alpha_juno.py in Juno-App auf dem iPhone ablegen.</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <strong>WL2 befuellen</strong><br>
+      <span class="mut">WL2-Tab: Ticker manuell hinzufuegen oder ueber "Alle BUY hinzufuegen". Bleibt dauerhaft gespeichert.</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <strong>Archiv aufbauen</strong><br>
+      <span class="mut">Taeglich JSON laden = automatischer Snapshot. Ab 30 Snapshots: Signal-Tracking (WL3) verfuegbar.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>9. Wichtige Hinweise</h2>
+
+<div class="card red">
+  <table>
+    <tr><th>Hinweis</th><th>Details</th></tr>
+    <tr>
+      <td>Kein Anlageberater</td>
+      <td>StockIQ liefert Entscheidungshilfen auf Basis von Algorithmen. Keine Haftung fuer Kauf/Verkauf-Entscheidungen.</td>
+    </tr>
+    <tr>
+      <td>Backtesting-Limitation</td>
+      <td>Walk-Forward-Ergebnisse basieren auf historischen Daten. Vergangene Performance kein Garant fuer Zukunft.</td>
+    </tr>
+    <tr>
+      <td>Datenbasis</td>
+      <td>Daten via yfinance (Yahoo Finance). Einzelne Kennzahlen koennen fehlen oder verzoegert sein.</td>
+    </tr>
+    <tr>
+      <td>Haltedauer</td>
+      <td>Signale optimal fuer mittelfristige Haltedauern (Wochen bis Monate). Nicht fuer Day-Trading konzipiert.</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ============================================================ -->
+<h2>10. Balancing von Anlageklassen</h2>
+
+<div class="card cyan">
+  <p style="margin-bottom:10px">StockIQ-Signale steuern die Aktien-Komponente. Das Gesamtportfolio braucht zusaetzlich eine Zielallokation ueber alle Anlageklassen.</p>
+  <h3 style="margin-top:0">Zielallokation (Referenzrahmen)</h3>
+  <table>
+    <tr><th>Anlageklasse</th><th>Zielgewicht</th><th>Instrumente (Beispiele)</th></tr>
+    <tr><td>Aktien (global)</td><td style="color:var(--green);font-weight:700">60%</td><td>StockIQ-Signale + Core-ETF (MSCI World Multifactor)</td></tr>
+    <tr><td>Anleihen</td><td style="color:var(--cyan);font-weight:700">20%</td><td>Kurzlaufende Staatsanleihen, Geldmarkt-ETF</td></tr>
+    <tr><td>Gold + Silber</td><td style="color:var(--yellow);font-weight:700">15%</td><td>GLD/IAU (Gold), SLV (Silber), Minenaktien</td></tr>
+    <tr><td>Cash</td><td style="color:var(--mut);font-weight:700">5%</td><td>Tagesgeld, kurzlaufende T-Bills</td></tr>
+  </table>
+</div>
+
+<div class="card green">
+  <h3 style="margin-top:0">Rebalancing-Regeln</h3>
+  <table>
+    <tr><th>Regel</th><th>Bedingung</th><th>Aktion</th></tr>
+    <tr>
+      <td><strong>Toleranzband</strong></td>
+      <td>Abweichung &gt; &plusmn;7pp je Anlageklasse</td>
+      <td>Rebalancing ausfuehren. Innerhalb des Bands: kein Eingriff (spart Transaktionskosten und Steuern).</td>
+    </tr>
+    <tr>
+      <td><strong>SPY-200MA-Trigger</strong></td>
+      <td>SPY faellt unter 200MA (Baermarkt)</td>
+      <td>Aktienquote aktiv reduzieren, unabhaengig vom Zeitpunkt. Cash/Anleihen erhoehen.</td>
+    </tr>
+    <tr>
+      <td><strong>Gold/Silber-Ratio</strong></td>
+      <td>Ratio &gt; 90 (Silber relativ billig)</td>
+      <td>Silber-Anteil aggressiv aufbauen (innerhalb 15%-Ziel).</td>
+    </tr>
+  </table>
+  <div class="mut" style="margin-top:8px">
+    Methodisch entspricht das dem Vorgehen institutioneller Multi-Asset-Portfolios: Schwellenwert-Drift statt Kalender-Rebalancing. Reagiert auf echte Regimewechsel ohne monatliches Eingreifen.
+  </div>
+</div>
+
+<div class="card yellow">
+  <h3 style="margin-top:0">StockIQ Allokations-Tab</h3>
+  <p>Der Allokations-Tab zeigt den Ist-Zustand deines Depots gegen diese Zielgewichte. Eingabe der aktuellen Positionen &rarr; automatischer Soll/Ist-Vergleich &rarr; Rebalancing-Hinweis bei &Uuml;berschreitung des Toleranzbands.</p>
+  <div class="mut" style="margin-top:6px">Rohstoffe im Dashboard: Gold (GC=F), Silber (SI=F) als eigene Ticker-Klasse mit separatem Score-Regime.</div>
+</div>
+
+<!-- ============================================================ -->
+<h2>11. Sektor-Ampelsignale im Depot</h2>
+
+<div class="card orange">
+  <p style="margin-bottom:10px">Die Sektor-Ampel (Skt-Spalte im Depot-Tab) zeigt ob der Sektor einer Position aktuell den Markt anf&uuml;hrt oder zur&uuml;ckliegt &mdash; basierend auf dem 12-Monats-Return des entsprechenden Sektor-ETFs.</p>
+  <table>
+    <tr><th>Symbol</th><th>Bedeutung</th><th>Schwelle (12M-Return)</th></tr>
+    <tr><td>&#128200; gr&uuml;n</td><td>Sektor f&uuml;hrt den Markt</td><td style="color:var(--green)">&gt; +10%</td></tr>
+    <tr><td>&#128992; gelb</td><td>Sektor neutral</td><td style="color:var(--yellow)">0 &ndash; 10%</td></tr>
+    <tr><td>&#128308; rot</td><td>Sektor hinkt nach</td><td style="color:var(--red)">&lt; 0%</td></tr>
+  </table>
+</div>
+
+<div class="card cyan">
+  <h3 style="margin-top:0">Signalkombinationen — was sie bedeuten</h3>
+  <table>
+    <tr><th>Kombination</th><th>Interpretation</th><th>Handlung</th></tr>
+    <tr>
+      <td><span class="sig sig-buy">BUY</span> + &#128200; gr&uuml;n</td>
+      <td><strong style="color:var(--green)">Staerkste Konstellation.</strong> Sektor und Titel konvergieren positiv. Beispiel: SHEL.L + RIO (XLE/XLB beide &gt;10%).</td>
+      <td>Priorisierter Einstieg. Position ggf. aufstocken.</td>
+    </tr>
+    <tr>
+      <td><span class="sig sig-sell">SELL</span> + &#128200; gr&uuml;n</td>
+      <td><strong style="color:var(--yellow)">Underperformance-Warnung.</strong> Sektor f&uuml;hrt, Titel l&auml;uft schlechter. Beispiel: NVO (XLV gr&uuml;n, aber SELL MA).</td>
+      <td>Beobachten. Titel verliert relativ zum Sektor &rarr; Wechselkandidat.</td>
+    </tr>
+    <tr>
+      <td><span class="sig sig-watch">WATCH</span> + &#128200; gr&uuml;n</td>
+      <td>Sektor-R&uuml;ckenwind wird nicht genutzt. Beispiel: GSK.L (Sektor gr&uuml;n, Titel flat).</td>
+      <td>Beobachten ob Sektor-Dynamik irgendwann auf den Titel &uuml;bergreift.</td>
+    </tr>
+    <tr>
+      <td><span class="sig sig-buy">BUY</span> + &#128308; rot</td>
+      <td>Titel besser als sein schwacher Sektor. Relative St&auml;rke vorhanden.</td>
+      <td>BUY-Signal gilt, aber Sektor-Gegenwind beachten. Kleinere Position.</td>
+    </tr>
+    <tr>
+      <td><span class="sig sig-hold">HOLD</span> + &#128992; gelb</td>
+      <td>Typische Halteposition. Kein Druck in beide Richtungen.</td>
+      <td>Position halten, n&auml;chstes Signal abwarten.</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card green">
+  <h3 style="margin-top:0">Sektor-ETF Mapping (Benchmark je Sektor)</h3>
+  <table>
+    <tr><th>Sektor</th><th>ETF</th><th>Typische Marktphase</th></tr>
+    <tr><td>Technology</td><td>XLK</td><td>Growth / Early Cycle</td></tr>
+    <tr><td>Healthcare</td><td>XLV</td><td>Defensiv / alle Phasen</td></tr>
+    <tr><td>Financials</td><td>XLF</td><td>Zinssensitiv / Mid Cycle</td></tr>
+    <tr><td>Consumer Discretionary</td><td>XLY</td><td>Late Cycle / Konsum</td></tr>
+    <tr><td>Consumer Staples</td><td>XLP</td><td>Defensiv / Rezession</td></tr>
+    <tr><td>Industrials</td><td>XLI</td><td>Early-Mid Cycle / Infrastruktur</td></tr>
+    <tr><td>Energy</td><td>XLE</td><td>Late Cycle / Inflation</td></tr>
+    <tr><td>Materials</td><td>XLB</td><td>Late Cycle / Rohstoff-Boom</td></tr>
+    <tr><td>Utilities</td><td>XLU</td><td>Defensiv / Zinssenkungen</td></tr>
+    <tr><td>Real Estate</td><td>XLRE</td><td>Zinssensitiv / Erholung</td></tr>
+    <tr><td>Communication Svc</td><td>XLC</td><td>Growth / Mixed</td></tr>
+  </table>
+  <div class="mut" style="margin-top:6px">
+    EU-Ticker (.DE, .PA, .MI, .SW, .L) verwenden V2X statt VIX als Volatilitaets-Proxy. Sektor-ETF-Benchmarks bleiben US-basiert (globale Sektor-Dynamik).
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>9. Was ist neu in v5.9.95? (Phase C)</h2>
+
+<h3>9.1 Score-Qualitaet verbessert</h3>
+<div class="card green">
+  <p style="margin-bottom:10px">
+    Ab v5.9.95 werden mehrere Einzel-Scores direkt aus der zentralen Scoring-Datenbank
+    gelesen statt im Browser neu berechnet. Das macht die Anzeige konsistenter und schneller.
+    <span class="mut">Keine sichtbare Aenderung im Interface &ndash; nur praezisere Werte im Detail-Panel.</span>
+  </p>
+  <table>
+    <tr><th>Score im Detail-Panel</th><th>Beschreibung</th></tr>
+    <tr>
+      <td>PEG (Sektor-relativ)</td>
+      <td>PEG des Titels relativ zum Sektor-Median. &lt;0.5x Median = 100 Punkte.</td>
+    </tr>
+    <tr>
+      <td>EVAR</td>
+      <td>Earnings-Varianz-Score (Percentile im Sektor). Hoher Wert = stabile Gewinne.</td>
+    </tr>
+    <tr>
+      <td>Consistency</td>
+      <td>ROCE-Stabilitaet ueber 5 Jahre (Buffett-Test: alle Jahre positiv = Bonus).</td>
+    </tr>
+    <tr>
+      <td>Piotroski</td>
+      <td>Bilanz-Gesundheits-Score 0-9 (Piotroski 2000). Auf 0-100 skaliert.</td>
+    </tr>
+  </table>
+</div>
+
+<h3>9.2 SPY-Banner nun korrekt</h3>
+<div class="card cyan">
+  <p>
+    Der SPY-Marktphasen-Banner im Watchlist-Tab zeigt nun zuverl&auml;ssig
+    <strong style="color:var(--green)">gruen</strong> (SPY &uuml;ber 200-Tage-MA = Bullenmarkt) oder
+    <strong style="color:var(--yellow)">gelb</strong> (SPY unter 200-Tage-MA = Vorsicht).
+  </p>
+</div>
+
+<h3>9.3 Marktkontext Mai/Juni 2026</h3>
+<div class="card yellow">
+  <table>
+    <tr><th>Faktor</th><th>Aktueller Stand</th><th>Bedeutung fuer StockIQ</th></tr>
+    <tr>
+      <td>Momentum</td>
+      <td>Staerkster Faktor global seit Dotcom-Blase (JP Morgan Q2 2026)</td>
+      <td>Momentum-Scores (mom_score) derzeit besonders treffsicher</td>
+    </tr>
+    <tr>
+      <td>Momentum-Dispersion</td>
+      <td>Hoechste seit 1990 &ndash; Crash-Risiko erhoeht</td>
+      <td>SPY-Banner beachten: Bei gelb Positionen vorsichtiger dimensionieren</td>
+    </tr>
+    <tr>
+      <td>Value</td>
+      <td>3 positive Quartale in Folge global</td>
+      <td>EV/EBIT + Owner Earnings Scores derzeit gut positioniert</td>
+    </tr>
+    <tr>
+      <td>Quality</td>
+      <td>Schwaecher als Value/Momentum (Q2 2026)</td>
+      <td>Consistency + Piotroski wirken als Qualitaets-Gate, nicht als Alpha-Quelle</td>
+    </tr>
+  </table>
+</div>
+
+<footer>
+  StockIQ Anwender-Leitfaden v5.9.95 &middot; Mai 2026 &middot; klaschim11.github.io/Stockiq &middot; Claude (Anthropic)
+</footer>
+
+</body>
+</html>
