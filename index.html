@@ -2926,7 +2926,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.4.11';
+      var PAGE_VERSION = 'v6.4.12';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -3617,7 +3617,7 @@ function rFund(){
     cards+='<div style="display:flex;justify-content:space-between;margin-bottom:6px">';
     cards+='<div><div style="font-size:13px;font-weight:700">'+s.t+'</div><div style="font-size:10px;color:var(--mut)">'+dName(s)+'</div></div>';
     cards+='<div style="font-size:18px;font-weight:800;color:'+fcol+'">'+fs3+'</div></div>';
-    cards+='<div style="font-family:monospace;font-size:8px;padding:2px 7px;border-radius:8px;background:rgba(255,255,255,.06);color:'+mC+';margin-bottom:6px;display:inline-block">'+fd4.moat.toUpperCase()+'</div>';
+    cards+='<div style="font-family:monospace;font-size:8px;padding:2px 7px;border-radius:8px;background:rgba(255,255,255,.06);color:'+mC+';margin-bottom:6px;display:inline-block">'+( fd4.moat||'--').toUpperCase()+'</div>';
     cards+='<div style="font-size:10px;color:var(--mut);margin-bottom:6px;font-style:italic">'+(fd4.mr||'')+'</div>';
     cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:2px"><span style="color:var(--mut)">FCF Yield</span><span style="color:'+fcC+'">'+fp(fd4.fcf)+'</span></div>';
     var fdcC4=fd4.fcf_debt_cover!==null&&fd4.fcf_debt_cover!==undefined?fd4.fcf_debt_cover:null;
