@@ -4903,7 +4903,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v5.9.78 &middot; Daten aus geladener fundamentals.json</div>
+        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v6.4.13 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
@@ -4965,7 +4965,10 @@ function rptInitSectors(){
   var sectors = {};
   for(var i=0;i<STOCKS.length;i++){
     var fd = FD[STOCKS[i].t];
-    var sec = (fd && fd.sector) ? fd.sector : (STOCKS[i].sector || '');
+    var _si = _scoresIdx[STOCKS[i].t];
+    var sec = (fd && fd.sector) ? fd.sector
+            : (_si && _si.sector) ? _si.sector
+            : (STOCKS[i].sector || '');
     if(sec) sectors[sec] = (sectors[sec]||0)+1;
   }
   var sel = document.getElementById('rpt-sector');
