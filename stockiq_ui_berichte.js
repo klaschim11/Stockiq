@@ -6,6 +6,37 @@
    SEKTOR-BERICHT ENGINE v5.9.51
    ============================================================ */
 
+/* ----------------------------------------------------------------
+   rptGetFd(t) — Unified FD/scores Merger v1.0
+   Prioritaet: FD[t] (manuell geladen) > _scoresIdx[t] (scores.json)
+   Dauerhaft leer (kein scores.json-Feld): industry, fcf_debt_cover,
+   shareholder_return
+   ---------------------------------------------------------------- */
+function rptGetFd(t){
+  var base = FD[t] ? FD[t] : {};
+  var si   = _scoresIdx[t] ? _scoresIdx[t] : {};
+  return {
+    sector:               base.sector               !== undefined ? base.sector               : si.sector,
+    industry:             base.industry,
+    moat:                 base.moat                 !== undefined ? base.moat                 : si.moat,
+    fcf:                  base.fcf                  !== undefined ? base.fcf                  : si.fcf_yield,
+    owner_earnings_yield: base.owner_earnings_yield !== undefined ? base.owner_earnings_yield : si.owner_earnings,
+    roce:                 base.roce                 !== undefined ? base.roce                 : si.roce,
+    peg:                  base.peg                  !== undefined ? base.peg                  : si.peg,
+    ev_ebitda:            base.ev_ebitda            !== undefined ? base.ev_ebitda            : si.ev_ebitda,
+    ev_ebit:              base.ev_ebit              !== undefined ? base.ev_ebit              : si.ev_ebit,
+    fcf_debt_cover:       base.fcf_debt_cover,
+    rsi_val:              base.rsi_val              !== undefined ? base.rsi_val              : si.rsi,
+    mom_skip:             base.mom_skip             !== undefined ? base.mom_skip             : si.mom_skip,
+    mom12m:               base.mom12m               !== undefined ? base.mom12m               : si.mom12m_ret,
+    beta:                 base.beta                 !== undefined ? base.beta                 : si.beta,
+    shareholder_return:   base.shareholder_return,
+    shares_change_yoy:    base.shares_change_yoy    !== undefined ? base.shares_change_yoy    : si.sc_yoy,
+    debt:                 base.debt                 !== undefined ? base.debt                 : si.debt_eq,
+    evar:                 base.evar                 !== undefined ? base.evar                 : si.evar
+  };
+}
+
 function rptOpen(){
   if(!STOCKS || STOCKS.length === 0){
     alert('Bitte zuerst fundamentals.json laden.');
@@ -29,7 +60,7 @@ function rptPrint(){
 function rptInitSectors(){
   var sectors = {};
   for(var i=0;i<STOCKS.length;i++){
-    var fd = FD[STOCKS[i].t];
+    var fd = rptGetFd(STOCKS[i].t);
     var _si = _scoresIdx[STOCKS[i].t];
     var sec = (fd && fd.sector) ? fd.sector
             : (_si && _si.sector) ? _si.sector
@@ -60,7 +91,7 @@ function rptFillStocks(){
 
   var inSec = [];
   for(var i=0;i<STOCKS.length;i++){
-    var fd = FD[STOCKS[i].t];
+    var fd = rptGetFd(STOCKS[i].t);
     var _si2 = _scoresIdx[STOCKS[i].t];
     var s = (fd && fd.sector) ? fd.sector
           : (_si2 && _si2.sector) ? _si2.sector
@@ -96,7 +127,7 @@ function rptBuild(){
   /* Sektor-Statistiken berechnen */
   var secStocks = [];
   for(var i=0;i<STOCKS.length;i++){
-    var fd0 = FD[STOCKS[i].t];
+    var fd0 = rptGetFd(STOCKS[i].t);
     var _si3 = _scoresIdx[STOCKS[i].t];
     var s0  = (fd0 && fd0.sector) ? fd0.sector
             : (_si3 && _si3.sector) ? _si3.sector
@@ -153,7 +184,7 @@ function rptBuild(){
   var top = secStocks.slice(0, 10);
   for(var ri=0;ri<top.length;ri++){
     var rs  = top[ri];
-    var rfd = FD[rs.t] || {};
+    var rfd = rptGetFd(rs.t) || {};
     var rsc = Math.round(cSc(rs));
     var rsig = rptSigText(rs);
     var sigC = rsig.indexOf('BUY')>=0 ? '#00e57a' : rsig.indexOf('SELL')>=0 ? '#ff5252' : '#ffab00';
@@ -233,7 +264,7 @@ function rptCompareBlock(tk1, tk2){
     if(STOCKS[i].t===tk2) s2=STOCKS[i];
   }
   if(!s1||!s2) return '<div style="color:#ff5252">Ticker nicht in STOCKS gefunden.</div>';
-  var fd1 = FD[tk1]||{}; var fd2 = FD[tk2]||{};
+  var fd1 = rptGetFd(tk1)||{}; var fd2 = rptGetFd(tk2)||{};
   var sc1 = Math.round(cSc(s1)); var sc2 = Math.round(cSc(s2));
 
   function row(lbl, v1, v2, higherIsBetter){
@@ -277,7 +308,7 @@ function rptDetailCard(tk, num){
   var st=null;
   for(var i=0;i<STOCKS.length;i++){ if(STOCKS[i].t===tk){st=STOCKS[i];break;} }
   if(!st) return '';
-  var fd=FD[tk]||{};
+  var fd=rptGetFd(tk)||{};
   var sc=Math.round(cSc(st));
   var sig=rptSigText(st);
   var sigC=sig.indexOf('BUY')>=0?'#00e57a':sig.indexOf('SELL')>=0?'#ff5252':'#ffab00';
@@ -414,7 +445,7 @@ function rptSectorRanking(){
   /* Sektor-Statistiken berechnen */
   var secData = {};
   for(var i=0;i<STOCKS.length;i++){
-    var fd0 = FD[STOCKS[i].t];
+    var fd0 = rptGetFd(STOCKS[i].t);
     var _siR = _scoresIdx[STOCKS[i].t];
     var sec0 = (fd0&&fd0.sector) ? fd0.sector
              : (_siR&&_siR.sector) ? _siR.sector : '';
@@ -503,7 +534,7 @@ function rptTextAnalysis(tk, secStats){
   var st = null;
   for(var i=0;i<STOCKS.length;i++){ if(STOCKS[i].t===tk){st=STOCKS[i];break;} }
   if(!st) return '';
-  var fd = FD[tk] || {};
+  var fd = rptGetFd(tk) || {};
   var sc = Math.round(cSc(st));
   var sig = rptSigText(st);
   var rawSig = mSig(st);
@@ -761,7 +792,7 @@ function rptCalcStats(arr){
   var scores=[]; var fcfs=[]; var roces=[];
   for(var i=0;i<arr.length;i++){
     scores.push(cSc(arr[i]));
-    var fd=FD[arr[i].t]||{};
+    var fd=rptGetFd(arr[i].t)||{};
     if(fd.fcf!=null&&!isNaN(fd.fcf)&&Math.abs(fd.fcf)<100) fcfs.push(fd.fcf);
     if(fd.roce!=null&&!isNaN(fd.roce)&&fd.roce<200) roces.push(fd.roce);
   }
