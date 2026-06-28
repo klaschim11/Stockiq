@@ -91,7 +91,6 @@ stockiq_alpha*.py
 Doku_aktuell/
 
 # Engineering und Tests
-CLAUDE.md
 tests/
 utils/
 experiments/
