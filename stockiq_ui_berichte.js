@@ -7,7 +7,7 @@
    ============================================================ */
 
 /* ----------------------------------------------------------------
-   rptGetFd(t) — Unified FD/scores Merger v1.1
+   rptGetFd(t) -- Unified FD/scores Merger v1.1
    Prioritaet: FD[t] (manuell geladen) > _scoresIdx[t] (scores.json)
    Dauerhaft leer (kein scores.json-Feld): shareholder_return
    shareholder_return: berechnet aus div_yield + sc_yoy
@@ -143,7 +143,7 @@ function rptBuild(){
 
   var out = '';
 
-  /* â”€â”€ Titel-Block â”€â”€ */
+  /* -- Titel-Block -- */
   out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a3a5c;border-radius:10px;padding:16px;margin-bottom:14px">';
   out += '<div class="rpt-h1" style="font-size:18px;font-weight:800;color:#00c8f0;margin-bottom:4px">StockIQ Sektor-Analyse</div>';
   out += '<div class="rpt-h2" style="font-size:14px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#128202; ' + sec + ' &mdash; ' + dateStr + '</div>';
@@ -151,10 +151,10 @@ function rptBuild(){
   out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v6.4.13</div>';
   out += '</div>';
 
-  /* â”€â”€ 0. Sektor-Performance-Ranking (alle Sektoren) â”€â”€ */
+  /* -- 0. Sektor-Performance-Ranking (alle Sektoren) -- */
   out += rptSectorRanking();
 
-  /* â”€â”€ 1. Sektorvergleich: Statistik-Kacheln â”€â”€ */
+  /* -- 1. Sektorvergleich: Statistik-Kacheln -- */
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">1. Sektor&uuml;bersicht &mdash; ' + sec + '</div>';
   out += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">';

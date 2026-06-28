@@ -87,8 +87,6 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
       <div style="margin-top:4px;display:flex;gap:4px;justify-content:flex-end">
-        <button onclick="dlSelf()" style="font-family:monospace;font-size:9px;color:var(--acc);background:rgba(0,200,240,.1);border:1px solid rgba(0,200,240,.3);border-radius:6px;padding:3px 8px;cursor:pointer">&#8595; HTML</button>
-        <button onclick="dlDataUrl()" style="font-family:monospace;font-size:9px;color:var(--grn);background:rgba(0,229,122,.1);border:1px solid rgba(0,229,122,.3);border-radius:6px;padding:3px 8px;cursor:pointer">&#8595; Link</button>
         <button onclick="rptOpen()" style="font-family:monospace;font-size:9px;color:#ffab00;background:rgba(255,171,0,.1);border:1px solid rgba(255,171,0,.3);border-radius:6px;padding:3px 8px;cursor:pointer">&#128203; Bericht</button>
       </div>
     </div>
@@ -3648,43 +3646,6 @@ window.onerror = function(msg, src, line, col, err){
   return false;
 };
 
-function dlSelf(){
-  try{
-    var html = document.documentElement.outerHTML;
-    var blob = new Blob([html], {type:'text/html;charset=utf-8'});
-    var url  = URL.createObjectURL(blob);
-    var a    = document.createElement('a');
-    a.href   = url;
-    a.download = 'stockiq-v5.9.44.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }catch(e){
-    alert('Download fehlgeschlagen: ' + e.message);
-  }
-}
-
-function dlDataUrl(){
-  /* In der Claude-App koennen Blob-URLs nicht in Safari geoeffnet werden.
-     Zeigt stattdessen eine klare Anleitung. */
-  var existing = document.getElementById('siq-dl-link');
-  if(existing) existing.parentNode.removeChild(existing);
-  var div = document.createElement('div');
-  div.id = 'siq-dl-link';
-  div.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#0c1420;border-bottom:2px solid #00c8f0;padding:14px 16px;z-index:9999';
-  div.innerHTML = ''
-    + '<div style="display:flex;justify-content:space-between;align-items:flex-start">'
-    + '<div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:8px">&#128241; StockIQ speichern</div>'
-    + '<button onclick="document.getElementById(\'siq-dl-link\').remove()" style="background:transparent;border:none;color:#9ab8d0;font-size:20px;cursor:pointer;line-height:1">&times;</button>'
-    + '</div>'
-    + '<div style="font-size:11px;color:#9ab8d0;line-height:1.8">'
-    + '<div><strong style="color:#dce8f5">Option A &mdash; Juno:</strong> In Juno neue Datei <span style="color:#00c8f0">stockiq-v5.9.html</span> erstellen, Inhalt via &ldquo;Kopieren&rdquo; (oben im Chat) einsetzen, speichern.</div>'
-    + '<div style="margin-top:6px"><strong style="color:#dce8f5">Option B &mdash; Mac/PC:</strong> Datei im Chat auf einem Desktop-Browser herunterladen, via iCloud Drive auf iPhone uebertragen.</div>'
-    + '<div style="margin-top:6px"><strong style="color:#dce8f5">Option C &mdash; direkt:</strong> Im Chat oben rechts <span style="color:#00c8f0">&#8942;</span> &rarr; &ldquo;Kopieren&rdquo; &rarr; in Juno einsetzen.</div>'
-    + '</div>';
-  document.body.insertBefore(div, document.body.firstChild);
-}
 </script>
 
 
