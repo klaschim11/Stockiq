@@ -7,10 +7,10 @@
    ============================================================ */
 
 /* ----------------------------------------------------------------
-   rptGetFd(t) — Unified FD/scores Merger v1.0
+   rptGetFd(t) — Unified FD/scores Merger v1.1
    Prioritaet: FD[t] (manuell geladen) > _scoresIdx[t] (scores.json)
-   Dauerhaft leer (kein scores.json-Feld): industry, fcf_debt_cover,
-   shareholder_return
+   Dauerhaft leer (kein scores.json-Feld): industry, fcf_debt_cover
+   shareholder_return: berechnet aus div_yield + max(0, -sc_yoy)
    ---------------------------------------------------------------- */
 function rptGetFd(t){
   var base = FD[t] ? FD[t] : {};
@@ -30,10 +30,12 @@ function rptGetFd(t){
     mom_skip:             base.mom_skip             !== undefined ? base.mom_skip             : si.mom_skip,
     mom12m:               base.mom12m               !== undefined ? base.mom12m               : si.mom12m_ret,
     beta:                 base.beta                 !== undefined ? base.beta                 : si.beta,
-    shareholder_return:   base.shareholder_return,
     shares_change_yoy:    base.shares_change_yoy    !== undefined ? base.shares_change_yoy    : si.sc_yoy,
     debt:                 base.debt                 !== undefined ? base.debt                 : si.debt_eq,
-    evar:                 base.evar                 !== undefined ? base.evar                 : si.evar
+    evar:                 base.evar                 !== undefined ? base.evar                 : si.evar,
+    div_yield:            base.div_yield            !== undefined ? base.div_yield            : si.div_yield,
+    shareholder_return:   base.shareholder_return   !== undefined ? base.shareholder_return
+                          : (si.div_yield || 0) + (si.sc_yoy || 0)
   };
 }
 
@@ -783,6 +785,28 @@ function rptShowControls(){
     '<button onclick="rptBuild()" style="flex:1;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#9654; Bericht erstellen</button>' +
     '<button id="rpt-print-btn" onclick="rptPrint()" style="flex:1;background:#1a7a3a;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer;display:none">&#128438; Als PDF drucken</button>' +
     '</div>';
+  // BG-2: FD[]-Backfill aus _scoresIdx fuer rpt*-Kennzahlen
+  for(var _t in _scoresIdx) {
+    if(!FD[_t]) FD[_t] = {};
+    var _si = _scoresIdx[_t];
+    FD[_t].sector    = FD[_t].sector    || _si.sector;
+    FD[_t].fcf       = FD[_t].fcf       || _si.fcf_yield;
+    FD[_t].roce      = FD[_t].roce      || _si.roce;
+    FD[_t].peg       = FD[_t].peg       || _si.peg;
+    FD[_t].rsi_val   = FD[_t].rsi_val   || _si.rsi;
+    FD[_t].evar      = FD[_t].evar      || _si.evar;
+    FD[_t].ev_ebitda = FD[_t].ev_ebitda || _si.ev_ebitda;
+    FD[_t].ev_ebit   = FD[_t].ev_ebit   || _si.ev_ebit;
+    FD[_t].beta      = FD[_t].beta      || _si.beta;
+    FD[_t].debt      = FD[_t].debt      || _si.debt_eq;
+    FD[_t].mom_skip  = FD[_t].mom_skip  || _si.mom_skip;
+    FD[_t].mom12m    = FD[_t].mom12m    || _si.mom12m_ret;
+    FD[_t].moat      = FD[_t].moat      || _si.moat;
+    FD[_t].owner_earnings_yield = FD[_t].owner_earnings_yield || _si.owner_earnings;
+    FD[_t].shares_change_yoy    = FD[_t].shares_change_yoy    || _si.sc_yoy;
+    FD[_t].div_yield = FD[_t].div_yield || _si.div_yield;
+  }
+  // fd.industry, fd.fcf_debt_cover: kein Quellfeld in scores.json
   rptInitSectors();
   document.getElementById('rpt-modal').scrollTop = 0;
 }
