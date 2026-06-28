@@ -6,6 +6,11 @@
    SEKTOR-BERICHT ENGINE v5.9.51
    ============================================================ */
 
+function escapeHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
 /* ----------------------------------------------------------------
    rptGetFd(t) -- Unified FD/scores Merger v1.1
    Prioritaet: FD[t] (manuell geladen) > _scoresIdx[t] (scores.json)
@@ -194,10 +199,10 @@ function rptBuild(){
     var rowBg = ri % 2 === 0 ? '#0a1628' : '#0c1a2e';
     var isSel = (rs.t === tk1 || rs.t === tk2) ? 'font-weight:700;' : '';
     out += '<tr style="background:' + rowBg + '">';
-    out += '<td style="padding:5px 7px;' + isSel + 'color:' + (rs.t===tk1||rs.t===tk2?'#00c8f0':'#dce8f5') + '">' + rs.t + '</td>';
-    out += '<td style="padding:5px 7px;color:#dce8f5;font-size:9px">' + (rs.n||'') + '</td>';
+    out += '<td style="padding:5px 7px;' + isSel + 'color:' + (rs.t===tk1||rs.t===tk2?'#00c8f0':'#dce8f5') + '">' + escapeHtml(rs.t) + '</td>';
+    out += '<td style="padding:5px 7px;color:#dce8f5;font-size:9px">' + escapeHtml(rs.n||'') + '</td>';
     out += '<td style="padding:5px 7px;text-align:center;color:#dce8f5;font-weight:700">' + rsc + '</td>';
-    out += '<td style="padding:5px 7px;text-align:center;color:' + sigC + ';font-size:9px">' + rsig + '</td>';
+    out += '<td style="padding:5px 7px;text-align:center;color:' + sigC + ';font-size:9px">' + escapeHtml(rsig) + '</td>';
     out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.fcf!=null?rfd.fcf.toFixed(1)+'%':'\u2014') + '</td>';
     out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.roce!=null?rfd.roce.toFixed(1)+'%':'\u2014') + '</td>';
     out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.peg!=null?rfd.peg.toFixed(2):'\u2014') + '</td>';
