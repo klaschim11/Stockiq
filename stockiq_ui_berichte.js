@@ -790,6 +790,7 @@ function rptShowControls(){
     if(!FD[_t]) FD[_t] = {};
     var _si = _scoresIdx[_t];
     FD[_t].sector    = FD[_t].sector    || _si.sector;
+    FD[_t].industry  = FD[_t].industry  || _si.industry;
     FD[_t].fcf       = FD[_t].fcf       || _si.fcf_yield;
     FD[_t].roce      = FD[_t].roce      || _si.roce;
     FD[_t].peg       = FD[_t].peg       || _si.peg;
