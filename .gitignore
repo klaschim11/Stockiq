@@ -132,3 +132,4 @@ stockiq_alpha_interim*.json
 stockiq_anwender_leitfaden*.html
 stockiq_dev_leitfaden*.html
 VERSION.txt
+stockiq_skill_*.md
