@@ -160,9 +160,9 @@ function rptBuild(){
   out += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">';
   var kpis = [
     {l:'Anz. Titel', v:secStocks.length, u:''},
-    {l:'Ã˜ Score', v:stats.avgScore.toFixed(1), u:'/100'},
-    {l:'Ã˜ FCF Yield', v:stats.avgFcf !== null ? stats.avgFcf.toFixed(1)+'%' : 'n/a', u:''},
-    {l:'Ã˜ ROCE', v:stats.avgRoce !== null ? stats.avgRoce.toFixed(1)+'%' : 'n/a', u:''},
+    {l:'\u00d8 Score', v:stats.avgScore.toFixed(1), u:'/100'},
+    {l:'\u00d8 FCF Yield', v:stats.avgFcf !== null ? stats.avgFcf.toFixed(1)+'%' : 'n/a', u:''},
+    {l:'\u00d8 ROCE', v:stats.avgRoce !== null ? stats.avgRoce.toFixed(1)+'%' : 'n/a', u:''},
   ];
   for(var ki=0;ki<kpis.length;ki++){
     out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">';
@@ -198,36 +198,36 @@ function rptBuild(){
     out += '<td style="padding:5px 7px;color:#dce8f5;font-size:9px">' + (rs.n||'') + '</td>';
     out += '<td style="padding:5px 7px;text-align:center;color:#dce8f5;font-weight:700">' + rsc + '</td>';
     out += '<td style="padding:5px 7px;text-align:center;color:' + sigC + ';font-size:9px">' + rsig + '</td>';
-    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.fcf!=null?rfd.fcf.toFixed(1)+'%':'â€”') + '</td>';
-    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.roce!=null?rfd.roce.toFixed(1)+'%':'â€”') + '</td>';
-    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.peg!=null?rfd.peg.toFixed(2):'â€”') + '</td>';
+    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.fcf!=null?rfd.fcf.toFixed(1)+'%':'\u2014') + '</td>';
+    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.roce!=null?rfd.roce.toFixed(1)+'%':'\u2014') + '</td>';
+    out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.peg!=null?rfd.peg.toFixed(2):'\u2014') + '</td>';
     out += '</tr>';
   }
   out += '</table>';
   if(secStocks.length > 10) out += '<div style="font-family:monospace;font-size:9px;color:#7a9bb5;margin-top:4px">+ ' + (secStocks.length-10) + ' weitere Titel im Sektor</div>';
   out += '</div>';
 
-  /* â”€â”€ 2. Aktien-Detail â”€â”€ */
+  /* -- 2. Aktien-Detail -- */
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">2. Aktien-Vergleich &amp; Analyse</div>';
   out += rptCompareBlock(tk1, tk2);
   out += '</div>';
 
-  /* â”€â”€ 3. Detail-Karten â”€â”€ */
+  /* -- 3. Detail-Karten -- */
   out += rptDetailCard(tk1, '3a');
   out += rptDetailCard(tk2, '3b');
 
-  /* â”€â”€ 4. Regelbasierte Textanalyse â”€â”€ */
+  /* -- 4. Regelbasierte Textanalyse -- */
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">4. Textliche Analyse</div>';
   out += rptTextAnalysis(tk1, stats);
   out += rptTextAnalysis(tk2, stats);
   out += '</div>';
 
-  /* â”€â”€ 5. Glossar â”€â”€ */
+  /* -- 5. Glossar -- */
   out += rptGlossar();
 
-  /* â”€â”€ Disclaimer â”€â”€ */
+  /* -- Disclaimer -- */
   out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a2a3a;border-radius:8px;padding:10px;margin-bottom:10px">';
   out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5;line-height:1.5">';
   out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v6.4.13 generiert. ';
@@ -239,7 +239,7 @@ function rptBuild(){
   document.getElementById('rpt-output').innerHTML = out;
   document.getElementById('rpt-print-btn').style.display = 'block';
 
-  /* Controls einklappen â€” Bericht sichtbar machen */
+  /* Controls einklappen -- Bericht sichtbar machen */
   var ctrl = document.getElementById('rpt-controls');
   ctrl.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">' +
     '<div style="font-family:monospace;font-size:10px;color:#00e57a">&#10003; Bericht erstellt: ' +
@@ -282,7 +282,7 @@ function rptCompareBlock(tk1, tk2){
       '<td style="padding:5px 8px;text-align:center;color:'+c1+';font-weight:700">' + v1 + '</td>' +
       '<td style="padding:5px 8px;text-align:center;color:'+c2+';font-weight:700">' + v2 + '</td></tr>';
   }
-  function fmtN(v, suf){ return v!=null ? v.toFixed(1)+suf : 'â€”'; }
+  function fmtN(v, suf){ return v!=null ? v.toFixed(1)+suf : '\u2014'; }
 
   var out='';
   out += '<table class="rpt-tbl" style="width:100%;border-collapse:collapse;font-size:11px">';
@@ -296,7 +296,7 @@ function rptCompareBlock(tk1, tk2){
   out += row('FCF Yield %', fmtN(fd1.fcf,'%'), fmtN(fd2.fcf,'%'), true);
   out += row('ROCE %', fmtN(fd1.roce,'%'), fmtN(fd2.roce,'%'), true);
   out += row('OE Yield %', fmtN(fd1.owner_earnings_yield,'%'), fmtN(fd2.owner_earnings_yield,'%'), true);
-  out += row('PEG', fd1.peg!=null?fd1.peg.toFixed(2):'â€”', fd2.peg!=null?fd2.peg.toFixed(2):'â€”', false);
+  out += row('PEG', fd1.peg!=null?fd1.peg.toFixed(2):'\u2014', fd2.peg!=null?fd2.peg.toFixed(2):'\u2014', false);
   out += row('EV/EBITDA', fmtN(fd1.ev_ebitda,'x'), fmtN(fd2.ev_ebitda,'x'), false);
   out += row('Beta', fmtN(fd1.beta,''), fmtN(fd2.beta,''), false);
   out += row('Debt/Equity %', fmtN(fd1.debt,'%'), fmtN(fd2.debt,'%'), false);
@@ -443,7 +443,7 @@ var SECTOR_ETF_MAP = {
   'Technology':              {etf:'XLK', name:'Technology Select SPDR'},
 };
 
-/* â”€â”€ Sektor-Performance-Ranking (v5.9.55) â”€â”€ */
+/* -- Sektor-Performance-Ranking (v5.9.55) -- */
 function rptSectorRanking(){
   /* Sektor-Statistiken berechnen */
   var secData = {};
@@ -478,7 +478,7 @@ function rptSectorRanking(){
     }
     var avgSc = 0; for(var k2=0;k2<d.scores.length;k2++) avgSc+=d.scores[k2];
     avgSc = avgSc/d.scores.length;
-    var etfInfo = SECTOR_ETF_MAP[sec] || {etf:'â€”', name:''};
+    var etfInfo = SECTOR_ETF_MAP[sec] || {etf:'\u2014', name:''};
     var etfMom = (etfData[etfInfo.etf] && etfData[etfInfo.etf].mom12m !== null) ?
       etfData[etfInfo.etf].mom12m : null;
     rows.push({sec:sec, etf:etfInfo.etf, etfName:etfInfo.name,
@@ -496,21 +496,21 @@ function rptSectorRanking(){
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">&#128202; Sektor-Performance-Ranking (12M)</div>';
   out += '<div style="font-family:monospace;font-size:9px;color:#7a9bb5;margin-bottom:10px">';
-  out += 'Aktien-Ã˜: 12M-Momentum aller Sektortitel (aus FD[]) &middot; ETF-Return: Sektor-ETF (fund_juno v7.9.10)</div>';
+  out += 'Aktien-\u00d8: 12M-Momentum aller Sektortitel (aus FD[]) &middot; ETF-Return: Sektor-ETF (fund_juno v7.9.10)</div>';
 
   out += '<table class="rpt-tbl" style="width:100%;border-collapse:collapse;font-size:10px">';
   out += '<tr><th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">#</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:left">Sektor</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">ETF</th>';
-  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">Aktien-Ã˜ 12M</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">Aktien-\u00d8 12M</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">ETF 12M</th>';
-  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">Ã˜ Score</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">\u00d8 Score</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">n</th></tr>';
 
   for(var ri=0;ri<rows.length;ri++){
     var r = rows[ri];
     var rowBg = ri % 2 === 0 ? '#0a1628' : '#0c1a2e';
-    var momStr = r.avgMom !== null ? (r.avgMom >= 0 ? '+' : '') + r.avgMom.toFixed(1) + '%' : 'â€”';
+    var momStr = r.avgMom !== null ? (r.avgMom >= 0 ? '+' : '') + r.avgMom.toFixed(1) + '%' : '\u2014';
     var momC = r.avgMom === null ? '#7a9bb5' : r.avgMom > 10 ? '#00e57a' : r.avgMom > 0 ? '#a5d6a7' : '#ff7043';
     var etfStr = r.etfMom !== null ? (r.etfMom >= 0 ? '+' : '') + r.etfMom.toFixed(1) + '%' : 'n/a*';
     var etfC = r.etfMom === null ? '#7a9bb5' : r.etfMom > 10 ? '#00e57a' : r.etfMom > 0 ? '#a5d6a7' : '#ff7043';
@@ -532,7 +532,7 @@ function rptSectorRanking(){
   return out;
 }
 
-/* â”€â”€ Regelbasierte Textanalyse signal-konform (v5.9.69) â”€â”€ */
+/* -- Regelbasierte Textanalyse signal-konform (v5.9.69) -- */
 function rptTextAnalysis(tk, secStats){
   var st = null;
   for(var i=0;i<STOCKS.length;i++){ if(STOCKS[i].t===tk){st=STOCKS[i];break;} }
@@ -546,13 +546,13 @@ function rptTextAnalysis(tk, secStats){
   function nn(v){ return v !== null && v !== undefined && !isNaN(v); }
   function pct(v,d){ return (v>=0?'+':'')+v.toFixed(d||1)+'%'; }
 
-  /* â”€â”€ Signal-Kategorie bestimmen â”€â”€ */
+  /* -- Signal-Kategorie bestimmen -- */
   var isBuySignal  = rawSig==='strong'||rawSig==='buy'||rawSig==='pb';
   var isSellSignal = isSell(rawSig);
   var isHoldSig    = isHoldSF(rawSig);
   var isWatchSig   = rawSig==='watch'||rawSig==='weak';
 
-  /* â”€â”€ Persistenz aus Snapshots â”€â”€ */
+  /* -- Persistenz aus Snapshots -- */
   var persistCount = 0; var snapCount = 0;
   try {
     var snaps = JSON.parse(localStorage.getItem('stockiq_snapshots')||'[]');
@@ -560,7 +560,7 @@ function rptTextAnalysis(tk, secStats){
       var snap = snaps[si];
       if(!snap||!snap.tickers||!snap.tickers[tk]) continue;
       snapCount++;
-      /* Signal aus Snapshot-Daten rekonstruieren â€” vereinfacht via trend */
+      /* Signal aus Snapshot-Daten rekonstruieren -- vereinfacht via trend */
       var snapTk = snap.tickers[tk];
       if(snapTk.trend !== null && snapTk.trend !== undefined && snapTk.trend < 0) persistCount++;
     }
@@ -573,7 +573,7 @@ function rptTextAnalysis(tk, secStats){
       persistText = 'Kurs durchgehend &uuml;ber 200MA in ' + snapCount + ' Snapshots.';
   }
 
-  /* â”€â”€ P1: Signal-Intro â€” direkt und konform â”€â”€ */
+  /* -- P1: Signal-Intro -- direkt und konform -- */
   var p1 = '';
   var scDiff = secStats && nn(secStats.avgScore) ? Math.round(sc - secStats.avgScore) : null;
   var scDiffTxt = scDiff !== null ?
@@ -585,9 +585,9 @@ function rptTextAnalysis(tk, secStats){
     p1 = '<strong>' + name + ' wird aktuell als <span style="color:#ff5252">' + sig +
          '</span> eingestuft</strong> (Score ' + sc + '/100). ';
     if(rawSig==='sell_ma')
-      p1 += 'Der Kurs hat die 200-Tage-Linie unterschritten â€” der Aufw&auml;rtstrend ist technisch gebrochen. ';
+      p1 += 'Der Kurs hat die 200-Tage-Linie unterschritten \u2014 der Aufw&auml;rtstrend ist technisch gebrochen. ';
     else if(rawSig==='sell_zl')
-      p1 += 'Der MACD hat die Nulllinie nach unten durchbrochen â€” ein Momentum-Umkehrsignal. ';
+      p1 += 'Der MACD hat die Nulllinie nach unten durchbrochen \u2014 ein Momentum-Umkehrsignal. ';
     else
       p1 += 'Mehrere technische Exit-Signale sind aktiv. ';
     if(persistText) p1 += persistText + ' ';
@@ -598,13 +598,13 @@ function rptTextAnalysis(tk, secStats){
     p1 = name + ' zeigt ein <strong>Deep Value Divergence</strong>-Signal (Score ' + sc + '/100). ';
     p1 += 'Das technische Bild ist belastet (unter 200MA), aber Fundamentals (Fund ' +
           Math.round(fSc(st)) + '/100) und RSI im &uuml;berverkauften Bereich deuten auf nachlassenden Verkaufsdruck hin. ';
-    p1 += '<strong>Handlungskonsequenz: Beobachten â€” Einstieg pr&uuml;fen wenn Kurs &uuml;ber 200MA zur&uuml;ckkehrt.</strong>';
+    p1 += '<strong>Handlungskonsequenz: Beobachten \u2014 Einstieg pr&uuml;fen wenn Kurs &uuml;ber 200MA zur&uuml;ckkehrt.</strong>';
     p1 += scDiffTxt;
 
   } else if(isHoldSig){
     p1 = name + ' wird durch den <strong>Score Filter als HOLD</strong> eingestuft (Score ' + sc + '/100). ';
     p1 += 'Das technische Exit-Signal wird durch die fundamentale St&auml;rke (Score &ge;55) neutralisiert. ';
-    p1 += '<strong>Handlungskonsequenz: Qualit&auml;tsposition halten â€” kein Verkauf auf Basis des technischen Signals allein.</strong>';
+    p1 += '<strong>Handlungskonsequenz: Qualit&auml;tsposition halten \u2014 kein Verkauf auf Basis des technischen Signals allein.</strong>';
     p1 += scDiffTxt;
 
   } else if(rawSig==='strong'){
@@ -621,90 +621,90 @@ function rptTextAnalysis(tk, secStats){
 
   } else {
     p1 = name + ' zeigt kein klares Kauf- oder Verkaufssignal (Score ' + sc + '/100, ' + sig + '). ';
-    p1 += '<strong>Handlungskonsequenz: Beobachten â€” kein Handlungsbedarf.</strong>';
+    p1 += '<strong>Handlungskonsequenz: Beobachten \u2014 kein Handlungsbedarf.</strong>';
     p1 += scDiffTxt;
   }
 
-  /* â”€â”€ P2: StÃ¤rken (nur relevante, signal-kontextuell) â”€â”€ */
+  /* -- P2: Staerken (nur relevante, signal-kontextuell) -- */
   var strengths = [];
   if(nn(fd.roce)){
-    if(fd.roce >= 30) strengths.push('ROCE ' + fd.roce.toFixed(1) + '% â€” starker wirtschaftlicher Burggraben.');
-    else if(fd.roce >= 15) strengths.push('ROCE ' + fd.roce.toFixed(1) + '% â€” solide Kapitaleffizienz.');
+    if(fd.roce >= 30) strengths.push('ROCE ' + fd.roce.toFixed(1) + '% \u2014 starker wirtschaftlicher Burggraben.');
+    else if(fd.roce >= 15) strengths.push('ROCE ' + fd.roce.toFixed(1) + '% \u2014 solide Kapitaleffizienz.');
   }
   if(nn(fd.owner_earnings_yield) && nn(fd.fcf)){
     var oeDiff = fd.owner_earnings_yield - fd.fcf;
     if(oeDiff > 5)
-      strengths.push('OE Yield (' + fd.owner_earnings_yield.toFixed(1) + '%) vs. FCF (' + fd.fcf.toFixed(1) + '%): +' + oeDiff.toFixed(1) + 'pp Growth-Capex â€” Buffett-Indikator f&uuml;r Wachstumsinvestitionen.');
+      strengths.push('OE Yield (' + fd.owner_earnings_yield.toFixed(1) + '%) vs. FCF (' + fd.fcf.toFixed(1) + '%): +' + oeDiff.toFixed(1) + 'pp Growth-Capex \u2014 Buffett-Indikator f&uuml;r Wachstumsinvestitionen.');
     else if(nn(fd.fcf) && fd.fcf >= 6)
-      strengths.push('FCF Yield ' + fd.fcf.toFixed(1) + '% â€” starke Cashgenerierung.');
+      strengths.push('FCF Yield ' + fd.fcf.toFixed(1) + '% \u2014 starke Cashgenerierung.');
   } else if(nn(fd.fcf) && fd.fcf >= 6){
-    strengths.push('FCF Yield ' + fd.fcf.toFixed(1) + '% â€” starke Cashgenerierung.');
+    strengths.push('FCF Yield ' + fd.fcf.toFixed(1) + '% \u2014 starke Cashgenerierung.');
   }
   if(fd.moat && fd.moat !== 'none')
-    strengths.push('Morningstar Moat: ' + fd.moat.toUpperCase() + ' â€” strukturelle Wettbewerbsvorteile.');
+    strengths.push('Morningstar Moat: ' + fd.moat.toUpperCase() + ' \u2014 strukturelle Wettbewerbsvorteile.');
   if(nn(fd.evar) && fd.evar >= 65)
-    strengths.push('EVAR ' + Math.round(fd.evar) + ' â€” &uuml;berdurchschnittlich stabile Ertragsentwicklung.');
+    strengths.push('EVAR ' + Math.round(fd.evar) + ' \u2014 &uuml;berdurchschnittlich stabile Ertragsentwicklung.');
   if(nn(fd.peg) && fd.peg < 1.5)
-    strengths.push('PEG ' + fd.peg.toFixed(2) + ' â€” attraktive Wachstumsbewertung.');
+    strengths.push('PEG ' + fd.peg.toFixed(2) + ' \u2014 attraktive Wachstumsbewertung.');
   if(nn(fd.beta) && fd.beta < 0.5)
-    strengths.push('Beta ' + fd.beta.toFixed(2) + ' â€” defensives, marktunkorreliertes Profil.');
+    strengths.push('Beta ' + fd.beta.toFixed(2) + ' \u2014 defensives, marktunkorreliertes Profil.');
 
   var p2 = strengths.length > 0 ?
     '<strong>St&auml;rken:</strong> ' + strengths.join(' ') :
     '<strong>Fundamentales Bild:</strong> Keine herausragenden Einzelkennzahlen identifiziert.';
 
-  /* â”€â”€ P3: Risiken â€” signal-priorisiert â”€â”€ */
+  /* -- P3: Risiken -- signal-priorisiert -- */
   var risks = [];
   if(isSellSignal){
     var rsi3 = fd.rsi_val !== null && fd.rsi_val !== undefined ? Math.round(fd.rsi_val) : null;
     risks.push('<strong>Technischer Abw&auml;rtstrend aktiv</strong> (' + sig + '). ' +
       (persistText ? persistText + ' ' : '') +
-      (rsi3 !== null ? 'RSI ' + rsi3 + (rsi3 < 35 ? ' â€” &uuml;berverkauft, Reversal-Potenzial m&ouml;glich.' : ' â€” kein extremer &Uuml;berverkauf.') : ''));
+      (rsi3 !== null ? 'RSI ' + rsi3 + (rsi3 < 35 ? ' \u2014 &uuml;berverkauft, Reversal-Potenzial m&ouml;glich.' : ' \u2014 kein extremer &Uuml;berverkauf.') : ''));
   }
   if(nn(fd.peg) && fd.peg > 3)
-    risks.push('PEG ' + fd.peg.toFixed(2) + ' â€” ambitionierte Bewertung erfordert stabiles Gewinnwachstum.');
+    risks.push('PEG ' + fd.peg.toFixed(2) + ' \u2014 ambitionierte Bewertung erfordert stabiles Gewinnwachstum.');
   if(nn(fd.fcf) && fd.fcf < 2 && (!nn(fd.owner_earnings_yield) || fd.owner_earnings_yield < 5))
-    risks.push('FCF Yield ' + fd.fcf.toFixed(1) + '% â€” schwache laufende Cashgenerierung.');
+    risks.push('FCF Yield ' + fd.fcf.toFixed(1) + '% \u2014 schwache laufende Cashgenerierung.');
   if(nn(fd.debt) && fd.debt > 80)
-    risks.push('Debt/Equity ' + fd.debt.toFixed(0) + '% â€” erh&ouml;hte Verschuldung.');
+    risks.push('Debt/Equity ' + fd.debt.toFixed(0) + '% \u2014 erh&ouml;hte Verschuldung.');
   if(nn(fd.mom_skip) && fd.mom_skip < -20)
-    risks.push('12M-Momentum ' + pct(fd.mom_skip) + ' â€” anhaltender KursrÃ¼ckgang.');
+    risks.push('12M-Momentum ' + pct(fd.mom_skip) + ' \u2014 anhaltender Kursr\u00fcckgang.');
   if(nn(fd.evar) && fd.evar < 30)
-    risks.push('EVAR ' + Math.round(fd.evar) + ' â€” hohe Ertragsschwankung (zyklisches Profil).');
+    risks.push('EVAR ' + Math.round(fd.evar) + ' \u2014 hohe Ertragsschwankung (zyklisches Profil).');
 
   var p3 = risks.length > 0 ?
     '<strong>Risiken:</strong> ' + risks.join(' ') :
     '<strong>Risikoprofil:</strong> Keine kritischen Warnsignale identifiziert.';
 
-  /* â”€â”€ P4: Technisches Bild + Signal-konformes Fazit â”€â”€ */
+  /* -- P4: Technisches Bild + Signal-konformes Fazit -- */
   var rsi4 = fd.rsi_val !== null && fd.rsi_val !== undefined ? Math.round(fd.rsi_val) : null;
   var p4 = '<strong>Technisches Bild:</strong> ';
   if(nn(rsi4)){
-    if(rsi4 < 30) p4 += 'RSI ' + rsi4 + ' â€” &uuml;berverkauft. Statistisch erh&ouml;hte Reversalwahrscheinlichkeit. ';
-    else if(rsi4 < 45) p4 += 'RSI ' + rsi4 + ' â€” schwaches Momentum. ';
-    else if(rsi4 > 78) p4 += 'RSI ' + rsi4 + ' â€” &uuml;berhitzt. Konsolidierungsrisiko erh&ouml;ht. ';
-    else if(rsi4 > 70) p4 += 'RSI ' + rsi4 + ' â€” erh&ouml;htes Niveau, aber noch nicht extrem. ';
-    else p4 += 'RSI ' + rsi4 + ' â€” neutrales Niveau. ';
+    if(rsi4 < 30) p4 += 'RSI ' + rsi4 + ' \u2014 &uuml;berverkauft. Statistisch erh&ouml;hte Reversalwahrscheinlichkeit. ';
+    else if(rsi4 < 45) p4 += 'RSI ' + rsi4 + ' \u2014 schwaches Momentum. ';
+    else if(rsi4 > 78) p4 += 'RSI ' + rsi4 + ' \u2014 &uuml;berhitzt. Konsolidierungsrisiko erh&ouml;ht. ';
+    else if(rsi4 > 70) p4 += 'RSI ' + rsi4 + ' \u2014 erh&ouml;htes Niveau, aber noch nicht extrem. ';
+    else p4 += 'RSI ' + rsi4 + ' \u2014 neutrales Niveau. ';
   }
   if(nn(fd.mom_skip)) p4 += '12M-Momentum: ' + pct(fd.mom_skip) + '. ';
 
-  /* Signal-konformes Fazit â€” kein Widerspruch zum Signal */
+  /* Signal-konformes Fazit -- kein Widerspruch zum Signal */
   if(isSellSignal){
     p4 += '<strong>Fazit: Solange der Kurs unter der 200MA notiert, &uuml;berwiegen die technischen Risiken. ';
     p4 += nn(rsi4) && rsi4 < 35 ?
-      'RSI im &uuml;berverkauften Bereich â€” Reversal beobachten, aber kein Einstieg vor Trendumkehr-Best&auml;tigung.</strong>' :
+      'RSI im &uuml;berverkauften Bereich \u2014 Reversal beobachten, aber kein Einstieg vor Trendumkehr-Best&auml;tigung.</strong>' :
       'Kein Einstieg vor Trendumkehr-Best&auml;tigung (&Uuml;berschreiten der 200MA mit positivem MACD).</strong>';
   } else if(rawSig==='hold_dvg'){
-    p4 += '<strong>Fazit: Turnaround-Kandidat â€” fundamentale St&auml;rke intakt, technische Best&auml;tigung steht aus.</strong>';
+    p4 += '<strong>Fazit: Turnaround-Kandidat \u2014 fundamentale St&auml;rke intakt, technische Best&auml;tigung steht aus.</strong>';
   } else if(isHoldSig){
-    p4 += '<strong>Fazit: Qualit&auml;tsposition â€” technischer Druck vorhanden, aber Fundamentals rechtfertigen das Halten.</strong>';
+    p4 += '<strong>Fazit: Qualit&auml;tsposition \u2014 technischer Druck vorhanden, aber Fundamentals rechtfertigen das Halten.</strong>';
   } else if(isBuySignal){
-    p4 += '<strong>Fazit: Technisches und fundamentales Bild konvergieren positiv â€” Kaufgelegenheit unter Ber&uuml;cksichtigung der Positionsgr&ouml;&szlig;e.</strong>';
+    p4 += '<strong>Fazit: Technisches und fundamentales Bild konvergieren positiv \u2014 Kaufgelegenheit unter Ber&uuml;cksichtigung der Positionsgr&ouml;&szlig;e.</strong>';
   } else {
-    p4 += '<strong>Fazit: Kein klares Signal â€” Marktbeobachtung beibehalten.</strong>';
+    p4 += '<strong>Fazit: Kein klares Signal \u2014 Marktbeobachtung beibehalten.</strong>';
   }
 
-  /* â”€â”€ Ausgabe â”€â”€ */
+  /* -- Ausgabe -- */
   var out = '';
   out += '<div style="background:#060e1a;border:1px solid #1a3050;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div style="font-size:12px;font-weight:700;color:#00c8f0;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">&#129302; Analyse: ' + name + ' (' + tk + ')</div>';
@@ -716,7 +716,7 @@ function rptTextAnalysis(tk, secStats){
   return out;
 }
 
-/* â”€â”€ Kompaktes Glossar (v5.9.55) â”€â”€ */
+/* -- Kompaktes Glossar (v5.9.55) -- */
 function rptGlossar(){
   var terms = [
     {t:'Score /100', d:'Gewichteter Gesamt-Score: Momentum 25% + Trend 20% + Fundamentals 35% + Risk 20%. Schwellen: &ge;65 = BUY-Bereich, &lt;45 = SELL-Bereich.'},
@@ -731,10 +731,10 @@ function rptGlossar(){
     {t:'EVAR', d:'Earnings Variability Score 0&ndash;100. Misst Stabilit&auml;t der Ertr&auml;ge &uuml;ber Zeit. Sektor-relativ normiert. &gt;60 = stabil, &lt;30 = zyklisch.'},
     {t:'Beta', d:'Marktsensitivit&auml;t. &lt;0.5 = defensiv, 1.0 = Markt, &gt;1.5 = aggressiv. Negatives Beta = Gegenkorrelation zum Markt.'},
     {t:'Konsistenz (consScore)', d:'IQR-gefilterte Standardabweichung der ROCE-Historie (aus annual.json). Geringe Std-Abw = hohe Konsistenz = Buffett-Qualit&auml;tsmerkmal.'},
-    {t:'MACD', d:'Moving Average Convergence Divergence. ZL = Nulllinie. Histogramm > 0 = AufwÃ¤rtsmomentum. SELL-Signal: Histogramm negativ + unter 200MA.'},
+    {t:'MACD', d:'Moving Average Convergence Divergence. ZL = Nulllinie. Histogramm > 0 = Aufw\u00e4rtsmomentum. SELL-Signal: Histogramm negativ + unter 200MA.'},
     {t:'RSI', d:'Relative Strength Index (14). &lt;30 = &uuml;berverkauft (Kaufgelegenheit m&ouml;glich), &gt;70 = &uuml;berkauft, 40&ndash;60 = neutral.'},
     {t:'Divergenz', d:'bull_regular: RSI steigt bei fallendem Kurs = nachlassender Verkaufsdruck, m&ouml;gliche Trendwende. bear_regular: Gegenst&uuml;ck (Kauf-Warnsignal).'},
-    {t:'SELL MA', d:'Signal: Kurs hat die 200-Tage-Linie (SMA200) unterschritten &mdash; AufwÃ¤rtstrend gebrochen. Unabh&auml;ngig vom MACD-Signal.'},
+    {t:'SELL MA', d:'Signal: Kurs hat die 200-Tage-Linie (SMA200) unterschritten &mdash; Aufw\u00e4rtstrend gebrochen. Unabh&auml;ngig vom MACD-Signal.'},
     {t:'HOLD DVG', d:'Deep Value Divergence: Technisches SELL-Signal unterdrueckt weil Fund &ge;80 + RSI &lt;35 + Bullish Divergenz gleichzeitig. Zeigt: gutes Unternehmen in technischer Schwaechephase. Beobachten auf 200MA-Rueckkehr. (v5.9.69)'},
     {t:'Moat', d:'Wirtschaftlicher Burggraben nach Morningstar: Wide (sehr stark), Narrow (moderat), None (kein struktureller Vorteil). Wichtig f&uuml;r langfristige Haltestrategien.'},
   ];
