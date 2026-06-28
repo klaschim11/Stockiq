@@ -9,8 +9,8 @@
 /* ----------------------------------------------------------------
    rptGetFd(t) — Unified FD/scores Merger v1.1
    Prioritaet: FD[t] (manuell geladen) > _scoresIdx[t] (scores.json)
-   Dauerhaft leer (kein scores.json-Feld): industry, fcf_debt_cover
-   shareholder_return: berechnet aus div_yield + max(0, -sc_yoy)
+   Dauerhaft leer (kein scores.json-Feld): shareholder_return
+   shareholder_return: berechnet aus div_yield + sc_yoy
    ---------------------------------------------------------------- */
 function rptGetFd(t){
   var base = FD[t] ? FD[t] : {};
@@ -25,7 +25,8 @@ function rptGetFd(t){
     peg:                  base.peg                  !== undefined ? base.peg                  : si.peg,
     ev_ebitda:            base.ev_ebitda            !== undefined ? base.ev_ebitda            : si.ev_ebitda,
     ev_ebit:              base.ev_ebit              !== undefined ? base.ev_ebit              : si.ev_ebit,
-    fcf_debt_cover:       base.fcf_debt_cover,
+    fcf_debt_cover:       base.fcf_debt_cover !== undefined
+                          ? base.fcf_debt_cover : (si.fcf_debt_cover || null),
     rsi_val:              base.rsi_val              !== undefined ? base.rsi_val              : si.rsi,
     mom_skip:             base.mom_skip             !== undefined ? base.mom_skip             : si.mom_skip,
     mom12m:               base.mom12m               !== undefined ? base.mom12m               : si.mom12m_ret,
@@ -790,8 +791,9 @@ function rptShowControls(){
     if(!FD[_t]) FD[_t] = {};
     var _si = _scoresIdx[_t];
     FD[_t].sector    = FD[_t].sector    || _si.sector;
-    FD[_t].industry  = FD[_t].industry  || _si.industry;
-    FD[_t].fcf       = FD[_t].fcf       || _si.fcf_yield;
+    FD[_t].industry      = FD[_t].industry      || _si.industry;
+    FD[_t].fcf_debt_cover = FD[_t].fcf_debt_cover || _si.fcf_debt_cover;
+    FD[_t].fcf           = FD[_t].fcf           || _si.fcf_yield;
     FD[_t].roce      = FD[_t].roce      || _si.roce;
     FD[_t].peg       = FD[_t].peg       || _si.peg;
     FD[_t].rsi_val   = FD[_t].rsi_val   || _si.rsi;
@@ -807,7 +809,7 @@ function rptShowControls(){
     FD[_t].shares_change_yoy    = FD[_t].shares_change_yoy    || _si.sc_yoy;
     FD[_t].div_yield = FD[_t].div_yield || _si.div_yield;
   }
-  // fd.industry, fd.fcf_debt_cover: kein Quellfeld in scores.json
+  // fd.shareholder_return: computed (div_yield + sc_yoy)
   rptInitSectors();
   document.getElementById('rpt-modal').scrollTop = 0;
 }
