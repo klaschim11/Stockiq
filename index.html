@@ -1208,7 +1208,7 @@ function strongQualityGate(s) {
 
 function mSig(s){
   var _sd=_scoresIdx[s.t];
-  if(_sd&&_sd.signal){var _raw=_sd.signal;if(_raw==='strong') return strongQualityGate(s);if(isSell(_raw)){var _sc2=cSc(s);if(_sc2>=55) return 'hold';}return _raw;}
+  if(_sd&&_sd.signal){var _raw=_sd.signal;if(_raw==='strong') return strongQualityGate(s);if(isSell(_raw)&&SELL_SCORE_FILTER){var _fsc3=(_sd.fund_score!==null&&_sd.fund_score!==undefined)?_sd.fund_score:0;if(_fsc3>=SELL_SCORE_MIN) return 'hold_sf';}return _raw;}
   /* --- BUY-Seite: alle Bedingungen muessen erfuellt sein --- */
   /* v5.9.15: RSI-Filter entfernt (kein OOS-Effekt, Chong&Ng 2008) */
   var zl  = s.macdCross === 'below_zero';
@@ -1898,6 +1898,7 @@ function rWL(){
   var hcBuys=0,hcStrongs=0,hcTotal=0;  /* v5.9.74: hcTotal = alle isHC() */
   for(i=0;i<scored.length;i++){
     var ms=mSig(scored[i].s), _hc=isHC(scored[i].s, scored[i].sc);
+    if(FSC_FILTER){var _fv=(_scoresIdx[scored[i].s.t]&&_scoresIdx[scored[i].s.t].fund_score)||0;if(_fv<FSC_FILTER_MIN)continue;}
     if(ms==='strong'){ strongs++; if(_hc) hcStrongs++; }
     else if(ms==='buy'){ buys++; if(_hc) hcBuys++; }
     else if(ms==='pb') pbs++;
