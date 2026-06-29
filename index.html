@@ -1273,6 +1273,7 @@ function mSig(s){
 // SYNC-START:isSell
 function isSell(sig){return sig==='sell'||sig==='sell_zl'||sig==='sell_hist'||sig==='sell_ma';}
 // SYNC-END:isSell
+function dqCheck(t,sig){var d=_scoresIdx[t];if(!d)return null;var m=[],x=(d.sector||"").toLowerCase(),f=x.indexOf("financ")>=0||x.indexOf("bank")>=0||x.indexOf("insur")>=0,h=sig==="hold_sf"||sig==="hold_sf_both"||sig==="hold_sf_div",b=sig==="buy"||sig==="strong";if(b&&d.peg==null)m.push("PEG");if(b||h){if(!f){if(d.fcf==null&&d.owner_earnings_yield==null)m.push("FCF/OE");if(d.ev_ebit==null)m.push("EV/EBIT");if(d.roce==null)m.push("ROCE");}else{if(d.price_to_book==null)m.push("P/B");if(d.roe==null)m.push("ROE");}}return m.length>=2?{fields:m}:null;}
 // SYNC-START:sellSubCat
 function sellSubCat(sig) {
   var s = (sig || '').toLowerCase();
@@ -2075,6 +2076,7 @@ function wlRend(scored){
     var _srRank=(_scoresIdx[s.t]&&_scoresIdx[s.t].sector_rank)||null;
     var sectorBad=FSC_FILTER&&_srRank&&_srRank>=8;
     var sc2=isStrong?(sectorBad?'#7a6a4a':'#ff9f1c'):sig==='buy'?(sectorBad?'#5a8a6a':'#00e57a'):sig==='pb'?'#f0c000':isRsiBlk?'#e8a020':sig==='buy_rsi_warn'?'#a5d6a7':sig==='watch_rsi'?'#80cbc4':isHoldSf?'#b07cf8':isSellSig||sig==='weak'?'#ff6666':'#7a9bb5';
+    var dR=dqCheck(s.t,sig),dB=dR?('<span style="font-size:9px;color:#f0c000;border:1px solid rgba(240,192,0,.4);border-radius:3px;padding:1px 4px" title="DQ: '+dR.fields.join(", ")+'">&#9888;</span>'):"";
     var slbl=isStrong?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG-BLK':isRsiBlk?'RSI-BLK':isHoldSf?holdLbl:sig==='weak'?'WEAK':isSellSig?sellLabel(sig):'WATCH';
     var scc=scColQ(sc,s);
     var sqB=sqBadge(s);
@@ -2097,7 +2099,7 @@ function wlRend(scored){
     h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
-    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span><span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
+    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+dB+'<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
