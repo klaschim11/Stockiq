@@ -11,6 +11,284 @@ function escapeHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+/* ============================================================
+   RPT-Registry (Sprint 57) -- erweiterbar fuer kuenftige Berichte
+   Schema je Eintrag: key: { label, controls:fn, build:fn }
+   Dispatcher: rptBuild() reagiert auf RPT_TYPE
+   Type-Umschaltung: rptSetType(t) -> re-rendert Controls
+   ============================================================ */
+var RPT_TYPE = 'sector';
+var RPT_REG = {
+  sector: { label:'Sektor-Vergleich', controls:rptCtrlSector, build:rptBuildSector },
+  dq:     { label:'Datenqualitaet',    controls:rptCtrlDQ,     build:rptDQ          }
+};
+function rptBuild(){ var r=RPT_REG[RPT_TYPE]; if(r&&r.build) r.build(); }
+function rptSetType(t){ if(RPT_REG[t]){ RPT_TYPE=t; rptShowControls(); } }
+/* Stubs -- gefuellt in nachfolgenden Briefen:
+   rptCtrlSector  -> S57-4 (Extraktion aus rptShowControls)
+   rptCtrlDQ      -> S57-5 (DQ-Controls: Schwellen-Toggle + Filter)
+   rptDQ          -> S57-5 (DQ-Bericht-Body + CSV-Export)
+*/
+function rptCtrlSector(){
+  var ctrl = document.getElementById('rpt-controls');
+  ctrl.innerHTML += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">' +
+    '<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">SEKTOR</div>' +
+    '<select id="rpt-sector" onchange="rptFillStocks()" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select></div>' +
+    '<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">AKTIE 1</div>' +
+    '<select id="rpt-s1" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select></div>' +
+    '<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">AKTIE 2</div>' +
+    '<select id="rpt-s2" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select></div>' +
+    '</div>' +
+    '<div style="display:flex;gap:8px">' +
+    '<button onclick="rptBuild()" style="flex:1;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#9654; Bericht erstellen</button>' +
+    '<button id="rpt-print-btn" onclick="rptPrint()" style="flex:1;background:#1a7a3a;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer;display:none">&#128438; Als PDF drucken</button>' +
+    '</div>';
+  rptInitSectors();
+}
+function rptCtrlDQ(){
+  var ctrl = document.getElementById('rpt-controls');
+  /* Sektor-Liste aus _scoresIdx fuer Filter-Dropdown */
+  var secs = {};
+  for(var i=0; i<STOCKS.length; i++){
+    var sd = _scoresIdx[STOCKS[i].t];
+    if(sd && sd.sector) secs[sd.sector] = true;
+  }
+  var secList = [];
+  for(var sk in secs) secList.push(sk);
+  secList.sort();
+  var secOpts = '<option value="">alle</option>';
+  for(var si=0; si<secList.length; si++){
+    secOpts += '<option value="' + escapeHtml(secList[si]) + '">' + escapeHtml(secList[si]) + '</option>';
+  }
+  var iSt = 'width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace';
+  var lSt = 'font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px';
+  ctrl.innerHTML += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">' +
+    '<div><div style="' + lSt + '">SCHWELLE (FEHLEND)</div>' +
+    '<select id="dq-threshold" style="' + iSt + '">' +
+    '<option value="1">&gt;=1</option>' +
+    '<option value="2" selected>&gt;=2</option>' +
+    '<option value="3">&gt;=3</option>' +
+    '</select></div>' +
+    '<div><div style="' + lSt + '">SIGNAL-FILTER</div>' +
+    '<select id="dq-sigfilter" style="' + iSt + '">' +
+    '<option value="all" selected>alle</option>' +
+    '<optgroup label="BUY">' +
+    '<option value="g:buy">BUY (alle)</option>' +
+    '<option value="s:buy">- buy</option>' +
+    '<option value="s:strong">- strong</option>' +
+    '<option value="s:pb">- pb (PEG-Block)</option>' +
+    '<option value="s:buy_rsi_warn">- buy_rsi_warn</option>' +
+    '</optgroup>' +
+    '<optgroup label="HOLD*">' +
+    '<option value="g:holdstar">HOLD* (alle)</option>' +
+    '<option value="s:hold_sf">- hold_sf</option>' +
+    '<option value="s:hold_sf_div">- hold_sf_div</option>' +
+    '<option value="s:hold_sf_both">- hold_sf_both</option>' +
+    '<option value="s:hold_dvg">- hold_dvg</option>' +
+    '</optgroup>' +
+    '<optgroup label="HOLD">' +
+    '<option value="s:hold">- hold</option>' +
+    '</optgroup>' +
+    '<optgroup label="SELL">' +
+    '<option value="g:sell">SELL (alle)</option>' +
+    '<option value="s:sell_zl">- sell_zl</option>' +
+    '<option value="s:sell_ma">- sell_ma</option>' +
+    '<option value="s:sell_hist">- sell_hist</option>' +
+    '<option value="s:sell">- sell (generisch)</option>' +
+    '</optgroup>' +
+    '<optgroup label="WATCH / WEAK">' +
+    '<option value="g:watch">WATCH/WEAK (alle)</option>' +
+    '<option value="s:watch">- watch</option>' +
+    '<option value="s:watch_rsi">- watch_rsi</option>' +
+    '<option value="s:weak">- weak</option>' +
+    '</optgroup>' +
+    '</select></div>' +
+    '<div><div style="' + lSt + '">SEKTOR-FILTER</div>' +
+    '<select id="dq-sectorfilter" style="' + iSt + '">' + secOpts + '</select></div>' +
+    '</div>' +
+    '<div style="display:flex;gap:8px">' +
+    '<button onclick="rptBuild()" style="flex:1;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#9654; Bericht erstellen</button>' +
+    '<button onclick="rptDqCsv()" style="flex:1;background:#5d2dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#128190; CSV-Export</button>' +
+    '<button id="rpt-print-btn" onclick="rptPrint()" style="flex:1;background:#1a7a3a;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer;display:none">&#128438; Als PDF drucken</button>' +
+    '</div>';
+}
+/* ===== DQ-Bericht-Kern (Sprint 57) =====
+   rptDqCalc -- gemeinsame Datenstruktur fuer Tabelle und CSV
+   rptDqCsv  -- CSV-Download (Forward-Compat fuer DQ-1-IC Q3 2026)
+   rptDQ     -- Bericht-Body (11 Spalten + Footer-Stats)
+   ======================================== */
+function rptDqCalc(){
+  var thrEl = document.getElementById('dq-threshold');
+  var sfEl  = document.getElementById('dq-sigfilter');
+  var secEl = document.getElementById('dq-sectorfilter');
+  var thr = thrEl ? parseInt(thrEl.value, 10) : 2;
+  var sf  = sfEl  ? sfEl.value  : 'all';
+  var sec = secEl ? secEl.value : '';
+  /* Signal-Filter Helper: 'all' | 'g:Gruppe' (aggregiert) | 's:exakt' (Sub-Signal) */
+  function sigPass(sig, filt){
+    if(filt === 'all') return true;
+    if(filt.charAt(0) === 's' && filt.charAt(1) === ':'){
+      return sig === filt.substring(2);
+    }
+    if(filt === 'g:buy')      return sig==='buy' || sig==='strong' || sig==='pb' || sig==='buy_rsi_warn';
+    if(filt === 'g:holdstar') return isHoldSF(sig);
+    if(filt === 'g:sell')     return isSell(sig);
+    if(filt === 'g:watch')    return sig==='watch' || sig==='watch_rsi' || sig==='weak';
+    return false;
+  }
+  var rows = [];
+  for(var i=0; i<STOCKS.length; i++){
+    var s = STOCKS[i];
+    var sd = _scoresIdx[s.t];
+    if(!sd) continue;
+    var sig = mSig(s);
+    var dr  = dqCheck(s.t, sig, true);   /* forceReturn=true -> Rohliste */
+    if(!dr || dr.fields.length < thr) continue;
+    /* Signal-Filter (hierarchisch: all / g:Gruppe / s:Sub) */
+    if(!sigPass(sig, sf)) continue;
+    /* Sektor-Filter */
+    if(sec && sd.sector !== sec) continue;
+    /* fSc-Bucket */
+    var fs = (sd.fund_score !== null && sd.fund_score !== undefined) ? sd.fund_score : 0;
+    var bucket = 'low';
+    if(fs >= 85)      bucket = 'premium';
+    else if(fs >= 70) bucket = 'good';
+    else if(fs >= 50) bucket = 'mid';
+    rows.push({
+      t: s.t,
+      n: s.n || s.t,
+      sector: sd.sector || '',
+      sig: sig,
+      sigText: rptSigText(s),
+      raw_sig: sd.signal || '',
+      missing: dr.fields,
+      n_missing: dr.fields.length,
+      fund_score: fs,
+      fsc_bucket: bucket,
+      cSc: cSc(s),
+      mom12m: (sd.mom12m_ret !== null && sd.mom12m_ret !== undefined) ? sd.mom12m_ret : null
+    });
+  }
+  /* Sortierung: n_missing DESC, Signal-Prio, fund_score DESC */
+  var prio = {strong:1, buy:2, buy_rsi_warn:2, pb:3, watch:4, watch_rsi:4,
+              hold_sf:5, hold_sf_div:5, hold_sf_both:5, hold_dvg:5,
+              hold:6, weak:7,
+              sell:8, sell_zl:8, sell_ma:8, sell_hist:8};
+  rows.sort(function(a, b){
+    if(a.n_missing !== b.n_missing) return b.n_missing - a.n_missing;
+    var pa = prio[a.sig] || 9;
+    var pb = prio[b.sig] || 9;
+    if(pa !== pb) return pa - pb;
+    return b.fund_score - a.fund_score;
+  });
+  return rows;
+}
+
+function rptDqCsv(){
+  var rows = rptDqCalc();
+  if(rows.length === 0){
+    alert('Keine Ticker zum Exportieren mit den aktuellen Filtern.');
+    return;
+  }
+  var today = new Date().toISOString().substring(0, 10);
+  var lines = ['ticker;name;sector;signal_post;signal_raw;missing_fields;n_missing;fund_score;fsc_bucket;cSc;mom12m_ret;snapshot_date'];
+  for(var i=0; i<rows.length; i++){
+    var r = rows[i];
+    var nm = '"' + String(r.n).replace(/"/g, '""') + '"';
+    var line = [
+      r.t, nm, r.sector, r.sig, r.raw_sig,
+      r.missing.join('|'),
+      r.n_missing,
+      r.fund_score.toFixed(1),
+      r.fsc_bucket,
+      (r.cSc !== null && r.cSc !== undefined) ? r.cSc.toFixed(1) : '',
+      (r.mom12m !== null) ? r.mom12m.toFixed(4) : '',
+      today
+    ].join(';');
+    lines.push(line);
+  }
+  var csv = lines.join('\n');
+  var blob = new Blob([csv], {type: 'text/csv;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'stockiq_dq_snapshot_' + today + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function rptDQ(){
+  var rows = rptDqCalc();
+  var out = document.getElementById('rpt-output');
+  var today = new Date().toISOString().substring(0, 10);
+  /* Header */
+  var html = '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:20px;margin-bottom:20px">';
+  html += '<h2 style="color:#2d7dd2;font-size:22px;margin:0 0 8px 0">Datenqualitaets-Bericht</h2>';
+  html += '<div style="font-size:11px;color:#a0b0c0">Stand: ' + today + ' &mdash; ' + rows.length + ' Ticker</div>';
+  html += '</div>';
+  if(rows.length === 0){
+    html += '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:20px;text-align:center;color:#a0b0c0">Keine Ticker mit den aktuellen Filtern.</div>';
+    out.innerHTML = html;
+    return;
+  }
+  /* Tabelle */
+  html += '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:20px;overflow-x:auto;margin-bottom:20px">';
+  html += '<table style="width:100%;border-collapse:collapse;font-size:11px;font-family:monospace">';
+  html += '<thead><tr style="border-bottom:2px solid #1a3050;color:#dce8f5;text-align:left">';
+  var hdrs = ['Ticker', 'Name', 'Sektor', 'Signal', 'Raw', 'Fehlend', '#', 'fSc', 'Bucket', 'cSc', '12M'];
+  for(var h=0; h<hdrs.length; h++) html += '<th style="padding:6px 8px">' + hdrs[h] + '</th>';
+  html += '</tr></thead><tbody>';
+  for(var i=0; i<rows.length; i++){
+    var r = rows[i];
+    html += '<tr style="border-bottom:1px solid #11203a">';
+    html += '<td style="padding:6px 8px"><a href="javascript:rptDetailCard(\'' + r.t + '\')" style="color:#2d7dd2;text-decoration:none;font-weight:700">' + escapeHtml(r.t) + '</a></td>';
+    html += '<td style="padding:6px 8px;color:#dce8f5">' + escapeHtml(r.n) + '</td>';
+    html += '<td style="padding:6px 8px;color:#a0b0c0">' + escapeHtml(r.sector) + '</td>';
+    html += '<td style="padding:6px 8px;color:#dce8f5">' + escapeHtml(r.sigText) + '</td>';
+    html += '<td style="padding:6px 8px;color:#a0b0c0">' + escapeHtml(r.raw_sig) + '</td>';
+    html += '<td style="padding:6px 8px;color:#ffb000">' + escapeHtml(r.missing.join(', ')) + '</td>';
+    html += '<td style="padding:6px 8px;color:#dce8f5;font-weight:700">' + r.n_missing + '</td>';
+    html += '<td style="padding:6px 8px;color:#dce8f5">' + r.fund_score.toFixed(0) + '</td>';
+    html += '<td style="padding:6px 8px;color:#a0b0c0">' + r.fsc_bucket + '</td>';
+    var csVal = (r.cSc !== null && r.cSc !== undefined) ? r.cSc.toFixed(0) : '-';
+    html += '<td style="padding:6px 8px;color:#a0b0c0">' + csVal + '</td>';
+    var mVal = (r.mom12m !== null) ? (r.mom12m * 100).toFixed(1) + '%' : '-';
+    html += '<td style="padding:6px 8px;color:#a0b0c0">' + mVal + '</td>';
+    html += '</tr>';
+  }
+  html += '</tbody></table></div>';
+  /* Footer-Stats */
+  var bySig = {}, bySec = {}, fsSum = 0, fsCnt = 0;
+  for(var j=0; j<rows.length; j++){
+    var rj = rows[j];
+    bySig[rj.sigText] = (bySig[rj.sigText] || 0) + 1;
+    bySec[rj.sector || '(ohne)'] = (bySec[rj.sector || '(ohne)'] || 0) + 1;
+    fsSum += rj.fund_score; fsCnt++;
+  }
+  html += '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:20px;font-size:11px;color:#dce8f5">';
+  html += '<h3 style="color:#2d7dd2;font-size:14px;margin:0 0 12px 0">Verteilungen</h3>';
+  var sigArr = [];
+  for(var sk in bySig) sigArr.push(sk + ': ' + bySig[sk]);
+  sigArr.sort();
+  html += '<div style="margin-bottom:8px"><b>Nach Signal:</b> ' + sigArr.join(' | ') + '</div>';
+  var secArr = [];
+  for(var sk2 in bySec) secArr.push(sk2 + ': ' + bySec[sk2]);
+  secArr.sort();
+  html += '<div style="margin-bottom:8px"><b>Nach Sektor:</b> ' + secArr.join(' | ') + '</div>';
+  if(fsCnt > 0){
+    html += '<div style="margin-bottom:12px"><b>&Oslash; fund_score (DQ-Gruppe):</b> ' + (fsSum / fsCnt).toFixed(1) + '</div>';
+  }
+  html += '<div style="margin-top:8px;padding:10px;background:#11203a;border-left:3px solid #2d7dd2;border-radius:4px;color:#a0b0c0;font-size:10px">Datenbasis fuer DQ-1-Validierung Q3 2026 (n=' + rows.length + '). CSV-Export liefert alle Spalten plus fSc-Bucket fuer spaeteren IC-Analysis-Join.</div>';
+  html += '</div>';
+  out.innerHTML = html;
+  /* Print-Button sichtbar machen */
+  var pb = document.getElementById('rpt-print-btn');
+  if(pb) pb.style.display = '';
+}
+
+
 /* ----------------------------------------------------------------
    rptGetFd(t) -- Unified FD/scores Merger v1.1
    Prioritaet: FD[t] (manuell geladen) > _scoresIdx[t] (scores.json)
@@ -50,7 +328,7 @@ function rptOpen(){
     alert('Bitte zuerst fundamentals.json laden.');
     return;
   }
-  rptInitSectors();
+  rptShowControls();
   document.getElementById('rpt-modal').style.display = 'block';
   document.body.style.overflow = 'hidden';
 }
@@ -125,7 +403,7 @@ function rptFillStocks(){
 }
 
 /* Hauptfunktion: Bericht aufbauen */
-function rptBuild(){
+function rptBuildSector(){
   var sec  = document.getElementById('rpt-sector').value;
   var tk1  = document.getElementById('rpt-s1').value;
   var tk2  = document.getElementById('rpt-s2').value;
@@ -778,20 +1056,24 @@ function rptRisk(s){
 /* Controls wiederherstellen nach Einklappen */
 function rptShowControls(){
   var ctrl = document.getElementById('rpt-controls');
-  ctrl.innerHTML = '<div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:10px">Berichts-Parameter</div>' +
-    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">' +
-    '<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">SEKTOR</div>' +
-    '<select id="rpt-sector" onchange="rptFillStocks()" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select></div>' +
-    '<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">AKTIE 1</div>' +
-    '<select id="rpt-s1" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select></div>' +
-    '<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">AKTIE 2</div>' +
-    '<select id="rpt-s2" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select></div>' +
-    '</div>' +
-    '<div style="display:flex;gap:8px">' +
-    '<button onclick="rptBuild()" style="flex:1;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#9654; Bericht erstellen</button>' +
-    '<button id="rpt-print-btn" onclick="rptPrint()" style="flex:1;background:#1a7a3a;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer;display:none">&#128438; Als PDF drucken</button>' +
-    '</div>';
-  // BG-2: FD[]-Backfill aus _scoresIdx fuer rpt*-Kennzahlen
+  /* S57-4c: alten Bericht-Output entfernen (Type-Switch / Reopen) */
+  var out = document.getElementById('rpt-output');
+  if(out) out.innerHTML = '';
+  /* Header + Type-Dropdown (iteriert RPT_REG) */
+  var html = '<div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:10px">Berichts-Parameter</div>';
+  html += '<div style="margin-bottom:10px"><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">BERICHTS-TYP</div>';
+  html += '<select onchange="rptSetType(this.value)" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace">';
+  for(var k in RPT_REG){
+    var sel = (k===RPT_TYPE) ? ' selected' : '';
+    html += '<option value="'+k+'"'+sel+'>'+escapeHtml(RPT_REG[k].label)+'</option>';
+  }
+  html += '</select></div>';
+  ctrl.innerHTML = html;
+  /* Typ-spezifische Controls + Build-Button (kommt aus RPT_REG-Eintrag) */
+  if(RPT_REG[RPT_TYPE] && RPT_REG[RPT_TYPE].controls){
+    RPT_REG[RPT_TYPE].controls();
+  }
+  /* BG-2: FD[]-Backfill aus _scoresIdx fuer rpt*-Kennzahlen */
   for(var _t in _scoresIdx) {
     if(!FD[_t]) FD[_t] = {};
     var _si = _scoresIdx[_t];
@@ -814,8 +1096,7 @@ function rptShowControls(){
     FD[_t].shares_change_yoy    = FD[_t].shares_change_yoy    || _si.sc_yoy;
     FD[_t].div_yield = FD[_t].div_yield || _si.div_yield;
   }
-  // fd.shareholder_return: computed (div_yield + sc_yoy)
-  rptInitSectors();
+  /* fd.shareholder_return: computed (div_yield + sc_yoy) */
   document.getElementById('rpt-modal').scrollTop = 0;
 }
 

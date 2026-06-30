@@ -133,3 +133,6 @@ stockiq_anwender_leitfaden*.html
 stockiq_dev_leitfaden*.html
 VERSION.txt
 stockiq_skill_*.md
+
+# Engineering-Domain-Reference (Sprint 57): nur lokal, ADR-002
+stockiq_engineering_domain.md

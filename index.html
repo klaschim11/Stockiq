@@ -1273,7 +1273,7 @@ function mSig(s){
 // SYNC-START:isSell
 function isSell(sig){return sig==='sell'||sig==='sell_zl'||sig==='sell_hist'||sig==='sell_ma';}
 // SYNC-END:isSell
-function dqCheck(t,sig){var d=_scoresIdx[t];if(!d)return null;var m=[],x=(d.sector||"").toLowerCase(),f=x.indexOf("financ")>=0||x.indexOf("bank")>=0||x.indexOf("insur")>=0,h=sig==="hold_sf"||sig==="hold_sf_both"||sig==="hold_sf_div",b=sig==="buy"||sig==="strong";if(b&&d.peg==null)m.push("PEG");if(b||h){if(!f){if(d.fcf==null&&d.owner_earnings_yield==null)m.push("FCF/OE");if(d.ev_ebit==null)m.push("EV/EBIT");if(d.roce==null)m.push("ROCE");}else{if(d.price_to_book==null)m.push("P/B");if(d.roe==null)m.push("ROE");}}return m.length>=2?{fields:m}:null;}
+function dqCheck(t,sig,forceReturn){var d=_scoresIdx[t];if(!d)return null;var m=[],x=(d.sector||"").toLowerCase(),f=x.indexOf("financ")>=0||x.indexOf("bank")>=0||x.indexOf("insur")>=0,h=sig==="hold_sf"||sig==="hold_sf_both"||sig==="hold_sf_div",b=sig==="buy"||sig==="strong";if(b&&d.peg==null)m.push("PEG");if(b||h){if(!f){if(d.fcf==null&&d.owner_earnings_yield==null)m.push("FCF/OE");if(d.ev_ebit==null)m.push("EV/EBIT");if(d.roce==null)m.push("ROCE");}else{if(d.price_to_book==null)m.push("P/B");if(d.roe==null)m.push("ROE");}}return (forceReturn||m.length>=2)?{fields:m}:null;}
 // SYNC-START:sellSubCat
 function sellSubCat(sig) {
   var s = (sig || '').toLowerCase();
