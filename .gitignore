@@ -126,6 +126,7 @@ index_pre_*.html
 # Claude local
 .claude/
 Berichte/
+dq_snapshots/
 StockIQ/
 debugsdebug_*.txt
 stockiq_alpha_interim*.json
