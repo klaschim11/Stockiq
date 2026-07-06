@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.4.14 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.5.0 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -810,7 +810,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.4.14 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.5.0 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1290,7 +1290,7 @@ function mSig(s){
   return 'watch';
 }
 // SYNC-START:isSell
-function isSell(sig){return sig==='sell'||sig==='sell_zl'||sig==='sell_hist'||sig==='sell_ma';}
+function isSell(sig){return sig==='sell_ma';}
 // SYNC-END:isSell
 function dqCheck(t,sig,forceReturn){var d=_scoresIdx[t];if(!d)return null;var m=[],x=(d.sector||"").toLowerCase(),f=x.indexOf("financ")>=0||x.indexOf("bank")>=0||x.indexOf("insur")>=0,h=sig==="hold_sf"||sig==="hold_sf_both"||sig==="hold_sf_div",b=sig==="buy"||sig==="strong";if(b&&d.peg==null)m.push("PEG");if(b||h){var fd=(typeof FD!=="undefined"&&FD[t])?FD[t]:null;if(!f){var fcfVal=fd&&fd.fcf!=null?fd.fcf:(d.fcf_yield!=null?d.fcf_yield:null);var oeVal=fd&&fd.owner_earnings_yield!=null?fd.owner_earnings_yield:null;if(fcfVal==null&&oeVal==null)m.push("FCF/OE");if(d.ev_ebit==null)m.push("EV/EBIT");if(d.roce==null)m.push("ROCE");}else{var pbVal=fd&&fd.price_to_book!=null?fd.price_to_book:null;var roeVal=fd&&fd.roe!=null?fd.roe:null;if(pbVal==null)m.push("P/B");if(roeVal==null)m.push("ROE");}}return (forceReturn||m.length>=2)?{fields:m}:null;}
 // SYNC-START:sellSubCat
@@ -1358,9 +1358,9 @@ function holdSFLabel(sig){
 }
 function isRsiBlock(sig){return sig==='rsi_block';}
 function sellLabel(sig){
-  if(sig==='sell') return 'SELL';
-  if(sig==='sell_zl') return 'SELL ZL';
-  if(sig==='sell_hist') return 'SELL HIST';
+  if(sig==='sell') return 'WATCH';
+  if(sig==='sell_zl') return 'WATCH';
+  if(sig==='sell_hist') return 'WATCH';
   if(sig==='sell_ma') return 'SELL MA';
   return 'SELL';
 }
@@ -4307,6 +4307,22 @@ function dpRenderSummary(){
 }
 
 /* Positionen-Tabelle rendern */
+function dpSellMaDays(tk){
+    if(!_archive||_archive.length===0){return -1;}
+    var cnt=0,found=false,k,e,snap,hit;
+    for(k=0;k<_archive.length;k++){
+      snap=_archive[k];
+      if(!snap||!snap.entries){if(found){break;}else{continue;}}
+      hit=null;
+      for(e=0;e<snap.entries.length;e++){
+        if(snap.entries[e].t===tk){hit=snap.entries[e];break;}
+      }
+      if(hit===null){if(found){break;}else{continue;}}
+      if(hit.sig==='sell_ma'){cnt++;found=true;}else{break;}
+    }
+    return found?cnt:-1;
+  }
+
 function dpRenderTable(){
   var el = document.getElementById('dp-table');
   if(!el) return;
@@ -4324,6 +4340,7 @@ function dpRenderTable(){
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:right">+/-%</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Score</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Sig</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center;font-size:9px" title="Snapshots im sell_ma-Zustand. Ab 20: Exit faellig.">MA-Tg</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Skt</th>';
   out += '<th style="background:#1a3a5c;color:var(--mut);padding:5px 6px;text-align:right;font-size:9px">real.</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px"></th></tr>';
@@ -4352,6 +4369,7 @@ function dpRenderTable(){
                  dp_sig === 'buy'          ? 'BUY'    :
                  dp_sig === 'buy_rsi_warn' ? 'BUY'    :
                  dp_sig === 'pb'           ? 'PB'     :
+                 (dp_sig==='sell_zl'||dp_sig==='sell_hist'||dp_sig==='sell') ? 'WATCH' :
                  isSell(dp_sig)            ? 'SELL'   :
                  dp_isHoldSf              ? holdSFLabel(dp_sig) :
                  dp_sig === 'watch'        ? 'WATCH'  :
@@ -4377,6 +4395,14 @@ function dpRenderTable(){
     out += '<td style="padding:5px 6px;text-align:right;color:'+pnlC+';font-weight:700">'+(pnlPct!==null?(pnlPct>=0?'+':'')+pnlPct.toFixed(1)+'%':'n/a')+'</td>';
     out += '<td style="padding:5px 6px;text-align:center;color:#dce8f5;font-weight:700">'+sc+'</td>';
     out += '<td style="padding:5px 6px;text-align:center;color:'+sigC+';font-size:9px;font-weight:700">'+sigLbl+'</td>';
+    var _md=(dp_sig==='sell_ma')?dpSellMaDays(p.t):null;
+    var _mc,_mk;
+    if(_md===null){_mc='&mdash;';_mk='#456278';}
+    else if(_md<0){_mc='n/a';_mk='#456278';}
+    else if(_md>=20){_mc=_md+'!';_mk='#ff5252';}
+    else if(_md>=15){_mc=''+_md;_mk='#ffab00';}
+    else{_mc=''+_md;_mk='#7a9bb5';}
+    out += '<td style="padding:5px 6px;text-align:center;font-family:monospace;font-size:9px;font-weight:700;color:'+_mk+'">'+_mc+'</td>';
     out += '<td style="padding:5px 6px;text-align:center">'+getSektorBadge(p.t)+'</td>';
     var rlz = typeof p.realized === 'number' ? p.realized : 0;
     var rlzC = rlz > 0 ? '#00e57a' : rlz < 0 ? '#ff5252' : 'var(--mut)';
@@ -5109,7 +5135,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v6.4.14 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v6.5.0 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
