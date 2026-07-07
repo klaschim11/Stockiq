@@ -717,7 +717,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.4.14 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.5.0 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -2991,7 +2991,8 @@ function loadScores() {
           FD[_fi] = {
             fcf:  (_fe.fcf_yield  != null ? _fe.fcf_yield  : null),
             roce: (_fe.roce       != null ? _fe.roce        : null),
-            roe:  null
+            roe:  null,
+            current_price_eur: (_fe.current_price_eur != null ? _fe.current_price_eur : null)
           };
         }
       }
