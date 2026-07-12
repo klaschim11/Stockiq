@@ -62,6 +62,7 @@ stockiq_regime_status.json
 
 # Regime-Historie (Baustein 1, Sprint 72): DEV-ONLY, kein Commit, ADR-002 = 7
 stockiq_regime_history_findings.json
+stockiq_regime_history_summary.json
 
 # Empirie-Findings (Schema v1.0): DEV-ONLY, dev.html rendert lokal, kein Commit
 stockiq_wh7_findings.json
