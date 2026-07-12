@@ -60,6 +60,14 @@ fmp_pilot_results.json
 stockiq_regime_calc.py
 stockiq_regime_status.json
 
+# Regime-Historie (Baustein 1, Sprint 72): DEV-ONLY, kein Commit, ADR-002 = 7
+stockiq_regime_history_findings.json
+
+# Empirie-Findings (Schema v1.0): DEV-ONLY, dev.html rendert lokal, kein Commit
+stockiq_wh7_findings.json
+stockiq_ph5_findings.json
+stockiq_tr9_findings.json
+
 # --- Sprint 41: Verzeichniskonzept (15.06.2026) ---
 
 # Debug-Outputs (nie produktiv, nie public)
