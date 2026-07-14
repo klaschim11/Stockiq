@@ -146,3 +146,16 @@ stockiq_skill_*.md
 
 # Engineering-Domain-Reference (Sprint 57): nur lokal, ADR-002
 stockiq_engineering_domain.md
+
+# --- S76-A dev-only (nie committen) ---
+# Kandidaten-/Rohdaten
+fundamentals_kandidaten*.json
+stockiq_universe_*.json
+stockiq_alpha_s76*.json
+sp500_constituents*.csv
+stoxx600_*
+s76_candidates.txt
+# Lokale Script-Ablage
+scripts/
+# verirrtes Duplikat (nie committen)
+gitignore

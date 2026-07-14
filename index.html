@@ -1310,7 +1310,8 @@ function sigCategory(sig) {
   if (s === 'buy' || s === 'buy_rsi_warn') return 'buy';
   if (s === 'watch' || s === 'watch_rsi') return 'watch';
   if (s === 'pb') return 'peg';
-  if (s === 'sell' || s === 'sell_zl' || s === 'sell_ma' || s === 'sell_hist') return 'sell';
+  if (s === 'sell_ma') return 'sell';
+  if (s === 'sell' || s === 'sell_zl' || s === 'sell_hist') return 'watch';
   return 'hold';
 }
 // SYNC-END:sigCategory
