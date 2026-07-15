@@ -1117,16 +1117,16 @@ var STOCKS = [
     {t:"HBAN.SW"},
     {t:"MRSH"},
     {t:"STM"},
-    {t:'GAW.L'},
-    {t:'APP'},
-    {t:'EVO.ST'},
-    {t:'ANET'},
-    {t:'MYCR.ST'},
-    {t:'ASM.AS'},
-    {t:'STX'},
-    {t:'HOC.L'},
-    {t:'VRT'},
-    {t:'FRES.L'},
+    {t:'GAW.L',n:'Games Workshop Group'},
+    {t:'APP',n:'AppLovin'},
+    {t:'EVO.ST',n:'Evolution AB'},
+    {t:'ANET',n:'Arista Networks'},
+    {t:'MYCR.ST',n:'Mycronic'},
+    {t:'ASM.AS',n:'ASM International'},
+    {t:'STX',n:'Seagate Technology'},
+    {t:'HOC.L',n:'Hochschild Mining'},
+    {t:'VRT',n:'Vertiv Holdings'},
+    {t:'FRES.L',n:'Fresnillo'},
 ];
 var FD = {};
 var _scoresArr = [];
@@ -2307,8 +2307,8 @@ function wlDetail(ticker){
   }
   out+='</div>';
   out+='<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:5px">TECHNISCH</div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">MACD</span><span style="color:'+(s.macdLine<0?'#00e57a':'#ff6666')+'">'+s.macdLine.toFixed(2)+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">Hist / min</span><span style="color:'+(histOk(s)?'#00e57a':'#f0c000')+'">'+s.hist.toFixed(2)+' / '+minH+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">MACD</span><span style="color:'+(s.macdLine<0?'#00e57a':'#ff6666')+'">'+(s.macdLine!=null?s.macdLine.toFixed(2):'--')+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">Hist / min</span><span style="color:'+(histOk(s)?'#00e57a':'#f0c000')+'">'+(s.hist!=null?s.hist.toFixed(2):'--')+' / '+minH+'</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">RSI</span><span style="color:'+(s.rsi<30?'#00e57a':s.rsi>70?'#ff6666':'#dce8f5')+'">'+s.rsi+'</span></div>';
   var fd_m=_scoresIdx[s.t];
   var skipVal=fd_m&&fd_m.mom_skip!=null?fd_m.mom_skip:null;
@@ -2322,7 +2322,7 @@ function wlDetail(ticker){
     out+='<div style="'+row+'"><span style="color:var(--mut)">12M-Mom</span><span style="color:'+(m12leg>=20?'#00e57a':m12leg>=0?'#00c8f0':m12leg>=-15?'#f0c000':'#ff6666')+'">'+(m12leg>=0?'+':'')+m12leg.toFixed(1)+'%</span></div>';
   }
   out+='<div style="'+row+'"><span style="color:var(--mut)">Divergenz</span><span style="color:'+(isDivBull(s)?'#ff9f1c':'#7a9bb5')+'">'+s.div+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">KGV / EG</span><span>'+s.pe+'x / '+(s.eg||'-')+'%</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">KGV / EG</span><span>'+(s.pe!=null?s.pe+'x':'--')+' / '+(s.eg||'-')+'%</span></div>';
   /* PEG sektor-relativ (v5.9.41) */
   if(s.peg!=null){
     var pegRel=getScField(s.t, "peg_rel_sc", pegRelSc(s));
