@@ -103,7 +103,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <!-- TAB 1: WATCHLIST -->
 <div class="page" id="p1" style="display:block">
-  <div style="font-size:20px;font-weight:800;margin-bottom:4px">Watchlist &mdash; <span id="wl-hdr-cnt">--</span> Ticker</div>
+  <div style="font-size:20px;font-weight:800;margin-bottom:4px">Watchlist &mdash; <span id="wl-hdr-cnt">--</span></div>
   <!-- v6.3.1: 4-Zeilen-Filterstruktur -->
   <!-- Zeile 1: Signal-Filter -->
   <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px">
@@ -3011,7 +3011,19 @@ function loadScores() {
           if (_sd3.div      !== null && _sd3.div      !== undefined) { STOCKS[_si3].div  = _sd3.div; }
         }
       }
-      console.log("scores.json geladen: " + scores.length + " Ticker");
+      /*WLCNT-AP1*/
+      var _cntMatch = 0;
+      for (var _cm = 0; _cm < STOCKS.length; _cm++) {
+        if (_scoresIdx[STOCKS[_cm].t]) { _cntMatch++; }
+      }
+      var _cntTxt = scores.length + " Ticker (" + _cntMatch + " in Liste)";
+      var _ce1 = document.getElementById('hdr-cnt');
+      if (_ce1) { _ce1.textContent = scores.length; }
+      var _ce2 = document.getElementById('wl-cnt');
+      if (_ce2) { _ce2.textContent = scores.length; }
+      var _ce3 = document.getElementById('wl-hdr-cnt');
+      if (_ce3) { _ce3.textContent = _cntTxt; }
+      console.log("scores.json geladen: " + scores.length + " Ticker, " + _cntMatch + " in STOCKS[] gematcht");
       /* AR-C1: Algo-Phase in localStorage setzen (Option A, Sprint 38) */
       if(mac && typeof detectCyclePhase === 'function'){
         var _arVix = mac.vix || 0;
@@ -3682,7 +3694,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 /* Ticker-Counter dynamisch aus STOCKS.length */
 document.addEventListener('DOMContentLoaded', function(){
-  var n=STOCKS.length;
+  /*WLCNT-AP1-INIT*/var n=STOCKS.length;
   var e1=document.getElementById('hdr-cnt');    if(e1)e1.textContent=n;
   var e2=document.getElementById('wl-cnt');     if(e2)e2.textContent=n;
   var e3=document.getElementById('wl-hdr-cnt'); if(e3)e3.textContent=n;
