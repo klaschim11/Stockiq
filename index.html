@@ -781,6 +781,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
   <!-- â”€â”€ Gesamt-Performance Kacheln â”€â”€ -->
   <div id="dp-summary" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px"></div>
+  <div id="dp-risk" style="display:none;margin-bottom:14px;padding:10px;border:1px solid #2a3441;border-radius:6px;background:#0f1620"></div>
 
   <!-- â”€â”€ Zeitreihen-Chart â”€â”€ -->
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
@@ -4670,12 +4671,85 @@ function dpImport(evt){
 }
 
 /* Alles rendern */
+function dpHHI(weights){
+  /* weights: Array positiver Gewichtsanteile, Summe ~1. Rueckgabe {hhi, effN}. */
+  var s=0,i;
+  for(i=0;i<weights.length;i++){ s += weights[i]*weights[i]; }
+  if(s<=0) return {hhi:0, effN:0};
+  return {hhi:s, effN:1/s};
+}
+function dpRenderRisk(){
+  var el=document.getElementById('dp-risk');
+  if(!el) return;
+  var n=DEPOT_POSITIONS.length;
+  /* Leeres Depot: Block ausblenden. */
+  if(n===0){ el.style.display='none'; el.innerHTML=''; return; }
+  var tot=dpCalcTotal();
+  var complete=(tot.hasPrice===n);
+  /* Peak-State laden (defensiv). */
+  var pk=null;
+  try{ var raw=localStorage.getItem('stockiq_peak_v1'); if(raw) pk=JSON.parse(raw); }
+  catch(e){ pk=null; }
+  var today=new Date().toISOString().slice(0,10);
+  var html='';
+  /* ---- Stop-Floor ---- */
+  if(!complete){
+    var miss=n-tot.hasPrice;
+    html += '<div style="font-size:12px;color:#e0a030">'
+         +  '\u26A0 Risiko unvollst\u00E4ndig \u2014 '+miss+' Position(en) ohne Kurs. '
+         +  'Peak-Update und Drawdown-Vergleich ausgesetzt.</div>';
+  } else {
+    var val=tot.val;
+    /* Peak initialisieren oder anheben. Kein 'or' auf Zahlen. */
+    if(pk===null || typeof pk.v!=='number'){
+      pk={v:val, since:today, at:today};
+    } else if(val > pk.v){
+      pk.v=val; pk.at=today;
+    }
+    try{ localStorage.setItem('stockiq_peak_v1', JSON.stringify(pk)); }catch(e){}
+    var dd=(pk.v>0)?((pk.v-val)/pk.v):0;
+    var ddPct=(dd*100).toFixed(1);
+    var status,col;
+    if(dd>=0.25){ status='ALARM'; col='#d84040'; }
+    else if(dd>=0.20){ status='WARNUNG'; col='#e0a030'; }
+    else { status='OK'; col='#40a060'; }
+    html += '<div style="display:flex;justify-content:space-between;align-items:center">'
+         +  '<span style="font-size:12px;color:#9fb0c0">Drawdown vom Peak</span>'
+         +  '<span style="font-size:13px;font-weight:600;color:'+col+'">'
+         +  '\u2212'+ddPct+'% \u00B7 '+status+'</span></div>'
+         +  '<div style="font-size:11px;color:#6b7a8a;margin-top:2px">'
+         +  'Peak '+pk.v.toFixed(0)+' EUR \u00B7 beobachtet seit '+pk.since+'</div>';
+  }
+  /* ---- HHI ---- */
+  if(complete && tot.val>0){
+    var i,w=[],cp,v;
+    for(i=0;i<n;i++){
+      cp=dpCurrentPrice(DEPOT_POSITIONS[i].t);
+      v=DEPOT_POSITIONS[i].shares*cp;
+      w.push(v/tot.val);
+    }
+    var h=dpHHI(w);
+    html += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid #2a3441">'
+         +  '<div style="display:flex;justify-content:space-between;align-items:center">'
+         +  '<span style="font-size:12px;color:#9fb0c0">Konzentration (HHI)</span>'
+         +  '<span style="font-size:13px;font-weight:600;color:#cfe0f0">'
+         +  h.hhi.toFixed(2)+'</span></div>'
+         +  '<div style="font-size:11px;color:#6b7a8a;margin-top:2px">'
+         +  n+' Positionen wirken wie effektiv '+h.effN.toFixed(1)
+         +  ' unabh\u00E4ngige Wetten</div>'
+         +  '<div style="font-size:10px;color:#5a6875;margin-top:4px">'
+         +  'Misst Namens-Konzentration, nicht Faktor-Korrelation.</div></div>';
+  }
+  el.innerHTML=html;
+  el.style.display='block';
+}
 function dpRender(){
   dpRenderSummary();
   dpRenderTable();
   dpRenderChart();
   var _txLogEl = document.getElementById('dp-txlog');
   if(_txLogEl && _txLogEl.style.display !== 'none') dpRenderTxLog();
+  dpRenderRisk();
 }
 
 function dpToggleTx(){
