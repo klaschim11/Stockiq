@@ -5679,6 +5679,15 @@ function obNext(){
     try{localStorage.setItem(OB_KEY,JSON.stringify(profile));}catch(e){}
     var ov=document.getElementById('onboarding-overlay');if(ov){ov.style.display='none';}
     renderProfileBadge(profile);
+    /* S101: Allok-Zielkacheln nach Profilwechsel neu berechnen.
+       Nur wenn Alloc-Tab bereits initialisiert (ALLOC_TARGETS befuellt);
+       sonst uebernimmt initAlloc() das neue Profil beim naechsten Oeffnen. */
+    try {
+      if (typeof ALLOC_TARGETS !== 'undefined' && ALLOC_TARGETS.length > 0 &&
+          typeof setCycle === 'function') {
+        setCycle(CURRENT_CYCLE);
+      }
+    } catch (eA) {}
   }
 }
 function obBack(){if(OB_STEP>0){OB_STEP--;obRender();}}
