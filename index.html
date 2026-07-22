@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.5.1</title>
+<title>StockIQ v6.5.2</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.5.1 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.5.2 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -214,7 +214,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.5.1</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.5.2</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -407,7 +407,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.5.1 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.5.2 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -480,7 +480,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
   <!-- SEKTOR-AMPEL ERKLAERUNG v5.9.69 -->
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#127942; Sektor-Ampel &amp; Triple-Confirmation (v5.9.75)</div>
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#127942; Sektor-Ampel (Kontext, kein Entry-Signal)</div>
     <div style="font-size:11px;color:var(--mut);margin-bottom:10px;line-height:1.7">
       Die <strong style="color:#dce8f5">Sektor-Ampel</strong> (Spalte &ldquo;Skt&rdquo; im Depot-Tab, Block im Allokations-Tab) zeigt ob der Sektor eines Titels in der aktuellen Marktphase f&uuml;hrt oder nachhinkt &mdash; basierend auf 12M-Return des Sektor-ETFs (XLV, XLK etc.)
     </div>
@@ -501,22 +501,16 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:6px">Interpretationsmatrix: Sektor &times; Signal</div>
     <table style="width:100%;border-collapse:collapse;font-size:9px;margin-bottom:10px">
       <tr style="background:#1a3a5c"><th style="color:#dce8f5;padding:4px 6px;text-align:left">Sektor</th><th style="color:#dce8f5;padding:4px 6px;text-align:left">Signal</th><th style="color:#dce8f5;padding:4px 6px">Interpretation</th><th style="color:#dce8f5;padding:4px 6px">Handlung</th></tr>
-      <tr style="background:#0a1628"><td style="padding:4px 6px;color:#00e57a">&#128202;</td><td style="padding:4px 6px;color:#00e57a">BUY/STRONG</td><td style="padding:4px 6px;color:#dce8f5">&#11088; Ideal &mdash; Sektor + Titel konvergieren</td><td style="padding:4px 6px;color:#00e57a">Aufbauen</td></tr>
+      <tr style="background:#0a1628"><td style="padding:4px 6px;color:#00e57a">&#128202;</td><td style="padding:4px 6px;color:#00e57a">BUY/STRONG</td><td style="padding:4px 6px;color:#dce8f5">Sektor + Titel konvergieren (guenstiger Kontext)</td><td style="padding:4px 6px;color:#8ab4cc">Kontext</td></tr>
       <tr style="background:#0c1a2e"><td style="padding:4px 6px;color:#00e57a">&#128202;</td><td style="padding:4px 6px;color:#b07cf8">HOLD SF</td><td style="padding:4px 6px;color:#dce8f5">Titel schw&auml;cher als Sektor &mdash; unternehmensspezifisch</td><td style="padding:4px 6px;color:#ffab00">Beobachten</td></tr>
       <tr style="background:#0a1628"><td style="padding:4px 6px;color:#00e57a">&#128202;</td><td style="padding:4px 6px;color:#ff6666">SELL MA</td><td style="padding:4px 6px;color:#dce8f5">Relative Schw&auml;che &mdash; Sektor f&uuml;hrt, Titel verliert</td><td style="padding:4px 6px;color:#ff5252">Kein Einstieg</td></tr>
       <tr style="background:#0c1a2e"><td style="padding:4px 6px;color:#ffab00">&#128993;</td><td style="padding:4px 6px;color:#00e57a">BUY</td><td style="padding:4px 6px;color:#dce8f5">Titelselektion schl&auml;gt Sektor &mdash; ohne R&uuml;ckenwind</td><td style="padding:4px 6px;color:#ffab00">Normal kaufen</td></tr>
       <tr style="background:#0a1628"><td style="padding:4px 6px;color:#ff5252">&#128308;</td><td style="padding:4px 6px;color:#ff6666">SELL</td><td style="padding:4px 6px;color:#dce8f5">&#10007; Doppeltes Warnsignal &mdash; Sektor + Titel schwach</td><td style="padding:4px 6px;color:#ff5252">Meiden</td></tr>
       <tr style="background:#0c1a2e"><td style="padding:4px 6px;color:#ff5252">&#128308;</td><td style="padding:4px 6px;color:#00e57a">BUY</td><td style="padding:4px 6px;color:#dce8f5">Titelselektion gegen Sektor-Gegenwind</td><td style="padding:4px 6px;color:#ffab00">Klein positionieren</td></tr>
     </table>
-    <div style="padding:10px;background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.2);border-radius:7px">
-      <div style="font-size:11px;font-weight:700;color:#ffd700;margin-bottom:6px">&#11088; Triple-Confirmation-Strategie</div>
-      <div style="font-size:10px;color:#dce8f5;margin-bottom:6px">H&ouml;chste Outperformance-Wahrscheinlichkeit wenn <strong>alle drei</strong> erf&uuml;llt:</div>
-      <div style="font-family:monospace;font-size:9px;color:#00e57a;margin-bottom:4px">1. &#128202; Sektor-Ampel gr&uuml;n (&gt;+10% ETF-Return)</div>
-      <div style="font-family:monospace;font-size:9px;color:#00e57a;margin-bottom:4px">2. &#9654; Signal = BUY oder STRONG</div>
-      <div style="font-family:monospace;font-size:9px;color:#00e57a;margin-bottom:6px">3. &#128200; Score &ge; 65</div>
-      <div style="font-size:9px;color:#7a9bb5;line-height:1.6">Verkauf wenn: Signal &rarr; SELL | Sektor &rarr; &#128308; | Score &lt; 55<br>
-      Quelle: Moskowitz/Grinblatt 1999 + Fama/French 2015 + Jegadeesh/Titman 1993<br>
-      <span style="color:#ffab00">&#9888; Empirische Validierung ausstehend &mdash; Sektor-IC-Test geplant erledigt Jun 2026i 2026</span></div>
+    <div style="padding:10px;background:rgba(138,180,204,.06);border:1px solid rgba(138,180,204,.25);border-radius:7px">
+      <div style="font-size:11px;font-weight:700;color:#8ab4cc;margin-bottom:6px">&#8505; Sektor-Lage als Kontext</div>
+      <div style="font-size:10px;color:#dce8f5;line-height:1.7">Die Sektor-Ampel ist ein <strong>Orientierungsrahmen</strong>, kein Einstiegssignal. Interne Auswertungen haben gezeigt, dass ein starrer Sektor-Filter beim Einzeltitel die Trefferquote nicht verbessert &mdash; die Sektor-Lage hilft der Einordnung, nicht der Ja/Nein-Entscheidung. Massgeblich bleibt der Signalstatus (BUY / HOLD / WATCH / SELL) des einzelnen Titels.</div>
     </div>
   </div>
 
@@ -625,7 +619,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.5.1 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.5.2 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -717,7 +711,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.5.1 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.5.2 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -811,7 +805,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.5.1 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.5.2 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1850,13 +1844,13 @@ function rSyn(){
   if(filterActive){
     var filterParts=[];
     if(WL2_SYNC) filterParts.push('Fav ('+pool.length+' Titel)');
-    if(HC_FILTER) filterParts.push('HC: Triple-Confirmation');
+    if(HC_FILTER) filterParts.push('HC: Score+Mom+Sektor (Kontext)');
     var totalStr='Gesamt-Universe: '+strongs+' STRONG / '+buys+' BUY / '+sells+' SELL';
     filterInfoH='<div style="grid-column:1/-1;padding:5px 12px;background:rgba(255,159,28,.06);border:1px solid rgba(255,159,28,.2);border-radius:6px;margin-bottom:4px;font-family:monospace;font-size:9px;color:#ff9f1c">';
     filterInfoH+='&#9670; Filter: '+filterParts.join(' + ')+'  <span style="color:#456278">| '+totalStr+'</span>';
     filterInfoH+='</div>';
   }
-  if(el)el.innerHTML=vixH+dqH+filterInfoH+kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('&#11088; HC',hcs,'Score\u226565+Sektor+Mom','#ffd700')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
+  if(el)el.innerHTML=vixH+dqH+filterInfoH+kpiCard('Top Score',scored[0].sc,scored[0].s.t,'#00c8f0')+kpiCard('STRONG BUY',strongs,'ZL+Div+200MA+PEG','#ff9f1c')+kpiCard('BUY',buys,'ZL+200MA+PEG','#00e57a')+kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000');
 
   var stH='';
   for(i=0;i<Math.min(3,sStrong.length);i++){
@@ -1945,7 +1939,6 @@ function rWL(){
   if(kpi)kpi.innerHTML=
     kpiCard('STRONG',dispStrongs,'ZL+Div+200MA+PEG','#ff9f1c',"wlFilt('strong',null)")
     +kpiCard('BUY',dispBuys,'ZL+200MA+PEG','#00e57a',"wlFilt('buy',null)")
-    +kpiCard('&#11088; HC',hcTotal,'Score+Mom+Sektor (alle Sig.)','#ffd700',"document.getElementById('wl-hc-btn').click()")
     +kpiCard('PEG-Block',pbs,'PEG>=3.0','#f0c000',"wlFilt('pb',null)")
     +kpiCard('Sell/Weak',sells,'','#ff6666',"wlFilt('sell',null)");
   /* ---- v5.9.73: Synopse-Bar mit echtem HC-Zaehler (nicht STRONG-Zaehler) ---- */
@@ -2123,7 +2116,7 @@ function wlRend(scored){
     /* v5.9.72: Sektor-Ampel + HC-Badge fuer WL-Karte */
     var sktBdg = getSektorBadge(s.t);
     var hcBdg  = isHC(s, sc)
-      ? '<span style="font-size:10px;color:#ffd700;margin-left:2px" title="Triple-Confirmation: Score+Momentum+Sektor">&#11088;</span>'
+      ? '<span style="font-size:10px;color:#ffd700;margin-left:2px" title="Kontext: Score + Momentum + Sektor konvergent (kein Entry-Signal)">&#11088;</span>'
       : '';
     var h='<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderLeft+'border-radius:8px;padding:11px 13px;margin-bottom:6px;cursor:pointer" onclick="wlDetail(\''+s.t+'\')">';
     h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
@@ -2145,11 +2138,11 @@ function wlRend(scored){
     if(isHC(s,sc) && sig!=='strong'){
       var fdHC=FD[s.t]||{};
       var sktLabel=fdHC.sector?(' | '+fdHC.sector.replace('Consumer ','')):'';
-      h+='<div style="font-family:monospace;font-size:9px;color:#ffd700;margin-top:4px">&#11088; Triple: Score+Mom+Sektor'+sktLabel+'</div>';
+      h+='<div style="font-family:monospace;font-size:9px;color:#ffd700;margin-top:4px">&#11088; Score+Mom+Sektor konvergent (Kontext)'+sktLabel+'</div>';
     } else if(isHC(s,sc) && sig==='strong'){
       var fdHC2=FD[s.t]||{};
       var sktLabel2=fdHC2.sector?(' | Skt: '+fdHC2.sector.replace('Consumer ','')):'';
-      h+='<div style="font-family:monospace;font-size:9px;color:#ffd700;margin-top:1px">+ Triple-Confirmation'+sktLabel2+'</div>';
+      h+='<div style="font-family:monospace;font-size:9px;color:#ffd700;margin-top:1px">+ Sektor konvergent (Kontext)'+sktLabel2+'</div>';
     }
     if(isSellSig){h+='<div style="font-family:monospace;font-size:9px;color:#ff6666;margin-top:4px">'+sellWhy(s,sig)+'</div>';}
     if(isHoldSf){
@@ -2960,7 +2953,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.5.1';
+      var PAGE_VERSION = 'v6.5.2';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -5236,7 +5229,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v6.5.1 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v6.5.2 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
