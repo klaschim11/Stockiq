@@ -1,6 +1,6 @@
 {
   "__macro__": {
-    "dashboard_version": "v6.5.0",
+    "dashboard_version": "v6.5.1",
     "score_py_version": "v1.4.19",
     "fund_juno_version": "v7.9.43",
     "alpha_juno_version": "v6b_6m-u4",
