@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.5.2</title>
+<title>StockIQ v6.5.4</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -18,15 +18,15 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
-.tab{padding:8px 12px;border:1px solid transparent;border-bottom:none;border-radius:6px 6px 0 0;font-family:var(--f-mono);font-size:11px;color:var(--mut);cursor:pointer;background:transparent;white-space:nowrap}
+.tab{padding:8px 12px;border:1px solid transparent;border-bottom:none;border-radius:6px 6px 0 0;font-family:var(--f-mono);font-size:12px;color:var(--mut);cursor:pointer;background:transparent;white-space:nowrap}
 .tab.active{color:var(--acc);background:var(--sur);border-color:var(--bdr)}
-.chip{display:inline-block;margin-left:4px;padding:1px 5px;background:var(--acc);color:#000;border-radius:6px;font-size:9px;font-weight:700}
+.chip{display:inline-block;margin-left:4px;padding:1px 5px;background:var(--acc);color:#000;border-radius:6px;font-size:10px;font-weight:700}
 .chip.n{background:var(--pur)}.chip.ai{background:var(--grn)}.chip.s{background:var(--str)}
 .page{display:none;padding:16px}
 .g4{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tf{padding:6px 12px;border:1px solid var(--bdr2);border-radius:20px;font-family:var(--f-mono);font-size:10px;color:var(--mut);cursor:pointer;background:transparent}
+.tf{padding:6px 12px;border:1px solid var(--bdr2);border-radius:20px;font-family:var(--f-mono);font-size:11px;color:var(--mut);cursor:pointer;background:transparent}
 .tf.active{color:var(--acc);border-color:var(--acc);background:rgba(0,200,240,.08)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,159,28,.4)}70%{box-shadow:0 0 0 6px rgba(255,159,28,0)}}
@@ -82,22 +82,22 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.5.2 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.5.4 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
       <div style="margin-top:4px;display:flex;gap:4px;justify-content:flex-end">
-        <button onclick="rptOpen()" style="font-family:monospace;font-size:9px;color:#ffab00;background:rgba(255,171,0,.1);border:1px solid rgba(255,171,0,.3);border-radius:6px;padding:3px 8px;cursor:pointer">&#128203; Bericht</button>
+        <button onclick="rptOpen()" style="font-family:monospace;font-size:10px;color:#ffab00;background:rgba(255,171,0,.1);border:1px solid rgba(255,171,0,.3);border-radius:6px;padding:3px 8px;cursor:pointer">&#128203; Bericht</button>
       </div>
     </div>
   </div>
   <div style="display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px">
-    <button id="tb1" class="tab active" onclick="goTab(1,this)"><span style="opacity:.5;font-size:.8em;margin-right:3px">01</span> &#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
-    <button id="tb2" class="tab" onclick="goTab(2,this);initDepot()"><span style="opacity:.5;font-size:.8em;margin-right:3px">02</span> &#128200; Depot</button>
-    <button id="tb3" class="tab" onclick="goTab(3,this)"><span style="opacity:.5;font-size:.8em;margin-right:3px">03</span> &#9878; Allokation</button>
-    <button id="tb4" class="tab" onclick="goTab(4,this)"><span style="opacity:.5;font-size:.8em;margin-right:3px">04</span> &#127759; Sektoren</button>
-    <button id="tb5" class="tab" onclick="goTab(5,this)"><span style="opacity:.5;font-size:.8em;margin-right:3px">05</span> &#128218; Hilfe</button>
-    <button id="tb6" class="tab" onclick="goTab(6,this)"><span style="opacity:.5;font-size:.8em;margin-right:3px">06</span> &#128203; Roadmap</button>  </div>
+    <button id="tb1" class="tab active" onclick="goTab(1,this)"><span style="font-size:.9em;margin-right:3px">01</span> &#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
+    <button id="tb2" class="tab" onclick="goTab(2,this);initDepot()"><span style="font-size:.9em;margin-right:3px">02</span> &#128200; Depot</button>
+    <button id="tb3" class="tab" onclick="goTab(3,this)"><span style="font-size:.9em;margin-right:3px">03</span> &#9878; Allokation</button>
+    <button id="tb4" class="tab" onclick="goTab(4,this)"><span style="font-size:.9em;margin-right:3px">04</span> &#127759; Sektoren</button>
+    <button id="tb5" class="tab" onclick="goTab(5,this)"><span style="font-size:.9em;margin-right:3px">05</span> &#128218; Hilfe</button>
+    <button id="tb6" class="tab" onclick="goTab(6,this)"><span style="font-size:.9em;margin-right:3px">06</span> &#128203; Roadmap</button>  </div>
 <div id="profile-badge" style="display:none;font-family:monospace;font-size:10px;color:var(--mut);padding:3px 8px;border:1px solid #1a2a3a;border-radius:20px;cursor:pointer;margin:4px 8px" onclick="showOnboarding()"><span id="profile-text">--</span> <span style="color:var(--acc)">&#9998;</span></div>
 </header>
 
@@ -112,9 +112,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button class="tf" onclick="wlFilt('pb',this)">PEG-Block</button>
     <button class="tf" onclick="wlFilt('watch',this)">HOLD/Watch</button>
     <button class="tf" onclick="wlFilt('sell',this)">SELL</button>
-    <button class="tf" style="font-size:9px;opacity:.75" onclick="wlFilt('sell_ma',this)" title="SELL: MA-Crossunder (TR-5: konsistentestes Signal)">SELL&middot;MA</button>
-    <button class="tf" style="font-size:9px;opacity:.75" onclick="wlFilt('sell_hist',this)" title="SELL: MACD-Histogramm (TR-5: ohne Vorhersagekraft)">SELL&middot;HIST</button>
-    <button class="tf" style="font-size:9px;opacity:.75" onclick="wlFilt('sell_zl',this)" title="SELL: Nulllinien-Cross (TR-5: nur langfristig signifikant)">SELL&middot;ZL</button>
+    <button class="tf" style="font-size:11px" onclick="wlFilt('sell_ma',this)" title="SELL: MA-Crossunder (TR-5: konsistentestes Signal)">SELL&middot;MA</button>
+    <button class="tf" style="font-size:11px" onclick="wlFilt('sell_hist',this)" title="SELL: MACD-Histogramm (TR-5: ohne Vorhersagekraft)">SELL&middot;HIST</button>
+    <button class="tf" style="font-size:11px" onclick="wlFilt('sell_zl',this)" title="SELL: Nulllinien-Cross (TR-5: nur langfristig signifikant)">SELL&middot;ZL</button>
   </div>
   <!-- Zeile 2: ALLE / FAV / Sort / SPY-Badge -->
   <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px;align-items:center">
@@ -167,10 +167,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="display:flex;align-items:center;gap:8px;font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:8px">
         <div style="width:8px;height:8px;border-radius:50%;background:#7a9bb5" id="fdot"></div>
         <span id="fmsg">Warte auf JSON...</span>
-        <span id="fcache-badge" style="display:none;padding:1px 6px;background:rgba(0,200,240,.15);border:1px solid #00c8f0;border-radius:8px;font-size:9px;color:#00c8f0"></span>
+        <span id="fcache-badge" style="display:none;padding:1px 6px;background:rgba(0,200,240,.15);border:1px solid #00c8f0;border-radius:8px;font-size:10px;color:#00c8f0"></span>
       </div>
       <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:8px" id="fts"></div>
-      <div id="fund-meta-info" style="display:none;font-family:monospace;font-size:9px;color:#00c8f0;margin-bottom:6px;padding:3px 8px;background:rgba(0,200,240,.08);border-radius:5px;border:1px solid rgba(0,200,240,.2)"></div>
+      <div id="fund-meta-info" style="display:none;font-family:monospace;font-size:10px;color:#00c8f0;margin-bottom:6px;padding:3px 8px;background:rgba(0,200,240,.08);border-radius:5px;border:1px solid rgba(0,200,240,.2)"></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button onclick="clearFundCache()" style="font-family:monospace;font-size:10px;color:var(--mut);background:transparent;border:1px solid #1a2a3a;border-radius:6px;padding:4px 10px;cursor:pointer">&#128465; Cache leeren</button>
         <button onclick="archSnapshot();alert('Snapshot gespeichert: '+_archive.length+' Eintraege')" style="font-family:monospace;font-size:10px;color:var(--acc);background:transparent;border:1px solid var(--acc);border-radius:6px;padding:4px 10px;cursor:pointer">&#128247; Snapshot</button>
@@ -180,10 +180,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
           &#128197; Annual laden
           <input type="file" accept=".json" onchange="loadAnnual(this)" style="display:none">
         </label>
-        <span id="annual-status" style="font-family:monospace;font-size:9px;color:var(--mut);margin-left:8px">stockiq_annual.json (optional)</span>
+        <span id="annual-status" style="font-family:monospace;font-size:10px;color:var(--mut);margin-left:8px">stockiq_annual.json (optional)</span>
       </div>
       <div style="margin-top:10px;padding:8px 10px;background:rgba(0,200,240,.06);border:1px solid rgba(0,200,240,.15);border-radius:8px">
-        <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:6px;text-transform:uppercase">Archiv</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:6px;text-transform:uppercase">Archiv</div>
         <div style="font-family:monospace;font-size:11px;color:var(--acc);margin-bottom:8px" id="arch-status">Lade...</div>
         <div style="display:flex;gap:8px">
           <button onclick="archExportJSON()" style="font-family:monospace;font-size:10px;color:var(--grn);background:transparent;border:1px solid rgba(0,229,122,.4);border-radius:6px;padding:4px 10px;cursor:pointer">&#8595; JSON</button>
@@ -214,7 +214,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.5.2</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.5.4</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -224,38 +224,38 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:12px">&#128221; Aktueller Portfoliowert eingeben</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">EINZELAKTIEN (EUR) <span id="alloc-depot-badge" style="display:none;color:#00c8f0;font-size:8px">&#128202; Aus Depot</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">EINZELAKTIEN (EUR) <span id="alloc-depot-badge" style="display:none;color:#00c8f0;font-size:10px">&#128202; Aus Depot</span></div>
       <input id="ai-stocks" type="number" min="0" step="100" placeholder="z.B. 60000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">ETFs (EUR)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ETFs (EUR)</div>
       <input id="ai-etfs" type="number" min="0" step="100" placeholder="z.B. 15000"
           style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
           oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">ANLEIHEN / RENTEN (EUR)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ANLEIHEN / RENTEN (EUR)</div>
       <input id="ai-bonds" type="number" min="0" step="100" placeholder="z.B. 20000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">GOLD / EDELMETALLE (EUR)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">GOLD / EDELMETALLE (EUR)</div>
       <input id="ai-gold" type="number" min="0" step="100" placeholder="z.B. 15000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:4px">CASH / TAGESGELD (EUR)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">CASH / TAGESGELD (EUR)</div>
       <input id="ai-cash" type="number" min="0" step="100" placeholder="z.B. 10000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:#ff9f1c;margin-bottom:4px">ROHSTOFFE / COMMODITIES (EUR)
-        <span style="display:block;font-size:8px;color:var(--mut);font-weight:400;margin-top:2px">Commodity-ETFs, Futures, Silbermuenzen &middot; ausserhalb StockIQ-Depot</span></div>
+      <div style="font-family:monospace;font-size:10px;color:#ff9f1c;margin-bottom:4px">ROHSTOFFE / COMMODITIES (EUR)
+        <span style="display:block;font-size:10px;color:var(--mut);font-weight:400;margin-top:2px">Commodity-ETFs, Futures, Silbermuenzen &middot; ausserhalb StockIQ-Depot</span></div>
       <input id="ai-commod" type="number" min="0" step="100" placeholder="z.B. 8000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #332200;border-radius:6px;padding:8px 10px;color:#ff9f1c;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
@@ -273,18 +273,18 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <!-- ZYKLUS-OVERLAY v5.9.69 (Fidelity Business Cycle, Hambro/BlackRock) -->
 <div style="background:#0c1420;border:1px solid #1a3050;border-radius:12px;padding:14px;margin-bottom:14px">
-  <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#9881; Konjunkturzyklus-Overlay <span style="font-family:monospace;font-size:9px;color:var(--mut)">Fidelity Business Cycle 2026</span></div>
+  <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#9881; Konjunkturzyklus-Overlay <span style="font-family:monospace;font-size:10px;color:var(--mut)">Fidelity Business Cycle 2026</span></div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px">
     <button id="cyc-early"     onclick="setCycle('early')"     style="padding:8px 4px;border:2px solid #1a3050;border-radius:8px;background:#0a1628;color:#7a9bb5;font-size:10px;font-weight:700;cursor:pointer">
-      &#9651; Early<br><span style="font-size:8px;font-weight:400">Aufschw.</span></button>
+      &#9651; Early<br><span style="font-size:10px;font-weight:400">Aufschw.</span></button>
     <button id="cyc-mid"       onclick="setCycle('mid')"       style="padding:8px 4px;border:2px solid #1a3050;border-radius:8px;background:#0a1628;color:#7a9bb5;font-size:10px;font-weight:700;cursor:pointer">
-      &#9651; Mid<br><span style="font-size:8px;font-weight:400">Expansion</span></button>
+      &#9651; Mid<br><span style="font-size:10px;font-weight:400">Expansion</span></button>
     <button id="cyc-late"      onclick="setCycle('late')"      style="padding:8px 4px;border:2px solid #ffab00;border-radius:8px;background:rgba(255,171,0,.08);color:#ffab00;font-size:10px;font-weight:700;cursor:pointer">
-      &#9654; Late<br><span style="font-size:8px;font-weight:400">Sp&auml;tzyklus</span></button>
+      &#9654; Late<br><span style="font-size:10px;font-weight:400">Sp&auml;tzyklus</span></button>
     <button id="cyc-recession" onclick="setCycle('recession')" style="padding:8px 4px;border:2px solid #1a3050;border-radius:8px;background:#0a1628;color:#7a9bb5;font-size:10px;font-weight:700;cursor:pointer">
-      &#9661; Rezess.<br><span style="font-size:8px;font-weight:400">Kontraktion</span></button>
+      &#9661; Rezess.<br><span style="font-size:10px;font-weight:400">Kontraktion</span></button>
   </div>
-  <div id="cycle-info" style="font-family:monospace;font-size:9px;color:var(--mut);padding:6px 8px;background:rgba(255,171,0,.05);border-left:3px solid #ffab00;border-radius:4px;margin-bottom:8px">
+  <div id="cycle-info" style="font-family:monospace;font-size:10px;color:var(--mut);padding:6px 8px;background:rgba(255,171,0,.05);border-left:3px solid #ffab00;border-radius:4px;margin-bottom:8px">
     &#9654; <strong style="color:#ffab00">Late Cycle</strong> &mdash; Energy &amp; Rohstoffe f&uuml;hren. Defensive Sektoren aufbauen. Cash erh&ouml;hen. <span style="color:#7a9bb5">(Befund: Sektor-Ranking Jun 2026)</span>
   </div>
   <div id="cycle-targets" style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px"></div>
@@ -308,7 +308,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px">
   <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">&#128270; Ziel-Allokation (zyklus-adjustiert, v5.9.78)</div>
   <div id="ziel-kacheln" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px"></div>
-  <div style="font-family:monospace;font-size:9px;color:var(--mut);line-height:1.6">
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);line-height:1.6">
     <strong style="color:#dce8f5">Basis (Hambro/BlackRock 2026):</strong> 55% Aktien / 15% Anleihen / 12% Gold / 8% Rohstoffe / 10% Cash<br>
     <strong style="color:#dce8f5">Quelle:</strong> Fidelity Business Cycle AART Jan 2025 &middot; BlackRock Hambro Webinar Mai 2026<br>
     <strong style="color:#dce8f5">Rebalancing-Trigger:</strong> Abweichung &gt; &plusmn;7pp vom Zielwert &rarr; rot markiert + Empfehlung.
@@ -322,31 +322,31 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#ffab00;margin:18px 0 4px">&#127750; Gold-Silver-Ratio (GSR)</div>
 <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:6px">Spread-adjustiertes Switch-Signal &middot; Physische Edelmetalle</div>
 <div id="macro-auto-badge" style="display:none;font-family:monospace;font-size:10px;color:#00e57a;background:rgba(0,229,122,.07);border:1px solid rgba(0,229,122,.2);border-radius:6px;padding:5px 10px;margin-bottom:10px"></div>
-<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:10px">Preise werden nach JSON-Laden automatisch befuellt (fund_juno v7.9.29+). Manuell &uuml;berschreibbar.</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">Preise werden nach JSON-Laden automatisch befuellt (fund_juno v7.9.29+). Manuell &uuml;berschreibbar.</div>
 
 <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:10px">
   <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:10px">Preise &amp; Spreads eingeben (EUR/Unze)</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
     <div>
-      <div style="font-family:monospace;font-size:9px;color:#ffab00;margin-bottom:3px">GOLD-PREIS (EUR/oz)</div>
+      <div style="font-family:monospace;font-size:10px;color:#ffab00;margin-bottom:3px">GOLD-PREIS (EUR/oz)</div>
       <input id="gsr-gold" type="number" min="0" step="1" placeholder="z.B. 2900"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #332200;border-radius:6px;padding:7px 9px;color:#ffab00;font-size:13px;font-family:monospace"
         oninput="rGSR()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:#c0c0c0;margin-bottom:3px">SILBER-PREIS (EUR/oz)</div>
+      <div style="font-family:monospace;font-size:10px;color:#c0c0c0;margin-bottom:3px">SILBER-PREIS (EUR/oz)</div>
       <input id="gsr-silver" type="number" min="0" step="0.1" placeholder="z.B. 32"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a2a3a;border-radius:6px;padding:7px 9px;color:#c0c0c0;font-size:13px;font-family:monospace"
         oninput="rGSR()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">GOLD-SPREAD % (1oz M&uuml;nze)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">GOLD-SPREAD % (1oz M&uuml;nze)</div>
       <input id="gsr-gspread" type="number" min="0" max="20" step="0.5" value="4.5"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a2a3a;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rGSR()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">SILBER-SPREAD % (1oz M&uuml;nze, 19% MwSt)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">SILBER-SPREAD % (1oz M&uuml;nze, 19% MwSt)</div>
       <input id="gsr-sspread" type="number" min="0" max="40" step="0.5" value="22"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a2a3a;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rGSR()">
@@ -375,13 +375,13 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:10px">Parameter</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">BUND-RENDITE % (10J)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">BUND-RENDITE % (10J)</div>
       <input id="bond-bund" type="number" value="2.6" min="0" max="10" step="0.1"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#00c8f0;font-size:13px;font-family:monospace"
         oninput="rBondETF()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">YIELD-KURVE FORM</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">YIELD-KURVE FORM</div>
       <select id="bond-curve" onchange="rBondETF()"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:12px;font-family:monospace">
         <option value="normal">Normal (kurz &lt; lang)</option>
@@ -407,7 +407,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.5.2 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.5.4 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -487,19 +487,19 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
       <div style="text-align:center;padding:7px;background:rgba(0,229,122,.07);border:1px solid rgba(0,229,122,.3);border-radius:7px">
         <div style="font-size:16px">&#128202;</div>
-        <div style="font-family:monospace;font-size:9px;color:#00e57a;font-weight:700">LEADING &gt;+10%</div>
+        <div style="font-family:monospace;font-size:10px;color:#00e57a;font-weight:700">LEADING &gt;+10%</div>
       </div>
       <div style="text-align:center;padding:7px;background:rgba(255,171,0,.07);border:1px solid rgba(255,171,0,.3);border-radius:7px">
         <div style="font-size:16px">&#128993;</div>
-        <div style="font-family:monospace;font-size:9px;color:#ffab00;font-weight:700">NEUTRAL 0-10%</div>
+        <div style="font-family:monospace;font-size:10px;color:#ffab00;font-weight:700">NEUTRAL 0-10%</div>
       </div>
       <div style="text-align:center;padding:7px;background:rgba(255,82,82,.07);border:1px solid rgba(255,82,82,.3);border-radius:7px">
         <div style="font-size:16px">&#128308;</div>
-        <div style="font-family:monospace;font-size:9px;color:#ff5252;font-weight:700">LAGGING &lt;0%</div>
+        <div style="font-family:monospace;font-size:10px;color:#ff5252;font-weight:700">LAGGING &lt;0%</div>
       </div>
     </div>
     <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:6px">Interpretationsmatrix: Sektor &times; Signal</div>
-    <table style="width:100%;border-collapse:collapse;font-size:9px;margin-bottom:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:10px;margin-bottom:10px">
       <tr style="background:#1a3a5c"><th style="color:#dce8f5;padding:4px 6px;text-align:left">Sektor</th><th style="color:#dce8f5;padding:4px 6px;text-align:left">Signal</th><th style="color:#dce8f5;padding:4px 6px">Interpretation</th><th style="color:#dce8f5;padding:4px 6px">Handlung</th></tr>
       <tr style="background:#0a1628"><td style="padding:4px 6px;color:#00e57a">&#128202;</td><td style="padding:4px 6px;color:#00e57a">BUY/STRONG</td><td style="padding:4px 6px;color:#dce8f5">Sektor + Titel konvergieren (guenstiger Kontext)</td><td style="padding:4px 6px;color:#8ab4cc">Kontext</td></tr>
       <tr style="background:#0c1a2e"><td style="padding:4px 6px;color:#00e57a">&#128202;</td><td style="padding:4px 6px;color:#b07cf8">HOLD SF</td><td style="padding:4px 6px;color:#dce8f5">Titel schw&auml;cher als Sektor &mdash; unternehmensspezifisch</td><td style="padding:4px 6px;color:#ffab00">Beobachten</td></tr>
@@ -530,15 +530,15 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="font-family:monospace;font-size:10px;color:#ff9f1c;font-weight:700;margin-bottom:4px">bull_hidden &mdash; Trendfortsetzung (st&auml;rkeres Signal)</div>
       <div style="font-size:10px;color:#dce8f5;margin-bottom:3px">Kurs macht h&ouml;heres Hoch (HOH) &rarr; Aufw&auml;rtstrend intakt</div>
       <div style="font-size:10px;color:#dce8f5;margin-bottom:6px">MACD macht tieferen Hochpunkt &rarr; kurzfristiger R&uuml;cksetzer im Trend</div>
-      <div style="font-family:monospace;font-size:9px;color:#ffab00">Interpretation: Der Trend ist gesund. R&uuml;cksetzer sind Kaufgelegenheiten.</div>
-      <div style="font-family:monospace;font-size:9px;color:#7a9bb5">Beispiel: SANDVIK steigt, MACD zieht kurz zur&uuml;ck &rarr; bull_hidden &rarr; STRONG BUY</div>
+      <div style="font-family:monospace;font-size:10px;color:#ffab00">Interpretation: Der Trend ist gesund. R&uuml;cksetzer sind Kaufgelegenheiten.</div>
+      <div style="font-family:monospace;font-size:10px;color:#7a9bb5">Beispiel: SANDVIK steigt, MACD zieht kurz zur&uuml;ck &rarr; bull_hidden &rarr; STRONG BUY</div>
     </div>
     <div style="background:#0a1628;border-radius:8px;padding:10px">
       <div style="font-family:monospace;font-size:10px;color:#00e57a;font-weight:700;margin-bottom:4px">bull_regular &mdash; Trendumkehr (Bodenbildung)</div>
       <div style="font-size:10px;color:#dce8f5;margin-bottom:3px">Kurs macht tieferes Tief &rarr; Abw&auml;rtsdruck sichtbar</div>
       <div style="font-size:10px;color:#dce8f5;margin-bottom:6px">MACD macht h&ouml;heren Tiefpunkt &rarr; Verkaufsdruck l&auml;sst nach</div>
-      <div style="font-family:monospace;font-size:9px;color:#ffab00">Interpretation: Bodenbildung wahrscheinlich. Einstieg mit Absicherung pr&uuml;fen.</div>
-      <div style="font-family:monospace;font-size:9px;color:#7a9bb5">Beispiel: PYPL tieferes Tief, MACD h&ouml;her &rarr; bull_regular + Fund 87 &rarr; HOLD DVG</div>
+      <div style="font-family:monospace;font-size:10px;color:#ffab00">Interpretation: Bodenbildung wahrscheinlich. Einstieg mit Absicherung pr&uuml;fen.</div>
+      <div style="font-family:monospace;font-size:10px;color:#7a9bb5">Beispiel: PYPL tieferes Tief, MACD h&ouml;her &rarr; bull_regular + Fund 87 &rarr; HOLD DVG</div>
     </div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ATR-HIST-FILTER (neu v5.3)</div><div style="font-size:12px;color:var(--mut)">Histogramm muss &gt; ATR &times; 0.05 sein. Filtert flache, unzuverlaessige MACD-Kreuzungen heraus.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">MOAT</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">Wide</span> = dauerhafter Wettbewerbsvorteil &nbsp;<span style="color:#00c8f0">Narrow</span> = moderater Vorteil &nbsp;<span style="color:var(--mut)">None</span> = kein Vorteil.</div></div>
@@ -606,9 +606,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p9" style="display:none;padding:16px;">
   <div style="font-size:20px;font-weight:800;margin-bottom:12px">&#127759; Sektor-Regime</div>
   <div id="sektor-ampel" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px">
-    <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#127942; Sektor-Performance (12M ETF-Returns) <span style="font-family:monospace;font-size:8px;color:var(--mut)">aus fund_juno __macro__</span></div>
+    <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#127942; Sektor-Performance (12M ETF-Returns) <span style="font-family:monospace;font-size:10px;color:var(--mut)">aus fund_juno __macro__</span></div>
     <div id="sektor-ampel-content" style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px"></div>
-    <div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:6px">&#128202; &gt;+10% Leading &middot; &#128993; 0-10% Neutral &middot; &#128308; &lt;0% Lagging</div>
+    <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:6px">&#128202; &gt;+10% Leading &middot; &#128993; 0-10% Neutral &middot; &#128308; &lt;0% Lagging</div>
   </div>
   <div id="sektoren-content" style="color:#888;font-size:13px;">Laden...</div>
 </div>
@@ -619,7 +619,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.5.2 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.5.4 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -673,32 +673,32 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <span style="color:#00e57a;font-weight:700">P4</span>
       <span style="color:#dce8f5">Sektor-IC-Test</span>
       <span style="color:var(--mut)">Sektor-Ranking vs. 1&ndash;3M Forward-Return (Spearman-IC, sr-Feld)</span>
-      <span style="color:#00e57a;font-size:9px">erledigt Jun 2026</span>
+      <span style="color:#00e57a;font-size:10px">erledigt Jun 2026</span>
 
       <span style="color:#7a9bb5;font-weight:700">P5</span>
       <span style="color:#dce8f5">WL3-Run</span>
       <span style="color:var(--mut)">IC-Analyse + Signal-Tracking &middot; planm&auml;&szlig;iger Run</span>
-      <span style="color:#7a9bb5;font-size:9px">Mitte Jul</span>
+      <span style="color:#7a9bb5;font-size:10px">Mitte Jul</span>
 
       <span style="color:#7a9bb5;font-weight:700">P6</span>
       <span style="color:#dce8f5">TIPS-Fetch</span>
       <span style="color:var(--mut)">breakeven_inflation via FRED (urllib-Timeout Windows, Ticket offen)</span>
-      <span style="color:#7a9bb5;font-size:9px">offen</span>
+      <span style="color:#7a9bb5;font-size:10px">offen</span>
 
       <span style="color:#7a9bb5;font-weight:700">P7</span>
       <span style="color:#dce8f5">Walk-Forward-Tab</span>
       <span style="color:var(--mut)">Dev-Dashboard Tab 1 ausbauen (OOS-Fenster, Equity-Kurve)</span>
-      <span style="color:#7a9bb5;font-size:9px">offen</span>
+      <span style="color:#7a9bb5;font-size:10px">offen</span>
 
       <span style="color:#7a9bb5;font-weight:700">P8</span>
       <span style="color:#dce8f5">Ticker-Review</span>
       <span style="color:var(--mut)">7 Fehler-Ticker entfernen &middot; 15 EM-Titel evaluieren</span>
-      <span style="color:#7a9bb5;font-size:9px">Jul</span>
+      <span style="color:#7a9bb5;font-size:10px">Jul</span>
 
     </div>
   </div>
 
-  <div style="margin-top:10px;font-family:monospace;font-size:9px;color:#7a9bb5;text-align:center">
+  <div style="margin-top:10px;font-family:monospace;font-size:10px;color:#7a9bb5;text-align:center">
     klaschim11.github.io/Stockiq &middot; Juni 2026
   </div>
 
@@ -711,14 +711,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.5.2 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.5.4 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
     <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:10px">&#43; Position hinzuf&uuml;gen</div>
     <div style="margin-bottom:8px">
-      <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">TRANSAKTIONSTYP</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">TRANSAKTIONSTYP</div>
       <select id="dp-typ" onchange="dpTypChange()" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:12px;font-family:monospace">
         <option value="BUY" selected>BUY &#8211; Erstposition</option>
         <option value="ADD">ADD &#8211; Nachkauf</option>
@@ -728,39 +728,39 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
       <div id="dp-sel-existing-grp" style="display:none;grid-column:1 / -1">
-        <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">POSITION (aus Depot)</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">POSITION (aus Depot)</div>
         <select id="dp-sel-existing" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:11px;font-family:monospace">
           <option value="">-- Position waehlen --</option>
         </select>
       </div>
       <div id="dp-wl2-grp">
-        <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">TICKER (aus Favoriten)</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">TICKER (aus Favoriten)</div>
         <select id="dp-sel-wl2" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:11px;font-family:monospace">
           <option value="">-- aus Favoriten waehlen --</option>
         </select>
       </div>
       <div id="dp-ticker-grp">
-        <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">ODER TICKER MANUELL</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">ODER TICKER MANUELL</div>
         <input id="dp-ticker" type="text" placeholder="z.B. AAPL" maxlength="12"
           style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace;text-transform:uppercase">
       </div>
       <div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">ANZAHL ANTEILE</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">ANZAHL ANTEILE</div>
         <input id="dp-shares" type="number" min="0" step="0.001" placeholder="z.B. 10"
           style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace">
       </div>
       <div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">KAUFKURS (EUR)</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">KAUFKURS (EUR)</div>
         <input id="dp-buy-price" type="number" min="0" step="0.01" placeholder="z.B. 150.00"
           style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace">
       </div>
       <div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">KAUFDATUM</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">KAUFDATUM</div>
         <input id="dp-buy-date" type="date"
           style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace">
       </div>
       <div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">W&Auml;HRUNG</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">W&Auml;HRUNG</div>
         <select id="dp-currency" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:12px;font-family:monospace">
           <option value="EUR">EUR</option>
           <option value="USD">USD</option>
@@ -781,10 +781,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <div style="font-size:12px;font-weight:700;color:#dce8f5">&#128200; Depotwert-Verlauf</div>
-      <div style="font-family:monospace;font-size:9px;color:var(--mut)">aus Snapshots &middot; fund_juno v7.9.11+</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">aus Snapshots &middot; fund_juno v7.9.11+</div>
     </div>
     <canvas id="dp-chart" width="640" height="220" style="width:100%;height:220px;border-radius:8px"></canvas>
-    <div id="dp-chart-msg" style="font-family:monospace;font-size:9px;color:var(--mut);margin-top:6px;text-align:center"></div>
+    <div id="dp-chart-msg" style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:6px;text-align:center"></div>
   </div>
 
   <!-- â”€â”€ Positionen-Tabelle â”€â”€ -->
@@ -805,7 +805,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.5.2 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.5.4 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1664,9 +1664,9 @@ function scoreQuality(s){
 /* Badge-HTML fuer Score-Qualitaet */
 function sqBadge(s){
   var q=scoreQuality(s);
-  if(q==='ai')   return '<span style="font-family:monospace;font-size:7px;padding:1px 4px;border-radius:3px;background:rgba(0,230,118,.15);color:#00e676;margin-left:4px">AI</span>';
-  if(q==='json') return '<span style="font-family:monospace;font-size:7px;padding:1px 4px;border-radius:3px;background:rgba(0,200,240,.12);color:#00c8f0;margin-left:4px">JSON</span>';
-  return '<span style="font-family:monospace;font-size:7px;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,.07);color:#456278;margin-left:4px">stat</span>';
+  if(q==='ai')   return '<span style="font-family:monospace;font-size:10px;padding:1px 4px;border-radius:3px;background:rgba(0,230,118,.15);color:#00e676;margin-left:4px">AI</span>';
+  if(q==='json') return '<span style="font-family:monospace;font-size:10px;padding:1px 4px;border-radius:3px;background:rgba(0,200,240,.12);color:#00c8f0;margin-left:4px">JSON</span>';
+  return '<span style="font-family:monospace;font-size:10px;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,.07);color:#456278;margin-left:4px">stat</span>';
 }
 
 /* Score-Farbe: bei stat-Qualitaet gedÃ¤mpft */
@@ -1678,9 +1678,9 @@ function kpiCard(label,val,sub,vc,oc){
   var cs=oc?'cursor:pointer;':'';
   var oa=oc?' onclick="'+oc+'"':'';
   var h='<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;'+cs+'"'+oa+'>';
-  h+='<div style="font-family:monospace;font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">'+label+'</div>';
+  h+='<div style="font-family:monospace;font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">'+label+'</div>';
   h+='<div style="font-size:24px;font-weight:800;color:'+(vc||'#00c8f0')+'">'+val+'</div>';
-  if(sub)h+='<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-top:3px">'+sub+'</div>';
+  if(sub)h+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:3px">'+sub+'</div>';
   h+='</div>';return h;
 }
 
@@ -1773,16 +1773,16 @@ function rSyn(){
   if(vrl){
     var vixBg=vrl.zone===1?'rgba(0,230,118,.07)':vrl.zone===2?'rgba(255,171,0,.10)':'rgba(255,82,82,.12)';
     vixH='<div style="grid-column:1/-1;padding:7px 12px;background:'+vixBg+';border:1px solid '+vrl.col+';border-radius:8px;display:flex;align-items:center;gap:8px;margin-bottom:4px">';
-    vixH+='<div style="font-family:monospace;font-size:9px;font-weight:700;color:'+vrl.col+'">&#9632; '+vrl.label+'</div>';
-    if(vrl.zone===2){vixH+='<div style="font-family:monospace;font-size:8px;color:#ffab00">Mom. &times;0.60</div>';}
-    if(vrl.zone===3){vixH+='<div style="font-family:monospace;font-size:8px;color:#ff5252">Mom. &times;0.20 â€” CRASH-SCHUTZ AKTIV</div>';}
+    vixH+='<div style="font-family:monospace;font-size:10px;font-weight:700;color:'+vrl.col+'">&#9632; '+vrl.label+'</div>';
+    if(vrl.zone===2){vixH+='<div style="font-family:monospace;font-size:10px;color:#ffab00">Mom. &times;0.60</div>';}
+    if(vrl.zone===3){vixH+='<div style="font-family:monospace;font-size:10px;color:#ff5252">Mom. &times;0.20 â€” CRASH-SCHUTZ AKTIV</div>';}
     /* P-A2: SPY + Bond-Regime-Anzeige */
     var macro=(window.FD&&FD['__macro__'])?FD['__macro__']:null;
     if(macro&&macro.spy_above_200ma!==undefined){
       var spyCol2=macro.spy_above_200ma?'#00e676':'#ff6666';
       var spyTxt2=macro.spy_above_200ma?'SPY &gt; 200MA':'SPY &lt; 200MA';
-      vixH+='<div style="font-family:monospace;font-size:8px;color:var(--mut)">&nbsp;|&nbsp;</div>';
-      vixH+='<div style="font-family:monospace;font-size:8px;color:'+spyCol2+'">'+spyTxt2+'</div>';
+      vixH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">&nbsp;|&nbsp;</div>';
+      vixH+='<div style="font-family:monospace;font-size:10px;color:'+spyCol2+'">'+spyTxt2+'</div>';
     }
     var bondFactor=(macro&&macro.bond_factor!==undefined)?macro.bond_factor:1.00;
     var tnx5d=(macro&&macro.tnx_5d_change_bps!==undefined)?macro.tnx_5d_change_bps:0;
@@ -1793,8 +1793,8 @@ function rSyn(){
     else if(bondFactor>=0.60){bondEmoji="&#128993;";bondLabel="Zinsen steigen";}
     else{bondEmoji="&#128308;";bondLabel="Zinsen stark";}
     var bondStr=bondEmoji+" "+bondLabel+" ("+tnxSign+tnxPct+"% / 5T)";
-    vixH+='<div style="font-family:monospace;font-size:8px;color:var(--mut)">&nbsp;|&nbsp;</div>';
-    vixH+='<div style="font-family:monospace;font-size:8px;color:#8ab4cc">'+bondStr+'</div>';
+    vixH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">&nbsp;|&nbsp;</div>';
+    vixH+='<div style="font-family:monospace;font-size:10px;color:#8ab4cc">'+bondStr+'</div>';
     vixH+='</div>';
   }
   /* DQ-Banner: Datenqualitaets-Anzeige (v5.9.27) */
@@ -1821,14 +1821,14 @@ function rSyn(){
   var rsiQstr=hasRsiLive?'<span style="color:#00e676">live</span>':'<span style="color:#456278">stat</span>';
   var dqCol=nStat===0?'#00e676':nStat<20?'#ffab00':'#ff5252';
   dqH='<div style="grid-column:1/-1;padding:6px 12px;background:rgba(0,0,0,.25);border:1px solid '+dqCol+';border-radius:8px;margin-bottom:4px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">';
-  dqH+='<div style="font-family:monospace;font-size:8px;font-weight:700;color:'+dqCol+'">&#9141; DQ</div>';
-  dqH+='<div style="font-family:monospace;font-size:8px;color:#8ab4cc">'+nLoaded+'/'+STOCKS.length+'</div>';
-  dqH+='<div style="font-family:monospace;font-size:8px;color:#00e676">AI:'+nAI+'</div>';
-  if(nJSON) dqH+='<div style="font-family:monospace;font-size:8px;color:#00c8f0">JSON:'+nJSON+'</div>';
-  if(nStat) dqH+='<div style="font-family:monospace;font-size:8px;color:#456278">stat:'+nStat+'</div>';
-  dqH+='<div style="font-family:monospace;font-size:8px;color:#456278">Trend:'+trendQstr+'</div>';
-  dqH+='<div style="font-family:monospace;font-size:8px;color:#456278">RSI:'+rsiQstr+'</div>';
-  if(nSanity) dqH+='<div style="font-family:monospace;font-size:8px;color:#ff5252">&#9888; Sanity:'+nSanity+'</div>';
+  dqH+='<div style="font-family:monospace;font-size:10px;font-weight:700;color:'+dqCol+'">&#9141; DQ</div>';
+  dqH+='<div style="font-family:monospace;font-size:10px;color:#8ab4cc">'+nLoaded+'/'+STOCKS.length+'</div>';
+  dqH+='<div style="font-family:monospace;font-size:10px;color:#00e676">AI:'+nAI+'</div>';
+  if(nJSON) dqH+='<div style="font-family:monospace;font-size:10px;color:#00c8f0">JSON:'+nJSON+'</div>';
+  if(nStat) dqH+='<div style="font-family:monospace;font-size:10px;color:#456278">stat:'+nStat+'</div>';
+  dqH+='<div style="font-family:monospace;font-size:10px;color:#456278">Trend:'+trendQstr+'</div>';
+  dqH+='<div style="font-family:monospace;font-size:10px;color:#456278">RSI:'+rsiQstr+'</div>';
+  if(nSanity) dqH+='<div style="font-family:monospace;font-size:10px;color:#ff5252">&#9888; Sanity:'+nSanity+'</div>';
   /* Snapshot-Status-Badge v5.9.79 */
   var snapN=(_archive&&_archive.length)?_archive.length:0;
   var snapMile='',snapCol2='#456278';
@@ -1836,7 +1836,7 @@ function rSyn(){
   else if(snapN>=20){snapMile='IC:ok';snapCol2='#f0c000';}
   else{snapMile='IC:'+(20-snapN)+'f';snapCol2='#456278';}
   var snapDateStr=snapN>0?(' '+_archive[0].date):'';
-  dqH+='<div style="font-family:monospace;font-size:8px;color:'+snapCol2+'">&#128247;'+snapN+snapDateStr+' '+snapMile+'</div>';
+  dqH+='<div style="font-family:monospace;font-size:10px;color:'+snapCol2+'">&#128247;'+snapN+snapDateStr+' '+snapMile+'</div>';
   dqH+='</div>';
   /* Filter-Info-Zeile (v5.9.82): zeigt aktive Filter + Gesamtuniverse-Zaehler */
   var filterInfoH='';
@@ -1846,7 +1846,7 @@ function rSyn(){
     if(WL2_SYNC) filterParts.push('Fav ('+pool.length+' Titel)');
     if(HC_FILTER) filterParts.push('HC: Score+Mom+Sektor (Kontext)');
     var totalStr='Gesamt-Universe: '+strongs+' STRONG / '+buys+' BUY / '+sells+' SELL';
-    filterInfoH='<div style="grid-column:1/-1;padding:5px 12px;background:rgba(255,159,28,.06);border:1px solid rgba(255,159,28,.2);border-radius:6px;margin-bottom:4px;font-family:monospace;font-size:9px;color:#ff9f1c">';
+    filterInfoH='<div style="grid-column:1/-1;padding:5px 12px;background:rgba(255,159,28,.06);border:1px solid rgba(255,159,28,.2);border-radius:6px;margin-bottom:4px;font-family:monospace;font-size:10px;color:#ff9f1c">';
     filterInfoH+='&#9670; Filter: '+filterParts.join(' + ')+'  <span style="color:#456278">| '+totalStr+'</span>';
     filterInfoH+='</div>';
   }
@@ -1864,7 +1864,7 @@ function rSyn(){
     stH+='<div style="font-size:26px;font-weight:800;color:#ff9f1c;margin-bottom:4px">'+sc+'/100</div>';
     stH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">$'+s.p+' RSI:'+s.rsi+'</div>';
     stH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">PEG:'+pgLb(s)+' KGV:'+s.pe+'x</div>';
-    stH+='<div style="font-family:monospace;font-size:9px;color:#ff9f1c;margin-top:6px">ZL + 200MA + PEG + '+divLbl+'</div></div>';
+    stH+='<div style="font-family:monospace;font-size:10px;color:#ff9f1c;margin-top:6px">ZL + 200MA + PEG + '+divLbl+'</div></div>';
   }
   if(!stH)stH='<div style="color:var(--mut);font-size:12px;padding:12px">Keine STRONG BUY Signale</div>';
   var ss=document.getElementById('s_strong');if(ss)ss.innerHTML=stH;
@@ -1878,7 +1878,7 @@ function rSyn(){
     bH+='<div style="font-size:26px;font-weight:800;color:#00e57a;margin-bottom:4px">'+sc+'/100</div>';
     bH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">$'+s.p+' RSI:'+s.rsi+'</div>';
     bH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">PEG:'+pgLb(s)+' KGV:'+s.pe+'x</div>';
-    bH+='<div style="font-family:monospace;font-size:9px;color:#00c8f0;margin-top:6px">ZL ok | >200MA ok | PEG ok</div></div>';
+    bH+='<div style="font-family:monospace;font-size:10px;color:#00c8f0;margin-top:6px">ZL ok | >200MA ok | PEG ok</div></div>';
   }
   if(!bH)bH='<div style="color:var(--mut);font-size:12px;padding:12px">Keine qualifizierten Kaufsignale</div>';
   var s1=document.getElementById('s1');if(s1)s1.innerHTML=bH;
@@ -1891,7 +1891,7 @@ function rSyn(){
       pbH+='<div style="font-size:18px;font-weight:800;color:#f0c000">'+s.t+'</div>';
       pbH+='<div style="font-size:11px;color:var(--mut);margin-bottom:6px">'+dName(s)+'</div>';
       pbH+='<div style="font-size:26px;font-weight:800;color:#f0c000;margin-bottom:4px">'+sc+'/100</div>';
-      pbH+='<div style="font-family:monospace;font-size:9px;color:#f0c000">PEG '+pgLb(s)+' > 2.0 -- blockiert</div></div>';
+      pbH+='<div style="font-family:monospace;font-size:10px;color:#f0c000">PEG '+pgLb(s)+' > 2.0 -- blockiert</div></div>';
     }
   }
   var s2=document.getElementById('s2');if(s2)s2.innerHTML=pbH;
@@ -1905,10 +1905,10 @@ function rSyn(){
     sH+='<div style="display:flex;justify-content:space-between;align-items:flex-start">';
     sH+='<div><div style="font-size:18px;font-weight:800;color:#ff6666">'+s.t+'</div>';
     sH+='<div style="font-size:11px;color:var(--mut);margin-bottom:4px">'+dName(s)+'</div></div>';
-    sH+='<div style="font-family:monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(255,63,63,.15);color:#ff6666">'+slbl3+'</div></div>';
+    sH+='<div style="font-family:monospace;font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(255,63,63,.15);color:#ff6666">'+slbl3+'</div></div>';
     sH+='<div style="font-size:26px;font-weight:800;color:#ff6666;margin-bottom:4px">'+sc+'/100</div>';
     sH+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">$'+s.p+' RSI:'+s.rsi+'</div>';
-    sH+='<div style="font-family:monospace;font-size:9px;color:#ff6666">'+swhy3+'</div></div>';
+    sH+='<div style="font-family:monospace;font-size:10px;color:#ff6666">'+swhy3+'</div></div>';
   }
   var s3=document.getElementById('s3');if(s3)s3.innerHTML=sH;
 }
@@ -1953,7 +1953,7 @@ function rWL(){
   }
   var synBar=document.getElementById('wl-syn-bar');
   if(synBar){
-    var hcActv=HC_FILTER?' <span style="font-size:9px;color:#ffd700">(HC-Filter aktiv)</span>':'';
+    var hcActv=HC_FILTER?' <span style="font-size:10px;color:#ffd700">(HC-Filter aktiv)</span>':'';
     var _sc='cursor:pointer;text-decoration:underline dotted;';
     synBar.innerHTML='<span style="font-size:10px;color:var(--mut);margin-right:8px">Synopse (alle ' + _scoresArr.length + '):</span>'
       +'<span style="font-size:10px;color:#ffd700;margin-right:10px;'+_sc+'" title="HC-Filter an/aus" onclick="document.getElementById(\'wl-hc-btn\').click();goTab(1,document.getElementById(\'tb1\'))">&#11088; HC&nbsp;'+synHC+'</span>'
@@ -2100,7 +2100,7 @@ function wlRend(scored){
     var _srRank=(_scoresIdx[s.t]&&_scoresIdx[s.t].sector_rank)||null;
     var sectorBad=FSC_FILTER&&_srRank&&_srRank>=8;
     var sc2=isStrong?(sectorBad?'#7a6a4a':'#ff9f1c'):sig==='buy'?(sectorBad?'#5a8a6a':'#00e57a'):sig==='pb'?'#f0c000':isRsiBlk?'#e8a020':sig==='buy_rsi_warn'?'#a5d6a7':sig==='watch_rsi'?'#80cbc4':isHoldSf?'#b07cf8':isSellSig||sig==='weak'?'#ff6666':'#7a9bb5';
-    var dR=dqCheck(s.t,sig),dB=dR?('<span style="font-size:9px;color:#f0c000;border:1px solid rgba(240,192,0,.4);border-radius:3px;padding:1px 4px" title="DQ: '+dR.fields.join(", ")+'">&#9888;</span>'):"";
+    var dR=dqCheck(s.t,sig),dB=dR?('<span style="font-size:10px;color:#f0c000;border:1px solid rgba(240,192,0,.4);border-radius:3px;padding:1px 4px" title="DQ: '+dR.fields.join(", ")+'">&#9888;</span>'):"";
     var slbl=isStrong?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG-BLK':isRsiBlk?'RSI-BLK':isHoldSf?holdLbl:sig==='weak'?'WEAK':isSellSig?sellLabel(sig):'WATCH';
     var scc=scColQ(sc,s);
     var sqB=sqBadge(s);
@@ -2123,28 +2123,28 @@ function wlRend(scored){
     h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
-    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+dB+'<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
+    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+dB+'<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
-    h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
-    h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
-    h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">ROCE </span><span>'+roceD+'</span></div>';
-    h+='<div style="font-family:monospace;font-size:9px"><span style="color:var(--mut)">RSI </span><span style="color:'+rsiC+'">'+s.rsi+'</span></div>';
+    h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
+    h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
+    h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">ROCE </span><span>'+roceD+'</span></div>';
+    h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">RSI </span><span style="color:'+rsiC+'">'+s.rsi+'</span></div>';
     h+='</div>';
     if(isStrong){
       var dl=s.div==='bull_hidden'?'Bull Hidden Div':'Bull Regular Div';
-      h+='<div style="font-family:monospace;font-size:9px;color:#ff9f1c;margin-top:4px">&#11088; '+dl+' | ATR-Hist ok</div>';
+      h+='<div style="font-family:monospace;font-size:10px;color:#ff9f1c;margin-top:4px">&#11088; '+dl+' | ATR-Hist ok</div>';
     }
     /* v5.9.72: Triple-Confirmation-Zeile fuer BUY+STRONG wenn isHC */
     if(isHC(s,sc) && sig!=='strong'){
       var fdHC=FD[s.t]||{};
       var sktLabel=fdHC.sector?(' | '+fdHC.sector.replace('Consumer ','')):'';
-      h+='<div style="font-family:monospace;font-size:9px;color:#ffd700;margin-top:4px">&#11088; Score+Mom+Sektor konvergent (Kontext)'+sktLabel+'</div>';
+      h+='<div style="font-family:monospace;font-size:10px;color:#ffd700;margin-top:4px">&#11088; Score+Mom+Sektor konvergent (Kontext)'+sktLabel+'</div>';
     } else if(isHC(s,sc) && sig==='strong'){
       var fdHC2=FD[s.t]||{};
       var sktLabel2=fdHC2.sector?(' | Skt: '+fdHC2.sector.replace('Consumer ','')):'';
-      h+='<div style="font-family:monospace;font-size:9px;color:#ffd700;margin-top:1px">+ Sektor konvergent (Kontext)'+sktLabel2+'</div>';
+      h+='<div style="font-family:monospace;font-size:10px;color:#ffd700;margin-top:1px">+ Sektor konvergent (Kontext)'+sktLabel2+'</div>';
     }
-    if(isSellSig){h+='<div style="font-family:monospace;font-size:9px;color:#ff6666;margin-top:4px">'+sellWhy(s,sig)+'</div>';}
+    if(isSellSig){h+='<div style="font-family:monospace;font-size:10px;color:#ff6666;margin-top:4px">'+sellWhy(s,sig)+'</div>';}
     if(isHoldSf){
       var holdFd=FD[s.t];
       var holdDr=sig==='hold_sf_div'||sig==='hold_sf_both';
@@ -2154,7 +2154,7 @@ function wlRend(scored){
       if(holdDr&&holdFd&&holdFd.div_yield!==null&&holdFd.div_yield!==undefined)
         parts.push('Div '+holdFd.div_yield.toFixed(1)+'% \u2265 '+divThresh()+'% (DR)');
       else if(holdDr) parts.push('DR-Hold aktiv');
-      h+='<div style="font-family:monospace;font-size:9px;color:#b07cf8;margin-top:4px">&#9654; '+parts.join(' | ')+'</div>';
+      h+='<div style="font-family:monospace;font-size:10px;color:#b07cf8;margin-top:4px">&#9654; '+parts.join(' | ')+'</div>';
     }
     h+='</div>';
     return h;
@@ -2250,9 +2250,9 @@ function wlDetail(ticker){
   var out='<div style="background:#0c1420;border:1px solid #1a2a3a;border-left:3px solid '+sc2+';border-radius:12px;padding:16px">';
   out+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">';
   out+='<div><div style="font-size:20px;font-weight:800;color:'+scColQ(sc,s)+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+dName(s)+'</div></div>';
-  out+='<div style="text-align:right"><div style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:9px;color:var(--mut)">/100 '+sqBadge(s)+'</div></div></div>';
+  out+='<div style="text-align:right"><div style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:10px;color:var(--mut)">/100 '+sqBadge(s)+'</div></div></div>';
   out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">'+why+'</div>';
-  if(wasGated){out+='<div style="font-size:9px;color:#7a9bb5;margin-bottom:6px">&#9660; Score-Gate aktiv: Fundamentals oder Score unter Schwelle &rarr; BUY</div>';}
+  if(wasGated){out+='<div style="font-size:10px;color:#7a9bb5;margin-bottom:6px">&#9660; Score-Gate aktiv: Fundamentals oder Score unter Schwelle &rarr; BUY</div>';}
   out+='<button onclick="openChart(\''+s.t+'\')" style="font-size:11px;color:#00c8f0;background:none;border:none;cursor:pointer;font-family:monospace;padding:0;opacity:0.7;margin-top:4px">&#128200; Chart</button>';
   /* DVG-Banner: visueller Hinweis bei hold_dvg (Option C) */
   if(sig==='hold_dvg'){
@@ -2260,14 +2260,14 @@ function wlDetail(ticker){
     var dvgRsiV=_scoresIdx[s.t]&&_scoresIdx[s.t].rsi!==null?Math.round(_scoresIdx[s.t].rsi):'â€”';
     out+='<div style="margin-bottom:10px;padding:8px 10px;background:rgba(176,124,248,.07);border:1px solid rgba(176,124,248,.3);border-radius:8px;font-size:10px">';
     out+='<div style="font-weight:700;color:#b07cf8;margin-bottom:3px">&#128202; Deep Value Divergence (DVG)</div>';
-    out+='<div style="font-family:monospace;font-size:9px;color:#dce8f5;line-height:1.6">';
+    out+='<div style="font-family:monospace;font-size:10px;color:#dce8f5;line-height:1.6">';
     out+='Fundamentals stark (Fund '+dvgFundV+'/100 &ge; 80) &middot; RSI '+dvgRsiV+' &lt; 35 (nahe &uuml;berverkauft) &middot; Bullish Divergenz aktiv<br>';
     out+='<span style="color:#7a9bb5">Modell: Technisches SELL-Signal unterdrueckt. Gutes Unternehmen, schwacher Chart. ';
     out+='Beobachten auf 200MA-R&uuml;ckkehr + positives Momentum.</span>';
     out+='</div></div>';
   }
   out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">';
-  out+='<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:5px">SCORE</div>';
+  out+='<div><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">SCORE</div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Momentum 25%</span><span>'+momSc(s)+(_scoresIdx[s.t]&&(_scoresIdx[s.t].mom_skip!=null||_scoresIdx[s.t].mom12m_ret!=null||_scoresIdx[s.t].mom12m!=null)?' AI':' stat')+'</span></div>';
   var trendQ=_scoresIdx[s.t]?'stat':'stat';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Trend 20%</span><span style="color:#456278">'+s.trend+' stat</span></div>';
@@ -2278,7 +2278,7 @@ function wlDetail(ticker){
   if(cs2!==null&&as2){
     var csColor=cs2>=70?'#00e57a':cs2>=45?'#f0c000':'#ff6666';
     var roceInfo=as2.roce?('Std '+as2.roce.std+'pp, '+as2.roce.n+'J'+(as2.roce.outliers>0?' ['+as2.roce.outliers+' Outlier]':'')):' n/a';
-    out+='<div style="'+row+';font-size:9px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:'+csColor+'">'+cs2+' | '+roceInfo+'</span></div>';
+    out+='<div style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:'+csColor+'">'+cs2+' | '+roceInfo+'</span></div>';
   }
   var fdBeta=_scoresIdx[s.t];var betaVal=fdBeta&&fdBeta.beta!==null&&fdBeta.beta!==undefined?fdBeta.beta:null;
   var evarVal=fdBeta&&fdBeta.evar!==null&&fdBeta.evar!==undefined?fdBeta.evar:null;
@@ -2300,7 +2300,7 @@ function wlDetail(ticker){
     out+='<div style="'+row+';padding-top:3px;margin-top:1px"><span style="color:'+drC+'">DR-Hold (Schwelle '+thr2+'%)</span><span style="color:'+drC+'">'+drTxt+'</span></div>';
   }
   out+='</div>';
-  out+='<div><div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:5px">TECHNISCH</div>';
+  out+='<div><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">TECHNISCH</div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">MACD</span><span style="color:'+(s.macdLine<0?'#00e57a':'#ff6666')+'">'+(s.macdLine!=null?s.macdLine.toFixed(2):'--')+'</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">Hist / min</span><span style="color:'+(histOk(s)?'#00e57a':'#f0c000')+'">'+(s.hist!=null?s.hist.toFixed(2):'--')+' / '+minH+'</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">RSI</span><span style="color:'+(s.rsi<30?'#00e57a':s.rsi>70?'#ff6666':'#dce8f5')+'">'+s.rsi+'</span></div>';
@@ -2326,23 +2326,23 @@ function wlDetail(ticker){
     var usedMed=secPegMed!=null?secPegMed:PEG_GLOBAL_MED;
     var pegLabel='PEG vs.'+secName+' Med.'+(usedMed>0?usedMed.toFixed(1):'?');
     var pegColor=pegRel!=null?(pegRel>=65?'#00e57a':pegRel>=40?'#f0c000':'#ff6666'):'#7a9bb5';
-    out+='<div style="'+row+';font-size:9px"><span style="color:var(--mut)">'+pegLabel+'</span><span style="color:'+pegColor+'">'+s.peg.toFixed(2)+(pegRel!=null?' \u2192 '+pegRel:'')+'</span></div>';
+    out+='<div style="'+row+';font-size:10px"><span style="color:var(--mut)">'+pegLabel+'</span><span style="color:'+pegColor+'">'+s.peg.toFixed(2)+(pegRel!=null?' \u2192 '+pegRel:'')+'</span></div>';
   }
   out+='</div></div>';
   if(fd){
     out+='<div style="border-top:1px solid #1a2a3a;padding-top:10px">';
-    out+='<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:6px">FUNDAMENTALS (JSON)</div>';
+    out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:6px">FUNDAMENTALS (JSON)</div>';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">FCF YIELD</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">FCF YIELD</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
     /* Owner Earnings Yield (v5.9.44 / v7.9.7) */
     var oeY=fd.owner_earnings!=null?fd.owner_earnings:null;
     var oeDisp=oeY!=null?((oeY>=0?'+':'')+oeY.toFixed(1)+'%'):'n/a';
     var oeColor=oeY!=null?(oeY>4?'#00e57a':oeY>0?'#f0c000':'#ff6666'):'#7a9bb5';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">OWN.EARN.</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+oeDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">OWN.EARN.</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+oeDisp+'</div></div>';
     var rv2=fd.roce!==null&&fd.roce!==undefined?fd.roce:fd.roe;
     var rl2=fd.roce!==null&&fd.roce!==undefined?'ROCE':'ROE';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+rl2+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">MOAT</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">'+rl2+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">MOAT</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+'</div></div>';
     out+='</div>';
     /* EV/EBITDA + EVAR â€” zweite Zeile Value-Qualitaet (v5.9.30) */
     var evebDisp=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda.toFixed(1)+'x':'n/a';
@@ -2353,8 +2353,8 @@ function wlDetail(ticker){
     var evarScore=evarRel!=null?evarRel:fd.evar;
     var evarColor=evarScore!=null?(evarScore>=60?'#00e57a':evarScore>=40?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EV/EBITDA</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+evarLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDispFull+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">EV/EBITDA</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">'+evarLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDispFull+'</div></div>';
     out+='</div>';
     /* EV/EBIT + FCF/Debt Cover (v5.9.76: Research Sprint -- Buffett/Greenblatt) */
     var eveitDisp2=fd.ev_ebit!==null&&fd.ev_ebit!==undefined?fd.ev_ebit.toFixed(1)+'x':'n/a';
@@ -2363,8 +2363,8 @@ function wlDetail(ticker){
     var fdcStr=fdcV!==null?(fdcV>=10?'&gt;10x':fdcV.toFixed(2)+'x'):'n/a';
     var fdcCol=fdcV!==null?(fdcV>=0.20?'#00e57a':fdcV>=0.05?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">EV/EBIT</div><div style="font-family:monospace;font-size:11px;color:'+eveitColor2+'">'+eveitDisp2+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">FCF/DEBT</div><div style="font-family:monospace;font-size:11px;color:'+fdcCol+'">'+fdcStr+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">EV/EBIT</div><div style="font-family:monospace;font-size:11px;color:'+eveitColor2+'">'+eveitDisp2+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">FCF/DEBT</div><div style="font-family:monospace;font-size:11px;color:'+fdcCol+'">'+fdcStr+'</div></div>';
     out+='</div>';
     /* Owner Earnings Yield (v5.9.44) â€” Buffett NI+D&A-CapEx/MC */
     var oeVal=fd.owner_earnings!=null?fd.owner_earnings:null;
@@ -2374,8 +2374,8 @@ function wlDetail(ticker){
       var oeDiffStr=oeDiff!=null?(' ('+(oeDiff>=0?'+':'')+oeDiff+'pp)'):'';
       var oeLabel='OE Yield'+oeDiffStr;
       out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">'+oeLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+(oeVal>=0?'+':'')+oeVal.toFixed(1)+'%</div></div>';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">FCF YIELD</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">'+oeLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+(oeVal>=0?'+':'')+oeVal.toFixed(1)+'%</div></div>';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">FCF YIELD</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
       out+='</div>';
     }
     /* Jahres-Trend (v5.9.35): ROCE + FCF + Mom aus annual.json */
@@ -2385,21 +2385,21 @@ function wlDetail(ticker){
       var momPts =getAnnualTrend(s.t,'mom_skip');
       if(rocePts.length>0||fcfPts.length>0){
         out+='<div style="margin-top:6px;padding:5px 7px;background:rgba(0,229,122,.04);border:1px solid rgba(0,229,122,.15);border-radius:6px">';
-        out+='<div style="font-family:monospace;font-size:8px;color:#00e57a;margin-bottom:3px">JAHRES-TREND '+trendArrow(rocePts)+' ROCE &nbsp;'+trendArrow(fcfPts)+' FCF</div>';
+        out+='<div style="font-family:monospace;font-size:10px;color:#00e57a;margin-bottom:3px">JAHRES-TREND '+trendArrow(rocePts)+' ROCE &nbsp;'+trendArrow(fcfPts)+' FCF</div>';
         /* ROCE-Verlauf */
         if(rocePts.length>0){
           var rStr=rocePts.map(function(p){return p.year+': '+(p.val!=null?(p.val.toFixed(1)+'%'):'--');}).join(' &nbsp;');
-          out+='<div style="font-family:monospace;font-size:9px;color:var(--mut)">ROCE: '+rStr+'</div>';
+          out+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">ROCE: '+rStr+'</div>';
         }
         /* FCF-Verlauf */
         if(fcfPts.length>0){
           var fStr=fcfPts.map(function(p){return p.year+': '+(p.val!=null?(p.val.toFixed(1)+'%'):'--');}).join(' &nbsp;');
-          out+='<div style="font-family:monospace;font-size:9px;color:var(--mut)">FCF:  '+fStr+'</div>';
+          out+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">FCF:  '+fStr+'</div>';
         }
         /* Mom-Verlauf */
         if(momPts.length>0){
           var mStr=momPts.map(function(p){return p.year+': '+(p.val!=null?((p.val>=0?'+':'')+p.val.toFixed(0)+'%'):'--');}).join(' &nbsp;');
-          out+='<div style="font-family:monospace;font-size:9px;color:var(--mut)">Mom:  '+mStr+'</div>';
+          out+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">Mom:  '+mStr+'</div>';
         }
         out+='</div>';
       }
@@ -2409,17 +2409,17 @@ function wlDetail(ticker){
     var debtDisp=fd.debt_eq!==null&&fd.debt_eq!==undefined?fd.debt_eq.toFixed(0):'n/a';
     var debtColor=fd.debt_eq!==null&&fd.debt_eq!==undefined?(fd.debt_eq<100?'#00e57a':fd.debt_eq<200?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">BETA (Low-Vol)</div><div style="font-family:monospace;font-size:11px;color:'+betaColor+'">'+betaDisp+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">DEBT/EQ %</div><div style="font-family:monospace;font-size:11px;color:'+debtColor+'">'+debtDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">BETA (Low-Vol)</div><div style="font-family:monospace;font-size:11px;color:'+betaColor+'">'+betaDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">DEBT/EQ %</div><div style="font-family:monospace;font-size:11px;color:'+debtColor+'">'+debtDisp+'</div></div>';
     out+='</div>';
     if(fd.div_yield!==null&&fd.div_yield!==undefined||fd.buyback_yield!==null&&fd.buyback_yield!==undefined){
       var dy=fd.div_yield!==null&&fd.div_yield!==undefined?fd.div_yield.toFixed(1)+'%':'--';
       var by=fd.buyback_yield!==null&&fd.buyback_yield!==undefined?fd.buyback_yield.toFixed(1)+'%':'--';
       var sry=fd.shareholder_return!==null&&fd.shareholder_return!==undefined?fp(fd.shareholder_return):'--';
       out+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-top:5px">';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">DIV YIELD</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+dy+'</div></div>';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">BUYBACK</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+by+'</div></div>';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:8px;color:var(--mut)">SH RETURN</div><div style="font-family:monospace;font-size:11px;color:#b07cf8">'+sry+'</div></div>';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">DIV YIELD</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+dy+'</div></div>';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">BUYBACK</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+by+'</div></div>';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">SH RETURN</div><div style="font-family:monospace;font-size:11px;color:#b07cf8">'+sry+'</div></div>';
       out+='</div>';
     }
     /* shares_change_yoy: Buyback-Signal v5.9.78 */
@@ -2431,10 +2431,10 @@ function wlDetail(ticker){
       var scyTip=scyV<-3?'Starker Aktienrueckkauf (O\'Shaughnessy Shareholder Yield)':scyV<0?'Aktienrueckkauf aktiv':scyV<2?'Aktienanzahl stabil':'Achtung: Aktienverwaesserung';
       out+='<div style="margin-top:5px;padding:5px 8px;background:rgba(255,255,255,.03);border:1px solid #1a2a3a;border-radius:6px">';
       out+='<div style="display:flex;justify-content:space-between;align-items:center">';
-      out+='<div style="font-family:monospace;font-size:8px;color:var(--mut)">SHARES YOY <span style="color:#456278">(Buyback-Signal)</span></div>';
+      out+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">SHARES YOY <span style="color:#456278">(Buyback-Signal)</span></div>';
       out+='<div style="font-family:monospace;font-size:11px;font-weight:700;color:'+scyCol+'">'+scyLbl+' ('+scySign+scyV.toFixed(1)+'%)</div>';
       out+='</div>';
-      out+='<div style="font-family:monospace;font-size:8px;color:#456278;margin-top:2px">'+scyTip+'</div>';
+      out+='<div style="font-family:monospace;font-size:10px;color:#456278;margin-top:2px">'+scyTip+'</div>';
       out+='</div>';
     }
     if(fd.mr)out+='<div style="font-size:10px;color:var(--mut);margin-top:6px;font-style:italic">'+fd.mr+'</div>';
@@ -2877,7 +2877,7 @@ function archExportJSON(){
   hint.textContent = 'Kopieren -> Juno -> Neue Datei -> Einf\u00fcgen -> als stockiq_snapshots.json speichern';
   var ta = document.createElement('textarea');
   ta.value = json;
-  ta.style.cssText = 'flex:1;font-size:9px;font-family:monospace;background:#0c1420;color:#00e57a;border:1px solid #1a2a3a;border-radius:8px;padding:8px;resize:none';
+  ta.style.cssText = 'flex:1;font-size:10px;font-family:monospace;background:#0c1420;color:#00e57a;border:1px solid #1a2a3a;border-radius:8px;padding:8px;resize:none';
   ta.readOnly = true;
   overlay.appendChild(hdr);
   overlay.appendChild(btnRow);
@@ -2953,7 +2953,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.5.2';
+      var PAGE_VERSION = 'v6.5.4';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -3583,9 +3583,9 @@ function pioBadge(s, fd) {
   var borderCol = damped ? '#ff5252' : '#1a3050';
   var h = '<div style="margin-top:6px;padding:5px 8px;background:rgba(0,0,0,.2);border-radius:6px;border:1px solid ' + borderCol + '">';
   h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
-  h += '<div style="font-family:monospace;font-size:8px;color:#456278">PIOTROSKI MINI</div>';
+  h += '<div style="font-family:monospace;font-size:10px;color:#456278">PIOTROSKI MINI</div>';
   h += '<div style="display:flex;align-items:center;gap:5px">';
-  if (damped) { h += '<div style="font-family:monospace;font-size:7px;color:#ff5252">&#9660; Fund &times;0.85</div>'; }
+  if (damped) { h += '<div style="font-family:monospace;font-size:10px;color:#ff5252">&#9660; Fund &times;0.85</div>'; }
   h += '<div style="font-family:monospace;font-size:11px;font-weight:700;color:' + col + '">';
   h += p.score + '/' + (5 - p.pending) + '</div></div></div>';
   h += '<div style="display:flex;gap:3px;flex-wrap:wrap">';
@@ -3599,13 +3599,13 @@ function pioBadge(s, fd) {
     } else {
       bg = 'rgba(255,82,82,.12)'; tc = '#ff5252';
     }
-    h += '<div style="padding:2px 5px;border-radius:4px;background:' + bg + ';font-family:monospace;font-size:7px;color:' + tc + '">';
+    h += '<div style="padding:2px 5px;border-radius:4px;background:' + bg + ';font-family:monospace;font-size:10px;color:' + tc + '">';
     h += (c.ok === null ? '?' : (c.ok ? '\u2713' : '\u2717')) + ' ' + c.label;
     h += '</div>';
   }
   h += '</div>';
   if (p.pending > 0) {
-    h += '<div style="font-family:monospace;font-size:7px;color:#456278;margin-top:3px">? = fund_juno_v7.7 benoetigt</div>';
+    h += '<div style="font-family:monospace;font-size:10px;color:#456278;margin-top:3px">? = fund_juno_v7.7 benoetigt</div>';
   }
   h += '</div>';
   return h;
@@ -3646,7 +3646,7 @@ function rFund(){
     cards+='<div style="display:flex;justify-content:space-between;margin-bottom:6px">';
     cards+='<div><div style="font-size:13px;font-weight:700">'+s.t+'</div><div style="font-size:10px;color:var(--mut)">'+dName(s)+'</div></div>';
     cards+='<div style="font-size:18px;font-weight:800;color:'+fcol+'">'+fs3+'</div></div>';
-    cards+='<div style="font-family:monospace;font-size:8px;padding:2px 7px;border-radius:8px;background:rgba(255,255,255,.06);color:'+mC+';margin-bottom:6px;display:inline-block">'+( fd4.moat||'--').toUpperCase()+'</div>';
+    cards+='<div style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:8px;background:rgba(255,255,255,.06);color:'+mC+';margin-bottom:6px;display:inline-block">'+( fd4.moat||'--').toUpperCase()+'</div>';
     cards+='<div style="font-size:10px;color:var(--mut);margin-bottom:6px;font-style:italic">'+(fd4.mr||'')+'</div>';
     cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:2px"><span style="color:var(--mut)">FCF Yield</span><span style="color:'+fcC+'">'+fp(fd4.fcf)+'</span></div>';
     var fdcC4=fd4.fcf_debt_cover!==null&&fd4.fcf_debt_cover!==undefined?fd4.fcf_debt_cover:null;
@@ -3832,9 +3832,9 @@ function renderCyclePhaseBadge(){
     var pname = phaseNames[stored] || stored;
     var ca = CYCLE_ALLOC[stored] || CYCLE_ALLOC['mid'];
     var html = '<strong style="color:' + pcol + '">' + pname + modeStr + '</strong>'
-      + '<span style="color:var(--mut);font-size:9px"> &mdash; VIX ' + vix.toFixed(1)
+      + '<span style="color:var(--mut);font-size:10px"> &mdash; VIX ' + vix.toFixed(1)
       + slopeStr + spyStr + '</span>'
-      + '<br><span style="color:var(--mut);font-size:9px">' + ca.note + '</span>';
+      + '<br><span style="color:var(--mut);font-size:10px">' + ca.note + '</span>';
     var el = document.getElementById('cycle-info');
     if(el){ el.innerHTML = html; }
     highlightCycleBtn(stored);
@@ -3974,7 +3974,7 @@ function rAlloc(){
     html += '<div style="display:flex;gap:12px;align-items:center">';
     html += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">Soll: <span style="color:#dce8f5">' + t.soll + '%</span></div>';
     html += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">Ist: <span style="color:' + barColor + ';font-weight:700">' + ist.toFixed(1) + '%</span></div>';
-    html += '<div style="font-family:monospace;font-size:9px;color:' + labelColor + '">' + statusIcon + ' ' + statusText + '</div>';
+    html += '<div style="font-family:monospace;font-size:10px;color:' + labelColor + '">' + statusIcon + ' ' + statusText + '</div>';
     html += '</div></div>';
 
     /* Fortschrittsbalken */
@@ -3984,12 +3984,12 @@ function rAlloc(){
     /* Soll-Marker */
     html += '<div style="position:absolute;top:0;left:' + sollPct.toFixed(1) + '%;width:2px;height:100%;background:#dce8f5;opacity:0.5"></div>';
     /* Delta-Label */
-    html += '<div style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-family:monospace;font-size:9px;color:#dce8f5;opacity:0.9">';
+    html += '<div style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-family:monospace;font-size:10px;color:#dce8f5;opacity:0.9">';
     html += (delta >= 0 ? '+' : '') + delta.toFixed(1) + 'pp</div>';
     html += '</div>';
 
     /* Eurobetrag */
-    html += '<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-top:3px">';
+    html += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:3px">';
     html += vals[j].toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR';
     var sollVal = (t.soll / 100) * total;
     var diff = vals[j] - sollVal;
@@ -4002,7 +4002,7 @@ function rAlloc(){
       var action = diff > 0 ? 'REDUZIEREN' : 'AUFSTOCKEN';
       var absDiff = diff < 0 ? -diff : diff;
       rebalHtml += '<div style="margin-bottom:8px;padding:8px;background:#0a1628;border-left:3px solid ' + barColor + ';border-radius:4px">';
-      rebalHtml += '<div style="font-family:monospace;font-size:9px;font-weight:700;color:' + barColor + '">' + t.label + ' &#8594; ' + action + '</div>';
+      rebalHtml += '<div style="font-family:monospace;font-size:10px;font-weight:700;color:' + barColor + '">' + t.label + ' &#8594; ' + action + '</div>';
       rebalHtml += '<div style="font-size:10px;color:#dce8f5;margin-top:3px">';
       rebalHtml += absDiff.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR ' + (diff > 0 ? 'verkaufen / umschichten' : 'zukaufen');
       rebalHtml += ' &nbsp;<span style="color:var(--mut)">(' + (diff > 0 ? '+' : '') + delta.toFixed(1) + 'pp Abweichung)</span>';
@@ -4316,7 +4316,7 @@ function dpRenderSummary(){
 
   function kachel(label, val, col){
     return '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">' +
-      '<div style="font-family:monospace;font-size:8px;color:var(--mut)">' + label + '</div>' +
+      '<div style="font-family:monospace;font-size:10px;color:var(--mut)">' + label + '</div>' +
       '<div style="font-size:15px;font-weight:800;color:' + col + '">' + val + '</div></div>';
   }
   var out = '';
@@ -4361,9 +4361,9 @@ function dpRenderTable(){
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:right">+/-%</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Score</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Sig</th>';
-  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center;font-size:9px" title="Snapshots im sell_ma-Zustand. Ab 20: Exit faellig.">MA-Tg</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center;font-size:10px" title="Snapshots im sell_ma-Zustand. Ab 20: Exit faellig.">MA-Tg</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Skt</th>';
-  out += '<th style="background:#1a3a5c;color:var(--mut);padding:5px 6px;text-align:right;font-size:9px">real.</th>';
+  out += '<th style="background:#1a3a5c;color:var(--mut);padding:5px 6px;text-align:right;font-size:10px">real.</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px"></th></tr>';
 
   for(var i=0;i<DEPOT_POSITIONS.length;i++){
@@ -4403,7 +4403,7 @@ function dpRenderTable(){
 
     out += '<tr style="background:'+rowBg+'">';
     out += '<td style="padding:5px 6px;color:#00c8f0;font-weight:700;font-family:monospace;cursor:pointer;text-decoration:underline dotted" title="In WL-Detailansicht öffnen" onclick="goTab(1,document.getElementById(\'tb1\'));setTimeout(function(){wlDetail(\''+p.t+'\');},80)">'+p.t+'</td>';
-    out += '<td style="padding:5px 6px;color:#dce8f5;font-size:9px">'+p.name+'</td>';
+    out += '<td style="padding:5px 6px;color:#dce8f5;font-size:10px">'+p.name+'</td>';
     out += '<td style="padding:5px 6px;text-align:right;color:#dce8f5">'+p.shares+'</td>';
     out += '<td style="padding:5px 6px;text-align:right;color:#7a9bb5">'+p.buyPrice.toFixed(2)+'</td>';
     var fd0 = FD[p.t] || {};
@@ -4411,11 +4411,11 @@ function dpRenderTable(){
     var aktStr = cp !== null ? cp.toFixed(2) + priceNote :
       (fd0.current_price ? '!' + fd0.current_price.toFixed(2) + ' ' + (fd0.price_currency||'?') : 'n/a');
     var aktC = cp !== null ? '#dce8f5' : (fd0.current_price ? '#ffab00' : '#7a9bb5');
-    out += '<td style="padding:5px 6px;text-align:right;color:'+aktC+';font-size:9px">'+aktStr+'</td>';
+    out += '<td style="padding:5px 6px;text-align:right;color:'+aktC+';font-size:10px">'+aktStr+'</td>';
     out += '<td style="padding:5px 6px;text-align:right;color:#dce8f5">'+(wert!==null?wert.toLocaleString('de-DE',{maximumFractionDigits:0})+' \u20ac':'n/a')+'</td>';
     out += '<td style="padding:5px 6px;text-align:right;color:'+pnlC+';font-weight:700">'+(pnlPct!==null?(pnlPct>=0?'+':'')+pnlPct.toFixed(1)+'%':'n/a')+'</td>';
     out += '<td style="padding:5px 6px;text-align:center;color:#dce8f5;font-weight:700">'+sc+'</td>';
-    out += '<td style="padding:5px 6px;text-align:center;color:'+sigC+';font-size:9px;font-weight:700">'+sigLbl+'</td>';
+    out += '<td style="padding:5px 6px;text-align:center;color:'+sigC+';font-size:10px;font-weight:700">'+sigLbl+'</td>';
     var _md=(dp_sig==='sell_ma')?dpSellMaDays(p.t):null;
     var _mc,_mk;
     if(_md===null){_mc='&mdash;';_mk='#456278';}
@@ -4423,12 +4423,12 @@ function dpRenderTable(){
     else if(_md>=20){_mc=_md+'!';_mk='#ff5252';}
     else if(_md>=15){_mc=''+_md;_mk='#ffab00';}
     else{_mc=''+_md;_mk='#7a9bb5';}
-    out += '<td style="padding:5px 6px;text-align:center;font-family:monospace;font-size:9px;font-weight:700;color:'+_mk+'">'+_mc+'</td>';
+    out += '<td style="padding:5px 6px;text-align:center;font-family:monospace;font-size:10px;font-weight:700;color:'+_mk+'">'+_mc+'</td>';
     out += '<td style="padding:5px 6px;text-align:center">'+getSektorBadge(p.t)+'</td>';
     var rlz = typeof p.realized === 'number' ? p.realized : 0;
     var rlzC = rlz > 0 ? '#00e57a' : rlz < 0 ? '#ff5252' : 'var(--mut)';
     var rlzStr = rlz !== 0 ? (rlz >= 0 ? '+' : '') + Math.round(rlz) + '\u20ac' : '--';
-    out += '<td style="padding:5px 6px;text-align:right;font-family:monospace;font-size:9px;color:' + rlzC + '">' + rlzStr + '</td>';
+    out += '<td style="padding:5px 6px;text-align:right;font-family:monospace;font-size:10px;color:' + rlzC + '">' + rlzStr + '</td>';
     out += '<td style="padding:5px 6px;text-align:center"><button onclick="dpRemove('+i+')" style="background:transparent;border:1px solid #332;color:#ff6666;font-size:10px;padding:2px 7px;border-radius:4px;cursor:pointer">\u00d7</button></td>';
     out += '</tr>';
   }
@@ -4441,7 +4441,7 @@ function dpRenderTable(){
     if(!nfd || !nfd.current_price) noEurCount++;
   }
   if(noEurCount > 0){
-    out += '<div style="margin-top:8px;padding:7px 10px;background:rgba(255,171,0,.07);border-left:3px solid #ffab00;border-radius:4px;font-family:monospace;font-size:9px;color:#7a9bb5">';
+    out += '<div style="margin-top:8px;padding:7px 10px;background:rgba(255,171,0,.07);border-left:3px solid #ffab00;border-radius:4px;font-family:monospace;font-size:10px;color:#7a9bb5">';
     out += '&#9888; ' + noEurCount + ' Position(en) ohne EUR-Kurs &mdash; fund_juno v7.9.12+ erforderlich (current_price_eur-Feld). ';
     out += 'Vorhandene USD/GBP-Kurse (!) sind in Heimatw&auml;hrung &mdash; Wert und Performance nicht verl&auml;sslich.';
     out += '</div>';
@@ -4465,6 +4465,14 @@ function dpRenderChart(){
     if(!raw) raw = localStorage.getItem('stockiq_snapshots_v1');
     if(raw) snapshots = JSON.parse(raw);
   } catch(e){}
+
+  /* v6.5.4: Snapshots liegen newest-first (unshift Z.3060) --
+     fuer die Zeitachse chronologisch aufsteigend sortieren. */
+  snapshots = snapshots.slice().sort(function(a,b){
+    var da = (a && a.date) ? a.date : '';
+    var db = (b && b.date) ? b.date : '';
+    return da < db ? -1 : da > db ? 1 : 0;
+  });
 
   /* Punkte berechnen */
   var points = [];
@@ -4783,13 +4791,13 @@ function dpRenderTxLog(){
     var typC = (tx.typ==='BUY'||tx.typ==='ADD') ? '#00e57a'
              : (tx.typ==='SELL'||tx.typ==='TRIM') ? '#ff5252' : '#7a9bb5';
     out += '<tr style="background:'+rowBg+'">';
-    out += '<td style="padding:4px 5px;color:#7a9bb5;font-family:monospace;font-size:9px">'+(tx.d||'--')+'</td>';
-    out += '<td style="padding:4px 5px;text-align:center;color:'+typC+';font-family:monospace;font-size:9px;font-weight:700">'+(tx.typ||'?')+'</td>';
+    out += '<td style="padding:4px 5px;color:#7a9bb5;font-family:monospace;font-size:10px">'+(tx.d||'--')+'</td>';
+    out += '<td style="padding:4px 5px;text-align:center;color:'+typC+';font-family:monospace;font-size:10px;font-weight:700">'+(tx.typ||'?')+'</td>';
     out += '<td style="padding:4px 5px;color:#00c8f0;font-family:monospace;font-weight:700">'+(tx.t||'?')+'</td>';
     out += '<td style="padding:4px 5px;text-align:right;color:#dce8f5">'+(typeof tx.n==='number'?tx.n:'--')+'</td>';
     out += '<td style="padding:4px 5px;text-align:right;color:#dce8f5">'+(typeof tx.px==='number'?tx.px.toFixed(2):'--')+'</td>';
-    out += '<td style="padding:4px 5px;text-align:center;color:#7a9bb5;font-size:9px">'+(tx.sig||'--')+'</td>';
-    out += '<td style="padding:4px 5px;color:var(--mut);font-size:9px">'+(tx.note||'')+'</td>';
+    out += '<td style="padding:4px 5px;text-align:center;color:#7a9bb5;font-size:10px">'+(tx.sig||'--')+'</td>';
+    out += '<td style="padding:4px 5px;color:var(--mut);font-size:10px">'+(tx.note||'')+'</td>';
     out += '</tr>';
   }
   out += '</table>';
@@ -4889,7 +4897,7 @@ function rSektorAmpel(){
     var sec=sectors[i]; var mom=getSektorMom(sec.sym); var c=getSektorColor(mom);
     var rank=i===0?'&#127947; ':i===1?'&#129352; ':i===2?'&#129353; ':'';
     out+='<div style="padding:5px 4px;background:'+c.bg+';border:1px solid '+c.col+'44;border-radius:6px;text-align:center">';
-    out+='<div style="font-size:8px;color:var(--mut);font-family:monospace">'+rank+sec.name+'</div>';
+    out+='<div style="font-size:10px;color:var(--mut);font-family:monospace">'+rank+sec.name+'</div>';
     out+='<div style="font-size:11px;font-weight:800;color:'+c.col+'">'+c.icon+' '+c.label+'</div>';
     out+='</div>';
   }
@@ -4911,7 +4919,7 @@ function getSektorBadge(ticker){
       'Real Estate':'XLRE','Utilities':'XLU','Communication Services':'XLC'};
     var etf=map[skt]; if(!etf) return '';
     var mom=getSektorMom(etf); var c=getSektorColor(mom);
-    return '<span style="font-size:9px;color:'+c.col+';margin-left:3px" title="'+skt+' '+c.label+'">'+c.icon+'</span>';
+    return '<span style="font-size:10px;color:'+c.col+';margin-left:3px" title="'+skt+' '+c.label+'">'+c.icon+'</span>';
   } catch(e){return '';}
 }
 
@@ -4952,8 +4960,8 @@ function rBeckRegime(){
   el.innerHTML =
     '<div style="font-size:11px;font-weight:700;color:' + col + ';margin-bottom:5px">' +
     '&#128201; Beck/GPO Markt-Regime: ' + regime + '</div>' +
-    '<div style="font-family:monospace;font-size:9px;color:#dce8f5;margin-bottom:4px">' + note + '</div>' +
-    '<div style="font-family:monospace;font-size:9px;color:#7a9bb5">&#9654; ' + action + '</div>';
+    '<div style="font-family:monospace;font-size:10px;color:#dce8f5;margin-bottom:4px">' + note + '</div>' +
+    '<div style="font-family:monospace;font-size:10px;color:#7a9bb5">&#9654; ' + action + '</div>';
 }
 
 /* Button-Highlighting fuer Zyklus-Buttons */
@@ -4997,7 +5005,7 @@ function renderCycleTargets(c){
   for(var i=0;i<items.length;i++){
     out += '<div style="text-align:center;padding:6px 2px;background:#0a1628;border:1px solid #1a3050;border-radius:6px">';
     out += '<div style="font-size:15px;font-weight:800;color:' + items[i].col + '">' + items[i].soll + '%</div>';
-    out += '<div style="font-family:monospace;font-size:7px;color:var(--mut)">' + items[i].label + '</div>';
+    out += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">' + items[i].label + '</div>';
     out += '</div>';
   }
   el.innerHTML = out;
@@ -5012,7 +5020,7 @@ function renderZielKacheln(c){
   for(var i=0;i<items.length;i++){
     out += '<div style="text-align:center;padding:8px 4px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">';
     out += '<div style="font-size:17px;font-weight:700;color:' + items[i].col + '">' + items[i].soll + '%</div>';
-    out += '<div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">' + items[i].label.toUpperCase() + '</div>';
+    out += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:2px">' + items[i].label.toUpperCase() + '</div>';
     out += '</div>';
   }
   el.innerHTML = out;
@@ -5089,17 +5097,17 @@ function rGSR(){
   var out = '';
   out += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">';
   out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #332200;border-radius:8px">';
-  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">GSR</div>';
+  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">GSR</div>';
   out += '<div style="font-size:20px;font-weight:800;color:#ffab00">' + gsr.toFixed(1) + '</div>';
-  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">Ã˜ ~65</div></div>';
+  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">Ã˜ ~65</div></div>';
   out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a2a3a;border-radius:8px">';
-  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">SPREAD gesamt</div>';
+  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">SPREAD gesamt</div>';
   out += '<div style="font-size:20px;font-weight:800;color:' + (combinedSpread > 25 ? '#ff5252' : combinedSpread > 20 ? '#ffab00' : '#dce8f5') + '">' + combinedSpread.toFixed(1) + '%</div>';
-  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">M&uuml;nze ~16-18%</div></div>';
+  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">M&uuml;nze ~16-18%</div></div>';
   out += '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a2a3a;border-radius:8px">';
-  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">BE-GSR f. Switch</div>';
+  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">BE-GSR f. Switch</div>';
   out += '<div style="font-size:20px;font-weight:800;color:#7a9bb5">' + beGSR + '</div>';
-  out += '<div style="font-family:monospace;font-size:8px;color:var(--mut)">bei akt. Spread</div></div>';
+  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">bei akt. Spread</div></div>';
   out += '</div>';
   out += '<div style="padding:10px 12px;border-left:3px solid ' + sigCol + ';background:rgba(0,0,0,.2);border-radius:4px">';
   out += '<div style="font-size:13px;font-weight:700;color:' + sigCol + '">' + sigIcon + ' ' + signal + '</div>';
@@ -5191,7 +5199,7 @@ function rBondETF(){
 
   out += '<div style="padding:8px 10px;border-left:3px solid ' + regCol + ';background:rgba(0,0,0,.15);border-radius:4px;margin-bottom:10px">';
   out += '<div style="font-size:12px;font-weight:700;color:' + regCol + '">' + regLabel + '</div>';
-  out += '<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-top:2px">Bund ' + bund.toFixed(1) + '% &middot; Kurve: ' + curve + ' &middot; Zinsrisiko (1pp): &minus;' + riskPp + '% Porfolio</div>';
+  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:2px">Bund ' + bund.toFixed(1) + '% &middot; Kurve: ' + curve + ' &middot; Zinsrisiko (1pp): &minus;' + riskPp + '% Porfolio</div>';
   out += '</div>';
 
   /* Balken pro Segment */
@@ -5204,13 +5212,13 @@ function rBondETF(){
     if(wt === 0){ continue; }
     out += '<div>';
     out += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">';
-    out += '<span style="font-family:monospace;font-size:9px;color:#dce8f5">' + seg.label + '</span>';
+    out += '<span style="font-family:monospace;font-size:10px;color:#dce8f5">' + seg.label + '</span>';
     out += '<span style="font-family:monospace;font-size:11px;font-weight:700;color:' + col + '">' + wt + '%</span>';
     out += '</div>';
     out += '<div style="background:#0a1628;border-radius:3px;height:8px">';
     out += '<div style="background:' + col + ';height:8px;border-radius:3px;width:' + wt + '%"></div>';
     out += '</div>';
-    out += '<div style="font-family:monospace;font-size:8px;color:var(--mut);margin-top:2px">' + seg.examples + ' &middot; Duration ~' + seg.dur + 'J</div>';
+    out += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:2px">' + seg.examples + ' &middot; Duration ~' + seg.dur + 'J</div>';
     out += '</div>';
   }
   out += '</div>';
@@ -5229,7 +5237,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:9px;color:var(--mut)">StockIQ v6.5.2 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.5.4 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
@@ -5239,15 +5247,15 @@ function rBondETF(){
       <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:10px">Berichts-Parameter</div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
         <div>
-          <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">SEKTOR</div>
+          <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">SEKTOR</div>
           <select id="rpt-sector" onchange="rptFillStocks()" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select>
         </div>
         <div>
-          <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">AKTIE 1</div>
+          <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">AKTIE 1</div>
           <select id="rpt-s1" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select>
         </div>
         <div>
-          <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:3px">AKTIE 2</div>
+          <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">AKTIE 2</div>
           <select id="rpt-s2" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:6px 8px;color:#dce8f5;font-size:11px;font-family:monospace"></select>
         </div>
       </div>
@@ -5515,8 +5523,8 @@ function renderSektorTab(macro) {
     var rankStr = (s.rank3m !== null) ? '' + s.rank3m : '-';
     var rankCol = isTop ? '#3fb950' : (isBot ? '#f85149' : '#8b949e');
     var badge = isTop
-      ? ' <span title="Top-4 Sektoren: +2.09%/M (sektor_ic, 2020-2026)" style="background:#0d2118;color:#3fb950;font-size:9px;padding:1px 4px;border-radius:3px;margin-left:3px;">TOP</span>'
-      : (isBot ? ' <span title="Bottom-4 Sektoren: +1.06%/M (sektor_ic, 2020-2026)" style="background:#2d0f0f;color:#f85149;font-size:9px;padding:1px 4px;border-radius:3px;margin-left:3px;">BOT</span>' : '');
+      ? ' <span title="Top-4 Sektoren: +2.09%/M (sektor_ic, 2020-2026)" style="background:#0d2118;color:#3fb950;font-size:10px;padding:1px 4px;border-radius:3px;margin-left:3px;">TOP</span>'
+      : (isBot ? ' <span title="Bottom-4 Sektoren: +1.06%/M (sektor_ic, 2020-2026)" style="background:#2d0f0f;color:#f85149;font-size:10px;padding:1px 4px;border-radius:3px;margin-left:3px;">BOT</span>' : '');
 
     h += '<tr style="background:' + rowBg + ';border-bottom:1px solid #21262d;">';
     h += '<td style="padding:7px 10px;color:#c9d1d9;font-weight:600;">' + s.name + '</td>';
@@ -5547,7 +5555,7 @@ function renderSektorTab(macro) {
   if (etfScores.length > 0) {
     h += '<div style="margin-top:16px;border-top:1px solid #21262d;padding-top:12px;">';
     h += '<div style="font-family:monospace;font-size:11px;font-weight:700;color:#00c8f0;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">ETF-Score Rangliste</div>';
-    h += '<div style="font-family:monospace;font-size:9px;color:#8b949e;margin-bottom:8px;">Momentum 40% + Trend 35% + Risk 25%</div>';
+    h += '<div style="font-family:monospace;font-size:10px;color:#8b949e;margin-bottom:8px;">Momentum 40% + Trend 35% + Risk 25%</div>';
     h += '<table style="width:100%;border-collapse:collapse;font-family:monospace;font-size:11px;">';
     h += '<tr><th style="text-align:left;padding:4px 6px;color:#8b949e;font-weight:normal;">Rang</th>';
     h += '<th style="text-align:left;padding:4px 6px;color:#8b949e;font-weight:normal;">ETF</th>';
