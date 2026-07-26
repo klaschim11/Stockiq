@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.5.7</title>
+<title>StockIQ v6.5.8</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.5.7 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.5.8 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -93,11 +93,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px">
     <button id="tb1" class="tab active" onclick="goTab(1,this)"><span style="font-size:.9em;margin-right:3px">01</span> &#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
-    <button id="tb2" class="tab" onclick="goTab(2,this);initDepot()"><span style="font-size:.9em;margin-right:3px">02</span> &#128200; Depot</button>
-    <button id="tb3" class="tab" onclick="goTab(3,this)"><span style="font-size:.9em;margin-right:3px">03</span> &#9878; Allokation</button>
-    <button id="tb4" class="tab" onclick="goTab(4,this)"><span style="font-size:.9em;margin-right:3px">04</span> &#127759; Sektoren</button>
-    <button id="tb5" class="tab" onclick="goTab(5,this)"><span style="font-size:.9em;margin-right:3px">05</span> &#128218; Hilfe</button>
-    <button id="tb6" class="tab" onclick="goTab(6,this)"><span style="font-size:.9em;margin-right:3px">06</span> &#128203; Roadmap</button>  </div>
+    <button id="tb7" class="tab" onclick="goTab(7,this)"><span style="font-size:.9em;margin-right:3px">02</span> &#128188; ETF</button>
+    <button id="tb2" class="tab" onclick="goTab(2,this);initDepot()"><span style="font-size:.9em;margin-right:3px">03</span> &#128200; Depot</button>
+    <button id="tb3" class="tab" onclick="goTab(3,this)"><span style="font-size:.9em;margin-right:3px">04</span> &#9878; Allokation</button>
+    <button id="tb4" class="tab" onclick="goTab(4,this)"><span style="font-size:.9em;margin-right:3px">05</span> &#127759; Sektoren</button>
+    <button id="tb5" class="tab" onclick="goTab(5,this)"><span style="font-size:.9em;margin-right:3px">06</span> &#128218; Hilfe</button>
+    <button id="tb6" class="tab" onclick="goTab(6,this)"><span style="font-size:.9em;margin-right:3px">07</span> &#128203; Roadmap</button>  </div>
 <div id="profile-badge" style="display:none;font-family:monospace;font-size:10px;color:var(--mut);padding:3px 8px;border:1px solid #1a2a3a;border-radius:20px;cursor:pointer;margin:4px 8px" onclick="showOnboarding()"><span id="profile-text">--</span> <span style="color:var(--acc)">&#9998;</span></div>
 </header>
 
@@ -214,7 +215,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.5.7</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.5.8</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -407,7 +408,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.5.7 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.5.8 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -613,13 +614,40 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="sektoren-content" style="color:#888;font-size:13px;">Laden...</div>
 </div>
 
+<!-- v6.5.8: Tab ETF (p10) -- statische Referenz (E1). Buchung/Kurse folgen E2-E4. -->
+<div class="page" id="p10" style="display:none;padding:16px;">
+  <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128188; ETF-Bausteine</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">Referenz &middot; Stufe 1 (EUR-Kern) &middot; Quelle: ETF-Endkonzept v1 + Datenmodell 5g (yfinance-Mapping verifiziert 26.07.2026)</div>
+  <div style="overflow-x:auto">
+  <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:520px">
+    <thead><tr style="text-align:left;color:var(--acc)">
+      <th style="padding:7px 10px;border-bottom:1px solid #1a2a3a">Klasse</th>
+      <th style="padding:7px 10px;border-bottom:1px solid #1a2a3a">Baustein</th>
+      <th style="padding:7px 10px;border-bottom:1px solid #1a2a3a">ISIN</th>
+      <th style="padding:7px 10px;border-bottom:1px solid #1a2a3a">Symbol</th>
+      <th style="padding:7px 10px;border-bottom:1px solid #1a2a3a">Whg</th>
+      <th style="padding:7px 10px;border-bottom:1px solid #1a2a3a">TER</th>
+    </tr></thead>
+    <tbody style="font-family:monospace;font-size:12px">
+      <tr><td style="padding:6px 10px">E</td><td style="padding:6px 10px">Welt-Kern ACWI IMI</td><td style="padding:6px 10px">IE00B3YLTY66</td><td style="padding:6px 10px">SPYI.DE</td><td style="padding:6px 10px">EUR</td><td style="padding:6px 10px">0,17%</td></tr>
+      <tr><td style="padding:6px 10px">A</td><td style="padding:6px 10px">Global Agg Bond EURh</td><td style="padding:6px 10px">IE00BDBRDM35</td><td style="padding:6px 10px">EUNA.DE</td><td style="padding:6px 10px">EUR</td><td style="padding:6px 10px">0,10%</td></tr>
+      <tr><td style="padding:6px 10px">G</td><td style="padding:6px 10px">Physisches Gold</td><td style="padding:6px 10px">IE00B4ND3602</td><td style="padding:6px 10px">4GLD.DE</td><td style="padding:6px 10px">EUR</td><td style="padding:6px 10px">0,12%</td></tr>
+      <tr><td style="padding:6px 10px">A</td><td style="padding:6px 10px">EUR Gov 15-30J</td><td style="padding:6px 10px">IE00B1FZS913</td><td style="padding:6px 10px">IBGL.AS</td><td style="padding:6px 10px">EUR</td><td style="padding:6px 10px">0,15%</td></tr>
+      <tr><td style="padding:6px 10px">R</td><td style="padding:6px 10px">Rohstoffkorb (synth/Swap)</td><td style="padding:6px 10px">IE00BD6FTQ80</td><td style="padding:6px 10px">CMOD.MI</td><td style="padding:6px 10px">EUR</td><td style="padding:6px 10px">0,19%</td></tr>
+      <tr><td style="padding:6px 10px">C</td><td style="padding:6px 10px">REIT Property</td><td style="padding:6px 10px">IE00B1FZS350</td><td style="padding:6px 10px">IWDP.AS</td><td style="padding:6px 10px">EUR</td><td style="padding:6px 10px">0,59%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:10px">Alle Bausteine EUR-Direktlisting (kein FX). Buchung + Live-Kurse folgen (E2-E4). Faktor-ETFs/NATO = Stufe 2, noch nicht verifiziert.</div>
+</div>
+
 <!-- ============================================================
      TAB 9: ROADMAP (ab v5.9.86: Index 9)
      ============================================================ -->
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.5.7 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.5.8 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -711,7 +739,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.5.7 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.5.8 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -805,7 +833,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.5.7 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.5.8 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1721,7 +1749,7 @@ function renderSpyPhaseBanner() {
 
 
 function goTab(n,btn){
-  var pgs=['p1','p1','p8','p5','p9','p6','p7'],i; /* v6.1.0: WL2 entfernt, 6 Tabs */
+  var pgs=['p1','p1','p8','p5','p9','p6','p7','p10'],i; /* v6.5.8: +ETF-Tab p10 (Index 7) */
   for(i=0;i<pgs.length;i++){var pg=document.getElementById(pgs[i]);if(pg)pg.style.display='none';}
   var tabs=document.querySelectorAll('.tab');
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
@@ -2962,7 +2990,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.5.7';
+      var PAGE_VERSION = 'v6.5.8';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -5246,7 +5274,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.5.7 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.5.8 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
