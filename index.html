@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.1</title>
+<title>StockIQ v6.6.2</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.1 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.2 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -215,7 +215,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.1</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.2</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -231,7 +231,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ETFs (EUR) <span id="alloc-etf-badge" style="display:none;color:#00c8f0;font-size:10px">&#128230; Aus ETF-Tab</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ETFs (EUR)</div>
       <input id="ai-etfs" type="number" min="0" step="100" placeholder="z.B. 15000"
           style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
           oninput="rAlloc()">
@@ -255,13 +255,15 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:10px;color:#ff9f1c;margin-bottom:4px">ROHSTOFFE / COMMODITIES (EUR)
-        <span style="display:block;font-size:10px;color:var(--mut);font-weight:400;margin-top:2px">Commodity-ETFs, Futures, Silbermuenzen &middot; ausserhalb StockIQ-Depot</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ROHSTOFFE / COMMODITIES (EUR)
+        <span style="display:block;font-size:10px;color:var(--mut);font-weight:400;margin-top:2px">Rohstoff-ETF-Bausteine setzen dieses Feld automatisch &middot; ohne solche Bausteine manuell nutzbar</span></div>
       <input id="ai-commod" type="number" min="0" step="100" placeholder="z.B. 8000"
-        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #332200;border-radius:6px;padding:8px 10px;color:#ff9f1c;font-size:13px;font-family:monospace"
+        style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
     </div>
   </div>
+  <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:8px;line-height:1.5">
+    &#8505; Einzelaktien aus Depot &middot; ETF-Bausteine nach Anlageklasse verteilt (Rohstoff-ETF &#8594; Rohstoffe, Gold-ETF &#8594; Gold, Anleihen-ETF &#8594; Anleihen). Felder mit ETF-Bausteinen werden automatisch gesetzt und &uuml;berschreiben manuelle Eingaben &middot; Felder ohne solche Bausteine bleiben manuell.</div>
   <div style="display:flex;gap:10px;align-items:center">
     <div style="font-family:monospace;font-size:10px;color:var(--mut)">Gesamt: <span id="ai-total" style="color:#dce8f5;font-weight:700">0 EUR</span></div>
     <button onclick="allocClear()" style="margin-left:auto;padding:5px 12px;background:transparent;border:1px solid #1a3050;border-radius:5px;color:var(--mut);font-size:10px;cursor:pointer">&#10006; Leeren</button>
@@ -408,7 +410,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.1 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.2 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -741,7 +743,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.1 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.2 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -833,7 +835,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.1 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.2 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -927,7 +929,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.1 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.2 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -3084,7 +3086,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.1';
+      var PAGE_VERSION = 'v6.6.2';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -5357,20 +5359,15 @@ function allocPrefillFromEtf(){
       if(acc.hasOwnProperty(p.cls)) acc[p.cls] += mv;
     }
     var map = {E:'ai-etfs', A:'ai-bonds', G:'ai-gold', R:'ai-commod'};
-    var k, el, touched = false;
+    var k, el;
     for(k in map){
       if(!map.hasOwnProperty(k)) continue;
       if(acc[k] > 0){
         el = document.getElementById(map[k]);
-        if(el){ el.value = Math.round(acc[k]); touched = true; }
+        if(el){ el.value = Math.round(acc[k]); }
       }
     }
-    var badge = document.getElementById('alloc-etf-badge');
-    if(badge && touched){
-      badge.style.display = 'inline';
-      /* "ETF nach Anlageklasse verteilt (Gold-ETF -> Gold, Anleihen-ETF -> Anleihen)" */
-      badge.textContent = '\uD83D\uDCE6 ETF nach Anlageklasse verteilt (Gold-ETF \u2192 Gold, Anleihen-ETF \u2192 Anleihen)';
-    }
+    /* Badge entfernt (v6.6.2) -- Erklaerung jetzt im Allok-Footer */
   } catch(e){}
 }
 
@@ -5775,7 +5772,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.1 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.2 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
