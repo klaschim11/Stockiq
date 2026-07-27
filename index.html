@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.5.8</title>
+<title>StockIQ v6.5.9</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.5.8 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.5.9 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -93,7 +93,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px">
     <button id="tb1" class="tab active" onclick="goTab(1,this)"><span style="font-size:.9em;margin-right:3px">01</span> &#128202; Watchlist <span class="chip" id="wl-cnt">--</span></button>
-    <button id="tb7" class="tab" onclick="goTab(7,this)"><span style="font-size:.9em;margin-right:3px">02</span> &#128188; ETF</button>
+    <button id="tb7" class="tab" onclick="goTab(7,this);initEtf()"><span style="font-size:.9em;margin-right:3px">02</span> &#128188; ETF</button>
     <button id="tb2" class="tab" onclick="goTab(2,this);initDepot()"><span style="font-size:.9em;margin-right:3px">03</span> &#128200; Depot</button>
     <button id="tb3" class="tab" onclick="goTab(3,this)"><span style="font-size:.9em;margin-right:3px">04</span> &#9878; Allokation</button>
     <button id="tb4" class="tab" onclick="goTab(4,this)"><span style="font-size:.9em;margin-right:3px">05</span> &#127759; Sektoren</button>
@@ -215,7 +215,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.5.8</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.5.9</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -408,7 +408,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.5.8 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.5.9 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -618,6 +618,95 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p10" style="display:none;padding:16px;">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128188; ETF-Bausteine</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">Referenz &middot; Stufe 1 (EUR-Kern) &middot; Quelle: ETF-Endkonzept v1 + Datenmodell 5g (yfinance-Mapping verifiziert 26.07.2026)</div>
+
+  <!-- ==== ETF-Buchung (S119 E3) ==== -->
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
+    <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:10px">&#43; ETF-Buchung</div>
+    <div style="margin-bottom:8px">
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">TRANSAKTIONSTYP</div>
+      <select id="etf-typ" onchange="etfTypChange()" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:12px;font-family:monospace">
+        <option value="BUY" selected>BUY &#8211; Erstposition</option>
+        <option value="ADD">ADD &#8211; Nachkauf</option>
+        <option value="TRIM">TRIM &#8211; Teilverkauf</option>
+        <option value="SELL">SELL &#8211; Vollverkauf</option>
+      </select>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+      <div id="etf-sel-existing-grp" style="display:none;grid-column:1 / -1">
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">POSITION (aus ETF-Bestand)</div>
+        <select id="etf-sel-existing" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:11px;font-family:monospace">
+          <option value="">-- Position waehlen --</option>
+        </select>
+      </div>
+      <div id="etf-core-grp" style="grid-column:1 / -1">
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">KERN-BAUSTEIN</div>
+        <select id="etf-sel-core" onchange="etfCoreChange()" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:11px;font-family:monospace">
+          <option value="">-- Kern-Baustein waehlen --</option>
+          <option value="__free__">-- Freie Eingabe (Stufe 2) --</option>
+        </select>
+      </div>
+    </div>
+    <div id="etf-free-grp" style="display:none;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+      <div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">SYMBOL (yfinance)</div>
+        <input id="etf-symbol" type="text" placeholder="z.B. VANF.DE" maxlength="16"
+          style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace;text-transform:uppercase">
+      </div>
+      <div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">ISIN</div>
+        <input id="etf-isin" type="text" placeholder="z.B. IE00..." maxlength="12"
+          style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace;text-transform:uppercase">
+      </div>
+      <div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">NAME</div>
+        <input id="etf-name" type="text" placeholder="Bezeichnung" maxlength="40"
+          style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace">
+      </div>
+      <div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">KLASSE</div>
+        <select id="etf-cls" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:12px;font-family:monospace">
+          <option value="E">E &#8211; Equity</option>
+          <option value="A">A &#8211; Aggregate/Bond</option>
+          <option value="G">G &#8211; Gold</option>
+          <option value="R">R &#8211; Rohstoffe</option>
+          <option value="C">C &#8211; REIT/Property</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+      <div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">ANZAHL ANTEILE</div>
+        <input id="etf-shares" type="number" min="0" step="0.001" placeholder="z.B. 10"
+          style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace">
+      </div>
+      <div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">KURS (EUR)</div>
+        <input id="etf-price" type="number" min="0" step="0.01" placeholder="z.B. 45.00"
+          style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace">
+      </div>
+      <div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">DATUM</div>
+        <input id="etf-date" type="date"
+          style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:13px;font-family:monospace">
+      </div>
+      <div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:3px">W&Auml;HRUNG</div>
+        <select id="etf-currency" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:7px 9px;color:#dce8f5;font-size:12px;font-family:monospace">
+          <option value="EUR" selected>EUR</option>
+          <option value="USD">USD</option>
+          <option value="GBP">GBP</option>
+          <option value="CHF">CHF</option>
+        </select>
+      </div>
+    </div>
+    <button onclick="etfAdd()" style="width:100%;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#43; ETF-Buchung speichern</button>
+  </div>
+
+  <!-- Summary-Kacheln + Bestandstabelle -->
+  <div id="etf-summary" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px"></div>
+  <div id="etf-holdings" style="margin-bottom:14px"></div>
+
+  <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#128203; Referenz: Kern-Bausteine (Stufe 1)</div>
   <div style="overflow-x:auto">
   <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:520px">
     <thead><tr style="text-align:left;color:var(--acc)">
@@ -647,7 +736,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.5.8 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.5.9 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -739,7 +828,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.5.8 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.5.9 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -833,7 +922,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.5.8 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.5.9 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1755,7 +1844,7 @@ function goTab(n,btn){
   for(i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
   var pg2=document.getElementById(pgs[n]);if(pg2)pg2.style.display='block';
   if(btn)btn.classList.add('active');
-  if(n===0)rSyn();if(n===1){rWL();renderSpyPhaseBanner();}if(n===2){rFund();initDepot();}if(n===3){initAlloc();}
+  if(n===0)rSyn();if(n===1){rWL();renderSpyPhaseBanner();}if(n===2){rFund();initDepot();}if(n===3){initAlloc();}if(n===7){initEtf();}
   if(n===4){var sm=window.FD?FD['__macro__']:null;var el=document.getElementById('sektoren-content');if(el)el.innerHTML=renderSektorTab(sm);if(typeof rSektorAmpel==='function')rSektorAmpel();}
 }
 </script>
@@ -2990,7 +3079,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.5.8';
+      var PAGE_VERSION = 'v6.5.9';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -4066,6 +4155,248 @@ function rAlloc(){
    ============================================================ */
 var DEPOT_KEY = 'stockiq_depot_v1';
 var DEPOT_POSITIONS = [];  /* [{t, name, shares, buyPrice, buyDate, currency}] */
+
+/* ==== ETF-Datenschicht (S119 E2) ==== */
+var ETF_TX_KEY = 'stockiq_etf_tx_v1';
+var ETF_POSITIONS = [];
+
+/* Feste Kern-Bausteine (SSOT: Datenmodell 5g, verifiziert 26.07.2026).
+   symbol = yfinance EUR-Direktlisting, cls = Assetklasse E/A/G/R/C. */
+var ETF_CORE = [
+  {sym:'SPYI.DE', isin:'IE00B3YLTY66', cls:'E', name:'Welt-Kern ACWI IMI'},
+  {sym:'EUNA.DE', isin:'IE00BDBRDM35', cls:'A', name:'Global Agg Bond EURh'},
+  {sym:'4GLD.DE', isin:'IE00B4ND3602', cls:'G', name:'Physisches Gold'},
+  {sym:'IBGL.AS', isin:'IE00B1FZS913', cls:'A', name:'EUR Gov 15-30J'},
+  {sym:'CMOD.MI', isin:'IE00BD6FTQ80', cls:'R', name:'Rohstoffkorb (synth/Swap)'},
+  {sym:'IWDP.AS', isin:'IE00B1FZS350', cls:'C', name:'REIT Property'}
+];
+
+function etfTxLoad(){
+  var raw = null;
+  try { raw = localStorage.getItem(ETF_TX_KEY); } catch(e){}
+  if(raw){
+    try { return JSON.parse(raw); }
+    catch(e){ alert('ETF TX-Log: JSON-Fehler beim Laden. Daten beschaedigt?'); return []; }
+  }
+  return [];
+}
+
+function etfTxSave(txList){
+  try { localStorage.setItem(ETF_TX_KEY, JSON.stringify(txList)); } catch(e){}
+}
+
+/* Aggregat: gew. Durchschnittseinstand, Bestand, realisierter G/V je Symbol.
+   Schema TX: {t,d,typ,n,px,name,cur,cls,isin,note}; typ in BUY/ADD/TRIM/SELL. */
+function etfAggregate(txList){
+  var map = {}, i, tx, m, k;
+  for(i=0;i<txList.length;i++){
+    tx = txList[i];
+    if(!tx.t) continue;
+    if(!map[tx.t]){
+      map[tx.t] = {t:tx.t, name:tx.name||tx.t, buyDate:tx.d||'',
+                   currency:tx.cur||'EUR', cls:tx.cls||'', isin:tx.isin||'',
+                   _costBasis:0, _shares:0, realized:0};
+    }
+    m = map[tx.t];
+    if(tx.typ === 'BUY' || tx.typ === 'ADD'){
+      var prevCost = m._costBasis * m._shares;
+      m._shares += tx.n;
+      m._costBasis = m._shares > 0 ? (prevCost + tx.n * tx.px) / m._shares : 0;
+      if(tx.d && (!m.buyDate || tx.d < m.buyDate)) m.buyDate = tx.d;
+    } else if(tx.typ === 'TRIM' || tx.typ === 'SELL'){
+      m.realized += (tx.px - m._costBasis) * tx.n;
+      m._shares -= tx.n;
+      if(m._shares < 0) m._shares = 0;
+    }
+    if(tx.name && tx.name !== tx.t) m.name = tx.name;
+    if(tx.cur) m.currency = tx.cur;
+    if(tx.cls) m.cls = tx.cls;
+    if(tx.isin) m.isin = tx.isin;
+  }
+  var result = [];
+  for(k in map){
+    if(!map.hasOwnProperty(k)) continue;
+    if(map[k]._shares > 0){
+      result.push({
+        t:        map[k].t,
+        name:     map[k].name,
+        shares:   map[k]._shares,
+        buyPrice: map[k]._costBasis,
+        buyDate:  map[k].buyDate,
+        currency: map[k].currency,
+        cls:      map[k].cls,
+        isin:     map[k].isin,
+        realized: map[k].realized
+      });
+    }
+  }
+  return result;
+}
+
+function etfLoad(){
+  try{
+    var tx = etfTxLoad();
+    ETF_POSITIONS = etfAggregate(tx);
+  } catch(e){ ETF_POSITIONS = []; }
+}
+
+/* ==== ETF-UI-Logik (S119 E3) ==== */
+function etfFindCore(sym){
+  var i;
+  for(i=0;i<ETF_CORE.length;i++){ if(ETF_CORE[i].sym === sym) return ETF_CORE[i]; }
+  return null;
+}
+
+function etfFillCoreSelect(){
+  var sel = document.getElementById('etf-sel-core');
+  if(!sel) return;
+  var html = '<option value="">-- Kern-Baustein waehlen --</option>';
+  var i;
+  for(i=0;i<ETF_CORE.length;i++){
+    html += '<option value="' + ETF_CORE[i].sym + '">' + ETF_CORE[i].sym + ' -- ' + ETF_CORE[i].name + '</option>';
+  }
+  html += '<option value="__free__">-- Freie Eingabe (Stufe 2) --</option>';
+  sel.innerHTML = html;
+}
+
+function etfFillExisting(){
+  var sel = document.getElementById('etf-sel-existing');
+  if(!sel) return;
+  var html = '<option value="">-- Position waehlen --</option>';
+  var i;
+  for(i=0;i<ETF_POSITIONS.length;i++){
+    var p = ETF_POSITIONS[i];
+    html += '<option value="' + p.t + '">' + p.t + ' -- ' + p.name + '</option>';
+  }
+  sel.innerHTML = html;
+}
+
+/* Typ-Umschaltung: BUY/ADD -> Baustein-Auswahl; TRIM/SELL -> Bestand-Auswahl */
+function etfTypChange(){
+  var typ = (document.getElementById('etf-typ')||{}).value || 'BUY';
+  var isSell = (typ === 'TRIM' || typ === 'SELL');
+  var g;
+  g=document.getElementById('etf-sel-existing-grp'); if(g) g.style.display = isSell ? 'block':'none';
+  g=document.getElementById('etf-core-grp'); if(g) g.style.display = isSell ? 'none':'block';
+  if(isSell){ var fg=document.getElementById('etf-free-grp'); if(fg) fg.style.display='none'; }
+}
+
+/* Kern-Auswahl -> Freifelder ein/aus */
+function etfCoreChange(){
+  var v = (document.getElementById('etf-sel-core')||{}).value || '';
+  var fg = document.getElementById('etf-free-grp');
+  if(fg) fg.style.display = (v === '__free__') ? 'grid' : 'none';
+}
+
+function etfAdd(){
+  var typ = ((document.getElementById('etf-typ')||{}).value || 'BUY').toUpperCase();
+  var sym='', name='', cls='', isin='';
+  if(typ === 'BUY' || typ === 'ADD'){
+    var coreVal = (document.getElementById('etf-sel-core')||{}).value || '';
+    if(coreVal === '__free__'){
+      sym  = ((document.getElementById('etf-symbol')||{}).value||'').toUpperCase().trim();
+      isin = ((document.getElementById('etf-isin')||{}).value||'').toUpperCase().trim();
+      name = ((document.getElementById('etf-name')||{}).value||'').trim() || sym;
+      cls  = (document.getElementById('etf-cls')||{}).value || 'E';
+    } else if(coreVal){
+      var c = etfFindCore(coreVal);
+      if(c){ sym=c.sym; name=c.name; cls=c.cls; isin=c.isin; }
+    }
+  } else {
+    sym = (document.getElementById('etf-sel-existing')||{}).value || '';
+    var ex = null, xi;
+    for(xi=0;xi<ETF_POSITIONS.length;xi++){ if(ETF_POSITIONS[xi].t === sym){ ex=ETF_POSITIONS[xi]; break; } }
+    if(ex){ name=ex.name; cls=ex.cls; isin=ex.isin; }
+  }
+  var shares = parseFloat((document.getElementById('etf-shares')||{}).value);
+  var price  = parseFloat((document.getElementById('etf-price')||{}).value);
+  var dt     = (document.getElementById('etf-date')||{}).value;
+  var cur    = (document.getElementById('etf-currency')||{}).value || 'EUR';
+
+  if(!sym){ alert('Bitte Baustein waehlen oder Symbol eingeben.'); return; }
+  if(!shares || shares <= 0){ alert('Anzahl ungueltig.'); return; }
+  if(!price || price <= 0){ alert('Kurs ungueltig.'); return; }
+  if(!dt){ alert('Datum fehlt.'); return; }
+
+  /* Bestandspruefung fuer TRIM/SELL */
+  if(typ === 'TRIM' || typ === 'SELL'){
+    var held=0, hi;
+    for(hi=0;hi<ETF_POSITIONS.length;hi++){ if(ETF_POSITIONS[hi].t === sym){ held=ETF_POSITIONS[hi].shares; break; } }
+    if(shares > held){ alert('Verkauf > Bestand (' + held + ').'); return; }
+  }
+
+  var tx = etfTxLoad();
+  tx.push({t:sym, d:dt, typ:typ, n:shares, px:price, name:name, cur:cur, cls:cls, isin:isin, note:''});
+  etfTxSave(tx);
+  etfLoad();
+  etfRender();
+  etfFillExisting();
+  /* Eingabefelder leeren */
+  var ids=['etf-shares','etf-price','etf-symbol','etf-isin','etf-name'], ii;
+  for(ii=0;ii<ids.length;ii++){ var el=document.getElementById(ids[ii]); if(el) el.value=''; }
+}
+
+function etfRenderSummary(){
+  var el = document.getElementById('etf-summary');
+  if(!el) return;
+  if(ETF_POSITIONS.length === 0){ el.innerHTML=''; return; }
+  var totCost=0, totReal=0, i;
+  for(i=0;i<ETF_POSITIONS.length;i++){
+    var p=ETF_POSITIONS[i];
+    totCost += p.shares * p.buyPrice;
+    totReal += p.realized || 0;
+  }
+  function card(lbl,val){
+    return '<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:10px;text-align:center">'
+      + '<div style="font-family:monospace;font-size:9px;color:var(--mut)">' + lbl + '</div>'
+      + '<div style="font-size:15px;font-weight:800;color:#dce8f5;margin-top:2px">' + val + '</div></div>';
+  }
+  el.innerHTML = card('POSITIONEN', ETF_POSITIONS.length)
+    + card('EINSTAND EUR', totCost.toFixed(0))
+    + card('REALISIERT EUR', totReal.toFixed(0));
+}
+
+function etfRenderTable(){
+  var el = document.getElementById('etf-holdings');
+  if(!el) return;
+  if(ETF_POSITIONS.length === 0){
+    el.innerHTML = '<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:20px 0">Noch keine ETF-Positionen. Oben buchen.</div>';
+    return;
+  }
+  var h = '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;min-width:480px">'
+    + '<thead><tr style="text-align:left;color:var(--acc)">'
+    + '<th style="padding:6px 8px;border-bottom:1px solid #1a2a3a">Kl</th>'
+    + '<th style="padding:6px 8px;border-bottom:1px solid #1a2a3a">Symbol</th>'
+    + '<th style="padding:6px 8px;border-bottom:1px solid #1a2a3a">Name</th>'
+    + '<th style="padding:6px 8px;border-bottom:1px solid #1a2a3a">Anteile</th>'
+    + '<th style="padding:6px 8px;border-bottom:1px solid #1a2a3a">Einstand</th>'
+    + '</tr></thead><tbody style="font-family:monospace;font-size:11px">';
+  var i;
+  for(i=0;i<ETF_POSITIONS.length;i++){
+    var p=ETF_POSITIONS[i];
+    h += '<tr><td style="padding:5px 8px">' + (p.cls||'') + '</td>'
+      + '<td style="padding:5px 8px">' + p.t + '</td>'
+      + '<td style="padding:5px 8px">' + p.name + '</td>'
+      + '<td style="padding:5px 8px">' + p.shares + '</td>'
+      + '<td style="padding:5px 8px">' + p.buyPrice.toFixed(2) + ' ' + p.currency + '</td></tr>';
+  }
+  h += '</tbody></table></div>';
+  el.innerHTML = h;
+}
+
+function etfRender(){
+  etfRenderSummary();
+  etfRenderTable();
+}
+
+function initEtf(){
+  etfLoad();
+  etfFillCoreSelect();
+  etfFillExisting();
+  etfTypChange();
+  etfRender();
+}
+
 
 var TX_KEY = 'stockiq_depot_tx_v1';
 
@@ -5274,7 +5605,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.5.8 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.5.9 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
