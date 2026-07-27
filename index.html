@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.0</title>
+<title>StockIQ v6.6.1</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.0 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.1 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -215,7 +215,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.0</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.1</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -231,7 +231,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ETFs (EUR)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ETFs (EUR) <span id="alloc-etf-badge" style="display:none;color:#00c8f0;font-size:10px">&#128230; Aus ETF-Tab</span></div>
       <input id="ai-etfs" type="number" min="0" step="100" placeholder="z.B. 15000"
           style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
           oninput="rAlloc()">
@@ -408,7 +408,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.0 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.1 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -703,6 +703,11 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 
   <!-- Summary-Kacheln + Bestandstabelle -->
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-bottom:10px">
+    <button onclick="etfExport()" style="background:rgba(0,200,240,.1);border:1px solid rgba(0,200,240,.3);color:#00c8f0;font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">&#8595; Export</button>
+    <label style="background:rgba(0,229,122,.1);border:1px solid rgba(0,229,122,.3);color:#00e57a;font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">&#8593; Import<input type="file" accept=".json" onchange="etfImport(event)" style="display:none"></label>
+    <button onclick="etfClearAll()" style="background:transparent;border:1px solid #1a3050;color:var(--mut);font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">Alle l&ouml;schen</button>
+  </div>
   <div id="etf-summary" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px"></div>
   <div id="etf-holdings" style="margin-bottom:14px"></div>
 
@@ -736,7 +741,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.0 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.1 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -828,7 +833,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.0 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.1 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -922,7 +927,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.0 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.1 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -3079,7 +3084,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.0';
+      var PAGE_VERSION = 'v6.6.1';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -4168,7 +4173,7 @@ var ETF_CORE = [
   {sym:'4GLD.DE', isin:'IE00B4ND3602', cls:'G', name:'Physisches Gold'},
   {sym:'IBGL.AS', isin:'IE00B1FZS913', cls:'A', name:'EUR Gov 15-30J'},
   {sym:'CMOD.MI', isin:'IE00BD6FTQ80', cls:'R', name:'Rohstoffkorb (synth/Swap)'},
-  {sym:'IWDP.AS', isin:'IE00B1FZS350', cls:'C', name:'REIT Property'}
+  {sym:'IWDP.AS', isin:'IE00B1FZS350', cls:'E', name:'REIT Property'}
 ];
 
 function etfTxLoad(){
@@ -4341,13 +4346,17 @@ function etfRenderSummary(){
   if(!el) return;
   if(ETF_POSITIONS.length === 0){ el.innerHTML=''; return; }
   var totCost=0, totReal=0, totVal=0, hasPx=0, i;
+  var clsAcc = {E:0, A:0, G:0, R:0};
+  var clsLbl = {E:'ETF/Aktien', A:'Anleihen', G:'Gold', R:'Rohstoffe'};
   for(i=0;i<ETF_POSITIONS.length;i++){
     var p=ETF_POSITIONS[i];
     totCost += p.shares * p.buyPrice;
     totReal += p.realized || 0;
     var cp = etfCurrentPrice(p.t);
-    if(cp !== null){ totVal += p.shares * cp; hasPx += 1; }
-    else { totVal += p.shares * p.buyPrice; }  /* Fallback Einstand */
+    var mv;
+    if(cp !== null){ totVal += p.shares * cp; hasPx += 1; mv = p.shares * cp; }
+    else { totVal += p.shares * p.buyPrice; mv = p.shares * p.buyPrice; }  /* Fallback Einstand */
+    if(clsAcc.hasOwnProperty(p.cls)) clsAcc[p.cls] += mv;
   }
   var totGv = totVal - totCost;
   var gvCol = totGv >= 0 ? '#00e57a' : '#ff5252';
@@ -4362,6 +4371,20 @@ function etfRenderSummary(){
     + card(valLbl, totVal.toFixed(0))
     + card('G/V EUR', (totGv>=0?'+':'') + totGv.toFixed(0), gvCol)
     + card('REALISIERT EUR', totReal.toFixed(0));
+  /* S121 1c: Marktwert-Aufschluesselung je Anlageklasse (E/A/G/R) */
+  var k, clsHtml = '';
+  for(k in clsLbl){
+    if(!clsLbl.hasOwnProperty(k)) continue;
+    if(clsAcc[k] > 0){
+      clsHtml += '<span style="display:inline-block;margin:4px 8px 0 0;padding:4px 8px;background:#0c1420;border:1px solid #1a2a3a;border-radius:6px;font-family:monospace;font-size:10px;color:var(--mut)">'
+        + clsLbl[k] + ': <span style="color:#dce8f5;font-weight:700">'
+        + clsAcc[k].toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0})
+        + ' EUR</span></span>';
+    }
+  }
+  if(clsHtml){
+    el.innerHTML += '<div style="grid-column:1/-1;margin-top:2px">' + clsHtml + '</div>';
+  }
 }
 
 function etfRenderTable(){
@@ -4419,6 +4442,88 @@ function etfCurrentPrice(sym){
 function etfRender(){
   etfRenderSummary();
   etfRenderTable();
+}
+
+/* ETF Export als JSON (S121 E6, analog dpExport). */
+function etfExport(){
+  if(ETF_POSITIONS.length === 0){ alert('Keine ETF-Positionen zum Exportieren.'); return; }
+  var data = {
+    version:  'stockiq_etf_v2',
+    exported: new Date().toISOString().slice(0,10),
+    tx:        etfTxLoad(),
+    positions: ETF_POSITIONS
+  };
+  var blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  var url  = URL.createObjectURL(blob);
+  var a    = document.createElement('a');
+  a.href = url;
+  a.download = 'stockiq_etf_' + new Date().toISOString().slice(0,10) + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ETF Import aus JSON (S121 E6, analog dpImport, Schema stockiq_etf_v2). */
+function etfImport(evt){
+  var file = evt.target.files && evt.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    try {
+      var data = JSON.parse(e.target.result);
+      /* v2: TX-Log direkt */
+      if(Array.isArray(data.tx)){
+        var validTx = data.tx.filter(function(x){ return x.t && x.typ && x.n > 0 && x.px > 0; });
+        if(validTx.length === 0) throw new Error('Keine gueltigen ETF-Transaktionen im TX-Log');
+        if(ETF_POSITIONS.length > 0){
+          if(!confirm('Vorhandene ' + ETF_POSITIONS.length + ' ETF-Positionen ersetzen durch TX-Log ('
+                      + validTx.length + ' Transaktionen) aus Import?')) return;
+        }
+        etfTxSave(validTx);
+        etfLoad();
+        etfRender();
+        try { etfFillExisting(); } catch(fe){}
+        alert(validTx.length + ' ETF-Transaktionen importiert.');
+        return;
+      }
+      /* Fallback: positions-Array -> je Position eine BUY-TX (cls/isin erhalten) */
+      var positions = data.positions || data;
+      if(!Array.isArray(positions)) throw new Error('Ungueltiges Format');
+      var valid = positions.filter(function(p){ return p.t && p.shares > 0 && p.buyPrice > 0; });
+      if(valid.length === 0) throw new Error('Keine gueltigen ETF-Positionen');
+      if(ETF_POSITIONS.length > 0){
+        if(!confirm('Vorhandene ' + ETF_POSITIONS.length + ' ETF-Positionen ersetzen durch '
+                    + valid.length + ' aus Import?')) return;
+      }
+      var importTx = [];
+      for(var ii=0;ii<valid.length;ii++){
+        var vp = valid[ii];
+        importTx.push({t:vp.t, d:vp.buyDate||'', typ:'BUY', n:vp.shares, px:vp.buyPrice,
+                       name:vp.name||vp.t, cur:vp.currency||'EUR',
+                       cls:vp.cls||'', isin:vp.isin||'', note:'importiert'});
+      }
+      etfTxSave(importTx);
+      etfLoad();
+      etfRender();
+      try { etfFillExisting(); } catch(fe){}
+      alert(valid.length + ' ETF-Positionen importiert.');
+    } catch(err){
+      alert('ETF-Import-Fehler: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  evt.target.value = '';
+}
+
+/* ETF-TX-Log komplett loeschen (S121 E6, analog dpClearAll). */
+function etfClearAll(){
+  if(ETF_POSITIONS.length === 0){ alert('Keine ETF-Positionen vorhanden.'); return; }
+  if(!confirm('Wirklich ALLE ETF-Positionen und das ETF-TX-Log loeschen?')) return;
+  try { localStorage.removeItem(ETF_TX_KEY); } catch(e){}
+  ETF_POSITIONS = [];
+  etfRender();
+  try { etfFillExisting(); } catch(fe){}
 }
 
 function initEtf(){
@@ -5212,6 +5317,7 @@ function initAlloc(){
   renderZielKacheln(CURRENT_CYCLE);
   highlightCycleBtn(CURRENT_CYCLE);
   allocPrefillFromDepot();  /* v5.9.69: Aktienwert aus Depot */
+  allocPrefillFromEtf();    /* S121 E5: ETF cls-verteilt */
   rAlloc();
   rGSR();
   rBondETF();
@@ -5230,8 +5336,40 @@ function allocPrefillFromDepot(){
       if(el){
         el.value = Math.round(_pVal);
         var badge = document.getElementById('alloc-depot-badge');
-        if(badge){ badge.style.display = 'inline'; badge.textContent = '\uD83D\uDCCA Depot-Aktien (' + _pLbl + ') \u00b7 Rohstoffe/ETFs separat eingeben'; }
+        if(badge){ badge.style.display = 'inline'; badge.textContent = '\uD83D\uDCCA Depot-Aktien (' + _pLbl + ') \u00b7 Rohstoffe separat eingeben'; }
       }
+    }
+  } catch(e){}
+}
+
+/* ETF-Bestaende nach Anlageklasse in Allok-Felder (S121 E5).
+   cls-verteilt: E->etfs, A->bonds, G->gold, R->commod. Hart ueberschreiben
+   nur bei Klassensumme > 0 (leere Klasse -> Feld unberuehrt). */
+function allocPrefillFromEtf(){
+  try {
+    etfLoad();
+    var acc = {E:0, A:0, G:0, R:0};
+    var i, p, cp, mv;
+    for(i=0;i<ETF_POSITIONS.length;i++){
+      p = ETF_POSITIONS[i];
+      cp = etfCurrentPrice(p.t);
+      mv = (cp !== null && cp > 0) ? cp * p.shares : p.buyPrice * p.shares;
+      if(acc.hasOwnProperty(p.cls)) acc[p.cls] += mv;
+    }
+    var map = {E:'ai-etfs', A:'ai-bonds', G:'ai-gold', R:'ai-commod'};
+    var k, el, touched = false;
+    for(k in map){
+      if(!map.hasOwnProperty(k)) continue;
+      if(acc[k] > 0){
+        el = document.getElementById(map[k]);
+        if(el){ el.value = Math.round(acc[k]); touched = true; }
+      }
+    }
+    var badge = document.getElementById('alloc-etf-badge');
+    if(badge && touched){
+      badge.style.display = 'inline';
+      /* "ETF nach Anlageklasse verteilt (Gold-ETF -> Gold, Anleihen-ETF -> Anleihen)" */
+      badge.textContent = '\uD83D\uDCE6 ETF nach Anlageklasse verteilt (Gold-ETF \u2192 Gold, Anleihen-ETF \u2192 Anleihen)';
     }
   } catch(e){}
 }
@@ -5637,7 +5775,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.0 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.1 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
