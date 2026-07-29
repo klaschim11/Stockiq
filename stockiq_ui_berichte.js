@@ -20,7 +20,8 @@ function escapeHtml(s) {
 var RPT_TYPE = 'sector';
 var RPT_REG = {
   sector: { label:'Sektor-Vergleich', controls:rptCtrlSector, build:rptBuildSector },
-  dq:     { label:'Datenqualitaet',    controls:rptCtrlDQ,     build:rptDQ          }
+  dq:     { label:'Datenqualitaet',    controls:rptCtrlDQ,     build:rptDQ          },
+  signal: { label:'Signal-Export',     controls:rptCtrlSignal, build:rptBuildSignal }
 };
 function rptBuild(){ var r=RPT_REG[RPT_TYPE]; if(r&&r.build) r.build(); }
 function rptSetType(t){ if(RPT_REG[t]){ RPT_TYPE=t; rptShowControls(); } }
@@ -1124,4 +1125,238 @@ function rptSigText(s){
   if(isSell(sig))             return sellLabel(sig);
   if(isHoldSF(sig))           return holdSFLabel(sig);
   return 'HOLD';
+}
+
+/* ===== Signal-Export-Bericht (Sprint 124) =====
+   Konzept: stockiq_signal_export_konzept_s109.md (S109, freigegeben).
+   Gruppierung Variante B (Dashboard-Label, Konzept Abschn.2):
+     strong -> STRONG BUY | buy/buy_rsi_warn -> BUY | pb -> PEG-BLOCK |
+     sell_ma -> SELL | watch/watch_rsi/weak/sell_zl/sell_hist/sell -> WATCH |
+     hold/hold_sf(+unerreichbare Subtypen, SR-4) -> HOLD
+   rptSignalCalc  -- gemeinsame Datenstruktur fuer Tabelle und CSV (wie rptDqCalc)
+   rptSignalCsv   -- CSV-Download, ALLE Ticker/alle 6 Bloecke
+   rptBuildSignal -- Bericht-Body: nur Handelssignale (STRONG BUY/BUY/SELL) +
+                     Vollstaendigkeits-/Verteilungs-Summary ueber alle 6 Bloecke
+   Eigene raw->Block/Text-Zuordnung (NICHT rptSigText -- Luecke dort bei
+   buy_rsi_warn/watch_rsi, siehe Dump v121_S124_sig_export_diag.txt Abschn.2).
+   ======================================== */
+var RPT_SIG_ORDER = ['STRONG BUY','BUY','PEG-BLOCK','SELL','WATCH','HOLD'];
+var RPT_SIG_COLOR = {
+  'STRONG BUY':'#ff9f1c', 'BUY':'#00e57a', 'PEG-BLOCK':'#f0c000',
+  'SELL':'#ff6666', 'WATCH':'#7a9bb5', 'HOLD':'#b07cf8'
+};
+var RPT_SIG_PDF_BLOCKS = ['STRONG BUY','BUY','SELL'];
+
+function rptSignalBlockOf(sig){
+  if(sig==='strong') return 'STRONG BUY';
+  if(sig==='buy'||sig==='buy_rsi_warn') return 'BUY';
+  if(sig==='pb') return 'PEG-BLOCK';
+  if(sig==='sell_ma') return 'SELL';
+  if(sig==='watch'||sig==='watch_rsi'||sig==='weak'||sig==='sell_zl'||sig==='sell_hist'||sig==='sell') return 'WATCH';
+  if(sig==='hold'||isHoldSF(sig)) return 'HOLD';
+  return 'UNBEKANNT';
+}
+function rptSignalTextOf(sig){
+  if(sig==='strong')        return 'BUY STRONG';
+  if(sig==='buy')            return 'BUY';
+  if(sig==='buy_rsi_warn')   return 'BUY WARN';
+  if(sig==='pb')              return 'BUY PB';
+  if(sig==='watch')          return 'WATCH';
+  if(sig==='watch_rsi')      return 'WATCH RSI';
+  if(sig==='weak')            return 'WEAK';
+  if(isSell(sig))              return sellLabel(sig);        /* sell_ma -> 'SELL MA' */
+  if(sig==='sell_zl'||sig==='sell_hist'||sig==='sell') return 'WATCH';
+  if(isHoldSF(sig))            return holdSFLabel(sig);        /* hold_sf* -> 'HOLD*', hold_dvg -> 'HOLD DVG' */
+  if(sig==='hold')            return 'HOLD';
+  return String(sig||'').toUpperCase() || 'UNBEKANNT';
+}
+/* Klarname mit ALIAS-Fallback (dName() allein deckt raw-scores.json-Ticker
+   wie ITX.MC nicht ab -- _names ist dort unter dem ALIAS-Ziel 'INDITEX'
+   gefuehrt, nicht unter 'ITX.MC'). */
+function rptSignalName(t){
+  if(_names && _names[t]) return _names[t];
+  if(typeof ALIAS !== 'undefined' && ALIAS[t] && _names && _names[ALIAS[t]]) return _names[ALIAS[t]];
+  return t;
+}
+function rptSigNum(v, digits){
+  return (v===null||v===undefined||isNaN(v)) ? 'n/a' : v.toFixed(digits);
+}
+/* Dynamische Versions-Ermittlung (WD-13-Falle vermeiden): PAGE_VERSION ist
+   in index.html nur lokal (innerhalb loadScores()) deklariert, kein globales
+   Var -- daher Meta-Tag als Laufzeit-Quelle, kein hartkodierter String. */
+function rptPageVersion(){
+  var m = document.querySelector('meta[name="version"]');
+  return m ? ('v' + m.getAttribute('content')) : '';
+}
+
+function rptSignalCalc(){
+  var rows = [];
+  for(var i=0; i<_scoresArr.length; i++){
+    var sd = _scoresArr[i];
+    if(!sd || !sd.ticker) continue;
+    var raw = sd.signal || '';
+    var eff = mSig({t: sd.ticker});
+    var block = rptSignalBlockOf(eff);
+    var dr = dqCheck(sd.ticker, eff, true);
+    var missing = dr ? dr.fields : [];
+    var fs = (sd.fund_score !== null && sd.fund_score !== undefined) ? sd.fund_score : null;
+    var bucket = 'n/a';
+    if(fs !== null){
+      if(fs >= 85)      bucket = 'premium';
+      else if(fs >= 70) bucket = 'good';
+      else if(fs >= 50) bucket = 'mid';
+      else               bucket = 'low';
+    }
+    rows.push({
+      t: sd.ticker,
+      n: rptSignalName(sd.ticker),
+      sector: sd.sector || '',
+      block: block,
+      raw: raw,
+      sigText: rptSignalTextOf(eff),
+      cSc: (sd.score !== null && sd.score !== undefined) ? sd.score : null,
+      fSc: fs,
+      momSc: (sd.mom_score !== null && sd.mom_score !== undefined) ? sd.mom_score : null,
+      trend: (sd.trend_score !== null && sd.trend_score !== undefined) ? sd.trend_score : null,
+      rSc: (sd.risk_score !== null && sd.risk_score !== undefined) ? sd.risk_score : null,
+      peg: (sd.peg !== null && sd.peg !== undefined) ? sd.peg : null,
+      pegStatus: pgSt({peg: sd.peg}),
+      rsi: (sd.rsi !== null && sd.rsi !== undefined) ? sd.rsi : null,
+      missing: missing,
+      fscBucket: bucket
+    });
+  }
+  rows.sort(function(a, b){
+    var pa = RPT_SIG_ORDER.indexOf(a.block); if(pa < 0) pa = 99;
+    var pb2 = RPT_SIG_ORDER.indexOf(b.block); if(pb2 < 0) pb2 = 99;
+    if(pa !== pb2) return pa - pb2;
+    var ca = (a.cSc !== null && a.cSc !== undefined) ? a.cSc : -1;
+    var cb = (b.cSc !== null && b.cSc !== undefined) ? b.cSc : -1;
+    return cb - ca;
+  });
+  return rows;
+}
+
+function rptCtrlSignal(){
+  var ctrl = document.getElementById('rpt-controls');
+  ctrl.innerHTML += '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:11px;color:#a0b0c0">' +
+    'Vollstaendige Signaluebersicht ueber alle Ticker, nach Dashboard-Label gruppiert. ' +
+    'PDF enthaelt nur Handelssignale (STRONG BUY / BUY / SELL). CSV enthaelt alle Ticker/alle Bloecke.' +
+    '</div>' +
+    '<div style="display:flex;gap:8px">' +
+    '<button onclick="rptBuild()" style="flex:1;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#9654; Bericht erstellen</button>' +
+    '<button onclick="rptSignalCsv()" style="flex:1;background:#5d2dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#128190; CSV-Export</button>' +
+    '<button id="rpt-print-btn" onclick="rptPrint()" style="flex:1;background:#1a7a3a;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer;display:none">&#128438; Als PDF drucken</button>' +
+    '</div>';
+}
+
+function rptSignalCsv(){
+  var rows = rptSignalCalc();
+  if(rows.length === 0){
+    alert('Keine Ticker zum Exportieren.');
+    return;
+  }
+  var today = new Date().toISOString().substring(0, 10);
+  var lines = ['ticker;name;sector;block;raw;signal_text;cSc;fSc;momSc;trend;rSc;peg;peg_status;rsi;missing_fields;n_missing;fsc_bucket;snapshot_date'];
+  for(var i=0; i<rows.length; i++){
+    var r = rows[i];
+    var nm = '"' + String(r.n).replace(/"/g, '""') + '"';
+    var line = [
+      r.t, nm, r.sector, r.block, r.raw, r.sigText,
+      rptSigNum(r.cSc, 1), rptSigNum(r.fSc, 1), rptSigNum(r.momSc, 1),
+      rptSigNum(r.trend, 1), rptSigNum(r.rSc, 1),
+      rptSigNum(r.peg, 2), r.pegStatus, rptSigNum(r.rsi, 1),
+      r.missing.join('|'), r.missing.length, r.fscBucket, today
+    ].join(';');
+    lines.push(line);
+  }
+  var csv = lines.join('\n');
+  var blob = new Blob([csv], {type: 'text/csv;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'stockiq_signal_export_' + today + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function rptBuildSignal(){
+  var rows = rptSignalCalc();
+  var out = document.getElementById('rpt-output');
+  var today = new Date().toISOString().substring(0, 10);
+  /* Bloeckzaehler ueber ALLE 6 Bloecke (fuer Vollstaendigkeits-Check + Summary) */
+  var counts = {}, i;
+  for(i=0; i<RPT_SIG_ORDER.length; i++) counts[RPT_SIG_ORDER[i]] = 0;
+  var unmapped = 0;
+  for(i=0; i<rows.length; i++){
+    if(counts.hasOwnProperty(rows[i].block)) counts[rows[i].block]++;
+    else unmapped++;
+  }
+  var total = rows.length;
+  var sumBlocks = 0;
+  for(i=0; i<RPT_SIG_ORDER.length; i++) sumBlocks += counts[RPT_SIG_ORDER[i]];
+  var complete = (sumBlocks === total) && (unmapped === 0);
+
+  var html = '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:20px;margin-bottom:20px">';
+  html += '<h2 style="color:#2d7dd2;font-size:22px;margin:0 0 8px 0">Signal-Export</h2>';
+  html += '<div style="font-size:11px;color:#a0b0c0">Stand: ' + today + ' (' + rptPageVersion() + ') &mdash; Universe: ' + total + ' Ticker</div>';
+  html += '</div>';
+
+  /* Nur Handelssignal-Bloecke als volle Tabelle (PDF-Umfang) */
+  for(var bi=0; bi<RPT_SIG_PDF_BLOCKS.length; bi++){
+    var blk = RPT_SIG_PDF_BLOCKS[bi];
+    var col = RPT_SIG_COLOR[blk] || '#7a9bb5';
+    var blkRows = [];
+    for(i=0; i<rows.length; i++){ if(rows[i].block === blk) blkRows.push(rows[i]); }
+    html += '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:20px;overflow-x:auto;margin-bottom:20px">';
+    html += '<h3 style="color:' + col + ';font-size:16px;margin:0 0 12px 0">' + escapeHtml(blk) + ' (' + blkRows.length + ')</h3>';
+    if(blkRows.length === 0){
+      html += '<div style="color:#a0b0c0;font-size:11px">Keine Ticker in diesem Block.</div>';
+    } else {
+      html += '<table style="width:100%;border-collapse:collapse;font-size:11px;font-family:monospace">';
+      html += '<thead><tr style="border-bottom:2px solid #1a3050;color:#dce8f5;text-align:left">';
+      var hdrs = ['Ticker','Name','Sektor','Signal','cSc','fSc','PEG','RSI','Fehlend'];
+      for(var h=0; h<hdrs.length; h++) html += '<th style="padding:6px 8px">' + hdrs[h] + '</th>';
+      html += '</tr></thead><tbody>';
+      for(var j=0; j<blkRows.length; j++){
+        var r = blkRows[j];
+        html += '<tr style="border-bottom:1px solid #11203a">';
+        html += '<td style="padding:6px 8px"><a href="javascript:rptDetailCard(\'' + r.t + '\')" style="color:#2d7dd2;text-decoration:none;font-weight:700">' + escapeHtml(r.t) + '</a></td>';
+        html += '<td style="padding:6px 8px;color:#dce8f5">' + escapeHtml(r.n) + '</td>';
+        html += '<td style="padding:6px 8px;color:#a0b0c0">' + escapeHtml(r.sector) + '</td>';
+        html += '<td style="padding:6px 8px;color:#dce8f5">' + escapeHtml(r.sigText) + '</td>';
+        html += '<td style="padding:6px 8px;color:#dce8f5">' + rptSigNum(r.cSc, 0) + '</td>';
+        html += '<td style="padding:6px 8px;color:#a0b0c0">' + rptSigNum(r.fSc, 0) + '</td>';
+        html += '<td style="padding:6px 8px;color:#a0b0c0">' + rptSigNum(r.peg, 2) + '</td>';
+        html += '<td style="padding:6px 8px;color:#a0b0c0">' + rptSigNum(r.rsi, 0) + '</td>';
+        html += '<td style="padding:6px 8px;color:#ffb000">' + (r.missing.length ? escapeHtml(r.missing.join(', ')) : '-') + '</td>';
+        html += '</tr>';
+      }
+      html += '</tbody></table>';
+    }
+    html += '</div>';
+  }
+
+  /* Vollstaendigkeits-Check + Verteilung ueber alle 6 Bloecke */
+  html += '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:20px;font-size:11px;color:#dce8f5">';
+  html += '<h3 style="color:#2d7dd2;font-size:14px;margin:0 0 12px 0">Verteilung (alle Bloecke)</h3>';
+  var distArr = [];
+  for(i=0; i<RPT_SIG_ORDER.length; i++){
+    var bk = RPT_SIG_ORDER[i];
+    distArr.push('<span style="color:' + (RPT_SIG_COLOR[bk]||'#dce8f5') + '">' + escapeHtml(bk) + ': ' + counts[bk] + '</span>');
+  }
+  html += '<div style="margin-bottom:8px">' + distArr.join(' | ') + '</div>';
+  html += '<div style="margin-bottom:8px"><b>Vollstaendigkeits-Check:</b> Summe Bloecke ' + sumBlocks + ' / Universe ' + total +
+    (unmapped ? ' (' + unmapped + ' nicht zugeordnet)' : '') +
+    ' &mdash; <span style="color:' + (complete ? '#00e57a' : '#ff6666') + ';font-weight:700">' +
+    (complete ? 'OK' : 'ABWEICHUNG') + '</span></div>';
+  html += '<div style="padding:10px;background:#11203a;border-left:3px solid #2d7dd2;border-radius:4px;color:#a0b0c0;font-size:10px">' +
+    'PDF-Ansicht zeigt nur Handelssignale (STRONG BUY/BUY/SELL). CSV-Export liefert alle ' + total + ' Ticker inkl. HOLD/WATCH/PEG-BLOCK.</div>';
+  html += '</div>';
+
+  out.innerHTML = html;
+  var pbEl = document.getElementById('rpt-print-btn');
+  if(pbEl) pbEl.style.display = '';
 }
