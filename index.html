@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="version" content="6.6.6">
+<meta name="version" content="6.6.7">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.6</title>
+<title>StockIQ v6.6.7</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.6 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.7 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -214,7 +214,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.6</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.7</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -299,6 +299,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:24px 0">Bitte Portfoliowerte eingeben.</div>
   </div>
 </div>
+
+<!-- KONZENTRATION (R3): Einzelaktien-HHI aus Depot -->
+<div id="alloc-conc" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:14px;display:none"></div>
 
 <!-- REBALANCING-SEKTION -->
 <div id="alloc-rebal" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:14px;display:none">
@@ -409,7 +412,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.6 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.7 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -742,7 +745,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.6 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.7 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -834,7 +837,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.6 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.7 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -930,7 +933,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.6 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.7 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -3066,7 +3069,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.6';
+      var PAGE_VERSION = 'v6.6.7';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -4048,6 +4051,7 @@ function rAlloc(){
   if(total <= 0){
     barsEl.innerHTML = '<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:24px 0">Bitte Portfoliowerte eingeben.</div>';
     if(rebalEl) rebalEl.style.display = 'none';
+    try { rAllocConc(); } catch(e) {}
     return;
   }
 
@@ -4135,6 +4139,46 @@ function rAlloc(){
     }
   }
   try { renderEtfScoreList(); } catch(e) {}
+  try { rAllocConc(); } catch(e) {}
+}
+
+/* R3: Einzelaktien-Konzentration (HHI) im Allokations-Tab.
+   Wiederverwendung von dpHHI() (pure, DP-9..DP-14 getestet). Basis:
+   DEPOT_POSITIONS-Marktwerte. Spiegelt die p8-Sperr-Logik (dpRenderRisk):
+   bei >=1 Position ohne EUR-Kurs KEINE HHI -- sichtbarer Zustand
+   "unvollstaendig" statt stillem Fehlwert (AP-3). R-deskriptiv, kein
+   Score-/Sizing-Eingriff. Misst Namens-Konzentration im Aktienblock,
+   NICHT Klassen-Diversifikation (das leistet die Ist-vs-Soll-Ansicht). */
+function rAllocConc(){
+  var el = document.getElementById('alloc-conc');
+  if(!el) return;
+  try { depotLoad(); } catch(e){}
+  var n = DEPOT_POSITIONS ? DEPOT_POSITIONS.length : 0;
+  if(n === 0){ el.style.display = 'none'; el.innerHTML = ''; return; }
+  var tot = dpCalcTotal();
+  var complete = (tot.hasPrice === n);
+  var html = '<div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:10px">\u25A0 Aktien-Konzentration (HHI)</div>';
+  if(!complete || tot.val <= 0){
+    var miss = n - tot.hasPrice;
+    html += '<div style="font-family:monospace;font-size:11px;color:#e0a030">\u26A0 Unvollstaendig \u2014 ' + miss + ' Position(en) ohne EUR-Kurs. HHI ausgesetzt (kein Fehlwert).</div>';
+    el.innerHTML = html;
+    el.style.display = 'block';
+    return;
+  }
+  var i, w = [], cp, v;
+  for(i=0;i<n;i++){
+    cp = dpCurrentPrice(DEPOT_POSITIONS[i].t);
+    v = DEPOT_POSITIONS[i].shares * cp;
+    w.push(v / tot.val);
+  }
+  var h = dpHHI(w);
+  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
+  html += '<span style="font-family:monospace;font-size:11px;color:#9fb0c0">HHI</span>';
+  html += '<span style="font-family:monospace;font-size:13px;font-weight:700;color:#cfe0f0">' + h.hhi.toFixed(2) + '</span></div>';
+  html += '<div style="font-family:monospace;font-size:11px;color:#6b7a8a">' + n + ' Aktienpositionen wirken wie effektiv ' + h.effN.toFixed(1) + ' unabhaengige Wetten</div>';
+  html += '<div style="font-family:monospace;font-size:10px;color:#5a6875;margin-top:4px">Misst Namens-Konzentration im Aktienblock, nicht Klassen-Diversifikation (siehe Ist vs. Soll) und nicht Faktor-Korrelation.</div>';
+  el.innerHTML = html;
+  el.style.display = 'block';
 }
 
 /* ============================================================
@@ -5856,7 +5900,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.6 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.7 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
