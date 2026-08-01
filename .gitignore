@@ -159,3 +159,7 @@ s76_candidates.txt
 scripts/
 # verirrtes Duplikat (nie committen)
 gitignore
+
+# --- R2 DB-ZEITREIHE (Schutzziel A: .accdb NIE ins Repo, ADR-002) ---
+StockIQ_DB/
+stockiq_datenquellen_registry.json
