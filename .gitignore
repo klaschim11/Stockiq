@@ -99,6 +99,9 @@ stockiq_alpha*.py
 # Doku und Sprint-Unterlagen
 Doku_aktuell/
 
+# Claude Code Konfiguration (ADR-002 Revision v160, 25.08.2026 -- nicht dashboard-noetig)
+CLAUDE.md
+
 # Engineering und Tests
 tests/
 utils/
