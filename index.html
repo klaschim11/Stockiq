@@ -404,7 +404,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.9 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.13 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -508,6 +508,35 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="padding:10px;background:rgba(138,180,204,.06);border:1px solid rgba(138,180,204,.25);border-radius:7px">
       <div style="font-size:11px;font-weight:700;color:#8ab4cc;margin-bottom:6px">&#8505; Sektor-Lage als Kontext</div>
       <div style="font-size:10px;color:#dce8f5;line-height:1.7">Die Sektor-Ampel ist ein <strong>Orientierungsrahmen</strong>, kein Einstiegssignal. Interne Auswertungen haben gezeigt, dass ein starrer Sektor-Filter beim Einzeltitel die Trefferquote nicht verbessert &mdash; die Sektor-Lage hilft der Einordnung, nicht der Ja/Nein-Entscheidung. Massgeblich bleibt der Signalstatus (BUY / HOLD / WATCH / SELL) des einzelnen Titels.</div>
+    </div>
+  </div>
+
+  <!-- SEKTOR-SYMBOLE LEGENDE (beide Symbole) v6.6.12 -->
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128202; Sektor-Symbole in der Watchlist</div>
+    <div style="font-size:11px;color:var(--mut);margin-bottom:10px;line-height:1.7">Jede WL-Zeile zeigt <strong style="color:#dce8f5">zwei unabh&auml;ngige</strong> Sektor-Symbole &mdash; leicht verwechselbar, fachlich getrennt.</div>
+    <div style="margin-bottom:10px;padding:10px 12px;background:#0a1628;border-radius:8px">
+      <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:3px">&#128202; Balken-Symbol (links vom Signal) &mdash; Sektor-Momentum ABSOLUT</div>
+      <div style="font-size:10px;color:var(--mut);line-height:1.6">12M-ETF-Performance des Sektors &mdash; <span style="color:#00e57a">gr&uuml;n</span> stark, <span style="color:#ffab00">gelb</span> mittel, <span style="color:#ff5252">rot</span> negativ. Details: Box &bdquo;Sektor-Ampel&ldquo; oben.</div>
+    </div>
+    <div style="padding:10px 12px;background:#0a1628;border-radius:8px;margin-bottom:10px">
+      <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#9898; Kreis-Ampel (rechts vom Signal) &mdash; Sektor-Rang RELATIV (1 = bester von 11 Sektoren)</div>
+      <div style="font-size:10px;color:var(--mut);margin-bottom:6px">BUY:</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">
+        <div style="text-align:center;padding:6px;background:rgba(0,229,122,.07);border:1px solid rgba(0,229,122,.3);border-radius:7px"><div style="font-size:14px">&#128994;</div><div style="font-family:monospace;font-size:9px;color:#00e57a;font-weight:700">TOP-SEKTOR (1-3)</div></div>
+        <div style="text-align:center;padding:6px;background:rgba(122,155,181,.07);border:1px solid rgba(122,155,181,.3);border-radius:7px"><div style="font-size:14px">&#9898;</div><div style="font-family:monospace;font-size:9px;color:#7a9bb5;font-weight:700">MITTELFELD (4-7)</div></div>
+        <div style="text-align:center;padding:6px;background:rgba(255,171,0,.07);border:1px solid rgba(255,171,0,.3);border-radius:7px"><div style="font-size:14px">&#128993;</div><div style="font-family:monospace;font-size:9px;color:#ffab00;font-weight:700">BOTTOM-SEKTOR (8-11)</div></div>
+      </div>
+      <div style="font-size:10px;color:var(--mut);margin-bottom:6px">SELL:</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+        <div style="text-align:center;padding:6px;background:rgba(255,82,82,.07);border:1px solid rgba(255,82,82,.3);border-radius:7px"><div style="font-size:14px">&#128308;</div><div style="font-family:monospace;font-size:9px;color:#ff5252;font-weight:700">BOTTOM-SEKTOR (8-11)</div></div>
+        <div style="text-align:center;padding:6px;background:rgba(122,155,181,.07);border:1px solid rgba(122,155,181,.3);border-radius:7px"><div style="font-size:14px">&#9898;</div><div style="font-family:monospace;font-size:9px;color:#7a9bb5;font-weight:700">MITTELFELD (4-7)</div></div>
+        <div style="text-align:center;padding:6px;background:rgba(255,171,0,.07);border:1px solid rgba(255,171,0,.3);border-radius:7px"><div style="font-size:14px">&#128993;</div><div style="font-family:monospace;font-size:9px;color:#ffab00;font-weight:700">TOP-SEKTOR (1-3)</div></div>
+      </div>
+      <div style="font-size:10px;color:var(--mut);margin-top:8px;line-height:1.6">Grenze bei Rang 8 entspricht der Bottom-4-Sektor-D&auml;mpfung &mdash; beide Sektor-Symbole ordnen ab Rang 8 gleich ein.</div>
+    </div>
+    <div style="padding:10px;background:rgba(138,180,204,.06);border:1px solid rgba(138,180,204,.25);border-radius:7px">
+      <div style="font-size:10px;color:#dce8f5;line-height:1.7">Beide gleichfarbig (2&times; gr&uuml;n bei BUY / 2&times; rot bei SELL) = st&auml;rkste Best&auml;tigung. Auseinanderlaufend = absolut und relativ uneinig (Sp&auml;tzyklus-Hinweis m&ouml;glich).</div>
     </div>
   </div>
 
@@ -737,7 +766,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.9 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.13 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -1254,6 +1283,7 @@ var WL2 = {};          /* Ticker-Keys die in WL2 sind: {AAPL:true, MSFT:true, ..
 var WL2_SYNC = false;  /* true = Synopse+WL1 nur WL2-Ticker zeigen */
 var WL_SECTOR_FILTER = '';  /* v6.1.0: '' = alle Sektoren */
 var WL_SEARCH = '';          /* v6.1.1: Suchfeld WL */
+var SR_AMPEL_ON = true;      /* v6.6.10 (S163): sr-Ampel Reversibilitaets-Schalter */
 var WL_SORT = 'score'; /* 'score' oder 'alpha' */
 var SELL_SCORE_FILTER = true;   /* v5.9.69: Standard-ein (IC-Validierung Ende Mai) */
 var HC_FILTER = false;              /* v5.9.69: High-Conviction-Filter (Triple-Confirmation) */
@@ -2168,10 +2198,45 @@ function wlReset(){
   rWL();
 }
 
+/* sr-Ampel: liefert Farbklasse (Hex) nach Fachlogik, '' wenn nicht anwendbar.
+   sr = sector_rank, 1 = bester Sektor ... 11 = schwaechster Sektor. Feste
+   Schwellen (v6.6.13, S163): 1-3 Top-Sektoren, 4-7 Mittelfeld, 8-11
+   Bottom-Sektoren -- Grenze 8 deckungsgleich mit FSC_FILTER-Daempfung
+   (sectorBad = sr>=8). Vorher dynamische Terzile (srPerc), entfernt weil
+   "Rang 4 = stark" irrefuehrend war; feste Grenzen sind stabil und ehrlich. */
+function srAmpelCls(sig,sr){
+  if(!SR_AMPEL_ON) return '';
+  if(sr===null||sr===undefined) return '';
+  var isBuySig=(sig==='buy'||sig==='strong');
+  var isSellSig=isSell(sig);
+  if(isBuySig){
+    if(sr>=1&&sr<=3) return '#00e57a';
+    if(sr>=8) return '#ffab00';
+    return '#7a9bb5';
+  }
+  if(isSellSig){
+    if(sr>=8) return '#ff5252';
+    if(sr>=1&&sr<=3) return '#ffab00';
+    return '#7a9bb5';
+  }
+  return '';
+}
+function srAmpTitle(sig,sr,col){
+  var isBuySig=(sig==='buy'||sig==='strong');
+  if(isBuySig){
+    if(col==='#00e57a') return 'sr-Ampel BUY: Top-Sektor (Rang '+sr+' von 11) -- Sektor stuetzt Kauf';
+    if(col==='#ffab00') return 'sr-Ampel BUY: Bottom-Sektor (Rang '+sr+' von 11) -- Kauf gegen Gegenwind, zweimal pruefen';
+    return 'sr-Ampel BUY: Mittelfeld (Rang '+sr+' von 11) -- neutral';
+  }
+  if(col==='#ff5252') return 'sr-Ampel SELL: Bottom-Sektor (Rang '+sr+' von 11) -- verstaerkt Verkauf';
+  if(col==='#ffab00') return 'sr-Ampel SELL: Top-Sektor (Rang '+sr+' von 11) -- Verkauf trotz Sektor-Staerke, Ausstieg zweimal pruefen';
+  return 'sr-Ampel SELL: Mittelfeld (Rang '+sr+' von 11) -- neutral';
+}
 function wlRend(scored){
   /* Drei Gruppen: BUY (strong+buy+pb+rsi_block), HOLD (watch+weak), SELL (alle sell_*) */
   var i,s,sc,sig;
   var gBuy=[],gHold=[],gSell=[];
+  var _srIcoMap={'#00e57a':'&#128994;','#ffab00':'&#128993;','#ff5252':'&#128308;','#7a9bb5':'&#9898;'};
   for(i=0;i<scored.length;i++){
     s=scored[i].s;sc=scored[i].sc;sig=mSig(s);
     /* HC-Filter v5.9.69: isHC() Triple-Confirmation */
@@ -2230,6 +2295,8 @@ function wlRend(scored){
     var isSellSig=isSell(sig);
     var _srRank=(_scoresIdx[s.t]&&_scoresIdx[s.t].sector_rank)||null;
     var sectorBad=FSC_FILTER&&_srRank&&_srRank>=8;
+    var _srAmpCol=srAmpelCls(sig,_srRank);
+    var srAmpBdg=_srAmpCol?('<span style="font-size:10px;color:'+_srAmpCol+';margin-left:2px" title="'+srAmpTitle(sig,_srRank,_srAmpCol)+'">'+(_srIcoMap[_srAmpCol]||'')+'</span>'):'';
     var sc2=isStrong?(sectorBad?'#7a6a4a':'#ff9f1c'):sig==='buy'?(sectorBad?'#5a8a6a':'#00e57a'):sig==='pb'?'#f0c000':isRsiBlk?'#e8a020':sig==='buy_rsi_warn'?'#a5d6a7':sig==='watch_rsi'?'#80cbc4':isHoldSf?'#b07cf8':isSellSig||sig==='weak'?'#ff6666':'#7a9bb5';
     var dR=dqCheck(s.t,sig),dB=dR?('<span style="font-size:10px;color:#f0c000;border:1px solid rgba(240,192,0,.4);border-radius:3px;padding:1px 4px" title="DQ: '+dR.fields.join(", ")+'">&#9888;</span>'):"";
     var slbl=isStrong?'STRONG':sig==='buy'?'BUY':sig==='pb'?'PEG-BLK':isRsiBlk?'RSI-BLK':isHoldSf?holdLbl:sig==='weak'?'WEAK':isSellSig?sellLabel(sig):(sig==='sell_hist'||sig==='sell_zl'||sig==='sell')?sig:'WATCH';
@@ -2254,7 +2321,7 @@ function wlRend(scored){
     h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
-    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+dB+'<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
+    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+srAmpBdg+dB+'<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
@@ -3076,7 +3143,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.9';
+      var PAGE_VERSION = 'v6.6.13';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
