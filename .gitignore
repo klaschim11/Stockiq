@@ -68,6 +68,7 @@ stockiq_regime_history_summary.json
 stockiq_wh7_findings.json
 stockiq_ph5_findings.json
 stockiq_tr9_findings.json
+stockiq_signalq_findings.json
 
 # --- Sprint 41: Verzeichniskonzept (15.06.2026) ---
 
@@ -76,6 +77,14 @@ debugs/
 
 # Einmalige Pilot-Scripts und Interim-Ergebnisse
 experiments/
+
+# Lokale Nicht-Whitelist-Items (S164, 30.08.2026):
+# backup-Skript (produktiv, laeuft lokal wie score.py) +
+# Analyse-Ergebnis-Ordner + Claude-Code-Scratchpad (Tool-Herkunft,
+# kein StockIQ-Projektverzeichnis). Schutz gegen versehentl. git add -A.
+stockiq_backup.ps1
+analyse_buy_plus_minus/
+scratchpad/
 
 # Testergebnis-Daten (JSON/CSV, kein Quellcode)
 tests/results/
