@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.17</title>
+<title>StockIQ v6.6.18</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.17 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.18 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -127,6 +127,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button id="wl-sf-btn" onclick="toggleSellFilter(document.getElementById('sf-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
     <button id="wl-dr-btn" onclick="toggleDivFilter(document.getElementById('dr-btn'));rWL()" style="display:none;font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
     <button id="wl-fsc-btn" onclick="toggleFscFilter(document.getElementById('fsc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">fSc: aus</button>
+    <button id="wl-d1-btn" onclick="toggleD1Filter(this)" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer" title="Oberstes Zehntel der 12-Monats-Rendite im Watchlist-Korb. Beschreibend, kein Kaufsignal.">D1: aus</button>
   </div>
   <!-- Suchfeld -->
   <div style="margin-bottom:8px;position:relative">
@@ -206,7 +207,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.17</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.18</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -404,7 +405,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.17 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.18 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -464,9 +465,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="color:#ff6666">&#10007; SELL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash; Alle drei gleichzeitig (staerkstes Signal)</div>
     </div>
     <div style="font-size:12px;color:var(--mut);line-height:1.7">
-      <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD SF</strong> = Score-Filter: SELL unterdrueckt weil Score &ge; 55. Toggle: SF-Button.</div>
+      <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD SF</strong> = Score-Filter: SELL unterdrueckt weil Fundamentalscore &ge; 70. Toggle: SF-Button.</div>
       <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD DVG</strong> = Deep Value Divergence (v5.9.69): SELL unterdrueckt weil Fund &ge;80 + RSI &lt;35 + Bullish Divergenz. Gutes Unternehmen in technischer Schwaechephase.</div>
-      <div style="margin-bottom:5px"><strong style="color:#00c8f0">HOLD DR</strong> = Dividenden-Hold: SELL unterdrueckt weil Dividendenrendite &ge; max(Floor, Bund+2pp). Toggle: DR-Button + Bund%-Eingabe.</div>
+      <div style="margin-bottom:5px"><strong style="color:#00c8f0">HOLD DR</strong> = Dividenden-Hold: SELL unterdrueckt weil Dividendenrendite &ge; max(Floor, Bund+2pp). Toggle: DR-Button + Bund%-Eingabe (Knopf derzeit ausgeblendet).</div>
       <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD SF+D</strong> = Beide Kriterien aktiv gleichzeitig (Score UND Dividende halten).</div>
       <div style="margin-bottom:5px"><strong style="color:#f0c000">PEG-GEBLOCKT</strong> = technisch kaufbar, aber PEG &gt;= 3.0.</div>
       <div style="margin-bottom:5px"><strong style="color:#e8a020">RSI-BLK</strong> = technisch ok, aber RSI &gt; 72 (ueberkauft). Kein Entry.</div>
@@ -544,6 +545,35 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#7a9bb5">&#128202; D1-Kennzeichen in der Watchlist</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.7">D1 markiert die Titel im obersten Zehntel der 12-Monats-Rendite des Watchlist-Korbs. Das ist eine Beschreibung der letzten zw&ouml;lf Monate, kein Kaufsignal und keine Prognose. Ob D1-Titel danach besser abschneiden als der Korb, pr&uuml;ft ein vorregistrierter Test; bis dahin bleibt das Etikett neutral.</div>
+  </div>
+
+  <!-- FILTER DER WATCHLIST (S297) v6.6.18 -->
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128202; Filter der Watchlist</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Watchlist zeigt alle bewerteten Titel. Filter blenden Zeilen aus, die Sortierung &auml;ndert nur die Reihenfolge, der Sell-Blocker &auml;ndert nur das Etikett. Alle Zeilenfilter wirken zusammen: Wer den Sektor &bdquo;Technologie&ldquo;, den Umschalter D1 und die Kachel BUY w&auml;hlt, sieht nur BUY-Titel aus der Technologie, die zugleich im obersten Zehntel der 12-Monats-Rendite liegen.</div>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:11px;color:var(--mut)">
+      <tr><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">Bedienelement</th><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">Wirkung</th><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">Art</th><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">&bdquo;Alle&ldquo; setzt zur&uuml;ck</th></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel STRONG</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit dem Signal STRONG.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel BUY</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit dem Signal BUY, auch BUY mit RSI-Warnung.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel PEG-BLOCK</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, die technisch kaufbar w&auml;ren, aber durch eine hohe PEG-Bewertung (PEG &ge; 3.0) oder einen &uuml;berkauften RSI blockiert sind.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel WATCH</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Titel ohne Kauf-, Block-, HOLD*- oder SELL-Signal: &bdquo;Beobachten&ldquo; sowie die schwachen Verkaufssignale ZL und HIST. Die Chips ZL und HIST zeigen nur diese beiden.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel HOLD</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">SELL-Titel, die der Sell-Blocker wegen eines guten Fundamentalscores als HOLD* zeigt. Bei ausgeschaltetem Sell-Blocker leer.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel SELL</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Titel mit gebrochener 200-Tage-Linie (Chip MA).</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Sektor-Auswahl</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel des gew&auml;hlten Sektors.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Suchfeld</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, deren Ticker oder Name den Suchtext enth&auml;lt.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, das Feld wird geleert</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>fSc</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit einem Fundamentalscore ab 70; sortiert zus&auml;tzlich nach Fundamentalscore und dimmt BUY/STRONG aus schwachen Sektoren leicht ab.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter und Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>D1</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel im obersten Zehntel der 12-Monats-Rendite des Watchlist-Korbs (Kennzeichen D1). Beschreibend, kein Kaufsignal.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>&#9733; Fav</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur als Favorit markierte Titel. Ohne Favoriten bleibt die Liste vollst&auml;ndig. Favoriten ohne aktuelle Bewertung werden nicht angezeigt; die Zahl im Knopf z&auml;hlt sie trotzdem mit.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Score / A-Z</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Reihenfolge innerhalb jeder Gruppe: nach Score (bei aktivem fSc nach Fundamentalscore) oder alphabetisch nach Ticker.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, zur&uuml;ck auf Score</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>SF (Sell-Blocker)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Kein Filter, sondern ein Anzeigemodus: SELL-Titel mit einem Fundamentalscore ab 70 erscheinen als HOLD*. Standard: ein.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeigemodus</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">nein, bleibt wie eingestellt</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Alle</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Setzt alle Zeilenfilter und die Sortierung zur&uuml;ck. Der Sell-Blocker bleibt unver&auml;ndert.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>DR (Dividenden-Hold)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Derzeit ausgeblendet: Der Knopf wirkt auf keinen bewerteten Titel. Die Kl&auml;rung folgt im Signal-Review.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>SPY &gt; 200MA</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige der Marktphase: S&amp;P 500 &uuml;ber oder unter seiner 200-Tage-Linie. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Export / Import</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sichert die Favoritenliste als Datei bzw. l&auml;dt sie. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Datei</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
+    </table>
+    </div>
+    <div style="font-size:11px;color:var(--mut);line-height:1.7;margin-top:10px"><b>Zahlen:</b> Jede Kachel zeigt, wie viele Zeilen ein Klick auf sie in der aktuellen Ansicht zeigen w&uuml;rde &ndash; Sektor, Suche, fSc, D1 und Favoriten sind dabei ber&uuml;cksichtigt. Der Kopf jeder Gruppe in der Liste z&auml;hlt ihre sichtbaren Zeilen. Die Kopfzeile nennt die Zahl aller bewerteten Titel und, wenn Filter aktiv sind, wie viele davon angezeigt werden.</div>
   </div>
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
@@ -772,7 +802,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.17 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.18 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -864,7 +894,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.17 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.18 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -960,7 +990,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.17 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.18 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1299,6 +1329,13 @@ var DIV_HOLD_FILTER   = false; /* Dividenden-Hold-Filter (v5.9.17) */
 var FSC_FILTER        = false; /* Fundamentalscore-Selektion (Sprint 45) */
 var FSC_FILTER_MIN    = 70;    /* Schwellenwert fSc, analog SELL_SCORE_MIN */
 // SYNC-END:FSC_FILTER_VARS
+/* S297: D1_FILTER steht BEWUSST ausserhalb des SYNC-Bands FSC_FILTER_VARS --
+   das ist ein Kategorie-A-Block (Owner index.html -> dev/stockiq_dev.html,
+   sync_dev_index.py). D1 gehoert nicht zum fSc-Kontrakt, und dev.html wird
+   in diesem Sprint nicht angefasst. */
+var D1_FILTER         = false; /* Zeilenfilter auf das oberste Dezil der
+                                  12M-Rendite (isD1); kein WL_FILTER-Wert,
+                                  UND-verknuepft mit den anderen Filtern. */
 var BUND_RATE         = 2.6;   /* 10J-Referenzzins in %, quartalsweise anpassen */
 var DIV_FLOOR         = 3.5;   /* Mindest-DR in % (Floor, unabh. vom Bund-Satz) */
 var DIV_SPREAD        = 2.0;   /* Spread ueber Bund in pp */
@@ -2080,7 +2117,9 @@ function rWL(){
   var hcBuys=0,hcStrongs=0,hcTotal=0;  /* v5.9.74: hcTotal = alle isHC() */
   for(i=0;i<scored.length;i++){
     var ms=mSig(scored[i].s), _hc=isHC(scored[i].s, scored[i].sc);
-    if(FSC_FILTER){var _fv=(_scoresIdx[scored[i].s.t]&&_scoresIdx[scored[i].s.t].fund_score)||0;if(_fv<FSC_FILTER_MIN)continue;}
+    /* S297: dasselbe Zeilenpraedikat wie wlRend -- damit zeigt jede Kachel,
+       wie viele Zeilen ein Klick auf sie in der AKTUELLEN Ansicht ergaebe. */
+    if(!wlRowPass(scored[i].s)) continue;
     /* S296: Zuordnung ueber wlBucket -- eine Quelle fuer Kachel, Gruppe
        und Filter. Ersetzt die frueheren Einzelabfragen; damit entfaellt
        auch die undeklarierte Variable rsiBlocks (S295 D-1). */
@@ -2165,6 +2204,7 @@ function wlReset(){
   var _wse=document.getElementById('wl-search'); if(_wse) _wse.value='';
   DIV_HOLD_FILTER=false;
   FSC_FILTER=false;
+  D1_FILTER=false;
   var btns=document.querySelectorAll('.tf'),i;
   for(i=0;i<btns.length;i++) btns[i].classList.remove('active');
   var sd=document.getElementById('wl-sector-filter');
@@ -2204,6 +2244,9 @@ function wlReset(){
     _syncBtns[_rl].style.background='transparent';
     _syncBtns[_rl].classList.remove('active');
   }
+  wlD1Paint();   /* S297 F2: Knopf-Optik dem zurueckgesetzten
+                    D1_FILTER angleichen -- sonst bliebe "D1: an"
+                    stehen, obwohl der Filter aus ist. */
   rSyn();
   rWL();
 }
@@ -2296,7 +2339,7 @@ function wlSortPaint(mode){
    die die Watchlist wirklich rendert (U-4: nur Titel mit scores.json-
    Eintrag). Vor dem Laden ist _scoresIdx leer -> "--" statt einer Zahl,
    die spaeter nicht stimmt (bis v6.6.16 stand hier STOCKS.length, S295 C3). */
-function wlSetCnt(){
+function wlSetCnt(shown){
   var n=null,i;
   if(typeof _scoresIdx!=='undefined' && _scoresIdx){
     n=0;
@@ -2306,7 +2349,13 @@ function wlSetCnt(){
   var e1=document.getElementById('hdr-cnt');    if(e1)e1.textContent=txt;
   var e2=document.getElementById('wl-cnt');     if(e2)e2.textContent=txt;
   var e3=document.getElementById('wl-hdr-cnt');
-  if(e3)e3.textContent=(txt==='--')?'--':(txt+' Ticker');
+  if(!e3) return;
+  if(txt==='--'){ e3.textContent='--'; return; }
+  /* S297 F5: sind Zeilen ausgeblendet, sagt die Kopfzeile auch, wie viele
+     noch zu sehen sind. Mittelpunkt als Entity -- ASCII-Pflicht im Script. */
+  var h=txt+' Ticker';
+  if(typeof shown==='number' && shown<n){ h+=' &#183; '+shown+' angezeigt'; }
+  e3.innerHTML=h;
 }
 /* D1-Kennzeichen (S294, v6.6.16): markiert Titel im obersten Zehntel der
    12M-Rendite des WL-Korbs. Rangbasis ist das Feld mom12m_pct aus
@@ -2315,15 +2364,67 @@ function wlSetCnt(){
    AP-3: fehlender Wert -> kein Kennzeichen; pct=0 ist ein GUELTIGER Wert
    (schlechtester Rang) und darf nicht per ||-Falsy verschluckt werden.
    R-deskriptiv: kein Kaufsignal, kein Renditeanspruch (G-E). */
+/* wlD1Paint: Optik des D1-Knopfes an EINER Stelle (Muster wlSfPaint S296). */
+function wlD1Paint(){
+  var b=document.getElementById('wl-d1-btn');
+  if(!b) return;
+  b.textContent       = D1_FILTER ? 'D1: an' : 'D1: aus';
+  b.style.borderColor = D1_FILTER ? '#7a9bb5' : '#1a2a3a';
+  b.style.color       = D1_FILTER ? '#7a9bb5' : 'var(--mut)';
+  b.style.background  = D1_FILTER ? 'rgba(122,155,181,.1)' : 'transparent';
+}
+function toggleD1Filter(btn){
+  D1_FILTER = !D1_FILTER;
+  var _ab=document.querySelector('button[onclick="wlReset()"]');if(_ab){_ab.classList.remove('active');}
+  wlD1Paint();
+  rWL();
+}
+/* wlRowPass: EINZIGES Zeilenfilter-Praedikat (S297 F4). Sektor, Suche, fSc
+   und D1 stehen nur hier; die KPI-Zaehlung in rWL und die Zeilenauswahl in
+   wlRend nutzen dieselbe Funktion. Vorher pruefte rWL nur FSC_FILTER --
+   bei aktivem Sektor oder aktiver Suche wichen Kachelzahl und Listenlaenge
+   auseinander (S296-1). Der SIGNALFILTER (WL_FILTER) gehoert bewusst NICHT
+   hierher: die Kacheln sollen zeigen, was ein Klick auf sie ergaebe.
+   Fav (WL2_SYNC) wirkt weiterhin ueber den Pool (getActiveStocks). */
+function wlRowPass(s){
+  var d=_scoresIdx[s.t];
+  if(FSC_FILTER){
+    var fv=(d&&d.fund_score!==null&&d.fund_score!==undefined)?d.fund_score:(s.fund||0);
+    if(fv<FSC_FILTER_MIN) return false;
+  }
+  if(D1_FILTER){
+    var pv=(d&&d.mom12m_pct!==null&&d.mom12m_pct!==undefined)?d.mom12m_pct:null;
+    if(!isD1(pv)) return false;
+  }
+  if(WL_SECTOR_FILTER){
+    var sec=(typeof d==='string')?d:((d&&d.sector)||(FD[s.t]&&FD[s.t].sector)||'');
+    if(sec!==WL_SECTOR_FILTER) return false;
+  }
+  if(WL_SEARCH){
+    var st=s.t?s.t.toLowerCase():'';
+    var sn=s.n?s.n.toLowerCase():'';
+    var sd=dName(s)?dName(s).toLowerCase():'';
+    if(st.indexOf(WL_SEARCH)===-1&&sn.indexOf(WL_SEARCH)===-1&&sd.indexOf(WL_SEARCH)===-1)
+      return false;
+  }
+  return true;
+}
+/* isD1: EINZIGE Stelle, an der die D1-Schwelle steht (G-G). Kennzeichen
+   (d1Badge) und Zeilenfilter (wlRowPass) fragen beide hier. AP-3: ein
+   fehlender Wert ist KEIN D1; pct=0 ist ein gueltiger Wert (schlechtester
+   Rang) und darf nicht per ||-Falsy verschluckt werden (S293 G-W 1). */
+function isD1(pct){
+  if(pct===null||pct===undefined) return false;
+  if(typeof pct!=='number') return false;
+  if(isNaN(pct)) return false;
+  return pct>=90;
+}
 function d1Title(pct){
   return 'D1: oberstes Zehntel der 12-Monats-Rendite im Watchlist-Korb '
        + '(Rang ' + pct.toFixed(1) + ' von 100). Beschreibend, kein Kaufsignal.';
 }
 function d1Badge(pct){
-  if(pct===null||pct===undefined) return '';
-  if(typeof pct!=='number') return '';
-  if(isNaN(pct)) return '';
-  if(pct<90) return '';
+  if(!isD1(pct)) return '';   /* S297: Schwelle steht nur noch in isD1 */
   return '<span style="font-family:monospace;font-size:10px;color:#7a9bb5;'
        + 'border:1px solid rgba(122,155,181,.4);border-radius:3px;'
        + 'padding:1px 4px;margin-left:2px" title="' + d1Title(pct) + '">D1</span>';
@@ -2337,17 +2438,8 @@ function wlRend(scored){
     /* HC-Filter v5.9.69: isHC() Triple-Confirmation */
     /* v6.6.3 (S122b): HC-Ausblendung entfernt -- Triple-Confirmation als
        Selektion ist OOS widerlegt (WR 57.6->54.9). HC bleibt Kontext-Anzeige. */
-    if(FSC_FILTER){
-      var _fscd=_scoresIdx[s.t];
-      var _fscv=(_fscd&&_fscd.fund_score!==null&&_fscd.fund_score!==undefined)?_fscd.fund_score:(s.fund||0);
-      if(_fscv<FSC_FILTER_MIN) continue;
-    }
-    if(WL_SECTOR_FILTER){
-      var _secRaw=_scoresIdx[s.t];
-      var _sec=(typeof _secRaw==='string'?_secRaw:(_secRaw&&_secRaw.sector)||(FD[s.t]&&FD[s.t].sector)||'');
-      if(_sec!==WL_SECTOR_FILTER){continue;}
-    }
-    if(WL_SEARCH){var _st=s.t?s.t.toLowerCase():'';var _sn=s.n?s.n.toLowerCase():'';var _sd=dName(s)?dName(s).toLowerCase():'';if(_st.indexOf(WL_SEARCH)===-1&&_sn.indexOf(WL_SEARCH)===-1&&_sd.indexOf(WL_SEARCH)===-1)continue;}
+    /* S297: Sektor, Suche, fSc und D1 stehen nur noch in wlRowPass. */
+    if(!wlRowPass(s)) continue;
     if(WL_FILTER!=='all'){
       if(WL_FILTER==='strong'&&sig!=='strong')continue;
       if(WL_FILTER==='buy'&&wlBucket(sig)!=='BUY')continue;
@@ -2421,7 +2513,7 @@ function wlRend(scored){
     h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
-    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+d1Bdg+'<span style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+srAmpBdg+dB+'<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
+    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+srAmpBdg+dB+'<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+d1Bdg+_sB+'</div></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
@@ -2500,6 +2592,8 @@ function wlRend(scored){
     if(!out)out='<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Keine Ticker</div>';
   }
   var el=document.getElementById('wl-list');if(el)el.innerHTML=out;
+  /* S297 F5: gerenderte Zeilen an den einzigen Zaehler-Schreiber melden. */
+  wlSetCnt(gBuy.length+gBlock.length+gHold.length+gSell.length);
 }
 
 function wlDetail(ticker){
@@ -3257,7 +3351,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.17';
+      var PAGE_VERSION = 'v6.6.18';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -4009,6 +4103,7 @@ document.addEventListener('DOMContentLoaded', function(){
   wlSetCnt();
   /* S296: SF-Knopf auf den Startwert von SELL_SCORE_FILTER bringen. */
   wlSfPaint();
+  wlD1Paint();   /* S297 */
 });
 /* Initialisierung: nur initFund() - rSyn() wird intern von initFund aufgerufen */
 /* Falls kein Cache: rSyn() direkt aufrufen */
@@ -6090,7 +6185,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.17 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.18 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
