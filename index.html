@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.15</title>
+<title>StockIQ v6.6.16</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.15 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.16 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -206,7 +206,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.15</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.16</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -404,7 +404,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.15 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.16 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -538,6 +538,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="padding:10px;background:rgba(138,180,204,.06);border:1px solid rgba(138,180,204,.25);border-radius:7px">
       <div style="font-size:10px;color:#dce8f5;line-height:1.7">Beide gleichfarbig (2&times; gr&uuml;n bei BUY / 2&times; rot bei SELL) = st&auml;rkste Best&auml;tigung. Auseinanderlaufend = absolut und relativ uneinig (Sp&auml;tzyklus-Hinweis m&ouml;glich).</div>
     </div>
+  </div>
+
+  <!-- D1-KENNZEICHEN (S294) v6.6.16 -->
+  <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#7a9bb5">&#128202; D1-Kennzeichen in der Watchlist</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.7">D1 markiert die Titel im obersten Zehntel der 12-Monats-Rendite des Watchlist-Korbs. Das ist eine Beschreibung der letzten zw&ouml;lf Monate, kein Kaufsignal und keine Prognose. Ob D1-Titel danach besser abschneiden als der Korb, pr&uuml;ft ein vorregistrierter Test; bis dahin bleibt das Etikett neutral.</div>
   </div>
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
@@ -766,7 +772,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.15 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.16 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -858,7 +864,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.15 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.16 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -954,7 +960,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.15 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.16 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2233,6 +2239,26 @@ function srAmpTitle(sig,sr,col){
   if(col==='#ffab00') return 'sr-Ampel SELL: Top-Sektor (Rang '+sr+' von 11) -- Verkauf trotz Sektor-Staerke, Ausstieg zweimal pruefen';
   return 'sr-Ampel SELL: Mittelfeld (Rang '+sr+' von 11) -- neutral';
 }
+/* D1-Kennzeichen (S294, v6.6.16): markiert Titel im obersten Zehntel der
+   12M-Rendite des WL-Korbs. Rangbasis ist das Feld mom12m_pct aus
+   scores.json (Perzentil 0..100, score.py v1.4.21, DM v1.58 Abschn. 2).
+   Die Schwelle 90 steht NUR in d1Badge() -- G-G, genau eine Stelle.
+   AP-3: fehlender Wert -> kein Kennzeichen; pct=0 ist ein GUELTIGER Wert
+   (schlechtester Rang) und darf nicht per ||-Falsy verschluckt werden.
+   R-deskriptiv: kein Kaufsignal, kein Renditeanspruch (G-E). */
+function d1Title(pct){
+  return 'D1: oberstes Zehntel der 12-Monats-Rendite im Watchlist-Korb '
+       + '(Rang ' + pct.toFixed(1) + ' von 100). Beschreibend, kein Kaufsignal.';
+}
+function d1Badge(pct){
+  if(pct===null||pct===undefined) return '';
+  if(typeof pct!=='number') return '';
+  if(isNaN(pct)) return '';
+  if(pct<90) return '';
+  return '<span style="font-family:monospace;font-size:10px;color:#7a9bb5;'
+       + 'border:1px solid rgba(122,155,181,.4);border-radius:3px;'
+       + 'padding:1px 4px;margin-left:2px" title="' + d1Title(pct) + '">D1</span>';
+}
 function wlRend(scored){
   /* Drei Gruppen: BUY (strong+buy+pb+rsi_block), HOLD (watch+weak), SELL (alle sell_*) */
   var i,s,sc,sig;
@@ -2296,6 +2322,11 @@ function wlRend(scored){
     var _srRank=(_scoresIdx[s.t]&&_scoresIdx[s.t].sector_rank)||null;
     var sectorBad=FSC_FILTER&&_srRank&&_srRank>=8;
     var _srAmpCol=srAmpelCls(sig,_srRank);
+    /* S294: explizite null/undefined-Pruefung -- NICHT das ||null-Idiom
+       aus _srRank oben; pct=0 waere dort still zu null geworden (AP-3). */
+    var _d1Rec=_scoresIdx[s.t];
+    var _d1Pct=(_d1Rec&&_d1Rec.mom12m_pct!==null&&_d1Rec.mom12m_pct!==undefined)?_d1Rec.mom12m_pct:null;
+    var d1Bdg=d1Badge(_d1Pct);
     var srAmpBdg=_srAmpCol?('<span style="font-size:10px;color:'+_srAmpCol+';margin-left:2px" title="'+srAmpTitle(sig,_srRank,_srAmpCol)+'">'+(_srIcoMap[_srAmpCol]||'')+'</span>'):'';
     var sc2=isStrong?(sectorBad?'#7a6a4a':'#ff9f1c'):sig==='buy'?(sectorBad?'#5a8a6a':'#00e57a'):sig==='pb'?'#f0c000':isRsiBlk?'#e8a020':sig==='buy_rsi_warn'?'#a5d6a7':sig==='watch_rsi'?'#80cbc4':isHoldSf?'#b07cf8':isSellSig||sig==='weak'?'#ff6666':'#7a9bb5';
     var dR=dqCheck(s.t,sig),dB=dR?('<span style="font-size:10px;color:#f0c000;border:1px solid rgba(240,192,0,.4);border-radius:3px;padding:1px 4px" title="DQ: '+dR.fields.join(", ")+'">&#9888;</span>'):"";
@@ -2321,7 +2352,7 @@ function wlRend(scored){
     h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
-    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+srAmpBdg+dB+'<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
+    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+d1Bdg+'<span style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+srAmpBdg+dB+'<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
@@ -3143,7 +3174,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.15';
+      var PAGE_VERSION = 'v6.6.16';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -5977,7 +6008,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.15 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.16 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
