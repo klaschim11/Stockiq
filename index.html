@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.23</title>
+<title>StockIQ v6.6.24</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.23 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.24 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -124,9 +124,17 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <!-- Zeile 4: SF / DR (ausgeblendet seit v6.6.17) / fSc -->
   <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;align-items:center">
-    <button id="wl-sf-btn" onclick="toggleSellFilter(document.getElementById('sf-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">SF: aus</button>
+    <button id="wl-sf-btn" title="Titel unter der 200-Tage-Linie mit Fundamentalwert (fSc) ab 70 erscheinen als HOLD statt SELL. Es wird nichts ausgeblendet." onclick="toggleSellFilter(document.getElementById('sf-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">Sell-Blocker aus</button>
     <button id="wl-dr-btn" onclick="toggleDivFilter(document.getElementById('dr-btn'));rWL()" style="display:none;font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
-    <button id="wl-fsc-btn" onclick="toggleFscFilter(document.getElementById('fsc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">fSc: aus</button>
+    <button id="wl-fsc-btn" title="blendet alle Titel mit Fundamentalwert unter 70 aus und sortiert die &uuml;brigen Gruppen nach Fundamentalwert; BUY bleibt nach Rang sortiert. Sind beide an, ist SELL leer &ndash; die Titel stehen in HOLD." onclick="toggleFscFilter(document.getElementById('fsc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">fSc-Filter aus</button>
+    <button id="wl-aw-btn" title="zeigen nur Titel mit diesem Kennzeichen. Auswahl liegt immer in BUY, Trend in BUY oder WATCH." onclick="toggleAwFilter()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">Auswahl (--)</button>
+    <button id="wl-tr-btn" title="zeigen nur Titel mit diesem Kennzeichen. Auswahl liegt immer in BUY, Trend in BUY oder WATCH." onclick="toggleTrFilter()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">Trend (--)</button>
+  </div>
+  <!-- S383: Erklaerzeilen zu den vier Filterknoepfen (statisch) -->
+  <div id="wl-filter-erl" style="background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:6px;padding:8px 12px;margin-bottom:8px;font-size:11px;color:var(--mut);line-height:1.6">
+    <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Sell-Blocker</strong>: Titel unter der 200-Tage-Linie mit Fundamentalwert (fSc) ab 70 erscheinen als HOLD statt SELL. Es wird nichts ausgeblendet.</div>
+    <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Nur fSc ab 70</strong>: blendet alle Titel mit Fundamentalwert unter 70 aus und sortiert die &uuml;brigen Gruppen nach Fundamentalwert; BUY bleibt nach Rang sortiert. Sind beide an, ist SELL leer &ndash; die Titel stehen in HOLD.</div>
+    <div><strong style="color:#7a9bb5">Auswahl / Trend</strong>: zeigen nur Titel mit diesem Kennzeichen. Auswahl liegt immer in BUY, Trend in BUY oder WATCH.</div>
   </div>
   <!-- Suchfeld -->
   <div style="margin-bottom:8px;position:relative">
@@ -211,7 +219,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.23</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.24</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -409,7 +417,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.23 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.24 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -468,7 +476,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="color:#ff6666">&#10007; SELL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash; Alle drei gleichzeitig (staerkstes Signal)</div>
     </div>
     <div style="font-size:12px;color:var(--mut);line-height:1.7">
-      <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD SF</strong> = Score-Filter: SELL unterdrueckt weil Fundamentalscore &ge; 70. Toggle: SF-Button.</div>
+      <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD SF</strong> = Score-Filter: SELL unterdrueckt weil Fundamentalscore &ge; 70. Umschalten: Knopf Sell-Blocker.</div>
       <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD DVG</strong> = Deep Value Divergence (v5.9.69): SELL unterdrueckt weil Fund &ge;80 + RSI &lt;35 + Bullish Divergenz. Gutes Unternehmen in technischer Schwaechephase.</div>
       <div style="margin-bottom:5px"><strong style="color:#00c8f0">HOLD DR</strong> = Dividenden-Hold: SELL unterdrueckt weil Dividendenrendite &ge; max(Floor, Bund+2pp). Toggle: DR-Button + Bund%-Eingabe (Knopf derzeit ausgeblendet).</div>
       <div style="margin-bottom:5px"><strong style="color:#b07cf8">HOLD SF+D</strong> = Beide Kriterien aktiv gleichzeitig (Score UND Dividende halten).</div>
@@ -558,29 +566,30 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <!-- FILTER DER WATCHLIST (S297) v6.6.18 -->
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128202; Filter der Watchlist</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Watchlist zeigt alle bewerteten Titel. Filter blenden Zeilen aus, die Sortierung &auml;ndert nur die Reihenfolge, der Sell-Blocker &auml;ndert nur das Etikett. Alle Zeilenfilter wirken zusammen: Wer den Sektor &bdquo;Technologie&ldquo; und die Kachel BUY w&auml;hlt, sieht nur die BUY-Titel aus der Technologie.</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Watchlist zeigt alle bewerteten Titel. Filter blenden Zeilen aus, die Sortierung &auml;ndert nur die Reihenfolge, der Sell-Blocker stuft Titel von SELL nach HOLD um, ohne Zeilen auszublenden. Alle Zeilenfilter wirken zusammen: Wer den Sektor &bdquo;Technologie&ldquo; und die Kachel BUY w&auml;hlt, sieht nur die BUY-Titel aus der Technologie.</div>
     <div style="overflow-x:auto">
     <table style="width:100%;border-collapse:collapse;font-size:11px;color:var(--mut)">
       <tr><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">Bedienelement</th><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">Wirkung</th><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">Art</th><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">&bdquo;Alle&ldquo; setzt zur&uuml;ck</th></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel BUY</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit dem Signal BUY, auch BUY mit RSI-Warnung.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel PEG-BLOCK</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, die technisch kaufbar w&auml;ren, aber durch eine hohe PEG-Bewertung (PEG &ge; 3.0) oder einen &uuml;berkauften RSI blockiert sind.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel WATCH</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Titel ohne Kauf-, Block-, HOLD*- oder SELL-Signal: &bdquo;Beobachten&ldquo; sowie die schwachen Verkaufssignale ZL und HIST. Die Chips ZL und HIST zeigen nur diese beiden.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel HOLD</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">SELL-Titel, die der Sell-Blocker wegen eines guten Fundamentalscores als HOLD* zeigt. Bei ausgeschaltetem Sell-Blocker leer.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel SELL</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Titel mit gebrochener 200-Tage-Linie (Chip MA).</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Sektor-Auswahl</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel des gew&auml;hlten Sektors.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Suchfeld</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, deren Ticker oder Name den Suchtext enth&auml;lt.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, das Feld wird geleert</td></tr>
-      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>fSc</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit einem Fundamentalscore ab 70; sortiert zus&auml;tzlich nach Fundamentalscore und dimmt BUY aus schwachen Sektoren leicht ab.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter und Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel BUY</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur die Titel im obersten Zehntel der 12-Monats-Rendite des Watchlist-Korbs. Dasselbe Etikett erscheint in der Depot-Tabelle.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>&#9733; Fav</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur als Favorit markierte Titel. Ohne Favoriten bleibt die Liste vollst&auml;ndig. Favoriten ohne aktuelle Bewertung werden nicht angezeigt; die Zahl im Knopf z&auml;hlt sie trotzdem mit.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Score / A-Z</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Reihenfolge innerhalb jeder Gruppe: nach Score (bei aktivem fSc nach Fundamentalscore) oder alphabetisch nach Ticker.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, zur&uuml;ck auf Score</td></tr>
-      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>SF (Sell-Blocker)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Kein Filter, sondern ein Anzeigemodus: SELL-Titel mit einem Fundamentalscore ab 70 erscheinen als HOLD*. Standard: ein.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeigemodus</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">nein, bleibt wie eingestellt</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Alle</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Setzt alle Zeilenfilter und die Sortierung zur&uuml;ck. Der Sell-Blocker bleibt unver&auml;ndert.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
-      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>DR (Dividenden-Hold)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Derzeit ausgeblendet: Der Knopf wirkt auf keinen bewerteten Titel. Die Kl&auml;rung folgt im Signal-Review.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>SPY &gt; 200MA</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige der Marktphase: S&amp;P 500 &uuml;ber oder unter seiner 200-Tage-Linie. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
-      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Export / Import</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sichert die Favoritenliste als Datei bzw. l&auml;dt sie. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Datei</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel PEG-BLOCK</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, die technisch kaufbar w&auml;ren, aber durch eine hohe PEG-Bewertung (PEG &ge; 3.0) oder einen &uuml;berkauften RSI blockiert sind.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel WATCH</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Alle Titel, die weder BUY noch PEG-BLOCK, HOLD oder SELL sind: &bdquo;Beobachten&ldquo;, die schwachen Verkaufssignale ZL und HIST sowie Titel mit dem Kennzeichen Trend, die nicht im obersten Zehntel liegen. Die Chips ZL und HIST zeigen alle Titel mit diesem Signal, auch BUY-Titel.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel HOLD</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">SELL-Titel, die der Sell-Blocker wegen eines guten Fundamentalscores als HOLD* zeigt. Bei ausgeschaltetem Sell-Blocker leer.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel SELL</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Titel mit gebrochener 200-Tage-Linie (Chip MA). Der Chip MA zeigt alle Titel mit dem Signal SELL MA, auch einen BUY-Titel unter der 200-Tage-Linie.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Sektor-Auswahl</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel des gew&auml;hlten Sektors.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Suchfeld</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, deren Ticker oder Name den Suchtext enth&auml;lt.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, das Feld wird geleert</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Nur fSc ab 70</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit einem Fundamentalscore ab 70; sortiert zus&auml;tzlich nach Fundamentalscore und dimmt BUY aus schwachen Sektoren leicht ab. Sind Sell-Blocker und dieser Filter beide an, ist die Kachel SELL leer; die Titel stehen in HOLD.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter und Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Auswahl (n)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit dem Kennzeichen Auswahl (vordere Pl&auml;tze der BUY-Liste). Alle Kacheln au&szlig;er BUY zeigen dann 0.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Kennzeichen)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Trend (n)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit dem Kennzeichen Trend (fr&uuml;heres Kaufsignal), auch wenn sie zugleich BUY sind. Sie liegen in BUY oder WATCH. Zusammen mit Auswahl: nur Titel mit beiden Kennzeichen.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Kennzeichen)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel BUY</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel aus dem obersten Zehntel der 12-Monats-Entwicklung im Universum, sortiert nach Rang.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>&#9733; Fav</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur als Favorit markierte Titel. Ohne Favoriten bleibt die Liste vollst&auml;ndig. Favoriten ohne aktuelle Bewertung werden nicht angezeigt; die Zahl im Knopf z&auml;hlt sie trotzdem mit.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Score / A-Z</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Reihenfolge innerhalb jeder Gruppe: BUY nach Rang der 12-Monats-Entwicklung, die &uuml;brigen Gruppen nach Score (bei aktivem fSc-Filter nach Fundamentalscore). A-Z sortiert alle Gruppen alphabetisch nach Ticker.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, zur&uuml;ck auf Score</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Sell-Blocker (SF)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Kein Filter, sondern ein Anzeigemodus: Titel unter der 200-Tage-Linie (SELL MA) mit einem Fundamentalscore ab 70 erscheinen als HOLD statt SELL. Es wird nichts ausgeblendet. Standard: ein.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeigemodus</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">nein, bleibt wie eingestellt</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Alle</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Setzt alle Zeilenfilter (auch Auswahl und Trend) und die Sortierung zur&uuml;ck. Der Sell-Blocker bleibt unver&auml;ndert.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>DR (Dividenden-Hold)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Derzeit ausgeblendet: Der Knopf wirkt auf keinen bewerteten Titel. Die Kl&auml;rung folgt im Signal-Review.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>SPY &gt; 200MA</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige der Marktphase: S&amp;P 500 &uuml;ber oder unter seiner 200-Tage-Linie. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Export / Import</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sichert die Favoritenliste als Datei bzw. l&auml;dt sie. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Datei</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
     </table>
     </div>
-    <div style="font-size:11px;color:var(--mut);line-height:1.7;margin-top:10px"><b>Zahlen:</b> Jede Kachel zeigt, wie viele Zeilen ein Klick auf sie in der aktuellen Ansicht zeigen w&uuml;rde &ndash; Sektor, Suche, fSc und Favoriten sind dabei ber&uuml;cksichtigt. Der Kopf jeder Gruppe in der Liste z&auml;hlt ihre sichtbaren Zeilen. Die Kopfzeile nennt die Zahl aller bewerteten Titel und, wenn Filter aktiv sind, wie viele davon angezeigt werden.</div>
+    <div style="font-size:11px;color:var(--mut);line-height:1.7;margin-top:10px"><b>Zahlen:</b> Jede Kachel zeigt, wie viele Zeilen ein Klick auf sie in der aktuellen Ansicht zeigen w&uuml;rde &ndash; Sektor, Suche, fSc, Auswahl, Trend und Favoriten sind dabei ber&uuml;cksichtigt. Der Kopf jeder Gruppe in der Liste z&auml;hlt ihre sichtbaren Zeilen. Die Kopfzeile nennt die Zahl aller bewerteten Titel und, wenn Filter aktiv sind, wie viele davon angezeigt werden.</div>
   </div>
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
@@ -808,7 +817,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.23 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.24 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -822,6 +831,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.24</td><td style="padding:5px 8px;color:var(--mut)">Filter Auswahl und Trend; Filterkn&ouml;pfe umbenannt und erkl&auml;rt; BUY-Liste auch nach Klick auf die Kachel nach Rang sortiert.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.23</td><td style="padding:5px 8px;color:var(--mut)">Tooltip Auswahl ohne Groessenangabe &middot; Changelog-Luecke benannt</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.22</td><td style="padding:5px 8px;color:var(--mut)">BUY zeigt die Titel mit der staerksten Zwoelf-Monats-Entwicklung (oberstes Zehntel) &middot; STRONG entfaellt &middot; Kennzeichen Auswahl und Trend &middot; Watchlist und Depot mit demselben Etikett &middot; Hilfe-Block BUY, Auswahl und Trend</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.4.15 bis v6.6.21</td><td style="padding:5px 8px;color:var(--mut)">Versionen ohne Changelog-Zeile; Stand und Aenderungen: Git-Historie (Tags)</td><td style="padding:5px 8px;color:var(--mut)">Jul-Okt 2026</td></tr>
@@ -903,7 +913,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.23 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.24 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1000,7 +1010,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.23 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.24 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1335,6 +1345,9 @@ var SELL_SCORE_FILTER = true;   /* v5.9.69: Standard-ein (IC-Validierung Ende Ma
 var HC_FILTER = false;              /* v5.9.69: High-Conviction-Filter (Triple-Confirmation) */
 var SELL_SCORE_MIN    = 70;    /* Schwellenwert fSc (0-100) -- Sprint 33: cSc->fSc, 55->70 */
 var DIV_HOLD_FILTER   = false; /* Dividenden-Hold-Filter (v5.9.17) */
+var WL_AW_FILTER      = false; /* S383: Zeilenfilter Kennzeichen Auswahl; von "Alle" zurueckgesetzt, nicht persistiert */
+var WL_TR_FILTER      = false; /* S383: Zeilenfilter Kennzeichen Trend; von "Alle" zurueckgesetzt, nicht persistiert */
+var _wlAwN = null, _wlTrN = null; /* S383: Chip-Zahl n je rWL; null = vor dem Laden ("--") */
 // SYNC-START:FSC_FILTER_VARS
 var FSC_FILTER        = false; /* Fundamentalscore-Selektion (Sprint 45) */
 var FSC_FILTER_MIN    = 70;    /* Schwellenwert fSc, analog SELL_SCORE_MIN */
@@ -2109,10 +2122,16 @@ function rWL(){
   var i,s,scored=getScored();
   var buys=0,pbs=0,sells=0,watches=0,holds=0;
   var hcBuys=0,hcTotal=0;  /* v5.9.74: hcTotal = alle isHC() */
+  var awN=0,trN=0;  /* S383: Chip-Zahlen Auswahl/Trend */
   for(i=0;i<scored.length;i++){
     var ms=mSig(scored[i].s), _hc=isHC(scored[i].s, scored[i].sc);
     /* S297: dasselbe Zeilenpraedikat wie wlRend -- damit zeigt jede Kachel,
        wie viele Zeilen ein Klick auf sie in der AKTUELLEN Ansicht ergaebe. */
+    /* S383: Chip-Zahl n = Zeilen, die der Chip bei Kachel "Alle" zeigt:
+       alle uebrigen Zeilenfilter (auch der andere Chip), ohne den eigenen;
+       unabhaengig von der Kachelwahl wie die Kachelzahlen. */
+    if(wlRowPass(scored[i].s,'aw')&&awIs(scored[i].s.t)) awN++;
+    if(wlRowPass(scored[i].s,'tr')&&trendRaw(scored[i].s.t)) trN++;
     if(!wlRowPass(scored[i].s)) continue;
     /* S296: Zuordnung ueber wlBucket -- eine Quelle fuer Kachel, Gruppe
        und Filter. Ersetzt die frueheren Einzelabfragen; damit entfaellt
@@ -2125,6 +2144,9 @@ function rWL(){
     else watches++;
     if(_hc) hcTotal++;  /* alle Signale: buy+strong+pb+watch+hold */
   }
+  var _geladen=(typeof _scoresArr!=='undefined'&&_scoresArr&&_scoresArr.length>0);
+  _wlAwN=_geladen?awN:null; _wlTrN=_geladen?trN:null;
+  wlChipPaint();
   var dispBuys    = buys;  /* v6.6.3 (S122b): HC-Umschaltung entfernt */
   var kpi=document.getElementById('wl-kpi');
   if(kpi)kpi.innerHTML=
@@ -2193,6 +2215,8 @@ function wlReset(){
   var _wse=document.getElementById('wl-search'); if(_wse) _wse.value='';
   DIV_HOLD_FILTER=false;
   FSC_FILTER=false;
+  WL_AW_FILTER=false;  /* S383: Chips Auswahl/Trend; Optik malt rWL -> wlChipPaint */
+  WL_TR_FILTER=false;
   var btns=document.querySelectorAll('.tf'),i;
   for(i=0;i<btns.length;i++) btns[i].classList.remove('active');
   var sd=document.getElementById('wl-sector-filter');
@@ -2209,7 +2233,7 @@ function wlReset(){
      SELL_SCORE_FILTER, und der bleibt unveraendert (F4). */
   var _fscBtns=document.querySelectorAll('#fsc-btn,#wl-fsc-btn');
   for(_rl=0;_rl<_fscBtns.length;_rl++){
-    _fscBtns[_rl].textContent='fSc: aus';
+    _fscBtns[_rl].textContent='fSc-Filter aus';
     _fscBtns[_rl].style.borderColor='#1a2a3a';
     _fscBtns[_rl].style.color='var(--mut)';
     _fscBtns[_rl].style.background='transparent';
@@ -2378,7 +2402,7 @@ function wlSetCnt(shown){
    auseinander (S296-1). Der SIGNALFILTER (WL_FILTER) gehoert bewusst NICHT
    hierher: die Kacheln sollen zeigen, was ein Klick auf sie ergaebe.
    Fav (WL2_SYNC) wirkt weiterhin ueber den Pool (getActiveStocks). */
-function wlRowPass(s){
+function wlRowPass(s,ohne){
   var d=_scoresIdx[s.t];
   if(FSC_FILTER){
     var fv=(d&&d.fund_score!==null&&d.fund_score!==undefined)?d.fund_score:(s.fund||0);
@@ -2395,6 +2419,12 @@ function wlRowPass(s){
     if(st.indexOf(WL_SEARCH)===-1&&sn.indexOf(WL_SEARCH)===-1&&sd.indexOf(WL_SEARCH)===-1)
       return false;
   }
+  /* S383: Chips Auswahl und Trend -- je ein Zweig; die Abfragen bleiben an
+     ihrer einen Stelle (awIs, trendRaw), keine zweite Zuordnung. "ohne"
+     ('aw'|'tr') laesst den eigenen Chip weg -- damit zaehlt rWL die
+     Chip-Zahl n mit DEMSELBEN Praedikat. */
+  if(WL_AW_FILTER&&ohne!=='aw'&&!awIs(s.t)) return false;
+  if(WL_TR_FILTER&&ohne!=='tr'&&!trendRaw(s.t)) return false;
   return true;
 }
 /* isD1: EINZIGE Stelle, an der die Schwelle des obersten Zehntels steht
@@ -2690,7 +2720,9 @@ function wlRend(scored){
   /* Im gefilterten Modus: keine Gruppen-Header, einfache Liste */
   if(WL_FILTER!=='all'){
     var all=gBuy.concat(gBlock).concat(gHold).concat(gSell);
-    all.sort(wlCmp());
+    /* S383: Kachel BUY sortiert wie die BUY-Gruppe der Gesamtansicht
+       (Rang; A-Z gewinnt in wlCmpBuy). Alle anderen Ansichten: wlCmp. */
+    all.sort(WL_FILTER==='buy'?wlCmpBuy():wlCmp());
     if(all.length===0){out='<div style="color:var(--mut);font-family:monospace;font-size:11px;padding:12px">Keine Ticker</div>';}
     else{
       var _flabel={buy:'BUY',pb:'PEG-BLOCK',watch:'WATCH',hold:'HOLD',sell:'SELL',sell_ma:'SELL MA',sell_hist:'SELL HIST',sell_zl:'SELL ZL'};
@@ -2989,7 +3021,7 @@ function wlSfPaint(){
   var sfBtns = document.querySelectorAll('#sf-btn, #sf-btn-wl, #wl-sf-btn'), i, b;
   for(i=0;i<sfBtns.length;i++){
     b = sfBtns[i]; if(!b) continue;
-    b.textContent    = SELL_SCORE_FILTER ? ('SF fSc:>'+SELL_SCORE_MIN) : 'SF: aus';
+    b.textContent    = SELL_SCORE_FILTER ? ('Sell-Blocker fSc ab '+SELL_SCORE_MIN) : 'Sell-Blocker aus';
     b.style.borderColor = SELL_SCORE_FILTER ? '#b07cf8' : '#1a2a3a';
     b.style.color       = SELL_SCORE_FILTER ? '#b07cf8' : 'var(--mut)';
     b.style.background  = SELL_SCORE_FILTER ? 'rgba(176,124,248,.1)' : 'transparent';
@@ -3029,12 +3061,40 @@ function toggleFscFilter(btn){
   var fscBtns = document.querySelectorAll('#fsc-btn, #wl-fsc-btn'), i;
   for(i=0;i<fscBtns.length;i++){
     var b3 = fscBtns[i]; if(!b3) continue;
-    b3.textContent    = FSC_FILTER ? ('fSc:>'+FSC_FILTER_MIN) : 'fSc: aus';
+    b3.textContent    = FSC_FILTER ? ('Nur fSc ab '+FSC_FILTER_MIN) : 'fSc-Filter aus';
     b3.style.borderColor = FSC_FILTER ? '#00e57a' : '#1a2a3a';
     b3.style.color       = FSC_FILTER ? '#00e57a' : 'var(--mut)';
     b3.style.background  = FSC_FILTER ? 'rgba(0,229,122,.1)' : 'transparent';
   }
   rSyn();rWL();
+}
+
+/* ---- Chips Auswahl und Trend (S383) ----
+   Zeilenfilter auf die Kennzeichen; der Zweig steht in wlRowPass, die
+   Zahl n zaehlt rWL. wlChipPaint malt Text "Name (n)" und Optik; vor dem
+   Laden steht "--". Nicht persistiert, "Alle" setzt beide zurueck. */
+function wlChipPaint(){
+  var defs=[['wl-aw-btn','Auswahl',WL_AW_FILTER,_wlAwN,'#00c8f0','rgba(0,200,240,.1)'],
+            ['wl-tr-btn','Trend',WL_TR_FILTER,_wlTrN,'#7a9bb5','rgba(122,155,181,.12)']],i,b,dd;
+  for(i=0;i<defs.length;i++){
+    dd=defs[i]; b=document.getElementById(dd[0]); if(!b) continue;
+    b.textContent=dd[1]+' ('+((dd[3]===null)?'--':dd[3])+')';
+    b.style.borderColor = dd[2]?dd[4]:'#1a2a3a';
+    b.style.color       = dd[2]?dd[4]:'var(--mut)';
+    b.style.background  = dd[2]?dd[5]:'transparent';
+  }
+}
+/* toggleAwFilter: Schalter des Zeilenfilters Auswahl. */
+function toggleAwFilter(){
+  WL_AW_FILTER = !WL_AW_FILTER;
+  var _ab=document.querySelector('button[onclick="wlReset()"]');if(_ab){_ab.classList.remove('active');}
+  rWL();
+}
+/* toggleTrFilter: Schalter des Zeilenfilters Trend. */
+function toggleTrFilter(){
+  WL_TR_FILTER = !WL_TR_FILTER;
+  var _ab=document.querySelector('button[onclick="wlReset()"]');if(_ab){_ab.classList.remove('active');}
+  rWL();
 }
 
 function updBundRate(val){
@@ -3478,7 +3538,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.23';
+      var PAGE_VERSION = 'v6.6.24';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -6513,7 +6573,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.23 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.24 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
