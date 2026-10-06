@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.24</title>
+<title>StockIQ v6.6.25</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -82,7 +82,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.24 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.25 &middot; <span id="hdr-cnt">--</span> Ticker &middot; Echte Kursdaten &middot; Score-Filter &middot; Piotroski &middot; VIX &middot; DQ-Monitor &middot; EVAR-rel &middot; EV/EBITDA &middot; EV/EBIT++ &middot; Skip-Mom &middot; EPS-Mom &middot; Konsistenz &middot; Buyback-Signal &middot; Snap-Badge &middot; Lernendes System &middot; Roadmap &middot; IC-Score-Update &middot; Chart-Export &middot; Bond-Regime &middot; Snapshot-Sync &middot; Experten-Toggle &middot; fSc-Filter &middot; scores.json</div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -219,7 +219,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.24</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.25</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -417,7 +417,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.24 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.25 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -435,7 +435,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#9889; Schnellstart</div>
     <div style="font-size:13px;color:var(--mut);line-height:1.8">
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. Watchlist</strong> &mdash; Alle 305 Ticker nach Score. SPY-Marktphasen-Banner oben (gruen = SPY ueber 200MA / gelb = darunter). Antippen = Detail.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. Depot</strong> &mdash; Portfolio-Tracking. Positionen hinzufuegen, Wertentwicklung und Zeitreihe aus Snapshots.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. Depot</strong> &mdash; Portfolio-Tracking. Positionen hinzufuegen, Wertentwicklung und Zeitreihe aus Snapshots. Pr&uuml;fung: Jede Position wird zw&ouml;lf Monate ab Erstkauf gehalten. Am Pr&uuml;fdatum gilt: steht der Titel dann auf BUY, verl&auml;ngert sich die Haltezeit um ein Jahr; sonst zeigt die Zeile SELL Abstieg. Nachkauf und Teilverkauf verschieben das Pr&uuml;fdatum nicht. Bestand vom Jahresanfang 2026 wird gemeinsam am 31.10.2026 gepr&uuml;ft. &Uuml;bergangsweise kann die Spalte Sig noch SELL MA zeigen, w&auml;hrend die Spalte Pr&uuml;fung &bdquo;h&auml;lt bis&ldquo; meldet; die Spalte Sig wird in der folgenden Version angepasst.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. Fundamentals</strong> &mdash; Tagesaktuelle Scores aus scores.json. <strong style="color:#00e57a">Exp</strong>-Button oben rechts = Experten-Modus ein/aus (ROCE, PEG, Debt, Moat, IC-Detail).</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Sektoren</strong> &mdash; RSS-Signale + 3M-Skip-Momentum, 11 SPDR-ETFs. Dispersion-Signal.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">5. Hilfe</strong> &mdash; Diese Seite.</div>
@@ -817,7 +817,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.24 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.25 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -831,6 +831,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.25</td><td style="padding:5px 8px;color:var(--mut)">Depot: Spalte Pr&uuml;fung (h&auml;lt bis / verl&auml;ngert / SELL Abstieg / nicht bewertet) statt MA-Tg, Kachel Zu pr&uuml;fen, Hinweis beim Nachkauf.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.24</td><td style="padding:5px 8px;color:var(--mut)">Filter Auswahl und Trend; Filterkn&ouml;pfe umbenannt und erkl&auml;rt; BUY-Liste auch nach Klick auf die Kachel nach Rang sortiert.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.23</td><td style="padding:5px 8px;color:var(--mut)">Tooltip Auswahl ohne Groessenangabe &middot; Changelog-Luecke benannt</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.22</td><td style="padding:5px 8px;color:var(--mut)">BUY zeigt die Titel mit der staerksten Zwoelf-Monats-Entwicklung (oberstes Zehntel) &middot; STRONG entfaellt &middot; Kennzeichen Auswahl und Trend &middot; Watchlist und Depot mit demselben Etikett &middot; Hilfe-Block BUY, Auswahl und Trend</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -913,7 +914,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.24 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.25 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -973,10 +974,11 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       </div>
     </div>
     <button onclick="dpAdd()" style="width:100%;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#43; Position hinzuf&uuml;gen</button>
+    <div id="dp-add-hint" style="display:none;margin-top:8px;font-family:monospace;font-size:10px;color:#ffab00"></div>
   </div>
 
   <!-- â”€â”€ Gesamt-Performance Kacheln â”€â”€ -->
-  <div id="dp-summary" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px"></div>
+  <div id="dp-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:14px"></div>
   <div id="dp-risk" style="display:none;margin-bottom:14px;padding:10px;border:1px solid #2a3441;border-radius:6px;background:#0f1620"></div>
 
   <!-- â”€â”€ Zeitreihen-Chart â”€â”€ -->
@@ -1010,7 +1012,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.24 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.25 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -3538,7 +3540,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.24';
+      var PAGE_VERSION = 'v6.6.25';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -5230,6 +5232,186 @@ function dpHoldingsAsOf(dateStr){
   return holdings;
 }
 
+/* S392 v6.6.25: Pruefdatum und Haltestatus je Position (Konzept C-BUY-
+   Umsetzung Stufe 3, Konzept SELL 3.5). Abgeleitet, NICHT gespeichert:
+   Eingaben sind allein Buchungslog, heutiges Datum und scores.json --
+   jedes Geraet zeigt denselben Status (Kla 06.10.2026, kein Merker je
+   Browser). Alle Daten als Zeichenkette JJJJ-MM-TT; Vergleiche als
+   Zeichenkettenvergleich, Tagesdifferenz ueber Date.UTC (zeitzonenfrei).
+   buyDate in dpBuildMap bleibt unveraendert (Renditerechnung). */
+var DP_ALTBESTAND_START = '2026-01-01';
+var DP_ALTBESTAND_ANKER = '2026-10-31';
+
+/* dpHeute: EINZIGE Stelle, an der "heute" entsteht (R-4, lokale Uhr). */
+function dpHeute(){
+  var d = new Date();
+  var m = d.getMonth() + 1, t = d.getDate();
+  return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (t < 10 ? '0' : '') + t;
+}
+
+/* dpJahrePlus: gleicher Kalendertag n Jahre spaeter; 29.02. -> 28.02.
+   (Date.setMonth wuerde auf den 01.03. rollen, S388 B-8). */
+function dpJahrePlus(s, n){
+  var y = parseInt(s.substring(0, 4), 10) + n;
+  var md = s.substring(5, 10);
+  if(md === '02-29' && !((y % 4 === 0 && y % 100 !== 0) || y % 400 === 0)) md = '02-28';
+  return y + '-' + md;
+}
+
+/* dpTageBis: Kalendertage von -> bis (positiv, wenn bis spaeter liegt). */
+function dpTageBis(von, bis){
+  function u(s){
+    return Date.UTC(parseInt(s.substring(0, 4), 10), parseInt(s.substring(5, 7), 10) - 1,
+                    parseInt(s.substring(8, 10), 10));
+  }
+  return Math.round((u(bis) - u(von)) / 86400000);
+}
+
+function dpDatumTxt(s){
+  return s ? s.substring(8, 10) + '.' + s.substring(5, 7) + '.' + s.substring(0, 4) : '';
+}
+
+/* R-1: Zyklusstart je Titel = erste Kaufbuchung nach dem letzten
+   Nullbestand (Nullbestand wie dpBuildMap: Bestand <= 0). Nachkauf und
+   Teilverkauf aendern ihn nicht; Wiederkauf nach Vollverkauf beginnt neu. */
+function dpZyklusStarts(txList){
+  var sorted = txSortByDate(txList || []);
+  var st = {}, res = {}, i, tx, s, k;
+  for(i = 0; i < sorted.length; i++){
+    tx = sorted[i];
+    if(!tx || !tx.t) continue;
+    if(!st[tx.t]) st[tx.t] = {n:0, start:''};
+    s = st[tx.t];
+    if(tx.typ === 'BUY' || tx.typ === 'ADD'){
+      if(s.n <= 0) s.start = txDateKey(tx);
+      s.n += tx.n;
+    } else if(tx.typ === 'TRIM' || tx.typ === 'SELL'){
+      s.n -= tx.n;
+      if(s.n < 0) s.n = 0;
+    }
+  }
+  for(k in st){ if(st.hasOwnProperty(k)) res[k] = st[k].start; }
+  return res;
+}
+
+/* R-2: Anker = Zyklusstart plus 12 Monate; Altbestand gemeinsam. */
+function dpAnker(start){
+  if(!start) return '';
+  return start === DP_ALTBESTAND_START ? DP_ALTBESTAND_ANKER : dpJahrePlus(start, 1);
+}
+
+/* R-3: juengstes Pruefdatum <= heute (letzt) und aeltestes > heute (naechst). */
+function dpPruefDaten(anker, heute){
+  var letzt = null, naechst = anker, k = 0;
+  while(naechst <= heute && k < 200){ letzt = naechst; k++; naechst = dpJahrePlus(anker, k); }
+  return {letzt:letzt, naechst:naechst};
+}
+
+/* R-5: war der Titel am Tag D BUY? true / false / null (nicht bewertbar).
+   rec = Titelzeile aus scores.json oder null, wenn der Titel dort fehlt
+   oder keinen Rangwert hat (entscheidet der Aufrufer ueber buyPctFor --
+   der Rang wird nur dort gelesen, D1-13). mac = __macro__, heuteBuy =
+   buyIsD1(t) des Aufrufers (die Schwelle steht weiter nur in isD1).
+   buy_hist und buy_hist_na sind Listen halboffener Intervalle [von, bis_exkl). */
+function dpBuyAm(rec, mac, D, heute, heuteBuy){
+  if(!rec || typeof rec !== 'object') return null;
+  var ab = mac ? mac.buy_hist_ab : null, bis = mac ? mac.buy_hist_bis : null;
+  if(!mac || mac.sell_proj_status !== 'ok' || !ab || !bis || !Array.isArray(rec.buy_hist)){
+    return D === heute ? (heuteBuy === true) : null;
+  }
+  if(D < ab) return null;
+  if(D > bis) return heuteBuy === true;
+  function drin(liste){
+    if(!Array.isArray(liste)) return false;
+    for(var i = 0; i < liste.length; i++){
+      var iv = liste[i];
+      if(iv && iv[0] && iv[0] <= D && (iv[1] === null || iv[1] === undefined || D < iv[1])) return true;
+    }
+    return false;
+  }
+  if(drin(rec.buy_hist_na)) return null;
+  return drin(rec.buy_hist);
+}
+
+/* R-6: Status einer offenen Position. code: etf | ohne | haelt | verl |
+   sell | nb; dazu letzt, naechst, rest (Tage bis naechst), wieder. */
+function dpPruefStatus(start, heute, rec, mac, heuteBuy, istEtf){
+  if(istEtf) return {code:'etf'};
+  var anker = dpAnker(start);
+  if(!anker) return {code:'ohne'};
+  var pd = dpPruefDaten(anker, heute);
+  var r = {code:'', letzt:pd.letzt, naechst:pd.naechst,
+           rest:dpTageBis(heute, pd.naechst), wieder:false};
+  if(!pd.letzt){ r.code = 'haelt'; return r; }
+  var b = dpBuyAm(rec, mac, pd.letzt, heute, heuteBuy);
+  if(b === true) r.code = 'verl';
+  else if(b === false){ r.code = 'sell'; r.wieder = (heuteBuy === true); }
+  else r.code = 'nb';
+  return r;
+}
+
+/* R-8: Kachel ZU PRUEFEN -- SELL Abstieg plus laufende Fristen mit
+   hoechstens 30 Resttagen; dazu das naechste Pruefdatum im Depot. */
+function dpPruefZaehlung(liste){
+  var n = 0, naechst = '', i, s;
+  for(i = 0; i < liste.length; i++){
+    s = liste[i];
+    if(!s || s.code === 'etf' || s.code === 'ohne') continue;
+    if(s.code === 'sell' || ((s.code === 'haelt' || s.code === 'verl') && s.rest <= 30)) n++;
+    if(s.naechst && (!naechst || s.naechst < naechst)) naechst = s.naechst;
+  }
+  return {n:n, naechst:naechst};
+}
+
+/* Status aller offenen Positionen {ticker: status}. Einzige nicht reine
+   Stelle: liest DEPOT_POSITIONS, _scoresIdx, __macro__, buyIsD1 und die
+   ETF-Liste (Kern-Bausteine + ETF-Log -> keine Frist). */
+function dpPruefMap(txList, heute){
+  var starts = dpZyklusStarts(txList);
+  var mac = (window.FD && FD['__macro__']) ? FD['__macro__'] : null;
+  var etf = {}, res = {}, i, et, p, st, rec;
+  for(i = 0; i < ETF_CORE.length; i++) etf[ETF_CORE[i].sym] = true;
+  et = etfTxLoad();
+  for(i = 0; i < et.length; i++){ if(et[i] && et[i].t) etf[et[i].t] = true; }
+  for(i = 0; i < DEPOT_POSITIONS.length; i++){
+    p = DEPOT_POSITIONS[i];
+    st = starts.hasOwnProperty(p.t) ? starts[p.t] : (p.buyDate || '');
+    rec = (buyPctFor(p.t) === null) ? null : _scoresIdx[p.t];
+    res[p.t] = dpPruefStatus(st, heute, rec, mac, buyIsD1(p.t), etf[p.t] === true);
+  }
+  return res;
+}
+
+/* Zelle Pruefung (R-6/R-7). maTxt: Satz zu den Tagen unter der
+   200-Tage-Linie (frueher eigene Spalte MA-Tg) oder ''. */
+function dpPruefZelle(s, maTxt){
+  var txt, col, ttl;
+  if(!s || s.code === 'etf'){ txt = '&mdash;'; col = '#456278'; ttl = 'ETF: keine Frist.'; }
+  else if(s.code === 'ohne'){ txt = '&mdash;'; col = '#456278'; ttl = 'Kaufdatum fehlt im Buchungslog.'; }
+  else if(s.code === 'haelt'){
+    txt = 'h&auml;lt bis ' + dpDatumTxt(s.naechst) + ' (' + s.rest + ' T)';
+    col = s.rest <= 30 ? '#ffab00' : '#7a9bb5';
+    ttl = 'Pr&uuml;fdatum ' + dpDatumTxt(s.naechst) + ', noch ' + s.rest + ' Tage.';
+  }
+  else if(s.code === 'verl'){
+    txt = 'verl&auml;ngert bis ' + dpDatumTxt(s.naechst);
+    col = '#00e57a';
+    ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + ': BUY. N&auml;chste Pr&uuml;fung in ' + s.rest + ' Tagen.';
+  }
+  else if(s.code === 'sell'){
+    txt = 'SELL Abstieg';
+    col = '#ff5252';
+    ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + (s.wieder ? '; heute wieder BUY' : '') + '.';
+  }
+  else {
+    txt = 'nicht bewertet';
+    col = '#456278';
+    ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + ': f&uuml;r diesen Tag liegt keine Bewertung vor.';
+  }
+  if(maTxt) ttl += ' ' + maTxt;
+  return '<td style="padding:5px 6px;text-align:center;font-family:monospace;font-size:10px;font-weight:700;white-space:nowrap;color:' + col + '" title="' + ttl + '">' + txt + '</td>';
+}
+
 function initDepot(){
   depotLoad();
   dpFillWL2();
@@ -5378,6 +5560,16 @@ function dpAdd(){
   dpTxSave(txList);
   DEPOT_POSITIONS = dpAggregate(txList);
 
+  /* S392 R-9: Nachkauf eines gehaltenen Titels -- das Pruefdatum bleibt. */
+  var _hint = document.getElementById('dp-add-hint');
+  if(_hint && _hint.style){
+    var _hs = (typ === 'ADD') ? dpPruefMap(txList, dpHeute())[tk] : null;
+    if(_hs && _hs.naechst){
+      _hint.innerHTML = 'Nachkauf: Pr&uuml;fdatum bleibt ' + dpDatumTxt(_hs.naechst);
+      _hint.style.display = 'block';
+    } else { _hint.innerHTML = ''; _hint.style.display = 'none'; }
+  }
+
   /* Felder leeren */
   document.getElementById('dp-shares').value = '';
   document.getElementById('dp-buy-price').value = '';
@@ -5450,16 +5642,25 @@ function dpRenderSummary(){
   var pnlPct = tot.cost > 0 ? (pnl / tot.cost * 100) : 0;
   var pnlC = pnl >= 0 ? '#00e57a' : '#ff5252';
 
-  function kachel(label, val, col){
+  function kachel(label, val, col, sub){
     return '<div style="text-align:center;padding:10px 6px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">' +
       '<div style="font-family:monospace;font-size:10px;color:var(--mut)">' + label + '</div>' +
-      '<div style="font-size:15px;font-weight:800;color:' + col + '">' + val + '</div></div>';
+      '<div style="font-size:15px;font-weight:800;color:' + col + '">' + val + '</div>' +
+      (sub ? '<div style="font-family:monospace;font-size:9px;color:var(--mut);margin-top:2px">' + sub + '</div>' : '') +
+      '</div>';
   }
   var out = '';
   out += kachel('POSITIONEN', DEPOT_POSITIONS.length, '#dce8f5');
   out += kachel('EINSTAND', tot.cost.toLocaleString('de-DE',{maximumFractionDigits:0})+' EUR', '#7a9bb5');
   out += kachel('AKT. WERT', tot.hasPrice>0 ? tot.val.toLocaleString('de-DE',{maximumFractionDigits:0})+' EUR' : 'n/a', '#dce8f5');
   out += kachel('+/- EUR', (tot.hasPrice>0 ? (pnl>=0?'+':'')+pnl.toLocaleString('de-DE',{maximumFractionDigits:0})+' EUR' : 'n/a'), pnlC);
+  /* S392 R-8: Kachel ZU PRUEFEN -- SELL Abstieg plus Fristen mit
+     hoechstens 30 Resttagen; Unterzeile = naechstes Pruefdatum. */
+  var _pm = dpPruefMap(dpTxLoad(), dpHeute()), _pl = [], _pk;
+  for(_pk in _pm){ if(_pm.hasOwnProperty(_pk)) _pl.push(_pm[_pk]); }
+  var _pz = dpPruefZaehlung(_pl);
+  out += kachel('ZU PR&Uuml;FEN', _pz.n, _pz.n > 0 ? '#ffab00' : '#dce8f5',
+                _pz.naechst ? 'n&auml;chste ' + dpDatumTxt(_pz.naechst) : '');
   el.innerHTML = out;
 }
 
@@ -5497,11 +5698,12 @@ function dpRenderTable(){
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:right">+/-%</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Score</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Sig</th>';
-  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center;font-size:10px" title="Snapshots im sell_ma-Zustand. Ab 20: Exit faellig.">MA-Tg</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center;font-size:10px" title="Pr&uuml;fdatum: zw&ouml;lf Monate ab Erstkauf, danach j&auml;hrlich.">Pr&uuml;fung</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Skt</th>';
   out += '<th style="background:#1a3a5c;color:var(--mut);padding:5px 6px;text-align:right;font-size:10px">real.</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px"></th></tr>';
 
+  var _dpPm = dpPruefMap(dpTxLoad(), dpHeute());
   for(var i=0;i<DEPOT_POSITIONS.length;i++){
     var p = DEPOT_POSITIONS[i];
     var cp = dpCurrentPrice(p.t);
@@ -5550,14 +5752,11 @@ function dpRenderTable(){
        Sektor-Ampel. Geschlossene Positionen (dpRenderClosed) und der
        ETF-Tab (etfRenderTable) bleiben bewusst ohne Kennzeichen. */
     out += '<td style="padding:5px 6px;text-align:center;color:'+sigC+';font-size:10px;font-weight:700" title="'+_dpSv.ttl+'">'+sigLbl+_dpSv.bdg+_dpSrBdg+'</td>';
+    /* S392 R-7: Spalte Pruefung an der Stelle von MA-Tg (td-Index 9). Die
+       Tage unter der 200-Tage-Linie stehen als Satz im Tooltip. */
     var _md=(dp_sig==='sell_ma')?dpSellMaDays(p.t):null;
-    var _mc,_mk;
-    if(_md===null){_mc='&mdash;';_mk='#456278';}
-    else if(_md<0){_mc='n/a';_mk='#456278';}
-    else if(_md>=20){_mc=_md+'!';_mk='#ff5252';}
-    else if(_md>=15){_mc=''+_md;_mk='#ffab00';}
-    else{_mc=''+_md;_mk='#7a9bb5';}
-    out += '<td style="padding:5px 6px;text-align:center;font-family:monospace;font-size:10px;font-weight:700;color:'+_mk+'">'+_mc+'</td>';
+    var _mt=(_md===null)?'':('Tage unter der 200-Tage-Linie: '+(_md<0?'unbekannt':_md)+'.');
+    out += dpPruefZelle(_dpPm[p.t], _mt);
     out += '<td style="padding:5px 6px;text-align:center">'+getSektorBadge(p.t)+'</td>';
     var rlz = typeof p.realized === 'number' ? p.realized : 0;
     var rlzC = rlz > 0 ? '#00e57a' : rlz < 0 ? '#ff5252' : 'var(--mut)';
@@ -5572,6 +5771,9 @@ function dpRenderTable(){
      aus wie ein Verkaufshinweis. Es ist keiner (Haltefrist = Stufe 3). */
   out += '<div style="margin-top:8px;padding:7px 10px;background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:4px;font-family:monospace;font-size:10px;color:#7a9bb5">';
   out += 'WATCH bei einer gehaltenen Position heisst: der Titel geh&ouml;rt nicht mehr zum obersten Zehntel. Das ist kein Verkaufshinweis &mdash; getestet ist eine Haltedauer von zw&ouml;lf Monaten ab Kauf.';
+  out += '</div>';
+  out += '<div style="margin-top:6px;padding:7px 10px;background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:4px;font-family:monospace;font-size:10px;color:#7a9bb5">';
+  out += 'Pr&uuml;fung: Jede Position wird zw&ouml;lf Monate ab Erstkauf gehalten. Am Pr&uuml;fdatum gilt: steht der Titel dann auf BUY, verl&auml;ngert sich die Haltezeit um ein Jahr; sonst zeigt die Zeile SELL Abstieg. Nachkauf und Teilverkauf verschieben das Pr&uuml;fdatum nicht. Bestand vom Jahresanfang 2026 wird gemeinsam am 31.10.2026 gepr&uuml;ft.';
   out += '</div>';
   /* Warnung wenn Ticker ohne EUR-Kurs.
      S359: EINE Quelle. dpCurrentPrice() entscheidet, ob eine
@@ -6573,7 +6775,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.24 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.25 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
