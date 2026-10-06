@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.28</title>
+<title>StockIQ v6.6.29</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -84,7 +84,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.28 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.29 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -126,7 +126,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <!-- Zeile 4: DR (ausgeblendet seit v6.6.17) / fSc / Auswahl / Trend / i (S394: Sell-Blocker entfallen) -->
   <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;align-items:center">
     <button id="wl-dr-btn" onclick="toggleDivFilter(document.getElementById('dr-btn'));rWL()" style="display:none;font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">DR: aus</button>
-    <button id="wl-fsc-btn" title="blendet alle Titel mit Fundamentalwert unter 70 aus und sortiert die &uuml;brigen Gruppen nach Fundamentalwert; BUY bleibt nach Rang sortiert." onclick="toggleFscFilter(document.getElementById('fsc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">fSc-Filter aus</button>
+    <button id="wl-fsc-btn" title="blendet Titel mit niedrigem Fundamentalwert aus und sortiert die &uuml;brigen danach; BUY bleibt nach Rang sortiert." onclick="toggleFscFilter(document.getElementById('fsc-btn'));rWL()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">Fundamentalwert-Filter aus</button>
     <button id="wl-aw-btn" title="zeigen nur Titel mit diesem Kennzeichen. Auswahl liegt immer in BUY, Trend in BUY oder WATCH." onclick="toggleAwFilter()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">Auswahl (--)</button>
     <button id="wl-tr-btn" title="zeigen nur Titel mit diesem Kennzeichen. Auswahl liegt immer in BUY, Trend in BUY oder WATCH." onclick="toggleTrFilter()" style="font-family:monospace;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">Trend (--)</button>
     <button id="wl-erl-btn" title="Erl&auml;uterungen ein- und ausblenden" onclick="wlErlToggle()" style="font-family:monospace;font-size:10px;font-weight:700;padding:5px 11px;border-radius:20px;border:1px solid #1a2a3a;color:var(--mut);background:transparent;cursor:pointer">i</button>
@@ -142,7 +142,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="wl-erl-box" style="display:none">
   <!-- S383: Erklaerzeilen zu den vier Filterknoepfen (statisch) -->
   <div id="wl-filter-erl" style="background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:6px;padding:8px 12px;margin-bottom:8px;font-size:11px;color:var(--mut);line-height:1.6">
-    <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Nur fSc ab 70</strong>: blendet alle Titel mit Fundamentalwert unter 70 aus und sortiert die &uuml;brigen Gruppen nach Fundamentalwert; BUY bleibt nach Rang sortiert.</div>
+    <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Nur hoher Fundamentalwert</strong>: blendet Titel mit niedrigem Fundamentalwert aus und sortiert die &uuml;brigen danach; BUY bleibt nach Rang sortiert.</div>
     <div><strong style="color:#7a9bb5">Auswahl / Trend</strong>: zeigen nur Titel mit diesem Kennzeichen. Auswahl liegt immer in BUY, Trend in BUY oder WATCH.</div>
   </div>
   <div style="background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:6px;padding:8px 12px;margin-bottom:8px;font-size:11px;color:var(--mut);line-height:1.5"><strong style="color:#7a9bb5">BUY</strong> (Stand 10/2026): BUY zeigt die Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Universum (oberstes Zehntel). Die R&uuml;ckrechnung hat diese Gruppe als Ganzes best&auml;tigt; die H&ouml;he ist &uuml;berzeichnet, weil nur heute noch gehandelte Titel z&auml;hlen. Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.</div>
@@ -222,7 +222,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.28</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.29</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -420,7 +420,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.28 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.29 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -440,7 +440,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. Watchlist</strong> &mdash; Alle Titel nach Score. Kachel Marktphase: Lage des Gesamtmarkts zu seiner 200-Tage-Linie (GR&Uuml;N, GELB als &Uuml;bergang, ROT). Antippen = Detail.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. Depot</strong> &mdash; Portfolio-Tracking. Positionen hinzufuegen, Wertentwicklung und Zeitreihe aus Snapshots. Pr&uuml;fung: Jede Position wird zw&ouml;lf Monate ab Erstkauf gehalten. Am Pr&uuml;fdatum gilt: steht der Titel dann auf BUY, verl&auml;ngert sich die Haltezeit um ein Jahr; sonst zeigt die Zeile SELL Abstieg. Nachkauf und Teilverkauf verschieben das Pr&uuml;fdatum nicht. Bestand vom Jahresanfang 2026 wird gemeinsam am 31.10.2026 gepr&uuml;ft. HOLD bei einer gehaltenen Position heisst: innerhalb der Haltezeit, kein Verkaufshinweis. SELL Abstieg erscheint erst am Pr&uuml;fdatum.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. Fundamentals</strong> &mdash; Tagesaktuelle Scores aus scores.json. <strong style="color:#00e57a">Exp</strong>-Button oben rechts = Experten-Modus ein/aus (ROCE, PEG, Debt, Moat, IC-Detail).</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Sektoren</strong> &mdash; RSS-Signale + 3M-Skip-Momentum, 11 SPDR-ETFs. Dispersion-Signal.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. Sektoren</strong> &mdash; RSS-Signale + Momentum 3 Monate ohne letzten Monat, 11 SPDR-ETFs. Dispersion-Signal.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">5. Hilfe</strong> &mdash; Diese Seite.</div>
       <div><strong style="color:#dce8f5">6. Roadmap</strong> &mdash; Entwicklungsplan &middot; Versions-Uebersicht &middot; offene Features.</div>
     </div>
@@ -563,7 +563,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Chip U200</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Kurs unter der 200-Tage-Linie. Ein Kennzeichen, kein Verkaufssignal. Der Chip zeigt die Titel der Gruppe WATCH mit diesem Kennzeichen; die Pille U200 erscheint bei jedem Etikett, auch bei BUY.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Kennzeichen)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Sektor-Auswahl</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel des gew&auml;hlten Sektors.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Suchfeld</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, deren Ticker oder Name den Suchtext enth&auml;lt.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, das Feld wird geleert</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Nur fSc ab 70</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit einem Fundamentalscore ab 70; sortiert zus&auml;tzlich nach Fundamentalscore und dimmt BUY aus schwachen Sektoren leicht ab.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter und Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Nur hoher Fundamentalwert</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Blendet Titel mit niedrigem Fundamentalwert aus und sortiert die &uuml;brigen danach; dimmt BUY aus schwachen Sektoren leicht ab.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter und Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Auswahl (n)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit dem Kennzeichen Auswahl (vordere Pl&auml;tze der BUY-Liste). Alle Kacheln au&szlig;er BUY zeigen dann 0.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Kennzeichen)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Trend (n)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit dem Kennzeichen Trend (fr&uuml;heres Kaufsignal), auch wenn sie zugleich BUY sind. Sie liegen in BUY oder WATCH. Zusammen mit Auswahl: nur Titel mit beiden Kennzeichen.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Kennzeichen)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel BUY</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel aus dem obersten Zehntel der 12-Monats-Entwicklung im Universum, sortiert nach Rang.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Zeilenfilter (Signal)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
@@ -585,7 +585,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">BETA / LOW-VOL (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Beta = Kursvolatilitaet relativ zum Markt. <span style="color:#00e57a">niedrig</span> defensiv (Bonus) &nbsp;<span style="color:#f0c000">mittel</span> markt&auml;hnlich &nbsp;<span style="color:#ff6666">hoch</span> spekulativ (Malus). Fliesst in den Risk-Score ein. Akademisch: MSCI/BlackRock 1963&ndash;2024.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">DEBT/EQ % (v5.9.16)</div><div style="font-size:12px;color:var(--mut)">Verschuldungsgrad (yfinance debtToEquity). <span style="color:#00e57a">niedrig</span> konservativ &nbsp;<span style="color:#f0c000">mittel</span> normal &nbsp;<span style="color:#ff6666">hoch</span> risikoreich. Fliesst als Sicherheitsdimension in den Fundamental-Score ein. Finanzwerte werden separat bewertet (strukturell hohe D/E-Ratios).</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PEG-RATIO</div><div style="font-size:12px;color:var(--mut)">KGV / Gewinnwachstum%. <span style="color:#00e57a">niedrig</span> unterbewertet &nbsp;<span style="color:#00c8f0">mittel</span> fair &nbsp;<span style="color:#f0c000">erh&ouml;ht</span> leicht teuer &nbsp;<span style="color:#ff6666">hoch</span> teuer.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EVAR â€” Sektor-relatives Stability-Score (v5.9.32)</div><div style="font-size:12px;color:var(--mut)">Earnings Variability: Stabilit&auml;t der quarterly Net Income YoY-Wachstumsraten. Score 0&ndash;100 (100=maximal stabil). Ab v5.9.32 <strong style="color:#dce8f5">sektor-relativ</strong>: Zykliker werden mit Zyklikern verglichen. Quelle: MSCI Quality Index (dritter Kerndeskriptor neben ROE + D/E). Daten: fund_juno v7.9.3+.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EVAR â€” Sektor-relatives Stability-Score (v5.9.32)</div><div style="font-size:12px;color:var(--mut)">Earnings Variability: Stabilit&auml;t der quarterly Net Income YoY-Wachstumsraten. Score 0&ndash;100 (100=maximal stabil). Ab v5.9.32 <strong style="color:#dce8f5">sektor-relativ</strong>: Zykliker werden mit Zyklikern verglichen. Quelle: MSCI Quality Index (dritter Kerndeskriptor neben ROE + D/E). Daten: aus den Tagesdaten.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">EV/EBITDA (v5.9.30)</div><div style="font-size:12px;color:var(--mut)">Enterprise Value / EBITDA &mdash; robusteres Value-Signal als P/E oder PEG. EV umfasst Marktkapitalisierung + Schulden &minus; Cash; EBITDA eliminiert Abschreibungseffekte. <span style="color:#00e57a">niedrig</span> guenstig &nbsp;<span style="color:#f0c000">mittel</span> fair bis erhoht &nbsp;<span style="color:#ff6666">hoch</span> teuer. Fliesst in den Value-Score ein. Quelle: Loughran/Wellman 2011.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">FCF YIELD</div><div style="font-size:12px;color:var(--mut)">FreeCashflow / Marktkapitalisierung. <span style="color:#00e57a">hoch</span> stark &nbsp;<span style="color:#00c8f0">mittel</span> gut &nbsp;<span style="color:#f0c000">gering</span> schwach &nbsp;<span style="color:#ff6666">negativ</span> negativ.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ROCE / ROE</div><div style="font-size:12px;color:var(--mut)">ROCE = EBIT / (EK + LT-Schulden). Fallback ROE wenn nicht verfuegbar. <span style="color:#00e57a">sehr hoch</span> Burggraben &nbsp;<span style="color:#00c8f0">hoch</span> stark.</div></div>
@@ -607,7 +607,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">ATR-HIST-FILTER (neu v5.3)</div><div style="font-size:12px;color:var(--mut)">Histogramm muss im Verh&auml;ltnis zur Schwankungsbreite (ATR) ausreichend gro&szlig; sein. Filtert flache, unzuverlaessige MACD-Kreuzungen heraus.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">MOAT</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">Wide</span> = dauerhafter Wettbewerbsvorteil &nbsp;<span style="color:#00c8f0">Narrow</span> = moderater Vorteil &nbsp;<span style="color:var(--mut)">None</span> = kein Vorteil.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">RSI</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">niedrig</span> ueberverkauft &nbsp;<span style="color:#ff6666">hoch</span> ueberkauft &nbsp;<span style="color:var(--mut)">mittel</span> neutral.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">WALK-FORWARD OOS</div><div style="font-size:12px;color:var(--mut)">12M Training / 6M Out-of-Sample Test (v6b_6m). OOS WR &gt; IS WR = kein Overfitting. Reines Validierungsinstrument &mdash; veraendert keine Live-Signale.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">WALK-FORWARD</div><div style="font-size:12px;color:var(--mut)">Pr&uuml;fung an Daten, die bei der Festlegung der Regel nicht benutzt wurden. Reines Validierungsinstrument &mdash; veraendert keine Live-Signale.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">STABILITAET (StdAbw OOS WR)</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">gering</span> stabil &nbsp;<span style="color:#00c8f0">mittel</span> akzeptabel &nbsp;<span style="color:#ff6666">hoch</span> instabil. Bei wenigen Trades pro Fenster statistisch nicht aussagekraeftig.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PIOTROSKI MINI-SCORE (v5.9.21)</div><div style="font-size:12px;color:var(--mut)">5-Punkte Quality-Filter: ROA positiv, CFO positiv, Accruals OK (CFO&gt;NI), GrossMargin steigend, Debt Safe. Niedrige Scores bei messbaren Kriterien d&auml;mpfen den Fundamental-Score. Quelle: Piotroski 2000.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">VIX-REGIME (v5.9.24)</div><div style="font-size:12px;color:var(--mut)">CBOE Volatility Index: <span style="color:#00e676">niedrig (Low Vol)</span> normal &nbsp;<span style="color:#ffab00">erh&ouml;ht (Elevated)</span> ged&auml;mpft &nbsp;<span style="color:#ff5252">sehr hoch (Crisis)</span> stark ged&auml;mpft. Momentum-Score wird bei h&ouml;herer Volatilitaet Richtung Neutral skaliert. Quelle: Barroso/Santa-Clara 2015.</div></div>
@@ -670,7 +670,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p9" style="display:none;padding:16px;">
   <div style="font-size:20px;font-weight:800;margin-bottom:12px">&#127759; Sektor-Regime</div>
   <div id="sektor-ampel" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px">
-    <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#127942; Sektor-Performance (12M ETF-Returns) <span style="font-family:monospace;font-size:10px;color:var(--mut)">aus fund_juno __macro__</span></div>
+    <div style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#127942; Sektor-Performance (12M ETF-Returns) <span style="font-family:monospace;font-size:10px;color:var(--mut)">aus den Tagesdaten</span></div>
     <div id="sektor-ampel-content" style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px"></div>
     <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:6px">&#128202; stark positiv Leading &middot; &#128993; leicht positiv Neutral &middot; &#128308; negativ Lagging</div>
   </div>
@@ -804,7 +804,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.28 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.29 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -818,6 +818,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.29</td><td style="padding:5px 8px;color:var(--mut)">PEG aus den Tagesdaten auch f&uuml;r die Info-Zeile &bdquo;Hoch bewertet&ldquo; und die Fundamentals-Karte; Berichte ohne Gewichte und Schwellen, Glossar in Worten; Filter &bdquo;Nur hoher Fundamentalwert&ldquo;, Score ohne Verfahrens-Badge.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.28</td><td style="padding:5px 8px;color:var(--mut)">Detailansicht ohne Gewichte, Schwellen und Umrechnungen: Begr&uuml;ndungszeile nennt das Etikett in Klartext, Score als Sortierhilfe mit Teilwerten, PEG als gemessener Wert; Glossar und Sektoren-Tab in Worten statt Grenzwerten.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.27</td><td style="padding:5px 8px;color:var(--mut)">Watchlist: Kachel und Gruppe PEG-Block entfallen, Bewertung und &Uuml;berdehnung als Information in der Detailansicht; Kreis-Ampel bei U200 neutral; Hilfe Signal-Logik und Sektor-Matrix neu; Kopfzeile mit Datenstand, eine Lupe, Tab-Leiste bricht um, Profil-Chip ohne Zeichenfehler.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.26</td><td style="padding:5px 8px;color:var(--mut)">Watchlist: Kachel SELL Abstieg (vor 12 Monaten BUY, heute nicht) und Kachel Marktphase (best&auml;tigt, GELB mit Richtung); Sell-Blocker, HOLD und SELL MA entfallen, Kennzeichen U200; Depot-Spalte Sig zeigt HOLD in der Haltezeit; Erl&auml;uterungen hinter Knopf i.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -904,7 +905,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.28 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.29 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1002,7 +1003,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.28 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.29 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1365,11 +1366,9 @@ function pgSt(s){
   return 'ov';
 }
 function pgBk(s){var p=pgSt(s);return p==='ov'||p==='ng';}
-function pgLb(s){if(s.peg===null||s.peg===undefined)return 'n/a';return s.peg.toFixed(2);}
-/* S398 R-5: gemessener PEG aus dem Datenfeld (scores.json peg). s.peg ist der
-   statische Wert aus STOCKS[] (der STOCKS-Sync uebernimmt peg nicht; nur ein
-   manueller Fundamentals-Upload ueberschreibt ihn) -- er bleibt fuer
-   pgSt/mSig unveraendert, wird aber nicht mehr angezeigt. */
+/* S398 R-5: gemessener PEG aus dem Datenfeld (scores.json peg).
+   S399: einziger Anzeige-Leser (pgLb entfallen). Seit S399 setzt der
+   STOCKS-Sync s.peg aus demselben Feld; pgSt/mSig lesen s.peg. */
 function pegMess(t){
   var d=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
   return (d&&typeof d.peg==='number'&&isFinite(d.peg))?d.peg.toFixed(2):'--';
@@ -1874,12 +1873,10 @@ function scoreQuality(s){
   return 'stat';
 }
 
-/* Badge-HTML fuer Score-Qualitaet */
-function sqBadge(s){
-  var q=scoreQuality(s);
-  if(q==='ai')   return '<span style="font-family:monospace;font-size:10px;padding:1px 4px;border-radius:3px;background:rgba(0,230,118,.15);color:#00e676;margin-left:4px">AI</span>';
-  if(q==='json') return '<span style="font-family:monospace;font-size:10px;padding:1px 4px;border-radius:3px;background:rgba(0,200,240,.12);color:#00c8f0;margin-left:4px">JSON</span>';
-  return '<span style="font-family:monospace;font-size:10px;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,.07);color:#456278;margin-left:4px">stat</span>';
+/* S399 C-2: Badge AI/JSON/stat entfallen. Bei unvollstaendigen Daten bleibt
+   die Graufaerbung (scColQ) und der Score traegt einen title. */
+function sqTitle(s){
+  return scoreQuality(s)==='stat'?' title="Daten unvollst&auml;ndig"':'';
 }
 
 /* Score-Farbe: bei stat-Qualitaet gedÃ¤mpft */
@@ -2063,7 +2060,7 @@ function rSyn(){
     bH+='<div style="font-size:11px;color:var(--mut);margin-bottom:6px">'+dName(s)+'</div>';
     bH+='<div style="font-size:26px;font-weight:800;color:#00e57a;margin-bottom:4px">'+sc+'/100</div>';
     bH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">$'+s.p+' RSI:'+s.rsi+'</div>';
-    bH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">PEG:'+pgLb(s)+' KGV:'+s.pe+'x</div>';
+    bH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">PEG:'+pegMess(s.t)+' KGV:'+s.pe+'x</div>';
     bH+='</div>';
   }
   if(!bH)bH='<div style="color:var(--mut);font-size:12px;padding:12px">Keine qualifizierten Kaufsignale</div>';
@@ -2243,7 +2240,7 @@ function wlReset(){
      SELL_SCORE_FILTER, und der bleibt unveraendert (F4). */
   var _fscBtns=document.querySelectorAll('#fsc-btn,#wl-fsc-btn');
   for(_rl=0;_rl<_fscBtns.length;_rl++){
-    _fscBtns[_rl].textContent='fSc-Filter aus';
+    _fscBtns[_rl].textContent='Fundamentalwert-Filter aus';  /* S399 C-1 */
     _fscBtns[_rl].style.borderColor='#1a2a3a';
     _fscBtns[_rl].style.color='var(--mut)';
     _fscBtns[_rl].style.background='transparent';
@@ -2679,7 +2676,6 @@ function wlRend(scored){
     var dR=dqCheck(s.t,sig),dB=dR?('<span style="font-size:10px;color:#f0c000;border:1px solid rgba(240,192,0,.4);border-radius:3px;padding:1px 4px" title="DQ: '+dR.fields.join(", ")+'">&#9888;</span>'):"";
     var slbl=_sv.lbl;
     var scc=scColQ(sc,s);
-    var sqB=sqBadge(s);
     var pgD=pegMess(s.t);  /* S398 R-5: gemessener PEG statt Platzhalter */
     var pgV=pgD==='--'?null:parseFloat(pgD);  /* Farbe folgt dem angezeigten Wert, nicht s.peg */
     var pgC=pgV===null?'#7a9bb5':pgSt({peg:pgV})==='ov'?'#f0c000':pgV<1.5?'#00e57a':'#7a9bb5';
@@ -2700,7 +2696,7 @@ function wlRend(scored){
     h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800">'+s.t+'</span><span style="font-size:11px;color:var(--mut)">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
-    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+srAmpBdg+dB+'<span style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+sqB+_sB+'</div></div>';
+    h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+srAmpBdg+dB+'<span'+sqTitle(s)+' style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+_sB+'</div></div>';
     h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
@@ -2790,8 +2786,6 @@ function wlDetail(ticker){
   }
   WL_SEL=ticker;
   var sig=mSig(s);var sc=cSc(s);var fd=_scoresIdx[s.t];
-  var _sdGate=_scoresIdx&&_scoresIdx[s.t];
-  var wasGated=sig==='buy'&&_sdGate&&_sdGate.signal==='strong';
   var isStrong=sig==='strong';
   var isSellD=isSell(sig);
   var _svD=sigView(s.t,sig);
@@ -2810,11 +2804,10 @@ function wlDetail(ticker){
   var out='<div style="background:#0c1420;border:1px solid #1a2a3a;border-left:3px solid '+sc2+';border-radius:12px;padding:16px">';
   out+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">';
   out+='<div><div style="font-size:20px;font-weight:800;color:'+scColQ(sc,s)+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+dName(s)+'</div></div>';
-  out+='<div style="text-align:right"><div style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:10px;color:var(--mut)">/100 '+sqBadge(s)+'</div></div></div>';
+  out+='<div style="text-align:right"><div'+sqTitle(s)+' style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:10px;color:var(--mut)">/100</div></div></div>';
   out+='<div class="wl-why" style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:'+(_svD.bdg?'4':'10')+'px">'+why+'</div>';
   if(_svD.bdg)out+='<div class="wl-marks" style="margin-bottom:8px">'+_svD.bdg+'</div>';  /* S398 R-2: Kennzeichen */
   out+=wlInfoZeilen(s,sig);  /* S395 R-2 */
-  if(wasGated){out+='<div style="font-size:10px;color:#7a9bb5;margin-bottom:6px">&#9660; Score-Gate aktiv: Fundamentals oder Score unter Schwelle &rarr; BUY</div>';}
   out+='<button onclick="openChart(\''+s.t+'\')" style="font-size:11px;color:#00c8f0;background:none;border:none;cursor:pointer;font-family:monospace;padding:0;opacity:0.7;margin-top:4px">&#128200; Chart</button>';
   out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">';
   /* S398 R-3: Bausteinnamen ohne Gewicht und ohne Verfahrenszusatz */
@@ -3040,7 +3033,7 @@ function toggleFscFilter(btn){
   var fscBtns = document.querySelectorAll('#fsc-btn, #wl-fsc-btn'), i;
   for(i=0;i<fscBtns.length;i++){
     var b3 = fscBtns[i]; if(!b3) continue;
-    b3.textContent    = FSC_FILTER ? ('Nur fSc ab '+FSC_FILTER_MIN) : 'fSc-Filter aus';
+    b3.textContent    = FSC_FILTER ? 'Nur hoher Fundamentalwert' : 'Fundamentalwert-Filter aus';  /* S399 C-1: Zahl entfaellt */
     b3.style.borderColor = FSC_FILTER ? '#00e57a' : '#1a2a3a';
     b3.style.color       = FSC_FILTER ? '#00e57a' : 'var(--mut)';
     b3.style.background  = FSC_FILTER ? 'rgba(0,229,122,.1)' : 'transparent';
@@ -3520,7 +3513,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.28';
+      var PAGE_VERSION = 'v6.6.29';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -3572,7 +3565,10 @@ function loadScores() {
         }
       }
       /* Sprint 32: STOCKS aus _scoresIdx sync (AP-1: Single Source of Truth)      */
-      /* Felder: sw, above200, p, hist, rsi, div                                    */
+      /* Felder: sw, above200, p, hist, rsi, div, peg (S399)                        */
+      /* S399 A-1: peg aus dem Datenfeld, Zahl -> Zahl, sonst null (AP-3). Titel
+         ohne Eintrag ebenfalls null -- der STOCKS-Platzhalter gilt nur bis zum
+         Laden von scores.json. */
       /* NICHT sync-bar: macdLine/macdSig (n.v.), macdCross (Typ-Konflikt), sr      */
       for (var _si3 = 0; _si3 < STOCKS.length; _si3++) {
         var _sd3 = _scoresIdx[STOCKS[_si3].t];
@@ -3584,6 +3580,7 @@ function loadScores() {
           if (_sd3.rsi      !== null && _sd3.rsi      !== undefined) { STOCKS[_si3].rsi  = _sd3.rsi; }
           if (_sd3.div      !== null && _sd3.div      !== undefined) { STOCKS[_si3].div  = _sd3.div; }
         }
+        STOCKS[_si3].peg = (_sd3 && typeof _sd3.peg === 'number' && isFinite(_sd3.peg)) ? _sd3.peg : null;
       }
       /*WLCNT-AP1*/
       var _cntMatch = 0;
@@ -3880,7 +3877,7 @@ function applyFund(fund){
   for(i2=0;i2<STOCKS.length;i2++){
     var fd2=FD[STOCKS[i2].t];
     if(fd2){
-      if(fd2.peg!==null&&fd2.peg!==undefined)STOCKS[i2].peg=fd2.peg;
+      if(fd2.peg!==null&&fd2.peg!==undefined&&!(_scoresIdx&&_scoresIdx[STOCKS[i2].t]))STOCKS[i2].peg=fd2.peg;  /* S399: scores.json bleibt Quelle (AP-1) */
       if(fd2.pe!==null&&fd2.pe!==undefined)STOCKS[i2].pe=fd2.pe;
       // v6: technische Felder aus JSON uebernehmen
       if(fd2.price!==null&&fd2.price!==undefined)STOCKS[i2].p=fd2.price;
@@ -4219,7 +4216,7 @@ function rFund(){
     var fdcC4=fd4.fcf_debt_cover!==null&&fd4.fcf_debt_cover!==undefined?fd4.fcf_debt_cover:null;
     if(fdcC4!==null){var fdcCol4=fdcC4>=0.20?'#00e57a':fdcC4>=0.05?'#f0c000':'#ff6666';var fdcStr4=fdcC4>=10?'&gt;10x':fdcC4.toFixed(2)+'x';cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:2px"><span style="color:var(--mut)">FCF/Debt</span><span style="color:'+fdcCol4+'">'+fdcStr4+'</span></div>';}
     cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:2px"><span style="color:var(--mut)">'+rl4+'</span><span style="color:'+rc4+'">'+fp(rv4)+'</span></div>';
-    cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG</span><span>'+pgLb(s)+'</span></div>';
+    cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG</span><span>'+pegMess(s.t)+'</span></div>';
     var mrkC4=typeof s.momRank==='number'?(s.momRank>=80?'#00e57a':s.momRank>=60?'#f0c000':'#7a9bb5'):'#7a9bb5';
     cards+='<div style="display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-top:2px"><span style="color:var(--mut)">MomRank</span><span style="color:'+mrkC4+'">'+(typeof s.momRank==='number'?s.momRank+'%':'--')+'</span></div>';
     if(fd4.shareholder_return!==null&&fd4.shareholder_return!==undefined){
@@ -6772,7 +6769,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.28 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.29 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
@@ -7041,8 +7038,8 @@ function renderSektorTab(macro) {
   h += '<th style="padding:7px 8px;text-align:center;border-bottom:1px solid #30363d;">ETF</th>';
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">RSS &Delta;7d</th>';
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">RSS &Delta;30d</th>';
-  h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">3M-Skip</th>';
-  h += '<th title="3M-Skip-Momentum: 3-Monats-Return des ETF, letzte 21 Tage ausgeblendet (verhindert Kurzfrist-Reversal-Verzerrung). Rang 1 = staerkster Sektor." style="padding:7px 8px;text-align:center;border-bottom:1px solid #30363d;cursor:help;">Rang</th>';
+  h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">3 Monate ohne letzten Monat</th>';
+  h += '<th title="Momentum 3 Monate ohne letzten Monat: Return des ETF ohne den letzten Monat (verhindert Kurzfrist-Reversal-Verzerrung). Rang 1 = staerkster Sektor." style="padding:7px 8px;text-align:center;border-bottom:1px solid #30363d;cursor:help;">Rang</th>';
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">30d Ret.</th>';
   h += '<th style="padding:7px 8px;text-align:right;border-bottom:1px solid #30363d;">12M Ret.</th>';
   h += '</tr>';
@@ -7077,7 +7074,7 @@ function renderSektorTab(macro) {
 
   /* Legende */
   h += '<div style="margin-top:12px;font-size:11px;color:#8b949e;border-top:1px solid #21262d;padding-top:10px;line-height:1.6;">';
-  h += 'RSS = Sektor-ETF / SPY (relative Staerke). Rang = 3M-Skip-Momentum: 3-Monats-Return des ETF, letzte 21 Tage ausgeblendet (verhindert Kurzfrist-Reversal-Verzerrung). Rang 1 = staerkster Sektor.';
+  h += 'RSS = Sektor-ETF / SPY (relative Staerke). Rang = Momentum 3 Monate ohne letzten Monat: Return des ETF ohne den letzten Monat (verhindert Kurzfrist-Reversal-Verzerrung). Rang 1 = staerkster Sektor.';
   h += 'Dispersion = StdDev der 30d-Returns aller 11 Sektoren. ';
   h += 'Status: Stable (niedrig) | Building | Imminent | Active (hoch). ';
   h += '12M Ret. = ETF-Return letzte 12 Monate. Quellen: Moskowitz/Grinblatt 1999, Mamais/Thomakos/Vlamis 2025.';

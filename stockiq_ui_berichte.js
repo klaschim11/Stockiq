@@ -1,6 +1,7 @@
 /* stockiq_ui_berichte.js -- Sektor-Analyse-Bericht Engine */
 /* Extrahiert aus index.html | Sprint 53 | 27.06.2026 */
 /* Dashboard v6.4.13 | ES5-only (iOS Safari + GitHub Pages) */
+/* S399 (v6.6.29): Formeltexte (Gewichte, Schwellen, Funktionsnamen) aus dem sichtbaren Text entfernt */
 
 /* ============================================================
    SEKTOR-BERICHT ENGINE v5.9.51
@@ -238,7 +239,7 @@ function rptDQ(){
   html += '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:20px;overflow-x:auto;margin-bottom:20px">';
   html += '<table style="width:100%;border-collapse:collapse;font-size:11px;font-family:monospace">';
   html += '<thead><tr style="border-bottom:2px solid #1a3050;color:#dce8f5;text-align:left">';
-  var hdrs = ['Ticker', 'Name', 'Sektor', 'Signal', 'Raw', 'Fehlend', '#', 'fSc', 'Bucket', 'cSc', '12M'];
+  var hdrs = ['Ticker', 'Name', 'Sektor', 'Signal', 'Raw', 'Fehlend', '#', 'Fund', 'Bucket', 'Score', '12M'];
   for(var h=0; h<hdrs.length; h++) html += '<th style="padding:6px 8px">' + hdrs[h] + '</th>';
   html += '</tr></thead><tbody>';
   for(var i=0; i<rows.length; i++){
@@ -279,9 +280,9 @@ function rptDQ(){
   secArr.sort();
   html += '<div style="margin-bottom:8px"><b>Nach Sektor:</b> ' + secArr.join(' | ') + '</div>';
   if(fsCnt > 0){
-    html += '<div style="margin-bottom:12px"><b>&Oslash; fund_score (DQ-Gruppe):</b> ' + (fsSum / fsCnt).toFixed(1) + '</div>';
+    html += '<div style="margin-bottom:12px"><b>&Oslash; Fundamentalwert (DQ-Gruppe):</b> ' + (fsSum / fsCnt).toFixed(1) + '</div>';
   }
-  html += '<div style="margin-top:8px;padding:10px;background:#11203a;border-left:3px solid #2d7dd2;border-radius:4px;color:#a0b0c0;font-size:10px">Datenbasis fuer DQ-1-Validierung Q3 2026 (n=' + rows.length + '). CSV-Export liefert alle Spalten plus fSc-Bucket fuer spaeteren IC-Analysis-Join.</div>';
+  html += '<div style="margin-top:8px;padding:10px;background:#11203a;border-left:3px solid #2d7dd2;border-radius:4px;color:#a0b0c0;font-size:10px">Datenbasis fuer DQ-1-Validierung Q3 2026 (n=' + rows.length + '). CSV-Export liefert alle Spalten plus Fundamentalwert-Klasse fuer spaeteren IC-Analysis-Join.</div>';
   html += '</div>';
   out.innerHTML = html;
   /* Print-Button sichtbar machen */
@@ -432,7 +433,7 @@ function rptBuildSector(){
   out += '<div class="rpt-h1" style="font-size:18px;font-weight:800;color:#00c8f0;margin-bottom:4px">StockIQ Sektor-Analyse</div>';
   out += '<div class="rpt-h2" style="font-size:14px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#128202; ' + sec + ' &mdash; ' + dateStr + '</div>';
   out += '<div class="rpt-mut" style="font-family:monospace;font-size:9px;color:#7a9bb5">';
-  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score-Architektur: Mom 25% + Trend 20% + Fund 35% + Risk 20% &middot; StockIQ v6.4.13</div>';
+  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score: Sortierhilfe aus Momentum, Trend, Fundamentaldaten und Risiko &middot; StockIQ v6.4.13</div>';
   out += '</div>';
 
   /* -- 0. Sektor-Performance-Ranking (alle Sektoren) -- */
@@ -780,7 +781,7 @@ function rptSectorRanking(){
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">&#128202; Sektor-Performance-Ranking (12M)</div>';
   out += '<div style="font-family:monospace;font-size:9px;color:#7a9bb5;margin-bottom:10px">';
-  out += 'Aktien-\u00d8: 12M-Momentum aller Sektortitel (aus FD[]) &middot; ETF-Return: Sektor-ETF (fund_juno v7.9.10)</div>';
+  out += 'Aktien-\u00d8: 12M-Momentum aller Sektortitel &middot; ETF-Return: Sektor-ETF (aus den Tagesdaten)</div>';
 
   out += '<table class="rpt-tbl" style="width:100%;border-collapse:collapse;font-size:10px">';
   out += '<tr><th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">#</th>';
@@ -811,7 +812,7 @@ function rptSectorRanking(){
   }
   out += '</table>';
   out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5;margin-top:6px">';
-  out += '* ETF-Returns n/a: fund_juno v7.9.10 erforderlich (sector_etfs im __macro__-Block)</div>';
+  out += '* ETF-Returns n/a: in den Tagesdaten nicht enthalten.</div>';
   out += '</div>';
   return out;
 }
@@ -887,7 +888,7 @@ function rptTextAnalysis(tk, secStats){
 
   } else if(isHoldSig){
     p1 = name + ' wird durch den <strong>Score Filter als HOLD</strong> eingestuft (Score ' + sc + '/100). ';
-    p1 += 'Das technische Exit-Signal wird durch die fundamentale St&auml;rke (Score &ge;55) neutralisiert. ';
+    p1 += 'Das technische Exit-Signal wird durch die fundamentale St&auml;rke neutralisiert. ';
     p1 += '<strong>Handlungskonsequenz: Qualit&auml;tsposition halten \u2014 kein Verkauf auf Basis des technischen Signals allein.</strong>';
     p1 += scDiffTxt;
 
@@ -1003,23 +1004,23 @@ function rptTextAnalysis(tk, secStats){
 /* -- Kompaktes Glossar (v5.9.55) -- */
 function rptGlossar(){
   var terms = [
-    {t:'Score /100', d:'Gewichteter Gesamt-Score: Momentum 25% + Trend 20% + Fundamentals 35% + Risk 20%. Schwellen: &ge;65 = BUY-Bereich, &lt;45 = SELL-Bereich.'},
-    {t:'Momentum (momSc)', d:'12M Skip-Month-Momentum (Jegadeesh/Titman 1993) + MACD-Overlay + VIX/V2X-D&auml;mpfung (&times;1.0/0.6/0.2). EU-Ticker nutzen V2X statt VIX.'},
-    {t:'Trend', d:'Abstand des Kurses von der 200-Tage-Linie (SMA200) als Score 0&ndash;100. Negativ = Kurs unter 200MA = technisches SELL-Signal.'},
-    {t:'Fund (fSc)', d:'Fundamentals-Score: Bewertung (20%) + FCF Yield (30%) + ROCE (30%) + Schuldenqualit&auml;t (15%) + Konsistenz (5%).'},
-    {t:'FCF Yield', d:'Free Cashflow / Marktkapitalisierung &times; 100. Zeigt die laufende Cashgenerierung. &gt;6% stark, &lt;2% schwach.'},
-    {t:'Owner Earnings Yield', d:'(Nettogewinn + Abschreibungen &minus; Capex) / Marktkapitalisierung. Buffetts Konzept (1986): zeigt den echten Ertrag nach Erhaltungsinvestitionen. H&ouml;her als FCF bei Growth-Capex-Unternehmen.'},
-    {t:'ROCE', d:'Return on Capital Employed = EBIT / (Eigenkapital + langfr. Schulden). Misst Kapitaleffizienz. &gt;20% = starker Moat, &lt;8% = schwach.'},
-    {t:'PEG-Ratio', d:'Kurs-Gewinn-Verh&auml;ltnis / Gewinnwachstum. PEG &lt;2 = attraktiv, &gt;4 = teuer. Sektor-relativ normiert (pegRelSc).'},
-    {t:'EV/EBITDA', d:'Enterprise Value / EBITDA. Bewertungsm&uuml;ltipel: &lt;12x = g&uuml;nstig, &gt;25x = teuer. Buffett bevorzugt EV/EBIT (ohne D&A).'},
-    {t:'EVAR', d:'Earnings Variability Score 0&ndash;100. Misst Stabilit&auml;t der Ertr&auml;ge &uuml;ber Zeit. Sektor-relativ normiert. &gt;60 = stabil, &lt;30 = zyklisch.'},
-    {t:'Beta', d:'Marktsensitivit&auml;t. &lt;0.5 = defensiv, 1.0 = Markt, &gt;1.5 = aggressiv. Negatives Beta = Gegenkorrelation zum Markt.'},
-    {t:'Konsistenz (consScore)', d:'IQR-gefilterte Standardabweichung der ROCE-Historie (aus annual.json). Geringe Std-Abw = hohe Konsistenz = Buffett-Qualit&auml;tsmerkmal.'},
-    {t:'MACD', d:'Moving Average Convergence Divergence. ZL = Nulllinie. Histogramm > 0 = Aufw\u00e4rtsmomentum. SELL-Signal: Histogramm negativ + unter 200MA.'},
-    {t:'RSI', d:'Relative Strength Index (14). &lt;30 = &uuml;berverkauft (Kaufgelegenheit m&ouml;glich), &gt;70 = &uuml;berkauft, 40&ndash;60 = neutral.'},
-    {t:'Divergenz', d:'bull_regular: RSI steigt bei fallendem Kurs = nachlassender Verkaufsdruck, m&ouml;gliche Trendwende. bear_regular: Gegenst&uuml;ck (Kauf-Warnsignal).'},
-    {t:'SELL MA', d:'Signal: Kurs hat die 200-Tage-Linie (SMA200) unterschritten &mdash; Aufw\u00e4rtstrend gebrochen. Unabh&auml;ngig vom MACD-Signal.'},
-    {t:'HOLD DVG', d:'Deep Value Divergence: Technisches SELL-Signal unterdrueckt weil Fund &ge;80 + RSI &lt;35 + Bullish Divergenz gleichzeitig. Zeigt: gutes Unternehmen in technischer Schwaechephase. Beobachten auf 200MA-Rueckkehr. (v5.9.69)'},
+    {t:'Score /100', d:'Der Score fasst Momentum, Trend, Fundamentaldaten und Risiko zusammen. Er ist eine Sortierhilfe, kein Kauf- oder Verkaufssignal.'},
+    {t:'Momentum', d:'Misst die Kursentwicklung des letzten Jahres ohne den j&uuml;ngsten Monat. H&ouml;her ist g&uuml;nstiger.'},
+    {t:'Trend', d:'Misst den Abstand des Kurses zur 200-Tage-Linie. H&ouml;her ist g&uuml;nstiger.'},
+    {t:'Fund', d:'Fasst Bewertung, Cashflow, Kapitalrendite, Verschuldung und Ertragsstabilit&auml;t zusammen. H&ouml;her ist g&uuml;nstiger.'},
+    {t:'FCF Yield', d:'Misst den freien Cashflow im Verh&auml;ltnis zum B&ouml;rsenwert. H&ouml;her ist g&uuml;nstiger.'},
+    {t:'Owner Earnings Yield', d:'Misst den Ertrag f&uuml;r den Eigent&uuml;mer nach Erhaltungsinvestitionen im Verh&auml;ltnis zum B&ouml;rsenwert (Konzept nach Buffett). H&ouml;her ist g&uuml;nstiger.'},
+    {t:'ROCE', d:'Misst die Rendite auf das eingesetzte Kapital. H&ouml;her ist g&uuml;nstiger.'},
+    {t:'PEG-Ratio', d:'Misst das Kurs-Gewinn-Verh&auml;ltnis im Verh&auml;ltnis zum Gewinnwachstum. Niedriger ist g&uuml;nstiger.'},
+    {t:'EV/EBITDA', d:'Misst den Unternehmenswert im Verh&auml;ltnis zum operativen Ergebnis vor Abschreibungen. Niedriger ist g&uuml;nstiger.'},
+    {t:'EVAR', d:'Misst die Stabilit&auml;t der Ertr&auml;ge &uuml;ber die Zeit, verglichen mit dem eigenen Sektor. H&ouml;her ist g&uuml;nstiger.'},
+    {t:'Beta', d:'Misst, wie stark der Kurs mit dem Gesamtmarkt schwankt. Niedriger ist g&uuml;nstiger.'},
+    {t:'Konsistenz', d:'Misst, wie gleichm&auml;&szlig;ig die Kapitalrendite &uuml;ber die Jahre ausf&auml;llt. H&ouml;her ist g&uuml;nstiger.'},
+    {t:'MACD', d:'Misst Richtung und St&auml;rke der kurzfristigen Kursbewegung. H&ouml;her ist g&uuml;nstiger.'},
+    {t:'RSI', d:'Misst, wie stark der Kurs in kurzer Zeit gestiegen oder gefallen ist. Hoch hei&szlig;t &uuml;berkauft, niedrig &uuml;berverkauft. Information, kein Signal.'},
+    {t:'Divergenz', d:'Bullische Divergenz: der RSI steigt, w&auml;hrend der Kurs f&auml;llt &mdash; nachlassender Verkaufsdruck. B&auml;rische Divergenz: das Gegenst&uuml;ck.'},
+    {t:'U200', d:'Kurs unter der 200-Tage-Linie. Kennzeichen, kein Signal.'},
+    {t:'HOLD DVG', d:'Deep Value Divergence: hoher Fundamentalwert, &uuml;berverkaufter Kurs und bullische Divergenz treffen zusammen. Zeigt ein gutes Unternehmen in technischer Schw&auml;chephase.'},
     {t:'Moat', d:'Wirtschaftlicher Burggraben nach Morningstar: Wide (sehr stark), Narrow (moderat), None (kein struktureller Vorteil). Wichtig f&uuml;r langfristige Haltestrategien.'},
   ];
 
@@ -1317,7 +1318,7 @@ function rptBuildSignal(){
     } else {
       html += '<table style="width:100%;border-collapse:collapse;font-size:11px;font-family:monospace">';
       html += '<thead><tr style="border-bottom:2px solid #1a3050;color:#dce8f5;text-align:left">';
-      var hdrs = ['Ticker','Name','Sektor','Signal','cSc','fSc','PEG','RSI','Fehlend'];
+      var hdrs = ['Ticker','Name','Sektor','Signal','Score','Fund','PEG','RSI','Fehlend'];
       for(var h=0; h<hdrs.length; h++) html += '<th style="padding:6px 8px">' + hdrs[h] + '</th>';
       html += '</tr></thead><tbody>';
       for(var j=0; j<blkRows.length; j++){
