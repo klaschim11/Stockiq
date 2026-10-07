@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.30</title>
+<title>StockIQ v6.6.32</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -87,7 +87,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.30 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.32 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -225,7 +225,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.30</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.32</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -423,7 +423,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.30 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.32 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -807,7 +807,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.30 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.32 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -821,6 +821,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.32</td><td style="padding:5px 8px;color:var(--mut)">Dividendenrendite wieder in der Detailansicht &ndash; die Tagesdaten liefern sie jetzt in der richtigen Einheit (Prozent). Die Kachel SH RETURN bleibt ausgeblendet, bis es Daten zu Aktienr&uuml;ckk&auml;ufen gibt.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.31</td><td style="padding:5px 8px;color:var(--mut)">Detailansicht: Momentum, Trend, Fund und Risk zeigen die Werte aus den Tagesdaten; MACD-Zeile, BUYBACK und Dividendenkacheln (bis zur Korrektur der Dividendendaten) ausgeblendet; RSI ohne Wert zeigt &bdquo;--&ldquo;.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.30</td><td style="padding:5px 8px;color:var(--mut)">KGV laufend und erwartet in der Watchlist-Zeile neben dem PEG und als Depot-Spalte, Gewinnwachstum in der Detailansicht &ndash; Angabe aus den Tagesdaten, kein Signal; Depot-Spalte Pr&uuml;fung zeigt nur noch Datum und Resttage.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.29</td><td style="padding:5px 8px;color:var(--mut)">PEG aus den Tagesdaten auch f&uuml;r die Info-Zeile &bdquo;Hoch bewertet&ldquo; und die Fundamentals-Karte; Berichte ohne Gewichte und Schwellen, Glossar in Worten; Filter &bdquo;Nur hoher Fundamentalwert&ldquo;, Score ohne Verfahrens-Badge.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.28</td><td style="padding:5px 8px;color:var(--mut)">Detailansicht ohne Gewichte, Schwellen und Umrechnungen: Begr&uuml;ndungszeile nennt das Etikett in Klartext, Score als Sortierhilfe mit Teilwerten, PEG als gemessener Wert; Glossar und Sektoren-Tab in Worten statt Grenzwerten.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -909,7 +911,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.30 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.32 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1007,310 +1009,310 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.30 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.32 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
      ============================================================ -->
 <script>
 var STOCKS = [
-  {t:'META',n:'Meta Platforms',p:548.40,chg:2.0,rsi:64,pe:25,eg:22,peg:1.14,above200:true,macdCross:'above_zero',macdLine:2.00,macdSig:1.40,hist:0.60,div:'bear_hidden',sr:false,sw:false,atr:16,mom:68,trend:70,fund:76,risk:58},
-  {t:'AAPL',n:'Apple Inc',p:196.40,chg:1.1,rsi:57,pe:28,eg:10,peg:2.8,above200:true,macdCross:'above_zero',macdLine:0.70,macdSig:0.40,hist:0.30,div:'none',sr:true,sw:false,atr:5,mom:61,trend:65,fund:74,risk:70},
-  {t:'MSFT',n:'Microsoft Corp',p:388.40,chg:0.6,rsi:54,pe:31,eg:16,peg:1.94,above200:true,macdCross:'above_zero',macdLine:1.10,macdSig:0.80,hist:0.30,div:'none',sr:true,sw:false,atr:9,mom:63,trend:68,fund:76,risk:72},
-  {t:'GOOGL',n:'Alphabet Inc',p:166.20,chg:0.5,rsi:51,pe:21,eg:18,peg:1.17,above200:true,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.60,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:6,mom:58,trend:62,fund:79,risk:67},
-  {t:'AMZN',n:'Amazon.com',p:188.60,chg:1.6,rsi:60,pe:36,eg:28,peg:1.29,above200:true,macdCross:'above_zero',macdLine:1.30,macdSig:0.90,hist:0.40,div:'none',sr:true,sw:false,atr:8,mom:66,trend:64,fund:72,risk:63},
-  {t:'NVDA',n:'NVIDIA Corp',p:171.80,chg:-1.4,rsi:38,pe:42,eg:80,peg:0.53,above200:false,macdCross:'below_zero',macdLine:-2.80,macdSig:-3.20,hist:0.40,div:'bull_regular',sr:true,sw:false,atr:12,mom:62,trend:48,fund:58,risk:55},
-  {t:'TSLA',n:'Tesla Inc',p:252.80,chg:2.8,rsi:42,pe:88,eg:8,peg:11.0,above200:false,macdCross:'below_zero',macdLine:-4.10,macdSig:-3.20,hist:-0.90,div:'none',sr:false,sw:true,atr:18,mom:38,trend:32,fund:22,risk:28},
-  {t:'AVGO',n:'Broadcom Inc',p:168.20,chg:-0.9,rsi:41,pe:35,eg:24,peg:1.46,above200:false,macdCross:'below_zero',macdLine:-1.80,macdSig:-2.20,hist:0.40,div:'bull_regular',sr:true,sw:false,atr:7,mom:55,trend:50,fund:72,risk:60},
-  {t:'MU',n:'Micron Technology',p:118.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
-  {t:'QCOM',n:'Qualcomm',p:148.30,chg:-1.1,rsi:40,pe:16,eg:14,peg:1.14,above200:false,macdCross:'below_zero',macdLine:-1.20,macdSig:-1.60,hist:0.40,div:'bull_hidden',sr:true,sw:false,atr:5,mom:52,trend:46,fund:74,risk:62},
-  {t:'CDNS',n:'Cadence Design Sys',p:224.50,chg:0.4,rsi:52,pe:64,eg:18,peg:3.56,above200:false,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.90,hist:0.30,div:'none',sr:true,sw:false,atr:8,mom:56,trend:54,fund:70,risk:58},
-  {t:'SNPS',n:'Synopsys',p:448.20,chg:0.2,rsi:50,pe:58,eg:17,peg:3.41,above200:false,macdCross:'below_zero',macdLine:-0.80,macdSig:-1.10,hist:0.30,div:'none',sr:true,sw:false,atr:14,mom:54,trend:52,fund:72,risk:60},
-  {t:'FICO',n:'Fair Isaac Corp',p:1820.00,chg:1.2,rsi:58,pe:82,eg:20,peg:4.1,above200:true,macdCross:'below_zero',macdLine:-5.00,macdSig:-7.00,hist:2.00,div:'bull_hidden',sr:true,sw:false,atr:55,mom:65,trend:62,fund:68,risk:55},
-  {t:'NOW',n:'ServiceNow',p:742.60,chg:0.8,rsi:55,pe:72,eg:25,peg:2.88,above200:true,macdCross:'below_zero',macdLine:-2.10,macdSig:-3.00,hist:0.90,div:'bull_hidden',sr:true,sw:false,atr:22,mom:64,trend:62,fund:70,risk:58},
-  {t:'LLY',n:'Eli Lilly',p:798.40,chg:-0.6,rsi:44,pe:52,eg:40,peg:1.3,above200:false,macdCross:'below_zero',macdLine:-4.20,macdSig:-5.80,hist:1.60,div:'bull_regular',sr:true,sw:false,atr:28,mom:58,trend:52,fund:74,risk:56},
-  {t:'JNJ',n:'Johnson & Johnson',p:155.40,chg:0.1,rsi:49,pe:14,eg:5,peg:2.8,above200:true,macdCross:'below_zero',macdLine:-0.20,macdSig:-0.40,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:2.5,mom:50,trend:53,fund:84,risk:90},
-  {t:'SYK',n:'Stryker Corp',p:352.80,chg:0.5,rsi:56,pe:34,eg:12,peg:2.83,above200:true,macdCross:'below_zero',macdLine:-0.90,macdSig:-1.30,hist:0.40,div:'none',sr:true,sw:false,atr:10,mom:62,trend:60,fund:76,risk:72},
-  {t:'NVO',n:'Novo Nordisk',p:68.10,chg:-0.9,rsi:22,pe:15,eg:20,peg:0.75,above200:false,macdCross:'below_zero',macdLine:-2.20,macdSig:-2.90,hist:0.70,div:'bull_regular',sr:false,sw:false,atr:3.2,mom:26,trend:20,fund:64,risk:44},
-  {t:'BRK-B',n:'Berkshire Hathaway B',p:448.20,chg:0.3,rsi:55,pe:22,eg:9,peg:2.44,above200:true,macdCross:'above_zero',macdLine:1.40,macdSig:1.00,hist:0.40,div:'none',sr:true,sw:false,atr:8,mom:64,trend:66,fund:82,risk:80},
-  {t:'PGR',n:'Progressive Corp',p:248.60,chg:0.7,rsi:57,pe:18,eg:20,peg:0.9,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.80,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:7,mom:65,trend:64,fund:80,risk:76},
-  {t:'BKNG',n:'Booking Holdings',p:4820.00,chg:1.4,rsi:59,pe:26,eg:18,peg:1.44,above200:true,macdCross:'above_zero',macdLine:12.00,macdSig:8.50,hist:3.50,div:'none',sr:true,sw:false,atr:110,mom:67,trend:68,fund:74,risk:62},
-  {t:'PYPL',n:'PayPal Holdings',p:62.40,chg:-0.8,rsi:38,pe:18,eg:7,peg:2.57,above200:false,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.90,hist:0.30,div:'bull_regular',sr:false,sw:false,atr:2.5,mom:42,trend:36,fund:58,risk:45},
-  {t:'MCD',n:'McDonalds Corp',p:288.40,chg:0.2,rsi:48,pe:22,eg:8,peg:2.75,above200:false,macdCross:'below_zero',macdLine:-0.80,macdSig:-1.10,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:5,mom:52,trend:50,fund:78,risk:74},
-  {t:'SBUX',n:'Starbucks Corp',p:88.20,chg:0.4,rsi:45,pe:26,eg:10,peg:2.6,above200:false,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.60,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:2.8,mom:50,trend:46,fund:64,risk:58},
-  {t:'YUM',n:'Yum! Brands',p:132.80,chg:0.1,rsi:47,pe:24,eg:10,peg:2.4,above200:false,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:50,trend:48,fund:68,risk:62},
-  {t:'COST',n:'Costco Wholesale',p:928.40,chg:0.9,rsi:58,pe:52,eg:12,peg:4.33,above200:true,macdCross:'below_zero',macdLine:-2.50,macdSig:-3.50,hist:1.00,div:'bull_hidden',sr:true,sw:false,atr:22,mom:66,trend:64,fund:76,risk:72},
-  {t:'TT',n:'Trane Technologies',p:312.60,chg:0.6,rsi:54,pe:28,eg:14,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.70,macdSig:-1.00,hist:0.30,div:'none',sr:true,sw:false,atr:9,mom:62,trend:60,fund:74,risk:68},
-  {t:'ODFL',n:'Old Dominion Freight',p:148.20,chg:-0.4,rsi:42,pe:26,eg:10,peg:2.6,above200:false,macdCross:'below_zero',macdLine:-0.90,macdSig:-1.20,hist:0.30,div:'bull_regular',sr:true,sw:false,atr:5,mom:52,trend:48,fund:78,risk:70},
-  {t:'CWST',n:'Casella Waste Sys A',p:88.40,chg:0.3,rsi:50,pe:82,eg:15,peg:5.47,above200:true,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.50,hist:0.20,div:'none',sr:true,sw:false,atr:2.5,mom:58,trend:56,fund:62,risk:66},
-  {t:'NESN',n:'Nestle SA',p:84.20,chg:0.3,rsi:47,pe:18,eg:4,peg:4.5,above200:false,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.70,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:2.1,mom:55,trend:58,fund:82,risk:86},
-  {t:'LISP',n:'Lindt & Spruengli',p:11480.00,chg:0.2,rsi:51,pe:44,eg:8,peg:5.5,above200:false,macdCross:'below_zero',macdLine:-28.00,macdSig:-38.00,hist:10.00,div:'bull_hidden',sr:true,sw:false,atr:220,mom:56,trend:54,fund:82,risk:78},
-  {t:'SRT3',n:'Sartorius AG Vz',p:198.40,chg:-0.5,rsi:36,pe:52,eg:18,peg:2.89,above200:false,macdCross:'below_zero',macdLine:-1.80,macdSig:-2.40,hist:0.60,div:'bull_regular',sr:false,sw:false,atr:7,mom:40,trend:34,fund:68,risk:48},
-  {t:'EVD',n:'CTS Eventim AG',p:88.60,chg:0.6,rsi:54,pe:32,eg:14,peg:2.29,above200:true,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.50,hist:0.20,div:'none',sr:true,sw:false,atr:2.5,mom:62,trend:60,fund:72,risk:66},
-  {t:'NEM',n:'Nemetschek SE',p:94.20,chg:0.8,rsi:55,pe:68,eg:22,peg:3.09,above200:true,macdCross:'below_zero',macdLine:-0.20,macdSig:-0.40,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:3,mom:64,trend:62,fund:68,risk:60},
-  {t:'ASML',n:'ASML Holding',p:642.80,chg:-0.8,rsi:43,pe:29,eg:18,peg:1.61,above200:false,macdCross:'below_zero',macdLine:-1.40,macdSig:-1.10,hist:-0.30,div:'none',sr:true,sw:true,atr:20,mom:40,trend:38,fund:80,risk:62},
-  {t:'BTI',n:'British American Tobacco',p:34.80,chg:0.2,rsi:48,pe:8,eg:-2,peg:null,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.10,div:'none',sr:true,sw:false,atr:0.8,mom:50,trend:52,fund:62,risk:68},
-  {t:'RIO',n:'Rio Tinto',p:58.40,chg:-0.4,rsi:44,pe:11,eg:4,peg:2.75,above200:false,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.50,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:1.5,mom:48,trend:44,fund:72,risk:64},
-  {t:'SHEL.L',n:'Shell plc (London)',p:2850.00,chg:0.3,rsi:50,pe:13,eg:3,peg:4.33,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:3.00,div:'none',sr:true,sw:false,atr:40,mom:52,trend:52,fund:68,risk:66},
-  {t:'RMS',n:'Hermes International',p:2248.00,chg:0.5,rsi:53,pe:48,eg:14,peg:3.43,above200:true,macdCross:'below_zero',macdLine:-6.00,macdSig:-8.50,hist:2.50,div:'bull_hidden',sr:true,sw:false,atr:55,mom:65,trend:64,fund:86,risk:74},
-  {t:'8058.T',n:'Mitsubishi Corp',p:2840.00,chg:0.8,rsi:52,pe:11,eg:8,peg:1.38,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:3.00,div:'bull_hidden',sr:true,sw:false,atr:65,mom:62,trend:60,fund:80,risk:72},
-  {t:'8001.T',n:'Itochu Corp',p:7480.00,chg:0.6,rsi:54,pe:13,eg:9,peg:1.44,above200:true,macdCross:'below_zero',macdLine:-18.00,macdSig:-25.00,hist:7.00,div:'none',sr:true,sw:false,atr:140,mom:64,trend:62,fund:82,risk:74},
-  {t:'8031.T',n:'Mitsui & Co',p:2950.00,chg:0.5,rsi:53,pe:10,eg:9,peg:1.11,above200:true,macdCross:'below_zero',macdLine:-7.00,macdSig:-10.00,hist:3.00,div:'bull_hidden',sr:true,sw:false,atr:60,mom:63,trend:61,fund:81,risk:73},
-  {t:'8002.T',n:'Marubeni Corp',p:2180.00,chg:0.4,rsi:51,pe:9,eg:8,peg:1.13,above200:true,macdCross:'below_zero',macdLine:-5.00,macdSig:-7.50,hist:2.50,div:'bull_hidden',sr:true,sw:false,atr:50,mom:61,trend:60,fund:80,risk:72},
-  {t:'8053.T',n:'Sumitomo Corp',p:3120.00,chg:0.6,rsi:54,pe:10,eg:9,peg:1.11,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:3.00,div:'bull_hidden',sr:true,sw:false,atr:62,mom:62,trend:61,fund:80,risk:73},
-  {t:'8015.T',n:'Toyota Tsusho',p:2650.00,chg:0.3,rsi:52,pe:12,eg:10,peg:1.20,above200:true,macdCross:'below_zero',macdLine:-6.00,macdSig:-8.50,hist:2.50,div:'bull_hidden',sr:true,sw:false,atr:52,mom:60,trend:59,fund:78,risk:71},
-  {t:'V',n:'Visa Inc',p:278.40,chg:0.8,rsi:56,pe:30,eg:14,peg:2.14,above200:true,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.90,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:6,mom:65,trend:66,fund:78,risk:76},
-  {t:'MA',n:'Mastercard Inc',p:488.20,chg:0.9,rsi:57,pe:33,eg:16,peg:2.06,above200:true,macdCross:'below_zero',macdLine:-1.10,macdSig:-1.50,hist:0.40,div:'bull_hidden',sr:true,sw:false,atr:10,mom:66,trend:67,fund:78,risk:74},
-  {t:'UNH',n:'UnitedHealth Group',p:488.60,chg:-0.5,rsi:38,pe:18,eg:12,peg:1.5,above200:false,macdCross:'below_zero',macdLine:-4.20,macdSig:-5.80,hist:0.80,div:'bull_regular',sr:true,sw:false,atr:18,mom:42,trend:36,fund:76,risk:58},
-  {t:'HD',n:'Home Depot Inc',p:342.80,chg:0.4,rsi:50,pe:22,eg:8,peg:2.75,above200:true,macdCross:'below_zero',macdLine:-0.80,macdSig:-1.20,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:8,mom:55,trend:58,fund:76,risk:70},
-  {t:'ADBE',n:'Adobe Inc',p:368.40,chg:-0.6,rsi:42,pe:24,eg:12,peg:2.0,above200:false,macdCross:'below_zero',macdLine:-1.80,macdSig:-2.40,hist:0.40,div:'none',sr:true,sw:false,atr:12,mom:48,trend:44,fund:72,risk:60},
-  {t:'CRM',n:'Salesforce Inc',p:278.60,chg:0.5,rsi:50,pe:28,eg:14,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.90,macdSig:-1.30,hist:0.30,div:'none',sr:true,sw:false,atr:9,mom:57,trend:58,fund:70,risk:62},
-  {t:'ACN',n:'Accenture plc',p:302.40,chg:0.3,rsi:48,pe:24,eg:10,peg:2.4,above200:false,macdCross:'below_zero',macdLine:-1.20,macdSig:-1.60,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:8,mom:52,trend:50,fund:74,risk:68},
-  {t:'TMO',n:'Thermo Fisher Scientific',p:448.20,chg:0.2,rsi:46,pe:26,eg:10,peg:2.6,above200:false,macdCross:'below_zero',macdLine:-2.20,macdSig:-3.00,hist:0.50,div:'none',sr:true,sw:false,atr:14,mom:50,trend:48,fund:76,risk:64},
-  {t:'ISRG',n:'Intuitive Surgical',p:488.60,chg:1.1,rsi:60,pe:58,eg:16,peg:3.63,above200:true,macdCross:'below_zero',macdLine:-1.40,macdSig:-2.00,hist:0.50,div:'bull_hidden',sr:false,sw:false,atr:14,mom:65,trend:64,fund:68,risk:62},
-  {t:'REGN',n:'Regeneron Pharma',p:648.40,chg:-0.4,rsi:44,pe:20,eg:14,peg:1.43,above200:false,macdCross:'below_zero',macdLine:-3.80,macdSig:-5.20,hist:0.80,div:'none',sr:false,sw:false,atr:22,mom:50,trend:46,fund:72,risk:58},
-  {t:'PANW',n:'Palo Alto Networks',p:168.40,chg:0.8,rsi:54,pe:46,eg:20,peg:2.3,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.80,hist:0.20,div:'bull_hidden',sr:false,sw:false,atr:6,mom:60,trend:62,fund:66,risk:58},
-  {t:'AMAT',n:'Applied Materials',p:148.60,chg:-0.9,rsi:40,pe:16,eg:12,peg:1.33,above200:false,macdCross:'below_zero',macdLine:-1.40,macdSig:-2.00,hist:0.40,div:'bull_regular',sr:true,sw:false,atr:7,mom:48,trend:44,fund:74,risk:60},
-  {t:'LRCX',n:'Lam Research',p:678.40,chg:-1.1,rsi:38,pe:18,eg:14,peg:1.29,above200:false,macdCross:'below_zero',macdLine:-5.20,macdSig:-7.00,hist:1.20,div:'bull_regular',sr:true,sw:false,atr:24,mom:46,trend:42,fund:76,risk:58},
-  {t:'KLAC',n:'KLA Corp',p:688.20,chg:-0.8,rsi:42,pe:20,eg:14,peg:1.43,above200:false,macdCross:'below_zero',macdLine:-4.80,macdSig:-6.40,hist:1.00,div:'bull_regular',sr:true,sw:false,atr:22,mom:48,trend:44,fund:74,risk:60},
-  {t:'MELI',n:'MercadoLibre Inc',p:1888.40,chg:1.4,rsi:58,pe:48,eg:28,peg:1.71,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:2.00,div:'none',sr:false,sw:false,atr:55,mom:65,trend:63,fund:68,risk:58},
-  {t:'ADP',n:'Automatic Data Processing',p:278.40,chg:0.4,rsi:54,pe:28,eg:10,peg:2.8,above200:true,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.90,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:6,mom:60,trend:62,fund:76,risk:76},
-  {t:'CTAS',n:'Cintas Corp',p:188.60,chg:0.5,rsi:56,pe:38,eg:12,peg:3.17,above200:true,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.60,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:5,mom:62,trend:63,fund:70,risk:72},
-  {t:'FAST',n:'Fastenal Co',p:68.40,chg:0.3,rsi:52,pe:34,eg:10,peg:3.4,above200:true,macdCross:'below_zero',macdLine:-0.20,macdSig:-0.30,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:1.6,mom:58,trend:60,fund:68,risk:72},
-  {t:'ROL',n:'Rollins Inc',p:48.20,chg:0.4,rsi:55,pe:44,eg:12,peg:3.67,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.10,div:'none',sr:true,sw:false,atr:1.1,mom:60,trend:62,fund:66,risk:70},
-  {t:'WST',n:'West Pharmaceutical',p:228.40,chg:-0.3,rsi:44,pe:32,eg:10,peg:3.2,above200:false,macdCross:'below_zero',macdLine:-1.20,macdSig:-1.70,hist:0.30,div:'none',sr:true,sw:false,atr:8,mom:48,trend:46,fund:70,risk:62},
-  {t:'MTD',n:'Mettler-Toledo Intl',p:1188.40,chg:0.2,rsi:48,pe:30,eg:8,peg:3.75,above200:false,macdCross:'below_zero',macdLine:-5.80,macdSig:-8.00,hist:1.40,div:'none',sr:false,sw:false,atr:38,mom:52,trend:50,fund:70,risk:62},
-  {t:'IDXX',n:'IDEXX Laboratories',p:388.40,chg:0.6,rsi:52,pe:44,eg:12,peg:3.67,above200:true,macdCross:'below_zero',macdLine:-1.20,macdSig:-1.70,hist:0.30,div:'none',sr:false,sw:false,atr:12,mom:58,trend:58,fund:68,risk:62},
-  {t:'WSO',n:'Watsco Inc',p:388.20,chg:0.5,rsi:54,pe:28,eg:10,peg:2.8,above200:true,macdCross:'below_zero',macdLine:-0.80,macdSig:-1.10,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:10,mom:61,trend:62,fund:72,risk:68},
-  {t:'EFX',n:'Equifax Inc',p:228.40,chg:0.4,rsi:50,pe:32,eg:14,peg:2.29,above200:true,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.90,hist:0.20,div:'none',sr:true,sw:false,atr:7,mom:56,trend:58,fund:70,risk:62},
-  {t:'MCO',n:'Moodys Corp',p:388.60,chg:0.7,rsi:57,pe:32,eg:14,peg:2.29,above200:true,macdCross:'below_zero',macdLine:-0.90,macdSig:-1.30,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:10,mom:64,trend:65,fund:76,risk:70},
-  {t:'SPGI',n:'S&P Global Inc',p:448.80,chg:0.6,rsi:55,pe:32,eg:12,peg:2.67,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:11,mom:63,trend:64,fund:76,risk:72},
-  {t:'ICE',n:'Intercontinental Exchange',p:148.40,chg:0.5,rsi:55,pe:26,eg:10,peg:2.6,above200:true,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.60,hist:0.20,div:'none',sr:true,sw:false,atr:4,mom:60,trend:62,fund:74,risk:72},
-  {t:'CME',n:'CME Group Inc',p:228.40,chg:0.3,rsi:52,pe:22,eg:8,peg:2.75,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:5,mom:58,trend:60,fund:74,risk:74},
-  {t:'BRO',n:'Brown & Brown Inc',p:88.40,chg:0.6,rsi:58,pe:28,eg:12,peg:2.33,above200:true,macdCross:'below_zero',macdLine:-0.20,macdSig:-0.30,hist:0.10,div:'none',sr:true,sw:false,atr:2.2,mom:63,trend:64,fund:70,risk:72},
-  {t:'RJF',n:'Raymond James Financial',p:118.40,chg:0.4,rsi:52,pe:14,eg:10,peg:1.4,above200:true,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.50,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:3,mom:59,trend:60,fund:74,risk:70},
-  {t:'SAP',n:'SAP SE',p:228.40,chg:0.8,rsi:58,pe:36,eg:16,peg:2.25,above200:true,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.90,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:6,mom:64,trend:65,fund:74,risk:68},
-  {t:'SIE',n:'Siemens AG',p:188.40,chg:0.5,rsi:52,pe:18,eg:10,peg:1.8,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.80,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:5,mom:58,trend:60,fund:76,risk:68},
-  {t:'ALV',n:'Allianz SE',p:328.40,chg:0.4,rsi:54,pe:12,eg:8,peg:1.5,above200:true,macdCross:'below_zero',macdLine:-0.70,macdSig:-1.00,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:7,mom:60,trend:62,fund:80,risk:76},
-  {t:'MRK',n:'Merck KGaA',p:148.60,chg:-0.3,rsi:46,pe:18,eg:10,peg:1.8,above200:false,macdCross:'below_zero',macdLine:-0.90,macdSig:-1.30,hist:0.30,div:'bull_regular',sr:true,sw:false,atr:4,mom:50,trend:48,fund:74,risk:64},
-  {t:'DTE',n:'Deutsche Telekom AG',p:28.40,chg:0.3,rsi:52,pe:14,eg:6,peg:2.33,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.10,hist:0.04,div:'bull_hidden',sr:true,sw:false,atr:0.6,mom:56,trend:58,fund:72,risk:70},
-  {t:'BAS',n:'BASF SE',p:38.40,chg:-0.4,rsi:42,pe:16,eg:4,peg:4.0,above200:false,macdCross:'below_zero',macdLine:-0.20,macdSig:-0.30,hist:0.10,div:'bull_regular',sr:true,sw:false,atr:1.0,mom:44,trend:42,fund:64,risk:58},
-  {t:'MC',n:'LVMH Moet Hennessy',p:548.40,chg:0.4,rsi:50,pe:20,eg:8,peg:2.5,above200:false,macdCross:'below_zero',macdLine:-2.80,macdSig:-3.80,hist:0.70,div:'bull_hidden',sr:true,sw:false,atr:15,mom:54,trend:52,fund:82,risk:70},
-  {t:'AIRLIQ',n:'Air Liquide SA',p:148.40,chg:0.3,rsi:52,pe:22,eg:8,peg:2.75,above200:true,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.60,hist:0.20,div:'bull_hidden',sr:true,sw:false,atr:3.5,mom:57,trend:58,fund:76,risk:72},
-  {t:'SANOFI',n:'Sanofi SA',p:98.40,chg:0.2,rsi:50,pe:14,eg:8,peg:1.75,above200:true,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.40,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:2.2,mom:55,trend:56,fund:78,risk:74},
-  {t:'BNP',n:'BNP Paribas SA',p:68.40,chg:0.5,rsi:54,pe:8,eg:6,peg:1.33,above200:true,macdCross:'below_zero',macdLine:-0.20,macdSig:-0.30,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:1.6,mom:59,trend:60,fund:76,risk:66},
-  {t:'OR',n:'LOreal SA',p:288.40,chg:0.3,rsi:50,pe:28,eg:8,peg:3.5,above200:false,macdCross:'below_zero',macdLine:-1.20,macdSig:-1.70,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:7,mom:52,trend:50,fund:82,risk:72},
-  {t:'DSY',n:'Dassault Systemes SE',p:28.40,chg:0.4,rsi:50,pe:32,eg:12,peg:2.67,above200:false,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.06,div:'none',sr:true,sw:false,atr:0.7,mom:52,trend:50,fund:70,risk:62},
-  {t:'NOVN',n:'Novartis AG',p:98.40,chg:0.4,rsi:55,pe:16,eg:8,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.40,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:2.0,mom:59,trend:60,fund:80,risk:76},
-  {t:'ABBN',n:'ABB Ltd',p:48.40,chg:0.6,rsi:56,pe:22,eg:12,peg:1.83,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:1.1,mom:62,trend:63,fund:76,risk:70},
-  {t:'GEBN',n:'Geberit AG',p:488.40,chg:0.3,rsi:52,pe:26,eg:8,peg:3.25,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.30,div:'bull_hidden',sr:true,sw:false,atr:11,mom:57,trend:58,fund:74,risk:72},
-  {t:'SREN',n:'Swiss Re AG',p:118.40,chg:0.2,rsi:51,pe:12,eg:6,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.40,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:2.5,mom:56,trend:57,fund:78,risk:74},
-  {t:'LONN',n:'Lonza Group AG',p:388.40,chg:-0.4,rsi:44,pe:36,eg:14,peg:2.57,above200:false,macdCross:'below_zero',macdLine:-2.00,macdSig:-2.80,hist:0.50,div:'none',sr:false,sw:false,atr:12,mom:48,trend:46,fund:72,risk:60},
-  {t:'AZN',n:'AstraZeneca plc ADR',p:68.40,chg:0.3,rsi:52,pe:22,eg:12,peg:1.83,above200:true,macdCross:'below_zero',macdLine:-0.20,macdSig:-0.30,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:1.5,mom:58,trend:59,fund:78,risk:72},
-  {t:'GSK.L',n:'GSK plc (London)',p:1750.00,chg:0.2,rsi:50,pe:12,eg:6,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-3.00,macdSig:-4.00,hist:1.00,div:'bull_hidden',sr:true,sw:false,atr:25,mom:54,trend:55,fund:74,risk:70},
-  {t:'ULVR',n:'Unilever plc',p:48.40,chg:0.2,rsi:50,pe:18,eg:4,peg:4.5,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.06,div:'bull_hidden',sr:true,sw:false,atr:1.1,mom:54,trend:56,fund:76,risk:76},
-  {t:'DGE',n:'Diageo plc',p:22.40,chg:-0.3,rsi:40,pe:16,eg:4,peg:4.0,above200:false,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.10,hist:0.03,div:'bull_regular',sr:true,sw:false,atr:0.5,mom:44,trend:42,fund:74,risk:64},
-  {t:'EXPN',n:'Experian plc',p:38.40,chg:0.5,rsi:55,pe:28,eg:12,peg:2.33,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.10,hist:0.04,div:'none',sr:true,sw:false,atr:0.9,mom:61,trend:62,fund:72,risk:66},
-  {t:'HEIA',n:'Heineken NV',p:68.40,chg:0.1,rsi:48,pe:16,eg:6,peg:2.67,above200:false,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.40,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:1.6,mom:50,trend:48,fund:72,risk:66},
-  {t:'INGA',n:'ING Groep NV',p:18.40,chg:0.4,rsi:54,pe:8,eg:6,peg:1.33,above200:true,macdCross:'below_zero',macdLine:-0.05,macdSig:-0.08,hist:0.03,div:'bull_hidden',sr:true,sw:false,atr:0.4,mom:59,trend:60,fund:74,risk:66},
-  {t:'NOVOB',n:'Novo Nordisk B',p:68.10,chg:-0.8,rsi:24,pe:16,eg:18,peg:0.89,above200:false,macdCross:'below_zero',macdLine:-0.60,macdSig:-0.80,hist:0.20,div:'bull_regular',sr:false,sw:false,atr:2.8,mom:28,trend:22,fund:66,risk:46},
-  {t:'ATCOA',n:'Atlas Copco A',p:18.40,chg:0.5,rsi:54,pe:24,eg:10,peg:2.4,above200:true,macdCross:'below_zero',macdLine:-0.05,macdSig:-0.07,hist:0.03,div:'bull_hidden',sr:true,sw:false,atr:0.4,mom:60,trend:61,fund:74,risk:70},
-  {t:'SANDVIK',n:'Sandvik AB',p:22.40,chg:0.4,rsi:52,pe:18,eg:8,peg:2.25,above200:true,macdCross:'below_zero',macdLine:-0.06,macdSig:-0.09,hist:0.03,div:'bull_hidden',sr:true,sw:false,atr:0.5,mom:57,trend:58,fund:72,risk:68},
-  {t:'INDITEX',n:'Inditex SA',p:48.40,chg:0.6,rsi:58,pe:22,eg:12,peg:1.83,above200:true,macdCross:'below_zero',macdLine:-0.10,macdSig:-0.20,hist:0.08,div:'bull_hidden',sr:true,sw:false,atr:1.1,mom:63,trend:64,fund:78,risk:72},
-  {t:'ENEL',n:'Enel SpA',p:6.80,chg:0.2,rsi:50,pe:12,eg:4,peg:3.0,above200:true,macdCross:'below_zero',macdLine:-0.02,macdSig:-0.03,hist:0.01,div:'bull_hidden',sr:true,sw:false,atr:0.15,mom:53,trend:54,fund:68,risk:66},
-  {t:'6758.T',n:'Sony Group Corp',p:2488.00,chg:0.6,rsi:52,pe:18,eg:8,peg:2.25,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:2.00,div:'none',sr:true,sw:false,atr:55,mom:58,trend:59,fund:72,risk:66},
-  {t:'6861.T',n:'Keyence Corp',p:58000.00,chg:0.4,rsi:54,pe:44,eg:10,peg:4.4,above200:true,macdCross:'below_zero',macdLine:-120.00,macdSig:-165.00,hist:38.00,div:'none',sr:false,sw:false,atr:1200,mom:60,trend:61,fund:68,risk:64},
-  {t:'7974.T',n:'Nintendo Co Ltd',p:8800.00,chg:0.8,rsi:56,pe:22,eg:8,peg:2.75,above200:true,macdCross:'below_zero',macdLine:-22.00,macdSig:-30.00,hist:7.00,div:'bull_hidden',sr:true,sw:false,atr:180,mom:62,trend:62,fund:74,risk:70},
-  {t:'4519.T',n:'Chugai Pharmaceutical',p:4888.00,chg:0.3,rsi:52,pe:28,eg:10,peg:2.8,above200:true,macdCross:'below_zero',macdLine:-10.00,macdSig:-14.00,hist:3.00,div:'bull_hidden',sr:true,sw:false,atr:110,mom:57,trend:58,fund:76,risk:70},
-  {t:'4523.T',n:'Eisai Co Ltd',p:3888.00,chg:-0.4,rsi:44,pe:24,eg:12,peg:2.0,above200:false,macdCross:'below_zero',macdLine:-14.00,macdSig:-19.00,hist:3.50,div:'bull_regular',sr:true,sw:false,atr:100,mom:48,trend:46,fund:70,risk:60},
-  {t:'6367.T',n:'Daikin Industries',p:18800.00,chg:0.5,rsi:54,pe:28,eg:10,peg:2.8,above200:true,macdCross:'below_zero',macdLine:-45.00,macdSig:-62.00,hist:14.00,div:'bull_hidden',sr:true,sw:false,atr:380,mom:60,trend:61,fund:74,risk:68},
-  {t:'6902.T',n:'Denso Corp',p:1888.00,chg:0.3,rsi:50,pe:14,eg:8,peg:1.75,above200:true,macdCross:'below_zero',macdLine:-4.80,macdSig:-6.50,hist:1.50,div:'bull_hidden',sr:true,sw:false,atr:45,mom:55,trend:56,fund:74,risk:66},
-  {t:'7203.T',n:'Toyota Motor Corp',p:2488.00,chg:0.4,rsi:52,pe:10,eg:6,peg:1.67,above200:true,macdCross:'below_zero',macdLine:-5.50,macdSig:-7.50,hist:1.80,div:'bull_hidden',sr:true,sw:false,atr:55,mom:57,trend:58,fund:76,risk:68},
-  {t:'8316.T',n:'Sumitomo Mitsui FG',p:1288.00,chg:0.6,rsi:55,pe:10,eg:8,peg:1.25,above200:true,macdCross:'below_zero',macdLine:-3.00,macdSig:-4.20,hist:1.00,div:'bull_hidden',sr:true,sw:false,atr:30,mom:61,trend:62,fund:78,risk:70},
-  {t:'8411.T',n:'Mizuho Financial Group',p:2888.00,chg:0.5,rsi:54,pe:10,eg:8,peg:1.25,above200:true,macdCross:'below_zero',macdLine:-6.00,macdSig:-8.20,hist:2.00,div:'bull_hidden',sr:true,sw:false,atr:65,mom:60,trend:61,fund:76,risk:68},
-  {t:'8306.T',n:'Mitsubishi UFJ FG',p:1488.00,chg:0.7,rsi:57,pe:10,eg:10,peg:1.0,above200:true,macdCross:'below_zero',macdLine:-3.20,macdSig:-4.40,hist:1.10,div:'bull_hidden',sr:true,sw:false,atr:32,mom:63,trend:64,fund:80,risk:70},
-  {t:'9432.T',n:'Nippon Telegraph NTT',p:148.00,chg:0.2,rsi:50,pe:12,eg:4,peg:3.0,above200:false,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.50,hist:0.10,div:'bull_hidden',sr:true,sw:false,atr:3.5,mom:52,trend:50,fund:70,risk:68},
-  {t:'4543.T',n:'Terumo Corp',p:2488.00,chg:0.4,rsi:54,pe:32,eg:10,peg:3.2,above200:true,macdCross:'below_zero',macdLine:-5.00,macdSig:-6.80,hist:1.50,div:'none',sr:true,sw:false,atr:55,mom:59,trend:60,fund:70,risk:66},
-  {t:'6146.T',n:'Disco Corp',p:22800.00,chg:-0.8,rsi:40,pe:22,eg:16,peg:1.38,above200:false,macdCross:'below_zero',macdLine:-65.00,macdSig:-88.00,hist:16.00,div:'bull_regular',sr:true,sw:false,atr:650,mom:46,trend:44,fund:74,risk:58},
-  {t:'4661.T',n:'Oriental Land Co',p:2888.00,chg:0.5,rsi:54,pe:44,eg:12,peg:3.67,above200:true,macdCross:'below_zero',macdLine:-5.50,macdSig:-7.50,hist:1.80,div:'none',sr:false,sw:false,atr:65,mom:60,trend:61,fund:68,risk:64},
-  {t:'9433.T',n:'KDDI Corp',p:4888.00,chg:0.3,rsi:52,pe:14,eg:6,peg:2.33,above200:true,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:2.50,div:'bull_hidden',sr:true,sw:false,atr:95,mom:56,trend:57,fund:74,risk:70},
-  {t:'8035.T',n:'Tokyo Electron Ltd',p:18800.00,chg:-1.2,rsi:38,pe:20,eg:18,peg:1.11,above200:false,macdCross:'below_zero',macdLine:-55.00,macdSig:-75.00,hist:14.00,div:'bull_regular',sr:true,sw:false,atr:520,mom:44,trend:40,fund:76,risk:56},
-  {t:'6954.T',n:'Fanuc Corp',p:3488.00,chg:0.2,rsi:50,pe:24,eg:8,peg:3.0,above200:false,macdCross:'below_zero',macdLine:-8.00,macdSig:-11.00,hist:2.50,div:'bull_hidden',sr:true,sw:false,atr:85,mom:52,trend:50,fund:72,risk:64},
-  {t:'9984.T',n:'SoftBank Group Corp',p:8800.00,chg:1.2,rsi:58,pe:18,eg:20,peg:0.9,above200:true,macdCross:'below_zero',macdLine:-18.00,macdSig:-25.00,hist:6.00,div:'none',sr:false,sw:false,atr:220,mom:64,trend:63,fund:58,risk:48},
-  {t:'BLK',n:'BlackRock Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'GS',n:'Goldman Sachs',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'MS',n:'Morgan Stanley',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'JPM',n:'JPMorgan Chase',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CNR',n:'Canadian National Railway',p:155.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
-  {t:'RY',n:'Royal Bank of Canada',p:148.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
-  {t:'SHOP',n:'Shopify Inc',p:92.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
-  {t:'BAC',n:'Bank of America',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'AXP',n:'American Express',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CB',n:'Chubb Ltd',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ORCL',n:'Oracle Corp',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'INTU',n:'Intuit Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'FTNT',n:'Fortinet Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CAT',n:'Caterpillar Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'DE',n:'Deere & Co',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'HON',n:'Honeywell Intl',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ITW',n:'Illinois Tool Works',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'PH',n:'Parker-Hannifin',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'GWW',n:'W.W. Grainger',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CARR',n:'Carrier Global',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ABT',n:'Abbott Laboratories',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'MDT',n:'Medtronic plc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'BSX',n:'Boston Scientific',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'EW',n:'Edwards Lifesciences',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'DXCM',n:'DexCom Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'HCA',n:'HCA Healthcare',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'NKE',n:'Nike Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'LULU',n:'Lululemon Athletica',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'MNST',n:'Monster Beverage',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'HSY',n:'Hershey Co',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'XOM',n:'Exxon Mobil',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CVX',n:'Chevron Corp',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'COP',n:'ConocoPhillips',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'FCX',n:'Freeport-McMoRan',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'AMT',n:'American Tower',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'EQIX',n:'Equinix Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'PLD',n:'Prologis Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'MSCI',n:'MSCI Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'VRSK',n:'Verisk Analytics',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'NFLX',n:'Netflix Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'WDAY',n:'Workday Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ZS',n:'Zscaler Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CPRT',n:'Copart Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CSGP',n:'CoStar Group',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'POOL',n:'Pool Corp',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ROP',n:'Roper Technologies',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'TRMB',n:'Trimble Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'AXON',n:'Axon Enterprise',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'DECK',n:'Deckers Outdoor',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'BURL',n:'Burlington Stores',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'FERG',n:'Ferguson Enterprises',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'BMW.DE',n:'BMW AG',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'MBG.DE',n:'Mercedes-Benz AG',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'VOW3.DE',n:'Volkswagen AG Vz',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'RWE.DE',n:'RWE AG',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'MUV2.DE',n:'Munich Re AG',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'HEN3.DE',n:'Henkel AG Vz',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'BEI.DE',n:'Beiersdorf AG',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'FRE.DE',n:'Fresenius SE',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ADS.DE',n:'Adidas AG',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'IFX.DE',n:'Infineon Technologies',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'DBK.DE',n:'Deutsche Bank AG',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'AIR.PA',n:'Airbus SE',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'SU.PA',n:'Schneider Electric',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'EN.PA',n:'Bouygues SA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CAP.PA',n:'Capgemini SE',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'KER.PA',n:'Kering SA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'LR.PA',n:'Legrand SA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ZURN.SW',n:'Zurich Insurance Group',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CFR.SW',n:'Richemont AG',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'SLHN.SW',n:'Swiss Life Holding',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'PGHN.SW',n:'Partners Group Holding',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'BKW.SW',n:'BKW AG',p:100.00,chg:0.0,rsi:50,pe:16,eg:7,peg:2.3,above200:true,macdCross:'below_zero',macdLine:-0.30,macdSig:-0.50,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:3,mom:55,trend:55,fund:70,risk:72},
-  {t:'KNIN.SW',n:'Kuehne Nagel International AG',p:100.00,chg:0.0,rsi:50,pe:18,eg:8,peg:2.25,above200:false,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:4,mom:48,trend:46,fund:74,risk:68},
-  {t:'HOLN.SW',n:'Holcim Ltd',p:100.00,chg:0.0,rsi:50,pe:12,eg:8,peg:1.5,above200:true,macdCross:'below_zero',macdLine:-0.40,macdSig:-0.60,hist:0.20,div:'bull_regular',sr:true,sw:false,atr:3,mom:52,trend:54,fund:70,risk:66},
-  {t:'SIX2.DE',n:'Sixt SE',p:100.00,chg:0.0,rsi:50,pe:14,eg:10,peg:1.4,above200:false,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'bull_regular',sr:false,sw:false,atr:3,mom:46,trend:44,fund:66,risk:58},
-  {t:'BP.L',n:'BP plc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'HSBA.L',n:'HSBC Holdings',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'BA.L',n:'BAE Systems',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'REL.L',n:'Relx plc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'LSEG.L',n:'London Stock Exchange Group',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CPG.L',n:'Compass Group',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'BATS.L',n:'British American Tobacco',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'VOD.L',n:'Vodafone Group',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'PHIA.AS',n:'Philips NV',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'WKL.AS',n:'Wolters Kluwer',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ASRNL.AS',n:'ASR Nederland',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'VOLV-B.ST',n:'Volvo AB B',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ASSA-B.ST',n:'Assa Abloy B',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'EQT.ST',n:'EQT AB',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'INVE-B.ST',n:'Investor AB B',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'IBE.MC',n:'Iberdrola SA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'SAN.MC',n:'Banco Santander',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'BBVA.MC',n:'Banco Bilbao Vizcaya',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ISP.MI',n:'Intesa Sanpaolo',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'UCG.MI',n:'UniCredit SpA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'META',n:'Meta Platforms',p:548.40,rsi:64,peg:1.14,above200:true,macdCross:'above_zero',hist:0.60,div:'bear_hidden',sw:false,atr:16,mom:68,trend:70,fund:76,risk:58},
+  {t:'AAPL',n:'Apple Inc',p:196.40,rsi:57,peg:2.8,above200:true,macdCross:'above_zero',hist:0.30,div:'none',sw:false,atr:5,mom:61,trend:65,fund:74,risk:70},
+  {t:'MSFT',n:'Microsoft Corp',p:388.40,rsi:54,peg:1.94,above200:true,macdCross:'above_zero',hist:0.30,div:'none',sw:false,atr:9,mom:63,trend:68,fund:76,risk:72},
+  {t:'GOOGL',n:'Alphabet Inc',p:166.20,rsi:51,peg:1.17,above200:true,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:6,mom:58,trend:62,fund:79,risk:67},
+  {t:'AMZN',n:'Amazon.com',p:188.60,rsi:60,peg:1.29,above200:true,macdCross:'above_zero',hist:0.40,div:'none',sw:false,atr:8,mom:66,trend:64,fund:72,risk:63},
+  {t:'NVDA',n:'NVIDIA Corp',p:171.80,rsi:38,peg:0.53,above200:false,macdCross:'below_zero',hist:0.40,div:'bull_regular',sw:false,atr:12,mom:62,trend:48,fund:58,risk:55},
+  {t:'TSLA',n:'Tesla Inc',p:252.80,rsi:42,peg:11.0,above200:false,macdCross:'below_zero',hist:-0.90,div:'none',sw:true,atr:18,mom:38,trend:32,fund:22,risk:28},
+  {t:'AVGO',n:'Broadcom Inc',p:168.20,rsi:41,peg:1.46,above200:false,macdCross:'below_zero',hist:0.40,div:'bull_regular',sw:false,atr:7,mom:55,trend:50,fund:72,risk:60},
+  {t:'MU',n:'Micron Technology',p:118.0,rsi:50,peg:2.5,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'QCOM',n:'Qualcomm',p:148.30,rsi:40,peg:1.14,above200:false,macdCross:'below_zero',hist:0.40,div:'bull_hidden',sw:false,atr:5,mom:52,trend:46,fund:74,risk:62},
+  {t:'CDNS',n:'Cadence Design Sys',p:224.50,rsi:52,peg:3.56,above200:false,macdCross:'below_zero',hist:0.30,div:'none',sw:false,atr:8,mom:56,trend:54,fund:70,risk:58},
+  {t:'SNPS',n:'Synopsys',p:448.20,rsi:50,peg:3.41,above200:false,macdCross:'below_zero',hist:0.30,div:'none',sw:false,atr:14,mom:54,trend:52,fund:72,risk:60},
+  {t:'FICO',n:'Fair Isaac Corp',p:1820.00,rsi:58,peg:4.1,above200:true,macdCross:'below_zero',hist:2.00,div:'bull_hidden',sw:false,atr:55,mom:65,trend:62,fund:68,risk:55},
+  {t:'NOW',n:'ServiceNow',p:742.60,rsi:55,peg:2.88,above200:true,macdCross:'below_zero',hist:0.90,div:'bull_hidden',sw:false,atr:22,mom:64,trend:62,fund:70,risk:58},
+  {t:'LLY',n:'Eli Lilly',p:798.40,rsi:44,peg:1.3,above200:false,macdCross:'below_zero',hist:1.60,div:'bull_regular',sw:false,atr:28,mom:58,trend:52,fund:74,risk:56},
+  {t:'JNJ',n:'Johnson & Johnson',p:155.40,rsi:49,peg:2.8,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:2.5,mom:50,trend:53,fund:84,risk:90},
+  {t:'SYK',n:'Stryker Corp',p:352.80,rsi:56,peg:2.83,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:10,mom:62,trend:60,fund:76,risk:72},
+  {t:'NVO',n:'Novo Nordisk',p:68.10,rsi:22,peg:0.75,above200:false,macdCross:'below_zero',hist:0.70,div:'bull_regular',sw:false,atr:3.2,mom:26,trend:20,fund:64,risk:44},
+  {t:'BRK-B',n:'Berkshire Hathaway B',p:448.20,rsi:55,peg:2.44,above200:true,macdCross:'above_zero',hist:0.40,div:'none',sw:false,atr:8,mom:64,trend:66,fund:82,risk:80},
+  {t:'PGR',n:'Progressive Corp',p:248.60,rsi:57,peg:0.9,above200:true,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:7,mom:65,trend:64,fund:80,risk:76},
+  {t:'BKNG',n:'Booking Holdings',p:4820.00,rsi:59,peg:1.44,above200:true,macdCross:'above_zero',hist:3.50,div:'none',sw:false,atr:110,mom:67,trend:68,fund:74,risk:62},
+  {t:'PYPL',n:'PayPal Holdings',p:62.40,rsi:38,peg:2.57,above200:false,macdCross:'below_zero',hist:0.30,div:'bull_regular',sw:false,atr:2.5,mom:42,trend:36,fund:58,risk:45},
+  {t:'MCD',n:'McDonalds Corp',p:288.40,rsi:48,peg:2.75,above200:false,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:5,mom:52,trend:50,fund:78,risk:74},
+  {t:'SBUX',n:'Starbucks Corp',p:88.20,rsi:45,peg:2.6,above200:false,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:2.8,mom:50,trend:46,fund:64,risk:58},
+  {t:'YUM',n:'Yum! Brands',p:132.80,rsi:47,peg:2.4,above200:false,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:50,trend:48,fund:68,risk:62},
+  {t:'COST',n:'Costco Wholesale',p:928.40,rsi:58,peg:4.33,above200:true,macdCross:'below_zero',hist:1.00,div:'bull_hidden',sw:false,atr:22,mom:66,trend:64,fund:76,risk:72},
+  {t:'TT',n:'Trane Technologies',p:312.60,rsi:54,peg:2.0,above200:true,macdCross:'below_zero',hist:0.30,div:'none',sw:false,atr:9,mom:62,trend:60,fund:74,risk:68},
+  {t:'ODFL',n:'Old Dominion Freight',p:148.20,rsi:42,peg:2.6,above200:false,macdCross:'below_zero',hist:0.30,div:'bull_regular',sw:false,atr:5,mom:52,trend:48,fund:78,risk:70},
+  {t:'CWST',n:'Casella Waste Sys A',p:88.40,rsi:50,peg:5.47,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:2.5,mom:58,trend:56,fund:62,risk:66},
+  {t:'NESN',n:'Nestle SA',p:84.20,rsi:47,peg:4.5,above200:false,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:2.1,mom:55,trend:58,fund:82,risk:86},
+  {t:'LISP',n:'Lindt & Spruengli',p:11480.00,rsi:51,peg:5.5,above200:false,macdCross:'below_zero',hist:10.00,div:'bull_hidden',sw:false,atr:220,mom:56,trend:54,fund:82,risk:78},
+  {t:'SRT3',n:'Sartorius AG Vz',p:198.40,rsi:36,peg:2.89,above200:false,macdCross:'below_zero',hist:0.60,div:'bull_regular',sw:false,atr:7,mom:40,trend:34,fund:68,risk:48},
+  {t:'EVD',n:'CTS Eventim AG',p:88.60,rsi:54,peg:2.29,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:2.5,mom:62,trend:60,fund:72,risk:66},
+  {t:'NEM',n:'Nemetschek SE',p:94.20,rsi:55,peg:3.09,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:3,mom:64,trend:62,fund:68,risk:60},
+  {t:'ASML',n:'ASML Holding',p:642.80,rsi:43,peg:1.61,above200:false,macdCross:'below_zero',hist:-0.30,div:'none',sw:true,atr:20,mom:40,trend:38,fund:80,risk:62},
+  {t:'BTI',n:'British American Tobacco',p:34.80,rsi:48,peg:null,above200:true,macdCross:'below_zero',hist:0.10,div:'none',sw:false,atr:0.8,mom:50,trend:52,fund:62,risk:68},
+  {t:'RIO',n:'Rio Tinto',p:58.40,rsi:44,peg:2.75,above200:false,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:1.5,mom:48,trend:44,fund:72,risk:64},
+  {t:'SHEL.L',n:'Shell plc (London)',p:2850.00,rsi:50,peg:4.33,above200:true,macdCross:'below_zero',hist:3.00,div:'none',sw:false,atr:40,mom:52,trend:52,fund:68,risk:66},
+  {t:'RMS',n:'Hermes International',p:2248.00,rsi:53,peg:3.43,above200:true,macdCross:'below_zero',hist:2.50,div:'bull_hidden',sw:false,atr:55,mom:65,trend:64,fund:86,risk:74},
+  {t:'8058.T',n:'Mitsubishi Corp',p:2840.00,rsi:52,peg:1.38,above200:true,macdCross:'below_zero',hist:3.00,div:'bull_hidden',sw:false,atr:65,mom:62,trend:60,fund:80,risk:72},
+  {t:'8001.T',n:'Itochu Corp',p:7480.00,rsi:54,peg:1.44,above200:true,macdCross:'below_zero',hist:7.00,div:'none',sw:false,atr:140,mom:64,trend:62,fund:82,risk:74},
+  {t:'8031.T',n:'Mitsui & Co',p:2950.00,rsi:53,peg:1.11,above200:true,macdCross:'below_zero',hist:3.00,div:'bull_hidden',sw:false,atr:60,mom:63,trend:61,fund:81,risk:73},
+  {t:'8002.T',n:'Marubeni Corp',p:2180.00,rsi:51,peg:1.13,above200:true,macdCross:'below_zero',hist:2.50,div:'bull_hidden',sw:false,atr:50,mom:61,trend:60,fund:80,risk:72},
+  {t:'8053.T',n:'Sumitomo Corp',p:3120.00,rsi:54,peg:1.11,above200:true,macdCross:'below_zero',hist:3.00,div:'bull_hidden',sw:false,atr:62,mom:62,trend:61,fund:80,risk:73},
+  {t:'8015.T',n:'Toyota Tsusho',p:2650.00,rsi:52,peg:1.20,above200:true,macdCross:'below_zero',hist:2.50,div:'bull_hidden',sw:false,atr:52,mom:60,trend:59,fund:78,risk:71},
+  {t:'V',n:'Visa Inc',p:278.40,rsi:56,peg:2.14,above200:true,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:6,mom:65,trend:66,fund:78,risk:76},
+  {t:'MA',n:'Mastercard Inc',p:488.20,rsi:57,peg:2.06,above200:true,macdCross:'below_zero',hist:0.40,div:'bull_hidden',sw:false,atr:10,mom:66,trend:67,fund:78,risk:74},
+  {t:'UNH',n:'UnitedHealth Group',p:488.60,rsi:38,peg:1.5,above200:false,macdCross:'below_zero',hist:0.80,div:'bull_regular',sw:false,atr:18,mom:42,trend:36,fund:76,risk:58},
+  {t:'HD',n:'Home Depot Inc',p:342.80,rsi:50,peg:2.75,above200:true,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:8,mom:55,trend:58,fund:76,risk:70},
+  {t:'ADBE',n:'Adobe Inc',p:368.40,rsi:42,peg:2.0,above200:false,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:12,mom:48,trend:44,fund:72,risk:60},
+  {t:'CRM',n:'Salesforce Inc',p:278.60,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.30,div:'none',sw:false,atr:9,mom:57,trend:58,fund:70,risk:62},
+  {t:'ACN',n:'Accenture plc',p:302.40,rsi:48,peg:2.4,above200:false,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:8,mom:52,trend:50,fund:74,risk:68},
+  {t:'TMO',n:'Thermo Fisher Scientific',p:448.20,rsi:46,peg:2.6,above200:false,macdCross:'below_zero',hist:0.50,div:'none',sw:false,atr:14,mom:50,trend:48,fund:76,risk:64},
+  {t:'ISRG',n:'Intuitive Surgical',p:488.60,rsi:60,peg:3.63,above200:true,macdCross:'below_zero',hist:0.50,div:'bull_hidden',sw:false,atr:14,mom:65,trend:64,fund:68,risk:62},
+  {t:'REGN',n:'Regeneron Pharma',p:648.40,rsi:44,peg:1.43,above200:false,macdCross:'below_zero',hist:0.80,div:'none',sw:false,atr:22,mom:50,trend:46,fund:72,risk:58},
+  {t:'PANW',n:'Palo Alto Networks',p:168.40,rsi:54,peg:2.3,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:6,mom:60,trend:62,fund:66,risk:58},
+  {t:'AMAT',n:'Applied Materials',p:148.60,rsi:40,peg:1.33,above200:false,macdCross:'below_zero',hist:0.40,div:'bull_regular',sw:false,atr:7,mom:48,trend:44,fund:74,risk:60},
+  {t:'LRCX',n:'Lam Research',p:678.40,rsi:38,peg:1.29,above200:false,macdCross:'below_zero',hist:1.20,div:'bull_regular',sw:false,atr:24,mom:46,trend:42,fund:76,risk:58},
+  {t:'KLAC',n:'KLA Corp',p:688.20,rsi:42,peg:1.43,above200:false,macdCross:'below_zero',hist:1.00,div:'bull_regular',sw:false,atr:22,mom:48,trend:44,fund:74,risk:60},
+  {t:'MELI',n:'MercadoLibre Inc',p:1888.40,rsi:58,peg:1.71,above200:true,macdCross:'below_zero',hist:2.00,div:'none',sw:false,atr:55,mom:65,trend:63,fund:68,risk:58},
+  {t:'ADP',n:'Automatic Data Processing',p:278.40,rsi:54,peg:2.8,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:6,mom:60,trend:62,fund:76,risk:76},
+  {t:'CTAS',n:'Cintas Corp',p:188.60,rsi:56,peg:3.17,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:5,mom:62,trend:63,fund:70,risk:72},
+  {t:'FAST',n:'Fastenal Co',p:68.40,rsi:52,peg:3.4,above200:true,macdCross:'below_zero',hist:0.10,div:'bull_hidden',sw:false,atr:1.6,mom:58,trend:60,fund:68,risk:72},
+  {t:'ROL',n:'Rollins Inc',p:48.20,rsi:55,peg:3.67,above200:true,macdCross:'below_zero',hist:0.10,div:'none',sw:false,atr:1.1,mom:60,trend:62,fund:66,risk:70},
+  {t:'WST',n:'West Pharmaceutical',p:228.40,rsi:44,peg:3.2,above200:false,macdCross:'below_zero',hist:0.30,div:'none',sw:false,atr:8,mom:48,trend:46,fund:70,risk:62},
+  {t:'MTD',n:'Mettler-Toledo Intl',p:1188.40,rsi:48,peg:3.75,above200:false,macdCross:'below_zero',hist:1.40,div:'none',sw:false,atr:38,mom:52,trend:50,fund:70,risk:62},
+  {t:'IDXX',n:'IDEXX Laboratories',p:388.40,rsi:52,peg:3.67,above200:true,macdCross:'below_zero',hist:0.30,div:'none',sw:false,atr:12,mom:58,trend:58,fund:68,risk:62},
+  {t:'WSO',n:'Watsco Inc',p:388.20,rsi:54,peg:2.8,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:10,mom:61,trend:62,fund:72,risk:68},
+  {t:'EFX',n:'Equifax Inc',p:228.40,rsi:50,peg:2.29,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:7,mom:56,trend:58,fund:70,risk:62},
+  {t:'MCO',n:'Moodys Corp',p:388.60,rsi:57,peg:2.29,above200:true,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:10,mom:64,trend:65,fund:76,risk:70},
+  {t:'SPGI',n:'S&P Global Inc',p:448.80,rsi:55,peg:2.67,above200:true,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:11,mom:63,trend:64,fund:76,risk:72},
+  {t:'ICE',n:'Intercontinental Exchange',p:148.40,rsi:55,peg:2.6,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:4,mom:60,trend:62,fund:74,risk:72},
+  {t:'CME',n:'CME Group Inc',p:228.40,rsi:52,peg:2.75,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:5,mom:58,trend:60,fund:74,risk:74},
+  {t:'BRO',n:'Brown & Brown Inc',p:88.40,rsi:58,peg:2.33,above200:true,macdCross:'below_zero',hist:0.10,div:'none',sw:false,atr:2.2,mom:63,trend:64,fund:70,risk:72},
+  {t:'RJF',n:'Raymond James Financial',p:118.40,rsi:52,peg:1.4,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:3,mom:59,trend:60,fund:74,risk:70},
+  {t:'SAP',n:'SAP SE',p:228.40,rsi:58,peg:2.25,above200:true,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:6,mom:64,trend:65,fund:74,risk:68},
+  {t:'SIE',n:'Siemens AG',p:188.40,rsi:52,peg:1.8,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:5,mom:58,trend:60,fund:76,risk:68},
+  {t:'ALV',n:'Allianz SE',p:328.40,rsi:54,peg:1.5,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:7,mom:60,trend:62,fund:80,risk:76},
+  {t:'MRK',n:'Merck KGaA',p:148.60,rsi:46,peg:1.8,above200:false,macdCross:'below_zero',hist:0.30,div:'bull_regular',sw:false,atr:4,mom:50,trend:48,fund:74,risk:64},
+  {t:'DTE',n:'Deutsche Telekom AG',p:28.40,rsi:52,peg:2.33,above200:true,macdCross:'below_zero',hist:0.04,div:'bull_hidden',sw:false,atr:0.6,mom:56,trend:58,fund:72,risk:70},
+  {t:'BAS',n:'BASF SE',p:38.40,rsi:42,peg:4.0,above200:false,macdCross:'below_zero',hist:0.10,div:'bull_regular',sw:false,atr:1.0,mom:44,trend:42,fund:64,risk:58},
+  {t:'MC',n:'LVMH Moet Hennessy',p:548.40,rsi:50,peg:2.5,above200:false,macdCross:'below_zero',hist:0.70,div:'bull_hidden',sw:false,atr:15,mom:54,trend:52,fund:82,risk:70},
+  {t:'AIRLIQ',n:'Air Liquide SA',p:148.40,rsi:52,peg:2.75,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_hidden',sw:false,atr:3.5,mom:57,trend:58,fund:76,risk:72},
+  {t:'SANOFI',n:'Sanofi SA',p:98.40,rsi:50,peg:1.75,above200:true,macdCross:'below_zero',hist:0.10,div:'bull_hidden',sw:false,atr:2.2,mom:55,trend:56,fund:78,risk:74},
+  {t:'BNP',n:'BNP Paribas SA',p:68.40,rsi:54,peg:1.33,above200:true,macdCross:'below_zero',hist:0.10,div:'bull_hidden',sw:false,atr:1.6,mom:59,trend:60,fund:76,risk:66},
+  {t:'OR',n:'LOreal SA',p:288.40,rsi:50,peg:3.5,above200:false,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:7,mom:52,trend:50,fund:82,risk:72},
+  {t:'DSY',n:'Dassault Systemes SE',p:28.40,rsi:50,peg:2.67,above200:false,macdCross:'below_zero',hist:0.06,div:'none',sw:false,atr:0.7,mom:52,trend:50,fund:70,risk:62},
+  {t:'NOVN',n:'Novartis AG',p:98.40,rsi:55,peg:2.0,above200:true,macdCross:'below_zero',hist:0.10,div:'bull_hidden',sw:false,atr:2.0,mom:59,trend:60,fund:80,risk:76},
+  {t:'ABBN',n:'ABB Ltd',p:48.40,rsi:56,peg:1.83,above200:true,macdCross:'below_zero',hist:0.10,div:'bull_hidden',sw:false,atr:1.1,mom:62,trend:63,fund:76,risk:70},
+  {t:'GEBN',n:'Geberit AG',p:488.40,rsi:52,peg:3.25,above200:true,macdCross:'below_zero',hist:0.30,div:'bull_hidden',sw:false,atr:11,mom:57,trend:58,fund:74,risk:72},
+  {t:'SREN',n:'Swiss Re AG',p:118.40,rsi:51,peg:2.0,above200:true,macdCross:'below_zero',hist:0.10,div:'bull_hidden',sw:false,atr:2.5,mom:56,trend:57,fund:78,risk:74},
+  {t:'LONN',n:'Lonza Group AG',p:388.40,rsi:44,peg:2.57,above200:false,macdCross:'below_zero',hist:0.50,div:'none',sw:false,atr:12,mom:48,trend:46,fund:72,risk:60},
+  {t:'AZN',n:'AstraZeneca plc ADR',p:68.40,rsi:52,peg:1.83,above200:true,macdCross:'below_zero',hist:0.10,div:'bull_hidden',sw:false,atr:1.5,mom:58,trend:59,fund:78,risk:72},
+  {t:'GSK.L',n:'GSK plc (London)',p:1750.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:1.00,div:'bull_hidden',sw:false,atr:25,mom:54,trend:55,fund:74,risk:70},
+  {t:'ULVR',n:'Unilever plc',p:48.40,rsi:50,peg:4.5,above200:true,macdCross:'below_zero',hist:0.06,div:'bull_hidden',sw:false,atr:1.1,mom:54,trend:56,fund:76,risk:76},
+  {t:'DGE',n:'Diageo plc',p:22.40,rsi:40,peg:4.0,above200:false,macdCross:'below_zero',hist:0.03,div:'bull_regular',sw:false,atr:0.5,mom:44,trend:42,fund:74,risk:64},
+  {t:'EXPN',n:'Experian plc',p:38.40,rsi:55,peg:2.33,above200:true,macdCross:'below_zero',hist:0.04,div:'none',sw:false,atr:0.9,mom:61,trend:62,fund:72,risk:66},
+  {t:'HEIA',n:'Heineken NV',p:68.40,rsi:48,peg:2.67,above200:false,macdCross:'below_zero',hist:0.10,div:'bull_hidden',sw:false,atr:1.6,mom:50,trend:48,fund:72,risk:66},
+  {t:'INGA',n:'ING Groep NV',p:18.40,rsi:54,peg:1.33,above200:true,macdCross:'below_zero',hist:0.03,div:'bull_hidden',sw:false,atr:0.4,mom:59,trend:60,fund:74,risk:66},
+  {t:'NOVOB',n:'Novo Nordisk B',p:68.10,rsi:24,peg:0.89,above200:false,macdCross:'below_zero',hist:0.20,div:'bull_regular',sw:false,atr:2.8,mom:28,trend:22,fund:66,risk:46},
+  {t:'ATCOA',n:'Atlas Copco A',p:18.40,rsi:54,peg:2.4,above200:true,macdCross:'below_zero',hist:0.03,div:'bull_hidden',sw:false,atr:0.4,mom:60,trend:61,fund:74,risk:70},
+  {t:'SANDVIK',n:'Sandvik AB',p:22.40,rsi:52,peg:2.25,above200:true,macdCross:'below_zero',hist:0.03,div:'bull_hidden',sw:false,atr:0.5,mom:57,trend:58,fund:72,risk:68},
+  {t:'INDITEX',n:'Inditex SA',p:48.40,rsi:58,peg:1.83,above200:true,macdCross:'below_zero',hist:0.08,div:'bull_hidden',sw:false,atr:1.1,mom:63,trend:64,fund:78,risk:72},
+  {t:'ENEL',n:'Enel SpA',p:6.80,rsi:50,peg:3.0,above200:true,macdCross:'below_zero',hist:0.01,div:'bull_hidden',sw:false,atr:0.15,mom:53,trend:54,fund:68,risk:66},
+  {t:'6758.T',n:'Sony Group Corp',p:2488.00,rsi:52,peg:2.25,above200:true,macdCross:'below_zero',hist:2.00,div:'none',sw:false,atr:55,mom:58,trend:59,fund:72,risk:66},
+  {t:'6861.T',n:'Keyence Corp',p:58000.00,rsi:54,peg:4.4,above200:true,macdCross:'below_zero',hist:38.00,div:'none',sw:false,atr:1200,mom:60,trend:61,fund:68,risk:64},
+  {t:'7974.T',n:'Nintendo Co Ltd',p:8800.00,rsi:56,peg:2.75,above200:true,macdCross:'below_zero',hist:7.00,div:'bull_hidden',sw:false,atr:180,mom:62,trend:62,fund:74,risk:70},
+  {t:'4519.T',n:'Chugai Pharmaceutical',p:4888.00,rsi:52,peg:2.8,above200:true,macdCross:'below_zero',hist:3.00,div:'bull_hidden',sw:false,atr:110,mom:57,trend:58,fund:76,risk:70},
+  {t:'4523.T',n:'Eisai Co Ltd',p:3888.00,rsi:44,peg:2.0,above200:false,macdCross:'below_zero',hist:3.50,div:'bull_regular',sw:false,atr:100,mom:48,trend:46,fund:70,risk:60},
+  {t:'6367.T',n:'Daikin Industries',p:18800.00,rsi:54,peg:2.8,above200:true,macdCross:'below_zero',hist:14.00,div:'bull_hidden',sw:false,atr:380,mom:60,trend:61,fund:74,risk:68},
+  {t:'6902.T',n:'Denso Corp',p:1888.00,rsi:50,peg:1.75,above200:true,macdCross:'below_zero',hist:1.50,div:'bull_hidden',sw:false,atr:45,mom:55,trend:56,fund:74,risk:66},
+  {t:'7203.T',n:'Toyota Motor Corp',p:2488.00,rsi:52,peg:1.67,above200:true,macdCross:'below_zero',hist:1.80,div:'bull_hidden',sw:false,atr:55,mom:57,trend:58,fund:76,risk:68},
+  {t:'8316.T',n:'Sumitomo Mitsui FG',p:1288.00,rsi:55,peg:1.25,above200:true,macdCross:'below_zero',hist:1.00,div:'bull_hidden',sw:false,atr:30,mom:61,trend:62,fund:78,risk:70},
+  {t:'8411.T',n:'Mizuho Financial Group',p:2888.00,rsi:54,peg:1.25,above200:true,macdCross:'below_zero',hist:2.00,div:'bull_hidden',sw:false,atr:65,mom:60,trend:61,fund:76,risk:68},
+  {t:'8306.T',n:'Mitsubishi UFJ FG',p:1488.00,rsi:57,peg:1.0,above200:true,macdCross:'below_zero',hist:1.10,div:'bull_hidden',sw:false,atr:32,mom:63,trend:64,fund:80,risk:70},
+  {t:'9432.T',n:'Nippon Telegraph NTT',p:148.00,rsi:50,peg:3.0,above200:false,macdCross:'below_zero',hist:0.10,div:'bull_hidden',sw:false,atr:3.5,mom:52,trend:50,fund:70,risk:68},
+  {t:'4543.T',n:'Terumo Corp',p:2488.00,rsi:54,peg:3.2,above200:true,macdCross:'below_zero',hist:1.50,div:'none',sw:false,atr:55,mom:59,trend:60,fund:70,risk:66},
+  {t:'6146.T',n:'Disco Corp',p:22800.00,rsi:40,peg:1.38,above200:false,macdCross:'below_zero',hist:16.00,div:'bull_regular',sw:false,atr:650,mom:46,trend:44,fund:74,risk:58},
+  {t:'4661.T',n:'Oriental Land Co',p:2888.00,rsi:54,peg:3.67,above200:true,macdCross:'below_zero',hist:1.80,div:'none',sw:false,atr:65,mom:60,trend:61,fund:68,risk:64},
+  {t:'9433.T',n:'KDDI Corp',p:4888.00,rsi:52,peg:2.33,above200:true,macdCross:'below_zero',hist:2.50,div:'bull_hidden',sw:false,atr:95,mom:56,trend:57,fund:74,risk:70},
+  {t:'8035.T',n:'Tokyo Electron Ltd',p:18800.00,rsi:38,peg:1.11,above200:false,macdCross:'below_zero',hist:14.00,div:'bull_regular',sw:false,atr:520,mom:44,trend:40,fund:76,risk:56},
+  {t:'6954.T',n:'Fanuc Corp',p:3488.00,rsi:50,peg:3.0,above200:false,macdCross:'below_zero',hist:2.50,div:'bull_hidden',sw:false,atr:85,mom:52,trend:50,fund:72,risk:64},
+  {t:'9984.T',n:'SoftBank Group Corp',p:8800.00,rsi:58,peg:0.9,above200:true,macdCross:'below_zero',hist:6.00,div:'none',sw:false,atr:220,mom:64,trend:63,fund:58,risk:48},
+  {t:'BLK',n:'BlackRock Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'GS',n:'Goldman Sachs',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'MS',n:'Morgan Stanley',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'JPM',n:'JPMorgan Chase',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CNR',n:'Canadian National Railway',p:155.0,rsi:50,peg:2.5,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'RY',n:'Royal Bank of Canada',p:148.0,rsi:50,peg:2.5,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'SHOP',n:'Shopify Inc',p:92.0,rsi:50,peg:2.5,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'BAC',n:'Bank of America',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'AXP',n:'American Express',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CB',n:'Chubb Ltd',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ORCL',n:'Oracle Corp',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'INTU',n:'Intuit Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'FTNT',n:'Fortinet Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CAT',n:'Caterpillar Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'DE',n:'Deere & Co',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'HON',n:'Honeywell Intl',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ITW',n:'Illinois Tool Works',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'PH',n:'Parker-Hannifin',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'GWW',n:'W.W. Grainger',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CARR',n:'Carrier Global',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ABT',n:'Abbott Laboratories',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'MDT',n:'Medtronic plc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'BSX',n:'Boston Scientific',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'EW',n:'Edwards Lifesciences',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'DXCM',n:'DexCom Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'HCA',n:'HCA Healthcare',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'NKE',n:'Nike Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'LULU',n:'Lululemon Athletica',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'MNST',n:'Monster Beverage',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'HSY',n:'Hershey Co',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'XOM',n:'Exxon Mobil',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CVX',n:'Chevron Corp',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'COP',n:'ConocoPhillips',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'FCX',n:'Freeport-McMoRan',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'AMT',n:'American Tower',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'EQIX',n:'Equinix Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'PLD',n:'Prologis Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'MSCI',n:'MSCI Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'VRSK',n:'Verisk Analytics',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'NFLX',n:'Netflix Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'WDAY',n:'Workday Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ZS',n:'Zscaler Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CPRT',n:'Copart Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CSGP',n:'CoStar Group',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'POOL',n:'Pool Corp',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ROP',n:'Roper Technologies',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'TRMB',n:'Trimble Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'AXON',n:'Axon Enterprise',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'DECK',n:'Deckers Outdoor',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'BURL',n:'Burlington Stores',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'FERG',n:'Ferguson Enterprises',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'BMW.DE',n:'BMW AG',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'MBG.DE',n:'Mercedes-Benz AG',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'VOW3.DE',n:'Volkswagen AG Vz',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'RWE.DE',n:'RWE AG',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'MUV2.DE',n:'Munich Re AG',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'HEN3.DE',n:'Henkel AG Vz',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'BEI.DE',n:'Beiersdorf AG',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'FRE.DE',n:'Fresenius SE',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ADS.DE',n:'Adidas AG',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'IFX.DE',n:'Infineon Technologies',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'DBK.DE',n:'Deutsche Bank AG',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'AIR.PA',n:'Airbus SE',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'SU.PA',n:'Schneider Electric',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'EN.PA',n:'Bouygues SA',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CAP.PA',n:'Capgemini SE',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'KER.PA',n:'Kering SA',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'LR.PA',n:'Legrand SA',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ZURN.SW',n:'Zurich Insurance Group',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CFR.SW',n:'Richemont AG',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'SLHN.SW',n:'Swiss Life Holding',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'PGHN.SW',n:'Partners Group Holding',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'BKW.SW',n:'BKW AG',p:100.00,rsi:50,peg:2.3,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_regular',sw:false,atr:3,mom:55,trend:55,fund:70,risk:72},
+  {t:'KNIN.SW',n:'Kuehne Nagel International AG',p:100.00,rsi:50,peg:2.25,above200:false,macdCross:'below_zero',hist:0.20,div:'bull_regular',sw:false,atr:4,mom:48,trend:46,fund:74,risk:68},
+  {t:'HOLN.SW',n:'Holcim Ltd',p:100.00,rsi:50,peg:1.5,above200:true,macdCross:'below_zero',hist:0.20,div:'bull_regular',sw:false,atr:3,mom:52,trend:54,fund:70,risk:66},
+  {t:'SIX2.DE',n:'Sixt SE',p:100.00,rsi:50,peg:1.4,above200:false,macdCross:'below_zero',hist:0.20,div:'bull_regular',sw:false,atr:3,mom:46,trend:44,fund:66,risk:58},
+  {t:'BP.L',n:'BP plc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'HSBA.L',n:'HSBC Holdings',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'BA.L',n:'BAE Systems',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'REL.L',n:'Relx plc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'LSEG.L',n:'London Stock Exchange Group',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CPG.L',n:'Compass Group',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'BATS.L',n:'British American Tobacco',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'VOD.L',n:'Vodafone Group',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'PHIA.AS',n:'Philips NV',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'WKL.AS',n:'Wolters Kluwer',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ASRNL.AS',n:'ASR Nederland',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'VOLV-B.ST',n:'Volvo AB B',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ASSA-B.ST',n:'Assa Abloy B',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'EQT.ST',n:'EQT AB',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'INVE-B.ST',n:'Investor AB B',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'IBE.MC',n:'Iberdrola SA',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'SAN.MC',n:'Banco Santander',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'BBVA.MC',n:'Banco Bilbao Vizcaya',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ISP.MI',n:'Intesa Sanpaolo',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'UCG.MI',n:'UniCredit SpA',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
 
-  {t:'RHM.DE',n:'Rheinmetall AG',p:1680.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
-  {t:'SAF.PA',n:'Safran SA',p:245.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
-  {t:'HO.PA',n:'Thales SA',p:185.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
-  {t:'RR.L',n:'Rolls-Royce Holdings',p:780.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
-  {t:'BAES.L',n:'BAE Systems plc',p:1420.0,chg:0.0,rsi:50,pe:20,eg:8,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
-  {t:'LDO.MI',n:'Leonardo SpA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ERG.MI',n:'ERG SpA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'STLAM.MI',n:'Stellantis NV',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'G.MI',n:'Generali Assicurazioni',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'RACE.MI',n:'Ferrari NV ADR',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'7751.T',n:'Canon Inc',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'4901.T',n:'Fujifilm Holdings',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'6501.T',n:'Hitachi Ltd',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'6702.T',n:'Fujitsu Ltd',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'6503.T',n:'Mitsubishi Electric',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'7267.T',n:'Honda Motor Co',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'4502.T',n:'Takeda Pharmaceutical',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'4507.T',n:'Shionogi & Co',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'2914.T',n:'Japan Tobacco Inc',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'3382.T',n:'Seven & i Holdings',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'8267.T',n:'Aeon Co Ltd',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'9020.T',n:'East Japan Railway',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'5401.T',n:'Nippon Steel Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'4063.T',n:'Shin-Etsu Chemical',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'6594.T',n:'Nidec Corp',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'6723.T',n:'Renesas Electronics',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'4568.T',n:'Daiichi Sankyo Co',p:1000.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'9983.T',n:'Fast Retailing Uniqlo',p:47000.0,chg:0.0,rsi:50,pe:38,eg:12,peg:2.8,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:900,mom:62,trend:64,fund:60,risk:68},
-  {t:'6098.T',n:'Recruit Holdings',p:8200.0,chg:0.0,rsi:50,pe:30,eg:15,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:160,mom:60,trend:62,fund:65,risk:65},
-  {t:'BABA',n:'Alibaba Group ADR',p:85.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:3.5,mom:52,trend:48,fund:68,risk:45},
-  {t:'PDD',n:'PDD Holdings Temu',p:108.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.08,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:5.2,mom:58,trend:54,fund:65,risk:42},
-  {t:'JD',n:'JD.com ADR',p:26.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.15,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.2,mom:50,trend:46,fund:62,risk:44},
-  {t:'BIDU',n:'Baidu ADR',p:82.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.2,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:3.8,mom:48,trend:44,fund:60,risk:40},
-  {t:'NTES',n:'NetEase ADR',p:103.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.05,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:4.0,mom:60,trend:58,fund:66,risk:52},
-  {t:'TCOM',n:'Trip.com Group ADR',p:62.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.08,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:2.8,mom:62,trend:60,fund:65,risk:55},
-  {t:'YUMC',n:'Yum China Holdings',p:44.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.8,mom:58,trend:56,fund:68,risk:60},
-  {t:'BILI',n:'Bilibili ADR',p:14.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.33,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.9,mom:52,trend:48,fund:55,risk:38},
-  {t:'TME',n:'Tencent Music ADR',p:10.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.25,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.5,mom:54,trend:50,fund:58,risk:45},
-  {t:'LI',n:'Li Auto ADR',p:23.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.4,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.4,mom:50,trend:46,fund:52,risk:35},
-  {t:'XPEV',n:'XPeng ADR',p:11.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.45,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.8,mom:48,trend:44,fund:50,risk:32},
-  {t:'NIO',n:'NIO Inc ADR',p:4.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.5,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.4,mom:46,trend:42,fund:48,risk:30},
-  {t:'BEKE',n:'KE Holdings Beike ADR',p:18.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.2,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.9,mom:55,trend:52,fund:60,risk:48},
-  {t:'ZTO',n:'ZTO Express ADR',p:18.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.12,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:0.8,mom:57,trend:55,fund:63,risk:52},
-  {t:'0700.HK',n:'Tencent Holdings HK',p:380.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:14,mom:62,trend:60,fund:70,risk:55},
-  {t:'3750.HK',n:'CATL HK',p:100.00,chg:0.0,rsi:50,pe:20,eg:20,peg:1.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:70,risk:60},
-  {t:'1211.HK',n:'BYD Company HK',p:27.0,chg:0.0,rsi:50,pe:15,eg:12,peg:2.08,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1.5,mom:55,trend:54,fund:65,risk:52},
-  {t:'HDB',n:'HDFC Bank ADR',p:60.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.85,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:2,mom:60,trend:62,fund:74,risk:68},
-  {t:'TSM',n:'TSMC ADR',p:170.0,chg:0.0,rsi:50,pe:20,eg:12,peg:1.65,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:7,mom:65,trend:66,fund:82,risk:65},
-  {t:'005930.KS',n:'Samsung Electronics',p:74000.0,chg:0.0,rsi:50,pe:15,eg:12,peg:1.95,above200:true,macdCross:'below_zero',macdLine:-1.00,macdSig:-1.40,hist:0.40,div:'none',sr:false,sw:false,atr:1800,mom:60,trend:60,fund:70,risk:58},
-  {t:'NEE',n:'NextEra Energy',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CEG',n:'Constellation Energy',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'WEC',n:'WEC Energy Group',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'DUK',n:'Duke Energy',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'SO',n:'Southern Company',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'SSE.L',n:'SSE plc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'NG',n:'National Grid',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'EDP.LS',n:'EDP Portugal',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ENGI.PA',n:'Engie SA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'NTGY.MC',n:'Naturgy Energy',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'EOAN.DE',n:'E.ON SE',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'FORTUM.HE',n:'Fortum Oyj',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CNA.L',n:'Centrica plc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'VER.VI',n:'Verbund AG',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'TTE.PA',n:'TotalEnergies SE',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ENI.MI',n:'Eni SpA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'SLB',n:'SLB',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'EOG',n:'EOG Resources',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'EQNR',n:'Equinor ASA',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'CNQ',n:'Canadian Natural Resources',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'FANG',n:'Diamondback Energy',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'PSX',n:'Phillips 66',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'OXY',n:'Occidental Petroleum',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'WMB',n:'Williams Companies',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'ENB',n:'Enbridge Inc',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'SHEL',n:'Shell plc ADR',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'MPC',n:'Marathon Petroleum',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
-  {t:'VLO',n:'Valero Energy',p:100.00,chg:0.0,rsi:50,pe:20,eg:10,peg:2.0,above200:true,macdCross:'below_zero',macdLine:-0.50,macdSig:-0.70,hist:0.20,div:'none',sr:true,sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'RHM.DE',n:'Rheinmetall AG',p:1680.0,rsi:50,peg:2.5,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'SAF.PA',n:'Safran SA',p:245.0,rsi:50,peg:2.5,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'HO.PA',n:'Thales SA',p:185.0,rsi:50,peg:2.5,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'RR.L',n:'Rolls-Royce Holdings',p:780.0,rsi:50,peg:2.5,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'BAES.L',n:'BAE Systems plc',p:1420.0,rsi:50,peg:2.5,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:5,mom:55,trend:55,fund:65,risk:65},
+  {t:'LDO.MI',n:'Leonardo SpA',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ERG.MI',n:'ERG SpA',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'STLAM.MI',n:'Stellantis NV',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'G.MI',n:'Generali Assicurazioni',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'RACE.MI',n:'Ferrari NV ADR',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'7751.T',n:'Canon Inc',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'4901.T',n:'Fujifilm Holdings',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'6501.T',n:'Hitachi Ltd',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'6702.T',n:'Fujitsu Ltd',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'6503.T',n:'Mitsubishi Electric',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'7267.T',n:'Honda Motor Co',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'4502.T',n:'Takeda Pharmaceutical',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'4507.T',n:'Shionogi & Co',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'2914.T',n:'Japan Tobacco Inc',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'3382.T',n:'Seven & i Holdings',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'8267.T',n:'Aeon Co Ltd',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'9020.T',n:'East Japan Railway',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'5401.T',n:'Nippon Steel Corp',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'4063.T',n:'Shin-Etsu Chemical',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'6594.T',n:'Nidec Corp',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'6723.T',n:'Renesas Electronics',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'4568.T',n:'Daiichi Sankyo Co',p:1000.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'9983.T',n:'Fast Retailing Uniqlo',p:47000.0,rsi:50,peg:2.8,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:900,mom:62,trend:64,fund:60,risk:68},
+  {t:'6098.T',n:'Recruit Holdings',p:8200.0,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:160,mom:60,trend:62,fund:65,risk:65},
+  {t:'BABA',n:'Alibaba Group ADR',p:85.0,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:3.5,mom:52,trend:48,fund:68,risk:45},
+  {t:'PDD',n:'PDD Holdings Temu',p:108.0,rsi:50,peg:2.08,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:5.2,mom:58,trend:54,fund:65,risk:42},
+  {t:'JD',n:'JD.com ADR',p:26.0,rsi:50,peg:2.15,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:1.2,mom:50,trend:46,fund:62,risk:44},
+  {t:'BIDU',n:'Baidu ADR',p:82.0,rsi:50,peg:2.2,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:3.8,mom:48,trend:44,fund:60,risk:40},
+  {t:'NTES',n:'NetEase ADR',p:103.0,rsi:50,peg:2.05,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:4.0,mom:60,trend:58,fund:66,risk:52},
+  {t:'TCOM',n:'Trip.com Group ADR',p:62.0,rsi:50,peg:2.08,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:2.8,mom:62,trend:60,fund:65,risk:55},
+  {t:'YUMC',n:'Yum China Holdings',p:44.0,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:1.8,mom:58,trend:56,fund:68,risk:60},
+  {t:'BILI',n:'Bilibili ADR',p:14.0,rsi:50,peg:2.33,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:0.9,mom:52,trend:48,fund:55,risk:38},
+  {t:'TME',n:'Tencent Music ADR',p:10.0,rsi:50,peg:2.25,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:0.5,mom:54,trend:50,fund:58,risk:45},
+  {t:'LI',n:'Li Auto ADR',p:23.0,rsi:50,peg:2.4,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:1.4,mom:50,trend:46,fund:52,risk:35},
+  {t:'XPEV',n:'XPeng ADR',p:11.0,rsi:50,peg:2.45,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:0.8,mom:48,trend:44,fund:50,risk:32},
+  {t:'NIO',n:'NIO Inc ADR',p:4.0,rsi:50,peg:2.5,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:0.4,mom:46,trend:42,fund:48,risk:30},
+  {t:'BEKE',n:'KE Holdings Beike ADR',p:18.0,rsi:50,peg:2.2,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:0.9,mom:55,trend:52,fund:60,risk:48},
+  {t:'ZTO',n:'ZTO Express ADR',p:18.0,rsi:50,peg:2.12,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:0.8,mom:57,trend:55,fund:63,risk:52},
+  {t:'0700.HK',n:'Tencent Holdings HK',p:380.0,rsi:50,peg:1.95,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:14,mom:62,trend:60,fund:70,risk:55},
+  {t:'3750.HK',n:'CATL HK',p:100.00,rsi:50,peg:1.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:70,risk:60},
+  {t:'1211.HK',n:'BYD Company HK',p:27.0,rsi:50,peg:2.08,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:1.5,mom:55,trend:54,fund:65,risk:52},
+  {t:'HDB',n:'HDFC Bank ADR',p:60.0,rsi:50,peg:1.85,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:2,mom:60,trend:62,fund:74,risk:68},
+  {t:'TSM',n:'TSMC ADR',p:170.0,rsi:50,peg:1.65,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:7,mom:65,trend:66,fund:82,risk:65},
+  {t:'005930.KS',n:'Samsung Electronics',p:74000.0,rsi:50,peg:1.95,above200:true,macdCross:'below_zero',hist:0.40,div:'none',sw:false,atr:1800,mom:60,trend:60,fund:70,risk:58},
+  {t:'NEE',n:'NextEra Energy',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CEG',n:'Constellation Energy',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'WEC',n:'WEC Energy Group',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'DUK',n:'Duke Energy',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'SO',n:'Southern Company',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'SSE.L',n:'SSE plc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'NG',n:'National Grid',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'EDP.LS',n:'EDP Portugal',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ENGI.PA',n:'Engie SA',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'NTGY.MC',n:'Naturgy Energy',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'EOAN.DE',n:'E.ON SE',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'FORTUM.HE',n:'Fortum Oyj',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CNA.L',n:'Centrica plc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'VER.VI',n:'Verbund AG',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'TTE.PA',n:'TotalEnergies SE',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ENI.MI',n:'Eni SpA',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'SLB',n:'SLB',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'EOG',n:'EOG Resources',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'EQNR',n:'Equinor ASA',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'CNQ',n:'Canadian Natural Resources',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'FANG',n:'Diamondback Energy',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'PSX',n:'Phillips 66',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'OXY',n:'Occidental Petroleum',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'WMB',n:'Williams Companies',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'ENB',n:'Enbridge Inc',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'SHEL',n:'Shell plc ADR',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'MPC',n:'Marathon Petroleum',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
+  {t:'VLO',n:'Valero Energy',p:100.00,rsi:50,peg:2.0,above200:true,macdCross:'below_zero',hist:0.20,div:'none',sw:false,atr:3,mom:55,trend:55,fund:65,risk:65},
     {t:"HBAN.SW"},
     {t:"MRSH"},
     {t:"STM"},
@@ -1682,6 +1684,18 @@ function vixRegimeLabel(){
 }
 
 function momSc(s){ return s.mom||50; }
+/* S407 Punkt 1: Score-Bausteine fuer die Anzeige aus den Tagesdaten (mom_score,
+   trend_score, fund_score, risk_score). Fehlt der Wert: null, Anzeige "--" --
+   nie 50, nie 0, keine Rueckrechnung. momSc/fSc bleiben nur fuer die
+   Rueckfallpfade von cSc/mSig (greifen nur ohne scores.score/scores.signal). */
+function bstWert(t, f){
+  var d=_scoresIdx&&_scoresIdx[t];
+  var v=d?d[f]:null;
+  return (typeof v==='number'&&isFinite(v))?Math.round(v):null;
+}
+function bstText(t, f){ var v=bstWert(t, f); return v===null?'--':String(v); }
+/* S407 Punkt 3: RSI fuer die Anzeige -- echter Wert oder "--" (STOCKS-Sync setzt null). */
+function rsiText(s){ return (s&&typeof s.rsi==='number'&&isFinite(s.rsi))?String(s.rsi):'--'; }
 
 
 function debtSc(dte, sector){ return 50; }
@@ -2736,7 +2750,7 @@ function wlRend(scored){
     var fcfD=fd&&fd.fcf!==null?fp(fd.fcf):'--';
     var rv=fd?(fd.roce!==null&&fd.roce!==undefined?fd.roce:(fd.roe!==null&&fd.roe!==undefined?fd.roe:null)):null;
     var roceD=rv!==null?fp(rv):'--';
-    var rsiC=s.rsi<30?'#00e57a':'#7a9bb5';  /* S395 R-2: Rotfaerbung entfallen */
+    var rsiC=(typeof s.rsi==='number'&&s.rsi<30)?'#00e57a':'#7a9bb5';  /* S395 R-2: Rotfaerbung entfallen; S407: null ist nicht < 30 */
     var rowBg=WL_SEL===s.t?'background:#101d2e;':'background:#0c1420;';
     var topC=rank<=3?'#ffd040':'#7a9bb5';
     var borderLeft=_sv.buy?'border-left:3px solid #00e57a;':isAbst?'border-left:3px solid #ff3f3f;':'';
@@ -2757,7 +2771,7 @@ function wlRend(scored){
     h+='<div class="wl-kgv" style="font-family:monospace;font-size:10px" title="'+KGV_TTL+'"><span style="color:var(--mut)">KGV </span><span>'+kgvText(s.t).replace(/^KGV /,'')+'</span></div>';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">ROCE </span><span>'+roceD+'</span></div>';
-    h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">RSI </span><span style="color:'+rsiC+'">'+s.rsi+'</span></div>';
+    h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">RSI </span><span style="color:'+rsiC+'">'+rsiText(s)+'</span></div>';  /* S407: fehlt er "--" */
     h+='</div>';
     /* S-2: die STRONG-Divergenzzeile ist entfallen. Die HC-Zeile bleibt
        (Kontextanzeige, kein Entry-Signal) und unterscheidet nicht mehr
@@ -2831,6 +2845,23 @@ function wlInfoZeilen(s,sig){
     h+='<div class="wl-info-rsi" style="'+st+'">&Uuml;berkauft: Der Kurs ist in kurzer Zeit stark gestiegen. In der R&uuml;ckrechnung hat sich das Warten auf einen R&uuml;cksetzer nicht gelohnt. Information, kein Signal.</div>';
   return h;
 }
+/* S407 Punkt 5 (Kla E-2, 07.10.2026): DIV YIELD und SH RETURN hinter einem Schalter.
+   BUYBACK entfaellt ganz (Feld buyback_yield existiert in keiner Datei).
+   S408 (Kla 07.10.2026): Schalter an -- fund_juno v7.9.49 liefert div_yield in Prozent
+   ohne Faktor 100. Jede Kachel nur bei Wert: SH RETURN bleibt damit ausgeblendet, solange
+   shareholder_return fehlt (keine Rueckkaufquelle, Feld None bei allen Titeln). */
+var DIV_ANZEIGE_AUS = false;  /* S408: Producer korrigiert */
+function divKacheln(fd){
+  if(DIV_ANZEIGE_AUS||!fd)return '';
+  var hatDy=fd.div_yield!==null&&fd.div_yield!==undefined;
+  var hatSr=fd.shareholder_return!==null&&fd.shareholder_return!==undefined;
+  if(!hatDy&&!hatSr)return '';
+  var box='background:rgba(255,255,255,.05);border-radius:6px;padding:7px 9px';
+  var h='<div style="display:grid;grid-template-columns:'+(hatDy&&hatSr?'1fr 1fr':'1fr')+';gap:5px;margin-top:5px">';
+  if(hatDy)h+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">DIV YIELD</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+fd.div_yield.toFixed(1)+'%</div></div>';
+  if(hatSr)h+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">SH RETURN</div><div style="font-family:monospace;font-size:11px;color:#b07cf8">'+fp(fd.shareholder_return)+'</div></div>';
+  return h+'</div>';
+}
 function wlDetail(ticker){
   var s=null,i;
   for(i=0;i<STOCKS.length;i++){if(STOCKS[i].t===ticker){s=STOCKS[i];break;}}
@@ -2847,7 +2878,6 @@ function wlDetail(ticker){
   var _svD=sigView(s.t,sig);
   var isAbstD=_svD.lbl==='SELL Abstieg';
   var sc2=_svD.col;
-  var fs2=fSc(s);
   /* S398 R-2: Begruendungszeile = Etikett in Klartext. Die Kette des alten
      Kaufsignals (ZL, 200MA, Hist mit Mindestwert, PEG-Vergleich) entfaellt
      (Schutzziel A). Kennzeichen als Pillen darunter, dann die Info-Zeilen. */
@@ -2868,9 +2898,10 @@ function wlDetail(ticker){
   out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">';
   /* S398 R-3: Bausteinnamen ohne Gewicht und ohne Verfahrenszusatz */
   out+='<div class="wl-score"><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">Score (Sortierhilfe)</div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">Momentum</span><span>'+momSc(s)+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">Trend</span><span>'+s.trend+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">Fund</span><span>'+fs2+'</span></div>';
+  /* S407 Punkt 1: Bausteine aus den Tagesdaten statt STOCKS-Platzhalter */
+  out+='<div style="'+row+'"><span style="color:var(--mut)">Momentum</span><span>'+bstText(s.t,'mom_score')+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">Trend</span><span>'+bstText(s.t,'trend_score')+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">Fund</span><span>'+bstText(s.t,'fund_score')+'</span></div>';
   /* Konsistenz-Badge (v5.9.36) */
   var cs2=getScField(s.t, "cons_sc", consScore(s.t));
   var as2=calcAnnualStats(s.t);
@@ -2879,13 +2910,7 @@ function wlDetail(ticker){
     var roceInfo=as2.roce?('Std '+as2.roce.std+'pp, '+as2.roce.n+'J'+(as2.roce.outliers>0?' ['+as2.roce.outliers+' Outlier]':'')):' n/a';
     out+='<div style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:'+csColor+'">'+cs2+' | '+roceInfo+'</span></div>';
   }
-  var fdBeta=_scoresIdx[s.t];var betaVal=fdBeta&&fdBeta.beta!==null&&fdBeta.beta!==undefined?fdBeta.beta:null;
-  var evarVal=fdBeta&&fdBeta.evar!==null&&fdBeta.evar!==undefined?fdBeta.evar:null;
-  var eRel=getScField(s.t, "evar_rel_sc", evarRelSc(s.t));
-  var rSc2=s.risk;
-  if(betaVal!==null&&eRel!==null){rSc2=Math.round(s.risk*0.50+betaSc(betaVal)*0.40+eRel*0.10);}
-  else if(betaVal!==null){rSc2=Math.round(s.risk*0.60+betaSc(betaVal)*0.40);}
-  out+='<div style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)">Risk</span><span>'+rSc2+'</span></div>';  /* S398 R-3: Beta/EVAR stehen unten als Kennzahl */
+  out+='<div style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)">Risk</span><span>'+bstText(s.t,'risk_score')+'</span></div>';  /* S398 R-3: Beta/EVAR stehen unten als Kennzahl */
   /* DR-Hold-Zeile: nur anzeigen wenn DIV_HOLD_FILTER aktiv und JSON vorhanden */
   if(DIV_HOLD_FILTER){
     var fdDr=_scoresIdx[s.t];var dyV=fdDr&&fdDr.div_yield!==null&&fdDr.div_yield!==undefined?fdDr.div_yield:null;
@@ -2897,21 +2922,17 @@ function wlDetail(ticker){
   }
   out+='</div>';
   out+='<div><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">TECHNISCH</div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">MACD</span><span style="color:'+(s.macdLine<0?'#00e57a':'#ff6666')+'">'+(s.macdLine!=null?s.macdLine.toFixed(2):'--')+'</span></div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">MACD-Histogramm</span><span>'+(s.hist!=null?s.hist.toFixed(2):'--')+'</span></div>';  /* S398 R-4 */
-  out+='<div style="'+row+'"><span style="color:var(--mut)">RSI</span><span style="color:'+(typeof s.rsi==='number'&&s.rsi<30?'#00e57a':'#dce8f5')+'">'+(s.rsi!=null?s.rsi:'--')+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">RSI</span><span style="color:'+(typeof s.rsi==='number'&&s.rsi<30?'#00e57a':'#dce8f5')+'">'+rsiText(s)+'</span></div>';
   var fd_m=_scoresIdx[s.t];
   var skipVal=fd_m&&fd_m.mom_skip!=null?fd_m.mom_skip:null;
   var ret12Val=fd_m&&fd_m.mom12m_ret!=null?fd_m.mom12m_ret:null;
-  var m12leg=fd_m&&fd_m.mom12m!=null?fd_m.mom12m:null;
   if(skipVal!==null){
     var sc=skipVal>=20?'#00e57a':skipVal>=0?'#00c8f0':skipVal>=-15?'#f0c000':'#ff6666';
     out+='<div style="'+row+'"><span style="color:var(--mut)">12 Monate ohne letzten Monat</span><span style="color:'+sc+'">'+(skipVal>=0?'+':'')+skipVal.toFixed(1)+'%</span></div>';
     if(ret12Val!==null){var r12c=ret12Val>=20?'#00e57a':ret12Val>=0?'#00c8f0':ret12Val>=-15?'#f0c000':'#ff6666';out+='<div style="'+row+'"><span style="color:var(--mut)">12M (inkl.1M)</span><span style="color:'+r12c+'">'+(ret12Val>=0?'+':'')+ret12Val.toFixed(1)+'%</span></div>';}
-  } else if(m12leg!==null){
-    out+='<div style="'+row+'"><span style="color:var(--mut)">12M-Mom</span><span style="color:'+(m12leg>=20?'#00e57a':m12leg>=0?'#00c8f0':m12leg>=-15?'#f0c000':'#ff6666')+'">'+(m12leg>=0?'+':'')+m12leg.toFixed(1)+'%</span></div>';
   }
-  out+='<div style="'+row+'"><span style="color:var(--mut)">Divergenz</span><span style="color:'+(isDivBull(s)?'#ff9f1c':'#7a9bb5')+'">'+s.div+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">Divergenz</span><span style="color:'+(isDivBull(s)?'#ff9f1c':'#7a9bb5')+'">'+(s.div!=null?s.div:'--')+'</span></div>';
   /* S405: KGV und Gewinnwachstum aus dem Datenfeld statt STOCKS-Platzhalter pe/eg; neutral, direkt ueber PEG. */
   out+='<div class="wl-kgv-det" style="'+row+'" title="'+KGV_TTL+'"><span style="color:var(--mut)">KGV laufend / erwartet</span><span>'+kgvText(s.t).replace(/^KGV /,'')+'</span></div>';
   if(kgvUnpl(s.t))out+='<div class="wl-kgv-unpl" style="'+row+'"><span style="color:var(--mut)">KGV erwartet</span><span>Sch&auml;tzung des Anbieters unplausibel</span></div>';
@@ -3003,16 +3024,7 @@ function wlDetail(ticker){
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">BETA (Low-Vol)</div><div style="font-family:monospace;font-size:11px;color:'+betaColor+'">'+betaDisp+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">DEBT/EQ %</div><div style="font-family:monospace;font-size:11px;color:'+debtColor+'">'+debtDisp+'</div></div>';
     out+='</div>';
-    if(fd.div_yield!==null&&fd.div_yield!==undefined||fd.buyback_yield!==null&&fd.buyback_yield!==undefined){
-      var dy=fd.div_yield!==null&&fd.div_yield!==undefined?fd.div_yield.toFixed(1)+'%':'--';
-      var by=fd.buyback_yield!==null&&fd.buyback_yield!==undefined?fd.buyback_yield.toFixed(1)+'%':'--';
-      var sry=fd.shareholder_return!==null&&fd.shareholder_return!==undefined?fp(fd.shareholder_return):'--';
-      out+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-top:5px">';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">DIV YIELD</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+dy+'</div></div>';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">BUYBACK</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+by+'</div></div>';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">SH RETURN</div><div style="font-family:monospace;font-size:11px;color:#b07cf8">'+sry+'</div></div>';
-      out+='</div>';
-    }
+    out+=divKacheln(fd);  /* S407 Punkt 5: Schalter DIV_ANZEIGE_AUS; BUYBACK entfallen */
     /* shares_change_yoy: Buyback-Signal v5.9.78 */
     var scyV=fd.sc_yoy!==null&&fd.sc_yoy!==undefined?fd.sc_yoy:null;
     if(scyV!==null){
@@ -3028,7 +3040,6 @@ function wlDetail(ticker){
       out+='<div style="font-family:monospace;font-size:10px;color:#456278;margin-top:2px">'+scyTip+'</div>';
       out+='</div>';
     }
-    if(fd.mr)out+='<div style="font-size:10px;color:var(--mut);margin-top:6px;font-style:italic">'+fd.mr+'</div>';
     out+='</div>';
   }
   out+='</div>';
@@ -3390,6 +3401,15 @@ function archSave(){
   catch(e){ console.warn('Archiv-Speichern fehlgeschlagen'); }
 }
 
+/* S407 Punkt 7: Archiv-Eintrag null-treu (AP-3) -- ein gueltiger Wert 0 bleibt 0,
+   ein fehlender bleibt null; Kurs aus dem Tagesdatenfeld price statt s.p.
+   Schluessel unveraendert (hist und macd tragen beide das Histogramm). */
+function archNum(v){ return (typeof v==='number'&&isFinite(v))?v:null; }
+function archEntry(t, sig, sc0){
+  return { t:t, sig:sig, sc:archNum(sc0.score), p:archNum(sc0.price), rsi:archNum(sc0.rsi),
+           hist:archNum(sc0.macd_hist), a200:sc0.above200?1:0, macd:archNum(sc0.macd_hist),
+           peg:archNum(sc0.peg), sr:archNum(sc0.sector_rank) };
+}
 function archSnapshot(){
   if(!_scoresIdx || Object.keys(_scoresIdx).length === 0) return;
   var ts = Date.now();
@@ -3400,19 +3420,7 @@ function archSnapshot(){
       var sc0 = _scoresIdx[s.t];
       if(!sc0) continue;
       var sig = sc0.signal || 'watch';
-      var sc  = sc0.score  || 0;
-      snap.entries.push({
-        t:    s.t,
-        sig:  sig,
-        sc:   sc,
-        p:    s.p           || null,
-        rsi:  sc0.rsi       || null,
-        hist: sc0.macd_hist || null,
-        a200: sc0.above200  ? 1 : 0,
-        macd: sc0.macd_hist || null,
-        peg:  sc0.peg       || null,
-        sr:   sc0.sector_rank || null
-      });
+      snap.entries.push(archEntry(s.t, sig, sc0));
     }catch(se){ /* einzelnen Ticker ueberspringen */ }
   }
   /* v5.9.86: Sektor-Signale einmal pro Snapshot (nicht je Ticker) */
@@ -3507,14 +3515,14 @@ function archExportJSON(){
 function archExportCSV(){
   /* Exportiert alle Snapshots als CSV (eine Zeile pro Ticker pro Tag) */
   if(_archive.length === 0){ alert('Kein Archiv vorhanden.'); return; }
-  var rows = ['date,ticker,signal,score,price,rsi,macd,above200,peg'];
+  var rows = ['date,ticker,signal,score,price,rsi,macd_hist,above200,peg'];  /* S407 Punkt 2: Spalte traegt das Histogramm */
   for(var i=0;i<_archive.length;i++){
     var snap = _archive[i];
     for(var j=0;j<snap.entries.length;j++){
       var e = snap.entries[j];
       rows.push([
         snap.date, e.t, e.sig, e.sc,
-        e.p, e.rsi, e.macd, e.a200, e.peg||''
+        e.p, e.rsi, e.macd, e.a200, e.peg  /* S407: null -> leeres Feld (join), 0 bleibt 0 */
       ].join(','));
     }
   }
@@ -3572,7 +3580,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.30';
+      var PAGE_VERSION = 'v6.6.32';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -3628,17 +3636,21 @@ function loadScores() {
       /* S399 A-1: peg aus dem Datenfeld, Zahl -> Zahl, sonst null (AP-3). Titel
          ohne Eintrag ebenfalls null -- der STOCKS-Platzhalter gilt nur bis zum
          Laden von scores.json. */
-      /* NICHT sync-bar: macdLine/macdSig (n.v.), macdCross (Typ-Konflikt), sr      */
+      /* NICHT sync-bar: macdCross (Typ-Konflikt) und atr -- nur Rueckfallpfad mSig.
+         macdLine/macdSig/sr/chg/pe/eg sind seit S407 aus STOCKS entfernt.            */
       for (var _si3 = 0; _si3 < STOCKS.length; _si3++) {
         var _sd3 = _scoresIdx[STOCKS[_si3].t];
         if (_sd3) {
           STOCKS[_si3].sw       = (_sd3.sw === true);
           STOCKS[_si3].above200 = (_sd3.above200 === true);
-          if (_sd3.price    !== null && _sd3.price    !== undefined) { STOCKS[_si3].p    = _sd3.price; }
-          if (_sd3.macd_hist !== null && _sd3.macd_hist !== undefined) { STOCKS[_si3].hist = _sd3.macd_hist; }
-          if (_sd3.rsi      !== null && _sd3.rsi      !== undefined) { STOCKS[_si3].rsi  = _sd3.rsi; }
-          if (_sd3.div      !== null && _sd3.div      !== undefined) { STOCKS[_si3].div  = _sd3.div; }
         }
+        /* S407 Punkt 3/4: Kurs, Histogramm, RSI wie peg -- Zahl -> Zahl, sonst null;
+           Divergenz Text -> Text, sonst null; ohne Eintrag null. Vorher blieb der
+           STOCKS-Platzhalter stehen, wenn das Datenfeld fehlte (RSI: 18 London-Titel). */
+        STOCKS[_si3].p    = (_sd3 && typeof _sd3.price === 'number' && isFinite(_sd3.price)) ? _sd3.price : null;
+        STOCKS[_si3].hist = (_sd3 && typeof _sd3.macd_hist === 'number' && isFinite(_sd3.macd_hist)) ? _sd3.macd_hist : null;
+        STOCKS[_si3].rsi  = (_sd3 && typeof _sd3.rsi === 'number' && isFinite(_sd3.rsi)) ? _sd3.rsi : null;
+        STOCKS[_si3].div  = (_sd3 && typeof _sd3.div === 'string') ? _sd3.div : null;
         STOCKS[_si3].peg = (_sd3 && typeof _sd3.peg === 'number' && isFinite(_sd3.peg)) ? _sd3.peg : null;
         /* S405: KGV + Gewinnwachstum wie peg -- Zahl -> Zahl, sonst null; pe_neg nur
            true/false, sonst null; ohne Eintrag null. Der STOCKS-Platzhalter pe/eg
@@ -3919,7 +3931,7 @@ function applyFund(fund){
     if(!fd_pre) continue;
     if(fd_pre.trend!==null&&fd_pre.trend!==undefined)
       STOCKS[i_pre].trend=fd_pre.trend;
-    if(fd_pre.rsi_val!==null&&fd_pre.rsi_val!==undefined)
+    if(fd_pre.rsi_val!==null&&fd_pre.rsi_val!==undefined&&!(_scoresIdx&&_scoresIdx[sym_pre]))  /* S407: scores.json bleibt Quelle (AP-1) */
       STOCKS[i_pre].rsi=fd_pre.rsi_val;
     /* v7.9: evar bleibt in FD[t] â€” cSc() liest es direkt von dort */
     /* v7.9.3: Sektor-EVAR-Mediane nach vollstaendigem FD-Aufbau berechnen */
@@ -3945,14 +3957,12 @@ function applyFund(fund){
     var fd2=FD[STOCKS[i2].t];
     if(fd2){
       if(fd2.peg!==null&&fd2.peg!==undefined&&!(_scoresIdx&&_scoresIdx[STOCKS[i2].t]))STOCKS[i2].peg=fd2.peg;  /* S399: scores.json bleibt Quelle (AP-1) */
-      if(fd2.pe!==null&&fd2.pe!==undefined)STOCKS[i2].pe=fd2.pe;
       // v6: technische Felder aus JSON uebernehmen
-      if(fd2.price!==null&&fd2.price!==undefined)STOCKS[i2].p=fd2.price;
-      if(fd2.chg!==null&&fd2.chg!==undefined)STOCKS[i2].chg=fd2.chg;
-      if(fd2.rsi!==null&&fd2.rsi!==undefined)STOCKS[i2].rsi=fd2.rsi;
-      if(fd2.macdLine!==null&&fd2.macdLine!==undefined)STOCKS[i2].macdLine=fd2.macdLine;
-      if(fd2.macdSig!==null&&fd2.macdSig!==undefined)STOCKS[i2].macdSig=fd2.macdSig;
-      if(fd2.hist!==null&&fd2.hist!==undefined)STOCKS[i2].hist=fd2.hist;
+      /* S407: Kurs, RSI, Histogramm nur ohne scores.json-Eintrag (wie peg, S399);
+         chg/pe/macdLine/macdSig entfallen mit den STOCKS-Feldern. */
+      if(fd2.price!==null&&fd2.price!==undefined&&!(_scoresIdx&&_scoresIdx[STOCKS[i2].t]))STOCKS[i2].p=fd2.price;
+      if(fd2.rsi!==null&&fd2.rsi!==undefined&&!(_scoresIdx&&_scoresIdx[STOCKS[i2].t]))STOCKS[i2].rsi=fd2.rsi;
+      if(fd2.hist!==null&&fd2.hist!==undefined&&!(_scoresIdx&&_scoresIdx[STOCKS[i2].t]))STOCKS[i2].hist=fd2.hist;
       if(fd2.macdCross!==null&&fd2.macdCross!==undefined)STOCKS[i2].macdCross=fd2.macdCross;
       if(fd2.above200!==null&&fd2.above200!==undefined)STOCKS[i2].above200=fd2.above200;
       if(fd2.price_vs_50ma_pct!==null&&fd2.price_vs_50ma_pct!==undefined)STOCKS[i2].above50ma=(fd2.price_vs_50ma_pct||0)>0;
@@ -6839,7 +6849,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.30 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.32 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>

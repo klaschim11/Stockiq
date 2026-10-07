@@ -294,8 +294,8 @@ function rptDQ(){
 /* ----------------------------------------------------------------
    rptGetFd(t) -- Unified FD/scores Merger v1.1
    Prioritaet: FD[t] (manuell geladen) > _scoresIdx[t] (scores.json)
-   Dauerhaft leer (kein scores.json-Feld): shareholder_return
-   shareholder_return: berechnet aus div_yield + sc_yoy
+   shareholder_return: Datenfeld aus scores.json, keine Summenformel (S407);
+   derzeit ohne Anzeige (Zeile Div+Buyback entfernt, S407 Punkt 5)
    ---------------------------------------------------------------- */
 function rptGetFd(t){
   var base = FD[t] ? FD[t] : {};
@@ -321,7 +321,7 @@ function rptGetFd(t){
     evar:                 base.evar                 !== undefined ? base.evar                 : si.evar,
     div_yield:            base.div_yield            !== undefined ? base.div_yield            : si.div_yield,
     shareholder_return:   base.shareholder_return   !== undefined ? base.shareholder_return
-                          : (si.div_yield || 0) + (si.sc_yoy || 0)
+                          : (si.shareholder_return !== undefined ? si.shareholder_return : null)  /* S407: keine Summenformel */
   };
 }
 
@@ -576,8 +576,9 @@ function rptCompareBlock(tk1, tk2){
   out += '<th style="background:#1a3a5c;color:#00c8f0;padding:7px;text-align:center">' + tk2 + '<br><span style="font-size:9px;font-weight:400">' + (s2.n||'') + '</span></th></tr>';
   out += row('Gesamt-Score /100', sc1, sc2, true);
   out += row('Signal', rptSigText(s1), rptSigText(s2), false);
-  out += row('Momentum', Math.round(momSc(s1)), Math.round(momSc(s2)), true);
-  out += row('Fundamentals', Math.round(fSc(s1)), Math.round(fSc(s2)), true);
+  /* S407 Punkt 1: Bausteine aus den Tagesdaten (mom_score, fund_score), fehlt er "--" */
+  out += row('Momentum', bstText(tk1,'mom_score'), bstText(tk2,'mom_score'), true);
+  out += row('Fundamentals', bstText(tk1,'fund_score'), bstText(tk2,'fund_score'), true);
   out += row('FCF Yield %', fmtN(fd1.fcf,'%'), fmtN(fd2.fcf,'%'), true);
   out += row('ROCE %', fmtN(fd1.roce,'%'), fmtN(fd2.roce,'%'), true);
   out += row('OE Yield %', fmtN(fd1.owner_earnings_yield,'%'), fmtN(fd2.owner_earnings_yield,'%'), true);
@@ -616,13 +617,16 @@ function rptDetailCard(tk, num){
 
   /* Score-Komponenten */
   out += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:12px">';
-  var riskV=Math.round(rptRisk(st));
-  var riskColV=riskV>65?'#00e57a':riskV>40?'#ffab00':'#ff5252';
+  /* S407 Punkt 1: Bausteine aus den Tagesdaten (mom/trend/fund/risk_score); fehlt
+     einer: "--". Die Rueckrechnung des Risk aus Score und Platzhaltern entfaellt. */
+  var riskV=bstWert(tk,'risk_score');
+  var riskColV=riskV===null?'#7a9bb5':riskV>65?'#00e57a':riskV>40?'#ffab00':'#ff5252';
+  function bstZ(v){ return v===null?'--':v; }
   var comps = [
-    {l:'Momentum', v:Math.round(momSc(st)), c:'#00c8f0'},
-    {l:'Trend', v:Math.round(st.trend||0), c:'#7a9bb5'},
-    {l:'Fund', v:Math.round(fSc(st)), c:'#00e57a'},
-    {l:'Risk', v:riskV, c:riskColV},
+    {l:'Momentum', v:bstZ(bstWert(tk,'mom_score')), c:'#00c8f0'},
+    {l:'Trend', v:bstZ(bstWert(tk,'trend_score')), c:'#7a9bb5'},
+    {l:'Fund', v:bstZ(bstWert(tk,'fund_score')), c:'#00e57a'},
+    {l:'Risk', v:bstZ(riskV), c:riskColV},
   ];
   for(var ci=0;ci<comps.length;ci++){
     out += '<div style="text-align:center;padding:8px 4px;background:#0a1628;border:1px solid #1a3050;border-radius:6px">';
@@ -689,7 +693,6 @@ function rptDetailCard(tk, num){
   out += '<div style="color:#7a9bb5">RSI: <span style="color:#dce8f5">' + (fd.rsi_val!=null?Math.round(fd.rsi_val):'n/a') + '</span></div>';
   out += '<div style="color:#7a9bb5">12M-Mom: <span style="color:#dce8f5">' + (fd.mom_skip!=null?fd.mom_skip.toFixed(1)+'%':fd.mom12m!=null?fd.mom12m.toFixed(1)+'%':'n/a') + '</span></div>';
   out += '<div style="color:#7a9bb5">Beta: <span style="color:#dce8f5">' + (fd.beta!=null?fd.beta.toFixed(2):'n/a') + '</span></div>';
-  out += '<div style="color:#7a9bb5">Div+Buyback: <span style="color:#dce8f5">' + (fd.shareholder_return!=null?fd.shareholder_return.toFixed(1)+'%':'n/a') + '</span></div>';
   out += '</div>';
   /* Shares YoY: Buyback-Signal v5.9.80 (O'Shaughnessy Shareholder Yield) */
   var scyRpt=fd.shares_change_yoy!==null&&fd.shares_change_yoy!==undefined?fd.shares_change_yoy:null;
@@ -882,7 +885,7 @@ function rptTextAnalysis(tk, secStats){
   } else if(rawSig==='hold_dvg'){
     p1 = name + ' zeigt ein <strong>Deep Value Divergence</strong>-Signal (Score ' + sc + '/100). ';
     p1 += 'Das technische Bild ist belastet (unter 200MA), aber Fundamentals (Fund ' +
-          Math.round(fSc(st)) + '/100) und RSI im &uuml;berverkauften Bereich deuten auf nachlassenden Verkaufsdruck hin. ';
+          bstText(tk,'fund_score') + '/100) und RSI im &uuml;berverkauften Bereich deuten auf nachlassenden Verkaufsdruck hin. ';
     p1 += '<strong>Handlungskonsequenz: Beobachten \u2014 Einstieg pr&uuml;fen wenn Kurs &uuml;ber 200MA zur&uuml;ckkehrt.</strong>';
     p1 += scDiffTxt;
 
@@ -1041,20 +1044,6 @@ function rptGlossar(){
   return out;
 }
 
-/* Sicherer Risk-Score Wrapper (rSc ist kein globales Symbol) */
-function rptRisk(s){
-  /* Risk = (cSc - mom*0.25 - trend*0.20 - fund*0.35) / 0.20 */
-  try {
-    var fd = FD[s.t] || {};
-    var mo = momSc(s) || 0;
-    var tr = (s.trend || 0);
-    var fu = fSc(s) || 0;
-    var cs = cSc(s) || 0;
-    var risk = (cs - mo * 0.25 - tr * 0.20 - fu * 0.35) / 0.20;
-    return Math.max(0, Math.min(100, risk));
-  } catch(e){ return 50; }
-}
-
 /* Controls wiederherstellen nach Einklappen */
 function rptShowControls(){
   var ctrl = document.getElementById('rpt-controls');
@@ -1098,7 +1087,6 @@ function rptShowControls(){
     FD[_t].shares_change_yoy    = FD[_t].shares_change_yoy    || _si.sc_yoy;
     FD[_t].div_yield = FD[_t].div_yield || _si.div_yield;
   }
-  /* fd.shareholder_return: computed (div_yield + sc_yoy) */
   document.getElementById('rpt-modal').scrollTop = 0;
 }
 

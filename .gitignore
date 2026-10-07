@@ -69,6 +69,38 @@ stockiq_wh7_findings.json
 stockiq_ph5_findings.json
 stockiq_tr9_findings.json
 stockiq_signalq_findings.json
+# Render-Projektion daneben (NEU v209_S210, gleicher Owner): dev.html liest
+# diese, nicht die 107,9-MB-findings-Datei. Muster wie regime findings/summary.
+stockiq_signalq_summary.json
+# OOS-Beobachtungsreihe (NEU v208_S209, Owner Berichte\stockiq_alpha_oos_kadenz.py)
+stockiq_alpha_oos_findings.json
+# Querschnitt-Klassen (Owner Berichte\stockiq_querschnitt_klassen.py).
+# NACHGETRAGEN v221_S278: die Datei existierte seit v210_S212 im Root, war
+# aber als EINZIGE der Findings-Familie nicht gelistet -- git status fuehrte
+# sie als untracked, ein "git add ." haette sie ins oeffentliche Repo
+# getragen (ADR-002-Luecke, Nebenbefund S277 Teil C).
+stockiq_querschnitt_findings.json
+# FAV-DESK Fenster-Deskription (NEU v221_S278, Owner Berichte\stockiq_favdesk.py):
+# Projektion aus TBL_TICKER_WINDOW/_XS/_STAT, DEV-ONLY, kein Commit.
+stockiq_favdesk_findings.json
+# D1-VERLAUF Teil A (NEU v228_S316, Owner Berichte\stockiq_d1_verlauf.py v1.1
+# --projektion): Projektion aus TBL_D1_STATE/_EPISODE/_SERIES/_SURVIVAL,
+# DEV-ONLY, kein Commit. Liegt im Repo-Root wie favdesk_findings und wird von
+# keiner anderen Zeile gedeckt -- ohne diese Zeile fuehrt git status sie als
+# untracked (dieselbe ADR-002-Luecke wie bei querschnitt_findings, S277/S278).
+stockiq_d1_verlauf_summary.json
+
+# Ccode-Auftragsbriefe (NEU v221_S279, ADR-002). Das Verzeichnis war untracked
+# und von keiner Zeile gedeckt -- ein "git add ." haette die Briefe ins
+# oeffentliche Repo getragen. Zweite Fundstelle derselben Klasse wie die
+# fehlende Zeile fuer stockiq_querschnitt_findings.json (Nebenbefund S277/S278).
+Briefe Ccode/
+# Schattenschicht fSc-Soll/fSc2 (NEU v212_S222, Owner stockiq_fsc2_shadow.py):
+# DEV-ONLY, kein Commit. WICHTIG: der Name liegt dicht an der PUBLIC-Datei
+# stockiq_scores.json -- ohne diese Zeile waere die Schattendatei nicht von
+# stockiq_annual*.json o.ae. gedeckt und koennte versehentlich getrackt werden
+# (ADR-002 laesst nur die 6 Whitelist-Dateien zu).
+stockiq_scores_shadow.json
 
 # --- Sprint 41: Verzeichniskonzept (15.06.2026) ---
 
