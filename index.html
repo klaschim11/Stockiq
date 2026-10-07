@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.29</title>
+<title>StockIQ v6.6.30</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -28,6 +28,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 #wl-kpi{grid-template-columns:repeat(4,1fr)}
 @media (max-width:600px){#wl-kpi{grid-template-columns:repeat(2,1fr)}}
+.wl-kz{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.wl-kz>div{white-space:nowrap}
+@media (max-width:600px){.wl-kz{display:flex;flex-wrap:wrap;column-gap:12px;row-gap:4px}}
 .tf{padding:6px 12px;border:1px solid var(--bdr2);border-radius:20px;font-family:var(--f-mono);font-size:11px;color:var(--mut);cursor:pointer;background:transparent}
 .tf.active{color:var(--acc);border-color:var(--acc);background:rgba(0,200,240,.08)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
@@ -84,7 +87,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:10px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.29 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.30 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
     </div>
     <div style="font-family:monospace;font-size:11px;color:var(--mut);text-align:right">
       <div><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:-- CET</span></div>
@@ -222,7 +225,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.29</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.30</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -420,7 +423,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.29 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.30 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -804,7 +807,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div class="page" id="p7" style="display:none;padding:16px;max-width:800px;margin:0 auto">
 
   <div style="font-size:20px;font-weight:700;margin-bottom:4px">&#128203; Entwicklungsplan</div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.29 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">StockIQ v6.6.30 &middot; Juli 2026 &middot; klaschim11.github.io/Stockiq</div>
 
   <!-- Versions-Uebersicht -->
   <div style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">&#9881; Versions-Uebersicht</div>
@@ -818,6 +821,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.30</td><td style="padding:5px 8px;color:var(--mut)">KGV laufend und erwartet in der Watchlist-Zeile neben dem PEG und als Depot-Spalte, Gewinnwachstum in der Detailansicht &ndash; Angabe aus den Tagesdaten, kein Signal; Depot-Spalte Pr&uuml;fung zeigt nur noch Datum und Resttage.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.29</td><td style="padding:5px 8px;color:var(--mut)">PEG aus den Tagesdaten auch f&uuml;r die Info-Zeile &bdquo;Hoch bewertet&ldquo; und die Fundamentals-Karte; Berichte ohne Gewichte und Schwellen, Glossar in Worten; Filter &bdquo;Nur hoher Fundamentalwert&ldquo;, Score ohne Verfahrens-Badge.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.28</td><td style="padding:5px 8px;color:var(--mut)">Detailansicht ohne Gewichte, Schwellen und Umrechnungen: Begr&uuml;ndungszeile nennt das Etikett in Klartext, Score als Sortierhilfe mit Teilwerten, PEG als gemessener Wert; Glossar und Sektoren-Tab in Worten statt Grenzwerten.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.27</td><td style="padding:5px 8px;color:var(--mut)">Watchlist: Kachel und Gruppe PEG-Block entfallen, Bewertung und &Uuml;berdehnung als Information in der Detailansicht; Kreis-Ampel bei U200 neutral; Hilfe Signal-Logik und Sektor-Matrix neu; Kopfzeile mit Datenstand, eine Lupe, Tab-Leiste bricht um, Profil-Chip ohne Zeichenfehler.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -905,7 +909,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.29 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.30 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1003,7 +1007,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.29 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.30 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1373,6 +1377,56 @@ function pegMess(t){
   var d=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
   return (d&&typeof d.peg==='number'&&isFinite(d.peg))?d.peg.toFixed(2):'--';
 }
+/* S405: KGV laufend/erwartet und Gewinnwachstum aus dem Datenfeld
+   (scores.json pe_ttm/pe_fwd/pe_neg/eg_q/eg_fwd). Angabe ohne Testbeleg --
+   kein Score, kein Signal, keine Farbe, keine Ampel. Rundung nur hier:
+   ab 10 ganzzahlig, darunter eine Nachkommastelle, Dezimalkomma; ueber
+   1000 ">1000" bzw. ">1000e" (die Datei traegt den Rohwert, Kla 07.10.2026).
+   KGV_UNPLAUSIBEL (Kla-Entscheid 07.10.2026, Befund Schritt 0 S405): die
+   Vendor-Gewinnschaetzung (forwardEps) dieser Titel ist offensichtlich
+   falsch (erwartetes KGV 5401.T 1,1 / 8001.T 3,3 / 8053.T 3,9 /
+   9433.T 1235). Die Datei behaelt den Rohwert; die Anzeige zeigt "?e",
+   die Detailansicht "Schaetzung des Anbieters unplausibel". Kein Titel
+   wird ueber eine Rechenregel ausgeblendet. */
+var KGV_UNPLAUSIBEL={'5401.T':'07.10.2026','8001.T':'07.10.2026','8053.T':'07.10.2026','9433.T':'07.10.2026'};
+var KGV_TTL='Kurs-Gewinn-Verh&auml;ltnis: laufend (Gewinn der letzten 12 Monate) / erwartet (Analystensch&auml;tzung f&uuml;r das n&auml;chste Gesch&auml;ftsjahr). Angabe, kein Signal.';
+var KGV_EG_TTL='Gewinnwachstum: realisiert = Gewinn des letzten Quartals gegen&uuml;ber dem Vorjahresquartal; erwartet = Analystensch&auml;tzung f&uuml;r das n&auml;chste Gesch&auml;ftsjahr gegen&uuml;ber dem Gewinn der letzten 12 Monate. Angabe, kein Signal.';
+function kgvNum(v){
+  if(typeof v!=='number'||!isFinite(v))return null;
+  if(v>1000)return '>1000';  /* Kla 07.10.2026: Rohwert gespeichert, Anzeige gedeckelt */
+  var r=Math.round(v*10)/10;
+  if(r>=10)return String(Math.round(v));
+  return r.toFixed(1).replace('.',',');
+}
+function kgvPct(v){
+  if(typeof v!=='number'||!isFinite(v))return null;
+  var p=v*100,a=Math.round(Math.abs(p)*10)/10,t;
+  t=a>=10?String(Math.round(Math.abs(p))):a.toFixed(1).replace('.',',');
+  return (a===0?'':p>0?'+':'-')+t+' %';
+}
+function kgvDat(t){
+  var d=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
+  return (d&&typeof d==='object')?d:null;
+}
+function kgvUnpl(t){
+  var d=kgvDat(t);
+  return !!(KGV_UNPLAUSIBEL[t]||(d&&d.ticker&&KGV_UNPLAUSIBEL[d.ticker]));
+}
+function kgvText(t){
+  var d=kgvDat(t);
+  if(d&&d.pe_neg===true)return 'KGV - (Verlust)';
+  var a=d?kgvNum(d.pe_ttm):null;
+  var b=kgvUnpl(t)?'?':(d?kgvNum(d.pe_fwd):null);
+  if(a===null&&b===null)return 'KGV -';
+  return 'KGV '+(a===null?'-':a)+' / '+(b===null?'-':b)+'e';
+}
+function kgvEgText(t){
+  var d=kgvDat(t);
+  var a=d?kgvPct(d.eg_q):null;
+  var b=kgvUnpl(t)?'?':(d?kgvPct(d.eg_fwd):null);
+  return 'realisiert '+(a===null?'-':a)+' / erwartet '+(b===null?'-':b);
+}
+/*KGV-ENDE*/
 function fp(v){if(v===null||v===undefined||isNaN(v))return 'n/a';return (v>=0?'+':'')+v.toFixed(1)+'%';}
 function scCol(sc){if(sc>=70)return '#00e57a';if(sc>=55)return '#00c8f0';if(sc>=40)return '#f0c000';return '#ff6666';}
 function isDivBull(s){return s.div==='bull_hidden'||s.div==='bull_regular';}
@@ -2060,7 +2114,7 @@ function rSyn(){
     bH+='<div style="font-size:11px;color:var(--mut);margin-bottom:6px">'+dName(s)+'</div>';
     bH+='<div style="font-size:26px;font-weight:800;color:#00e57a;margin-bottom:4px">'+sc+'/100</div>';
     bH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">$'+s.p+' RSI:'+s.rsi+'</div>';
-    bH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">PEG:'+pegMess(s.t)+' KGV:'+s.pe+'x</div>';
+    bH+='<div style="font-family:monospace;font-size:10px;color:var(--mut)">PEG:'+pegMess(s.t)+' '+kgvText(s.t)+'</div>';
     bH+='</div>';
   }
   if(!bH)bH='<div style="color:var(--mut);font-size:12px;padding:12px">Keine qualifizierten Kaufsignale</div>';
@@ -2697,8 +2751,10 @@ function wlRend(scored){
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
     h+='<div style="display:flex;align-items:center;gap:6px">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+srAmpBdg+dB+'<span'+sqTitle(s)+' style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+_sB+'</div></div>';
-    h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">';
+    /* S405: KGV direkt neben PEG (Kla 07.10.2026), neutral ohne Farbe. Schmal bricht die Zeile um (.wl-kz). */
+    h+='<div class="wl-kz">';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
+    h+='<div class="wl-kgv" style="font-family:monospace;font-size:10px" title="'+KGV_TTL+'"><span style="color:var(--mut)">KGV </span><span>'+kgvText(s.t).replace(/^KGV /,'')+'</span></div>';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">ROCE </span><span>'+roceD+'</span></div>';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">RSI </span><span style="color:'+rsiC+'">'+s.rsi+'</span></div>';
@@ -2856,7 +2912,10 @@ function wlDetail(ticker){
     out+='<div style="'+row+'"><span style="color:var(--mut)">12M-Mom</span><span style="color:'+(m12leg>=20?'#00e57a':m12leg>=0?'#00c8f0':m12leg>=-15?'#f0c000':'#ff6666')+'">'+(m12leg>=0?'+':'')+m12leg.toFixed(1)+'%</span></div>';
   }
   out+='<div style="'+row+'"><span style="color:var(--mut)">Divergenz</span><span style="color:'+(isDivBull(s)?'#ff9f1c':'#7a9bb5')+'">'+s.div+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">KGV / EG</span><span>'+(s.pe!=null?s.pe+'x':'--')+' / '+(s.eg||'-')+'%</span></div>';
+  /* S405: KGV und Gewinnwachstum aus dem Datenfeld statt STOCKS-Platzhalter pe/eg; neutral, direkt ueber PEG. */
+  out+='<div class="wl-kgv-det" style="'+row+'" title="'+KGV_TTL+'"><span style="color:var(--mut)">KGV laufend / erwartet</span><span>'+kgvText(s.t).replace(/^KGV /,'')+'</span></div>';
+  if(kgvUnpl(s.t))out+='<div class="wl-kgv-unpl" style="'+row+'"><span style="color:var(--mut)">KGV erwartet</span><span>Sch&auml;tzung des Anbieters unplausibel</span></div>';
+  out+='<div class="wl-eg-det" style="'+row+'" title="'+KGV_EG_TTL+'"><span style="color:var(--mut)">Gewinnwachstum</span><span>'+kgvEgText(s.t)+'</span></div>';
   /* S398 R-4: PEG nur als gemessener Wert aus dem Datenfeld, ohne
      Sektor-Median und ohne Umrechnung in Punkte; fehlt er: "--". */
   out+='<div style="'+row+'"><span style="color:var(--mut)">PEG</span><span>'+pegMess(s.t)+'</span></div>';
@@ -3513,7 +3572,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.29';
+      var PAGE_VERSION = 'v6.6.30';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -3581,6 +3640,14 @@ function loadScores() {
           if (_sd3.div      !== null && _sd3.div      !== undefined) { STOCKS[_si3].div  = _sd3.div; }
         }
         STOCKS[_si3].peg = (_sd3 && typeof _sd3.peg === 'number' && isFinite(_sd3.peg)) ? _sd3.peg : null;
+        /* S405: KGV + Gewinnwachstum wie peg -- Zahl -> Zahl, sonst null; pe_neg nur
+           true/false, sonst null; ohne Eintrag null. Der STOCKS-Platzhalter pe/eg
+           hat seither keinen Anzeige-Leser mehr. */
+        var _kn3 = ['pe_ttm', 'pe_fwd', 'eg_q', 'eg_fwd'];
+        for (var _kk3 = 0; _kk3 < _kn3.length; _kk3++) {
+          STOCKS[_si3][_kn3[_kk3]] = (_sd3 && typeof _sd3[_kn3[_kk3]] === 'number' && isFinite(_sd3[_kn3[_kk3]])) ? _sd3[_kn3[_kk3]] : null;
+        }
+        STOCKS[_si3].pe_neg = (_sd3 && typeof _sd3.pe_neg === 'boolean') ? _sd3.pe_neg : null;
       }
       /*WLCNT-AP1*/
       var _cntMatch = 0;
@@ -5366,14 +5433,14 @@ function dpPruefZelle(s, maTxt){
   if(!s || s.code === 'etf'){ txt = '&mdash;'; col = '#456278'; ttl = 'ETF: keine Frist.'; }
   else if(s.code === 'ohne'){ txt = '&mdash;'; col = '#456278'; ttl = 'Kaufdatum fehlt im Buchungslog.'; }
   else if(s.code === 'haelt'){
-    txt = 'h&auml;lt bis ' + dpDatumTxt(s.naechst) + ' (' + s.rest + ' T)';
+    txt = dpDatumTxt(s.naechst) + ' (' + s.rest + ' T)';  /* S405: kurz, 'haelt bis' im Tooltip */
     col = s.rest <= 30 ? '#ffab00' : '#7a9bb5';
-    ttl = 'Pr&uuml;fdatum ' + dpDatumTxt(s.naechst) + ', noch ' + s.rest + ' Tage.';
+    ttl = 'H&auml;lt bis ' + dpDatumTxt(s.naechst) + '. Pr&uuml;fdatum ' + dpDatumTxt(s.naechst) + ', noch ' + s.rest + ' Tage.';
   }
   else if(s.code === 'verl'){
-    txt = 'verl&auml;ngert bis ' + dpDatumTxt(s.naechst);
+    txt = dpDatumTxt(s.naechst) + ' (' + s.rest + ' T)';  /* S405: kurz, 'verlaengert bis' im Tooltip */
     col = '#00e57a';
-    ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + ': BUY. N&auml;chste Pr&uuml;fung in ' + s.rest + ' Tagen.';
+    ttl = 'Verl&auml;ngert bis ' + dpDatumTxt(s.naechst) + '. Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + ': BUY. N&auml;chste Pr&uuml;fung in ' + s.rest + ' Tagen.';
   }
   else if(s.code === 'sell'){
     txt = 'SELL Abstieg';
@@ -5688,6 +5755,7 @@ function dpRenderTable(){
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Score</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Sig</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center;font-size:10px" title="Pr&uuml;fdatum: zw&ouml;lf Monate ab Erstkauf, danach j&auml;hrlich.">Pr&uuml;fung</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:right;font-size:10px" title="'+KGV_TTL+'">KGV</th>';  /* S405 */
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Skt</th>';
   out += '<th style="background:#1a3a5c;color:var(--mut);padding:5px 6px;text-align:right;font-size:10px">real.</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px"></th></tr>';
@@ -5750,6 +5818,8 @@ function dpRenderTable(){
     var _md=(dp_sig==='sell_ma')?dpSellMaDays(p.t):null;
     var _mt=(_md===null)?'':('Tage unter der 200-Tage-Linie: '+(_md<0?'unbekannt':_md)+'.');
     out += dpPruefZelle(_dpPm[p.t], _mt);
+    /* S405: KGV laufend / erwartet, neutral, rechts neben Pruefung (Kla 07.10.2026). */
+    out += '<td class="dp-kgv" style="padding:5px 6px;text-align:right;font-family:monospace;font-size:10px;white-space:nowrap;color:#dce8f5" title="'+KGV_TTL+'">'+kgvText(p.t).replace(/^KGV /,'')+'</td>';
     out += '<td style="padding:5px 6px;text-align:center">'+getSektorBadge(p.t)+'</td>';
     var rlz = typeof p.realized === 'number' ? p.realized : 0;
     var rlzC = rlz > 0 ? '#00e57a' : rlz < 0 ? '#ff5252' : 'var(--mut)';
@@ -6769,7 +6839,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Sektor-Analyse-Bericht</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.29 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.30 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
