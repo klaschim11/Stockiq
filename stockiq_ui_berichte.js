@@ -251,7 +251,7 @@ function rptDQ(){
     html += '<td style="padding:6px 8px;color:#a0b0c0">' + r.fsc_bucket + '</td>';
     var csVal = (r.cSc !== null && r.cSc !== undefined) ? r.cSc.toFixed(0) : '-';
     html += '<td style="padding:6px 8px;color:#a0b0c0">' + csVal + '</td>';
-    var mVal = (r.mom12m !== null) ? (r.mom12m * 100).toFixed(1) + '%' : '-';
+    var mVal = (r.mom12m !== null) ? r.mom12m.toFixed(1) + '%' : '-';  /* S417 A-3: mom12m_ret ist schon Prozent */
     html += '<td style="padding:6px 8px;color:#a0b0c0">' + mVal + '</td>';
     html += '</tr>';
   }
