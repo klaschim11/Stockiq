@@ -2,6 +2,8 @@
 /* Extrahiert aus index.html | Sprint 53 | 27.06.2026 */
 /* Dashboard v6.4.13 | ES5-only (iOS Safari + GitHub Pages) */
 /* S399 (v6.6.29): Formeltexte (Gewichte, Schwellen, Funktionsnamen) aus dem sichtbaren Text entfernt */
+/* S416 (v6.6.34): BUY-Nachzug -- alle Berichte zeigen das Etikett der Watchlist (sigView:
+   BUY / SELL Abstieg / WATCH) und deren Kennzeichen (sigMarks); neuer Bericht Rotation */
 
 /* ============================================================
    SEKTOR-BERICHT ENGINE v5.9.51
@@ -22,7 +24,8 @@ var RPT_TYPE = 'sector';
 var RPT_REG = {
   sector: { label:'Sektor-Vergleich', controls:rptCtrlSector, build:rptBuildSector },
   dq:     { label:'Datenqualitaet',    controls:rptCtrlDQ,     build:rptDQ          },
-  signal: { label:'Signal-Export',     controls:rptCtrlSignal, build:rptBuildSignal }
+  signal: { label:'Signal-Export',     controls:rptCtrlSignal, build:rptBuildSignal },
+  rotation:{ label:'Rotation (BUY heute / vor 12 Monaten)', controls:rptCtrlRot, build:rptBuildRot }
 };
 function rptBuild(){ var r=RPT_REG[RPT_TYPE]; if(r&&r.build) r.build(); }
 function rptSetType(t){ if(RPT_REG[t]){ RPT_TYPE=t; rptShowControls(); } }
@@ -74,32 +77,23 @@ function rptCtrlDQ(){
     '<div><div style="' + lSt + '">SIGNAL-FILTER</div>' +
     '<select id="dq-sigfilter" style="' + iSt + '">' +
     '<option value="all" selected>alle</option>' +
-    '<optgroup label="BUY">' +
-    '<option value="g:buy">BUY (alle)</option>' +
+    '<option value="g:buy">BUY</option>' +
+    '<option value="g:abstieg">SELL Abstieg</option>' +
+    '<option value="g:watch">WATCH</option>' +
+    '<optgroup label="Signalcode (Tagesdaten)">' +
     '<option value="s:buy">- buy</option>' +
     '<option value="s:strong">- strong</option>' +
-    '<option value="s:pb">- pb (PEG-Block)</option>' +
+    '<option value="s:pb">- pb</option>' +
     '<option value="s:buy_rsi_warn">- buy_rsi_warn</option>' +
-    '</optgroup>' +
-    '<optgroup label="HOLD*">' +
-    '<option value="g:holdstar">HOLD* (alle)</option>' +
     '<option value="s:hold_sf">- hold_sf</option>' +
     '<option value="s:hold_sf_div">- hold_sf_div</option>' +
     '<option value="s:hold_sf_both">- hold_sf_both</option>' +
     '<option value="s:hold_dvg">- hold_dvg</option>' +
-    '</optgroup>' +
-    '<optgroup label="HOLD">' +
     '<option value="s:hold">- hold</option>' +
-    '</optgroup>' +
-    '<optgroup label="SELL">' +
-    '<option value="g:sell">SELL (alle)</option>' +
     '<option value="s:sell_zl">- sell_zl</option>' +
     '<option value="s:sell_ma">- sell_ma</option>' +
     '<option value="s:sell_hist">- sell_hist</option>' +
-    '<option value="s:sell">- sell (generisch)</option>' +
-    '</optgroup>' +
-    '<optgroup label="WATCH / WEAK">' +
-    '<option value="g:watch">WATCH/WEAK (alle)</option>' +
+    '<option value="s:sell">- sell</option>' +
     '<option value="s:watch">- watch</option>' +
     '<option value="s:watch_rsi">- watch_rsi</option>' +
     '<option value="s:weak">- weak</option>' +
@@ -126,16 +120,16 @@ function rptDqCalc(){
   var thr = thrEl ? parseInt(thrEl.value, 10) : 2;
   var sf  = sfEl  ? sfEl.value  : 'all';
   var sec = secEl ? secEl.value : '';
-  /* Signal-Filter Helper: 'all' | 'g:Gruppe' (aggregiert) | 's:exakt' (Sub-Signal) */
-  function sigPass(sig, filt){
+  /* Signal-Filter: 'all' | 'g:Etikett' (S416: Etikett der Watchlist,
+     sigView) | 's:Code' (Signalcode der Tagesdaten) */
+  function sigPass(sig, filt, lbl){
     if(filt === 'all') return true;
     if(filt.charAt(0) === 's' && filt.charAt(1) === ':'){
       return sig === filt.substring(2);
     }
-    if(filt === 'g:buy')      return sig==='buy' || sig==='strong' || sig==='pb' || sig==='buy_rsi_warn';
-    if(filt === 'g:holdstar') return isHoldSF(sig);
-    if(filt === 'g:sell')     return isSell(sig);
-    if(filt === 'g:watch')    return sig==='watch' || sig==='watch_rsi' || sig==='weak';
+    if(filt === 'g:buy')      return lbl === 'BUY';
+    if(filt === 'g:abstieg')  return lbl === 'SELL Abstieg';
+    if(filt === 'g:watch')    return lbl === 'WATCH';
     return false;
   }
   var rows = [];
@@ -144,10 +138,11 @@ function rptDqCalc(){
     var sd = _scoresIdx[s.t];
     if(!sd) continue;
     var sig = mSig(s);
+    var sv  = sigView(s.t, sig);         /* S416: Etikett wie WL */
     var dr  = dqCheck(s.t, sig, true);   /* forceReturn=true -> Rohliste */
     if(!dr || dr.fields.length < thr) continue;
-    /* Signal-Filter (hierarchisch: all / g:Gruppe / s:Sub) */
-    if(!sigPass(sig, sf)) continue;
+    /* Signal-Filter (all / g:Etikett / s:Code) */
+    if(!sigPass(sig, sf, sv.lbl)) continue;
     /* Sektor-Filter */
     if(sec && sd.sector !== sec) continue;
     /* fSc-Bucket */
@@ -161,7 +156,8 @@ function rptDqCalc(){
       n: s.n || s.t,
       sector: sd.sector || '',
       sig: sig,
-      sigText: rptSigText(s),
+      sigText: sv.lbl,
+      marks: rptMarks(s.t, sig),
       raw_sig: sd.signal || '',
       missing: dr.fields,
       n_missing: dr.fields.length,
@@ -171,15 +167,12 @@ function rptDqCalc(){
       mom12m: (sd.mom12m_ret !== null && sd.mom12m_ret !== undefined) ? sd.mom12m_ret : null
     });
   }
-  /* Sortierung: n_missing DESC, Signal-Prio, fund_score DESC */
-  var prio = {strong:1, buy:2, buy_rsi_warn:2, pb:3, watch:4, watch_rsi:4,
-              hold_sf:5, hold_sf_div:5, hold_sf_both:5, hold_dvg:5,
-              hold:6, weak:7,
-              sell:8, sell_zl:8, sell_ma:8, sell_hist:8};
+  /* Sortierung: n_missing DESC, Etikett (BUY, SELL Abstieg, WATCH), fund_score DESC */
+  var prio = {'BUY':1, 'SELL Abstieg':2, 'WATCH':3};
   rows.sort(function(a, b){
     if(a.n_missing !== b.n_missing) return b.n_missing - a.n_missing;
-    var pa = prio[a.sig] || 9;
-    var pb = prio[b.sig] || 9;
+    var pa = prio[a.sigText] || 9;
+    var pb = prio[b.sigText] || 9;
     if(pa !== pb) return pa - pb;
     return b.fund_score - a.fund_score;
   });
@@ -193,7 +186,7 @@ function rptDqCsv(){
     return;
   }
   var today = new Date().toISOString().substring(0, 10);
-  var lines = ['ticker;name;sector;signal_post;signal_raw;missing_fields;n_missing;fund_score;fsc_bucket;cSc;mom12m_ret;snapshot_date'];
+  var lines = ['ticker;name;sector;signal_post;signal_raw;missing_fields;n_missing;fund_score;fsc_bucket;cSc;mom12m_ret;snapshot_date;etikett;kennzeichen'];
   for(var i=0; i<rows.length; i++){
     var r = rows[i];
     var nm = '"' + String(r.n).replace(/"/g, '""') + '"';
@@ -205,7 +198,9 @@ function rptDqCsv(){
       r.fsc_bucket,
       (r.cSc !== null && r.cSc !== undefined) ? r.cSc.toFixed(1) : '',
       (r.mom12m !== null) ? r.mom12m.toFixed(4) : '',
-      today
+      today,
+      r.sigText,
+      r.marks.join('|')
     ].join(';');
     lines.push(line);
   }
@@ -248,7 +243,7 @@ function rptDQ(){
     html += '<td style="padding:6px 8px"><a href="javascript:rptDetailCard(\'' + r.t + '\')" style="color:#2d7dd2;text-decoration:none;font-weight:700">' + escapeHtml(r.t) + '</a></td>';
     html += '<td style="padding:6px 8px;color:#dce8f5">' + escapeHtml(r.n) + '</td>';
     html += '<td style="padding:6px 8px;color:#a0b0c0">' + escapeHtml(r.sector) + '</td>';
-    html += '<td style="padding:6px 8px;color:#dce8f5">' + escapeHtml(r.sigText) + '</td>';
+    html += '<td style="padding:6px 8px;color:#dce8f5">' + escapeHtml(r.sigText) + rptMarksTxt(r.marks) + '</td>';
     html += '<td style="padding:6px 8px;color:#a0b0c0">' + escapeHtml(r.raw_sig) + '</td>';
     html += '<td style="padding:6px 8px;color:#ffb000">' + escapeHtml(r.missing.join(', ')) + '</td>';
     html += '<td style="padding:6px 8px;color:#dce8f5;font-weight:700">' + r.n_missing + '</td>';
@@ -433,7 +428,7 @@ function rptBuildSector(){
   out += '<div class="rpt-h1" style="font-size:18px;font-weight:800;color:#00c8f0;margin-bottom:4px">StockIQ Sektor-Analyse</div>';
   out += '<div class="rpt-h2" style="font-size:14px;font-weight:700;color:#dce8f5;margin-bottom:6px">&#128202; ' + sec + ' &mdash; ' + dateStr + '</div>';
   out += '<div class="rpt-mut" style="font-family:monospace;font-size:9px;color:#7a9bb5">';
-  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score: Sortierhilfe aus Momentum, Trend, Fundamentaldaten und Risiko &middot; StockIQ v6.4.13</div>';
+  out += 'Universum: ' + secStocks.length + ' Titel &middot; Score: Sortierhilfe aus Momentum, Trend, Fundamentaldaten und Risiko &middot; StockIQ ' + rptPageVersion() + '</div>';
   out += '</div>';
 
   /* -- 0. Sektor-Performance-Ranking (alle Sektoren) -- */
@@ -474,15 +469,16 @@ function rptBuildSector(){
     var rs  = top[ri];
     var rfd = rptGetFd(rs.t) || {};
     var rsc = Math.round(cSc(rs));
-    var rsig = rptSigText(rs);
-    var sigC = rsig.indexOf('BUY')>=0 ? '#00e57a' : rsig.indexOf('SELL')>=0 ? '#ff5252' : '#ffab00';
+    var rsv  = sigView(rs.t, mSig(rs));   /* S416: Etikett, Farbe, Kennzeichen wie WL */
+    var rsig = rsv.lbl;
+    var sigC = rsv.col;
     var rowBg = ri % 2 === 0 ? '#0a1628' : '#0c1a2e';
     var isSel = (rs.t === tk1 || rs.t === tk2) ? 'font-weight:700;' : '';
     out += '<tr style="background:' + rowBg + '">';
     out += '<td style="padding:5px 7px;' + isSel + 'color:' + (rs.t===tk1||rs.t===tk2?'#00c8f0':'#dce8f5') + '">' + escapeHtml(rs.t) + '</td>';
     out += '<td style="padding:5px 7px;color:#dce8f5;font-size:9px">' + escapeHtml(rs.n||'') + '</td>';
     out += '<td style="padding:5px 7px;text-align:center;color:#dce8f5;font-weight:700">' + rsc + '</td>';
-    out += '<td style="padding:5px 7px;text-align:center;color:' + sigC + ';font-size:9px">' + escapeHtml(rsig) + '</td>';
+    out += '<td style="padding:5px 7px;text-align:center;color:' + sigC + ';font-size:9px">' + escapeHtml(rsig) + rsv.bdg + '</td>';
     out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.fcf!=null?rfd.fcf.toFixed(1)+'%':'\u2014') + '</td>';
     out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.roce!=null?rfd.roce.toFixed(1)+'%':'\u2014') + '</td>';
     out += '<td style="padding:5px 7px;text-align:right;color:#dce8f5">' + (rfd.peg!=null?rfd.peg.toFixed(2):'\u2014') + '</td>';
@@ -515,7 +511,7 @@ function rptBuildSector(){
   /* -- Disclaimer -- */
   out += '<div class="rpt-card" style="background:#060e1a;border:1px solid #1a2a3a;border-radius:8px;padding:10px;margin-bottom:10px">';
   out += '<div style="font-family:monospace;font-size:8px;color:#7a9bb5;line-height:1.5">';
-  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ v6.4.13 generiert. ';
+  out += '<strong style="color:#dce8f5">Disclaimer:</strong> Dieser Bericht wurde automatisch von StockIQ ' + rptPageVersion() + ' generiert. ';
   out += 'Er dient ausschlie&szlig;lich zu Informationszwecken und stellt keine Anlageberatung dar. ';
   out += 'Alle Daten stammen aus yfinance (Yahoo Finance) und sind ohne Gew&auml;hr. ';
   out += 'Investitionsentscheidungen sollten immer auf Basis eigener Recherche und ggf. professioneller Beratung getroffen werden.';
@@ -575,7 +571,7 @@ function rptCompareBlock(tk1, tk2){
   out += '<th style="background:#1a3a5c;color:#00c8f0;padding:7px;text-align:center">' + tk1 + '<br><span style="font-size:9px;font-weight:400">' + (s1.n||'') + '</span></th>';
   out += '<th style="background:#1a3a5c;color:#00c8f0;padding:7px;text-align:center">' + tk2 + '<br><span style="font-size:9px;font-weight:400">' + (s2.n||'') + '</span></th></tr>';
   out += row('Gesamt-Score /100', sc1, sc2, true);
-  out += row('Signal', rptSigText(s1), rptSigText(s2), false);
+  out += row('Signal', sigLogText(tk1, mSig(s1)), sigLogText(tk2, mSig(s2)), false);  /* S416: Etikett + Kennzeichen */
   /* S407 Punkt 1: Bausteine aus den Tagesdaten (mom_score, fund_score), fehlt er "--" */
   out += row('Momentum', bstText(tk1,'mom_score'), bstText(tk2,'mom_score'), true);
   out += row('Fundamentals', bstText(tk1,'fund_score'), bstText(tk2,'fund_score'), true);
@@ -599,8 +595,9 @@ function rptDetailCard(tk, num){
   if(!st) return '';
   var fd=rptGetFd(tk)||{};
   var sc=Math.round(cSc(st));
-  var sig=rptSigText(st);
-  var sigC=sig.indexOf('BUY')>=0?'#00e57a':sig.indexOf('SELL')>=0?'#ff5252':'#ffab00';
+  var stv=sigView(tk, mSig(st));  /* S416: Etikett, Farbe, Kennzeichen wie WL */
+  var sig=stv.lbl;
+  var sigC=stv.col;
 
   var out='';
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
@@ -613,6 +610,7 @@ function rptDetailCard(tk, num){
   out += '<div style="text-align:right">';
   out += '<div style="font-size:36px;font-weight:900;color:'+sigC+'">' + sc + '</div>';
   out += '<div style="font-family:monospace;font-size:10px;color:'+sigC+';font-weight:700">' + sig + '</div>';
+  if(stv.bdg) out += '<div style="margin-top:3px">' + stv.bdg + '</div>';
   out += '</div></div>';
 
   /* Score-Komponenten */
@@ -827,18 +825,18 @@ function rptTextAnalysis(tk, secStats){
   if(!st) return '';
   var fd = rptGetFd(tk) || {};
   var sc = Math.round(cSc(st));
-  var sig = rptSigText(st);
   var rawSig = mSig(st);
   var name = st.n || tk;
 
   function nn(v){ return v !== null && v !== undefined && !isNaN(v); }
   function pct(v,d){ return (v>=0?'+':'')+v.toFixed(d||1)+'%'; }
 
-  /* -- Signal-Kategorie bestimmen -- */
-  var isBuySignal  = rawSig==='strong'||rawSig==='buy'||rawSig==='pb';
-  var isSellSignal = isSell(rawSig);
-  var isHoldSig    = isHoldSF(rawSig);
-  var isWatchSig   = rawSig==='watch'||rawSig==='weak';
+  /* -- Kategorie (S416): Etikett der Watchlist (sigView); U200 (Signalcode
+     sell_ma) ist Kennzeichen, kein Verkaufssignal -- wie in der WL. -- */
+  var sv = sigView(tk, rawSig);
+  var isBuySignal = sv.buy;
+  var isAbstieg   = sv.lbl === 'SELL Abstieg';
+  var isU200      = isSell(rawSig);
 
   /* -- Persistenz aus Snapshots -- */
   var persistCount = 0; var snapCount = 0;
@@ -869,49 +867,20 @@ function rptTextAnalysis(tk, secStats){
     (scDiff >= 0 ? scDiff + ' Punkte &uuml;ber' : Math.abs(scDiff) + ' Punkte unter') +
     ' dem Sektor-Durchschnitt (' + Math.round(secStats.avgScore) + ' Punkte).' : '';
 
-  if(isSellSignal){
-    p1 = '<strong>' + name + ' wird aktuell als <span style="color:#ff5252">' + sig +
-         '</span> eingestuft</strong> (Score ' + sc + '/100). ';
-    if(rawSig==='sell_ma')
-      p1 += 'Der Kurs hat die 200-Tage-Linie unterschritten \u2014 der Aufw&auml;rtstrend ist technisch gebrochen. ';
-    else if(rawSig==='sell_zl')
-      p1 += 'Der MACD hat die Nulllinie nach unten durchbrochen \u2014 ein Momentum-Umkehrsignal. ';
-    else
-      p1 += 'Mehrere technische Exit-Signale sind aktiv. ';
-    if(persistText) p1 += persistText + ' ';
-    p1 += '<strong>Handlungskonsequenz: Kein Neueinstieg empfohlen. Bestehende Positionen &uuml;berpr&uuml;fen.</strong>';
-    p1 += scDiffTxt;
-
-  } else if(rawSig==='hold_dvg'){
-    p1 = name + ' zeigt ein <strong>Deep Value Divergence</strong>-Signal (Score ' + sc + '/100). ';
-    p1 += 'Das technische Bild ist belastet (unter 200MA), aber Fundamentals (Fund ' +
-          bstText(tk,'fund_score') + '/100) und RSI im &uuml;berverkauften Bereich deuten auf nachlassenden Verkaufsdruck hin. ';
-    p1 += '<strong>Handlungskonsequenz: Beobachten \u2014 Einstieg pr&uuml;fen wenn Kurs &uuml;ber 200MA zur&uuml;ckkehrt.</strong>';
-    p1 += scDiffTxt;
-
-  } else if(isHoldSig){
-    p1 = name + ' wird durch den <strong>Score Filter als HOLD</strong> eingestuft (Score ' + sc + '/100). ';
-    p1 += 'Das technische Exit-Signal wird durch die fundamentale St&auml;rke neutralisiert. ';
-    p1 += '<strong>Handlungskonsequenz: Qualit&auml;tsposition halten \u2014 kein Verkauf auf Basis des technischen Signals allein.</strong>';
-    p1 += scDiffTxt;
-
-  } else if(rawSig==='strong'){
-    p1 = name + ' erreicht ein <strong style="color:#ff9f1c">BUY STRONG</strong>-Signal (Score ' + sc + '/100). ';
-    p1 += 'Alle Kernbedingungen sind erf&uuml;llt: MACD positiv, &uuml;ber 200MA, Bullish Divergenz. ';
-    p1 += '<strong>Handlungskonsequenz: Klare Kaufempfehlung mit g&uuml;nstigem Chance/Risiko-Verh&auml;ltnis.</strong>';
-    p1 += scDiffTxt;
-
-  } else if(rawSig==='buy'||rawSig==='pb'){
-    p1 = name + ' zeigt ein <strong style="color:#00e57a">BUY</strong>-Signal (Score ' + sc + '/100). ';
-    p1 += 'Technische und fundamentale Signale sind &uuml;berwiegend positiv. ';
-    p1 += '<strong>Handlungskonsequenz: Kauf unter Ber&uuml;cksichtigung des aktuellen Marktregimes (VIX/V2X).</strong>';
-    p1 += scDiffTxt;
-
+  if(isBuySignal){
+    p1 = name + ' steht auf <strong style="color:#00e57a">BUY</strong> (Score ' + sc + '/100): '
+       + 'geh&ouml;rt zu den Titeln mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung. ';
+  } else if(isAbstieg){
+    p1 = name + ' steht auf <strong style="color:#ff6666">SELL Abstieg</strong> (Score ' + sc + '/100): '
+       + 'vor zw&ouml;lf Monaten BUY, heute nicht mehr. Nach der getesteten Regel wird ein solcher Titel ersetzt. ';
   } else {
-    p1 = name + ' zeigt kein klares Kauf- oder Verkaufssignal (Score ' + sc + '/100, ' + sig + '). ';
-    p1 += '<strong>Handlungskonsequenz: Beobachten \u2014 kein Handlungsbedarf.</strong>';
-    p1 += scDiffTxt;
+    p1 = name + ' steht auf <strong>WATCH</strong> (Score ' + sc + '/100): kein Kauf- und kein Verkaufshinweis. ';
   }
+  if(isU200){
+    p1 += 'Der Kurs liegt unter der 200-Tage-Linie (Kennzeichen U200, kein Verkaufssignal). ';
+    if(persistText) p1 += persistText + ' ';
+  }
+  p1 += scDiffTxt;
 
   /* -- P2: Staerken (nur relevante, signal-kontextuell) -- */
   var strengths = [];
@@ -943,9 +912,9 @@ function rptTextAnalysis(tk, secStats){
 
   /* -- P3: Risiken -- signal-priorisiert -- */
   var risks = [];
-  if(isSellSignal){
+  if(isU200){
     var rsi3 = fd.rsi_val !== null && fd.rsi_val !== undefined ? Math.round(fd.rsi_val) : null;
-    risks.push('<strong>Technischer Abw&auml;rtstrend aktiv</strong> (' + sig + '). ' +
+    risks.push('<strong>Kurs unter der 200-Tage-Linie</strong> (U200). ' +
       (persistText ? persistText + ' ' : '') +
       (rsi3 !== null ? 'RSI ' + rsi3 + (rsi3 < 35 ? ' \u2014 &uuml;berverkauft, Reversal-Potenzial m&ouml;glich.' : ' \u2014 kein extremer &Uuml;berverkauf.') : ''));
   }
@@ -976,20 +945,13 @@ function rptTextAnalysis(tk, secStats){
   }
   if(nn(fd.mom_skip)) p4 += '12M-Momentum: ' + pct(fd.mom_skip) + '. ';
 
-  /* Signal-konformes Fazit -- kein Widerspruch zum Signal */
-  if(isSellSignal){
-    p4 += '<strong>Fazit: Solange der Kurs unter der 200MA notiert, &uuml;berwiegen die technischen Risiken. ';
-    p4 += nn(rsi4) && rsi4 < 35 ?
-      'RSI im &uuml;berverkauften Bereich \u2014 Reversal beobachten, aber kein Einstieg vor Trendumkehr-Best&auml;tigung.</strong>' :
-      'Kein Einstieg vor Trendumkehr-Best&auml;tigung (&Uuml;berschreiten der 200MA mit positivem MACD).</strong>';
-  } else if(rawSig==='hold_dvg'){
-    p4 += '<strong>Fazit: Turnaround-Kandidat \u2014 fundamentale St&auml;rke intakt, technische Best&auml;tigung steht aus.</strong>';
-  } else if(isHoldSig){
-    p4 += '<strong>Fazit: Qualit&auml;tsposition \u2014 technischer Druck vorhanden, aber Fundamentals rechtfertigen das Halten.</strong>';
-  } else if(isBuySignal){
-    p4 += '<strong>Fazit: Technisches und fundamentales Bild konvergieren positiv \u2014 Kaufgelegenheit unter Ber&uuml;cksichtigung der Positionsgr&ouml;&szlig;e.</strong>';
+  /* Fazit nach dem Etikett der Watchlist (S416) */
+  if(isBuySignal){
+    p4 += '<strong>Fazit: BUY &mdash; oberstes Zehntel der Zw&ouml;lf-Monats-Entwicklung im Universum. Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.</strong>';
+  } else if(isAbstieg){
+    p4 += '<strong>Fazit: SELL Abstieg &mdash; vor zw&ouml;lf Monaten BUY, heute nicht mehr.</strong>';
   } else {
-    p4 += '<strong>Fazit: Kein klares Signal \u2014 Marktbeobachtung beibehalten.</strong>';
+    p4 += '<strong>Fazit: WATCH &mdash; beobachten, kein Kauf- und kein Verkaufshinweis.</strong>';
   }
 
   /* -- Ausgabe -- */
@@ -1023,7 +985,8 @@ function rptGlossar(){
     {t:'RSI', d:'Misst, wie stark der Kurs in kurzer Zeit gestiegen oder gefallen ist. Hoch hei&szlig;t &uuml;berkauft, niedrig &uuml;berverkauft. Information, kein Signal.'},
     {t:'Divergenz', d:'Bullische Divergenz: der RSI steigt, w&auml;hrend der Kurs f&auml;llt &mdash; nachlassender Verkaufsdruck. B&auml;rische Divergenz: das Gegenst&uuml;ck.'},
     {t:'U200', d:'Kurs unter der 200-Tage-Linie. Kennzeichen, kein Signal.'},
-    {t:'HOLD DVG', d:'Deep Value Divergence: hoher Fundamentalwert, &uuml;berverkaufter Kurs und bullische Divergenz treffen zusammen. Zeigt ein gutes Unternehmen in technischer Schw&auml;chephase.'},
+    {t:'BUY', d:'Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Universum (oberstes Zehntel). Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.'},
+    {t:'SELL Abstieg', d:'Vor zw&ouml;lf Monaten BUY, heute nicht mehr. Nach der getesteten Regel wird ein solcher Titel ersetzt.'},
     {t:'Moat', d:'Wirtschaftlicher Burggraben nach Morningstar: Wide (sehr stark), Narrow (moderat), None (kein struktureller Vorteil). Wichtig f&uuml;r langfristige Haltestrategien.'},
   ];
 
@@ -1103,62 +1066,49 @@ function rptCalcStats(arr){
   return { avgScore:avg(scores)||0, avgFcf:avg(fcfs), avgRoce:avg(roces) };
 }
 
-/* Signal-Text fuer Report: nutzt mSig() + sellLabel() aus Dashboard (identisch mit WL) */
+/* Etikett fuer Berichte (S416): sigView() der Watchlist -- BUY / SELL
+   Abstieg / WATCH. Keine zweite Zuordnung im Berichtsmodul. */
 function rptSigText(s){
-  var sig = mSig(s);
-  if(!sig || sig === 'watch') return 'WATCH';
-  if(sig === 'weak')          return 'WEAK';
-  if(sig === 'buy')           return 'BUY';
-  if(sig === 'strong')        return 'BUY STRONG';
-  if(sig === 'pb')            return 'BUY PB';
-  if(isSell(sig))             return sellLabel(sig);
-  if(isHoldSF(sig))           return holdSFLabel(sig);
-  return 'HOLD';
+  return sigView(s.t, mSig(s)).lbl;
+}
+/* Kennzeichen-Texte (Auswahl, Trend, U200) aus sigMarks(), derselben
+   Stelle wie die Watchlist-Zeile. */
+function rptMarks(t, sig){
+  var m = sigMarks(t, sig), p = [], i;
+  for(i=0; i<m.length; i++) p.push(m[i].txt);
+  return p;
+}
+function rptMarksTxt(marks){
+  return marks.length ? ' <span style="color:#7a9bb5">(' + escapeHtml(marks.join(', ')) + ')</span>' : '';
+}
+/* Download einer Textdatei; iOS Safari braucht die URL noch kurz nach
+   dem Klick -- darum wird sie verzoegert freigegeben (S416). */
+function rptDownload(text, name, mime){
+  var blob = new Blob([text], {type: mime});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
 }
 
-/* ===== Signal-Export-Bericht (Sprint 124) =====
+/* ===== Signal-Export-Bericht (Sprint 124; S416 BUY-Nachzug) =====
    Konzept: stockiq_signal_export_konzept_s109.md (S109, freigegeben).
-   Gruppierung Variante B (Dashboard-Label, Konzept Abschn.2):
-     strong -> STRONG BUY | buy/buy_rsi_warn -> BUY | pb -> PEG-BLOCK |
-     sell_ma -> SELL | watch/watch_rsi/weak/sell_zl/sell_hist/sell -> WATCH |
-     hold/hold_sf(+unerreichbare Subtypen, SR-4) -> HOLD
+   S416 (Kla 08.10.2026): Bloecke = Etikett der Watchlist (sigView):
+     BUY | SELL Abstieg | WATCH. Kennzeichen aus sigMarks. Der Signal-
+     code der Tagesdaten bleibt als eigene Spalte (raw) im CSV.
    rptSignalCalc  -- gemeinsame Datenstruktur fuer Tabelle und CSV (wie rptDqCalc)
-   rptSignalCsv   -- CSV-Download, ALLE Ticker/alle 6 Bloecke
-   rptBuildSignal -- Bericht-Body: nur Handelssignale (STRONG BUY/BUY/SELL) +
-                     Vollstaendigkeits-/Verteilungs-Summary ueber alle 6 Bloecke
-   Eigene raw->Block/Text-Zuordnung (NICHT rptSigText -- Luecke dort bei
-   buy_rsi_warn/watch_rsi, siehe Dump v121_S124_sig_export_diag.txt Abschn.2).
+   rptSignalCsv   -- CSV-Download, ALLE Ticker/alle Bloecke
+   rptBuildSignal -- Bericht-Body: BUY und SELL Abstieg als Tabelle +
+                     Vollstaendigkeits-/Verteilungs-Summary ueber alle Bloecke
    ======================================== */
-var RPT_SIG_ORDER = ['STRONG BUY','BUY','PEG-BLOCK','SELL','WATCH','HOLD'];
-var RPT_SIG_COLOR = {
-  'STRONG BUY':'#ff9f1c', 'BUY':'#00e57a', 'PEG-BLOCK':'#f0c000',
-  'SELL':'#ff6666', 'WATCH':'#7a9bb5', 'HOLD':'#b07cf8'
-};
-var RPT_SIG_PDF_BLOCKS = ['STRONG BUY','BUY','SELL'];
+var RPT_SIG_ORDER = ['BUY','SELL Abstieg','WATCH'];
+var RPT_SIG_COLOR = {'BUY':'#00e57a', 'SELL Abstieg':'#ff6666', 'WATCH':'#7a9bb5'};
+var RPT_SIG_PDF_BLOCKS = ['BUY','SELL Abstieg'];
 
-function rptSignalBlockOf(sig){
-  if(sig==='strong') return 'STRONG BUY';
-  if(sig==='buy'||sig==='buy_rsi_warn') return 'BUY';
-  if(sig==='pb') return 'PEG-BLOCK';
-  if(sig==='sell_ma') return 'SELL';
-  if(sig==='watch'||sig==='watch_rsi'||sig==='weak'||sig==='sell_zl'||sig==='sell_hist'||sig==='sell') return 'WATCH';
-  if(sig==='hold'||isHoldSF(sig)) return 'HOLD';
-  return 'UNBEKANNT';
-}
-function rptSignalTextOf(sig){
-  if(sig==='strong')        return 'BUY STRONG';
-  if(sig==='buy')            return 'BUY';
-  if(sig==='buy_rsi_warn')   return 'BUY WARN';
-  if(sig==='pb')              return 'BUY PB';
-  if(sig==='watch')          return 'WATCH';
-  if(sig==='watch_rsi')      return 'WATCH RSI';
-  if(sig==='weak')            return 'WEAK';
-  if(isSell(sig))              return sellLabel(sig);        /* sell_ma -> 'SELL MA' */
-  if(sig==='sell_zl'||sig==='sell_hist'||sig==='sell') return 'WATCH';
-  if(isHoldSF(sig))            return holdSFLabel(sig);        /* hold_sf* -> 'HOLD*', hold_dvg -> 'HOLD DVG' */
-  if(sig==='hold')            return 'HOLD';
-  return String(sig||'').toUpperCase() || 'UNBEKANNT';
-}
 /* Klarname mit ALIAS-Fallback (dName() allein deckt raw-scores.json-Ticker
    wie ITX.MC nicht ab -- _names ist dort unter dem ALIAS-Ziel 'INDITEX'
    gefuehrt, nicht unter 'ITX.MC'). */
@@ -1185,7 +1135,8 @@ function rptSignalCalc(){
     if(!sd || !sd.ticker) continue;
     var raw = sd.signal || '';
     var eff = mSig({t: sd.ticker});
-    var block = rptSignalBlockOf(eff);
+    var sv = sigView(sd.ticker, eff);   /* S416: Block = Etikett der WL */
+    var block = sv.lbl;
     var dr = dqCheck(sd.ticker, eff, true);
     var missing = dr ? dr.fields : [];
     var fs = (sd.fund_score !== null && sd.fund_score !== undefined) ? sd.fund_score : null;
@@ -1202,7 +1153,9 @@ function rptSignalCalc(){
       sector: sd.sector || '',
       block: block,
       raw: raw,
-      sigText: rptSignalTextOf(eff),
+      sigText: sv.lbl,
+      marks: rptMarks(sd.ticker, eff),
+      bdg: sv.bdg,
       cSc: (sd.score !== null && sd.score !== undefined) ? sd.score : null,
       fSc: fs,
       momSc: (sd.mom_score !== null && sd.mom_score !== undefined) ? sd.mom_score : null,
@@ -1229,8 +1182,8 @@ function rptSignalCalc(){
 function rptCtrlSignal(){
   var ctrl = document.getElementById('rpt-controls');
   ctrl.innerHTML += '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:11px;color:#a0b0c0">' +
-    'Vollstaendige Signaluebersicht ueber alle Ticker, nach Dashboard-Label gruppiert. ' +
-    'PDF enthaelt nur Handelssignale (STRONG BUY / BUY / SELL). CSV enthaelt alle Ticker/alle Bloecke.' +
+    'Vollstaendige Signaluebersicht ueber alle Ticker, gruppiert wie die Watchlist (BUY / SELL Abstieg / WATCH). ' +
+    'PDF enthaelt BUY und SELL Abstieg. CSV enthaelt alle Ticker/alle Bloecke.' +
     '</div>' +
     '<div style="display:flex;gap:8px">' +
     '<button onclick="rptBuild()" style="flex:1;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#9654; Bericht erstellen</button>' +
@@ -1246,7 +1199,7 @@ function rptSignalCsv(){
     return;
   }
   var today = new Date().toISOString().substring(0, 10);
-  var lines = ['ticker;name;sector;block;raw;signal_text;cSc;fSc;momSc;trend;rSc;peg;peg_status;rsi;missing_fields;n_missing;fsc_bucket;snapshot_date'];
+  var lines = ['ticker;name;sector;block;raw;signal_text;cSc;fSc;momSc;trend;rSc;peg;peg_status;rsi;missing_fields;n_missing;fsc_bucket;snapshot_date;kennzeichen'];
   for(var i=0; i<rows.length; i++){
     var r = rows[i];
     var nm = '"' + String(r.n).replace(/"/g, '""') + '"';
@@ -1255,7 +1208,8 @@ function rptSignalCsv(){
       rptSigNum(r.cSc, 1), rptSigNum(r.fSc, 1), rptSigNum(r.momSc, 1),
       rptSigNum(r.trend, 1), rptSigNum(r.rSc, 1),
       rptSigNum(r.peg, 2), r.pegStatus, rptSigNum(r.rsi, 1),
-      r.missing.join('|'), r.missing.length, r.fscBucket, today
+      r.missing.join('|'), r.missing.length, r.fscBucket, today,
+      r.marks.join('|')
     ].join(';');
     lines.push(line);
   }
@@ -1275,7 +1229,7 @@ function rptBuildSignal(){
   var rows = rptSignalCalc();
   var out = document.getElementById('rpt-output');
   var today = new Date().toISOString().substring(0, 10);
-  /* Bloeckzaehler ueber ALLE 6 Bloecke (fuer Vollstaendigkeits-Check + Summary) */
+  /* Bloeckzaehler ueber ALLE Bloecke (fuer Vollstaendigkeits-Check + Summary) */
   var counts = {}, i;
   for(i=0; i<RPT_SIG_ORDER.length; i++) counts[RPT_SIG_ORDER[i]] = 0;
   var unmapped = 0;
@@ -1315,7 +1269,7 @@ function rptBuildSignal(){
         html += '<td style="padding:6px 8px"><a href="javascript:rptDetailCard(\'' + r.t + '\')" style="color:#2d7dd2;text-decoration:none;font-weight:700">' + escapeHtml(r.t) + '</a></td>';
         html += '<td style="padding:6px 8px;color:#dce8f5">' + escapeHtml(r.n) + '</td>';
         html += '<td style="padding:6px 8px;color:#a0b0c0">' + escapeHtml(r.sector) + '</td>';
-        html += '<td style="padding:6px 8px;color:#dce8f5">' + escapeHtml(r.sigText) + '</td>';
+        html += '<td style="padding:6px 8px;color:#dce8f5">' + escapeHtml(r.sigText) + r.bdg + '</td>';
         html += '<td style="padding:6px 8px;color:#dce8f5">' + rptSigNum(r.cSc, 0) + '</td>';
         html += '<td style="padding:6px 8px;color:#a0b0c0">' + rptSigNum(r.fSc, 0) + '</td>';
         html += '<td style="padding:6px 8px;color:#a0b0c0">' + rptSigNum(r.peg, 2) + '</td>';
@@ -1342,9 +1296,215 @@ function rptBuildSignal(){
     ' &mdash; <span style="color:' + (complete ? '#00e57a' : '#ff6666') + ';font-weight:700">' +
     (complete ? 'OK' : 'ABWEICHUNG') + '</span></div>';
   html += '<div style="padding:10px;background:#11203a;border-left:3px solid #2d7dd2;border-radius:4px;color:#a0b0c0;font-size:10px">' +
-    'PDF-Ansicht zeigt nur Handelssignale (STRONG BUY/BUY/SELL). CSV-Export liefert alle ' + total + ' Ticker inkl. HOLD/WATCH/PEG-BLOCK.</div>';
+    'PDF-Ansicht zeigt BUY und SELL Abstieg. CSV-Export liefert alle ' + total + ' Ticker inkl. WATCH.</div>';
   html += '</div>';
 
+  out.innerHTML = html;
+  var pbEl = document.getElementById('rpt-print-btn');
+  if(pbEl) pbEl.style.display = '';
+}
+
+/* ===== Bericht Rotation (S416, v6.6.34) =====
+   Vergleicht die BUY-Liste von heute mit der am Referenz-Ultimo (vor
+   12 Monaten). Gruppen aus denselben Funktionen wie die Watchlist:
+     Neu BUY      wlBucket = 'BUY' und buyRef12m(t) !== true
+                  (null = kein Referenzwert -> Hinweis "keine Referenz")
+     Bleibt BUY   wlBucket = 'BUY' und buyRef12m(t) === true
+     SELL Abstieg wlBucket = 'ABSTIEG' (sellAbstieg)
+   Rang = Platz im Universum nach dem Perzentil der 12-Monats-Rendite
+   (buyPctFor; 1 = bester, Gleichstand teilt den Platz), dahinter das
+   Perzentil wie im BUY-Tooltip. Rang vor 12 Monaten: dieselbe Definition
+   in der Kohorte des Referenz-Ultimos (buy_ref12m_platz / _pct, score.py
+   v1.4.25). Kennzeichen, KGV und Dividende wie in der Watchlist.
+   rptRotCalc ist die EINE Datenquelle fuer Tabelle und CSV.
+   ======================================== */
+var RPT_ROT_GRP = ['Neu BUY','Bleibt BUY','SELL Abstieg'];
+var RPT_ROT_COL = {'Neu BUY':'#00e57a', 'Bleibt BUY':'#00c8f0', 'SELL Abstieg':'#ff6666'};
+var RPT_ROT_HDR = ['Ticker','Name','Rang heute','12M-Rendite','Rang vor 12 Monaten',
+                   'Auswahl','Trend','U200','Branche','KGV (laufend / erwartet)','Dividende'];
+var RPT_ROT_ZAHL = [2, 3, 4, 10];   /* Spalten mit Dezimalzahl: im CSV Dezimalkomma */
+
+function rptRotDatum(iso){
+  var s = String(iso || '');
+  if(!/^\d{4}-\d{2}-\d{2}/.test(s)) return '';
+  return s.substring(8, 10) + '.' + s.substring(5, 7) + '.' + s.substring(0, 4);
+}
+/* AP-3: nur echte Zahlen; 0 bleibt 0, fehlend wird null */
+function rptRotWert(v){
+  return (typeof v !== 'number' || isNaN(v)) ? null : v;
+}
+/* Platz = 1 + Zahl der Titel mit hoeherem Perzentil (1 = bester) */
+function rptRotPlatz(pct, alle){
+  var n = 1, i;
+  for(i=0; i<alle.length; i++){ if(alle[i] > pct) n++; }
+  return n;
+}
+function rptRotRang(platz, pct){
+  if(platz === null || pct === null) return null;
+  return platz + ' (' + pct.toFixed(1) + ')';
+}
+
+function rptRotCalc(){
+  var mac = (typeof FD !== 'undefined' && FD && FD['__macro__']) ? FD['__macro__'] : {};
+  var arr = (typeof _scoresArr !== 'undefined' && _scoresArr) ? _scoresArr : [];
+  var pcts = [], i, rec, p;
+  for(i=0; i<arr.length; i++){
+    rec = arr[i];
+    if(!rec || typeof rec !== 'object' || !rec.ticker) continue;
+    p = buyPctFor(rec.ticker);
+    if(p !== null) pcts.push(p);
+  }
+  var grp = {'Neu BUY':[], 'Bleibt BUY':[], 'SELL Abstieg':[]};
+  var nKeineRef = 0;
+  for(i=0; i<STOCKS.length; i++){
+    var s = STOCKS[i], sd = _scoresIdx[s.t];
+    if(!sd) continue;                       /* wie getScored (U-4) */
+    var sig = mSig(s), b = wlBucket(sig, s.t), ref = buyRef12m(s.t), g;
+    if(b === 'BUY') g = (ref === true) ? 'Bleibt BUY' : 'Neu BUY';
+    else if(b === 'ABSTIEG') g = 'SELL Abstieg';
+    else continue;
+    var pct = buyPctFor(s.t);
+    var platz = (pct === null) ? null : rptRotPlatz(pct, pcts);
+    var keineRef = (ref === null);
+    if(keineRef) nKeineRef++;
+    var rRang = rptRotRang(rptRotWert(sd.buy_ref12m_platz), rptRotWert(sd.buy_ref12m_pct));
+    var ret = rptRotWert(sd.mom12m_ret), dy = rptRotWert(sd.div_yield);
+    var mk = rptMarks(s.t, sig);
+    grp[g].push({t: s.t, grp: g, platz: platz, keineRef: keineRef, cells: [
+      s.t,
+      dName(s) || s.t,
+      rptRotRang(platz, pct) || '-',
+      ret === null ? '-' : fp(ret),
+      keineRef ? 'keine Referenz' : (rRang || '-'),
+      mk.indexOf('Auswahl') >= 0 ? 'Auswahl' : '-',
+      mk.indexOf('Trend') >= 0 ? 'Trend' : '-',
+      mk.indexOf('U200') >= 0 ? 'U200' : '-',
+      sd.sector || '-',
+      kgvText(s.t).replace(/^KGV /, ''),
+      dy === null ? '-' : dy.toFixed(1) + '%'
+    ]});
+  }
+  function cmp(a, b){
+    var pa = (a.platz === null) ? 1e9 : a.platz, pb = (b.platz === null) ? 1e9 : b.platz;
+    if(pa !== pb) return pa - pb;
+    return a.t < b.t ? -1 : (a.t > b.t ? 1 : 0);
+  }
+  for(i=0; i<RPT_ROT_GRP.length; i++) grp[RPT_ROT_GRP[i]].sort(cmp);
+  /* Kontrollsumme (c): BUY am Referenz-Ultimo, die heute im Universum sind */
+  var nRef = 0;
+  for(i=0; i<arr.length; i++){
+    rec = arr[i];
+    if(rec && typeof rec === 'object' && rec.ticker && buyRef12m(rec.ticker) === true) nRef++;
+  }
+  var weg = (mac.buy_ref12m_weg && typeof mac.buy_ref12m_weg.length === 'number') ? mac.buy_ref12m_weg : null;
+  return {grp: grp, nKeineRef: nKeineRef, nRefHeute: nRef, weg: weg,
+          aktiv: abstiegAktiv(), stand: mac.run_date || '',
+          stichtag: mac.buy_ref12m_stichtag || ''};
+}
+
+function rptCtrlRot(){
+  var ctrl = document.getElementById('rpt-controls');
+  ctrl.innerHTML += '<div style="background:#0a1628;border:1px solid #1a3050;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:11px;color:#a0b0c0">' +
+    'Vergleicht die BUY-Liste von heute mit der von vor 12 Monaten: Neu BUY, Bleibt BUY und SELL Abstieg. ' +
+    'CSV enthaelt dieselben Zeilen und Spalten plus Spalte Gruppe.' +
+    '</div>' +
+    '<div style="display:flex;gap:8px">' +
+    '<button onclick="rptBuild()" style="flex:1;background:#2d7dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#9654; Bericht erstellen</button>' +
+    '<button onclick="rptRotCsv()" style="flex:1;background:#5d2dd2;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer">&#128190; CSV-Export</button>' +
+    '<button id="rpt-print-btn" onclick="rptPrint()" style="flex:1;background:#1a7a3a;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:8px;cursor:pointer;display:none">&#128438; Als PDF drucken</button>' +
+    '</div>';
+}
+
+function rptRotCsvFeld(v){
+  var s = String(v);
+  return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+/* CSV-Text: UTF-8 mit BOM, Semikolon, Dezimalkomma; Zeilen und Werte wie
+   die Tabelle (rptRotCalc), plus Spalte Gruppe vorn. */
+function rptRotCsvText(){
+  var d = rptRotCalc(), lines = [], i, j, k, f, row, rows;
+  f = ['Gruppe'].concat(RPT_ROT_HDR);
+  for(k=0; k<f.length; k++) f[k] = rptRotCsvFeld(f[k]);
+  lines.push(f.join(';'));
+  for(i=0; i<RPT_ROT_GRP.length; i++){
+    rows = d.grp[RPT_ROT_GRP[i]];
+    for(j=0; j<rows.length; j++){
+      row = [rptRotCsvFeld(RPT_ROT_GRP[i])];
+      for(k=0; k<rows[j].cells.length; k++){
+        var c = String(rows[j].cells[k]);
+        if(RPT_ROT_ZAHL.indexOf(k) >= 0) c = c.replace(/(\d)\.(\d)/g, '$1,$2');
+        row.push(rptRotCsvFeld(c));
+      }
+      lines.push(row.join(';'));
+    }
+  }
+  return '\ufeff' + lines.join('\r\n') + '\r\n';
+}
+function rptRotCsv(){
+  var mac = (typeof FD !== 'undefined' && FD && FD['__macro__']) ? FD['__macro__'] : {};
+  var iso = /^\d{4}-\d{2}-\d{2}/.test(String(mac.run_date || '')) ? String(mac.run_date)
+          : new Date().toISOString();
+  var ymd = iso.substring(0, 4) + iso.substring(5, 7) + iso.substring(8, 10);
+  rptDownload(rptRotCsvText(), 'stockiq_rotation_' + ymd + '.csv', 'text/csv;charset=utf-8');
+}
+
+function rptBuildRot(){
+  var d = rptRotCalc(), out = document.getElementById('rpt-output'), i, j, k;
+  var nNeu = d.grp['Neu BUY'].length, nBl = d.grp['Bleibt BUY'].length, nAb = d.grp['SELL Abstieg'].length;
+  var mut = 'font-size:11px;color:#a0b0c0;margin-top:4px';
+  var html = '<div class="rpt-card" id="rot-kopf" style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:16px;margin-bottom:16px">';
+  html += '<h2 style="color:#2d7dd2;font-size:20px;margin:0 0 8px 0">Rotation &mdash; BUY heute und vor 12 Monaten</h2>';
+  html += '<div style="' + mut + '">Datenstand ' + (rptRotDatum(d.stand) || '?') + ' &middot; ' +
+    (d.stichtag ? 'Vergleich mit ' + rptRotDatum(d.stichtag) : 'Vergleichsstichtag fehlt') + '</div>';
+  html += '<div id="rot-zahlen" style="font-size:12px;color:#dce8f5;margin-top:6px">' +
+    'Neu BUY <b data-n="neu">' + nNeu + '</b> &middot; Bleibt BUY <b data-n="bleibt">' + nBl + '</b> &middot; ' +
+    'SELL Abstieg <b data-n="abstieg">' + nAb + '</b> &middot; BUY heute ' + (nNeu + nBl) + '</div>';
+  if(d.nKeineRef) html += '<div style="' + mut + '">Davon ohne Wert vor 12 Monaten (keine Referenz): <b data-n="keineref">' + d.nKeineRef + '</b></div>';
+  if(!d.aktiv){
+    html += '<div style="font-size:11px;color:#ffab00;margin-top:6px">Die Vergleichsdaten fehlen im aktuellen Datenstand. ' +
+      'Alle BUY-Titel stehen deshalb unter Neu BUY mit dem Hinweis keine Referenz.</div>';
+  } else {
+    var nZ = (d.weg === null) ? null : d.nRefHeute + d.weg.length;
+    var okC = (nBl + nAb) === d.nRefHeute;
+    html += '<div id="rot-kontrolle" style="' + mut + '">BUY am ' + rptRotDatum(d.stichtag) + ': ' +
+      (nZ === null ? '?' : nZ) + ' Titel' +
+      (d.weg === null ? '' : (d.weg.length ? ', davon heute nicht mehr im Universum: ' + d.weg.length +
+        ' (' + escapeHtml(d.weg.join(', ')) + ')' : ', alle heute im Universum')) +
+      ' &middot; Bleibt BUY + SELL Abstieg = ' + (nBl + nAb) + ' &mdash; <span style="color:' +
+      (okC ? '#00e57a' : '#ff6666') + ';font-weight:700">' + (okC ? 'OK' : 'ABWEICHUNG') + '</span></div>';
+  }
+  html += '</div>';
+
+  var th = 'padding:6px 8px;text-align:left;white-space:nowrap;background:#1a3a5c;color:#dce8f5';
+  var td = 'padding:5px 8px;white-space:nowrap;border-bottom:1px solid #11203a';
+  for(i=0; i<RPT_ROT_GRP.length; i++){
+    var g = RPT_ROT_GRP[i], rows = d.grp[g];
+    html += '<div class="rpt-card" style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:14px;overflow-x:auto;margin-bottom:16px">';
+    html += '<h3 style="color:' + RPT_ROT_COL[g] + ';font-size:15px;margin:0 0 10px 0">' + escapeHtml(g) + ' (' + rows.length + ')</h3>';
+    if(rows.length === 0){
+      html += '<div style="color:#a0b0c0;font-size:11px">Keine Titel.</div></div>';
+      continue;
+    }
+    html += '<table class="rot-tab" data-grp="' + escapeHtml(g) + '" style="width:100%;border-collapse:collapse;font-size:11px;font-family:monospace">';
+    html += '<thead><tr>';
+    for(k=0; k<RPT_ROT_HDR.length; k++) html += '<th style="' + th + '">' + escapeHtml(RPT_ROT_HDR[k]) + '</th>';
+    html += '</tr></thead><tbody>';
+    for(j=0; j<rows.length; j++){
+      html += '<tr>';
+      for(k=0; k<rows[j].cells.length; k++){
+        var c = String(rows[j].cells[k]);
+        var col = (k === 0) ? '#00c8f0;font-weight:700' : (k === 4 && rows[j].keineRef) ? '#ffab00'
+                : (c === '-') ? '#456278' : '#dce8f5';
+        html += '<td style="' + td + ';color:' + col + '">' + escapeHtml(c) + '</td>';
+      }
+      html += '</tr>';
+    }
+    html += '</tbody></table></div>';
+  }
+  html += '<div class="rpt-card" style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:12px;font-size:10px;color:#a0b0c0;line-height:1.6">' +
+    'Rang: Platz nach der 12-Monats-Rendite im Universum (1 = bester), in Klammern der Rang von 100 wie im BUY-Tooltip. ' +
+    'Rang vor 12 Monaten: dieselbe Rangfolge am Vergleichsstichtag. Kennzeichen, KGV und Dividende wie in der Watchlist. ' +
+    'Innerhalb jeder Gruppe nach Rang heute geordnet.</div>';
   out.innerHTML = html;
   var pbEl = document.getElementById('rpt-print-btn');
   if(pbEl) pbEl.style.display = '';
