@@ -1311,8 +1311,9 @@ function rptBuildSignal(){
                   (null = kein Referenzwert -> Hinweis "keine Referenz")
      Bleibt BUY   wlBucket = 'BUY' und buyRef12m(t) === true
      SELL Abstieg wlBucket = 'ABSTIEG' (sellAbstieg)
-   Rang = Platz im Universum nach dem Perzentil der 12-Monats-Rendite
-   (buyPctFor; 1 = bester, Gleichstand teilt den Platz), dahinter das
+   Rang = Rang im Universum nach dem Perzentil der 12-Monats-Rendite
+   (rang12m, wie Spalte 1 der Watchlist; 1 = bester, Gleichstand teilt
+   den Rang), dahinter das
    Perzentil wie im BUY-Tooltip. Rang vor 12 Monaten: dieselbe Definition
    in der Kohorte des Referenz-Ultimos (buy_ref12m_platz / _pct, score.py
    v1.4.25). Kennzeichen, KGV und Dividende wie in der Watchlist.
@@ -1333,27 +1334,17 @@ function rptRotDatum(iso){
 function rptRotWert(v){
   return (typeof v !== 'number' || isNaN(v)) ? null : v;
 }
-/* Platz = 1 + Zahl der Titel mit hoeherem Perzentil (1 = bester) */
-function rptRotPlatz(pct, alle){
-  var n = 1, i;
-  for(i=0; i<alle.length; i++){ if(alle[i] > pct) n++; }
-  return n;
-}
-function rptRotRang(platz, pct){
-  if(platz === null || pct === null) return null;
-  return platz + ' (' + pct.toFixed(1) + ')';
+/* S419: Rang aus rang12m() (index.html) -- dieselbe Funktion wie Spalte 1
+   der Watchlist; die eigene Rangfunktion des Berichts entfaellt. */
+function rptRotRang(rang, pct){
+  if(rang === null || pct === null) return null;
+  return rang + ' (' + pct.toFixed(1) + ')';
 }
 
 function rptRotCalc(){
   var mac = (typeof FD !== 'undefined' && FD && FD['__macro__']) ? FD['__macro__'] : {};
   var arr = (typeof _scoresArr !== 'undefined' && _scoresArr) ? _scoresArr : [];
-  var pcts = [], i, rec, p;
-  for(i=0; i<arr.length; i++){
-    rec = arr[i];
-    if(!rec || typeof rec !== 'object' || !rec.ticker) continue;
-    p = buyPctFor(rec.ticker);
-    if(p !== null) pcts.push(p);
-  }
+  var i, rec;
   var grp = {'Neu BUY':[], 'Bleibt BUY':[], 'SELL Abstieg':[]};
   var nKeineRef = 0;
   for(i=0; i<STOCKS.length; i++){
@@ -1364,16 +1355,16 @@ function rptRotCalc(){
     else if(b === 'ABSTIEG') g = 'SELL Abstieg';
     else continue;
     var pct = buyPctFor(s.t);
-    var platz = (pct === null) ? null : rptRotPlatz(pct, pcts);
+    var rg = rang12m(s.t), rang = (rg === null) ? null : rg.r;
     var keineRef = (ref === null);
     if(keineRef) nKeineRef++;
     var rRang = rptRotRang(rptRotWert(sd.buy_ref12m_platz), rptRotWert(sd.buy_ref12m_pct));
     var ret = rptRotWert(sd.mom12m_ret), dy = rptRotWert(sd.div_yield);
     var mk = rptMarks(s.t, sig);
-    grp[g].push({t: s.t, grp: g, platz: platz, keineRef: keineRef, cells: [
+    grp[g].push({t: s.t, grp: g, rang: rang, keineRef: keineRef, cells: [
       s.t,
       dName(s) || s.t,
-      rptRotRang(platz, pct) || '-',
+      rptRotRang(rang, pct) || '-',
       ret === null ? '-' : fp(ret),
       keineRef ? 'keine Referenz' : (rRang || '-'),
       mk.indexOf('Auswahl') >= 0 ? 'Auswahl' : '-',
@@ -1385,7 +1376,7 @@ function rptRotCalc(){
     ]});
   }
   function cmp(a, b){
-    var pa = (a.platz === null) ? 1e9 : a.platz, pb = (b.platz === null) ? 1e9 : b.platz;
+    var pa = (a.rang === null) ? 1e9 : a.rang, pb = (b.rang === null) ? 1e9 : b.rang;
     if(pa !== pb) return pa - pb;
     return a.t < b.t ? -1 : (a.t > b.t ? 1 : 0);
   }
@@ -1502,7 +1493,7 @@ function rptBuildRot(){
     html += '</tbody></table></div>';
   }
   html += '<div class="rpt-card" style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:12px;font-size:10px;color:#a0b0c0;line-height:1.6">' +
-    'Rang: Platz nach der 12-Monats-Rendite im Universum (1 = bester), in Klammern der Rang von 100 wie im BUY-Tooltip. ' +
+    'Rang heute: Rang nach der 12-Monats-Rendite im Universum (1 = bester), in Klammern der Rang von 100 wie im BUY-Tooltip. ' +
     'Rang vor 12 Monaten: dieselbe Rangfolge am Vergleichsstichtag. Kennzeichen, KGV und Dividende wie in der Watchlist. ' +
     'Innerhalb jeder Gruppe nach Rang heute geordnet.</div>';
   out.innerHTML = html;

@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:,">
-<meta name="version" content="6.6.35">
+<meta name="version" content="6.6.36">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.35</title>
+<title>StockIQ v6.6.36</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -107,7 +107,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.35 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.36 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
       <span style="white-space:nowrap"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:--:--</span></span>
@@ -134,7 +134,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;margin-bottom:6px">
     <div style="font-size:20px;font-weight:800">WL &mdash; <span id="wl-hdr-cnt">--</span></div>
     <div style="display:flex;align-items:center;gap:4px;position:relative">
-      <button id="sort-score" class="wf on" onclick="wlSetSort('score',this)">Score</button>
+      <button id="sort-score" class="wf" onclick="wlSetSort('score',this)">Score</button>
       <button id="sort-alpha" class="wf" onclick="wlSetSort('alpha',this)">A-Z</button>
       <button id="wl-menu-btn" class="wf" onclick="wlMenuToggle()" title="Export / Import" aria-label="Men&uuml;">&#8942;</button>
       <div id="wl-menu" style="display:none;position:absolute;right:0;top:100%;margin-top:4px;z-index:50;background:#0c1420;border:1px solid #223040;border-radius:10px;padding:6px;min-width:150px;box-shadow:0 6px 20px rgba(0,0,0,.5)">
@@ -186,7 +186,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="wl-filter-erl" class="wl-erl-blk">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">fSc hoch</strong>: zeigt nur Titel mit hohem Fundamentalwert.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Dividende</strong>: zeigt nur Titel mit hoher Dividendenrendite. Eine einmalige Sonderdividende kann die Rendite vor&uuml;bergehend erh&ouml;hen.</div>
-    <div>Alle Filter wirken zusammen und &auml;ndern die Reihenfolge nicht. Sortiert wird nur &uuml;ber Score oder A-Z; BUY steht immer nach Rang. Die Kacheln z&auml;hlen die aktuelle Ansicht.</div>
+    <div>Alle Filter wirken zusammen und &auml;ndern die Reihenfolge nicht. Ohne Sortierknopf stehen BUY und SELL Abstieg nach Rang, WATCH nach Score. Score und A-Z ordnen alle Gruppen um; ein zweiter Druck stellt die Grundordnung wieder her. Die Kacheln z&auml;hlen die aktuelle Ansicht.</div>
   </div>
   </div>
   <div class="g4" id="wl-kpi" style="margin-bottom:8px"></div>
@@ -259,7 +259,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.35</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.36</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -457,7 +457,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.35 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.36 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -609,7 +609,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>i</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Blendet die Erkl&auml;rungen zu Etiketten, Kennzeichen, Filtern und Marktphase ein und aus, auch auf dem iPhone. Beim Laden zu.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">nein</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Suchfeld</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, deren Ticker oder Name den Suchtext enth&auml;lt.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, das Feld wird geleert</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel BUY / SELL Abstieg / WATCH</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Antippen zeigt nur diese Gruppe, nochmals antippen hebt das auf. Ohne aktuelle Daten zeigt SELL Abstieg &ndash;&ndash;.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter (Gruppe)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Score / A-Z</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Reihenfolge von SELL Abstieg und WATCH: nach Score oder alphabetisch nach Ticker. BUY steht immer nach Rang der 12-Monats-Entwicklung. Filter &auml;ndern die Reihenfolge nie.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, zur&uuml;ck auf Score</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Score / A-Z</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Ohne Auswahl: BUY und SELL Abstieg nach Rang, WATCH nach Score. Score ordnet alle Gruppen nach Score, A-Z alphabetisch nach Firmennamen. Ein zweiter Druck auf den aktiven Knopf stellt die Grundordnung wieder her. Die Zahl vor dem Ticker ist immer der Rang im Universum nach der 12-Monats-Entwicklung (1 = bester). Filter &auml;ndern die Reihenfolge nie.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, zur&uuml;ck zur Grundordnung</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Men&uuml; &#8942; (Export / Import)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sichert die Favoritenliste als Datei bzw. l&auml;dt sie. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Datei</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Marktphase (Zeile unter den Tabs)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Lage des Gesamtmarkts zu seiner 200-Tage-Linie. GR&Uuml;N und ROT sind &uuml;ber zehn Handelstage best&auml;tigt. GELB ist der &Uuml;bergang: der Pfeil zeigt die Richtung, bis zum zehnten Tag gilt der bisherige Zustand. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
     </table>
@@ -709,6 +709,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.36</td><td style="padding:5px 8px;color:var(--mut)">Score und A-Z ordnen jetzt alle Gruppen um, auch BUY; A-Z sortiert nach Firmennamen. Die Zahl vor dem Ticker zeigt immer den Rang nach der 12-Monats-Entwicklung.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.35</td><td style="padding:5px 8px;color:var(--mut)">Watchlist &uuml;bersichtlicher &ndash; Tabs mit Kurznamen in h&ouml;chstens zwei Zeilen, Hilfe &uuml;ber das Fragezeichen, Tab Roadmap entfallen (Versionen jetzt im Hilfe-Tab), Marktphase als Zeile in der Ampelfarbe unter den Tabs, Filter in zwei Zeilen (Auswahl der Titel und Kennzeichen, zusammenwirkend, ohne Umsortieren), neue Filter Dividende, U200, HIST und Bleibt BUY, Dividendenrendite und erwartetes KGV bei Verlusttiteln in jeder Zeile, alle Erkl&auml;rungen &uuml;ber den i-Punkt, Uhr mit MEZ/MESZ; Bericht Datenqualit&auml;t: 12-Monats-Rendite ohne Faktor 100</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.34</td><td style="padding:5px 8px;color:var(--mut)">Neuer Bericht Rotation &ndash; vergleicht die BUY-Liste von heute mit der von vor 12 Monaten (Neu BUY, Bleibt BUY, SELL Abstieg) mit Rang heute und vor 12 Monaten, Kennzeichen, KGV und Dividende; CSV-Download. Alle Berichte zeigen BUY, SELL Abstieg und WATCH wie die Watchlist.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.33</td><td style="padding:5px 8px;color:var(--mut)">Zeile Sanofi korrigiert &ndash; sie zeigte bis v6.6.32 die Daten von Banco Santander; Sanofi selbst fehlte in der Liste. Beide Titel zeigen jetzt ihre eigenen Daten.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -904,7 +905,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.35 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.36 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1002,7 +1003,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.35 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.36 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1332,7 +1333,7 @@ var WL2_SYNC = false;  /* true = Synopse+WL1 nur WL2-Ticker zeigen */
 var WL_SECTOR_FILTER = '';  /* v6.1.0: '' = alle Sektoren */
 var WL_SEARCH = '';          /* v6.1.1: Suchfeld WL */
 var SR_AMPEL_ON = true;      /* v6.6.10 (S163): sr-Ampel Reversibilitaets-Schalter */
-var WL_SORT = 'score'; /* 'score' oder 'alpha' */
+var WL_SORT = 'std'; /* S419: 'std' (Grundzustand) | 'score' | 'alpha' */
 var SELL_SCORE_MIN    = 70;    /* Schwellenwert fSc (0-100) -- Sprint 33: cSc->fSc, 55->70 */
 var WL_AW_FILTER      = false; /* S383: Zeilenfilter Kennzeichen Auswahl; von "Alle" zurueckgesetzt, nicht persistiert */
 var WL_TR_FILTER      = false; /* S383: Zeilenfilter Kennzeichen Trend; von "Alle" zurueckgesetzt, nicht persistiert */
@@ -2119,7 +2120,7 @@ function wlReset(){
   WL_FILTER='all';
   WL2_SYNC=false;
   WL_SECTOR_FILTER='';
-  WL_SORT='score';
+  WL_SORT='std';  /* S419: Grundzustand */
   WL_SEARCH='';
   var _wse=document.getElementById('wl-search'); if(_wse) _wse.value='';
   var sd=document.getElementById('wl-sector-filter'); if(sd) sd.value='';
@@ -2165,7 +2166,7 @@ function wlPaint(){
   var akt=wlAktiveFilter(),i,b,an;
   var defs=[['wl-alle-btn',akt.length===0],['sync-btn',WL2_SYNC],['wl-fsc-btn',FSC_FILTER],['wl-dv-btn',WL_DV_FILTER],
             ['wl-aw-btn',WL_AW_FILTER],['wl-tr-btn',WL_TR_FILTER],['wl-u2-btn',WL_U2_FILTER],['wl-hi-btn',WL_HI_FILTER],
-            ['wl-bb-btn',WL_BB_FILTER],['sort-score',WL_SORT!=='alpha'],['sort-alpha',WL_SORT==='alpha'],
+            ['wl-bb-btn',WL_BB_FILTER],['sort-score',WL_SORT==='score'],['sort-alpha',WL_SORT==='alpha'],
             ['wl-sector-filter',!!WL_SECTOR_FILTER],['wl-search',!!WL_SEARCH]];
   for(i=0;i<defs.length;i++){
     b=document.getElementById(defs[i][0]); if(!b) continue; an=defs[i][1];
@@ -2232,31 +2233,46 @@ function wlBucket(sig,t){
   if(sellAbstieg(t)) return 'ABSTIEG';
   return 'WATCH';
 }
-/* wlCmpBuy: die BUY-Gruppe ist nach 12M-Rang geordnet (S-5) -- das
-   Kennzeichen "Auswahl" markiert die Rangspitze, und eine Liste, deren
-   Spitze nicht oben steht, waere irrefuehrend. Der A-Z-Schalter ist eine
-   ausdrueckliche Nutzerwahl und gewinnt. */
-function wlCmpBuy(){
-  /* S417 W-4: BUY immer nach Rang -- auch bei A-Z (Kla 08.10.2026). */
-  return function(a,b){
-    var pa=buyPctFor(a.s.t), pb2=buyPctFor(b.s.t);
-    if(pa===null) pa=-1;
-    if(pb2===null) pb2=-1;
-    if(pa!==pb2) return pb2-pa;
-    return a.s.t<b.s.t?-1:(a.s.t>b.s.t?1:0);
-  };
+/* wlCmpRang: EINE Rangordnung "nach Rang" fuer BUY und SELL Abstieg (S419).
+   Gleichstandsregel aus awCmp (Perzentil, rohe 12M-Rendite, Symbol) --
+   dieselbe Ordnung, aus der die Auswahl entsteht; so steht die Auswahl
+   immer oben in der BUY-Liste. Ohne Perzentil ans Ende (AP-3: -1 ist
+   nur Sortierschluessel, kein Rangwert). Ersetzt wlCmpBuy (Gleichstand
+   nach Ticker). */
+function wlRangKey(s){
+  var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[s.t]:null,pct=buyPctFor(s.t);
+  var ret=(rec&&typeof rec==='object'&&rec.mom12m_ret!==null&&rec.mom12m_ret!==undefined)?rec.mom12m_ret:null;
+  return {t:s.t,pct:(pct===null)?-1:pct,ret:ret};
 }
-/* wlCmp: EINZIGE Sortier-Entscheidung der Watchlist. WL_SORT wurde bis
-   v6.6.16 nur in getScored() beachtet und von wlRend unbedingt mit einer
-   Score-Sortierung ueberschrieben -- der A-Z-Knopf blieb wirkungslos
-   (S295 C2). */
-function wlCmp(){
-  if(WL_SORT==='alpha'){
-    return function(a,b){ return a.s.t<b.s.t?-1:(a.s.t>b.s.t?1:0); };
+function wlCmpRang(a,b){ return awCmp(wlRangKey(a.s),wlRangKey(b.s)); }
+/* S417 W-4: Filter sortieren nie um. Gleichstand im Score nach Ticker,
+   damit die Reihenfolge in jeder Teilmenge dieselbe ist. */
+function wlCmpScore(a,b){ if(b.sc!==a.sc) return b.sc-a.sc; return a.s.t<b.s.t?-1:(a.s.t>b.s.t?1:0); }
+/* wlNameCmp: A-Z nach dem angezeigten Firmennamen (dName), ohne Ruecksicht
+   auf Gross-/Kleinschreibung, deutsche Sortierreihenfolge; Gleichstand nach
+   Ticker (S419). Ohne Intl.Collator: Kleinbuchstaben-Vergleich. */
+var _wlColl;  /* undefined = ungeprueft, false = kein Intl */
+function wlNameCmp(a,b){
+  var x=String(dName(a.s)||a.s.t),y=String(dName(b.s)||b.s.t),r;
+  if(_wlColl===undefined){
+    try{ _wlColl=(typeof Intl!=='undefined'&&Intl.Collator)?new Intl.Collator('de',{sensitivity:'accent'}):false; }
+    catch(eC){ _wlColl=false; }
   }
-  /* S417 W-4: Filter sortieren nie um -- auch fSc hoch nicht mehr. Gleichstand
-     im Score nach Ticker, damit die Reihenfolge in jeder Teilmenge dieselbe ist. */
-  return function(a,b){ if(b.sc!==a.sc) return b.sc-a.sc; return a.s.t<b.s.t?-1:(a.s.t>b.s.t?1:0); };
+  if(_wlColl) r=_wlColl.compare(x,y);
+  else { x=x.toLowerCase(); y=y.toLowerCase(); r=x<y?-1:(x>y?1:0); }
+  if(r!==0) return r;
+  return a.s.t<b.s.t?-1:(a.s.t>b.s.t?1:0);
+}
+/* wlCmp: EINZIGE Sortier-Entscheidung der Watchlist (S296, S419). g ist die
+   Gruppe aus wlBucket. Grundzustand ('std', Startwert und Ergebnis von
+   "Alle"): BUY und SELL Abstieg nach Rang, WATCH nach Score. 'score': alle
+   Gruppen nach Score. 'alpha': alle Gruppen nach Firmenname. Gilt in "Alle"
+   und bei aktiver Kachel; Filter ordnen nie um (S417). Ersetzt S417 W-4
+   (BUY auch bei A-Z nach Rang), Kla 09.10.2026. */
+function wlCmp(g){
+  if(WL_SORT==='alpha') return wlNameCmp;
+  if(WL_SORT!=='score'&&(g==='BUY'||g==='ABSTIEG')) return wlCmpRang;
+  return wlCmpScore;
 }
 /* wlSetCnt: EINZIGER Schreiber der drei Ticker-Zaehler. Zaehlt die Titel,
    die die Watchlist wirklich rendert (U-4: nur Titel mit scores.json-
@@ -2350,6 +2366,24 @@ function buyPctFor(t){
   var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
   if(!rec||typeof rec!=='object') return null;
   return (rec.mom12m_pct!==null&&rec.mom12m_pct!==undefined)?rec.mom12m_pct:null;
+}
+/* rang12m: EINZIGE Stelle fuer den Rang im Universum nach der
+   12-Monats-Rendite (S419, Kla 09.10.2026): {r, n} -- r = 1 + Zahl der
+   Titel in _scoresArr mit hoeherem Perzentil (1 = bester, Gleichstand teilt
+   den Rang), n = Zahl der Titel mit Wert. null ohne Perzentil (AP-3). Haengt
+   nicht von Sortierung, Kachel oder Filter ab. Leser: Spalte 1 der Watchlist
+   (renderEntry) und Bericht Rotation (rptRotCalc, stockiq_ui_berichte.js). */
+function rang12m(t){
+  var pct=buyPctFor(t),arr,i,rec,p,r=1,n=0;
+  if(pct===null) return null;
+  arr=(typeof _scoresArr!=='undefined'&&_scoresArr)?_scoresArr:[];
+  for(i=0;i<arr.length;i++){
+    rec=arr[i];
+    if(!rec||typeof rec!=='object'||!rec.ticker) continue;
+    p=buyPctFor(rec.ticker);
+    if(p!==null){ n++; if(p>pct) r++; }
+  }
+  return {r:r,n:n};
 }
 /* buyIsD1: EINZIGE Stelle, die "ist dieser Titel BUY" entscheidet (G-G).
    Kachel, Gruppe, Filter, Etikett in Watchlist UND Depot, Kopfzahl,
@@ -2552,15 +2586,14 @@ function wlRend(scored){
     else if(_gb==='ABSTIEG') gAbst.push(entry);
     else gWatch.push(entry); /* watch, hold, weak, sell_* (Kennzeichen) */
   }
-  /* S296: EINE Sortier-Entscheidung (wlCmp) fuer alle Gruppen -- beachtet
-     WL_SORT ('alpha') und FSC_FILTER. Vorher wurde hier unbedingt nach
-     Score sortiert, was den A-Z-Knopf wirkungslos machte (S295 C2). */
-  var _cmp=wlCmp();
-  gBuy.sort(wlCmpBuy());
-  gAbst.sort(_cmp);
-  gWatch.sort(_cmp);
+  /* S296/S419: EINE Sortier-Entscheidung (wlCmp) je Gruppe. Vorher wurde
+     hier unbedingt nach Score sortiert, was den A-Z-Knopf wirkungslos
+     machte (S295 C2). */
+  gBuy.sort(wlCmp('BUY'));
+  gAbst.sort(wlCmp('ABSTIEG'));
+  gWatch.sort(wlCmp('WATCH'));
 
-  function renderEntry(entry,rank){
+  function renderEntry(entry){
     s=entry.s;sc=entry.sc;sig=entry.sig;
     var fd=FD[s.t];
     /* S370: Etikett, Farbe und Kennzeichen kommen aus sigView() --
@@ -2584,7 +2617,9 @@ function wlRend(scored){
     var roceD=rv!==null?fp(rv):'--';
     var rsiC=(typeof s.rsi==='number'&&s.rsi<30)?'#00e57a':'#7a9bb5';  /* S395 R-2: Rotfaerbung entfallen; S407: null ist nicht < 30 */
     var rowBg=WL_SEL===s.t?'background:#101d2e;':'background:#0c1420;';
-    var topC=rank<=3?'#ffd040':'#7a9bb5';
+    /* S419: Spalte 1 = Rang im Universum (rang12m), nicht die Listenposition. */
+    var rg=rang12m(s.t);
+    var topC=(rg!==null&&rg.r<=3)?'#ffd040':'#7a9bb5';
     var borderLeft=_sv.buy?'border-left:3px solid #00e57a;':isAbst?'border-left:3px solid #ff3f3f;':'';
     /* v5.9.72: Sektor-Ampel + HC-Badge fuer WL-Karte */
     var sktBdg = getSektorBadge(s.t);
@@ -2594,7 +2629,7 @@ function wlRend(scored){
     var h='<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderLeft+'border-radius:8px;padding:11px 13px;margin-bottom:6px;cursor:pointer" onclick="wlDetail(\''+s.t+'\')">';
     /* S417 T-4: Kopf bricht um statt seitlich zu schieben (Name gekuerzt, Badges in die zweite Zeile) */
     h+='<div class="wl-rh">';
-    h+='<div class="wl-rl"><span style="font-family:monospace;font-size:10px;color:'+topC+'">'+rank+'</span><span style="font-size:15px;font-weight:800;flex-shrink:0">'+s.t+'</span><span class="wl-rn">'+dName(s)+'</span></div>';
+    h+='<div class="wl-rl"><span class="wl-rang" style="font-family:monospace;font-size:10px;color:'+topC+'"'+(rg===null?'':' title="Rang '+rg.r+' von '+rg.n+' (12M-Rendite)"')+'>'+(rg===null?'--':rg.r)+'</span><span style="font-size:15px;font-weight:800;flex-shrink:0">'+s.t+'</span><span class="wl-rn">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
     h+='<div class="wl-rb">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+srAmpBdg+dB+'<span'+sqTitle(s)+' style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+_sB+'</div></div>';
@@ -2632,29 +2667,29 @@ function wlRend(scored){
   var out='';
   /* Im gefilterten Modus: keine Gruppen-Header, einfache Liste */
   if(WL_FILTER!=='all'){
-    /* S417 W-4: die Gruppen sind schon sortiert (BUY nach Rang, sonst wlCmp);
-       eine Kachel zeigt genau eine Gruppe -- keine zweite Sortierung. */
+    /* S417/S419: die Gruppen sind schon sortiert (wlCmp je Gruppe); eine
+       Kachel zeigt genau eine Gruppe -- keine zweite Sortierung. */
     var all=gBuy.concat(gAbst).concat(gWatch);
     if(all.length===0){out=wlLeerHtml();}
     else{
       var _flabel={buy:'BUY',abstieg:'SELL Abstieg',watch:'WATCH'};
       var _fl=_flabel[WL_FILTER]||WL_FILTER.toUpperCase();
       out+=groupHeader(_fl,'#7a9bb5',all.length);
-      for(i=0;i<all.length;i++)out+=renderEntry(all[i],i+1);
+      for(i=0;i<all.length;i++)out+=renderEntry(all[i]);
     }
   } else {
     /* Gruppen-Ansicht */
     if(gBuy.length>0){
       out+=groupHeader('BUY','#00e57a',gBuy.length);
-      for(i=0;i<gBuy.length;i++)out+=renderEntry(gBuy[i],i+1);
+      for(i=0;i<gBuy.length;i++)out+=renderEntry(gBuy[i]);
     }
     if(gAbst.length>0){
       out+=groupHeader('SELL Abstieg','#ff6666',gAbst.length);
-      for(i=0;i<gAbst.length;i++)out+=renderEntry(gAbst[i],i+1);
+      for(i=0;i<gAbst.length;i++)out+=renderEntry(gAbst[i]);
     }
     if(gWatch.length>0){
       out+=groupHeader('WATCH','#7a9bb5',gWatch.length);
-      for(i=0;i<gWatch.length;i++)out+=renderEntry(gWatch[i],i+1);
+      for(i=0;i<gWatch.length;i++)out+=renderEntry(gWatch[i]);
     }
     if(!out)out=wlLeerHtml();
   }
@@ -2926,7 +2961,8 @@ function toggleSync(btn){
 
 /* ---- Sort-Umschalter ---- */
 function wlSetSort(mode, btn){
-  WL_SORT = mode;
+  /* S419: ein Druck auf den aktiven Knopf fuehrt zurueck in den Grundzustand. */
+  WL_SORT = (WL_SORT === mode) ? 'std' : mode;
   rWL();   /* S417: Optik in wlPaint */
 }
 
@@ -3004,11 +3040,8 @@ function getScored(){
     if(_haveIdx && !_scoresIdx[pool[i].t]) continue;
     scored.push({s:pool[i], sc:cSc(pool[i])});
   }
-  if(WL_SORT === 'alpha'){
-    scored.sort(function(a,b){ return a.s.t < b.s.t ? -1 : a.s.t > b.s.t ? 1 : 0; });
-  } else {
-    scored.sort(function(a,b){ return b.sc - a.sc; });
-  }
+  /* S419: keine Sortierung hier -- wlRend ordnet je Gruppe ueber wlCmp;
+     die uebrigen Leser (rWL-Zaehlung) brauchen keine Reihenfolge. */
   return scored;
 }
 
@@ -3340,7 +3373,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.35';
+      var PAGE_VERSION = 'v6.6.36';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -6599,7 +6632,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.35 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.36 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
