@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:,">
-<meta name="version" content="6.6.37">
+<meta name="version" content="6.6.38">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.37</title>
+<title>StockIQ v6.6.38</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -53,8 +53,6 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 .hlp-btn.active{color:var(--acc);border-color:var(--acc);background:var(--sur)}
 #mp-zeile{font-family:var(--f-mono);font-size:10px;color:#060a10;background:#7a9bb5;padding:4px 16px;border-top:1px solid var(--bdr);cursor:pointer}
 @media (max-width:480px){#rpt-content{padding:12px !important;margin:8px auto !important}#rpt-output .rpt-card{padding:10px !important}table.rot-tab th,table.rot-tab td{padding:4px !important;font-size:10px !important}table.rot-tab th{white-space:normal !important}table.rot-tab td:nth-child(2){max-width:64px;overflow:hidden;text-overflow:ellipsis}}
-/* S420: Depot-Tab ohne seitliches Schieben (Kla 09.10.2026). Unter 900 px wird jede Zeile der Positionen-Tabelle zu einer umbrechenden Karte; jede Zelle traegt die Spaltenbeschriftung. Datum und Zahlen brechen nie innerhalb um. */
-@media (max-width:899px){#dp-table table,#dp-table tbody{display:block;width:100%}#dp-table tr:first-child{display:none}#dp-table tr{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 10px;padding:6px 4px;border-bottom:1px solid #1a2a3a}#dp-table td{display:block;padding:1px 2px !important;text-align:left !important;white-space:nowrap}#dp-table td:nth-child(2){flex:1 1 55%;min-width:0;white-space:normal}#dp-table td:nth-child(14){margin-left:auto}#dp-table td::before{font-family:var(--f-mono);font-size:9px;font-weight:400;color:var(--mut);margin-right:4px}#dp-table td:nth-child(3)::before{content:'Anz.'}#dp-table td:nth-child(4)::before{content:'Kauf'}#dp-table td:nth-child(5)::before{content:'Akt.'}#dp-table td:nth-child(6)::before{content:'Wert'}#dp-table td:nth-child(7)::before{content:'+/-%'}#dp-table td:nth-child(8)::before{content:'Score'}#dp-table td:nth-child(9)::before{content:'Sig'}#dp-table td:nth-child(10)::before{content:'Pr\00FC fung'}#dp-table td:nth-child(11)::before{content:'KGV'}#dp-table td:nth-child(12)::before{content:'Skt'}#dp-table td:nth-child(13)::before{content:'real.'}#dp-txlog td,#dp-closed td{white-space:nowrap}#dp-txlog td:last-child,#dp-closed td:nth-child(2){white-space:normal}#dp-txlog th,#dp-txlog td{padding:4px 3px !important}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,159,28,.4)}70%{box-shadow:0 0 0 6px rgba(255,159,28,0)}}
 .strong-buy-pulse{animation:pulse 2s infinite}
@@ -109,7 +107,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.37 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.38 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
       <span style="white-space:nowrap"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:--:--</span></span>
@@ -261,7 +259,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.37</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.38</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -459,7 +457,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.37 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.38 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -711,7 +709,6 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
-<tr><td style="padding:5px 8px;color:#00e57a">v6.6.37</td><td style="padding:5px 8px;color:var(--mut)">Der Depot-Tab passt jetzt auch auf schmale Bildschirme, ohne seitlich zu schieben.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.36</td><td style="padding:5px 8px;color:var(--mut)">Score und A-Z ordnen jetzt alle Gruppen um, auch BUY; A-Z sortiert nach Firmennamen. Die Zahl vor dem Ticker zeigt immer den Rang nach der 12-Monats-Entwicklung.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.35</td><td style="padding:5px 8px;color:var(--mut)">Watchlist &uuml;bersichtlicher &ndash; Tabs mit Kurznamen in h&ouml;chstens zwei Zeilen, Hilfe &uuml;ber das Fragezeichen, Tab Roadmap entfallen (Versionen jetzt im Hilfe-Tab), Marktphase als Zeile in der Ampelfarbe unter den Tabs, Filter in zwei Zeilen (Auswahl der Titel und Kennzeichen, zusammenwirkend, ohne Umsortieren), neue Filter Dividende, U200, HIST und Bleibt BUY, Dividendenrendite und erwartetes KGV bei Verlusttiteln in jeder Zeile, alle Erkl&auml;rungen &uuml;ber den i-Punkt, Uhr mit MEZ/MESZ; Bericht Datenqualit&auml;t: 12-Monats-Rendite ohne Faktor 100</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.34</td><td style="padding:5px 8px;color:var(--mut)">Neuer Bericht Rotation &ndash; vergleicht die BUY-Liste von heute mit der von vor 12 Monaten (Neu BUY, Bleibt BUY, SELL Abstieg) mit Rang heute und vor 12 Monaten, Kennzeichen, KGV und Dividende; CSV-Download. Alle Berichte zeigen BUY, SELL Abstieg und WATCH wie die Watchlist.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -908,7 +905,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.37 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.38 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -987,9 +984,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
   <!-- â”€â”€ Positionen-Tabelle â”€â”€ -->
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px">
-    <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <div style="font-size:12px;font-weight:700;color:#dce8f5">Positionen</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <div style="display:flex;gap:6px">
         <button onclick="dpExport()" style="background:rgba(0,200,240,.1);border:1px solid rgba(0,200,240,.3);color:#00c8f0;font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">&#8595; Export</button>
         <button onclick="snapExport()" style="background:rgba(176,124,248,.1);border:1px solid rgba(176,124,248,.3);color:#b07cf8;font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">&#8595; Verlauf sichern</button>
         <label style="background:rgba(176,124,248,.1);border:1px solid rgba(176,124,248,.3);color:#b07cf8;font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">&#8593; Verlauf importieren<input type="file" accept=".json" onchange="snapImport(event)" style="display:none"></label>
@@ -1006,7 +1003,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.37 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.38 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -3376,7 +3373,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.37';
+      var PAGE_VERSION = 'v6.6.38';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -6635,7 +6632,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.37 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.38 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
