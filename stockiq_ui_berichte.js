@@ -440,7 +440,7 @@ function rptBuildSector(){
   out += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">';
   var kpis = [
     {l:'Anz. Titel', v:secStocks.length, u:''},
-    {l:'\u00d8 Score', v:stats.avgScore.toFixed(1), u:'/100'},
+    {l:'\u00d8 Score (Sortierhilfe, ungetestet)', v:stats.avgScore.toFixed(1), u:'/100'},
     {l:'\u00d8 FCF Yield', v:stats.avgFcf !== null ? stats.avgFcf.toFixed(1)+'%' : 'n/a', u:''},
     {l:'\u00d8 ROCE', v:stats.avgRoce !== null ? stats.avgRoce.toFixed(1)+'%' : 'n/a', u:''},
   ];
@@ -458,7 +458,7 @@ function rptBuildSector(){
   out += '<table class="rpt-tbl" style="width:100%;border-collapse:collapse;font-size:10px">';
   out += '<tr><th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:left">Ticker</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:left">Name</th>';
-  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">Score</th>';
+  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center" title="Score (Sortierhilfe, ungetestet)">Score</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">Signal</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">FCF%</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:right">ROCE%</th>';
@@ -582,8 +582,8 @@ function rptCompareBlock(tk1, tk2){
   out += row('EV/EBITDA', fmtN(fd1.ev_ebitda,'x'), fmtN(fd2.ev_ebitda,'x'), false);
   out += row('Beta', fmtN(fd1.beta,''), fmtN(fd2.beta,''), false);
   out += row('Debt/Equity %', fmtN(fd1.debt,'%'), fmtN(fd2.debt,'%'), false);
-  out += row('EVAR (rel.)', fmtN(fd1.evar,''), fmtN(fd2.evar,''), true);
-  out += row('12M-Momentum', fmtN(fd1.mom_skip!=null?fd1.mom_skip:fd1.mom12m,'%'), fmtN(fd2.mom_skip!=null?fd2.mom_skip:fd2.mom12m,'%'), true);
+  out += row('EVAR', fmtN(fd1.evar,''), fmtN(fd2.evar,''), true);
+  out += row('11M (ohne letzten Monat)', fmtN(fd1.mom_skip!=null?fd1.mom_skip:fd1.mom12m,'%'), fmtN(fd2.mom_skip!=null?fd2.mom_skip:fd2.mom12m,'%'), true);
   out += '</table>';
   return out;
 }
@@ -645,7 +645,7 @@ function rptDetailCard(tk, num){
     {l:'ROCE', v:fd.roce!=null?fd.roce.toFixed(1)+'%':'n/a', c:fd.roce>15?'#00e57a':fd.roce>8?'#ffab00':'#dce8f5'},
     {l:'PEG', v:fd.peg!=null?fd.peg.toFixed(2):'n/a', c:fd.peg<2?'#00e57a':fd.peg<3?'#ffab00':'#ff5252'},
     {l:'EV/EBITDA', v:fd.ev_ebitda!=null?fd.ev_ebitda.toFixed(1)+'x':'n/a', c:fd.ev_ebitda<15?'#00e57a':fd.ev_ebitda<25?'#ffab00':'#ff5252'},
-    {l:'EVAR (rel.)', v:evarDispV, c:evarColV},
+    {l:'EVAR', v:evarDispV, c:evarColV},
   ];
   for(var fi2=0;fi2<fkpis.length;fi2++){
     out += '<div style="padding:7px 8px;background:#0a1628;border:1px solid #1a3050;border-radius:6px">';
@@ -676,6 +676,9 @@ function rptDetailCard(tk, num){
         if(afd.fcf!=null)  fcf_hist.push(ae.year+': '+afd.fcf.toFixed(1)+'%');
       }
     }
+    if(roce_hist.length===0){  /* S423 G K46 */
+      annTrend += '<div style="font-family:monospace;font-size:9px;margin-top:8px;color:#7a9bb5">JAHRES-TREND: nicht verf&uuml;gbar</div>';
+    }
     if(roce_hist.length>0){
       annTrend += '<div style="padding:8px 10px;background:rgba(0,200,240,.05);border:1px solid rgba(0,200,240,.15);border-radius:6px;font-family:monospace;font-size:9px;margin-top:8px">';
       annTrend += '<div style="color:#00c8f0;margin-bottom:3px;font-weight:700">JAHRES-TREND</div>';
@@ -688,8 +691,8 @@ function rptDetailCard(tk, num){
 
   /* Technisch */
   out += '<div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-family:monospace;font-size:10px">';
-  out += '<div style="color:#7a9bb5">RSI: <span style="color:#dce8f5">' + (fd.rsi_val!=null?Math.round(fd.rsi_val):'n/a') + '</span></div>';
-  out += '<div style="color:#7a9bb5">12M-Mom: <span style="color:#dce8f5">' + (fd.mom_skip!=null?fd.mom_skip.toFixed(1)+'%':fd.mom12m!=null?fd.mom12m.toFixed(1)+'%':'n/a') + '</span></div>';
+  out += '<div style="color:#7a9bb5">52W-Pos.: <span style="color:#dce8f5">' + (fd.rsi_val!=null?Math.round(fd.rsi_val):'n/a') + '</span></div>';
+  out += '<div style="color:#7a9bb5">11M (ohne letzten Monat): <span style="color:#dce8f5">' + (fd.mom_skip!=null?fd.mom_skip.toFixed(1)+'%':fd.mom12m!=null?fd.mom12m.toFixed(1)+'%':'n/a') + '</span></div>';
   out += '<div style="color:#7a9bb5">Beta: <span style="color:#dce8f5">' + (fd.beta!=null?fd.beta.toFixed(2):'n/a') + '</span></div>';
   out += '</div>';
   /* Shares YoY: Buyback-Signal v5.9.80 (O'Shaughnessy Shareholder Yield) */
@@ -782,7 +785,7 @@ function rptSectorRanking(){
   out += '<div class="rpt-card" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:14px;margin-bottom:14px">';
   out += '<div class="rpt-h2" style="font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px">&#128202; Sektor-Performance-Ranking (12M)</div>';
   out += '<div style="font-family:monospace;font-size:9px;color:#7a9bb5;margin-bottom:10px">';
-  out += 'Aktien-\u00d8: 12M-Momentum aller Sektortitel &middot; ETF-Return: Sektor-ETF (aus den Tagesdaten)</div>';
+  out += 'Aktien-\u00d8: 11M (ohne letzten Monat) aller Sektortitel &middot; ETF-Return: Sektor-ETF (aus den Tagesdaten)</div>';
 
   out += '<table class="rpt-tbl" style="width:100%;border-collapse:collapse;font-size:10px">';
   out += '<tr><th style="background:#1a3a5c;color:#dce8f5;padding:5px 7px;text-align:center">#</th>';
@@ -872,7 +875,7 @@ function rptTextAnalysis(tk, secStats){
        + 'geh&ouml;rt zu den Titeln mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung. ';
   } else if(isAbstieg){
     p1 = name + ' steht auf <strong style="color:#ff6666">SELL Abstieg</strong> (Score ' + sc + '/100): '
-       + 'vor zw&ouml;lf Monaten BUY, heute nicht mehr. Nach der getesteten Regel wird ein solcher Titel ersetzt. ';
+       + 'vor zw&ouml;lf Monaten BUY, heute nicht mehr. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger. ';
   } else {
     p1 = name + ' steht auf <strong>WATCH</strong> (Score ' + sc + '/100): kein Kauf- und kein Verkaufshinweis. ';
   }
@@ -898,7 +901,7 @@ function rptTextAnalysis(tk, secStats){
     strengths.push('FCF Yield ' + fd.fcf.toFixed(1) + '% \u2014 starke Cashgenerierung.');
   }
   if(fd.moat && fd.moat !== 'none')
-    strengths.push('Morningstar Moat: ' + fd.moat.toUpperCase() + ' \u2014 strukturelle Wettbewerbsvorteile.');
+    strengths.push('Moat (Faustregel aus ROCE/FCF): ' + fd.moat.toUpperCase() + '.');
   if(nn(fd.evar) && fd.evar >= 65)
     strengths.push('EVAR ' + Math.round(fd.evar) + ' \u2014 &uuml;berdurchschnittlich stabile Ertragsentwicklung.');
   if(nn(fd.peg) && fd.peg < 1.5)
@@ -916,7 +919,7 @@ function rptTextAnalysis(tk, secStats){
     var rsi3 = fd.rsi_val !== null && fd.rsi_val !== undefined ? Math.round(fd.rsi_val) : null;
     risks.push('<strong>Kurs unter der 200-Tage-Linie</strong> (U200). ' +
       (persistText ? persistText + ' ' : '') +
-      (rsi3 !== null ? 'RSI ' + rsi3 + (rsi3 < 35 ? ' \u2014 &uuml;berverkauft, Reversal-Potenzial m&ouml;glich.' : ' \u2014 kein extremer &Uuml;berverkauf.') : ''));
+      (rsi3 !== null ? '52W-Pos. ' + rsi3 + (rsi3 < 35 ? ' \u2014 nahe am 52-Wochen-Tief.' : '.') : ''));
   }
   if(nn(fd.peg) && fd.peg > 3)
     risks.push('PEG ' + fd.peg.toFixed(2) + ' \u2014 ambitionierte Bewertung erfordert stabiles Gewinnwachstum.');
@@ -925,7 +928,7 @@ function rptTextAnalysis(tk, secStats){
   if(nn(fd.debt) && fd.debt > 80)
     risks.push('Debt/Equity ' + fd.debt.toFixed(0) + '% \u2014 erh&ouml;hte Verschuldung.');
   if(nn(fd.mom_skip) && fd.mom_skip < -20)
-    risks.push('12M-Momentum ' + pct(fd.mom_skip) + ' \u2014 anhaltender Kursr\u00fcckgang.');
+    risks.push('11M (ohne letzten Monat) ' + pct(fd.mom_skip) + ' \u2014 anhaltender Kursr\u00fcckgang.');
   if(nn(fd.evar) && fd.evar < 30)
     risks.push('EVAR ' + Math.round(fd.evar) + ' \u2014 hohe Ertragsschwankung (zyklisches Profil).');
 
@@ -937,13 +940,14 @@ function rptTextAnalysis(tk, secStats){
   var rsi4 = fd.rsi_val !== null && fd.rsi_val !== undefined ? Math.round(fd.rsi_val) : null;
   var p4 = '<strong>Technisches Bild:</strong> ';
   if(nn(rsi4)){
-    if(rsi4 < 30) p4 += 'RSI ' + rsi4 + ' \u2014 &uuml;berverkauft. Statistisch erh&ouml;hte Reversalwahrscheinlichkeit. ';
-    else if(rsi4 < 45) p4 += 'RSI ' + rsi4 + ' \u2014 schwaches Momentum. ';
-    else if(rsi4 > 78) p4 += 'RSI ' + rsi4 + ' \u2014 &uuml;berhitzt. Konsolidierungsrisiko erh&ouml;ht. ';
-    else if(rsi4 > 70) p4 += 'RSI ' + rsi4 + ' \u2014 erh&ouml;htes Niveau, aber noch nicht extrem. ';
-    else p4 += 'RSI ' + rsi4 + ' \u2014 neutrales Niveau. ';
+    /* S423 G.1.2: Feld rsi ist die 52-Wochen-Position, kein RSI -- Saetze zur Lage, ohne Reversal-Aussage */
+    if(rsi4 < 30) p4 += '52W-Pos. ' + rsi4 + ' \u2014 nahe am 52-Wochen-Tief. ';
+    else if(rsi4 < 45) p4 += '52W-Pos. ' + rsi4 + ' \u2014 untere H&auml;lfte der 52-Wochen-Spanne. ';
+    else if(rsi4 > 78) p4 += '52W-Pos. ' + rsi4 + ' \u2014 nahe am 52-Wochen-Hoch. ';
+    else if(rsi4 > 70) p4 += '52W-Pos. ' + rsi4 + ' \u2014 obere H&auml;lfte der 52-Wochen-Spanne. ';
+    else p4 += '52W-Pos. ' + rsi4 + ' \u2014 mittlere Lage in der 52-Wochen-Spanne. ';
   }
-  if(nn(fd.mom_skip)) p4 += '12M-Momentum: ' + pct(fd.mom_skip) + '. ';
+  if(nn(fd.mom_skip)) p4 += '11M (ohne letzten Monat): ' + pct(fd.mom_skip) + '. ';
 
   /* Fazit nach dem Etikett der Watchlist (S416) */
   if(isBuySignal){
@@ -969,7 +973,7 @@ function rptTextAnalysis(tk, secStats){
 /* -- Kompaktes Glossar (v5.9.55) -- */
 function rptGlossar(){
   var terms = [
-    {t:'Score /100', d:'Der Score fasst Momentum, Trend, Fundamentaldaten und Risiko zusammen. Er ist eine Sortierhilfe, kein Kauf- oder Verkaufssignal.'},
+    {t:'Score /100', d:'Der Score fasst Momentum, Trend, Fundamentaldaten und Risiko zusammen. Er ist eine Sortierhilfe, kein Kauf- oder Verkaufssignal; ungetestet.'},
     {t:'Momentum', d:'Misst die Kursentwicklung des letzten Jahres ohne den j&uuml;ngsten Monat. H&ouml;her ist g&uuml;nstiger.'},
     {t:'Trend', d:'Misst den Abstand des Kurses zur 200-Tage-Linie. H&ouml;her ist g&uuml;nstiger.'},
     {t:'Fund', d:'Fasst Bewertung, Cashflow, Kapitalrendite, Verschuldung und Ertragsstabilit&auml;t zusammen. H&ouml;her ist g&uuml;nstiger.'},
@@ -982,12 +986,12 @@ function rptGlossar(){
     {t:'Beta', d:'Misst, wie stark der Kurs mit dem Gesamtmarkt schwankt. Niedriger ist g&uuml;nstiger.'},
     {t:'Konsistenz', d:'Misst, wie gleichm&auml;&szlig;ig die Kapitalrendite &uuml;ber die Jahre ausf&auml;llt. H&ouml;her ist g&uuml;nstiger.'},
     {t:'MACD', d:'Misst Richtung und St&auml;rke der kurzfristigen Kursbewegung. H&ouml;her ist g&uuml;nstiger.'},
-    {t:'RSI', d:'Misst, wie stark der Kurs in kurzer Zeit gestiegen oder gefallen ist. Hoch hei&szlig;t &uuml;berkauft, niedrig &uuml;berverkauft. Information, kein Signal.'},
+    {t:'52W-Pos.', d:'52-Wochen-Position: Lage des Kurses zwischen 52-Wochen-Tief und -Hoch. Hoch hei&szlig;t nahe am Hoch, niedrig nahe am Tief. Information, kein Signal.'},
     {t:'Divergenz', d:'Bullische Divergenz: der RSI steigt, w&auml;hrend der Kurs f&auml;llt &mdash; nachlassender Verkaufsdruck. B&auml;rische Divergenz: das Gegenst&uuml;ck.'},
     {t:'U200', d:'Kurs unter der 200-Tage-Linie. Kennzeichen, kein Signal.'},
     {t:'BUY', d:'Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Universum (oberstes Zehntel). Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.'},
-    {t:'SELL Abstieg', d:'Vor zw&ouml;lf Monaten BUY, heute nicht mehr. Nach der getesteten Regel wird ein solcher Titel ersetzt.'},
-    {t:'Moat', d:'Wirtschaftlicher Burggraben nach Morningstar: Wide (sehr stark), Narrow (moderat), None (kein struktureller Vorteil). Wichtig f&uuml;r langfristige Haltestrategien.'},
+    {t:'SELL Abstieg', d:'Vor zw&ouml;lf Monaten BUY, heute nicht mehr. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger.'},
+    {t:'Moat (Faustregel aus ROCE/FCF)', d:'Eigene Faustregel aus Kapitalrendite (ROCE) und freiem Cashflow, kein Moat-Rating eines Anbieters: Wide, Narrow oder None. Nur Anzeige.'},
   ];
 
   var out = '';
@@ -1260,7 +1264,7 @@ function rptBuildSignal(){
     } else {
       html += '<table style="width:100%;border-collapse:collapse;font-size:11px;font-family:monospace">';
       html += '<thead><tr style="border-bottom:2px solid #1a3050;color:#dce8f5;text-align:left">';
-      var hdrs = ['Ticker','Name','Sektor','Signal','Score','Fund','PEG','RSI','Fehlend'];
+      var hdrs = ['Ticker','Name','Sektor','Signal','Score','Fund','PEG','52W-Pos.','Fehlend'];
       for(var h=0; h<hdrs.length; h++) html += '<th style="padding:6px 8px">' + hdrs[h] + '</th>';
       html += '</tr></thead><tbody>';
       for(var j=0; j<blkRows.length; j++){
@@ -1311,9 +1315,10 @@ function rptBuildSignal(){
                   (null = kein Referenzwert -> Hinweis "keine Referenz")
      Bleibt BUY   wlBucket = 'BUY' und buyRef12m(t) === true
      SELL Abstieg wlBucket = 'ABSTIEG' (sellAbstieg)
-   Rang = Rang im Universum nach dem Perzentil der 12-Monats-Rendite
-   (rang12m, wie Spalte 1 der Watchlist; 1 = bester, Gleichstand teilt
-   den Rang), dahinter das
+   Rang = Rang (von n) im Universum nach der 12-Monats-Rendite, gespeichert
+   in scores.json (mom12m_rang, score.py v1.4.26; gelesen ueber rang12m wie
+   Spalte 1 der Watchlist; 1 = bester, Gleichstand teilt den Rang -- S423 C),
+   dahinter das
    Perzentil wie im BUY-Tooltip. Rang vor 12 Monaten: dieselbe Definition
    in der Kohorte des Referenz-Ultimos (buy_ref12m_platz / _pct, score.py
    v1.4.25). Kennzeichen, KGV und Dividende wie in der Watchlist.
@@ -1335,7 +1340,8 @@ function rptRotWert(v){
   return (typeof v !== 'number' || isNaN(v)) ? null : v;
 }
 /* S419: Rang aus rang12m() (index.html) -- dieselbe Funktion wie Spalte 1
-   der Watchlist; die eigene Rangfunktion des Berichts entfaellt. */
+   der Watchlist; die eigene Rangfunktion des Berichts entfaellt. Seit S423 C
+   liest rang12m das gespeicherte Feld mom12m_rang (kein Rechnen im Dashboard). */
 function rptRotRang(rang, pct){
   if(rang === null || pct === null) return null;
   return rang + ' (' + pct.toFixed(1) + ')';
@@ -1471,7 +1477,10 @@ function rptBuildRot(){
   for(i=0; i<RPT_ROT_GRP.length; i++){
     var g = RPT_ROT_GRP[i], rows = d.grp[g];
     html += '<div class="rpt-card" style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:14px;overflow-x:auto;margin-bottom:16px">';
-    html += '<h3 style="color:' + RPT_ROT_COL[g] + ';font-size:15px;margin:0 0 10px 0">' + escapeHtml(g) + ' (' + rows.length + ')</h3>';
+    /* S423 G.1.1: Etikett SELL Abstieg (ABST_TTL, index.html) an der Gruppe */
+    var gTtl = (g === 'SELL Abstieg' && typeof ABST_TTL === 'string') ? ' title="' + ABST_TTL + '"' : '';
+    html += '<h3' + gTtl + ' style="color:' + RPT_ROT_COL[g] + ';font-size:15px;margin:0 0 10px 0">' + escapeHtml(g) + ' (' + rows.length + ')'
+          + (gTtl ? ' <span style="font-size:11px;font-weight:400">Vorzeichen richtig, nicht gesichert</span>' : '') + '</h3>';
     if(rows.length === 0){
       html += '<div style="color:#a0b0c0;font-size:11px">Keine Titel.</div></div>';
       continue;
@@ -1493,7 +1502,7 @@ function rptBuildRot(){
     html += '</tbody></table></div>';
   }
   html += '<div class="rpt-card" style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:12px;font-size:10px;color:#a0b0c0;line-height:1.6">' +
-    'Rang heute: Rang nach der 12-Monats-Rendite im Universum (1 = bester), in Klammern der Rang von 100 wie im BUY-Tooltip. ' +
+    'Rang heute: Rang nach der 12-Monats-Rendite im Universum (1 = bester), in Klammern das Perzentil wie im BUY-Tooltip. ' +
     'Rang vor 12 Monaten: dieselbe Rangfolge am Vergleichsstichtag. Kennzeichen, KGV und Dividende wie in der Watchlist. ' +
     'Innerhalb jeder Gruppe nach Rang heute geordnet.</div>';
   out.innerHTML = html;
