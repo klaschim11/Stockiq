@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:,">
-<meta name="version" content="6.6.39">
+<meta name="version" content="6.6.40">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.39</title>
+<title>StockIQ v6.6.40</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -21,6 +21,13 @@
 body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 .tab{padding:7px 9px;border:1px solid transparent;border-bottom:none;border-radius:6px 6px 0 0;font-family:var(--f-mono);font-size:12px;color:var(--mut);cursor:pointer;background:transparent;white-space:nowrap}
 .tab.active{color:var(--acc);background:var(--sur);border-color:var(--bdr)}
+/* S434 C (Kla 08.10.2026): alle Tabs in EINER Zeile bei 375 px -- nur Abstand und Schriftgroesse */
+@media(max-width:480px){.tab{padding:7px 5px;font-size:11px}}
+/* S434 B: Rolle beim Namen, Zusatz am Wert -- sichtbar ohne Mouse-over (iPhone) */
+.kz-rolle{font-size:9px}
+.kz-zus{display:block;font-size:9px;color:#f0c000;text-align:right}
+.kz-g4>div{min-width:0}
+@media(max-width:480px){.kz-g4{grid-template-columns:1fr 1fr !important}}
 .chip{display:inline-block;margin-left:4px;padding:1px 5px;background:var(--acc);color:#000;border-radius:6px;font-size:10px;font-weight:700}
 .chip.n{background:var(--pur)}.chip.ai{background:var(--grn)}.chip.s{background:var(--str)}
 .page{display:none;padding:16px}
@@ -114,7 +121,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.39 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.40 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
       <span style="white-space:nowrap"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:--:--</span></span>
@@ -189,6 +196,11 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:3px"><strong style="color:#ff6666">SELL Abstieg</strong>: Diese Titel standen vor zw&ouml;lf Monaten auf BUY und stehen heute nicht mehr dort. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger. Im Depot entscheidet das Pr&uuml;fdatum der Position.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">WATCH</strong>: Beobachten. Kein Kauf- und kein Verkaufshinweis.</div>
     <div><strong style="color:#7a9bb5">Marktphase</strong> (Zeile unter den Tabs): Lage des Gesamtmarkts zu seiner 200-Tage-Linie. GR&Uuml;N und ROT sind &uuml;ber zehn Handelstage best&auml;tigt. GELB ist der &Uuml;bergang: der Pfeil zeigt die Richtung, bis zum zehnten Tag gilt der bisherige Zustand.</div>
+  </div>
+  <!-- S434 B.2: Abschnitt aus der Etikett-Tabelle (kzAbschnitt), gefuellt beim Oeffnen der i-Box -->
+  <div id="wl-zahlen-erl" class="wl-erl-blk">
+    <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Was die Zahlen der Zeile bedeuten</strong></div>
+    <div id="wl-zahlen-liste"></div>
   </div>
   <div id="wl-filter-erl" class="wl-erl-blk">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">fSc hoch</strong>: zeigt nur Titel mit hohem Fundamentalwert.</div>
@@ -266,7 +278,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.39</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.40</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -464,7 +476,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.39 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.40 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -497,8 +509,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:13px;color:var(--mut);line-height:1.8">
       <div style="margin-bottom:6px">Die Indikatoren dienen der eigenen Chartansicht. BUY folgt in StockIQ dem Rang der 12-Monats-Rendite; die 200-Tage-Linie entspricht dem Kennzeichen U200. Einmalig als Chart-Template in TradingView speichern:</div>
       <div style="padding:10px 12px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;margin-bottom:10px;font-family:monospace;font-size:11px">
-        <div style="color:#00c8f0;margin-bottom:3px">&#10003; SMA 200 &mdash; Periode 200 (Trendfilter, above200)</div>
-        <div style="color:#00c8f0;margin-bottom:3px">&#10003; MACD 12/26/9 mit Histogramm (macd_cross, macd_hist)</div>
+        <div style="color:#00c8f0;margin-bottom:3px">&#10003; SMA 200 &mdash; Periode 200 (200-Tage-Linie, Kennzeichen U200)</div>
+        <div style="color:#00c8f0;margin-bottom:3px">&#10003; MACD 12/26/9 mit Histogramm (Kennzeichen HIST und Trend)</div>
         <div style="color:#00c8f0;margin-bottom:3px">&#10003; RSI 14 (Indikator in TradingView)</div>
       </div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">Speichern:</strong> Indikatoren setzen &rarr; Layouts-Icon oben rechts &rarr; <strong style="color:#00e57a">Als Standard speichern</strong>. Dann bei jedem Chart-Aufruf via Dashboard automatisch geladen.</div>
@@ -716,6 +728,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.40</td><td style="padding:5px 8px;color:var(--mut)">Die Rolle jeder Kennzahl steht in der Detailansicht beim Namen, der Hinweis bekannt fehlerhaft am Wert; Watchlist (Knopf i) und Depot erkl&auml;ren die Zahlen der Zeile; der W&auml;hrungshinweis entf&auml;llt; Tab-Leiste in einer Zeile; TradingView-Hilfe ohne interne Namen.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.39</td><td style="padding:5px 8px;color:var(--mut)">Der Rang (von n) wird t&auml;glich gespeichert und so angezeigt; die Depot-Tabelle scrollt auf schmalen Bildschirmen seitlich, die Titelspalte bleibt stehen; Etiketten je Kennzahl (getestet, ungetestet, bekannt fehlerhaft) und der Teststand von SELL Abstieg; 52W-Pos. statt RSI; Streuung des Depots neben der BUY-Liste.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.36</td><td style="padding:5px 8px;color:var(--mut)">Score und A-Z ordnen jetzt alle Gruppen um, auch BUY; A-Z sortiert nach Firmennamen. Die Zahl vor dem Ticker zeigt immer den Rang nach der 12-Monats-Entwicklung.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.35</td><td style="padding:5px 8px;color:var(--mut)">Watchlist &uuml;bersichtlicher &ndash; Tabs mit Kurznamen in h&ouml;chstens zwei Zeilen, Hilfe &uuml;ber das Fragezeichen, Tab Roadmap entfallen (Versionen jetzt im Hilfe-Tab), Marktphase als Zeile in der Ampelfarbe unter den Tabs, Filter in zwei Zeilen (Auswahl der Titel und Kennzeichen, zusammenwirkend, ohne Umsortieren), neue Filter Dividende, U200, HIST und Bleibt BUY, Dividendenrendite und erwartetes KGV bei Verlusttiteln in jeder Zeile, alle Erkl&auml;rungen &uuml;ber den i-Punkt, Uhr mit MEZ/MESZ; Bericht Datenqualit&auml;t: 12-Monats-Rendite ohne Faktor 100</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -913,7 +926,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.39 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.40 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1011,7 +1024,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.39 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.40 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2107,6 +2120,7 @@ function wlErlToggle(){
   if(!b) return;
   auf=(b.style.display==='none');
   b.style.display=auf?'block':'none';
+  if(auf){ var zl=document.getElementById('wl-zahlen-liste'); if(zl) zl.innerHTML=kzAbschnitt(KZ_ZEILE_WL); }  /* S434 B.2 */
   if(k){ k.style.borderColor=auf?'#7a9bb5':'#1a2a3a'; k.style.color=auf?'#7a9bb5':'var(--mut)'; }
 }
 /* S417: Kachelfilter (Gruppe). Markierung malt rWL -> wlKachel/wlPaint. */
@@ -2554,19 +2568,37 @@ function sigLogText(t,sig){
 var ABST_TTL='SELL Abstieg: Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger.';
 var KZ_ROLLE={
   K01:'getestet', K10:'getestet (Haltedauer)', K11:'Regel getestet: verfehlt', K12:'getestet',
-  K35:'getestet (Rangbasis)', K20:'Sortierhilfe, ungetestet', K21:'Sortierhilfe, ungetestet',
+  K35:'getestet als Rangbasis', K20:'Sortierhilfe, ungetestet', K21:'Sortierhilfe, ungetestet',
   K22:'Sortierhilfe, ungetestet', K23:'Sortierhilfe, ungetestet', K24:'Sortierhilfe, ungetestet',
   K30:'Sortierhilfe, ungetestet', K37:'Sortierhilfe, ungetestet', K38:'Sortierhilfe, ungetestet',
   K57:'Sortierhilfe, ungetestet',
-  K29:'bei Titeln mit Abschluss in anderer W&auml;hrung als der Notierung fehlerhaft',
-  K39:'bei Titeln mit Abschluss in anderer W&auml;hrung als der Notierung fehlerhaft',
-  K41:'bei Titeln mit Abschluss in anderer W&auml;hrung als der Notierung fehlerhaft',
-  K42:'bei Titeln mit Abschluss in anderer W&auml;hrung als der Notierung fehlerhaft',  /* Kla 13.10.2026: Bedingung statt pauschal */
+  K29:'Sortierhilfe, ungetestet', K39:'Sortierhilfe, ungetestet', K41:'Sortierhilfe, ungetestet',
+  K42:'Sortierhilfe, ungetestet',  /* S434: Waehrungs-Zusatz entfaellt (S428, geschlossen ab Lauf 14.10.2026) */
+  K02:'Rang (von n) im Universum (12M)', K26:'Sortierhilfe, ungetestet',
+  K27:'nur Anzeige (Angabe, kein Signal)', K31:'nur Anzeige (laufende Dividende laut Anbieter)',
+  K53:'nur Anzeige',  /* S434 (Kla 14.10.2026, Option 2): Zeilen-Kennzahlen, etikett_soll der Status-Datei */
   K25:'nur Anzeige, Anbieterwert ungepr&uuml;ft', K55:'ungetestet', K56:'SPY &uuml;ber 200-Tage-Linie',
   K40:'Faustregel aus ROCE/FCF, kein Moat-Rating'
 };
 /* kzTtl: title-Attribut "Name: Etikett" fuer die Kennzahl id; ohne Eintrag leer. */
 function kzTtl(id,name){ return KZ_ROLLE[id]?(' title="'+name+': '+KZ_ROLLE[id]+'"'):''; }
+/* S434 B (Kla 13.10.2026 13:14): auf dem iPhone erscheint kein title. Rolle SICHTBAR beim Namen
+   (Form wie 'Score (Sortierhilfe, ungetestet)'), Zusatz 'bekannt fehlerhaft' sichtbar am Wert.
+   KZ_ZUSATZ = Kennzahlen der Tabelle mit mindestens einem Mangel der Klasse wert in der
+   Kennzahl-Status-Datei (die Seite liest sie nicht; Node-Test bindet beides an die Quelle).
+   Abschnitt 'Was die Zahlen der Zeile bedeuten' (WL-i-Box, Depot) aus DERSELBEN Tabelle. */
+var KZ_ZUSATZ_TXT='bekannt fehlerhaft';
+var KZ_ZUSATZ={K20:1,K21:1,K22:1,K23:1,K24:1,K25:1,K26:1,K29:1,K30:1,K37:1,K38:1,K40:1,K41:1,K42:1,K53:1};
+function kzRolle(id){ return KZ_ROLLE[id]?(' <span class="kz-rolle" data-kz="'+id+'">('+KZ_ROLLE[id]+')</span>'):''; }
+function kzZus(id){ return KZ_ZUSATZ[id]?('<span class="kz-zus" data-kz="'+id+'">'+KZ_ZUSATZ_TXT+'</span>'):''; }
+function kzZeileTxt(id,name){ return name+': '+KZ_ROLLE[id]+(KZ_ZUSATZ[id]?(', '+KZ_ZUSATZ_TXT):''); }
+var KZ_ZEILE_WL=[['K02','Rang'],['K20','Score'],['K25','PEG'],['K27','KGV'],['K29','FCF'],['K30','ROCE'],['K26','52W-Pos.'],['K31','Div']];
+var KZ_ZEILE_DP=[['K53','Akt. / Wert / +/-%'],['K20','Score'],['K11','Pr&uuml;fung'],['K27','KGV']];
+function kzAbschnitt(liste){
+  var h='',i;
+  for(i=0;i<liste.length;i++) h+='<div class="kz-z" data-kz="'+liste[i][0]+'" style="margin-bottom:2px">'+kzZeileTxt(liste[i][0],liste[i][1])+'</div>';
+  return h;
+}
 /* sigView: EINZIGE Etikettbildung. Rueckgabe {buy,lbl,col,bdg,ttl}. */
 function sigView(t,sig){
   var isBuy=buyIsD1(t),lbl,col;
@@ -2749,7 +2781,7 @@ function divKacheln(fd){
   if(!hatDy&&!hatSr)return '';
   var box='background:rgba(255,255,255,.05);border-radius:6px;padding:7px 9px';
   var h='<div style="display:grid;grid-template-columns:'+(hatDy&&hatSr?'1fr 1fr':'1fr')+';gap:5px;margin-top:5px">';
-  if(hatDy)h+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">DIV YIELD</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+fd.div_yield.toFixed(1)+'%</div></div>';
+  if(hatDy)h+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">DIV YIELD'+kzRolle('K31')+'</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+fd.div_yield.toFixed(1)+'%'+kzZus('K31')+'</div></div>';
   if(hatSr)h+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">SH RETURN</div><div style="font-family:monospace;font-size:11px;color:#b07cf8">'+fp(fd.shareholder_return)+'</div></div>';
   return h+'</div>';
 }
@@ -2781,7 +2813,7 @@ function wlDetail(ticker){
   var out='<div style="background:#0c1420;border:1px solid #1a2a3a;border-left:3px solid '+sc2+';border-radius:12px;padding:16px">';
   out+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">';
   out+='<div><div style="font-size:20px;font-weight:800;color:'+scColQ(sc,s)+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+dName(s)+'</div></div>';
-  out+='<div style="text-align:right"><div'+sqTitle(s)+' style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:10px;color:var(--mut)">/100</div></div></div>';
+  out+='<div style="text-align:right"><div'+sqTitle(s)+' style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:10px;color:var(--mut)">/100</div>'+kzZus('K20')+'</div></div>';
   out+='<div class="wl-why" style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:'+(_svD.bdg?'4':'10')+'px">'+why+'</div>';
   if(_svD.bdg)out+='<div class="wl-marks" style="margin-bottom:8px">'+_svD.bdg+'</div>';  /* S398 R-2: Kennzeichen */
   out+=wlInfoZeilen(s,sig);  /* S395 R-2 */
@@ -2790,9 +2822,9 @@ function wlDetail(ticker){
   /* S398 R-3: Bausteinnamen ohne Gewicht und ohne Verfahrenszusatz */
   out+='<div class="wl-score"><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">Score (Sortierhilfe, ungetestet)</div>';
   /* S407 Punkt 1: Bausteine aus den Tagesdaten statt STOCKS-Platzhalter */
-  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K21','Momentum')+'>Momentum</span><span>'+bstText(s.t,'mom_score')+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K22','Trend')+'>Trend</span><span>'+bstText(s.t,'trend_score')+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K23','Fund')+'>Fund</span><span>'+bstText(s.t,'fund_score')+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K21','Momentum')+'>Momentum'+kzRolle('K21')+'</span><span>'+bstText(s.t,'mom_score')+''+kzZus('K21')+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K22','Trend')+'>Trend'+kzRolle('K22')+'</span><span>'+bstText(s.t,'trend_score')+''+kzZus('K22')+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K23','Fund')+'>Fund'+kzRolle('K23')+'</span><span>'+bstText(s.t,'fund_score')+''+kzZus('K23')+'</span></div>';
   /* Konsistenz-Badge (v5.9.36) */
   var cs2=getScField(s.t, "cons_sc", consScore(s.t));
   var as2=calcAnnualStats(s.t);
@@ -2803,42 +2835,42 @@ function wlDetail(ticker){
   } else {
     out+='<div class="wl-kons-nv" style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:#7a9bb5">nicht verf&uuml;gbar</span></div>';  /* S423 G K46 */
   }
-  out+='<div style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)"'+kzTtl('K24','Risk')+'>Risk</span><span>'+bstText(s.t,'risk_score')+'</span></div>';  /* S398 R-3: Beta/EVAR stehen unten als Kennzahl */
+  out+='<div style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)"'+kzTtl('K24','Risk')+'>Risk'+kzRolle('K24')+'</span><span>'+bstText(s.t,'risk_score')+''+kzZus('K24')+'</span></div>';  /* S398 R-3: Beta/EVAR stehen unten als Kennzahl */
   out+='</div>';
   out+='<div><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">TECHNISCH</div>';
   out+='<div style="'+row+'"><span style="color:var(--mut)">MACD-Histogramm</span><span>'+(s.hist!=null?s.hist.toFixed(2):'--')+'</span></div>';  /* S398 R-4 */
-  out+='<div style="'+row+'"><span style="color:var(--mut)">52W-Pos.</span><span style="color:'+(typeof s.rsi==='number'&&s.rsi<30?'#00e57a':'#dce8f5')+'">'+rsiText(s)+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)">52W-Pos.'+kzRolle('K26')+'</span><span style="color:'+(typeof s.rsi==='number'&&s.rsi<30?'#00e57a':'#dce8f5')+'">'+rsiText(s)+kzZus('K26')+'</span></div>';
   var fd_m=_scoresIdx[s.t];
   var skipVal=fd_m&&fd_m.mom_skip!=null?fd_m.mom_skip:null;
   var ret12Val=fd_m&&fd_m.mom12m_ret!=null?fd_m.mom12m_ret:null;
   if(skipVal!==null){
     var sc=skipVal>=20?'#00e57a':skipVal>=0?'#00c8f0':skipVal>=-15?'#f0c000':'#ff6666';
     out+='<div style="'+row+'"><span style="color:var(--mut)">12 Monate ohne letzten Monat</span><span style="color:'+sc+'">'+(skipVal>=0?'+':'')+skipVal.toFixed(1)+'%</span></div>';
-    if(ret12Val!==null){var r12c=ret12Val>=20?'#00e57a':ret12Val>=0?'#00c8f0':ret12Val>=-15?'#f0c000':'#ff6666';out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K35','12M')+'>12M (inkl.1M)</span><span style="color:'+r12c+'">'+(ret12Val>=0?'+':'')+ret12Val.toFixed(1)+'%</span></div>';}
+    if(ret12Val!==null){var r12c=ret12Val>=20?'#00e57a':ret12Val>=0?'#00c8f0':ret12Val>=-15?'#f0c000':'#ff6666';out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K35','12M')+'>12M (inkl.1M)'+kzRolle('K35')+'</span><span style="color:'+r12c+'">'+(ret12Val>=0?'+':'')+ret12Val.toFixed(1)+'%'+kzZus('K35')+'</span></div>';}
   }
   out+='<div style="'+row+'"><span style="color:var(--mut)">Divergenz</span><span style="color:'+(isDivBull(s)?'#ff9f1c':'#7a9bb5')+'">'+(s.div!=null?s.div:'--')+'</span></div>';
   /* S405: KGV und Gewinnwachstum aus dem Datenfeld statt STOCKS-Platzhalter pe/eg; neutral, direkt ueber PEG. */
-  out+='<div class="wl-kgv-det" style="'+row+'" title="'+KGV_TTL+'"><span style="color:var(--mut)">KGV laufend / erwartet</span><span>'+kgvText(s.t).replace(/^KGV /,'')+'</span></div>';
+  out+='<div class="wl-kgv-det" style="'+row+'" title="'+KGV_TTL+'"><span style="color:var(--mut)">KGV laufend / erwartet'+kzRolle('K27')+'</span><span>'+kgvText(s.t).replace(/^KGV /,'')+kzZus('K27')+'</span></div>';
   if(kgvUnpl(s.t))out+='<div class="wl-kgv-unpl" style="'+row+'"><span style="color:var(--mut)">KGV erwartet</span><span>Sch&auml;tzung des Anbieters unplausibel</span></div>';
   out+='<div class="wl-eg-det" style="'+row+'" title="'+KGV_EG_TTL+'"><span style="color:var(--mut)">Gewinnwachstum</span><span>'+kgvEgText(s.t)+'</span></div>';
   /* S398 R-4: PEG nur als gemessener Wert aus dem Datenfeld, ohne
      Sektor-Median und ohne Umrechnung in Punkte; fehlt er: "--". */
-  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K25','PEG')+'>PEG</span><span>'+pegMess(s.t)+'</span></div>';
+  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K25','PEG')+'>PEG'+kzRolle('K25')+'</span><span>'+pegMess(s.t)+''+kzZus('K25')+'</span></div>';
   out+='</div></div>';
   if(fd){
     out+='<div style="border-top:1px solid #1a2a3a;padding-top:10px">';
     out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:6px">FUNDAMENTALS (JSON)</div>';
-    out+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
+    out+='<div class="kz-g4" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px">';  /* S434 B: schmal zweispaltig */
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD'+kzRolle('K29')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+''+kzZus('K29')+'</div></div>';
     /* Owner Earnings Yield (v5.9.44 / v7.9.7) */
     var oeY=fd.owner_earnings!=null?fd.owner_earnings:null;
     var oeDisp=oeY!=null?((oeY>=0?'+':'')+oeY.toFixed(1)+'%'):'n/a';
     var oeColor=oeY!=null?(oeY>4?'#00e57a':oeY>0?'#f0c000':'#ff6666'):'#7a9bb5';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OWN.EARN.')+'>OWN.EARN.</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+oeDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OWN.EARN.')+'>OWN.EARN.'+kzRolle('K39')+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+oeDisp+''+kzZus('K39')+'</div></div>';
     var rv2=fd.roce!==null&&fd.roce!==undefined?fd.roce:fd.roe;
     var rl2=fd.roce!==null&&fd.roce!==undefined?'ROCE':'ROE';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K30',rl2)+'>'+rl2+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K40','Moat')+'>MOAT</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K30',rl2)+'>'+rl2+''+kzRolle('K30')+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+''+kzZus('K30')+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K40','Moat')+'>MOAT'+kzRolle('K40')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+''+kzZus('K40')+'</div></div>';
     out+='</div>';
     /* EV/EBITDA + EVAR â€” zweite Zeile Value-Qualitaet (v5.9.30) */
     var evebDisp=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda.toFixed(1)+'x':'n/a';
@@ -2849,7 +2881,7 @@ function wlDetail(ticker){
     var evarScore=evarRel!=null?evarRel:fd.evar;
     var evarColor=evarScore!=null?(evarScore>=60?'#00e57a':evarScore>=40?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K41','EV/EBITDA')+'>EV/EBITDA</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K41','EV/EBITDA')+'>EV/EBITDA'+kzRolle('K41')+'</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+''+kzZus('K41')+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">'+evarLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDispFull+'</div></div>';
     out+='</div>';
     /* EV/EBIT + FCF/Debt Cover (v5.9.76: Research Sprint -- Buffett/Greenblatt) */
@@ -2859,7 +2891,7 @@ function wlDetail(ticker){
     var fdcStr=fdcV!==null?(fdcV>=10?'&gt;10x':fdcV.toFixed(2)+'x'):'n/a';
     var fdcCol=fdcV!==null?(fdcV>=0.20?'#00e57a':fdcV>=0.05?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K42','EV/EBIT')+'>EV/EBIT</div><div style="font-family:monospace;font-size:11px;color:'+eveitColor2+'">'+eveitDisp2+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K42','EV/EBIT')+'>EV/EBIT'+kzRolle('K42')+'</div><div style="font-family:monospace;font-size:11px;color:'+eveitColor2+'">'+eveitDisp2+''+kzZus('K42')+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">FCF/DEBT</div><div style="font-family:monospace;font-size:11px;color:'+fdcCol+'">'+fdcStr+'</div></div>';
     out+='</div>';
     /* Owner Earnings Yield (v5.9.44) â€” Buffett NI+D&A-CapEx/MC */
@@ -2870,8 +2902,8 @@ function wlDetail(ticker){
       var oeDiffStr=oeDiff!=null?(' ('+(oeDiff>=0?'+':'')+oeDiff+'pp)'):'';
       var oeLabel='OE Yield'+oeDiffStr;
       out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OE Yield')+'>'+oeLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+(oeVal>=0?'+':'')+oeVal.toFixed(1)+'%</div></div>';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OE Yield')+'>'+oeLabel+''+kzRolle('K39')+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+(oeVal>=0?'+':'')+oeVal.toFixed(1)+'%'+kzZus('K39')+'</div></div>';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD'+kzRolle('K29')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+''+kzZus('K29')+'</div></div>';
       out+='</div>';
     }
     /* Jahres-Trend (v5.9.35): ROCE + FCF + Mom aus annual.json */
@@ -2907,8 +2939,8 @@ function wlDetail(ticker){
     var debtDisp=fd.debt_eq!==null&&fd.debt_eq!==undefined?fd.debt_eq.toFixed(0):'n/a';
     var debtColor=fd.debt_eq!==null&&fd.debt_eq!==undefined?(fd.debt_eq<100?'#00e57a':fd.debt_eq<200?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K37','Beta')+'>BETA (Low-Vol)</div><div style="font-family:monospace;font-size:11px;color:'+betaColor+'">'+betaDisp+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K38','Debt/Equity')+'>DEBT/EQ %</div><div style="font-family:monospace;font-size:11px;color:'+debtColor+'">'+debtDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K37','Beta')+'>BETA (Low-Vol)'+kzRolle('K37')+'</div><div style="font-family:monospace;font-size:11px;color:'+betaColor+'">'+betaDisp+''+kzZus('K37')+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K38','Debt/Equity')+'>DEBT/EQ %'+kzRolle('K38')+'</div><div style="font-family:monospace;font-size:11px;color:'+debtColor+'">'+debtDisp+''+kzZus('K38')+'</div></div>';
     out+='</div>';
     out+=divKacheln(fd);  /* S407 Punkt 5: Schalter DIV_ANZEIGE_AUS; BUYBACK entfallen */
     /* shares_change_yoy: Buyback-Signal v5.9.78 */
@@ -3400,7 +3432,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.39';
+      var PAGE_VERSION = 'v6.6.40';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -5670,6 +5702,10 @@ function dpRenderTable(){
      DEPOT_POSITIONS.length - dpCalcTotal().hasPrice; dieselbe Entscheidung
      tragen HHI (Z4460), Risiko (Z5796), Kacheln (Z5259) und Wertverlauf
      (Z5531) schon vorher. */
+  /* S434 B.2: Abschnitt 'Was die Zahlen der Zeile bedeuten' aus der Etikett-Tabelle, einklappbar, beim Laden zu */
+  out += '<details id="dp-zahlen-erl" style="margin-top:6px;padding:7px 10px;background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:4px;font-family:monospace;font-size:10px;color:#7a9bb5">';
+  out += '<summary style="cursor:pointer">Was die Zahlen der Zeile bedeuten</summary>';
+  out += '<div id="dp-zahlen-liste" style="margin-top:4px;line-height:1.5">'+kzAbschnitt(KZ_ZEILE_DP)+'</div></details>';
   var noEurCount = 0;
   for(var ni=0;ni<DEPOT_POSITIONS.length;ni++){
     if(dpCurrentPrice(DEPOT_POSITIONS[ni].t) === null) noEurCount++;
@@ -6745,7 +6781,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.39 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.40 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
