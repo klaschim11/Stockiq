@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:,">
-<meta name="version" content="6.6.40">
+<meta name="version" content="6.6.41">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.40</title>
+<title>StockIQ v6.6.41</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -26,6 +26,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 /* S434 B: Rolle beim Namen, Zusatz am Wert -- sichtbar ohne Mouse-over (iPhone) */
 .kz-rolle{font-size:9px}
 .kz-zus{display:block;font-size:9px;color:#f0c000;text-align:right}
+/* S441 C.3: Detail-Zeilen brechen um statt in den Namen zu laufen; Bloecke 1/2 */
+.dt-r{flex-wrap:wrap;column-gap:8px}
+.dt-r>span:last-child{margin-left:auto;text-align:right}
+.wl-blk-h{font-family:monospace;font-size:10px;font-weight:700;color:#dce8f5;margin:2px 0 6px 0}
+.wl-b2-satz{font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px}
+.wl-b2-zus{font-family:monospace;font-size:10px;color:#f0c000;margin-bottom:8px}
 .kz-g4>div{min-width:0}
 @media(max-width:480px){.kz-g4{grid-template-columns:1fr 1fr !important}}
 .chip{display:inline-block;margin-left:4px;padding:1px 5px;background:var(--acc);color:#000;border-radius:6px;font-size:10px;font-weight:700}
@@ -121,7 +127,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.40 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.41 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
       <span style="white-space:nowrap"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:--:--</span></span>
@@ -278,7 +284,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.40</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.41</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -476,7 +482,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.40 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.41 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -728,6 +734,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.41</td><td style="padding:5px 8px;color:var(--mut)">Der Score steht nur noch in der Detailansicht (zweiter Block, mit Bausteinen), nicht mehr in der Watchlist-Zeile, im Kopf der Detailansicht und als Depot-Spalte; die Detailansicht hat zwei Bl&ouml;cke (was den Kauf tr&auml;gt, weitere Angaben) mit dem Hinweis bekannt fehlerhaft einmal am Blockkopf; Detailzeilen brechen um statt in den Namen zu laufen; Depot nach Namen.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.40</td><td style="padding:5px 8px;color:var(--mut)">Die Rolle jeder Kennzahl steht in der Detailansicht beim Namen, der Hinweis bekannt fehlerhaft am Wert; Watchlist (Knopf i) und Depot erkl&auml;ren die Zahlen der Zeile; der W&auml;hrungshinweis entf&auml;llt; Tab-Leiste in einer Zeile; TradingView-Hilfe ohne interne Namen.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.39</td><td style="padding:5px 8px;color:var(--mut)">Der Rang (von n) wird t&auml;glich gespeichert und so angezeigt; die Depot-Tabelle scrollt auf schmalen Bildschirmen seitlich, die Titelspalte bleibt stehen; Etiketten je Kennzahl (getestet, ungetestet, bekannt fehlerhaft) und der Teststand von SELL Abstieg; 52W-Pos. statt RSI; Streuung des Depots neben der BUY-Liste.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.36</td><td style="padding:5px 8px;color:var(--mut)">Score und A-Z ordnen jetzt alle Gruppen um, auch BUY; A-Z sortiert nach Firmennamen. Die Zahl vor dem Ticker zeigt immer den Rang nach der 12-Monats-Entwicklung.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -926,7 +933,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.40 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.41 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1024,7 +1031,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.40 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.41 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2592,8 +2599,25 @@ var KZ_ZUSATZ={K20:1,K21:1,K22:1,K23:1,K24:1,K25:1,K26:1,K29:1,K30:1,K37:1,K38:1
 function kzRolle(id){ return KZ_ROLLE[id]?(' <span class="kz-rolle" data-kz="'+id+'">('+KZ_ROLLE[id]+')</span>'):''; }
 function kzZus(id){ return KZ_ZUSATZ[id]?('<span class="kz-zus" data-kz="'+id+'">'+KZ_ZUSATZ_TXT+'</span>'):''; }
 function kzZeileTxt(id,name){ return name+': '+KZ_ROLLE[id]+(KZ_ZUSATZ[id]?(', '+KZ_ZUSATZ_TXT):''); }
-var KZ_ZEILE_WL=[['K02','Rang'],['K20','Score'],['K25','PEG'],['K27','KGV'],['K29','FCF'],['K30','ROCE'],['K26','52W-Pos.'],['K31','Div']];
-var KZ_ZEILE_DP=[['K53','Akt. / Wert / +/-%'],['K20','Score'],['K11','Pr&uuml;fung'],['K27','KGV']];
+var KZ_ZEILE_WL=[['K02','Rang'],['K25','PEG'],['K27','KGV'],['K29','FCF'],['K30','ROCE'],['K26','52W-Pos.'],['K31','Div']];
+var KZ_ZEILE_DP=[['K53','Akt. / Wert / +/-%'],['K11','Pr&uuml;fung'],['K27','KGV']];  /* S441 C.4: Score nicht mehr in der Zeile */
+/* S441 C.3 (Kla 14.10.2026): Detail Block 2 traegt den Zusatz EINMAL am Blockkopf. Welche
+   Kennzahlen dort stehen, folgt aus KZ_ZUSATZ und den data-kz-Marken, die der Block wirklich
+   zeigt (kzRolle, Score-Kopf) -- keine Hand-Liste. KZ_KURZ liefert nur den Anzeigenamen. */
+var KZ_KURZ={K20:'Score',K21:'Momentum',K22:'Trend',K23:'Fund',K24:'Risk',K25:'PEG',K26:'52W-Pos.',
+  K29:'FCF YIELD',K30:'ROCE/ROE',K37:'BETA',K38:'DEBT/EQ',K40:'MOAT',K41:'EV/EBITDA',K42:'EV/EBIT',K53:'Akt. / Wert / +/-%'};
+function kzZusIds(html){
+  var re=/data-kz="(K\d+)"/g,m,seen={},ids=[];
+  while((m=re.exec(html))!==null){ if(KZ_ZUSATZ[m[1]]&&!seen[m[1]]){ seen[m[1]]=1; ids.push(m[1]); } }
+  return ids;
+}
+function kzB2Kopf(html){
+  var ids=kzZusIds(html),nm=[],i;
+  for(i=0;i<ids.length;i++) nm.push(KZ_KURZ[ids[i]]||ids[i]);
+  return '<div class="wl-blk-h">Weitere Angaben</div>'
+    +'<div class="wl-b2-satz">Sortierhilfe oder nur Anzeige, nicht getestet; der Rang entscheidet.</div>'
+    +(nm.length?('<div class="wl-b2-zus" data-ids="'+ids.join(',')+'">'+KZ_ZUSATZ_TXT+': '+nm.join(', ')+'</div>'):'');
+}
 function kzAbschnitt(liste){
   var h='',i;
   for(i=0;i<liste.length;i++) h+='<div class="kz-z" data-kz="'+liste[i][0]+'" style="margin-bottom:2px">'+kzZeileTxt(liste[i][0],liste[i][1])+'</div>';
@@ -2663,7 +2687,6 @@ function wlRend(scored){
     var sc2=_sv.col;
     var dR=dqCheck(s.t,sig),dB=dR?('<span style="font-size:10px;color:#f0c000;border:1px solid rgba(240,192,0,.4);border-radius:3px;padding:1px 4px" title="DQ: '+dR.fields.join(", ")+'">&#9888;</span>'):"";
     var slbl=_sv.lbl;
-    var scc=scColQ(sc,s);
     var pgD=pegMess(s.t);  /* S398 R-5: gemessener PEG statt Platzhalter */
     var pgV=pgD==='--'?null:parseFloat(pgD);  /* Farbe folgt dem angezeigten Wert, nicht s.peg */
     var pgC=pgV===null?'#7a9bb5':pgSt({peg:pgV})==='ov'?'#f0c000':pgV<1.5?'#00e57a':'#7a9bb5';
@@ -2687,7 +2710,7 @@ function wlRend(scored){
     h+='<div class="wl-rl"><span class="wl-rang" style="font-family:monospace;font-size:10px;color:'+topC+'"'+(rg===null?'':' title="Rang '+rg.r+' von '+rg.n+' (12M-Rendite)"')+'>'+(rg===null?'--':rg.r)+'</span><span style="font-size:15px;font-weight:800;flex-shrink:0">'+s.t+'</span><span class="wl-rn">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
-    h+='<div class="wl-rb">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+srAmpBdg+dB+'<span title="Score (Sortierhilfe, ungetestet)'+(scoreQuality(s)==='stat'?'. Daten unvollst&auml;ndig':'')+'" style="font-size:18px;font-weight:800;color:'+scc+'">'+sc+'</span>'+_sB+'</div></div>';
+    h+='<div class="wl-rb">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+srAmpBdg+dB+_sB+'</div></div>';  /* S441 C.1: Score-Badge entfaellt (nur Detail Block 2) */
     /* S405: KGV direkt neben PEG (Kla 07.10.2026), neutral ohne Farbe. Schmal bricht die Zeile um (.wl-kz). */
     h+='<div class="wl-kz">';
     h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
@@ -2781,7 +2804,7 @@ function divKacheln(fd){
   if(!hatDy&&!hatSr)return '';
   var box='background:rgba(255,255,255,.05);border-radius:6px;padding:7px 9px';
   var h='<div style="display:grid;grid-template-columns:'+(hatDy&&hatSr?'1fr 1fr':'1fr')+';gap:5px;margin-top:5px">';
-  if(hatDy)h+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">DIV YIELD'+kzRolle('K31')+'</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+fd.div_yield.toFixed(1)+'%'+kzZus('K31')+'</div></div>';
+  if(hatDy)h+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">DIV YIELD'+kzRolle('K31')+'</div><div style="font-family:monospace;font-size:11px;color:#00c8f0">'+fd.div_yield.toFixed(1)+'%'+'</div></div>';
   if(hatSr)h+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">SH RETURN</div><div style="font-family:monospace;font-size:11px;color:#b07cf8">'+fp(fd.shareholder_return)+'</div></div>';
   return h+'</div>';
 }
@@ -2812,65 +2835,77 @@ function wlDetail(ticker){
   var row='display:flex;justify-content:space-between;font-family:monospace;font-size:10px;margin-bottom:3px';
   var out='<div style="background:#0c1420;border:1px solid #1a2a3a;border-left:3px solid '+sc2+';border-radius:12px;padding:16px">';
   out+='<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">';
-  out+='<div><div style="font-size:20px;font-weight:800;color:'+scColQ(sc,s)+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+dName(s)+'</div></div>';
-  out+='<div style="text-align:right"><div'+sqTitle(s)+' style="font-size:26px;font-weight:800;color:'+scColQ(sc,s)+'">'+sc+'</div><div style="font-family:monospace;font-size:10px;color:var(--mut)">/100</div>'+kzZus('K20')+'</div></div>';
-  out+='<div class="wl-why" style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:'+(_svD.bdg?'4':'10')+'px">'+why+'</div>';
-  if(_svD.bdg)out+='<div class="wl-marks" style="margin-bottom:8px">'+_svD.bdg+'</div>';  /* S398 R-2: Kennzeichen */
-  out+=wlInfoZeilen(s,sig);  /* S395 R-2 */
+  /* S441 C.1: Kopf ohne Score-Zahl; Titelfarbe = Etikettfarbe statt Score-Farbe */
+  out+='<div><div style="font-size:20px;font-weight:800;color:'+sc2+'">'+s.t+sigTitleSuffix+'</div><div style="font-size:12px;color:var(--mut)">'+dName(s)+'</div></div>';
+  out+='</div>';
+  /* S441 C.3 Block 1 'Was den Kauf traegt': Etikett, Kennzeichen, Rang (von n), 12M -- ohne Zusatz */
+  out+='<div class="wl-b1" style="margin-bottom:10px"><div class="wl-blk-h">Was den Kauf tr&auml;gt</div>';
+  out+='<div class="wl-why" style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:'+(_svD.bdg?'4':'6')+'px">'+why+'</div>';
+  if(_svD.bdg)out+='<div class="wl-marks" style="margin-bottom:6px">'+_svD.bdg+'</div>';  /* S398 R-2: Kennzeichen */
+  var _rgD=rang12m(s.t);  /* dasselbe n wie WL-Spalte 1; fehlt -> '--' (AP-3) */
+  out+='<div class="dt-r wl-rang-det" style="'+row+'"><span style="color:var(--mut)">'+KZ_ROLLE.K02+'</span><span>'+(_rgD===null?'--':(_rgD.r+' von '+_rgD.n))+'</span></div>';
+  var _r12=(fd&&fd.mom12m_ret!=null)?fd.mom12m_ret:null;
+  var _r12c=_r12===null?'#7a9bb5':_r12>=20?'#00e57a':_r12>=0?'#00c8f0':_r12>=-15?'#f0c000':'#ff6666';
+  out+='<div class="dt-r wl-12m-det" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K35','12M')+'>12M (inkl.1M)'+kzRolle('K35')+'</span><span style="color:'+_r12c+'">'+(_r12===null?'--':((_r12>=0?'+':'')+_r12.toFixed(1)+'%'))+'</span></div>';
   out+='<button onclick="openChart(\''+s.t+'\')" style="font-size:11px;color:#00c8f0;background:none;border:none;cursor:pointer;font-family:monospace;padding:0;opacity:0.7;margin-top:4px">&#128200; Chart</button>';
+  out+='</div>';
+  /* S441 C.3 Block 2 'Weitere Angaben': Kopf (Satz + Zusatzliste) wird nach dem Bau vorangestellt */
+  out+='<div class="wl-b2" style="border-top:1px solid #1a2a3a;padding-top:8px">';
+  var _b2s=out.length;
+  out+=wlInfoZeilen(s,sig);  /* S395 R-2 */
   out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">';
   /* S398 R-3: Bausteinnamen ohne Gewicht und ohne Verfahrenszusatz */
-  out+='<div class="wl-score"><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">Score (Sortierhilfe, ungetestet)</div>';
+  out+='<div class="wl-score"><div data-kz="K20" style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">Score (Sortierhilfe, ungetestet)</div>';
   /* S407 Punkt 1: Bausteine aus den Tagesdaten statt STOCKS-Platzhalter */
-  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K21','Momentum')+'>Momentum'+kzRolle('K21')+'</span><span>'+bstText(s.t,'mom_score')+''+kzZus('K21')+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K22','Trend')+'>Trend'+kzRolle('K22')+'</span><span>'+bstText(s.t,'trend_score')+''+kzZus('K22')+'</span></div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K23','Fund')+'>Fund'+kzRolle('K23')+'</span><span>'+bstText(s.t,'fund_score')+''+kzZus('K23')+'</span></div>';
+  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K21','Momentum')+'>Momentum'+kzRolle('K21')+'</span><span>'+bstText(s.t,'mom_score')+'</span></div>';
+  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K22','Trend')+'>Trend'+kzRolle('K22')+'</span><span>'+bstText(s.t,'trend_score')+'</span></div>';
+  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K23','Fund')+'>Fund'+kzRolle('K23')+'</span><span>'+bstText(s.t,'fund_score')+'</span></div>';
   /* Konsistenz-Badge (v5.9.36) */
   var cs2=getScField(s.t, "cons_sc", consScore(s.t));
   var as2=calcAnnualStats(s.t);
   if(cs2!==null&&as2){
     var csColor=cs2>=70?'#00e57a':cs2>=45?'#f0c000':'#ff6666';
     var roceInfo=as2.roce?('Std '+as2.roce.std+'pp, '+as2.roce.n+'J'+(as2.roce.outliers>0?' ['+as2.roce.outliers+' Outlier]':'')):' n/a';
-    out+='<div style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:'+csColor+'">'+cs2+' | '+roceInfo+'</span></div>';
+    out+='<div class="dt-r" style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:'+csColor+'">'+cs2+' | '+roceInfo+'</span></div>';
   } else {
-    out+='<div class="wl-kons-nv" style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:#7a9bb5">nicht verf&uuml;gbar</span></div>';  /* S423 G K46 */
+    out+='<div class="wl-kons-nv dt-r" style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:#7a9bb5">nicht verf&uuml;gbar</span></div>';  /* S423 G K46 */
   }
-  out+='<div style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)"'+kzTtl('K24','Risk')+'>Risk'+kzRolle('K24')+'</span><span>'+bstText(s.t,'risk_score')+''+kzZus('K24')+'</span></div>';  /* S398 R-3: Beta/EVAR stehen unten als Kennzahl */
+  out+='<div class="dt-r" style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)"'+kzTtl('K24','Risk')+'>Risk'+kzRolle('K24')+'</span><span>'+bstText(s.t,'risk_score')+'</span></div>';  /* S398 R-3: Beta/EVAR stehen unten als Kennzahl */
   out+='</div>';
   out+='<div><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">TECHNISCH</div>';
-  out+='<div style="'+row+'"><span style="color:var(--mut)">MACD-Histogramm</span><span>'+(s.hist!=null?s.hist.toFixed(2):'--')+'</span></div>';  /* S398 R-4 */
-  out+='<div style="'+row+'"><span style="color:var(--mut)">52W-Pos.'+kzRolle('K26')+'</span><span style="color:'+(typeof s.rsi==='number'&&s.rsi<30?'#00e57a':'#dce8f5')+'">'+rsiText(s)+kzZus('K26')+'</span></div>';
+  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)">MACD-Histogramm</span><span>'+(s.hist!=null?s.hist.toFixed(2):'--')+'</span></div>';  /* S398 R-4 */
+  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)">52W-Pos.'+kzRolle('K26')+'</span><span style="color:'+(typeof s.rsi==='number'&&s.rsi<30?'#00e57a':'#dce8f5')+'">'+rsiText(s)+'</span></div>';
   var fd_m=_scoresIdx[s.t];
   var skipVal=fd_m&&fd_m.mom_skip!=null?fd_m.mom_skip:null;
   var ret12Val=fd_m&&fd_m.mom12m_ret!=null?fd_m.mom12m_ret:null;
   if(skipVal!==null){
     var sc=skipVal>=20?'#00e57a':skipVal>=0?'#00c8f0':skipVal>=-15?'#f0c000':'#ff6666';
-    out+='<div style="'+row+'"><span style="color:var(--mut)">12 Monate ohne letzten Monat</span><span style="color:'+sc+'">'+(skipVal>=0?'+':'')+skipVal.toFixed(1)+'%</span></div>';
-    if(ret12Val!==null){var r12c=ret12Val>=20?'#00e57a':ret12Val>=0?'#00c8f0':ret12Val>=-15?'#f0c000':'#ff6666';out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K35','12M')+'>12M (inkl.1M)'+kzRolle('K35')+'</span><span style="color:'+r12c+'">'+(ret12Val>=0?'+':'')+ret12Val.toFixed(1)+'%'+kzZus('K35')+'</span></div>';}
+    out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)">12 Monate ohne letzten Monat</span><span style="color:'+sc+'">'+(skipVal>=0?'+':'')+skipVal.toFixed(1)+'%</span></div>';
+    /* S441 C.3: 12M steht in Block 1 */
   }
-  out+='<div style="'+row+'"><span style="color:var(--mut)">Divergenz</span><span style="color:'+(isDivBull(s)?'#ff9f1c':'#7a9bb5')+'">'+(s.div!=null?s.div:'--')+'</span></div>';
+  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)">Divergenz</span><span style="color:'+(isDivBull(s)?'#ff9f1c':'#7a9bb5')+'">'+(s.div!=null?s.div:'--')+'</span></div>';
   /* S405: KGV und Gewinnwachstum aus dem Datenfeld statt STOCKS-Platzhalter pe/eg; neutral, direkt ueber PEG. */
-  out+='<div class="wl-kgv-det" style="'+row+'" title="'+KGV_TTL+'"><span style="color:var(--mut)">KGV laufend / erwartet'+kzRolle('K27')+'</span><span>'+kgvText(s.t).replace(/^KGV /,'')+kzZus('K27')+'</span></div>';
-  if(kgvUnpl(s.t))out+='<div class="wl-kgv-unpl" style="'+row+'"><span style="color:var(--mut)">KGV erwartet</span><span>Sch&auml;tzung des Anbieters unplausibel</span></div>';
-  out+='<div class="wl-eg-det" style="'+row+'" title="'+KGV_EG_TTL+'"><span style="color:var(--mut)">Gewinnwachstum</span><span>'+kgvEgText(s.t)+'</span></div>';
+  out+='<div class="wl-kgv-det dt-r" style="'+row+'" title="'+KGV_TTL+'"><span style="color:var(--mut)">KGV laufend / erwartet'+kzRolle('K27')+'</span><span>'+kgvText(s.t).replace(/^KGV /,'')+'</span></div>';
+  if(kgvUnpl(s.t))out+='<div class="wl-kgv-unpl dt-r" style="'+row+'"><span style="color:var(--mut)">KGV erwartet</span><span>Sch&auml;tzung des Anbieters unplausibel</span></div>';
+  out+='<div class="wl-eg-det dt-r" style="'+row+'" title="'+KGV_EG_TTL+'"><span style="color:var(--mut)">Gewinnwachstum</span><span>'+kgvEgText(s.t)+'</span></div>';
   /* S398 R-4: PEG nur als gemessener Wert aus dem Datenfeld, ohne
      Sektor-Median und ohne Umrechnung in Punkte; fehlt er: "--". */
-  out+='<div style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K25','PEG')+'>PEG'+kzRolle('K25')+'</span><span>'+pegMess(s.t)+''+kzZus('K25')+'</span></div>';
+  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K25','PEG')+'>PEG'+kzRolle('K25')+'</span><span>'+pegMess(s.t)+'</span></div>';
   out+='</div></div>';
   if(fd){
     out+='<div style="border-top:1px solid #1a2a3a;padding-top:10px">';
     out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:6px">FUNDAMENTALS (JSON)</div>';
     out+='<div class="kz-g4" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px">';  /* S434 B: schmal zweispaltig */
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD'+kzRolle('K29')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+''+kzZus('K29')+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD'+kzRolle('K29')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
     /* Owner Earnings Yield (v5.9.44 / v7.9.7) */
     var oeY=fd.owner_earnings!=null?fd.owner_earnings:null;
     var oeDisp=oeY!=null?((oeY>=0?'+':'')+oeY.toFixed(1)+'%'):'n/a';
     var oeColor=oeY!=null?(oeY>4?'#00e57a':oeY>0?'#f0c000':'#ff6666'):'#7a9bb5';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OWN.EARN.')+'>OWN.EARN.'+kzRolle('K39')+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+oeDisp+''+kzZus('K39')+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OWN.EARN.')+'>OWN.EARN.'+kzRolle('K39')+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+oeDisp+'</div></div>';
     var rv2=fd.roce!==null&&fd.roce!==undefined?fd.roce:fd.roe;
     var rl2=fd.roce!==null&&fd.roce!==undefined?'ROCE':'ROE';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K30',rl2)+'>'+rl2+''+kzRolle('K30')+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+''+kzZus('K30')+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K40','Moat')+'>MOAT'+kzRolle('K40')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+''+kzZus('K40')+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K30',rl2)+'>'+rl2+''+kzRolle('K30')+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K40','Moat')+'>MOAT'+kzRolle('K40')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+'</div></div>';
     out+='</div>';
     /* EV/EBITDA + EVAR â€” zweite Zeile Value-Qualitaet (v5.9.30) */
     var evebDisp=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda.toFixed(1)+'x':'n/a';
@@ -2881,7 +2916,7 @@ function wlDetail(ticker){
     var evarScore=evarRel!=null?evarRel:fd.evar;
     var evarColor=evarScore!=null?(evarScore>=60?'#00e57a':evarScore>=40?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K41','EV/EBITDA')+'>EV/EBITDA'+kzRolle('K41')+'</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+''+kzZus('K41')+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K41','EV/EBITDA')+'>EV/EBITDA'+kzRolle('K41')+'</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">'+evarLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDispFull+'</div></div>';
     out+='</div>';
     /* EV/EBIT + FCF/Debt Cover (v5.9.76: Research Sprint -- Buffett/Greenblatt) */
@@ -2891,7 +2926,7 @@ function wlDetail(ticker){
     var fdcStr=fdcV!==null?(fdcV>=10?'&gt;10x':fdcV.toFixed(2)+'x'):'n/a';
     var fdcCol=fdcV!==null?(fdcV>=0.20?'#00e57a':fdcV>=0.05?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K42','EV/EBIT')+'>EV/EBIT'+kzRolle('K42')+'</div><div style="font-family:monospace;font-size:11px;color:'+eveitColor2+'">'+eveitDisp2+''+kzZus('K42')+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K42','EV/EBIT')+'>EV/EBIT'+kzRolle('K42')+'</div><div style="font-family:monospace;font-size:11px;color:'+eveitColor2+'">'+eveitDisp2+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">FCF/DEBT</div><div style="font-family:monospace;font-size:11px;color:'+fdcCol+'">'+fdcStr+'</div></div>';
     out+='</div>';
     /* Owner Earnings Yield (v5.9.44) â€” Buffett NI+D&A-CapEx/MC */
@@ -2902,8 +2937,8 @@ function wlDetail(ticker){
       var oeDiffStr=oeDiff!=null?(' ('+(oeDiff>=0?'+':'')+oeDiff+'pp)'):'';
       var oeLabel='OE Yield'+oeDiffStr;
       out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OE Yield')+'>'+oeLabel+''+kzRolle('K39')+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+(oeVal>=0?'+':'')+oeVal.toFixed(1)+'%'+kzZus('K39')+'</div></div>';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD'+kzRolle('K29')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+''+kzZus('K29')+'</div></div>';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OE Yield')+'>'+oeLabel+''+kzRolle('K39')+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+(oeVal>=0?'+':'')+oeVal.toFixed(1)+'%'+'</div></div>';
+      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD'+kzRolle('K29')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
       out+='</div>';
     }
     /* Jahres-Trend (v5.9.35): ROCE + FCF + Mom aus annual.json */
@@ -2939,8 +2974,8 @@ function wlDetail(ticker){
     var debtDisp=fd.debt_eq!==null&&fd.debt_eq!==undefined?fd.debt_eq.toFixed(0):'n/a';
     var debtColor=fd.debt_eq!==null&&fd.debt_eq!==undefined?(fd.debt_eq<100?'#00e57a':fd.debt_eq<200?'#f0c000':'#ff6666'):'#7a9bb5';
     out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K37','Beta')+'>BETA (Low-Vol)'+kzRolle('K37')+'</div><div style="font-family:monospace;font-size:11px;color:'+betaColor+'">'+betaDisp+''+kzZus('K37')+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K38','Debt/Equity')+'>DEBT/EQ %'+kzRolle('K38')+'</div><div style="font-family:monospace;font-size:11px;color:'+debtColor+'">'+debtDisp+''+kzZus('K38')+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K37','Beta')+'>BETA (Low-Vol)'+kzRolle('K37')+'</div><div style="font-family:monospace;font-size:11px;color:'+betaColor+'">'+betaDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K38','Debt/Equity')+'>DEBT/EQ %'+kzRolle('K38')+'</div><div style="font-family:monospace;font-size:11px;color:'+debtColor+'">'+debtDisp+'</div></div>';
     out+='</div>';
     out+=divKacheln(fd);  /* S407 Punkt 5: Schalter DIV_ANZEIGE_AUS; BUYBACK entfallen */
     /* shares_change_yoy: Buyback-Signal v5.9.78 */
@@ -2960,6 +2995,8 @@ function wlDetail(ticker){
     }
     out+='</div>';
   }
+  out=out.substring(0,_b2s)+kzB2Kopf(out.substring(_b2s))+out.substring(_b2s);  /* S441 C.3 */
+  out+='</div>';
   out+='</div>';
   det.innerHTML=out;det.style.display='block';
   wlRend(getScored());
@@ -3432,7 +3469,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.40';
+      var PAGE_VERSION = 'v6.6.41';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -5589,6 +5626,22 @@ function dpSigLbl(sv, code){
   if(!sv || sv.lbl === 'SELL Abstieg') return {lbl:'WATCH', col:'#7a9bb5'};
   return {lbl:sv.lbl, col:sv.col};
 }
+/* S441 C.2 (Kla 14.10.2026): Anzeige-Reihenfolge der offenen Positionen nach Name
+   (Grossschreibung ignoriert, Zeichencode statt Locale), zweiter Schluessel Ticker.
+   Liefert Indizes in die Liste; die Liste selbst bleibt unveraendert (Export, Verlauf,
+   Risiko, dpRemove-Index). Geschlossene Positionen bleiben nach letztem Verkauf (Kla 15.10.2026). */
+function dpNameOrder(list){
+  var ix=[],i;
+  for(i=0;i<list.length;i++) ix.push(i);
+  ix.sort(function(a,b){
+    var na=String(list[a].name||list[a].t||'').toLowerCase(), nb=String(list[b].name||list[b].t||'').toLowerCase();
+    if(na<nb) return -1;
+    if(na>nb) return 1;
+    var ta=String(list[a].t||''), tb=String(list[b].t||'');
+    return ta<tb?-1:ta>tb?1:a-b;
+  });
+  return ix;
+}
 function dpRenderTable(){
   var el = document.getElementById('dp-table');
   if(!el) return;
@@ -5604,7 +5657,6 @@ function dpRenderTable(){
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:right">Akt.</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:right">Wert</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:right">+/-%</th>';
-  out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center" title="Score (Sortierhilfe, ungetestet)">Score</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Sig</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center;font-size:10px" title="Pr&uuml;fdatum: zw&ouml;lf Monate ab Erstkauf, danach j&auml;hrlich. Regel getestet: verfehlt.">Pr&uuml;fung</th>';
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:right;font-size:10px" title="'+KGV_TTL+'">KGV</th>';  /* S405 */
@@ -5613,10 +5665,12 @@ function dpRenderTable(){
   out += '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px"></th></tr>';
 
   var _dpPm = dpPruefMap(dpTxLoad(), dpHeute());
-  for(var i=0;i<DEPOT_POSITIONS.length;i++){
+  var _dpOrd = dpNameOrder(DEPOT_POSITIONS);  /* S441 C.2: Anzeige nach Namen; i bleibt Index in DEPOT_POSITIONS (dpRemove) */
+  for(var _oi=0;_oi<_dpOrd.length;_oi++){
+    var i = _dpOrd[_oi];
     var p = DEPOT_POSITIONS[i];
     var cp = dpCurrentPrice(p.t);
-    var rowBg = i%2===0?'#0a1628':'#0c1a2e';
+    var rowBg = _oi%2===0?'#0a1628':'#0c1a2e';
     var wert = cp !== null ? (p.shares * cp) : null;
     var einstand = p.shares * p.buyPrice;
     var pnl = wert !== null ? wert - einstand : null;
@@ -5626,7 +5680,6 @@ function dpRenderTable(){
     /* Score + Signal: mSig() -- konsistent mit WL (Sprint 33 Prio 1) */
     var sc_entry = (_scoresIdx && typeof _scoresIdx === 'object') ? _scoresIdx[p.t] : null;
     var sc_valid = sc_entry && typeof sc_entry === 'object';
-    var sc       = sc_valid && sc_entry.score !== undefined ? Math.round(sc_entry.score) : '--';
     var dp_stocks_s = null;
     for (var _dpi = 0; _dpi < STOCKS.length; _dpi++) {
       if (STOCKS[_dpi].t === p.t) { dp_stocks_s = STOCKS[_dpi]; break; }
@@ -5657,7 +5710,6 @@ function dpRenderTable(){
     out += '<td style="padding:5px 6px;text-align:right;color:'+aktC+';font-size:10px">'+aktStr+'</td>';
     out += '<td style="padding:5px 6px;text-align:right;color:#dce8f5">'+(wert!==null?wert.toLocaleString('de-DE',{maximumFractionDigits:0})+' \u20ac':'n/a')+'</td>';
     out += '<td style="padding:5px 6px;text-align:right;color:'+pnlC+';font-weight:700">'+(pnlPct!==null?(pnlPct>=0?'+':'')+pnlPct.toFixed(1)+'%':'n/a')+'</td>';
-    out += '<td style="padding:5px 6px;text-align:center;color:#dce8f5;font-weight:700">'+sc+'</td>';
     var _dpSr=(sc_valid&&sc_entry.sector_rank)||null;
     var _dpSrCol=srAmpelCls(dp_sig,_dpSr,p.t);
     var _dpSrBdg=_dpSrCol?('<span style="font-size:10px;color:'+_dpSrCol+';margin-left:3px" title="'+srAmpTitle(dp_sig,_dpSr,_dpSrCol,p.t)+'">'+(_srIcoMap[_dpSrCol]||'')+'</span>'):'';
@@ -6781,7 +6833,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.40 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.41 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
