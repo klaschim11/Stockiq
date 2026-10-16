@@ -1,0 +1,1536 @@
+{
+ "meta": {
+  "erzeugt": "2026-10-16T12:51:32Z",
+  "etikett": "Schatten, ungetestet",
+  "fassung_md5": "70e53a297e9a1f7d9c7f564d45b71f89",
+  "n": 305,
+  "stichtag": "2026-10-16"
+ },
+ "ticker": {
+  "005930.KS": {
+   "perzentil": 37.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "0700.HK": {
+   "perzentil": 43.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "1211.HK": {
+   "perzentil": 82.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "2914.T": {
+   "perzentil": 37.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "3382.T": {
+   "perzentil": 29.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "3750.HK": {
+   "perzentil": 99.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "4063.T": {
+   "perzentil": 71.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "4502.T": {
+   "perzentil": 1.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "4507.T": {
+   "perzentil": 67.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "4519.T": {
+   "perzentil": 64.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "4523.T": {
+   "perzentil": 52.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "4543.T": {
+   "perzentil": 61.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "4568.T": {
+   "perzentil": 86.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "4661.T": {
+   "perzentil": 73.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "4901.T": {
+   "perzentil": 46.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "5401.T": {
+   "perzentil": 0.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6098.T": {
+   "perzentil": 90.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6146.T": {
+   "perzentil": 79.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6367.T": {
+   "perzentil": 57.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6501.T": {
+   "perzentil": 64.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6503.T": {
+   "perzentil": 74.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6594.T": {
+   "perzentil": 32.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6702.T": {
+   "perzentil": 81.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6723.T": {
+   "perzentil": 8.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6758.T": {
+   "perzentil": 45.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6861.T": {
+   "perzentil": 68.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6902.T": {
+   "perzentil": 66.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "6954.T": {
+   "perzentil": 58.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "7203.T": {
+   "perzentil": 32.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "7267.T": {
+   "perzentil": 39.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "7751.T": {
+   "perzentil": 39.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "7974.T": {
+   "perzentil": 27.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "8001.T": {
+   "perzentil": 40.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "8002.T": {
+   "perzentil": 41.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "8015.T": {
+   "perzentil": 56.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "8031.T": {
+   "perzentil": 30.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "8035.T": {
+   "perzentil": 67.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "8053.T": {
+   "perzentil": 15.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "8058.T": {
+   "perzentil": 28.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "8267.T": {
+   "perzentil": 27.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "8306.T": {
+   "perzentil": 73.3,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "8316.T": {
+   "perzentil": 61.5,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "8411.T": {
+   "perzentil": 77.9,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "9020.T": {
+   "perzentil": 31.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "9432.T": {
+   "perzentil": 22.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "9433.T": {
+   "perzentil": 37.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "9983.T": {
+   "perzentil": 85.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "9984.T": {
+   "perzentil": 16.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "AAPL": {
+   "perzentil": 95.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ABBN.SW": {
+   "perzentil": 75.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ABT": {
+   "perzentil": 36.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ACN": {
+   "perzentil": 79.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ADBE": {
+   "perzentil": 90.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ADP": {
+   "perzentil": 95.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ADS.DE": {
+   "perzentil": 44.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "AI.PA": {
+   "perzentil": 51.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "AIR.PA": {
+   "perzentil": 82.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ALV.DE": {
+   "perzentil": 56.9,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "AMAT": {
+   "perzentil": 81.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "AMT": {
+   "perzentil": 21.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "AMZN": {
+   "perzentil": 62.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ANET": {
+   "perzentil": 93.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "APP": {
+   "perzentil": 94.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ASM.AS": {
+   "perzentil": 88.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ASML": {
+   "perzentil": 98.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ASRNL.AS": {
+   "perzentil": 1.1,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "ASSA-B.ST": {
+   "perzentil": 41.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ATCO-A.ST": {
+   "perzentil": 67.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "AVGO": {
+   "perzentil": 53.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "AXON": {
+   "perzentil": 12.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "AXP": {
+   "perzentil": 68.7,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "AZN": {
+   "perzentil": 76.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BA.L": {
+   "perzentil": 55.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BABA": {
+   "perzentil": 58.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BAC": {
+   "perzentil": 5.7,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "BAS.DE": {
+   "perzentil": 30.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BATS.L": {
+   "perzentil": 23.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BBVA.MC": {
+   "perzentil": 59.2,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "BEI.DE": {
+   "perzentil": 69.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BEKE": {
+   "perzentil": 19.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BIDU": {
+   "perzentil": 16.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BILI": {
+   "perzentil": 11.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BKNG": {
+   "perzentil": 97.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BKW.SW": {
+   "perzentil": 26.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BLK": {
+   "perzentil": 8.0,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "BMW.DE": {
+   "perzentil": 4.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BNP.PA": {
+   "perzentil": 15.2,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "BP.L": {
+   "perzentil": 13.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BRK-B": {
+   "perzentil": 35.9,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "BRO": {
+   "perzentil": 50.0,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "BSX": {
+   "perzentil": 70.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BTI": {
+   "perzentil": 23.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "BURL": {
+   "perzentil": 50.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CAP.PA": {
+   "perzentil": 41.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CARR": {
+   "perzentil": 6.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CAT": {
+   "perzentil": 51.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CB": {
+   "perzentil": 71.0,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "CDNS": {
+   "perzentil": 78.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CEG": {
+   "perzentil": 33.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CFR.SW": {
+   "perzentil": 84.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CME": {
+   "perzentil": 40.8,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "CNA.L": {
+   "perzentil": 97.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CNQ": {
+   "perzentil": 53.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CNR": {
+   "perzentil": 35.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "COP": {
+   "perzentil": 28.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "COST": {
+   "perzentil": 85.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CPG.L": {
+   "perzentil": 56.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CPRT": {
+   "perzentil": 86.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CRM": {
+   "perzentil": 78.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CSGP": {
+   "perzentil": 12.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CTAS": {
+   "perzentil": 72.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CVX": {
+   "perzentil": 10.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "CWST": {
+   "perzentil": 0.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "DBK.DE": {
+   "perzentil": 13.0,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "DE": {
+   "perzentil": 9.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "DECK": {
+   "perzentil": 99.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "DGE.L": {
+   "perzentil": 10.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "DSY.PA": {
+   "perzentil": 70.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "DTE.DE": {
+   "perzentil": 26.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "DUK": {
+   "perzentil": 28.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "DXCM": {
+   "perzentil": 79.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EDP.LS": {
+   "perzentil": 36.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EFX": {
+   "perzentil": 33.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EN.PA": {
+   "perzentil": 46.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ENB": {
+   "perzentil": 34.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ENEL.MI": {
+   "perzentil": 34.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ENGI.PA": {
+   "perzentil": 62.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ENI.MI": {
+   "perzentil": 7.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EOAN.DE": {
+   "perzentil": 6.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EOG": {
+   "perzentil": 57.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EQIX": {
+   "perzentil": 29.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EQNR.OL": {
+   "perzentil": 12.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EQT.ST": {
+   "perzentil": 89.7,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "ERG.MI": {
+   "perzentil": 2.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EVD.DE": {
+   "perzentil": 94.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EVO.ST": {
+   "perzentil": 83.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EW": {
+   "perzentil": 52.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "EXPN.L": {
+   "perzentil": 60.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "FANG": {
+   "perzentil": 13.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "FAST": {
+   "perzentil": 76.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "FCX": {
+   "perzentil": 32.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "FERG": {
+   "perzentil": 48.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "FICO": {
+   "perzentil": 77.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "FORTUM.HE": {
+   "perzentil": 14.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "FRE.DE": {
+   "perzentil": 15.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "FRES.L": {
+   "perzentil": 81.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "FTNT": {
+   "perzentil": 93.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "G.MI": {
+   "perzentil": 64.1,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "GAW.L": {
+   "perzentil": 98.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "GEBN.SW": {
+   "perzentil": 60.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "GOOGL": {
+   "perzentil": 88.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "GS": {
+   "perzentil": 33.6,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "GSK.L": {
+   "perzentil": 11.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "GWW": {
+   "perzentil": 73.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "HCA": {
+   "perzentil": 44.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "HD": {
+   "perzentil": 48.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "HDB": {
+   "perzentil": 24.4,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "HEIA.AS": {
+   "perzentil": 16.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "HEN3.DE": {
+   "perzentil": 63.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "HO.PA": {
+   "perzentil": 65.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "HOC.L": {
+   "perzentil": 72.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "HOLN.SW": {
+   "perzentil": 76.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "HON": {
+   "perzentil": 39.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "HSBA.L": {
+   "perzentil": 26.7,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "HSY": {
+   "perzentil": 21.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "IBE.MC": {
+   "perzentil": 36.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ICE": {
+   "perzentil": 82.5,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "IDXX": {
+   "perzentil": 86.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "IFX.DE": {
+   "perzentil": 17.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "INGA.AS": {
+   "perzentil": 52.3,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "INTU": {
+   "perzentil": 72.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "INVE-B.ST": {
+   "perzentil": 38.5,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "ISP.MI": {
+   "perzentil": 75.6,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "ISRG": {
+   "perzentil": 91.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ITW": {
+   "perzentil": 59.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ITX.MC": {
+   "perzentil": 80.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "JD": {
+   "perzentil": 61.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "JNJ": {
+   "perzentil": 49.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "JPM": {
+   "perzentil": 47.7,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "KER.PA": {
+   "perzentil": 1.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "KLAC": {
+   "perzentil": 87.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "KNIN.SW": {
+   "perzentil": 46.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "LDO.MI": {
+   "perzentil": 59.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "LI": {
+   "perzentil": 42.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "LISP.SW": {
+   "perzentil": 57.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "LLY": {
+   "perzentil": 91.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "LONN.SW": {
+   "perzentil": 9.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "LR.PA": {
+   "perzentil": 48.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "LRCX": {
+   "perzentil": 95.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "LSEG.L": {
+   "perzentil": 3.4,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "LULU": {
+   "perzentil": 91.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MA": {
+   "perzentil": 98.9,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "MBG.DE": {
+   "perzentil": 5.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MC.PA": {
+   "perzentil": 47.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MCD": {
+   "perzentil": 42.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MCO": {
+   "perzentil": 92.0,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "MDT": {
+   "perzentil": 38.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MELI": {
+   "perzentil": 77.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "META": {
+   "perzentil": 88.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MNST": {
+   "perzentil": 80.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MPC": {
+   "perzentil": 7.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MRK.DE": {
+   "perzentil": 38.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MS": {
+   "perzentil": 43.1,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "MSCI": {
+   "perzentil": 29.0,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "MSFT": {
+   "perzentil": 83.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MTD": {
+   "perzentil": 73.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MU": {
+   "perzentil": 33.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "MUV2.DE": {
+   "perzentil": 17.5,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "MYCR.ST": {
+   "perzentil": 92.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NEE": {
+   "perzentil": 25.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NEM.DE": {
+   "perzentil": 71.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NESN.SW": {
+   "perzentil": 31.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NFLX": {
+   "perzentil": 89.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NG.L": {
+   "perzentil": 4.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NIO": {
+   "perzentil": 0.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NKE": {
+   "perzentil": 34.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NOVN.SW": {
+   "perzentil": 70.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NOVO-B.CO": {
+   "perzentil": 93.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NOW": {
+   "perzentil": 90.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NTES": {
+   "perzentil": 83.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NTGY.MC": {
+   "perzentil": 44.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NVDA": {
+   "perzentil": 97.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "NVO": {
+   "perzentil": 93.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ODFL": {
+   "perzentil": 69.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "OR.PA": {
+   "perzentil": 63.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ORCL": {
+   "perzentil": 45.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "OXY": {
+   "perzentil": 5.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "PANW": {
+   "perzentil": 75.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "PDD": {
+   "perzentil": 96.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "PGHN.SW": {
+   "perzentil": 80.2,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "PGR": {
+   "perzentil": 96.6,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "PH": {
+   "perzentil": 62.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "PHIA.AS": {
+   "perzentil": 6.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "PLD": {
+   "perzentil": 20.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "POOL": {
+   "perzentil": 25.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "PSX": {
+   "perzentil": 8.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "PYPL": {
+   "perzentil": 87.0,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "QCOM": {
+   "perzentil": 23.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "RACE.MI": {
+   "perzentil": 78.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "REGN": {
+   "perzentil": 63.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "REL.L": {
+   "perzentil": 54.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "RHM.DE": {
+   "perzentil": 74.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "RIO": {
+   "perzentil": 53.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "RJF": {
+   "perzentil": 45.4,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "RMS.PA": {
+   "perzentil": 96.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ROL": {
+   "perzentil": 68.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ROP": {
+   "perzentil": 7.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "RR.L": {
+   "perzentil": 99.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "RWE.DE": {
+   "perzentil": 18.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "RY": {
+   "perzentil": 19.8,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "SAF.PA": {
+   "perzentil": 47.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SAN.MC": {
+   "perzentil": 31.3,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "SAN.PA": {
+   "perzentil": 30.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SAND.ST": {
+   "perzentil": 55.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SAP.DE": {
+   "perzentil": 69.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SBUX": {
+   "perzentil": 11.6,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SHEL": {
+   "perzentil": 24.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SHEL.L": {
+   "perzentil": 24.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SHOP": {
+   "perzentil": 42.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SIE.DE": {
+   "perzentil": 58.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SIX2.DE": {
+   "perzentil": 19.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SLB": {
+   "perzentil": 49.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SLHN.SW": {
+   "perzentil": 10.3,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "SNPS": {
+   "perzentil": 21.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SO": {
+   "perzentil": 22.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SPGI": {
+   "perzentil": 22.1,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "SREN.SW": {
+   "perzentil": 94.3,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "SRT3.DE": {
+   "perzentil": 3.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SSE.L": {
+   "perzentil": 14.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "STLAM.MI": {
+   "perzentil": 2.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "STX": {
+   "perzentil": 85.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SU.PA": {
+   "perzentil": 50.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "SYK": {
+   "perzentil": 49.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "TCOM": {
+   "perzentil": 89.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "TME": {
+   "perzentil": 87.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "TMO": {
+   "perzentil": 35.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "TRMB": {
+   "perzentil": 14.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "TSLA": {
+   "perzentil": 13.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "TSM": {
+   "perzentil": 92.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "TT": {
+   "perzentil": 74.3,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "TTE.PA": {
+   "perzentil": 43.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "UCG.MI": {
+   "perzentil": 54.6,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "ULVR.L": {
+   "perzentil": 51.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "UNH": {
+   "perzentil": 20.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "V": {
+   "perzentil": 84.8,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  },
+  "VER.VI": {
+   "perzentil": 54.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "VLO": {
+   "perzentil": 18.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "VOD.L": {
+   "perzentil": 3.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "VOLV-B.ST": {
+   "perzentil": 27.0,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "VOW3.DE": {
+   "perzentil": 4.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "VRSK": {
+   "perzentil": 40.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "VRT": {
+   "perzentil": 84.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "WDAY": {
+   "perzentil": 24.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "WEC": {
+   "perzentil": 17.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "WKL.AS": {
+   "perzentil": 60.2,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "WMB": {
+   "perzentil": 18.5,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "WSO": {
+   "perzentil": 65.1,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "WST": {
+   "perzentil": 55.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "XOM": {
+   "perzentil": 20.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "XPEV": {
+   "perzentil": 2.8,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "YUM": {
+   "perzentil": 53.9,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "YUMC": {
+   "perzentil": 66.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ZS": {
+   "perzentil": 9.7,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ZTO": {
+   "perzentil": 65.4,
+   "pfad": "STANDARD",
+   "zustand": "BEWERTET"
+  },
+  "ZURN.SW": {
+   "perzentil": 66.4,
+   "pfad": "FINANZ",
+   "zustand": "BEWERTET"
+  }
+ }
+}

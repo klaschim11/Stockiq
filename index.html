@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.41</title>
+<title>StockIQ v6.6.42</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -127,7 +127,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.41 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.42 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
       <span style="white-space:nowrap"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:--:--</span></span>
@@ -284,7 +284,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.41</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.42</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -482,7 +482,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.41 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.42 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -673,6 +673,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">WALK-FORWARD</div><div style="font-size:12px;color:var(--mut)">Pr&uuml;fung an Daten, die bei der Festlegung der Regel nicht benutzt wurden. Reines Validierungsinstrument &mdash; veraendert keine Live-Signale.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">STABILITAET (StdAbw OOS WR)</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">gering</span> stabil &nbsp;<span style="color:#00c8f0">mittel</span> akzeptabel &nbsp;<span style="color:#ff6666">hoch</span> instabil. Bei wenigen Trades pro Fenster statistisch nicht aussagekraeftig.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PIOTROSKI MINI-SCORE (v5.9.21)</div><div style="font-size:12px;color:var(--mut)">5-Punkte Quality-Filter: ROA positiv, CFO positiv, Accruals OK (CFO&gt;NI), GrossMargin steigend, Debt Safe. Niedrige Scores bei messbaren Kriterien d&auml;mpfen den Fundamental-Score. Quelle: Piotroski 2000.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">QUALIT&Auml;T (SCHATTEN, UNGETESTET)</div><div style="font-size:12px;color:var(--mut)">Platz des Unternehmens im Universum nach Kapitalrendite, Gewinnwachstum, Stabilit&auml;t und Verschuldung aus den Jahresabschl&uuml;ssen, als Perzentil von 0 bis 100 (Detailansicht). L&auml;uft mit, Nutzen noch nicht belegt; geht in keine Empfehlung und keine Sortierung ein.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">VIX-REGIME (v5.9.24)</div><div style="font-size:12px;color:var(--mut)">CBOE Volatility Index: <span style="color:#00e676">niedrig (Low Vol)</span> normal &nbsp;<span style="color:#ffab00">erh&ouml;ht (Elevated)</span> ged&auml;mpft &nbsp;<span style="color:#ff5252">sehr hoch (Crisis)</span> stark ged&auml;mpft. Momentum-Score wird bei h&ouml;herer Volatilitaet Richtung Neutral skaliert. Quelle: Barroso/Santa-Clara 2015.</div></div>
     <div><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">OVERFITTING-GAP</div><div style="font-size:12px;color:var(--mut)">IS Win-Rate minus OOS Win-Rate. <span style="color:#00e57a">klein</span> = kein Overfitting &nbsp;<span style="color:#f0c000">mittel</span> = leicht &nbsp;<span style="color:#ff6666">gro&szlig;</span> = stark. Negativ = OOS besser als IS (bei kleinen Stichproben: Zufall).</div></div>
   </div>
@@ -734,6 +735,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.42</td><td style="padding:5px 8px;color:var(--mut)">Die Detailansicht zeigt die Qualit&auml;t (Perzentil im Universum, Schatten, ungetestet) mit dem Stand des Tageslaufs.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.41</td><td style="padding:5px 8px;color:var(--mut)">Der Score steht nur noch in der Detailansicht (zweiter Block, mit Bausteinen), nicht mehr in der Watchlist-Zeile, im Kopf der Detailansicht und als Depot-Spalte; die Detailansicht hat zwei Bl&ouml;cke (was den Kauf tr&auml;gt, weitere Angaben) mit dem Hinweis bekannt fehlerhaft einmal am Blockkopf; Detailzeilen brechen um statt in den Namen zu laufen; Depot nach Namen.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.40</td><td style="padding:5px 8px;color:var(--mut)">Die Rolle jeder Kennzahl steht in der Detailansicht beim Namen, der Hinweis bekannt fehlerhaft am Wert; Watchlist (Knopf i) und Depot erkl&auml;ren die Zahlen der Zeile; der W&auml;hrungshinweis entf&auml;llt; Tab-Leiste in einer Zeile; TradingView-Hilfe ohne interne Namen.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.39</td><td style="padding:5px 8px;color:var(--mut)">Der Rang (von n) wird t&auml;glich gespeichert und so angezeigt; die Depot-Tabelle scrollt auf schmalen Bildschirmen seitlich, die Titelspalte bleibt stehen; Etiketten je Kennzahl (getestet, ungetestet, bekannt fehlerhaft) und der Teststand von SELL Abstieg; 52W-Pos. statt RSI; Streuung des Depots neben der BUY-Liste.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -933,7 +935,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.41 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.42 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1031,7 +1033,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.41 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.42 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2585,7 +2587,8 @@ var KZ_ROLLE={
   K27:'nur Anzeige (Angabe, kein Signal)', K31:'nur Anzeige (laufende Dividende laut Anbieter)',
   K53:'nur Anzeige',  /* S434 (Kla 14.10.2026, Option 2): Zeilen-Kennzahlen, etikett_soll der Status-Datei */
   K25:'nur Anzeige, Anbieterwert ungepr&uuml;ft', K55:'ungetestet', K56:'SPY &uuml;ber 200-Tage-Linie',
-  K40:'Faustregel aus ROCE/FCF, kein Moat-Rating'
+  K40:'Faustregel aus ROCE/FCF, kein Moat-Rating',
+  K85:'Schatten, ungetestet'  /* S453b: Qualitaet, Detail Block 2; etikett_soll der Status-Datei */
 };
 /* kzTtl: title-Attribut "Name: Etikett" fuer die Kennzahl id; ohne Eintrag leer. */
 function kzTtl(id,name){ return KZ_ROLLE[id]?(' title="'+name+': '+KZ_ROLLE[id]+'"'):''; }
@@ -2892,6 +2895,8 @@ function wlDetail(ticker){
      Sektor-Median und ohne Umrechnung in Punkte; fehlt er: "--". */
   out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K25','PEG')+'>PEG'+kzRolle('K25')+'</span><span>'+pegMess(s.t)+'</span></div>';
   out+='</div></div>';
+  /* S453b (Kla 16.10.2026, Form B): Qualitaet, Rolle beim Namen (K85), Wert aus der Projektion; ohne fd sichtbar */
+  out+='<div class="dt-r wl-qual-det" style="'+row+';margin-bottom:8px"><span style="color:var(--mut)"'+kzTtl('K85','Qualit&auml;t')+'>Qualit&auml;t'+kzRolle('K85')+'</span><span class="wl-qual-val">'+qualDetText(s.t)+'</span></div>';
   if(fd){
     out+='<div style="border-top:1px solid #1a2a3a;padding-top:10px">';
     out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:6px">FUNDAMENTALS (JSON)</div>';
@@ -3443,6 +3448,34 @@ function updArchStatus(){
 var _scores = [];
 var _scoresIdx = {};
 
+/* S453b (Kla 16.10.2026, P1, Form B): Qualitaet (Schatten, ungetestet) aus
+   stockiq_qual_dashboard.json, die der Ladelauf schreibt und am Ende pusht. Die Seite
+   rechnet nichts: gespeichertes Perzentil (eine Nachkommastelle), Zustand, Stand.
+   Fehlt die Datei oder der Ticker: n/a (AP-3, nie 0). Schluessel = Rohticker wie
+   scores.json; Alias-Zeilen ueber _scoresIdx[t].ticker. Keine Formel, keine Grenze. */
+var _qualDash = null;
+function qualDetText(t){
+  var q=_qualDash,rec=_scoresIdx?_scoresIdx[t]:null,e=null,st;
+  if(!q||!q.ticker||typeof q.ticker!=='object')return 'n/a';
+  if(rec&&typeof rec==='object'&&rec.ticker&&q.ticker[rec.ticker])e=q.ticker[rec.ticker];
+  else if(q.ticker[t])e=q.ticker[t];
+  if(!e)return 'n/a';
+  if(e.zustand==='BEWERTET'&&typeof e.perzentil==='number'&&isFinite(e.perzentil)){
+    st=(q.meta&&typeof q.meta.stichtag==='string')?k1Datum(q.meta.stichtag):'--';
+    return 'Perzentil '+e.perzentil.toFixed(1).replace('.',',')+' von 100 &middot; Stand '+st;
+  }
+  if(e.zustand==='NONE_JAHRE')return 'nicht bewertbar (zu wenige Jahresabschl&uuml;sse)';
+  if(e.zustand==='NONE_BAUSTEINE')return 'nicht bewertbar (keine Kennzahl aus den Jahresabschl&uuml;ssen rechenbar)';
+  return 'n/a';
+}
+/* Projektion kommt nach scores.json an: offene Detailansicht nachziehen, sonst nichts. */
+function qualDetRefresh(){
+  var det=document.getElementById('wl-detail'),el;
+  if(!det||!WL_SEL||!det.querySelector)return;
+  el=det.querySelector('.wl-qual-val');
+  if(el)el.innerHTML=qualDetText(WL_SEL);
+}
+
 function loadScores() {
   var url = "https://raw.githubusercontent.com/klaschim11/Stockiq/main/stockiq_scores.json";
   fetch(url)
@@ -3469,7 +3502,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.41';
+      var PAGE_VERSION = 'v6.6.42';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -3600,6 +3633,11 @@ fetch(_namesUrl)
   .then(function(r){if(!r.ok){throw new Error('HTTP '+r.status);}return r.json();})
   .then(function(data){_names=data;if(typeof rWL==='function'){try{rWL();}catch(e){}}})
   .catch(function(e){console.log('ticker_names: '+e.message);});
+      /* S453b: Qualitaet-Projektion des Ladelaufs (P1); Fehler -> _qualDash bleibt null -> n/a */
+fetch('https://raw.githubusercontent.com/klaschim11/Stockiq/main/stockiq_qual_dashboard.json')
+  .then(function(r){if(!r.ok){throw new Error('HTTP '+r.status);}return r.json();})
+  .then(function(data){_qualDash=(data&&data.ticker&&typeof data.ticker==='object')?data:null;qualDetRefresh();})
+  .catch(function(e){console.log('qual_dashboard: '+e.message);});
       if (typeof rWL === "function") { try { rWL(); } catch(e) {} }
       if (typeof archSnapshot === "function") { try { archSnapshot(); } catch(e) {} }
     })
@@ -6833,7 +6871,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.41 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.42 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>

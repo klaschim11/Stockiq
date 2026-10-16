@@ -99,7 +99,7 @@ Briefe Ccode/
 # DEV-ONLY, kein Commit. WICHTIG: der Name liegt dicht an der PUBLIC-Datei
 # stockiq_scores.json -- ohne diese Zeile waere die Schattendatei nicht von
 # stockiq_annual*.json o.ae. gedeckt und koennte versehentlich getrackt werden
-# (ADR-002 laesst nur die 6 Whitelist-Dateien zu).
+# (ADR-002 laesst nur die Whitelist-Dateien zu, Stand ADR-Register v3.3: 7).
 stockiq_scores_shadow.json
 
 # --- Sprint 41: Verzeichniskonzept (15.06.2026) ---
