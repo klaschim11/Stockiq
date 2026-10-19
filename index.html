@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.42</title>
+<title>StockIQ v6.6.43</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -41,8 +41,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 #wl-kpi{grid-template-columns:repeat(3,1fr);gap:6px}
-.wl-kz{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.wl-kz{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .wl-kz>div{white-space:nowrap}
+.wl-legende{font-family:var(--f-mono);font-size:10px;color:var(--mut);line-height:1.5;margin:-2px 0 8px 0}
+.wl-mangel-btn{display:block;width:100%;box-sizing:border-box;text-align:left;font-family:var(--f-mono);font-size:10px;font-weight:700;color:#f0c000;background:transparent;border:1px solid var(--bdr);border-radius:6px;padding:6px 9px;cursor:pointer}
 @media (max-width:600px){.wl-kz{display:flex;flex-wrap:wrap;column-gap:12px;row-gap:4px}}
 .tf{padding:6px 12px;border:1px solid var(--bdr2);border-radius:20px;font-family:var(--f-mono);font-size:11px;color:var(--mut);cursor:pointer;background:transparent}
 .tf.active{color:var(--acc);border-color:var(--acc);background:rgba(0,200,240,.08)}
@@ -127,7 +129,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.42 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.43 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
       <span style="white-space:nowrap"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:--:--</span></span>
@@ -154,7 +156,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;margin-bottom:6px">
     <div style="font-size:20px;font-weight:800">WL &mdash; <span id="wl-hdr-cnt">--</span></div>
     <div style="display:flex;align-items:center;gap:4px;position:relative">
-      <button id="sort-score" class="wf" onclick="wlSetSort('score',this)">Score</button>
+      <button id="sort-rang" class="wf" onclick="wlSetSort('std',this)">Rang</button>
+      <button id="sort-q" class="wf" onclick="wlSetSort('q',this)">Q</button>
+      <button id="sort-kgv" class="wf" onclick="wlSetSort('kgv',this)">KGV</button>
+      <button id="sort-div" class="wf" onclick="wlSetSort('div',this)">Div</button>
       <button id="sort-alpha" class="wf" onclick="wlSetSort('alpha',this)">A-Z</button>
       <button id="wl-menu-btn" class="wf" onclick="wlMenuToggle()" title="Export / Import" aria-label="Men&uuml;">&#8942;</button>
       <div id="wl-menu" style="display:none;position:absolute;right:0;top:100%;margin-top:4px;z-index:50;background:#0c1420;border:1px solid #223040;border-radius:10px;padding:6px;min-width:150px;box-shadow:0 6px 20px rgba(0,0,0,.5)">
@@ -180,6 +185,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button id="wl-bb-btn" class="wf" onclick="toggleBbFilter()">Bleibt BUY (--)</button>
     <button id="wl-erl-btn" class="wf" onclick="wlErlToggle()" title="Erl&auml;uterungen ein- und ausblenden" aria-label="Erl&auml;uterungen" style="font-weight:700;padding:5px 11px">i</button>
   </div>
+  <!-- S459 W3: Legendenzeile, Text zur Laufzeit aus KZ_ZEILE_WL/KZ_ROLLE (wlLegende) -->
+  <div id="wl-legende" class="wl-legende"></div>
   <!-- Suchfeld -->
   <div style="margin-bottom:8px;position:relative">
     <input id="wl-search" type="text" placeholder="Ticker oder Name suchen..."
@@ -211,7 +218,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="wl-filter-erl" class="wl-erl-blk">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">fSc hoch</strong>: zeigt nur Titel mit hohem Fundamentalwert.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Dividende</strong>: zeigt nur Titel mit hoher Dividendenrendite. Eine einmalige Sonderdividende kann die Rendite vor&uuml;bergehend erh&ouml;hen.</div>
-    <div>Alle Filter wirken zusammen und &auml;ndern die Reihenfolge nicht. Ohne Sortierknopf stehen BUY und SELL Abstieg nach Rang, WATCH nach Score. Score und A-Z ordnen alle Gruppen um; ein zweiter Druck stellt die Grundordnung wieder her. Die Kacheln z&auml;hlen die aktuelle Ansicht.</div>
+    <div>Alle Filter wirken zusammen und &auml;ndern die Reihenfolge nicht. Im Grundzustand (Knopf Rang) stehen alle Gruppen nach Rang. Q, KGV, Div und A-Z ordnen alle Gruppen um; fehlende Werte stehen am Ende, Gleichstand nach Rang; ein zweiter Druck stellt die Grundordnung wieder her. Die Kacheln z&auml;hlen die aktuelle Ansicht.</div>
   </div>
   </div>
   <div class="g4" id="wl-kpi" style="margin-bottom:8px"></div>
@@ -284,7 +291,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.42</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.43</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -482,7 +489,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.42 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.43 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -634,7 +641,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>i</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Blendet die Erkl&auml;rungen zu Etiketten, Kennzeichen, Filtern und Marktphase ein und aus, auch auf dem iPhone. Beim Laden zu.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">nein</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Suchfeld</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, deren Ticker oder Name den Suchtext enth&auml;lt.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, das Feld wird geleert</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel BUY / SELL Abstieg / WATCH</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Antippen zeigt nur diese Gruppe, nochmals antippen hebt das auf. Ohne aktuelle Daten zeigt SELL Abstieg &ndash;&ndash;.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter (Gruppe)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Score / A-Z</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Ohne Auswahl: BUY und SELL Abstieg nach Rang, WATCH nach Score. Score ordnet alle Gruppen nach Score, A-Z alphabetisch nach Firmennamen. Ein zweiter Druck auf den aktiven Knopf stellt die Grundordnung wieder her. Die Zahl vor dem Ticker ist immer der Rang im Universum nach der 12-Monats-Entwicklung (1 = bester). Filter &auml;ndern die Reihenfolge nie.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, zur&uuml;ck zur Grundordnung</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Rang / Q / KGV / Div / A-Z</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Rang (Grundzustand, markiert): alle Gruppen nach Rang. Q ordnet nach der Qualit&auml;t (h&ouml;chste zuerst), KGV nach dem laufenden KGV (niedrigstes zuerst, Verlust am Ende), Div nach der Dividendenrendite (h&ouml;chste zuerst, ohne Dividende am Ende), A-Z alphabetisch nach Firmennamen. Fehlende Werte stehen am Ende, Gleichstand nach Rang. Ein zweiter Druck auf den aktiven Knopf stellt die Grundordnung wieder her. Die Legendenzeile unter den Kn&ouml;pfen nennt die Rolle jeder Zahl der Zeile. Die Zahl vor dem Ticker ist immer der Rang im Universum nach der 12-Monats-Entwicklung (1 = bester). Filter &auml;ndern die Reihenfolge nie.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, zur&uuml;ck zur Grundordnung</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Men&uuml; &#8942; (Export / Import)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sichert die Favoritenliste als Datei bzw. l&auml;dt sie. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Datei</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Marktphase (Zeile unter den Tabs)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Lage des Gesamtmarkts zu seiner 200-Tage-Linie. GR&Uuml;N und ROT sind &uuml;ber zehn Handelstage best&auml;tigt. GELB ist der &Uuml;bergang: der Pfeil zeigt die Richtung, bis zum zehnten Tag gilt der bisherige Zustand. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
     </table>
@@ -673,7 +680,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">WALK-FORWARD</div><div style="font-size:12px;color:var(--mut)">Pr&uuml;fung an Daten, die bei der Festlegung der Regel nicht benutzt wurden. Reines Validierungsinstrument &mdash; veraendert keine Live-Signale.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">STABILITAET (StdAbw OOS WR)</div><div style="font-size:12px;color:var(--mut)"><span style="color:#00e57a">gering</span> stabil &nbsp;<span style="color:#00c8f0">mittel</span> akzeptabel &nbsp;<span style="color:#ff6666">hoch</span> instabil. Bei wenigen Trades pro Fenster statistisch nicht aussagekraeftig.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">PIOTROSKI MINI-SCORE (v5.9.21)</div><div style="font-size:12px;color:var(--mut)">5-Punkte Quality-Filter: ROA positiv, CFO positiv, Accruals OK (CFO&gt;NI), GrossMargin steigend, Debt Safe. Niedrige Scores bei messbaren Kriterien d&auml;mpfen den Fundamental-Score. Quelle: Piotroski 2000.</div></div>
-    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">QUALIT&Auml;T (SCHATTEN, UNGETESTET)</div><div style="font-size:12px;color:var(--mut)">Platz des Unternehmens im Universum nach Kapitalrendite, Gewinnwachstum, Stabilit&auml;t und Verschuldung aus den Jahresabschl&uuml;ssen, als Perzentil von 0 bis 100 (Detailansicht). L&auml;uft mit, Nutzen noch nicht belegt; geht in keine Empfehlung und keine Sortierung ein.</div></div>
+    <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">QUALIT&Auml;T (SCHATTEN, UNGETESTET)</div><div style="font-size:12px;color:var(--mut)"><span id="hilfe-q-lang"></span> In der Detailansicht mit Titelzahl und Stand des Tageslaufs, in der Watchlist-Zeile als Q (ganzzahlig); der Knopf Q ordnet die Liste danach.</div></div>
     <div style="margin-bottom:12px"><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">VIX-REGIME (v5.9.24)</div><div style="font-size:12px;color:var(--mut)">CBOE Volatility Index: <span style="color:#00e676">niedrig (Low Vol)</span> normal &nbsp;<span style="color:#ffab00">erh&ouml;ht (Elevated)</span> ged&auml;mpft &nbsp;<span style="color:#ff5252">sehr hoch (Crisis)</span> stark ged&auml;mpft. Momentum-Score wird bei h&ouml;herer Volatilitaet Richtung Neutral skaliert. Quelle: Barroso/Santa-Clara 2015.</div></div>
     <div><div style="font-family:monospace;font-size:11px;color:#00c8f0;font-weight:700;margin-bottom:3px">OVERFITTING-GAP</div><div style="font-size:12px;color:var(--mut)">IS Win-Rate minus OOS Win-Rate. <span style="color:#00e57a">klein</span> = kein Overfitting &nbsp;<span style="color:#f0c000">mittel</span> = leicht &nbsp;<span style="color:#ff6666">gro&szlig;</span> = stark. Negativ = OOS besser als IS (bei kleinen Stichproben: Zufall).</div></div>
   </div>
@@ -735,6 +742,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.43</td><td style="padding:5px 8px;color:var(--mut)">Die Watchlist-Zeile zeigt Rang, 12M, Q (Qualit&auml;t), KGV und Div; PEG, FCF, ROCE und 52W-Pos. stehen in der Detailansicht. F&uuml;nf Sortierkn&ouml;pfe Rang, Q, KGV, Div und A-Z mit Legendenzeile; im Grundzustand stehen alle Gruppen nach Rang. Detailansicht: Qualit&auml;t zuerst, dann die Angaben ohne bekannten Mangel; Score und bekannt fehlerhafte Kennzahlen eingeklappt am Schluss; der Score tr&auml;gt das Etikett Schatten, ungetestet. Die Qualit&auml;tszeile nennt das Perzentil im Universum (h&ouml;her = besser) und die Titelzahl.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.42</td><td style="padding:5px 8px;color:var(--mut)">Die Detailansicht zeigt die Qualit&auml;t (Perzentil im Universum, Schatten, ungetestet) mit dem Stand des Tageslaufs.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.41</td><td style="padding:5px 8px;color:var(--mut)">Der Score steht nur noch in der Detailansicht (zweiter Block, mit Bausteinen), nicht mehr in der Watchlist-Zeile, im Kopf der Detailansicht und als Depot-Spalte; die Detailansicht hat zwei Bl&ouml;cke (was den Kauf tr&auml;gt, weitere Angaben) mit dem Hinweis bekannt fehlerhaft einmal am Blockkopf; Detailzeilen brechen um statt in den Namen zu laufen; Depot nach Namen.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.40</td><td style="padding:5px 8px;color:var(--mut)">Die Rolle jeder Kennzahl steht in der Detailansicht beim Namen, der Hinweis bekannt fehlerhaft am Wert; Watchlist (Knopf i) und Depot erkl&auml;ren die Zahlen der Zeile; der W&auml;hrungshinweis entf&auml;llt; Tab-Leiste in einer Zeile; TradingView-Hilfe ohne interne Namen.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -935,7 +943,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.42 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.43 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1033,7 +1041,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.42 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.43 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1362,7 +1370,7 @@ var WL2_SYNC = false;  /* true = Synopse+WL1 nur WL2-Ticker zeigen */
 var WL_SECTOR_FILTER = '';  /* v6.1.0: '' = alle Sektoren */
 var WL_SEARCH = '';          /* v6.1.1: Suchfeld WL */
 var SR_AMPEL_ON = true;      /* v6.6.10 (S163): sr-Ampel Reversibilitaets-Schalter */
-var WL_SORT = 'std'; /* S419: 'std' (Grundzustand) | 'score' | 'alpha' */
+var WL_SORT = 'std'; /* S459/S459n: 'std' (Grundzustand, Knopf Rang) | 'q' | 'kgv' | 'div' | 'alpha' */
 var SELL_SCORE_MIN    = 70;    /* Schwellenwert fSc (0-100) -- Sprint 33: cSc->fSc, 55->70 */
 var WL_AW_FILTER      = false; /* S383: Zeilenfilter Kennzeichen Auswahl; von "Alle" zurueckgesetzt, nicht persistiert */
 var WL_TR_FILTER      = false; /* S383: Zeilenfilter Kennzeichen Trend; von "Alle" zurueckgesetzt, nicht persistiert */
@@ -2129,8 +2137,18 @@ function wlErlToggle(){
   if(!b) return;
   auf=(b.style.display==='none');
   b.style.display=auf?'block':'none';
-  if(auf){ var zl=document.getElementById('wl-zahlen-liste'); if(zl) zl.innerHTML=kzAbschnitt(KZ_ZEILE_WL); }  /* S434 B.2 */
+  if(auf){ var zl=document.getElementById('wl-zahlen-liste'); if(zl) zl.innerHTML=kzAbschnitt(KZ_ZEILE_WL)+kzLang(KZ_ZEILE_WL); }  /* S434 B.2 */
   if(k){ k.style.borderColor=auf?'#7a9bb5':'#1a2a3a'; k.style.color=auf?'#7a9bb5':'var(--mut)'; }
+}
+/* S459 W-D1: Aufklapper 'Bekannt fehlerhaft' der Detailansicht (Muster wlErlToggle). Beim
+   Oeffnen der Detailansicht zu; der Zustand wird nicht gespeichert. */
+function wlMangelToggle(){
+  var b=document.getElementById('wl-mangel-body'),k=document.getElementById('wl-mangel-btn'),p=document.getElementById('wl-mangel-pf'),auf;
+  if(!b) return;
+  auf=(b.style.display==='none');
+  b.style.display=auf?'block':'none';
+  if(p) p.innerHTML=auf?'&#9662;':'&#9656;';
+  if(k) k.setAttribute('aria-expanded',auf?'true':'false');
 }
 /* S417: Kachelfilter (Gruppe). Markierung malt rWL -> wlKachel/wlPaint. */
 function wlFilt(f,btn){
@@ -2196,7 +2214,8 @@ function wlPaint(){
   var akt=wlAktiveFilter(),i,b,an;
   var defs=[['wl-alle-btn',akt.length===0],['sync-btn',WL2_SYNC],['wl-fsc-btn',FSC_FILTER],['wl-dv-btn',WL_DV_FILTER],
             ['wl-aw-btn',WL_AW_FILTER],['wl-tr-btn',WL_TR_FILTER],['wl-u2-btn',WL_U2_FILTER],['wl-hi-btn',WL_HI_FILTER],
-            ['wl-bb-btn',WL_BB_FILTER],['sort-score',WL_SORT==='score'],['sort-alpha',WL_SORT==='alpha'],
+            ['wl-bb-btn',WL_BB_FILTER],['sort-rang',WL_SORT==='std'],['sort-q',WL_SORT==='q'],['sort-kgv',WL_SORT==='kgv'],
+            ['sort-div',WL_SORT==='div'],['sort-alpha',WL_SORT==='alpha'],
             ['wl-sector-filter',!!WL_SECTOR_FILTER],['wl-search',!!WL_SEARCH]];
   for(i=0;i<defs.length;i++){
     b=document.getElementById(defs[i][0]); if(!b) continue; an=defs[i][1];
@@ -2205,6 +2224,18 @@ function wlPaint(){
   }
   var h=document.getElementById('wl-hint'); if(h) h.style.display=_wlFavHinweis?'block':'none';
   wlChipPaint();
+  wlLegende();
+}
+/* S459 W3: Etikett am Sortierchip (title) und Legendenzeile unter den Chips -- beides aus
+   KZ_ROLLE / KZ_ZEILE_WL (dieselbe Tabelle wie die i-Box), keine zweite Textkopie. */
+var WL_SORT_KZ=[['sort-rang','K02'],['sort-q','K85'],['sort-kgv','K27'],['sort-div','K31']];
+function wlLegende(){
+  var i,b,p=[],el=document.getElementById('wl-legende');
+  for(i=0;i<WL_SORT_KZ.length;i++){ b=document.getElementById(WL_SORT_KZ[i][0]); if(b) b.setAttribute('title',KZ_ROLLE[WL_SORT_KZ[i][1]]); }
+  b=document.getElementById('hilfe-q-lang'); if(b) b.innerHTML=KZ_LANG.K85;  /* S459n: Langtext aus KZ_LANG */
+  if(!el) return;
+  for(i=0;i<KZ_ZEILE_WL.length;i++) p.push(kzZeileTxt(KZ_ZEILE_WL[i][0],KZ_ZEILE_WL[i][1]));
+  el.innerHTML=p.join(' | ');
 }
 
 /* sr-Ampel: liefert Farbklasse (Hex) nach Fachlogik, '' wenn nicht anwendbar.
@@ -2275,9 +2306,33 @@ function wlRangKey(s){
   return {t:s.t,pct:(pct===null)?-1:pct,ret:ret};
 }
 function wlCmpRang(a,b){ return awCmp(wlRangKey(a.s),wlRangKey(b.s)); }
-/* S417 W-4: Filter sortieren nie um. Gleichstand im Score nach Ticker,
-   damit die Reihenfolge in jeder Teilmenge dieselbe ist. */
-function wlCmpScore(a,b){ if(b.sc!==a.sc) return b.sc-a.sc; return a.s.t<b.s.t?-1:(a.s.t>b.s.t?1:0); }
+/* S459: 12M-Rendite aus _scoresIdx (Quelle wie Detail Block 1) fuer Zeile und Sortierchip 12M; fehlt -> null (AP-3). */
+function wl12mKey(t){
+  var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null,v=rec?rec.mom12m_ret:null;
+  return (typeof v==='number'&&isFinite(v))?v:null;
+}
+/* S459: Sortierchips Q, KGV, 12M. Nur Sortierschluessel (AP-3): fehlender Wert ans Ende,
+   Gleichstand nach Rang (wlCmpRang). ab = 1 aufsteigend, -1 absteigend. Filter ordnen nie um (S417). */
+function wlCmpWert(x,y,ab,a,b){
+  if(x===null&&y===null) return wlCmpRang(a,b);
+  if(x===null) return 1;
+  if(y===null) return -1;
+  if(x!==y) return x<y?-ab:ab;
+  return wlCmpRang(a,b);
+}
+/* KGV (W1): laufendes KGV pe_ttm, nur endliche Werte > 0; Verlust (pe_neg), null, <= 0 ans Ende. */
+function wlKgvKey(t){
+  var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null,v=rec?rec.pe_ttm:null;
+  return (rec&&rec.pe_neg!==true&&typeof v==='number'&&isFinite(v)&&v>0)?v:null;
+}
+function wlCmpQ(a,b){ return wlCmpWert(qualPct(a.s.t),qualPct(b.s.t),-1,a,b); }
+function wlCmpKgv(a,b){ return wlCmpWert(wlKgvKey(a.s.t),wlKgvKey(b.s.t),1,a,b); }
+/* S459n (Kla 19.10.2026 "statt 12M Div"): Dividendenrendite div_yield (Quelle wie divText), nur endliche Werte > 0; 0 und fehlend ans Ende. */
+function wlDivKey(t){
+  var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null,v=rec?rec.div_yield:null;
+  return (typeof v==='number'&&isFinite(v)&&v>0)?v:null;
+}
+function wlCmpDiv(a,b){ return wlCmpWert(wlDivKey(a.s.t),wlDivKey(b.s.t),-1,a,b); }
 /* wlNameCmp: A-Z nach dem angezeigten Firmennamen (dName), ohne Ruecksicht
    auf Gross-/Kleinschreibung, deutsche Sortierreihenfolge; Gleichstand nach
    Ticker (S419). Ohne Intl.Collator: Kleinbuchstaben-Vergleich. */
@@ -2293,16 +2348,17 @@ function wlNameCmp(a,b){
   if(r!==0) return r;
   return a.s.t<b.s.t?-1:(a.s.t>b.s.t?1:0);
 }
-/* wlCmp: EINZIGE Sortier-Entscheidung der Watchlist (S296, S419). g ist die
-   Gruppe aus wlBucket. Grundzustand ('std', Startwert und Ergebnis von
-   "Alle"): BUY und SELL Abstieg nach Rang, WATCH nach Score. 'score': alle
-   Gruppen nach Score. 'alpha': alle Gruppen nach Firmenname. Gilt in "Alle"
-   und bei aktiver Kachel; Filter ordnen nie um (S417). Ersetzt S417 W-4
-   (BUY auch bei A-Z nach Rang), Kla 09.10.2026. */
+/* wlCmp: EINZIGE Sortier-Entscheidung der Watchlist (S296, S419, S459). g ist
+   die Gruppe aus wlBucket. Grundzustand ('std', Knopf Rang, Startwert und
+   Ergebnis von "Alle"): alle drei Gruppen nach Rang (Kla W2, 16.10.2026).
+   'q', 'kgv', 'div': alle Gruppen nach dem Wert. 'alpha': alle Gruppen nach
+   Firmenname. Gilt in "Alle" und bei aktiver Kachel; Filter ordnen nie um (S417). */
 function wlCmp(g){
   if(WL_SORT==='alpha') return wlNameCmp;
-  if(WL_SORT!=='score'&&(g==='BUY'||g==='ABSTIEG')) return wlCmpRang;
-  return wlCmpScore;
+  if(WL_SORT==='q') return wlCmpQ;
+  if(WL_SORT==='kgv') return wlCmpKgv;
+  if(WL_SORT==='div') return wlCmpDiv;
+  return wlCmpRang;  /* S459 W2: Grundzustand fuer BUY, SELL Abstieg und WATCH */
 }
 /* wlSetCnt: EINZIGER Schreiber der drei Ticker-Zaehler. Zaehlt die Titel,
    die die Watchlist wirklich rendert (U-4: nur Titel mit scores.json-
@@ -2577,7 +2633,7 @@ function sigLogText(t,sig){
 var ABST_TTL='SELL Abstieg: Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger.';
 var KZ_ROLLE={
   K01:'getestet', K10:'getestet (Haltedauer)', K11:'Regel getestet: verfehlt', K12:'getestet',
-  K35:'getestet als Rangbasis', K20:'Sortierhilfe, ungetestet', K21:'Sortierhilfe, ungetestet',
+  K35:'getestet als Rangbasis', K20:'Schatten, ungetestet', K21:'Sortierhilfe, ungetestet',
   K22:'Sortierhilfe, ungetestet', K23:'Sortierhilfe, ungetestet', K24:'Sortierhilfe, ungetestet',
   K30:'Sortierhilfe, ungetestet', K37:'Sortierhilfe, ungetestet', K38:'Sortierhilfe, ungetestet',
   K57:'Sortierhilfe, ungetestet',
@@ -2602,9 +2658,12 @@ var KZ_ZUSATZ={K20:1,K21:1,K22:1,K23:1,K24:1,K25:1,K26:1,K29:1,K30:1,K37:1,K38:1
 function kzRolle(id){ return KZ_ROLLE[id]?(' <span class="kz-rolle" data-kz="'+id+'">('+KZ_ROLLE[id]+')</span>'):''; }
 function kzZus(id){ return KZ_ZUSATZ[id]?('<span class="kz-zus" data-kz="'+id+'">'+KZ_ZUSATZ_TXT+'</span>'):''; }
 function kzZeileTxt(id,name){ return name+': '+KZ_ROLLE[id]+(KZ_ZUSATZ[id]?(', '+KZ_ZUSATZ_TXT):''); }
-var KZ_ZEILE_WL=[['K02','Rang'],['K25','PEG'],['K27','KGV'],['K29','FCF'],['K30','ROCE'],['K26','52W-Pos.'],['K31','Div']];
+var KZ_ZEILE_WL=[['K02','Rang'],['K35','12M'],['K85','Q'],['K27','KGV'],['K31','Div']];  /* S459: Zeile Rang-12M-Q-KGV-Div */
+/* S459n (Kla 19.10.2026 09:27): Langtext je Kennzahl fuer i-Box und Hilfe-Glossar -- EINE Quelle; KZ_ROLLE bleibt das kurze Etikett. */
+var KZ_LANG={K85:'Q: Qualit&auml;t der Ertragskraft &uuml;ber mehrere Jahresabschl&uuml;sse (Niveau und Stabilit&auml;t), als Perzentil im Universum des Tages: Q 33 bedeutet, 67 % der Titel haben eine h&ouml;here Qualit&auml;t. Schatten: wird t&auml;glich mitgerechnet, hat keinen Einfluss auf BUY, Rang oder Auswahl; Test FH-14 (30.11.2026). Finanztitel &uuml;ber eigenen Pfad; -- = nicht bewertbar (zu wenige Abschl&uuml;sse).'};
+function kzLang(liste){ var h='',i; for(i=0;i<liste.length;i++) if(KZ_LANG[liste[i][0]]) h+='<div class="kz-lang" data-kz="'+liste[i][0]+'" style="margin-top:4px">'+KZ_LANG[liste[i][0]]+'</div>'; return h; }
 var KZ_ZEILE_DP=[['K53','Akt. / Wert / +/-%'],['K11','Pr&uuml;fung'],['K27','KGV']];  /* S441 C.4: Score nicht mehr in der Zeile */
-/* S441 C.3 (Kla 14.10.2026): Detail Block 2 traegt den Zusatz EINMAL am Blockkopf. Welche
+/* S441 C.3 (Kla 14.10.2026), S459: Detail Block 2 traegt den Zusatz EINMAL, als erste Zeile des Aufklappers. Welche
    Kennzahlen dort stehen, folgt aus KZ_ZUSATZ und den data-kz-Marken, die der Block wirklich
    zeigt (kzRolle, Score-Kopf) -- keine Hand-Liste. KZ_KURZ liefert nur den Anzeigenamen. */
 var KZ_KURZ={K20:'Score',K21:'Momentum',K22:'Trend',K23:'Fund',K24:'Risk',K25:'PEG',K26:'52W-Pos.',
@@ -2614,12 +2673,15 @@ function kzZusIds(html){
   while((m=re.exec(html))!==null){ if(KZ_ZUSATZ[m[1]]&&!seen[m[1]]){ seen[m[1]]=1; ids.push(m[1]); } }
   return ids;
 }
-function kzB2Kopf(html){
+function kzB2Kopf(){
+  return '<div class="wl-blk-h">Weitere Angaben</div>'
+    +'<div class="wl-b2-satz">Sortierhilfe oder nur Anzeige, nicht getestet; der Rang entscheidet.</div>';
+}
+/* S459 (Kla 19.10.2026): die gelbe Zeile steht als erste Zeile im Aufklapper 'Bekannt fehlerhaft'. */
+function kzB2Zus(html){
   var ids=kzZusIds(html),nm=[],i;
   for(i=0;i<ids.length;i++) nm.push(KZ_KURZ[ids[i]]||ids[i]);
-  return '<div class="wl-blk-h">Weitere Angaben</div>'
-    +'<div class="wl-b2-satz">Sortierhilfe oder nur Anzeige, nicht getestet; der Rang entscheidet.</div>'
-    +(nm.length?('<div class="wl-b2-zus" data-ids="'+ids.join(',')+'">'+KZ_ZUSATZ_TXT+': '+nm.join(', ')+'</div>'):'');
+  return nm.length?('<div class="wl-b2-zus" data-ids="'+ids.join(',')+'">'+KZ_ZUSATZ_TXT+': '+nm.join(', ')+'</div>'):'';
 }
 function kzAbschnitt(liste){
   var h='',i;
@@ -2677,7 +2739,6 @@ function wlRend(scored){
 
   function renderEntry(entry){
     s=entry.s;sc=entry.sc;sig=entry.sig;
-    var fd=FD[s.t];
     /* S370: Etikett, Farbe und Kennzeichen kommen aus sigView() --
        derselben Funktion, die die Depot-Zeile fragt (S-9). */
     var _sv=sigView(s.t,sig);
@@ -2690,13 +2751,11 @@ function wlRend(scored){
     var sc2=_sv.col;
     var dR=dqCheck(s.t,sig),dB=dR?('<span style="font-size:10px;color:#f0c000;border:1px solid rgba(240,192,0,.4);border-radius:3px;padding:1px 4px" title="DQ: '+dR.fields.join(", ")+'">&#9888;</span>'):"";
     var slbl=_sv.lbl;
-    var pgD=pegMess(s.t);  /* S398 R-5: gemessener PEG statt Platzhalter */
-    var pgV=pgD==='--'?null:parseFloat(pgD);  /* Farbe folgt dem angezeigten Wert, nicht s.peg */
-    var pgC=pgV===null?'#7a9bb5':pgSt({peg:pgV})==='ov'?'#f0c000':pgV<1.5?'#00e57a':'#7a9bb5';
-    var fcfD=fd&&fd.fcf!==null?fp(fd.fcf):'--';
-    var rv=fd?(fd.roce!==null&&fd.roce!==undefined?fd.roce:(fd.roe!==null&&fd.roe!==undefined?fd.roe:null)):null;
-    var roceD=rv!==null?fp(rv):'--';
-    var rsiC=(typeof s.rsi==='number'&&s.rsi<30)?'#00e57a':'#7a9bb5';  /* S395 R-2: Rotfaerbung entfallen; S407: null ist nicht < 30 */
+    /* S459 (Kla 16./19.10.2026): 12M aus derselben Quelle wie Detail Block 1 (_scoresIdx), Q aus der
+       Projektion (qualPct, ganzzahlig); fehlt ein Wert: "--" (AP-3). Kein Etikett in der Zelle (W3). */
+    var r12=wl12mKey(s.t),qp=qualPct(s.t);
+    var r12D=r12===null?'--':((r12>=0?'+':'')+r12.toFixed(1)+'%');
+    var qD=qp===null?'--':String(Math.round(qp));
     var rowBg=WL_SEL===s.t?'background:#101d2e;':'background:#0c1420;';
     /* S419: Spalte 1 = Rang im Universum (rang12m), nicht die Listenposition. */
     var rg=rang12m(s.t);
@@ -2714,13 +2773,11 @@ function wlRend(scored){
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
     h+='<div class="wl-rb">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+srAmpBdg+dB+_sB+'</div></div>';  /* S441 C.1: Score-Badge entfaellt (nur Detail Block 2) */
-    /* S405: KGV direkt neben PEG (Kla 07.10.2026), neutral ohne Farbe. Schmal bricht die Zeile um (.wl-kz). */
+    /* S459: genau vier Zellen 12M, Q, KGV, Div; KGV neutral ohne Farbe (S405). Schmal bricht die Zeile um (.wl-kz). */
     h+='<div class="wl-kz">';
-    h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">PEG </span><span style="color:'+pgC+'">'+pgD+'</span></div>';
+    h+='<div class="wl-12m" style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">12M </span><span>'+r12D+'</span></div>';
+    h+='<div class="wl-q" style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">Q </span><span>'+qD+'</span></div>';
     h+='<div class="wl-kgv" style="font-family:monospace;font-size:10px" title="'+KGV_TTL+'"><span style="color:var(--mut)">KGV </span><span>'+kgvText(s.t).replace(/^KGV /,'')+'</span></div>';
-    h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">FCF </span><span>'+fcfD+'</span></div>';
-    h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">ROCE </span><span>'+roceD+'</span></div>';
-    h+='<div style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">52W-Pos. </span><span style="color:'+rsiC+'">'+rsiText(s)+'</span></div>';  /* S407: fehlt er "--" */
     h+='<div class="wl-div" style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">Div </span><span>'+divText(s.t)+'</span></div>';  /* S417 T-1 */
     h+='</div>';
     /* S-2: die STRONG-Divergenzzeile ist entfallen. Die HC-Zeile bleibt
@@ -2852,89 +2909,52 @@ function wlDetail(ticker){
   out+='<div class="dt-r wl-12m-det" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K35','12M')+'>12M (inkl.1M)'+kzRolle('K35')+'</span><span style="color:'+_r12c+'">'+(_r12===null?'--':((_r12>=0?'+':'')+_r12.toFixed(1)+'%'))+'</span></div>';
   out+='<button onclick="openChart(\''+s.t+'\')" style="font-size:11px;color:#00c8f0;background:none;border:none;cursor:pointer;font-family:monospace;padding:0;opacity:0.7;margin-top:4px">&#128200; Chart</button>';
   out+='</div>';
-  /* S441 C.3 Block 2 'Weitere Angaben': Kopf (Satz + Zusatzliste) wird nach dem Bau vorangestellt */
+  /* S459 (Kla 19.10.2026): Block 2 in der Reihenfolge Qualitaet, Angaben ohne Mangel, Bekannt
+     fehlerhaft (eingeklappt, am Schluss). Welche Angabe in den Aufklapper gehoert, folgt aus
+     KZ_ZUSATZ (Code), nicht aus einer Hand-Liste (W-D2). */
   out+='<div class="wl-b2" style="border-top:1px solid #1a2a3a;padding-top:8px">';
-  var _b2s=out.length;
-  out+=wlInfoZeilen(s,sig);  /* S395 R-2 */
-  out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">';
-  /* S398 R-3: Bausteinnamen ohne Gewicht und ohne Verfahrenszusatz */
-  out+='<div class="wl-score"><div data-kz="K20" style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">Score (Sortierhilfe, ungetestet)</div>';
-  /* S407 Punkt 1: Bausteine aus den Tagesdaten statt STOCKS-Platzhalter */
-  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K21','Momentum')+'>Momentum'+kzRolle('K21')+'</span><span>'+bstText(s.t,'mom_score')+'</span></div>';
-  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K22','Trend')+'>Trend'+kzRolle('K22')+'</span><span>'+bstText(s.t,'trend_score')+'</span></div>';
-  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K23','Fund')+'>Fund'+kzRolle('K23')+'</span><span>'+bstText(s.t,'fund_score')+'</span></div>';
-  /* Konsistenz-Badge (v5.9.36) */
-  var cs2=getScField(s.t, "cons_sc", consScore(s.t));
-  var as2=calcAnnualStats(s.t);
-  if(cs2!==null&&as2){
-    var csColor=cs2>=70?'#00e57a':cs2>=45?'#f0c000':'#ff6666';
-    var roceInfo=as2.roce?('Std '+as2.roce.std+'pp, '+as2.roce.n+'J'+(as2.roce.outliers>0?' ['+as2.roce.outliers+' Outlier]':'')):' n/a';
-    out+='<div class="dt-r" style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:'+csColor+'">'+cs2+' | '+roceInfo+'</span></div>';
-  } else {
-    out+='<div class="wl-kons-nv dt-r" style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:#7a9bb5">nicht verf&uuml;gbar</span></div>';  /* S423 G K46 */
-  }
-  out+='<div class="dt-r" style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)"'+kzTtl('K24','Risk')+'>Risk'+kzRolle('K24')+'</span><span>'+bstText(s.t,'risk_score')+'</span></div>';  /* S398 R-3: Beta/EVAR stehen unten als Kennzahl */
-  out+='</div>';
-  out+='<div><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">TECHNISCH</div>';
+  /* S453b (Kla 16.10.2026, Form B): Qualitaet, Rolle beim Namen (K85), Wert aus der Projektion; ohne fd sichtbar */
+  out+='<div class="dt-r wl-qual-det" style="'+row+';margin-bottom:8px"><span style="color:var(--mut)"'+kzTtl('K85','Qualit&auml;t')+'>Qualit&auml;t'+kzRolle('K85')+'</span><span class="wl-qual-val">'+qualDetText(s.t)+'</span></div>';
+  out+=kzB2Kopf();
+  /* S459 (3) Angaben ohne Mangel */
+  out+='<div class="wl-b3" style="margin-bottom:8px"><div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">TECHNISCH</div>';
   out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)">MACD-Histogramm</span><span>'+(s.hist!=null?s.hist.toFixed(2):'--')+'</span></div>';  /* S398 R-4 */
-  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)">52W-Pos.'+kzRolle('K26')+'</span><span style="color:'+(typeof s.rsi==='number'&&s.rsi<30?'#00e57a':'#dce8f5')+'">'+rsiText(s)+'</span></div>';
   var fd_m=_scoresIdx[s.t];
   var skipVal=fd_m&&fd_m.mom_skip!=null?fd_m.mom_skip:null;
-  var ret12Val=fd_m&&fd_m.mom12m_ret!=null?fd_m.mom12m_ret:null;
   if(skipVal!==null){
     var sc=skipVal>=20?'#00e57a':skipVal>=0?'#00c8f0':skipVal>=-15?'#f0c000':'#ff6666';
     out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)">12 Monate ohne letzten Monat</span><span style="color:'+sc+'">'+(skipVal>=0?'+':'')+skipVal.toFixed(1)+'%</span></div>';
     /* S441 C.3: 12M steht in Block 1 */
   }
   out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)">Divergenz</span><span style="color:'+(isDivBull(s)?'#ff9f1c':'#7a9bb5')+'">'+(s.div!=null?s.div:'--')+'</span></div>';
-  /* S405: KGV und Gewinnwachstum aus dem Datenfeld statt STOCKS-Platzhalter pe/eg; neutral, direkt ueber PEG. */
+  /* S405: KGV und Gewinnwachstum aus dem Datenfeld statt STOCKS-Platzhalter pe/eg; neutral. */
   out+='<div class="wl-kgv-det dt-r" style="'+row+'" title="'+KGV_TTL+'"><span style="color:var(--mut)">KGV laufend / erwartet'+kzRolle('K27')+'</span><span>'+kgvText(s.t).replace(/^KGV /,'')+'</span></div>';
   if(kgvUnpl(s.t))out+='<div class="wl-kgv-unpl dt-r" style="'+row+'"><span style="color:var(--mut)">KGV erwartet</span><span>Sch&auml;tzung des Anbieters unplausibel</span></div>';
   out+='<div class="wl-eg-det dt-r" style="'+row+'" title="'+KGV_EG_TTL+'"><span style="color:var(--mut)">Gewinnwachstum</span><span>'+kgvEgText(s.t)+'</span></div>';
-  /* S398 R-4: PEG nur als gemessener Wert aus dem Datenfeld, ohne
-     Sektor-Median und ohne Umrechnung in Punkte; fehlt er: "--". */
-  out+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K25','PEG')+'>PEG'+kzRolle('K25')+'</span><span>'+pegMess(s.t)+'</span></div>';
-  out+='</div></div>';
-  /* S453b (Kla 16.10.2026, Form B): Qualitaet, Rolle beim Namen (K85), Wert aus der Projektion; ohne fd sichtbar */
-  out+='<div class="dt-r wl-qual-det" style="'+row+';margin-bottom:8px"><span style="color:var(--mut)"'+kzTtl('K85','Qualit&auml;t')+'>Qualit&auml;t'+kzRolle('K85')+'</span><span class="wl-qual-val">'+qualDetText(s.t)+'</span></div>';
+  out+='</div>';
   if(fd){
     out+='<div style="border-top:1px solid #1a2a3a;padding-top:10px">';
     out+='<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:6px">FUNDAMENTALS (JSON)</div>';
-    out+='<div class="kz-g4" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px">';  /* S434 B: schmal zweispaltig */
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD'+kzRolle('K29')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
     /* Owner Earnings Yield (v5.9.44 / v7.9.7) */
     var oeY=fd.owner_earnings!=null?fd.owner_earnings:null;
     var oeDisp=oeY!=null?((oeY>=0?'+':'')+oeY.toFixed(1)+'%'):'n/a';
     var oeColor=oeY!=null?(oeY>4?'#00e57a':oeY>0?'#f0c000':'#ff6666'):'#7a9bb5';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OWN.EARN.')+'>OWN.EARN.'+kzRolle('K39')+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+oeDisp+'</div></div>';
-    var rv2=fd.roce!==null&&fd.roce!==undefined?fd.roce:fd.roe;
-    var rl2=fd.roce!==null&&fd.roce!==undefined?'ROCE':'ROE';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K30',rl2)+'>'+rl2+''+kzRolle('K30')+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K40','Moat')+'>MOAT'+kzRolle('K40')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+'</div></div>';
-    out+='</div>';
-    /* EV/EBITDA + EVAR â€” zweite Zeile Value-Qualitaet (v5.9.30) */
-    var evebDisp=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda.toFixed(1)+'x':'n/a';
-    var evebColor=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?(fd.ev_ebitda<12?'#00e57a':fd.ev_ebitda<20?'#f0c000':'#ff6666'):'#7a9bb5';
+    /* EVAR (v5.9.30) */
     var evarRel=getScField(s.t, "evar_rel_sc", evarRelSc(s.t));
     var evarLabel='EVAR';  /* S398 R-5: ohne Verfahrenszusatz und ohne Umrechnung in Punkte */
     var evarDispFull=fd.evar!=null?fd.evar:'n/a';
     var evarScore=evarRel!=null?evarRel:fd.evar;
     var evarColor=evarScore!=null?(evarScore>=60?'#00e57a':evarScore>=40?'#f0c000':'#ff6666'):'#7a9bb5';
-    out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K41','EV/EBITDA')+'>EV/EBITDA'+kzRolle('K41')+'</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">'+evarLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDispFull+'</div></div>';
-    out+='</div>';
-    /* EV/EBIT + FCF/Debt Cover (v5.9.76: Research Sprint -- Buffett/Greenblatt) */
-    var eveitDisp2=fd.ev_ebit!==null&&fd.ev_ebit!==undefined?fd.ev_ebit.toFixed(1)+'x':'n/a';
-    var eveitColor2=fd.ev_ebit!==null&&fd.ev_ebit!==undefined?(fd.ev_ebit<15?'#00e57a':fd.ev_ebit<25?'#f0c000':'#ff6666'):'#7a9bb5';
+    /* FCF/Debt Cover (v5.9.76: Research Sprint -- Buffett/Greenblatt) */
     var fdcV=fd.fcf_debt_cover!==null&&fd.fcf_debt_cover!==undefined?fd.fcf_debt_cover:null;
     var fdcStr=fdcV!==null?(fdcV>=10?'&gt;10x':fdcV.toFixed(2)+'x'):'n/a';
     var fdcCol=fdcV!==null?(fdcV>=0.20?'#00e57a':fdcV>=0.05?'#f0c000':'#ff6666'):'#7a9bb5';
-    out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K42','EV/EBIT')+'>EV/EBIT'+kzRolle('K42')+'</div><div style="font-family:monospace;font-size:11px;color:'+eveitColor2+'">'+eveitDisp2+'</div></div>';
+    out+='<div class="kz-g4" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px">';  /* S434 B: schmal zweispaltig */
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OWN.EARN.')+'>OWN.EARN.'+kzRolle('K39')+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+oeDisp+'</div></div>';
+    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">'+evarLabel+'</div><div style="font-family:monospace;font-size:11px;color:'+evarColor+'">'+evarDispFull+'</div></div>';
     out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)">FCF/DEBT</div><div style="font-family:monospace;font-size:11px;color:'+fdcCol+'">'+fdcStr+'</div></div>';
     out+='</div>';
-    /* Owner Earnings Yield (v5.9.44) â€” Buffett NI+D&A-CapEx/MC */
+    /* Owner Earnings Yield (v5.9.44) -- Buffett NI+D&A-CapEx/MC; S459: die zweite FCF-YIELD-Kachel entfaellt (G-Y) */
     var oeVal=fd.owner_earnings!=null?fd.owner_earnings:null;
     if(oeVal!==null){
       var oeColor=oeVal>4?'#00e57a':oeVal>0?'#f0c000':'#ff6666';
@@ -2943,7 +2963,6 @@ function wlDetail(ticker){
       var oeLabel='OE Yield'+oeDiffStr;
       out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
       out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K39','OE Yield')+'>'+oeLabel+''+kzRolle('K39')+'</div><div style="font-family:monospace;font-size:11px;color:'+oeColor+'">'+(oeVal>=0?'+':'')+oeVal.toFixed(1)+'%'+'</div></div>';
-      out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD'+kzRolle('K29')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
       out+='</div>';
     }
     /* Jahres-Trend (v5.9.35): ROCE + FCF + Mom aus annual.json */
@@ -2974,14 +2993,6 @@ function wlDetail(ticker){
         out+='</div>';
       }
     }
-    var betaColor=fd.beta!==null&&fd.beta!==undefined?(fd.beta<0.8?'#00e57a':fd.beta<1.2?'#f0c000':'#ff6666'):'#7a9bb5';
-    var betaDisp=fd.beta!==null&&fd.beta!==undefined?fd.beta.toFixed(2):'n/a';
-    var debtDisp=fd.debt_eq!==null&&fd.debt_eq!==undefined?fd.debt_eq.toFixed(0):'n/a';
-    var debtColor=fd.debt_eq!==null&&fd.debt_eq!==undefined?(fd.debt_eq<100?'#00e57a':fd.debt_eq<200?'#f0c000':'#ff6666'):'#7a9bb5';
-    out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px">';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K37','Beta')+'>BETA (Low-Vol)'+kzRolle('K37')+'</div><div style="font-family:monospace;font-size:11px;color:'+betaColor+'">'+betaDisp+'</div></div>';
-    out+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K38','Debt/Equity')+'>DEBT/EQ %'+kzRolle('K38')+'</div><div style="font-family:monospace;font-size:11px;color:'+debtColor+'">'+debtDisp+'</div></div>';
-    out+='</div>';
     out+=divKacheln(fd);  /* S407 Punkt 5: Schalter DIV_ANZEIGE_AUS; BUYBACK entfallen */
     /* shares_change_yoy: Buyback-Signal v5.9.78 */
     var scyV=fd.sc_yoy!==null&&fd.sc_yoy!==undefined?fd.sc_yoy:null;
@@ -3000,7 +3011,63 @@ function wlDetail(ticker){
     }
     out+='</div>';
   }
-  out=out.substring(0,_b2s)+kzB2Kopf(out.substring(_b2s))+out.substring(_b2s);  /* S441 C.3 */
+  /* S459 (4) Bekannt fehlerhaft (W-D1): Aufklapper am Schluss, beim Oeffnen zu, Zustand nicht
+     gespeichert. Erste Zeile = Zusatzliste (kzB2Zus), dann Info-Zeilen, Score mit Bausteinen und
+     jede Kennzahl mit Zusatz genau einmal. n = Zahl der Kennzahlen im Aufklapper. */
+  var mg='';
+  mg+=wlInfoZeilen(s,sig);  /* S395 R-2 */
+  mg+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">';
+  /* S398 R-3: Bausteinnamen ohne Gewicht und ohne Verfahrenszusatz */
+  mg+='<div class="wl-score"><div data-kz="K20" style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:5px">Score (Schatten, ungetestet)</div>';  /* S459n: Etikett wie KZ_ROLLE.K20 */
+  /* S407 Punkt 1: Bausteine aus den Tagesdaten statt STOCKS-Platzhalter */
+  mg+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K21','Momentum')+'>Momentum'+kzRolle('K21')+'</span><span>'+bstText(s.t,'mom_score')+'</span></div>';
+  mg+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K22','Trend')+'>Trend'+kzRolle('K22')+'</span><span>'+bstText(s.t,'trend_score')+'</span></div>';
+  mg+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K23','Fund')+'>Fund'+kzRolle('K23')+'</span><span>'+bstText(s.t,'fund_score')+'</span></div>';
+  /* Konsistenz-Badge (v5.9.36) */
+  var cs2=getScField(s.t, "cons_sc", consScore(s.t));
+  var as2=calcAnnualStats(s.t);
+  if(cs2!==null&&as2){
+    var csColor=cs2>=70?'#00e57a':cs2>=45?'#f0c000':'#ff6666';
+    var roceInfo=as2.roce?('Std '+as2.roce.std+'pp, '+as2.roce.n+'J'+(as2.roce.outliers>0?' ['+as2.roce.outliers+' Outlier]':'')):' n/a';
+    mg+='<div class="dt-r" style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:'+csColor+'">'+cs2+' | '+roceInfo+'</span></div>';
+  } else {
+    mg+='<div class="wl-kons-nv dt-r" style="'+row+';font-size:10px"><span style="color:var(--mut)">Konsistenz (ROCE)</span><span style="color:#7a9bb5">nicht verf&uuml;gbar</span></div>';  /* S423 G K46 */
+  }
+  mg+='<div class="dt-r" style="'+row+';border-top:1px solid #1a2a3a;padding-top:3px;margin-top:3px"><span style="color:var(--mut)"'+kzTtl('K24','Risk')+'>Risk'+kzRolle('K24')+'</span><span>'+bstText(s.t,'risk_score')+'</span></div>';  /* S398 R-3: Beta/EVAR stehen unten als Kennzahl */
+  mg+='</div>';
+  mg+='<div>';
+  mg+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)">52W-Pos.'+kzRolle('K26')+'</span><span style="color:'+(typeof s.rsi==='number'&&s.rsi<30?'#00e57a':'#dce8f5')+'">'+rsiText(s)+'</span></div>';
+  /* S398 R-4: PEG nur als gemessener Wert aus dem Datenfeld, ohne
+     Sektor-Median und ohne Umrechnung in Punkte; fehlt er: "--". */
+  mg+='<div class="dt-r" style="'+row+'"><span style="color:var(--mut)"'+kzTtl('K25','PEG')+'>PEG'+kzRolle('K25')+'</span><span>'+pegMess(s.t)+'</span></div>';
+  mg+='</div></div>';
+  if(fd){
+    var rv2=fd.roce!==null&&fd.roce!==undefined?fd.roce:fd.roe;
+    var rl2=fd.roce!==null&&fd.roce!==undefined?'ROCE':'ROE';
+    var evebDisp=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?fd.ev_ebitda.toFixed(1)+'x':'n/a';
+    var evebColor=fd.ev_ebitda!==null&&fd.ev_ebitda!==undefined?(fd.ev_ebitda<12?'#00e57a':fd.ev_ebitda<20?'#f0c000':'#ff6666'):'#7a9bb5';
+    var eveitDisp2=fd.ev_ebit!==null&&fd.ev_ebit!==undefined?fd.ev_ebit.toFixed(1)+'x':'n/a';
+    var eveitColor2=fd.ev_ebit!==null&&fd.ev_ebit!==undefined?(fd.ev_ebit<15?'#00e57a':fd.ev_ebit<25?'#f0c000':'#ff6666'):'#7a9bb5';
+    var betaColor=fd.beta!==null&&fd.beta!==undefined?(fd.beta<0.8?'#00e57a':fd.beta<1.2?'#f0c000':'#ff6666'):'#7a9bb5';
+    var betaDisp=fd.beta!==null&&fd.beta!==undefined?fd.beta.toFixed(2):'n/a';
+    var debtDisp=fd.debt_eq!==null&&fd.debt_eq!==undefined?fd.debt_eq.toFixed(0):'n/a';
+    var debtColor=fd.debt_eq!==null&&fd.debt_eq!==undefined?(fd.debt_eq<100?'#00e57a':fd.debt_eq<200?'#f0c000':'#ff6666'):'#7a9bb5';
+    mg+='<div class="kz-g4" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px">';  /* S434 B: schmal zweispaltig */
+    mg+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K29','FCF YIELD')+'>FCF YIELD'+kzRolle('K29')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.fcf_yield>3?'#00e57a':fd.fcf_yield>0?'#f0c000':'#ff6666')+'">'+fp(fd.fcf_yield)+'</div></div>';
+    mg+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K30',rl2)+'>'+rl2+''+kzRolle('K30')+'</div><div style="font-family:monospace;font-size:11px;color:'+(rv2>20?'#00e57a':rv2>10?'#f0c000':'#ff6666')+'">'+fp(rv2)+'</div></div>';
+    mg+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K40','Moat')+'>MOAT'+kzRolle('K40')+'</div><div style="font-family:monospace;font-size:11px;color:'+(fd.moat==='wide'?'#00e57a':fd.moat==='narrow'?'#00c8f0':'#7a9bb5')+'">'+((fd.moat||'--').toUpperCase())+'</div></div>';
+    mg+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K41','EV/EBITDA')+'>EV/EBITDA'+kzRolle('K41')+'</div><div style="font-family:monospace;font-size:11px;color:'+evebColor+'">'+evebDisp+'</div></div>';
+    mg+='</div>';
+    mg+='<div class="kz-g4" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-top:5px">';
+    mg+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K42','EV/EBIT')+'>EV/EBIT'+kzRolle('K42')+'</div><div style="font-family:monospace;font-size:11px;color:'+eveitColor2+'">'+eveitDisp2+'</div></div>';
+    mg+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K37','Beta')+'>BETA (Low-Vol)'+kzRolle('K37')+'</div><div style="font-family:monospace;font-size:11px;color:'+betaColor+'">'+betaDisp+'</div></div>';
+    mg+='<div style="'+box+'"><div style="font-family:monospace;font-size:10px;color:var(--mut)"'+kzTtl('K38','Debt/Equity')+'>DEBT/EQ %'+kzRolle('K38')+'</div><div style="font-family:monospace;font-size:11px;color:'+debtColor+'">'+debtDisp+'</div></div>';
+    mg+='</div>';
+  }
+  out+='<div class="wl-mangel" style="border-top:1px solid #1a2a3a;padding-top:8px;margin-top:8px">';
+  out+='<button id="wl-mangel-btn" class="wl-mangel-btn" onclick="wlMangelToggle()" aria-expanded="false">Bekannt fehlerhaft ('+kzZusIds(mg).length+') <span id="wl-mangel-pf">&#9656;</span></button>';
+  out+='<div id="wl-mangel-body" style="display:none;margin-top:6px">'+kzB2Zus(mg)+mg+'</div>';
+  out+='</div>';
   out+='</div>';
   out+='</div>';
   det.innerHTML=out;det.style.display='block';
@@ -3062,8 +3129,8 @@ function toggleSync(btn){
 
 /* ---- Sort-Umschalter ---- */
 function wlSetSort(mode, btn){
-  /* S419: ein Druck auf den aktiven Knopf fuehrt zurueck in den Grundzustand. */
-  WL_SORT = (WL_SORT === mode) ? 'std' : mode;
+  /* S419/S459: Rang fuehrt immer in den Grundzustand; ein zweiter Druck auf einen anderen aktiven Knopf ebenso. */
+  WL_SORT = (mode === 'std') ? 'std' : ((WL_SORT === mode) ? 'std' : mode);
   rWL();   /* S417: Optik in wlPaint */
 }
 
@@ -3454,15 +3521,32 @@ var _scoresIdx = {};
    Fehlt die Datei oder der Ticker: n/a (AP-3, nie 0). Schluessel = Rohticker wie
    scores.json; Alias-Zeilen ueber _scoresIdx[t].ticker. Keine Formel, keine Grenze. */
 var _qualDash = null;
+/* S459: EIN Eintrag je Ticker fuer Detailzeile, WL-Zeile und Sortierchip Q (Alias ueber _scoresIdx[t].ticker). */
+function qualRec(t){
+  var q=_qualDash,rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
+  if(!q||!q.ticker||typeof q.ticker!=='object')return null;
+  if(rec&&typeof rec==='object'&&rec.ticker&&q.ticker[rec.ticker])return q.ticker[rec.ticker];
+  return q.ticker[t]||null;
+}
+/* qualPct: Perzentil nur bei BEWERTET und endlicher Zahl, sonst null (AP-3, nie 0). */
+function qualPct(t){
+  var e=qualRec(t);
+  return (e&&e.zustand==='BEWERTET'&&typeof e.perzentil==='number'&&isFinite(e.perzentil))?e.perzentil:null;
+}
+/* S459n (Kla 19.10.2026 09:27): Titelzahl der Bezugsmenge -- meta.n der Projektion, sonst Zahl der BEWERTET-Eintraege mit Wert. */
+function qualN(){
+  var q=_qualDash,n=0,k,e;
+  if(!q||!q.ticker)return null;
+  if(q.meta&&typeof q.meta.n==='number'&&isFinite(q.meta.n)&&q.meta.n>0)return q.meta.n;
+  for(k in q.ticker){ e=q.ticker[k]; if(e&&e.zustand==='BEWERTET'&&typeof e.perzentil==='number'&&isFinite(e.perzentil)) n++; }
+  return n;
+}
 function qualDetText(t){
-  var q=_qualDash,rec=_scoresIdx?_scoresIdx[t]:null,e=null,st;
-  if(!q||!q.ticker||typeof q.ticker!=='object')return 'n/a';
-  if(rec&&typeof rec==='object'&&rec.ticker&&q.ticker[rec.ticker])e=q.ticker[rec.ticker];
-  else if(q.ticker[t])e=q.ticker[t];
+  var q=_qualDash,e=qualRec(t),st;
   if(!e)return 'n/a';
   if(e.zustand==='BEWERTET'&&typeof e.perzentil==='number'&&isFinite(e.perzentil)){
     st=(q.meta&&typeof q.meta.stichtag==='string')?k1Datum(q.meta.stichtag):'--';
-    return 'Perzentil '+e.perzentil.toFixed(1).replace('.',',')+' von 100 &middot; Stand '+st;
+    return 'Perzentil '+Math.round(e.perzentil)+' von 100 im Universum (h&ouml;her = besser) &middot; '+qualN()+' Titel &middot; Stand '+st;
   }
   if(e.zustand==='NONE_JAHRE')return 'nicht bewertbar (zu wenige Jahresabschl&uuml;sse)';
   if(e.zustand==='NONE_BAUSTEINE')return 'nicht bewertbar (keine Kennzahl aus den Jahresabschl&uuml;ssen rechenbar)';
@@ -3502,7 +3586,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.42';
+      var PAGE_VERSION = 'v6.6.43';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -3636,7 +3720,7 @@ fetch(_namesUrl)
       /* S453b: Qualitaet-Projektion des Ladelaufs (P1); Fehler -> _qualDash bleibt null -> n/a */
 fetch('https://raw.githubusercontent.com/klaschim11/Stockiq/main/stockiq_qual_dashboard.json')
   .then(function(r){if(!r.ok){throw new Error('HTTP '+r.status);}return r.json();})
-  .then(function(data){_qualDash=(data&&data.ticker&&typeof data.ticker==='object')?data:null;qualDetRefresh();})
+  .then(function(data){_qualDash=(data&&data.ticker&&typeof data.ticker==='object')?data:null;qualDetRefresh();if(typeof rWL==='function'){try{rWL();}catch(e){}}})
   .catch(function(e){console.log('qual_dashboard: '+e.message);});
       if (typeof rWL === "function") { try { rWL(); } catch(e) {} }
       if (typeof archSnapshot === "function") { try { archSnapshot(); } catch(e) {} }
@@ -6871,7 +6955,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.42 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.43 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
