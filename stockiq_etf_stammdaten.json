@@ -1,0 +1,3713 @@
+{
+ "kopf": {
+  "kennung": {
+   "senke": "etf_stammdaten_<JJJJMMTT>.json",
+   "lauf": "FREEZE",
+   "erzeuger": "etf_stammdaten_freeze.py"
+  },
+  "erzeugt": "2026-10-20T17:53:40",
+  "skript_version": "1.0",
+  "skript_md5": "3663b12e4844b0cb094aebb0f8d43cef",
+  "liste_version": "762a4d6aa7a664b2fc4f49712d58f85b",
+  "fund_juno_version": "7.9.57",
+  "mapping_version": "8a86bb1f7edaffb2c3d8dbb11879a833",
+  "sektor_namen_gleich_scores": true,
+  "n_gesamt": 24,
+  "n_mit_laendern": 14,
+  "n_mit_sektoren": 17,
+  "n_vollstaendig": 13,
+  "quellen": {
+   "Global X API-csv": 1,
+   "SPDR holdings-daily xlsx": 2,
+   "iShares latest-holdings.csv": 11,
+   "manuell (Kla-Download)": 6,
+   "n. a.": 4
+  },
+  "konzept": "Konzept ETF im Depot v1.3 Abschn. 5a; Region-Tabelle Konzept Depot-Soll v1.1 Abschn. 2.2",
+  "hinweis": "Stand je ETF und je Feld (stand_land aus der Datei, stand_sektor = Abruf); kein gemeinsames Datum."
+ },
+ "etf": [
+  {
+   "isin": "IE00B3YLTY66",
+   "symbol": "SPYI.DE",
+   "rolle": "KERN",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 3.9,
+    "Communication Services": 7.62,
+    "Consumer Cyclical": 8.41,
+    "Consumer Defensive": 4.38,
+    "Energy": 4.06,
+    "Financial Services": 15.54,
+    "Healthcare": 8.73,
+    "Industrials": 11.17,
+    "Real Estate": 2.05,
+    "Technology": 32.01,
+    "Utilities": 2.14,
+    "sonstige": -0.01
+   },
+   "quelle_land": "SPDR holdings-daily xlsx",
+   "stand_land": "2026-10-19",
+   "laender": {
+    "US": 63.6,
+    "JP": 5.72,
+    "UK": 3.34,
+    "TW": 3.28,
+    "CA": 3.18,
+    "CN": 2.16,
+    "KR": 2.13,
+    "CH": 1.93,
+    "FR": 1.91,
+    "DE": 1.83,
+    "AU": 1.51,
+    "IN": 1.48,
+    "NL": 1.06,
+    "SE": 0.76,
+    "ES": 0.72,
+    "IT": 0.6,
+    "BR": 0.57,
+    "SG": 0.47,
+    "DK": 0.43,
+    "HK": 0.39,
+    "ZA": 0.36,
+    "IL": 0.34,
+    "BE": 0.29,
+    "SA": 0.28,
+    "MX": 0.22,
+    "FI": 0.17,
+    "AE": 0.16,
+    "MY": 0.14,
+    "PL": 0.14,
+    "NO": 0.13,
+    "TH": 0.11,
+    "NZ": 0.1,
+    "KW": 0.07,
+    "PT": 0.07,
+    "QA": 0.06,
+    "TR": 0.05,
+    "CZ": 0.05,
+    "ID": 0.05,
+    "CL": 0.04,
+    "GR": 0.03,
+    "AT": 0.03,
+    "IE": 0.02,
+    "CO": 0.02,
+    "PH": 0.01,
+    "HU": 0.01,
+    "PE": 0.0,
+    "EG": 0.0,
+    "RU": 0.0
+   },
+   "regionen": {
+    "USA": 63.6,
+    "EUROPA": 13.51,
+    "JAPAN": 5.72,
+    "UEBRIGE_INDUSTRIELAENDER": 5.98,
+    "SCHWELLENLAENDER": 11.18,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "NVIDIA Corporation",
+     "gewicht": 4.3945,
+     "isin": "US67066G1040",
+     "ticker": null
+    },
+    {
+     "name": "Apple Inc.",
+     "gewicht": 4.3684,
+     "isin": "US0378331005",
+     "ticker": null
+    },
+    {
+     "name": "Microsoft Corporation",
+     "gewicht": 3.2524,
+     "isin": "US5949181045",
+     "ticker": null
+    },
+    {
+     "name": "Amazon.com Inc.",
+     "gewicht": 2.1876,
+     "isin": "US0231351067",
+     "ticker": null
+    },
+    {
+     "name": "Alphabet Inc. Class A",
+     "gewicht": 1.763,
+     "isin": "US02079K3059",
+     "ticker": null
+    },
+    {
+     "name": "Taiwan Semiconductor Manufacturing Co. Ltd.",
+     "gewicht": 1.6438,
+     "isin": "TW0002330008",
+     "ticker": null
+    },
+    {
+     "name": "Alphabet Inc. Class C",
+     "gewicht": 1.3879,
+     "isin": "US02079K1079",
+     "ticker": null
+    },
+    {
+     "name": "Meta Platforms Inc Class A",
+     "gewicht": 1.3216,
+     "isin": "US30303M1027",
+     "ticker": null
+    },
+    {
+     "name": "Broadcom Inc.",
+     "gewicht": 1.3072,
+     "isin": "US11135F1012",
+     "ticker": null
+    },
+    {
+     "name": "Micron Technology Inc.",
+     "gewicht": 0.908,
+     "isin": "US5951121038",
+     "ticker": null
+    },
+    {
+     "name": "Tesla Inc.",
+     "gewicht": 0.9043,
+     "isin": "US88160R1014",
+     "ticker": null
+    },
+    {
+     "name": "Eli Lilly and Company",
+     "gewicht": 0.849,
+     "isin": "US5324571083",
+     "ticker": null
+    },
+    {
+     "name": "JPMorgan Chase & Co.",
+     "gewicht": 0.787,
+     "isin": "US46625H1005",
+     "ticker": null
+    },
+    {
+     "name": "Advanced Micro Devices Inc.",
+     "gewicht": 0.7769,
+     "isin": "US0079031078",
+     "ticker": null
+    },
+    {
+     "name": "Samsung Electronics Co. Ltd.",
+     "gewicht": 0.7135,
+     "isin": "KR7005930003",
+     "ticker": null
+    },
+    {
+     "name": "Berkshire Hathaway Inc. Class B",
+     "gewicht": 0.6025,
+     "isin": "US0846707026",
+     "ticker": null
+    },
+    {
+     "name": "Exxonmobil Holdings Corporation",
+     "gewicht": 0.6001,
+     "isin": "US30233Q1085",
+     "ticker": null
+    },
+    {
+     "name": "ASML Holding NV",
+     "gewicht": 0.5583,
+     "isin": "NL0010273215",
+     "ticker": null
+    },
+    {
+     "name": "Visa Inc. Class A",
+     "gewicht": 0.5351,
+     "isin": "US92826C8394",
+     "ticker": null
+    },
+    {
+     "name": "Johnson & Johnson",
+     "gewicht": 0.492,
+     "isin": "US4781601046",
+     "ticker": null
+    },
+    {
+     "name": "SK hynix Inc.",
+     "gewicht": 0.4768,
+     "isin": "KR7000660001",
+     "ticker": null
+    },
+    {
+     "name": "AbbVie Inc.",
+     "gewicht": 0.4531,
+     "isin": "US00287Y1091",
+     "ticker": null
+    },
+    {
+     "name": "Walmart Inc.",
+     "gewicht": 0.4117,
+     "isin": "US9311421039",
+     "ticker": null
+    },
+    {
+     "name": "Chevron Corporation",
+     "gewicht": 0.3975,
+     "isin": "US1667641005",
+     "ticker": null
+    },
+    {
+     "name": "Mastercard Incorporated Class A",
+     "gewicht": 0.3951,
+     "isin": "US57636Q1040",
+     "ticker": null
+    }
+   ],
+   "positionen_n": 5981,
+   "gewicht_summe_roh": 100.0,
+   "anteil_nicht_aktie": 0.0,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": []
+  },
+  {
+   "isin": "IE00BDBRDM35",
+   "symbol": "EUNA.DE",
+   "rolle": "ALLOK",
+   "klasse": "A",
+   "quelle_sektor": "n. a.",
+   "stand_sektor": null,
+   "sektoren": null,
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "US": 39.8,
+    "CN": 15.13,
+    "JP": 10.19,
+    "FR": 3.97,
+    "UK": 3.86,
+    "DE": 3.59,
+    "IT": 3.38,
+    "XX": 2.85,
+    "CA": 2.73,
+    "ES": 2.29,
+    "KR": 1.51,
+    "AU": 1.51,
+    "BE": 0.8,
+    "CH": 0.63,
+    "MY": 0.61,
+    "NL": 0.59,
+    "MX": 0.55,
+    "AT": 0.55,
+    "ID": 0.52,
+    "TH": 0.49,
+    "PL": 0.46,
+    "SE": 0.41,
+    "SG": 0.31,
+    "FI": 0.31,
+    "IL": 0.27,
+    "PT": 0.27,
+    "DK": 0.26,
+    "NZ": 0.22,
+    "CZ": 0.2,
+    "IE": 0.19,
+    "GR": 0.18,
+    "NO": 0.16,
+    "SA": 0.16,
+    "SK": 0.14,
+    "HU": 0.11,
+    "RO": 0.11,
+    "PE": 0.1,
+    "QA": 0.08,
+    "CL": 0.08,
+    "LV": 0.07,
+    "SI": 0.05,
+    "KW": 0.05,
+    "HK": 0.04,
+    "LT": 0.04,
+    "AE": 0.03,
+    "LU": 0.03,
+    "HR": 0.03,
+    "UY": 0.01,
+    "CY": 0.01,
+    "PA": 0.01,
+    "BG": 0.01,
+    "PH": 0.01,
+    "OM": 0.0,
+    "PY": 0.0,
+    "IN": 0.0,
+    "BR": 0.0,
+    "AD": 0.0,
+    "KZ": 0.0,
+    "MA": 0.0,
+    "NG": 0.0,
+    "TW": 0.0,
+    "ZA": 0.0,
+    "IS": 0.0,
+    "CO": 0.0,
+    "MO": 0.0,
+    "AZ": 0.0,
+    "BM": 0.0,
+    "BH": 0.0,
+    "JO": 0.0,
+    "EE": 0.0,
+    "MU": 0.0,
+    "GA": 0.0,
+    "EC": 0.0,
+    "JE": 0.0,
+    "MT": 0.0,
+    "IM": 0.0
+   },
+   "regionen": {
+    "USA": 39.8,
+    "EUROPA": 22.22,
+    "JAPAN": 10.19,
+    "UEBRIGE_INDUSTRIELAENDER": 5.09,
+    "SCHWELLENLAENDER": 19.85,
+    "SONSTIGE": 2.85
+   },
+   "top": [
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.97,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "FHLMC 30YR UMBS SUPER",
+     "gewicht": 0.7,
+     "isin": null,
+     "ticker": "FRSD8155"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.5,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.47,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.37,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.36,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.31,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.27,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.26,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "FNMA 30YR UMBS SUPER",
+     "gewicht": 0.26,
+     "isin": null,
+     "ticker": "FNFS1571"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.24,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.22,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 0.22,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.21,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.21,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "CHINA DEVELOPMENT BANK",
+     "gewicht": 0.21,
+     "isin": null,
+     "ticker": "SDBC"
+    },
+    {
+     "name": "GNMA2 30YR 2021 PRODUCTION",
+     "gewicht": 0.19,
+     "isin": null,
+     "ticker": "G2MA7534"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 0.19,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "FHLMC 30YR UMBS RVS REMIC SUPER",
+     "gewicht": 0.19,
+     "isin": null,
+     "ticker": "FRSI2107"
+    },
+    {
+     "name": "CHINA DEVELOPMENT BANK",
+     "gewicht": 0.19,
+     "isin": null,
+     "ticker": "SDBC"
+    },
+    {
+     "name": "CHINA PEOPLES REPUBLIC OF (GOVERNM",
+     "gewicht": 0.18,
+     "isin": null,
+     "ticker": "CGB"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 0.18,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "UMBS 15YR TBA(REG B)",
+     "gewicht": 0.18,
+     "isin": null,
+     "ticker": "UM15"
+    },
+    {
+     "name": "FNMA 30YR UMBS SUPER",
+     "gewicht": 0.18,
+     "isin": null,
+     "ticker": "FNFS6130"
+    },
+    {
+     "name": "TREASURY NOTE (OTR)",
+     "gewicht": 0.18,
+     "isin": null,
+     "ticker": "TNOTE"
+    }
+   ],
+   "positionen_n": 19979,
+   "gewicht_summe_roh": 75.73,
+   "anteil_nicht_aktie": 2.42,
+   "anlageklasse": "Anleihen",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "ohne Sektor",
+    "Land unbekannt: 'Supranational' -> XX (SONSTIGE)",
+    "Gewichtssumme 75.73 % ausserhalb 95-105 % -> unvollstaendig"
+   ]
+  },
+  {
+   "isin": "IE00B4ND3602",
+   "symbol": "PPFB.DE",
+   "rolle": "KLASSE",
+   "klasse": "G",
+   "quelle_sektor": "n. a.",
+   "stand_sektor": null,
+   "sektoren": null,
+   "quelle_land": "n. a.",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": null,
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Gold",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "ohne Sektor",
+    "keine Bestandsliste erwartet (ETC/Swap)"
+   ]
+  },
+  {
+   "isin": "IE00BD6FTQ80",
+   "symbol": "CMOD.MI",
+   "rolle": "ALLOK",
+   "klasse": "R",
+   "quelle_sektor": "n. a.",
+   "stand_sektor": null,
+   "sektoren": null,
+   "quelle_land": "n. a.",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": null,
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Rohstoffe",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "ohne Sektor (yfinance unplausibel, S467)",
+    "keine Bestandsliste erwartet (ETC/Swap)"
+   ]
+  },
+  {
+   "isin": "IE00BP3QZ601",
+   "symbol": "IS3Q.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 3.17,
+    "Communication Services": 9.26,
+    "Consumer Cyclical": 8.4,
+    "Consumer Defensive": 4.65,
+    "Energy": 3.72,
+    "Financial Services": 15.1,
+    "Healthcare": 8.97,
+    "Industrials": 9.61,
+    "Real Estate": 1.47,
+    "Technology": 33.17,
+    "Utilities": 2.48,
+    "sonstige": 0.0
+   },
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "US": 73.37,
+    "UK": 4.35,
+    "CH": 3.5,
+    "JP": 3.18,
+    "NL": 3.15,
+    "CA": 2.4,
+    "AU": 1.85,
+    "ES": 1.81,
+    "FR": 1.77,
+    "DE": 1.4,
+    "IT": 0.78,
+    "HK": 0.73,
+    "DK": 0.54,
+    "SE": 0.45,
+    "FI": 0.27,
+    "NO": 0.14,
+    "SG": 0.09,
+    "IL": 0.09,
+    "BE": 0.05,
+    "AT": 0.04,
+    "NZ": 0.03
+   },
+   "regionen": {
+    "USA": 73.37,
+    "EUROPA": 18.25,
+    "JAPAN": 3.18,
+    "UEBRIGE_INDUSTRIELAENDER": 5.2,
+    "SCHWELLENLAENDER": 0.0,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "MICROSOFT",
+     "gewicht": 6.51,
+     "isin": null,
+     "ticker": "MSFT"
+    },
+    {
+     "name": "APPLE",
+     "gewicht": 5.9,
+     "isin": null,
+     "ticker": "AAPL"
+    },
+    {
+     "name": "NVIDIA",
+     "gewicht": 4.99,
+     "isin": null,
+     "ticker": "NVDA"
+    },
+    {
+     "name": "META PLATFORMS CLASS A",
+     "gewicht": 4.06,
+     "isin": null,
+     "ticker": "META"
+    },
+    {
+     "name": "VISA CLASS A",
+     "gewicht": 3.79,
+     "isin": null,
+     "ticker": "V"
+    },
+    {
+     "name": "ASML HOLDING",
+     "gewicht": 2.92,
+     "isin": null,
+     "ticker": "ASML"
+    },
+    {
+     "name": "ELI LILLY",
+     "gewicht": 2.68,
+     "isin": null,
+     "ticker": "LLY"
+    },
+    {
+     "name": "MASTERCARD CLASS A",
+     "gewicht": 2.17,
+     "isin": null,
+     "ticker": "MA"
+    },
+    {
+     "name": "TJX",
+     "gewicht": 2.07,
+     "isin": null,
+     "ticker": "TJX"
+    },
+    {
+     "name": "ALPHABET CLASS A",
+     "gewicht": 1.69,
+     "isin": null,
+     "ticker": "GOOGL"
+    },
+    {
+     "name": "LAM RESEARCH",
+     "gewicht": 1.67,
+     "isin": null,
+     "ticker": "LRCX"
+    },
+    {
+     "name": "ALPHABET CLASS C",
+     "gewicht": 1.33,
+     "isin": null,
+     "ticker": "GOOG"
+    },
+    {
+     "name": "APPLIED MATERIAL INC",
+     "gewicht": 1.32,
+     "isin": null,
+     "ticker": "AMAT"
+    },
+    {
+     "name": "JOHNSON & JOHNSON",
+     "gewicht": 1.19,
+     "isin": null,
+     "ticker": "JNJ"
+    },
+    {
+     "name": "CATERPILLAR INC",
+     "gewicht": 1.04,
+     "isin": null,
+     "ticker": "CAT"
+    },
+    {
+     "name": "NETFLIX",
+     "gewicht": 1.0,
+     "isin": null,
+     "ticker": "NFLX"
+    },
+    {
+     "name": "KLA",
+     "gewicht": 0.94,
+     "isin": null,
+     "ticker": "KLAC"
+    },
+    {
+     "name": "TOTALENERGIES",
+     "gewicht": 0.91,
+     "isin": null,
+     "ticker": "TTE"
+    },
+    {
+     "name": "COSTCO WHOLESALE CORP",
+     "gewicht": 0.91,
+     "isin": null,
+     "ticker": "COST"
+    },
+    {
+     "name": "MERCK & CO INC",
+     "gewicht": 0.89,
+     "isin": null,
+     "ticker": "MRK"
+    },
+    {
+     "name": "IBERDROLA",
+     "gewicht": 0.89,
+     "isin": null,
+     "ticker": "IBE"
+    },
+    {
+     "name": "ROCHE PS PAR AG",
+     "gewicht": 0.88,
+     "isin": null,
+     "ticker": "ROP"
+    },
+    {
+     "name": "WALMART",
+     "gewicht": 0.84,
+     "isin": null,
+     "ticker": "WMT"
+    },
+    {
+     "name": "COCA-COLA",
+     "gewicht": 0.84,
+     "isin": null,
+     "ticker": "KO"
+    },
+    {
+     "name": "PROCTER & GAMBLE",
+     "gewicht": 0.76,
+     "isin": null,
+     "ticker": "PG"
+    }
+   ],
+   "positionen_n": 290,
+   "gewicht_summe_roh": 100.05,
+   "anteil_nicht_aktie": 0.23,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": []
+  },
+  {
+   "isin": "LU2089238385",
+   "symbol": "PRAJ.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 3.24,
+    "Communication Services": 9.09,
+    "Consumer Cyclical": 11.18,
+    "Consumer Defensive": 3.88,
+    "Energy": 0.85,
+    "Financial Services": 18.59,
+    "Healthcare": 5.29,
+    "Industrials": 23.44,
+    "Real Estate": 2.39,
+    "Technology": 20.87,
+    "Utilities": 1.17,
+    "sonstige": 0.01
+   },
+   "quelle_land": "manuell (Kla-Download)",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": [
+    {
+     "name": "Mitsubishi UFJ Financial Group Inc",
+     "gewicht": 4.3333,
+     "isin": null,
+     "ticker": "8306.T"
+    },
+    {
+     "name": "Toyota Motor Corp",
+     "gewicht": 2.8125,
+     "isin": null,
+     "ticker": "7203.T"
+    },
+    {
+     "name": "Tokyo Electron Ltd",
+     "gewicht": 2.7559,
+     "isin": null,
+     "ticker": "8035.T"
+    },
+    {
+     "name": "Sumitomo Mitsui Financial Group Inc",
+     "gewicht": 2.7091,
+     "isin": null,
+     "ticker": "8316.T"
+    },
+    {
+     "name": "Advantest Corp",
+     "gewicht": 2.6225,
+     "isin": null,
+     "ticker": "6857.T"
+    },
+    {
+     "name": "Hitachi Ltd",
+     "gewicht": 2.5779,
+     "isin": null,
+     "ticker": "6501.T"
+    },
+    {
+     "name": "Sony Group Corp",
+     "gewicht": 2.3462,
+     "isin": null,
+     "ticker": "6758.T"
+    },
+    {
+     "name": "SoftBank Group Corp",
+     "gewicht": 2.285,
+     "isin": null,
+     "ticker": "9984.T"
+    },
+    {
+     "name": "Recruit Holdings Co Ltd",
+     "gewicht": 2.2692,
+     "isin": null,
+     "ticker": "6098.T"
+    },
+    {
+     "name": "Mizuho Financial Group Inc",
+     "gewicht": 2.2067,
+     "isin": null,
+     "ticker": "8411.T"
+    }
+   ],
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "Laender nicht verfuegbar (Kla-Download ausstehend)",
+    "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
+   ]
+  },
+  {
+   "isin": "IE00BQN1K901",
+   "symbol": "CEMS.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 5.52,
+    "Communication Services": 3.28,
+    "Consumer Cyclical": 5.57,
+    "Consumer Defensive": 7.89,
+    "Energy": 5.57,
+    "Financial Services": 26.59,
+    "Healthcare": 13.75,
+    "Industrials": 18.81,
+    "Real Estate": 0.6,
+    "Technology": 7.92,
+    "Utilities": 4.49,
+    "sonstige": 0.01
+   },
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "UK": 24.17,
+    "DE": 23.89,
+    "FR": 22.68,
+    "ES": 6.1,
+    "NL": 5.35,
+    "IT": 5.0,
+    "SE": 4.75,
+    "FI": 2.16,
+    "DK": 1.83,
+    "BE": 1.23,
+    "IE": 0.98,
+    "AT": 0.79,
+    "NO": 0.77,
+    "PT": 0.27,
+    "CH": 0.03
+   },
+   "regionen": {
+    "USA": 0.0,
+    "EUROPA": 100.0,
+    "JAPAN": 0.0,
+    "UEBRIGE_INDUSTRIELAENDER": 0.0,
+    "SCHWELLENLAENDER": 0.0,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "SIEMENS N AG",
+     "gewicht": 4.12,
+     "isin": null,
+     "ticker": "SIE"
+    },
+    {
+     "name": "SANOFI SA",
+     "gewicht": 4.02,
+     "isin": null,
+     "ticker": "SAN"
+    },
+    {
+     "name": "BRITISH AMERICAN TOBACCO",
+     "gewicht": 3.45,
+     "isin": null,
+     "ticker": "BATS"
+    },
+    {
+     "name": "BAYER AG",
+     "gewicht": 3.04,
+     "isin": null,
+     "ticker": "BAYN"
+    },
+    {
+     "name": "GLAXOSMITHKLINE",
+     "gewicht": 3.03,
+     "isin": null,
+     "ticker": "GSK"
+    },
+    {
+     "name": "HSBC HOLDINGS PLC",
+     "gewicht": 2.99,
+     "isin": null,
+     "ticker": "HSBA"
+    },
+    {
+     "name": "BANCO SANTANDER",
+     "gewicht": 2.48,
+     "isin": null,
+     "ticker": "SAN"
+    },
+    {
+     "name": "BNP PARIBAS SA",
+     "gewicht": 2.45,
+     "isin": null,
+     "ticker": "BNP"
+    },
+    {
+     "name": "DHL AG",
+     "gewicht": 2.01,
+     "isin": null,
+     "ticker": "DHL"
+    },
+    {
+     "name": "VINCI SA",
+     "gewicht": 1.92,
+     "isin": null,
+     "ticker": "DG"
+    },
+    {
+     "name": "TOTALENERGIES",
+     "gewicht": 1.91,
+     "isin": null,
+     "ticker": "TTE"
+    },
+    {
+     "name": "SHELL",
+     "gewicht": 1.87,
+     "isin": null,
+     "ticker": "SHEL"
+    },
+    {
+     "name": "INFINEON TECHNOLOGIES AG",
+     "gewicht": 1.79,
+     "isin": null,
+     "ticker": "IFX"
+    },
+    {
+     "name": "NOKIA",
+     "gewicht": 1.79,
+     "isin": null,
+     "ticker": "NOKIA"
+    },
+    {
+     "name": "BARCLAYS PLC",
+     "gewicht": 1.64,
+     "isin": null,
+     "ticker": "BARC"
+    },
+    {
+     "name": "BANCO BILBAO VIZCAYA ARGENTARIA SA",
+     "gewicht": 1.61,
+     "isin": null,
+     "ticker": "BBVA"
+    },
+    {
+     "name": "UNICREDIT",
+     "gewicht": 1.43,
+     "isin": null,
+     "ticker": "UCG"
+    },
+    {
+     "name": "AERCAP HOLDINGS",
+     "gewicht": 1.41,
+     "isin": null,
+     "ticker": "AER"
+    },
+    {
+     "name": "RIO TINTO",
+     "gewicht": 1.4,
+     "isin": null,
+     "ticker": "RIO"
+    },
+    {
+     "name": "VOLVO CLASS B",
+     "gewicht": 1.4,
+     "isin": null,
+     "ticker": "VOLV B"
+    },
+    {
+     "name": "NATIONAL GRID PLC",
+     "gewicht": 1.37,
+     "isin": null,
+     "ticker": "NG."
+    },
+    {
+     "name": "COMPAGNIE DE SAINT GOBAIN SA",
+     "gewicht": 1.35,
+     "isin": null,
+     "ticker": "SGO"
+    },
+    {
+     "name": "DEUTSCHE BANK AG",
+     "gewicht": 1.34,
+     "isin": null,
+     "ticker": "DBK"
+    },
+    {
+     "name": "MERCEDES-BENZ GROUP N AG",
+     "gewicht": 1.31,
+     "isin": null,
+     "ticker": "MBG"
+    },
+    {
+     "name": "NATWEST GROUP PLC",
+     "gewicht": 1.19,
+     "isin": null,
+     "ticker": "NWG"
+    }
+   ],
+   "positionen_n": 146,
+   "gewicht_summe_roh": 100.07,
+   "anteil_nicht_aktie": 0.36,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": []
+  },
+  {
+   "isin": "IE00B4WXJJ64",
+   "symbol": "EUNH.DE",
+   "rolle": "ALLOK",
+   "klasse": "A",
+   "quelle_sektor": "n. a.",
+   "stand_sektor": null,
+   "sektoren": null,
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "FR": 23.72,
+    "IT": 21.4,
+    "DE": 19.45,
+    "ES": 14.21,
+    "BE": 4.95,
+    "NL": 4.07,
+    "AT": 3.48,
+    "PT": 1.95,
+    "FI": 1.75,
+    "IE": 1.4,
+    "GR": 1.02,
+    "SK": 0.81,
+    "SI": 0.39,
+    "HR": 0.37,
+    "LU": 0.29,
+    "LT": 0.24,
+    "BG": 0.24,
+    "LV": 0.16,
+    "CY": 0.11
+   },
+   "regionen": {
+    "USA": 0.0,
+    "EUROPA": 97.39,
+    "JAPAN": 0.0,
+    "UEBRIGE_INDUSTRIELAENDER": 0.0,
+    "SCHWELLENLAENDER": 2.61,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.95,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.86,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.79,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF)",
+     "gewicht": 0.78,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.77,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.76,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.75,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF)",
+     "gewicht": 0.74,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.73,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.72,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF)",
+     "gewicht": 0.69,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.65,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.65,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF)",
+     "gewicht": 0.65,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF)",
+     "gewicht": 0.63,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.61,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.59,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.59,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.57,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF)",
+     "gewicht": 0.56,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "GERMANY (FEDERAL REPUBLIC OF) RegS",
+     "gewicht": 0.55,
+     "isin": null,
+     "ticker": "DBR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF)",
+     "gewicht": 0.55,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.55,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.52,
+     "isin": null,
+     "ticker": "FRTR"
+    },
+    {
+     "name": "FRANCE (REPUBLIC OF) RegS",
+     "gewicht": 0.48,
+     "isin": null,
+     "ticker": "FRTR"
+    }
+   ],
+   "positionen_n": 554,
+   "gewicht_summe_roh": 100.08,
+   "anteil_nicht_aktie": 0.07,
+   "anlageklasse": "Anleihen",
+   "vollstaendig": "ja",
+   "hinweis": [
+    "ohne Sektor"
+   ]
+  },
+  {
+   "isin": "IE00BFXYHY63",
+   "symbol": "OM3M.DE",
+   "rolle": "ALLOK",
+   "klasse": "A",
+   "quelle_sektor": "n. a.",
+   "stand_sektor": null,
+   "sektoren": null,
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "US": 100.0
+   },
+   "regionen": {
+    "USA": 100.0,
+    "EUROPA": 0.0,
+    "JAPAN": 0.0,
+    "UEBRIGE_INDUSTRIELAENDER": 0.0,
+    "SCHWELLENLAENDER": 0.0,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 2.15,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 2.0,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 2.0,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.94,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.92,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.9,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.87,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.86,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.85,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "US TREASURY N/B",
+     "gewicht": 1.84,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.82,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.82,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.81,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.74,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE (2OLD)",
+     "gewicht": 1.43,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.42,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.42,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.42,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE (OLD)",
+     "gewicht": 1.42,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.41,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.41,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.41,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.41,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.41,
+     "isin": null,
+     "ticker": "TNOTE"
+    },
+    {
+     "name": "TREASURY NOTE",
+     "gewicht": 1.4,
+     "isin": null,
+     "ticker": "TNOTE"
+    }
+   ],
+   "positionen_n": 88,
+   "gewicht_summe_roh": 100.01,
+   "anteil_nicht_aktie": 0.11,
+   "anlageklasse": "Anleihen",
+   "vollstaendig": "ja",
+   "hinweis": [
+    "ohne Sektor"
+   ]
+  },
+  {
+   "isin": "IE000OJ5TQP4",
+   "symbol": "ASWC.DE",
+   "rolle": "THEMA",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 0.0,
+    "Communication Services": 0.0,
+    "Consumer Cyclical": 0.0,
+    "Consumer Defensive": 0.0,
+    "Energy": 0.0,
+    "Financial Services": 0.0,
+    "Healthcare": 0.0,
+    "Industrials": 63.9,
+    "Real Estate": 0.0,
+    "Technology": 36.1,
+    "Utilities": 0.0,
+    "sonstige": 0.0
+   },
+   "quelle_land": "manuell (Kla-Download)",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": [
+    {
+     "name": "Palantir Technologies Inc Ordinary Shares - Class A",
+     "gewicht": 5.8102,
+     "isin": null,
+     "ticker": "PLTR"
+    },
+    {
+     "name": "CrowdStrike Holdings Inc Class A",
+     "gewicht": 5.7073,
+     "isin": null,
+     "ticker": "CRWD"
+    },
+    {
+     "name": "Safran SA",
+     "gewicht": 4.9692,
+     "isin": null,
+     "ticker": "SAF.PA"
+    },
+    {
+     "name": "BAE Systems PLC",
+     "gewicht": 4.9087,
+     "isin": null,
+     "ticker": "BA.L"
+    },
+    {
+     "name": "Palo Alto Networks Inc",
+     "gewicht": 4.7851,
+     "isin": null,
+     "ticker": "PANW"
+    },
+    {
+     "name": "Fortinet Inc",
+     "gewicht": 4.6592,
+     "isin": null,
+     "ticker": "FTNT"
+    },
+    {
+     "name": "Rheinmetall AG",
+     "gewicht": 4.6174,
+     "isin": null,
+     "ticker": "RHM.DE"
+    },
+    {
+     "name": "Lockheed Martin Corp",
+     "gewicht": 4.1383,
+     "isin": null,
+     "ticker": "LMT"
+    },
+    {
+     "name": "Cisco Systems Inc",
+     "gewicht": 3.9531,
+     "isin": null,
+     "ticker": "CSCO"
+    },
+    {
+     "name": "RTX Corp",
+     "gewicht": 3.9517,
+     "isin": null,
+     "ticker": "RTX"
+    }
+   ],
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "Laender nicht verfuegbar (Kla-Download ausstehend)",
+    "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
+   ]
+  },
+  {
+   "isin": "IE000NDWFGA5",
+   "symbol": "URNU.DE",
+   "rolle": "THEMA",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 5.37,
+    "Communication Services": 0.0,
+    "Consumer Cyclical": 0.0,
+    "Consumer Defensive": 0.0,
+    "Energy": 60.18,
+    "Financial Services": 0.0,
+    "Healthcare": 0.0,
+    "Industrials": 26.05,
+    "Real Estate": 0.0,
+    "Technology": 1.12,
+    "Utilities": 7.28,
+    "sonstige": 0.0
+   },
+   "quelle_land": "Global X API-csv",
+   "stand_land": "2026-10-19",
+   "laender": {
+    "CA": 34.98,
+    "US": 29.51,
+    "KR": 13.69,
+    "AU": 9.81,
+    "JP": 5.14,
+    "ZA": 2.75,
+    "JE": 2.74,
+    "KY": 1.3,
+    "NL": 0.08
+   },
+   "regionen": {
+    "USA": 29.51,
+    "EUROPA": 0.08,
+    "JAPAN": 5.14,
+    "UEBRIGE_INDUSTRIELAENDER": 44.79,
+    "SCHWELLENLAENDER": 20.48,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "CAMECO CORP",
+     "gewicht": 15.77,
+     "isin": "CA13321L1085",
+     "ticker": "CCO CN"
+    },
+    {
+     "name": "NEXGEN ENERGY LTD",
+     "gewicht": 8.16,
+     "isin": "CA65340P1062",
+     "ticker": "NXE CN"
+    },
+    {
+     "name": "NAC KAZATOMPROM JSC-GDR REGS",
+     "gewicht": 6.201,
+     "isin": "US63253R2013",
+     "ticker": "KAP LI"
+    },
+    {
+     "name": "OKLO INC",
+     "gewicht": 6.17,
+     "isin": "US02156V1098",
+     "ticker": "OKLO"
+    },
+    {
+     "name": "URANIUM ENERGY CORP",
+     "gewicht": 5.947,
+     "isin": "US9168961038",
+     "ticker": "UEC"
+    },
+    {
+     "name": "PALADIN ENERGY LTD",
+     "gewicht": 3.494,
+     "isin": "AU000000PDN8",
+     "ticker": "PDN AU"
+    },
+    {
+     "name": "DENISON MINES CORP",
+     "gewicht": 3.183,
+     "isin": "CA2483561072",
+     "ticker": "DML CN"
+    },
+    {
+     "name": "ENERGY FUELS INC",
+     "gewicht": 3.147,
+     "isin": "CA2926717083",
+     "ticker": "EFR CN"
+    },
+    {
+     "name": "CENTRUS ENERGY CORP-CLASS A",
+     "gewicht": 3.103,
+     "isin": "US15643U1043",
+     "ticker": "LEU"
+    },
+    {
+     "name": "NUSCALE POWER CORP",
+     "gewicht": 2.961,
+     "isin": "US67079K1007",
+     "ticker": "SMR"
+    },
+    {
+     "name": "X-ENERGY INC",
+     "gewicht": 2.825,
+     "isin": "US98386P1021",
+     "ticker": "XE"
+    },
+    {
+     "name": "ITOCHU CORP",
+     "gewicht": 2.786,
+     "isin": "JP3143600009",
+     "ticker": "8001 JP"
+    },
+    {
+     "name": "SIBANYE STILLWATER LTD",
+     "gewicht": 2.744,
+     "isin": "ZAE000259701",
+     "ticker": "SSW SJ"
+    },
+    {
+     "name": "YELLOW CAKE PLC",
+     "gewicht": 2.735,
+     "isin": "JE00BF50RG45",
+     "ticker": "YCA LN"
+    },
+    {
+     "name": "DAEWOO ENGINEERING & CONSTR",
+     "gewicht": 2.437,
+     "isin": "KR7047040001",
+     "ticker": "047040 KS"
+    },
+    {
+     "name": "HYUNDAI ENGINEERING & CONST",
+     "gewicht": 2.369,
+     "isin": "KR7000720003",
+     "ticker": "000720 KS"
+    },
+    {
+     "name": "DOOSAN ENERBILITY CO LTD",
+     "gewicht": 2.361,
+     "isin": "KR7034020008",
+     "ticker": "034020 KS"
+    },
+    {
+     "name": "BHP GROUP LTD",
+     "gewicht": 2.343,
+     "isin": "AU000000BHP4",
+     "ticker": "BHP AU"
+    },
+    {
+     "name": "MITSUBISHI HEAVY INDUSTRIES",
+     "gewicht": 2.339,
+     "isin": "JP3900000005",
+     "ticker": "7011 JP"
+    },
+    {
+     "name": "KEPCO ENGINEERING & CONSTRUC",
+     "gewicht": 2.236,
+     "isin": "KR7052690005",
+     "ticker": "052690 KS"
+    },
+    {
+     "name": "GS ENGINEERING & CONSTRUCT",
+     "gewicht": 2.219,
+     "isin": "KR7006360002",
+     "ticker": "006360 KS"
+    },
+    {
+     "name": "AECON GROUP INC",
+     "gewicht": 2.071,
+     "isin": "CA00762V1094",
+     "ticker": "ARE CN"
+    },
+    {
+     "name": "SAMSUNG C&T CORP",
+     "gewicht": 2.036,
+     "isin": "KR7028260008",
+     "ticker": "028260 KS"
+    },
+    {
+     "name": "CGN MINING CO LTD",
+     "gewicht": 1.302,
+     "isin": "KYG2029E1052",
+     "ticker": "1164 HK"
+    },
+    {
+     "name": "SILEX SYSTEMS LTD",
+     "gewicht": 0.895,
+     "isin": "AU000000SLX4",
+     "ticker": "SLX AU"
+    }
+   ],
+   "positionen_n": 57,
+   "gewicht_summe_roh": 100.0,
+   "anteil_nicht_aktie": 0.2,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": [
+    "Land = Boersenplatz, nicht Sitz"
+   ]
+  },
+  {
+   "isin": "DE000A0S9GB0",
+   "symbol": "4GLD.DE",
+   "rolle": "KLASSE",
+   "klasse": "G",
+   "quelle_sektor": "n. a.",
+   "stand_sektor": null,
+   "sektoren": null,
+   "quelle_land": "n. a.",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": null,
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Gold",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "ohne Sektor",
+    "keine Bestandsliste erwartet (ETC/Swap)"
+   ]
+  },
+  {
+   "isin": "IE00B5BMR087",
+   "symbol": "SXR8.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 1.56,
+    "Communication Services": 9.95,
+    "Consumer Cyclical": 8.74,
+    "Consumer Defensive": 4.33,
+    "Energy": 3.4,
+    "Financial Services": 11.2,
+    "Healthcare": 9.26,
+    "Industrials": 7.54,
+    "Real Estate": 1.7,
+    "Technology": 40.45,
+    "Utilities": 1.88,
+    "sonstige": -0.01
+   },
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "US": 100.0
+   },
+   "regionen": {
+    "USA": 100.0,
+    "EUROPA": 0.0,
+    "JAPAN": 0.0,
+    "UEBRIGE_INDUSTRIELAENDER": 0.0,
+    "SCHWELLENLAENDER": 0.0,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "NVIDIA",
+     "gewicht": 7.85,
+     "isin": null,
+     "ticker": "NVDA"
+    },
+    {
+     "name": "APPLE",
+     "gewicht": 7.59,
+     "isin": null,
+     "ticker": "AAPL"
+    },
+    {
+     "name": "MICROSOFT",
+     "gewicht": 5.95,
+     "isin": null,
+     "ticker": "MSFT"
+    },
+    {
+     "name": "AMAZON.COM INC",
+     "gewicht": 3.72,
+     "isin": null,
+     "ticker": "AMZN"
+    },
+    {
+     "name": "ALPHABET CLASS A",
+     "gewicht": 3.03,
+     "isin": null,
+     "ticker": "GOOGL"
+    },
+    {
+     "name": "ALPHABET CLASS C",
+     "gewicht": 2.42,
+     "isin": null,
+     "ticker": "GOOG"
+    },
+    {
+     "name": "META PLATFORMS CLASS A",
+     "gewicht": 2.37,
+     "isin": null,
+     "ticker": "META"
+    },
+    {
+     "name": "BROADCOM INC",
+     "gewicht": 2.37,
+     "isin": null,
+     "ticker": "AVGO"
+    },
+    {
+     "name": "ELI LILLY",
+     "gewicht": 1.52,
+     "isin": null,
+     "ticker": "LLY"
+    },
+    {
+     "name": "TESLA INC",
+     "gewicht": 1.51,
+     "isin": null,
+     "ticker": "TSLA"
+    },
+    {
+     "name": "MICRON TECHNOLOGY",
+     "gewicht": 1.5,
+     "isin": null,
+     "ticker": "MU"
+    },
+    {
+     "name": "BERKSHIRE HATHAWAY INC CLASS B",
+     "gewicht": 1.5,
+     "isin": null,
+     "ticker": "BRK B"
+    },
+    {
+     "name": "JPMORGAN CHASE & CO",
+     "gewicht": 1.37,
+     "isin": null,
+     "ticker": "JPM"
+    },
+    {
+     "name": "ADVANCED MICRO DEVICES",
+     "gewicht": 1.31,
+     "isin": null,
+     "ticker": "AMD"
+    },
+    {
+     "name": "EXXONMOBIL HOLDINGS CORP",
+     "gewicht": 1.11,
+     "isin": null,
+     "ticker": "XOM"
+    },
+    {
+     "name": "VISA CLASS A",
+     "gewicht": 1.04,
+     "isin": null,
+     "ticker": "V"
+    },
+    {
+     "name": "JOHNSON & JOHNSON",
+     "gewicht": 0.93,
+     "isin": null,
+     "ticker": "JNJ"
+    },
+    {
+     "name": "WALMART",
+     "gewicht": 0.8,
+     "isin": null,
+     "ticker": "WMT"
+    },
+    {
+     "name": "ABBVIE",
+     "gewicht": 0.76,
+     "isin": null,
+     "ticker": "ABBV"
+    },
+    {
+     "name": "MASTERCARD CLASS A",
+     "gewicht": 0.76,
+     "isin": null,
+     "ticker": "MA"
+    },
+    {
+     "name": "INTEL CORPORATION",
+     "gewicht": 0.68,
+     "isin": null,
+     "ticker": "INTC"
+    },
+    {
+     "name": "CHEVRON",
+     "gewicht": 0.67,
+     "isin": null,
+     "ticker": "CVX"
+    },
+    {
+     "name": "COSTCO WHOLESALE CORP",
+     "gewicht": 0.66,
+     "isin": null,
+     "ticker": "COST"
+    },
+    {
+     "name": "PALANTIR TECHNOLOGIES CLASS A",
+     "gewicht": 0.65,
+     "isin": null,
+     "ticker": "PLTR"
+    },
+    {
+     "name": "CISCO SYSTEMS INC",
+     "gewicht": 0.64,
+     "isin": null,
+     "ticker": "CSCO"
+    }
+   ],
+   "positionen_n": 504,
+   "gewicht_summe_roh": 100.11,
+   "anteil_nicht_aktie": 0.12,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": []
+  },
+  {
+   "isin": "IE00B4K48X80",
+   "symbol": "EUNK.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 5.45,
+    "Communication Services": 3.31,
+    "Consumer Cyclical": 5.93,
+    "Consumer Defensive": 8.26,
+    "Energy": 5.38,
+    "Financial Services": 24.91,
+    "Healthcare": 12.76,
+    "Industrials": 18.99,
+    "Real Estate": 0.62,
+    "Technology": 9.82,
+    "Utilities": 4.58,
+    "sonstige": -0.01
+   },
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "UK": 23.08,
+    "CH": 14.83,
+    "FR": 14.54,
+    "DE": 13.63,
+    "NL": 8.86,
+    "ES": 6.16,
+    "SE": 5.42,
+    "IT": 4.9,
+    "DK": 2.51,
+    "FI": 1.78,
+    "BE": 1.7,
+    "NO": 1.03,
+    "IE": 0.65,
+    "AT": 0.57,
+    "PT": 0.34
+   },
+   "regionen": {
+    "USA": 0.0,
+    "EUROPA": 100.0,
+    "JAPAN": 0.0,
+    "UEBRIGE_INDUSTRIELAENDER": 0.0,
+    "SCHWELLENLAENDER": 0.0,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "ASML HOLDING",
+     "gewicht": 4.66,
+     "isin": null,
+     "ticker": "ASML"
+    },
+    {
+     "name": "HSBC HOLDINGS PLC",
+     "gewicht": 2.37,
+     "isin": null,
+     "ticker": "HSBA"
+    },
+    {
+     "name": "ROCHE PS PAR AG",
+     "gewicht": 2.34,
+     "isin": null,
+     "ticker": "ROP"
+    },
+    {
+     "name": "SHELL",
+     "gewicht": 2.2,
+     "isin": null,
+     "ticker": "SHEL"
+    },
+    {
+     "name": "NOVARTIS AG",
+     "gewicht": 2.0,
+     "isin": null,
+     "ticker": "NOVN"
+    },
+    {
+     "name": "NESTLE SA",
+     "gewicht": 1.86,
+     "isin": null,
+     "ticker": "NESN"
+    },
+    {
+     "name": "ASTRAZENECA PLC",
+     "gewicht": 1.81,
+     "isin": null,
+     "ticker": "AZN"
+    },
+    {
+     "name": "SAP",
+     "gewicht": 1.64,
+     "isin": null,
+     "ticker": "SAP"
+    },
+    {
+     "name": "SIEMENS N AG",
+     "gewicht": 1.59,
+     "isin": null,
+     "ticker": "SIE"
+    },
+    {
+     "name": "BANCO SANTANDER",
+     "gewicht": 1.4,
+     "isin": null,
+     "ticker": "SAN"
+    },
+    {
+     "name": "ALLIANZ",
+     "gewicht": 1.34,
+     "isin": null,
+     "ticker": "ALV"
+    },
+    {
+     "name": "TOTALENERGIES",
+     "gewicht": 1.27,
+     "isin": null,
+     "ticker": "TTE"
+    },
+    {
+     "name": "SCHNEIDER ELECTRIC",
+     "gewicht": 1.13,
+     "isin": null,
+     "ticker": "SU"
+    },
+    {
+     "name": "IBERDROLA",
+     "gewicht": 1.1,
+     "isin": null,
+     "ticker": "IBE"
+    },
+    {
+     "name": "ROLLS-ROYCE HOLDINGS PLC",
+     "gewicht": 1.08,
+     "isin": null,
+     "ticker": "RR."
+    },
+    {
+     "name": "UBS GROUP AG",
+     "gewicht": 1.08,
+     "isin": null,
+     "ticker": "UBSG"
+    },
+    {
+     "name": "BANCO BILBAO VIZCAYA ARGENTARIA SA",
+     "gewicht": 1.05,
+     "isin": null,
+     "ticker": "BBVA"
+    },
+    {
+     "name": "ABB LTD",
+     "gewicht": 1.03,
+     "isin": null,
+     "ticker": "ABBN"
+    },
+    {
+     "name": "UNILEVER PLC",
+     "gewicht": 1.03,
+     "isin": null,
+     "ticker": "ULVR"
+    },
+    {
+     "name": "AIRBUS GROUP",
+     "gewicht": 0.96,
+     "isin": null,
+     "ticker": "AIR"
+    },
+    {
+     "name": "BP PLC",
+     "gewicht": 0.92,
+     "isin": null,
+     "ticker": "BP."
+    },
+    {
+     "name": "NOVO NORDISK CLASS B",
+     "gewicht": 0.91,
+     "isin": null,
+     "ticker": "NOVO B"
+    },
+    {
+     "name": "SAFRAN SA",
+     "gewicht": 0.89,
+     "isin": null,
+     "ticker": "SAF"
+    },
+    {
+     "name": "LAIR LIQUIDE SOCIETE ANONYME POUR",
+     "gewicht": 0.88,
+     "isin": null,
+     "ticker": "AI"
+    },
+    {
+     "name": "BRITISH AMERICAN TOBACCO",
+     "gewicht": 0.86,
+     "isin": null,
+     "ticker": "BATS"
+    }
+   ],
+   "positionen_n": 385,
+   "gewicht_summe_roh": 99.95,
+   "anteil_nicht_aktie": 0.61,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": []
+  },
+  {
+   "isin": "IE00BKM4GZ66",
+   "symbol": "IS3N.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 6.13,
+    "Communication Services": 5.5,
+    "Consumer Cyclical": 7.81,
+    "Consumer Defensive": 2.72,
+    "Energy": 3.34,
+    "Financial Services": 18.14,
+    "Healthcare": 3.56,
+    "Industrials": 7.48,
+    "Real Estate": 1.49,
+    "Technology": 41.93,
+    "Utilities": 1.9,
+    "sonstige": 0.0
+   },
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "TW": 29.24,
+    "CN": 18.45,
+    "KR": 18.22,
+    "IN": 12.49,
+    "BR": 4.29,
+    "ZA": 3.21,
+    "SA": 2.19,
+    "MX": 1.74,
+    "PL": 1.31,
+    "AE": 1.24,
+    "TH": 1.22,
+    "MY": 1.1,
+    "GR": 0.65,
+    "KW": 0.58,
+    "DE": 0.57,
+    "CL": 0.52,
+    "QA": 0.47,
+    "TR": 0.43,
+    "ID": 0.42,
+    "PE": 0.41,
+    "HU": 0.33,
+    "PH": 0.31,
+    "CO": 0.22,
+    "IE": 0.2,
+    "CZ": 0.12,
+    "EG": 0.07,
+    "HK": 0.0,
+    "RU": 0.0
+   },
+   "regionen": {
+    "USA": 0.0,
+    "EUROPA": 3.19,
+    "JAPAN": 0.0,
+    "UEBRIGE_INDUSTRIELAENDER": 0.0,
+    "SCHWELLENLAENDER": 96.81,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "TAIWAN SEMICONDUCTOR MANUFACTURING",
+     "gewicht": 13.75,
+     "isin": null,
+     "ticker": "2330"
+    },
+    {
+     "name": "SAMSUNG ELECTRONICS LTD",
+     "gewicht": 5.64,
+     "isin": null,
+     "ticker": "005930"
+    },
+    {
+     "name": "SK HYNIX",
+     "gewicht": 3.93,
+     "isin": null,
+     "ticker": "000660"
+    },
+    {
+     "name": "TENCENT HOLDINGS",
+     "gewicht": 2.44,
+     "isin": null,
+     "ticker": "700"
+    },
+    {
+     "name": "ALIBABA GROUP HOLDING",
+     "gewicht": 1.73,
+     "isin": null,
+     "ticker": "9988"
+    },
+    {
+     "name": "MEDIATEK",
+     "gewicht": 1.42,
+     "isin": null,
+     "ticker": "2454"
+    },
+    {
+     "name": "CHINA CONSTRUCTION BANK CORP H",
+     "gewicht": 0.79,
+     "isin": null,
+     "ticker": "939"
+    },
+    {
+     "name": "SAMSUNG ELECTRONICS NON VOTING PRE",
+     "gewicht": 0.75,
+     "isin": null,
+     "ticker": "005935"
+    },
+    {
+     "name": "DELTA ELECTRONICS",
+     "gewicht": 0.74,
+     "isin": null,
+     "ticker": "2308"
+    },
+    {
+     "name": "HON HAI PRECISION INDUSTRY",
+     "gewicht": 0.69,
+     "isin": null,
+     "ticker": "2317"
+    },
+    {
+     "name": "HDFC BANK",
+     "gewicht": 0.65,
+     "isin": null,
+     "ticker": "HDFCBANK"
+    },
+    {
+     "name": "ICICI BANK",
+     "gewicht": 0.58,
+     "isin": null,
+     "ticker": "ICICIBANK"
+    },
+    {
+     "name": "ISHARES MSCI BRAZIL UCITS ET USDHA",
+     "gewicht": 0.56,
+     "isin": null,
+     "ticker": "4BRZ"
+    },
+    {
+     "name": "RELIANCE INDUSTRIES LTD",
+     "gewicht": 0.54,
+     "isin": null,
+     "ticker": "RELIANCE"
+    },
+    {
+     "name": "ASE TECHNOLOGY HOLDING",
+     "gewicht": 0.52,
+     "isin": null,
+     "ticker": "3711"
+    },
+    {
+     "name": "INDUSTRIAL AND COMMERCIAL BANK OF",
+     "gewicht": 0.47,
+     "isin": null,
+     "ticker": "1398"
+    },
+    {
+     "name": "XIAOMI",
+     "gewicht": 0.43,
+     "isin": null,
+     "ticker": "1810"
+    },
+    {
+     "name": "BHARTI AIRTEL LTD",
+     "gewicht": 0.42,
+     "isin": null,
+     "ticker": "BHARTIARTL"
+    },
+    {
+     "name": "SK SQUARE",
+     "gewicht": 0.4,
+     "isin": null,
+     "ticker": "402340"
+    },
+    {
+     "name": "BANK OF CHINA LTD H",
+     "gewicht": 0.4,
+     "isin": null,
+     "ticker": "3988"
+    },
+    {
+     "name": "SAMSUNG ELECTRO MECHANICS LTD",
+     "gewicht": 0.37,
+     "isin": null,
+     "ticker": "009150"
+    },
+    {
+     "name": "MEITUAN",
+     "gewicht": 0.36,
+     "isin": null,
+     "ticker": "3690"
+    },
+    {
+     "name": "PETROLEO BRASILEIRO PREF SA",
+     "gewicht": 0.35,
+     "isin": null,
+     "ticker": "PETR4"
+    },
+    {
+     "name": "ANGLOGOLD ASHANTI PLC",
+     "gewicht": 0.35,
+     "isin": null,
+     "ticker": "ANG"
+    },
+    {
+     "name": "NU HOLDINGS CLASS A",
+     "gewicht": 0.35,
+     "isin": null,
+     "ticker": "NU"
+    }
+   ],
+   "positionen_n": 2955,
+   "gewicht_summe_roh": 98.37,
+   "anteil_nicht_aktie": 0.52,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": []
+  },
+  {
+   "isin": "IE00BP3QZ825",
+   "symbol": "IS3R.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 2.77,
+    "Communication Services": 5.61,
+    "Consumer Cyclical": 1.8,
+    "Consumer Defensive": 1.59,
+    "Energy": 10.2,
+    "Financial Services": 15.69,
+    "Healthcare": 8.07,
+    "Industrials": 11.15,
+    "Real Estate": 1.12,
+    "Technology": 40.42,
+    "Utilities": 1.57,
+    "sonstige": 0.01
+   },
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "US": 59.68,
+    "JP": 11.15,
+    "CA": 7.47,
+    "UK": 4.09,
+    "NL": 3.37,
+    "CH": 3.03,
+    "ES": 2.51,
+    "FR": 1.72,
+    "AU": 1.13,
+    "DE": 1.13,
+    "SG": 1.12,
+    "IT": 0.95,
+    "IL": 0.59,
+    "SE": 0.52,
+    "FI": 0.51,
+    "HK": 0.2,
+    "NO": 0.19,
+    "BE": 0.16,
+    "IE": 0.15,
+    "AT": 0.14,
+    "DK": 0.13,
+    "PT": 0.05,
+    "NZ": 0.01
+   },
+   "regionen": {
+    "USA": 59.68,
+    "EUROPA": 18.66,
+    "JAPAN": 11.15,
+    "UEBRIGE_INDUSTRIELAENDER": 10.51,
+    "SCHWELLENLAENDER": 0.0,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "MICRON TECHNOLOGY",
+     "gewicht": 4.83,
+     "isin": null,
+     "ticker": "MU"
+    },
+    {
+     "name": "ADVANCED MICRO DEVICES",
+     "gewicht": 4.22,
+     "isin": null,
+     "ticker": "AMD"
+    },
+    {
+     "name": "ALPHABET CLASS A",
+     "gewicht": 2.82,
+     "isin": null,
+     "ticker": "GOOGL"
+    },
+    {
+     "name": "EXXONMOBIL HOLDINGS CORP",
+     "gewicht": 2.64,
+     "isin": null,
+     "ticker": "XOM"
+    },
+    {
+     "name": "ASML HOLDING",
+     "gewicht": 2.61,
+     "isin": null,
+     "ticker": "ASML"
+    },
+    {
+     "name": "JOHNSON & JOHNSON",
+     "gewicht": 2.46,
+     "isin": null,
+     "ticker": "JNJ"
+    },
+    {
+     "name": "INTEL CORPORATION",
+     "gewicht": 2.44,
+     "isin": null,
+     "ticker": "INTC"
+    },
+    {
+     "name": "ALPHABET CLASS C",
+     "gewicht": 2.23,
+     "isin": null,
+     "ticker": "GOOG"
+    },
+    {
+     "name": "CISCO SYSTEMS INC",
+     "gewicht": 1.94,
+     "isin": null,
+     "ticker": "CSCO"
+    },
+    {
+     "name": "LAM RESEARCH",
+     "gewicht": 1.71,
+     "isin": null,
+     "ticker": "LRCX"
+    },
+    {
+     "name": "CATERPILLAR INC",
+     "gewicht": 1.7,
+     "isin": null,
+     "ticker": "CAT"
+    },
+    {
+     "name": "APPLIED MATERIAL INC",
+     "gewicht": 1.69,
+     "isin": null,
+     "ticker": "AMAT"
+    },
+    {
+     "name": "ROYAL BANK OF CANADA",
+     "gewicht": 1.45,
+     "isin": null,
+     "ticker": "RY"
+    },
+    {
+     "name": "GE VERNOVA",
+     "gewicht": 1.41,
+     "isin": null,
+     "ticker": "GEV"
+    },
+    {
+     "name": "HSBC HOLDINGS PLC",
+     "gewicht": 1.3,
+     "isin": null,
+     "ticker": "HSBA"
+    },
+    {
+     "name": "MERCK & CO INC",
+     "gewicht": 1.17,
+     "isin": null,
+     "ticker": "MRK"
+    },
+    {
+     "name": "CHEVRON",
+     "gewicht": 1.17,
+     "isin": null,
+     "ticker": "CVX"
+    },
+    {
+     "name": "SEAGATE TECHNOLOGY HOLDINGS PLC",
+     "gewicht": 1.15,
+     "isin": null,
+     "ticker": "STX"
+    },
+    {
+     "name": "TORONTO DOMINION",
+     "gewicht": 1.09,
+     "isin": null,
+     "ticker": "TD"
+    },
+    {
+     "name": "WESTERN DIGITAL CORP",
+     "gewicht": 0.98,
+     "isin": null,
+     "ticker": "WDC"
+    },
+    {
+     "name": "SHELL",
+     "gewicht": 0.94,
+     "isin": null,
+     "ticker": "SHEL"
+    },
+    {
+     "name": "NOVARTIS AG",
+     "gewicht": 0.91,
+     "isin": null,
+     "ticker": "NOVN"
+    },
+    {
+     "name": "ROCHE PS PAR AG",
+     "gewicht": 0.89,
+     "isin": null,
+     "ticker": "ROP"
+    },
+    {
+     "name": "KLA",
+     "gewicht": 0.85,
+     "isin": null,
+     "ticker": "KLAC"
+    },
+    {
+     "name": "MARVELL TECHNOLOGY",
+     "gewicht": 0.82,
+     "isin": null,
+     "ticker": "MRVL"
+    }
+   ],
+   "positionen_n": 349,
+   "gewicht_summe_roh": 99.94,
+   "anteil_nicht_aktie": 0.42,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": []
+  },
+  {
+   "isin": "IE00B8FHGS14",
+   "symbol": "IQQ0.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 0.47,
+    "Communication Services": 9.95,
+    "Consumer Cyclical": 5.01,
+    "Consumer Defensive": 10.13,
+    "Energy": 4.92,
+    "Financial Services": 13.68,
+    "Healthcare": 14.41,
+    "Industrials": 8.97,
+    "Real Estate": 1.2,
+    "Technology": 24.1,
+    "Utilities": 7.14,
+    "sonstige": 0.02
+   },
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "US": 67.54,
+    "JP": 11.23,
+    "CA": 3.3,
+    "CH": 2.89,
+    "FR": 2.38,
+    "UK": 1.46,
+    "DE": 1.38,
+    "HK": 1.29,
+    "SG": 1.26,
+    "ES": 1.16,
+    "AU": 1.15,
+    "NL": 0.89,
+    "IT": 0.82,
+    "IL": 0.81,
+    "FI": 0.79,
+    "BE": 0.61,
+    "IE": 0.25,
+    "DK": 0.25,
+    "PT": 0.14,
+    "SE": 0.13,
+    "NZ": 0.1,
+    "NO": 0.09,
+    "AT": 0.05
+   },
+   "regionen": {
+    "USA": 67.54,
+    "EUROPA": 13.31,
+    "JAPAN": 11.23,
+    "UEBRIGE_INDUSTRIELAENDER": 7.92,
+    "SCHWELLENLAENDER": 0.0,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "EXXONMOBIL HOLDINGS CORP",
+     "gewicht": 1.57,
+     "isin": null,
+     "ticker": "XOM"
+    },
+    {
+     "name": "MICROSOFT",
+     "gewicht": 1.43,
+     "isin": null,
+     "ticker": "MSFT"
+    },
+    {
+     "name": "JOHNSON & JOHNSON",
+     "gewicht": 1.4,
+     "isin": null,
+     "ticker": "JNJ"
+    },
+    {
+     "name": "DUKE ENERGY CORP",
+     "gewicht": 1.35,
+     "isin": null,
+     "ticker": "DUK"
+    },
+    {
+     "name": "CISCO SYSTEMS INC",
+     "gewicht": 1.31,
+     "isin": null,
+     "ticker": "CSCO"
+    },
+    {
+     "name": "SOUTHERN",
+     "gewicht": 1.29,
+     "isin": null,
+     "ticker": "SO"
+    },
+    {
+     "name": "MOTOROLA SOLUTIONS INC",
+     "gewicht": 1.29,
+     "isin": null,
+     "ticker": "MSI"
+    },
+    {
+     "name": "BERKSHIRE HATHAWAY INC CLASS B",
+     "gewicht": 1.27,
+     "isin": null,
+     "ticker": "BRK B"
+    },
+    {
+     "name": "NVIDIA",
+     "gewicht": 1.23,
+     "isin": null,
+     "ticker": "NVDA"
+    },
+    {
+     "name": "NOVARTIS AG",
+     "gewicht": 1.14,
+     "isin": null,
+     "ticker": "NOVN"
+    },
+    {
+     "name": "CENCORA",
+     "gewicht": 1.13,
+     "isin": null,
+     "ticker": "COR"
+    },
+    {
+     "name": "TAKEDA PHARMACEUTICAL",
+     "gewicht": 1.11,
+     "isin": null,
+     "ticker": "4502"
+    },
+    {
+     "name": "AT&T",
+     "gewicht": 1.11,
+     "isin": null,
+     "ticker": "T"
+    },
+    {
+     "name": "MCKESSON CORP",
+     "gewicht": 1.1,
+     "isin": null,
+     "ticker": "MCK"
+    },
+    {
+     "name": "CHUBB",
+     "gewicht": 1.05,
+     "isin": null,
+     "ticker": "CB"
+    },
+    {
+     "name": "KDDI",
+     "gewicht": 1.05,
+     "isin": null,
+     "ticker": "9433"
+    },
+    {
+     "name": "VERIZON COMMUNICATIONS INC",
+     "gewicht": 1.03,
+     "isin": null,
+     "ticker": "VZ"
+    },
+    {
+     "name": "REPUBLIC SERVICES INC",
+     "gewicht": 1.01,
+     "isin": null,
+     "ticker": "RSG"
+    },
+    {
+     "name": "WASTE MANAGEMENT INC",
+     "gewicht": 0.99,
+     "isin": null,
+     "ticker": "WM"
+    },
+    {
+     "name": "COCA-COLA",
+     "gewicht": 0.99,
+     "isin": null,
+     "ticker": "KO"
+    },
+    {
+     "name": "SOFTBANK",
+     "gewicht": 0.98,
+     "isin": null,
+     "ticker": "9434"
+    },
+    {
+     "name": "PROCTER & GAMBLE",
+     "gewicht": 0.97,
+     "isin": null,
+     "ticker": "PG"
+    },
+    {
+     "name": "WELLTOWER",
+     "gewicht": 0.94,
+     "isin": null,
+     "ticker": "WELL"
+    },
+    {
+     "name": "AMPHENOL CORP CLASS A",
+     "gewicht": 0.92,
+     "isin": null,
+     "ticker": "APH"
+    },
+    {
+     "name": "CONSOLIDATED EDISON",
+     "gewicht": 0.91,
+     "isin": null,
+     "ticker": "ED"
+    }
+   ],
+   "positionen_n": 297,
+   "gewicht_summe_roh": 100.07,
+   "anteil_nicht_aktie": 0.35,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": []
+  },
+  {
+   "isin": "IE00B8GKDB10",
+   "symbol": "VGWD.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 5.09,
+    "Communication Services": 3.24,
+    "Consumer Cyclical": 6.76,
+    "Consumer Defensive": 8.25,
+    "Energy": 9.04,
+    "Financial Services": 30.16,
+    "Healthcare": 11.57,
+    "Industrials": 11.78,
+    "Real Estate": 0.72,
+    "Technology": 8.38,
+    "Utilities": 5.0,
+    "sonstige": 0.01
+   },
+   "quelle_land": "manuell (Kla-Download)",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": [
+    {
+     "name": "JPMorgan Chase & Co",
+     "gewicht": 2.1653,
+     "isin": null,
+     "ticker": "JPM"
+    },
+    {
+     "name": "ExxonMobil Holdings Corp",
+     "gewicht": 1.5259,
+     "isin": null,
+     "ticker": "XOM"
+    },
+    {
+     "name": "Johnson & Johnson",
+     "gewicht": 1.4583,
+     "isin": null,
+     "ticker": "JNJ"
+    },
+    {
+     "name": "AbbVie Inc",
+     "gewicht": 1.0331,
+     "isin": null,
+     "ticker": "ABBV"
+    },
+    {
+     "name": "Cisco Systems Inc",
+     "gewicht": 0.9935,
+     "isin": null,
+     "ticker": "CSCO"
+    },
+    {
+     "name": "Bank of America Corp",
+     "gewicht": 0.9305,
+     "isin": null,
+     "ticker": "BAC"
+    },
+    {
+     "name": "Chevron Corp",
+     "gewicht": 0.8717,
+     "isin": null,
+     "ticker": "CVX"
+    },
+    {
+     "name": "Merck & Co Inc",
+     "gewicht": 0.8327,
+     "isin": null,
+     "ticker": "MRK"
+    },
+    {
+     "name": "HSBC Holdings PLC",
+     "gewicht": 0.8091,
+     "isin": null,
+     "ticker": "HSBA.L"
+    },
+    {
+     "name": "UnitedHealth Group Inc",
+     "gewicht": 0.8003,
+     "isin": null,
+     "ticker": "UNH"
+    }
+   ],
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "Laender nicht verfuegbar (Kla-Download ausstehend)",
+    "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
+   ]
+  },
+  {
+   "isin": "DE000A27Z304",
+   "symbol": "BTCE.DE",
+   "rolle": "KLASSE",
+   "klasse": "D",
+   "quelle_sektor": "n. a.",
+   "stand_sektor": null,
+   "sektoren": null,
+   "quelle_land": "n. a.",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": null,
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "BTC",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "ohne Sektor",
+    "keine Bestandsliste erwartet (ETC/Swap)"
+   ]
+  },
+  {
+   "isin": "IE00BK5BQT80",
+   "symbol": "VWCE.DE",
+   "rolle": "AUSWEIS",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 3.77,
+    "Communication Services": 7.67,
+    "Consumer Cyclical": 8.82,
+    "Consumer Defensive": 4.57,
+    "Energy": 3.98,
+    "Financial Services": 16.75,
+    "Healthcare": 8.35,
+    "Industrials": 10.3,
+    "Real Estate": 1.76,
+    "Technology": 31.7,
+    "Utilities": 2.33,
+    "sonstige": -0.0
+   },
+   "quelle_land": "manuell (Kla-Download)",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": [
+    {
+     "name": "NVIDIA Corp",
+     "gewicht": 4.7978,
+     "isin": null,
+     "ticker": "NVDA"
+    },
+    {
+     "name": "Apple Inc",
+     "gewicht": 4.2635,
+     "isin": null,
+     "ticker": "AAPL"
+    },
+    {
+     "name": "Microsoft Corp",
+     "gewicht": 3.5099,
+     "isin": null,
+     "ticker": "MSFT"
+    },
+    {
+     "name": "Amazon.com Inc",
+     "gewicht": 2.348,
+     "isin": null,
+     "ticker": "AMZN"
+    },
+    {
+     "name": "Alphabet Inc Class A",
+     "gewicht": 1.8801,
+     "isin": null,
+     "ticker": "GOOGL"
+    },
+    {
+     "name": "Taiwan Semiconductor Manufacturing Co Ltd",
+     "gewicht": 1.715,
+     "isin": null,
+     "ticker": "2330.TW"
+    },
+    {
+     "name": "Broadcom Inc",
+     "gewicht": 1.6053,
+     "isin": null,
+     "ticker": "AVGO"
+    },
+    {
+     "name": "Alphabet Inc Class C",
+     "gewicht": 1.4478,
+     "isin": null,
+     "ticker": "GOOG"
+    },
+    {
+     "name": "Meta Platforms Inc Class A",
+     "gewicht": 1.1734,
+     "isin": null,
+     "ticker": "META"
+    },
+    {
+     "name": "Micron Technology Inc",
+     "gewicht": 1.0071,
+     "isin": null,
+     "ticker": "MU"
+    }
+   ],
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "Laender nicht verfuegbar (Kla-Download ausstehend)",
+    "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
+   ]
+  },
+  {
+   "isin": "IE00B3RBWM25",
+   "symbol": "VGWL.DE",
+   "rolle": "AUSWEIS",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 3.77,
+    "Communication Services": 7.67,
+    "Consumer Cyclical": 8.82,
+    "Consumer Defensive": 4.57,
+    "Energy": 3.98,
+    "Financial Services": 16.75,
+    "Healthcare": 8.35,
+    "Industrials": 10.3,
+    "Real Estate": 1.76,
+    "Technology": 31.7,
+    "Utilities": 2.33,
+    "sonstige": -0.0
+   },
+   "quelle_land": "manuell (Kla-Download)",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": [
+    {
+     "name": "NVIDIA Corp",
+     "gewicht": 4.7978,
+     "isin": null,
+     "ticker": "NVDA"
+    },
+    {
+     "name": "Apple Inc",
+     "gewicht": 4.2635,
+     "isin": null,
+     "ticker": "AAPL"
+    },
+    {
+     "name": "Microsoft Corp",
+     "gewicht": 3.5099,
+     "isin": null,
+     "ticker": "MSFT"
+    },
+    {
+     "name": "Amazon.com Inc",
+     "gewicht": 2.348,
+     "isin": null,
+     "ticker": "AMZN"
+    },
+    {
+     "name": "Alphabet Inc Class A",
+     "gewicht": 1.8801,
+     "isin": null,
+     "ticker": "GOOGL"
+    },
+    {
+     "name": "Taiwan Semiconductor Manufacturing Co Ltd",
+     "gewicht": 1.715,
+     "isin": null,
+     "ticker": "2330.TW"
+    },
+    {
+     "name": "Broadcom Inc",
+     "gewicht": 1.6053,
+     "isin": null,
+     "ticker": "AVGO"
+    },
+    {
+     "name": "Alphabet Inc Class C",
+     "gewicht": 1.4478,
+     "isin": null,
+     "ticker": "GOOG"
+    },
+    {
+     "name": "Meta Platforms Inc Class A",
+     "gewicht": 1.1734,
+     "isin": null,
+     "ticker": "META"
+    },
+    {
+     "name": "Micron Technology Inc",
+     "gewicht": 1.0071,
+     "isin": null,
+     "ticker": "MU"
+    }
+   ],
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "Laender nicht verfuegbar (Kla-Download ausstehend)",
+    "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
+   ]
+  },
+  {
+   "isin": "IE00B44Z5B48",
+   "symbol": "SPYY.DE",
+   "rolle": "KERN",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 3.38,
+    "Communication Services": 8.12,
+    "Consumer Cyclical": 8.17,
+    "Consumer Defensive": 4.43,
+    "Energy": 3.96,
+    "Financial Services": 15.96,
+    "Healthcare": 8.44,
+    "Industrials": 9.93,
+    "Real Estate": 1.47,
+    "Technology": 33.92,
+    "Utilities": 2.21,
+    "sonstige": 0.02
+   },
+   "quelle_land": "SPDR holdings-daily xlsx",
+   "stand_land": "2026-10-19",
+   "laender": {
+    "US": 64.82,
+    "JP": 5.11,
+    "TW": 3.29,
+    "UK": 3.12,
+    "CA": 3.02,
+    "CN": 2.32,
+    "KR": 2.15,
+    "CH": 2.0,
+    "FR": 1.94,
+    "DE": 1.81,
+    "AU": 1.39,
+    "IN": 1.29,
+    "NL": 1.18,
+    "ES": 0.81,
+    "SE": 0.72,
+    "IT": 0.65,
+    "BR": 0.55,
+    "HK": 0.37,
+    "SG": 0.36,
+    "ZA": 0.35,
+    "DK": 0.33,
+    "SA": 0.27,
+    "IL": 0.24,
+    "FI": 0.24,
+    "BE": 0.2,
+    "MX": 0.19,
+    "AE": 0.14,
+    "TH": 0.13,
+    "PL": 0.13,
+    "NO": 0.13,
+    "MY": 0.1,
+    "IE": 0.09,
+    "AT": 0.08,
+    "GR": 0.06,
+    "CL": 0.05,
+    "PE": 0.05,
+    "KW": 0.05,
+    "QA": 0.05,
+    "PT": 0.04,
+    "ID": 0.04,
+    "TR": 0.04,
+    "NZ": 0.04,
+    "HU": 0.03,
+    "PH": 0.02,
+    "CZ": 0.02,
+    "CO": 0.01,
+    "EG": 0.0,
+    "RU": 0.0
+   },
+   "regionen": {
+    "USA": 64.82,
+    "EUROPA": 13.58,
+    "JAPAN": 5.11,
+    "UEBRIGE_INDUSTRIELAENDER": 5.42,
+    "SCHWELLENLAENDER": 11.07,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "Apple Inc.",
+     "gewicht": 4.9338,
+     "isin": "US0378331005",
+     "ticker": null
+    },
+    {
+     "name": "NVIDIA Corporation",
+     "gewicht": 4.893,
+     "isin": "US67066G1040",
+     "ticker": null
+    },
+    {
+     "name": "Microsoft Corporation",
+     "gewicht": 3.69,
+     "isin": "US5949181045",
+     "ticker": null
+    },
+    {
+     "name": "Amazon.com Inc.",
+     "gewicht": 2.4896,
+     "isin": "US0231351067",
+     "ticker": null
+    },
+    {
+     "name": "Alphabet Inc. Class A",
+     "gewicht": 1.9901,
+     "isin": "US02079K3059",
+     "ticker": null
+    },
+    {
+     "name": "Taiwan Semiconductor Manufacturing Co. Ltd.",
+     "gewicht": 1.8064,
+     "isin": "TW0002330008",
+     "ticker": null
+    },
+    {
+     "name": "Alphabet Inc. Class C",
+     "gewicht": 1.5471,
+     "isin": "US02079K1079",
+     "ticker": null
+    },
+    {
+     "name": "Meta Platforms Inc Class A",
+     "gewicht": 1.5189,
+     "isin": "US30303M1027",
+     "ticker": null
+    },
+    {
+     "name": "Broadcom Inc.",
+     "gewicht": 1.4839,
+     "isin": "US11135F1012",
+     "ticker": null
+    },
+    {
+     "name": "Tesla Inc.",
+     "gewicht": 1.0337,
+     "isin": "US88160R1014",
+     "ticker": null
+    },
+    {
+     "name": "Micron Technology Inc.",
+     "gewicht": 1.0033,
+     "isin": "US5951121038",
+     "ticker": null
+    },
+    {
+     "name": "Eli Lilly and Company",
+     "gewicht": 0.9738,
+     "isin": "US5324571083",
+     "ticker": null
+    },
+    {
+     "name": "JPMorgan Chase & Co.",
+     "gewicht": 0.8622,
+     "isin": "US46625H1005",
+     "ticker": null
+    },
+    {
+     "name": "Advanced Micro Devices Inc.",
+     "gewicht": 0.8621,
+     "isin": "US0079031078",
+     "ticker": null
+    },
+    {
+     "name": "Samsung Electronics Co. Ltd.",
+     "gewicht": 0.7518,
+     "isin": "KR7005930003",
+     "ticker": null
+    },
+    {
+     "name": "Berkshire Hathaway Inc. Class B",
+     "gewicht": 0.7287,
+     "isin": "US0846707026",
+     "ticker": null
+    },
+    {
+     "name": "Exxonmobil Holdings Corporation",
+     "gewicht": 0.7212,
+     "isin": "US30233Q1085",
+     "ticker": null
+    },
+    {
+     "name": "Visa Inc. Class A",
+     "gewicht": 0.6543,
+     "isin": "US92826C8394",
+     "ticker": null
+    },
+    {
+     "name": "ASML Holding NV",
+     "gewicht": 0.6415,
+     "isin": "NL0010273215",
+     "ticker": null
+    },
+    {
+     "name": "Johnson & Johnson",
+     "gewicht": 0.597,
+     "isin": "US4781601046",
+     "ticker": null
+    },
+    {
+     "name": "SK hynix Inc.",
+     "gewicht": 0.5213,
+     "isin": "KR7000660001",
+     "ticker": null
+    },
+    {
+     "name": "Walmart Inc.",
+     "gewicht": 0.5078,
+     "isin": "US9311421039",
+     "ticker": null
+    },
+    {
+     "name": "AbbVie Inc.",
+     "gewicht": 0.4908,
+     "isin": "US00287Y1091",
+     "ticker": null
+    },
+    {
+     "name": "Mastercard Incorporated Class A",
+     "gewicht": 0.4888,
+     "isin": "US57636Q1040",
+     "ticker": null
+    },
+    {
+     "name": "Costco Wholesale Corporation",
+     "gewicht": 0.4288,
+     "isin": "US22160K1051",
+     "ticker": null
+    }
+   ],
+   "positionen_n": 2250,
+   "gewicht_summe_roh": 100.0,
+   "anteil_nicht_aktie": 0.0,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": []
+  },
+  {
+   "isin": "NL0011683594",
+   "symbol": "VDIV.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 0.58,
+    "Communication Services": 8.18,
+    "Consumer Cyclical": 3.06,
+    "Consumer Defensive": 10.5,
+    "Energy": 12.6,
+    "Financial Services": 42.49,
+    "Healthcare": 12.29,
+    "Industrials": 3.32,
+    "Real Estate": 0.0,
+    "Technology": 0.38,
+    "Utilities": 6.59,
+    "sonstige": 0.01
+   },
+   "quelle_land": "manuell (Kla-Download)",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": [
+    {
+     "name": "Verizon Communications Inc",
+     "gewicht": 4.7155,
+     "isin": null,
+     "ticker": "VZ"
+    },
+    {
+     "name": "HSBC Holdings PLC",
+     "gewicht": 4.6148,
+     "isin": null,
+     "ticker": "HSBA.L"
+    },
+    {
+     "name": "Pfizer Inc",
+     "gewicht": 4.3477,
+     "isin": null,
+     "ticker": "PFE"
+    },
+    {
+     "name": "Nestle SA",
+     "gewicht": 3.7477,
+     "isin": null,
+     "ticker": "NESN.SW"
+    },
+    {
+     "name": "Shell PLC",
+     "gewicht": 3.644,
+     "isin": null,
+     "ticker": "SHEL.L"
+    },
+    {
+     "name": "TotalEnergies SE",
+     "gewicht": 3.2281,
+     "isin": null,
+     "ticker": "TTE.PA"
+    },
+    {
+     "name": "PepsiCo Inc",
+     "gewicht": 2.8117,
+     "isin": null,
+     "ticker": "PEP"
+    },
+    {
+     "name": "Allianz SE",
+     "gewicht": 2.7367,
+     "isin": null,
+     "ticker": "ALV.DE"
+    },
+    {
+     "name": "Intesa Sanpaolo",
+     "gewicht": 2.5783,
+     "isin": null,
+     "ticker": "ISP.MI"
+    },
+    {
+     "name": "Banco Bilbao Vizcaya Argentaria SA",
+     "gewicht": 2.4811,
+     "isin": null,
+     "ticker": "BBVA.MC"
+    }
+   ],
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "Laender nicht verfuegbar (Kla-Download ausstehend)",
+    "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
+   ]
+  },
+  {
+   "isin": "IE00BP3QZB59",
+   "symbol": "IS3S.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-20",
+   "sektoren": {
+    "Basic Materials": 2.63,
+    "Communication Services": 7.73,
+    "Consumer Cyclical": 8.16,
+    "Consumer Defensive": 4.49,
+    "Energy": 3.95,
+    "Financial Services": 15.41,
+    "Healthcare": 8.5,
+    "Industrials": 11.21,
+    "Real Estate": 1.55,
+    "Technology": 34.26,
+    "Utilities": 2.12,
+    "sonstige": -0.01
+   },
+   "quelle_land": "iShares latest-holdings.csv",
+   "stand_land": "2026-10-16",
+   "laender": {
+    "US": 47.28,
+    "JP": 20.71,
+    "UK": 8.51,
+    "FR": 6.11,
+    "DE": 4.34,
+    "ES": 1.96,
+    "IT": 1.69,
+    "NL": 1.5,
+    "CA": 1.48,
+    "HK": 1.47,
+    "SE": 0.99,
+    "FI": 0.8,
+    "AU": 0.62,
+    "IL": 0.59,
+    "SG": 0.44,
+    "DK": 0.43,
+    "NO": 0.41,
+    "AT": 0.25,
+    "IE": 0.2,
+    "BE": 0.11,
+    "PT": 0.06,
+    "CH": 0.04
+   },
+   "regionen": {
+    "USA": 47.28,
+    "EUROPA": 27.41,
+    "JAPAN": 20.71,
+    "UEBRIGE_INDUSTRIELAENDER": 4.6,
+    "SCHWELLENLAENDER": 0.0,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "MICRON TECHNOLOGY",
+     "gewicht": 13.42,
+     "isin": null,
+     "ticker": "MU"
+    },
+    {
+     "name": "CISCO SYSTEMS INC",
+     "gewicht": 3.01,
+     "isin": null,
+     "ticker": "CSCO"
+    },
+    {
+     "name": "VERIZON COMMUNICATIONS INC",
+     "gewicht": 2.06,
+     "isin": null,
+     "ticker": "VZ"
+    },
+    {
+     "name": "TOYOTA MOTOR",
+     "gewicht": 1.78,
+     "isin": null,
+     "ticker": "7203"
+    },
+    {
+     "name": "AT&T",
+     "gewicht": 1.61,
+     "isin": null,
+     "ticker": "T"
+    },
+    {
+     "name": "QUALCOMM",
+     "gewicht": 1.46,
+     "isin": null,
+     "ticker": "QCOM"
+    },
+    {
+     "name": "HEWLETT PACKARD ENTERPRISE",
+     "gewicht": 1.42,
+     "isin": null,
+     "ticker": "HPE"
+    },
+    {
+     "name": "SHELL",
+     "gewicht": 1.34,
+     "isin": null,
+     "ticker": "SHEL"
+    },
+    {
+     "name": "COMCAST CLASS A",
+     "gewicht": 1.25,
+     "isin": null,
+     "ticker": "CMCSA"
+    },
+    {
+     "name": "PFIZER",
+     "gewicht": 1.23,
+     "isin": null,
+     "ticker": "PFE"
+    },
+    {
+     "name": "GENERAL MOTORS",
+     "gewicht": 1.13,
+     "isin": null,
+     "ticker": "GM"
+    },
+    {
+     "name": "BRITISH AMERICAN TOBACCO",
+     "gewicht": 1.13,
+     "isin": null,
+     "ticker": "BATS"
+    },
+    {
+     "name": "HSBC HOLDINGS PLC",
+     "gewicht": 0.94,
+     "isin": null,
+     "ticker": "HSBA"
+    },
+    {
+     "name": "CITIGROUP",
+     "gewicht": 0.82,
+     "isin": null,
+     "ticker": "C"
+    },
+    {
+     "name": "CVS HEALTH",
+     "gewicht": 0.8,
+     "isin": null,
+     "ticker": "CVS"
+    },
+    {
+     "name": "TOTALENERGIES",
+     "gewicht": 0.78,
+     "isin": null,
+     "ticker": "TTE"
+    },
+    {
+     "name": "SALESFORCE",
+     "gewicht": 0.76,
+     "isin": null,
+     "ticker": "CRM"
+    },
+    {
+     "name": "BANCO SANTANDER",
+     "gewicht": 0.75,
+     "isin": null,
+     "ticker": "SAN"
+    },
+    {
+     "name": "DELL TECHNOLOGIES INC CLASS C",
+     "gewicht": 0.72,
+     "isin": null,
+     "ticker": "DELL"
+    },
+    {
+     "name": "BNP PARIBAS SA",
+     "gewicht": 0.67,
+     "isin": null,
+     "ticker": "BNP"
+    },
+    {
+     "name": "HONDA MOTOR",
+     "gewicht": 0.66,
+     "isin": null,
+     "ticker": "7267"
+    },
+    {
+     "name": "SANOFI SA",
+     "gewicht": 0.65,
+     "isin": null,
+     "ticker": "SAN"
+    },
+    {
+     "name": "MITSUBISHI",
+     "gewicht": 0.65,
+     "isin": null,
+     "ticker": "8058"
+    },
+    {
+     "name": "BRISTOL MYERS SQUIBB",
+     "gewicht": 0.63,
+     "isin": null,
+     "ticker": "BMY"
+    },
+    {
+     "name": "MITSUI",
+     "gewicht": 0.62,
+     "isin": null,
+     "ticker": "8031"
+    }
+   ],
+   "positionen_n": 391,
+   "gewicht_summe_roh": 100.03,
+   "anteil_nicht_aktie": 0.51,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "ja",
+   "hinweis": []
+  }
+ ]
+}
