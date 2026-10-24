@@ -160,6 +160,7 @@ node_modules/
 *.pyc
 __pycache__/
 .pytest_cache/
+pytest.ini
 
 # Datendateien (lokal)
 stockiq_dev_archive*.json
