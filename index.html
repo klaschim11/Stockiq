@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.44</title>
+<title>StockIQ v6.6.45</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -129,7 +129,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.44 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.45 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
       <span style="white-space:nowrap"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:--:--</span></span>
@@ -291,7 +291,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation<span id="alloc-kz55" style="font-weight:400;font-size:10px;color:var(--mut)"></span></div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.44</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.45</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -307,7 +307,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ETFs (EUR)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">AKTIEN-ETFs (EUR)</div>
       <input id="ai-etfs" type="number" min="0" step="100" placeholder="z.B. 15000"
           style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
           oninput="rAlloc()">
@@ -339,7 +339,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
   <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:8px;line-height:1.5">
-    &#8505; Einzelaktien aus Depot &middot; ETF-Bausteine nach Anlageklasse verteilt (Rohstoff-ETF &#8594; Rohstoffe, Gold-ETF &#8594; Gold, Anleihen-ETF &#8594; Anleihen). Felder mit ETF-Bausteinen werden automatisch gesetzt und &uuml;berschreiben manuelle Eingaben &middot; Felder ohne solche Bausteine bleiben manuell.</div>
+    &#8505; Einzelaktien aus Depot &middot; ETF-Bausteine nach Anlageklasse verteilt (Rohstoff-ETF &#8594; Rohstoffe, Gold-ETF &#8594; Gold, Anleihen-ETF &#8594; Anleihen). Aktien-ETFs stehen im Feld AKTIEN-ETFs. Felder mit ETF-Bausteinen werden automatisch gesetzt und &uuml;berschreiben manuelle Eingaben &middot; Felder ohne solche Bausteine bleiben manuell.</div>
   <div style="display:flex;gap:10px;align-items:center">
     <div style="font-family:monospace;font-size:10px;color:var(--mut)">Gesamt: <span id="ai-total" style="color:#dce8f5;font-weight:700">0 EUR</span></div>
     <button onclick="allocClear()" style="margin-left:auto;padding:5px 12px;background:transparent;border:1px solid #1a3050;border-radius:5px;color:var(--mut);font-size:10px;cursor:pointer">&#10006; Leeren</button>
@@ -348,6 +348,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <input type="file" id="alloc-import-file" style="display:none" accept=".json" onchange="allocImportFile(this)">
     <label for="alloc-import-file" style="padding:5px 12px;background:#001a30;border:1px solid #00e57a;border-radius:5px;color:#00e57a;font-size:10px;cursor:pointer">&#8593; Import</label>
   </div>
+  <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:6px">davon ETF-Teil gesamt: <span id="ai-etf-teil" style="color:#dce8f5;font-weight:700">0 EUR</span></div>
 </div>
 
 <!-- ZYKLUS-OVERLAY v5.9.69 (Fidelity Business Cycle, Hambro/BlackRock) -->
@@ -489,7 +490,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.44 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.45 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -742,6 +743,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.45</td><td style="padding:5px 8px;color:var(--mut)">Depot und ETF: jede Buchung l&auml;sst sich einzeln stornieren (Knopf Storno in der Transaktionshistorie bzw. unter Buchungen; kein Undo, vorher Export; verboten, wenn ein sp&auml;terer Verkauf ungedeckt bliebe). ETF-Positionen unter Ausweis ohne Kurs machen Kern-Zeile und Soll-Vergleich nicht mehr unvollst&auml;ndig, sie werden genannt. Allokation: Feld AKTIEN-ETFs und Zeile davon ETF-Teil gesamt.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.44</td><td style="padding:5px 8px;color:var(--mut)">ETF-Tab: Rangliste aus dem Tageslauf mit Gruppen nach Rolle, Kern-Zeile, 12M und Rang; Positionen au&szlig;erhalb der Rangliste stehen unter Ausweis. Depot: Risiko-Block mit Ist gegen Soll, Formular Soll bearbeiten (Pr&auml;ferenz, keine Regel) und Durchleuchtung; Export und Import tragen das Soll. Allokation: Kopf mit Etikett Nutzerparameter, ungetestet.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.43</td><td style="padding:5px 8px;color:var(--mut)">Die Watchlist-Zeile zeigt Rang, 12M, Q (Qualit&auml;t), KGV und Div; PEG, FCF, ROCE und 52W-Pos. stehen in der Detailansicht. F&uuml;nf Sortierkn&ouml;pfe Rang, Q, KGV, Div und A-Z mit Legendenzeile; im Grundzustand stehen alle Gruppen nach Rang. Detailansicht: Qualit&auml;t zuerst, dann die Angaben ohne bekannten Mangel; Score und bekannt fehlerhafte Kennzahlen eingeklappt am Schluss; der Score tr&auml;gt das Etikett Schatten, ungetestet. Die Qualit&auml;tszeile nennt das Perzentil im Universum (h&ouml;her = besser) und die Titelzahl.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.42</td><td style="padding:5px 8px;color:var(--mut)">Die Detailansicht zeigt die Qualit&auml;t (Perzentil im Universum, Schatten, ungetestet) mit dem Stand des Tageslaufs.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -910,6 +912,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div id="etf-summary" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px"></div>
   <div id="etf-holdings" style="margin-bottom:14px"></div>
+  <details id="etf-tx-box" style="margin-bottom:14px"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#dce8f5">Buchungen</summary><div id="etf-txlog" style="margin-top:8px"></div></details>
 
   <div id="etf-liste" style="margin-bottom:14px"></div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:10px">ETF-Rang (von m) ist nur Anzeige (Kontext zur Marktphase), kein Signal. Ohne Wert: --</div>
@@ -924,7 +927,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.44 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.45 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1022,7 +1025,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.44 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.45 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -3570,7 +3573,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.44';
+      var PAGE_VERSION = 'v6.6.45';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -4562,6 +4565,10 @@ function rAlloc(){
   }
   var totEl = document.getElementById('ai-total');
   if(totEl) totEl.textContent = total.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR';
+  /* S494 C-1: davon ETF-Teil gesamt -- nur Anzeige, dieselben Werte wie die Felder (allocEtfKlassen) */
+  var etEl = document.getElementById('ai-etf-teil');
+  if(etEl){ try { var _et = allocEtfTeilGesamt(); etEl.textContent = _et.sum.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR'
+    + (_et.d > 0 ? ' (inkl. Bitcoin ' + _et.d.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR ohne eigenes Feld)' : ''); } catch(ee){} }
 
   var barsEl = document.getElementById('alloc-bars');
   var rebalEl = document.getElementById('alloc-rebal');
@@ -4795,6 +4802,71 @@ function txSortByDate(txList){
   return out;
 }
 
+/* S494 D-3: Storno einer einzelnen Buchung im Depot- und im ETF-TX-Log. Gemeinsamer Kern, weil die fuer
+   Bestand und Identitaet massgeblichen Felder (t,d,typ,n,px) und die Buchungsarten in beiden Logs gleich
+   sind; die uebrigen Felder (Depot sig/lbl, ETF cls/isin) werden weder geprueft noch veraendert.
+   Storno = Entfernen genau EINES Eintrags (Index UND Feldvergleich); kein Undo, keine Gegenbuchung,
+   TX-Schema unveraendert. Rueckweg: Export vor dem Storno, Import stellt den Stand wieder her. */
+var TX_ART = {BUY:'Kauf', ADD:'Nachkauf', TRIM:'Teilverkauf', SELL:'Verkauf'};
+/* txStornoPruef: Bestand des Symbols chronologisch (txSortByDate) ohne den Eintrag idx; null oder
+   {sym, datum} der ersten Verletzung (Bestand < 0). Nur ein Kauf kann einen spaeteren Verkauf
+   ungedeckt lassen -- das Entfernen eines Verkaufs senkt keinen Bestand. Toleranz wie dpAdd. */
+function txStornoPruef(log, idx){
+  var x = log ? log[idx] : null, rest = [], i, sorted, b = 0, tx;
+  if(!x || !x.t || !(x.typ === 'BUY' || x.typ === 'ADD')) return null;
+  for(i=0;i<log.length;i++) if(i !== idx) rest.push(log[i]);
+  sorted = txSortByDate(rest);
+  for(i=0;i<sorted.length;i++){
+    tx = sorted[i];
+    if(!tx || tx.t !== x.t) continue;
+    if(tx.typ === 'BUY' || tx.typ === 'ADD') b += tx.n;
+    else if(tx.typ === 'TRIM' || tx.typ === 'SELL'){
+      b -= tx.n;
+      if(b < -0.0001) return {sym:x.t, datum:tx.d || ''};
+    }
+  }
+  return null;
+}
+/* Klartext einer Buchung (Buchungswerte, keine Statusfarbe) */
+function txKlartext(x){
+  var cur = x.cur || 'EUR', px = (typeof x.px === 'number') ? x.px.toFixed(2) : '--';
+  var bt = (typeof x.n === 'number' && typeof x.px === 'number') ? (x.n * x.px).toFixed(2) : '--';
+  return (x.d ? dpDatumTxt(x.d) : 'ohne Datum') + ', ' + x.t + ((x.name && x.name !== x.t) ? ' (' + x.name + ')' : '')
+    + ', ' + (TX_ART[x.typ] || x.typ) + ', ' + x.n + ' Stueck zu ' + px + ' ' + cur + ', Betrag ' + bt + ' ' + cur;
+}
+/* Knopf je Historienzeile; data-Attribute tragen die Felder fuer den Vergleich beim Klick */
+function txStornoKnopf(fn, i, x){
+  return '<button type="button" class="tx-storno" onclick="' + fn + '(' + i + ',this)"'
+    + ' data-d="' + etfEsc(x.d || '') + '" data-t="' + etfEsc(x.t || '') + '" data-typ="' + etfEsc(x.typ || '')
+    + '" data-n="' + etfEsc(String(x.n)) + '" data-px="' + etfEsc(String(x.px)) + '" title="Diese Buchung stornieren"'
+    + ' style="background:transparent;border:1px solid #332;color:#ff6666;font-size:9px;line-height:1;padding:1px 5px;border-radius:4px;cursor:pointer;margin-left:4px">Storno</button>';
+}
+function txStornoGleich(x, el){
+  if(!x || !el || !el.getAttribute) return false;
+  return String(x.d || '') === el.getAttribute('data-d') && String(x.t || '') === el.getAttribute('data-t')
+    && String(x.typ || '') === el.getAttribute('data-typ') && String(x.n) === el.getAttribute('data-n')
+    && String(x.px) === el.getAttribute('data-px');
+}
+/* txStornoLauf: Feldvergleich -> Verbotspruefung -> confirm; liefert {log, txt} mit dem neuen Log
+   (Kopie ohne Eintrag idx) oder {log:null, grund} -- das gespeicherte Log bleibt dann unveraendert (AP-3). */
+function txStornoLauf(log, idx, el){
+  var x = log ? log[idx] : null, v, neu, i;
+  if(!txStornoGleich(x, el)){
+    alert('Storno abgebrochen: Die Buchung passt nicht mehr zur angezeigten Zeile. Liste neu geladen, bitte erneut waehlen.');
+    return {log:null, grund:'id'};
+  }
+  var txt = txKlartext(x);
+  v = txStornoPruef(log, idx);
+  if(v){
+    alert('Storno nicht moeglich: Bestand ' + v.sym + ' wuerde negativ (Verkauf vom ' + (v.datum ? dpDatumTxt(v.datum) : 'ohne Datum') + '). Zuerst den Verkauf stornieren.');
+    return {log:null, grund:'neg'};
+  }
+  if(!confirm('Buchung stornieren?\n' + txt + '\nKein Undo. Vorher Export empfohlen.')) return {log:null, grund:'abbr'};
+  neu = [];
+  for(i=0;i<log.length;i++) if(i !== idx) neu.push(log[i]);
+  return {log:neu, txt:txt};
+}
+
 /* Aggregat: gew. Durchschnittseinstand, Bestand, realisierter G/V je Symbol.
    Schema TX: {t,d,typ,n,px,name,cur,cls,isin,note}; typ in BUY/ADD/TRIM/SELL. */
 function etfAggregate(txList){
@@ -5012,23 +5084,28 @@ function etfRenderSummary(){
 /* S490 A-4: Kern-Quote = Marktwert der Positionen mit rolle KERN / Marktwert aller ETF-Positionen
    (ETF-Teil, Konzept Depot-Soll v1.1 Abschn. 2.1) gegen das Soll (S491: dpSollLoad, Rueckfall DEPOT_SOLL_STD;
    dieselbe Zeile im Depot-Risiko-Block). Zustand als Pfeil und Text,
-   keine Farbe. Fehlt ein Kurs: keine Zahl (AP-3, Muster dpRenderRisk). */
+   keine Farbe. Fehlt ein Kurs: keine Zahl (AP-3, Muster dpRenderRisk).
+   S494 B-3: eine Ausweis-Position (ohne etf_rang-Eintrag oder rolle AUSWEIS) ohne Kurs geht weder in den
+   ETF-Teil noch in die Zaehlung ohne Kurs ein; Kern-Zeile und Soll-Block nennen sie (AP-3, sichtbar).
+   Ranglisten-ETFs ohne Kurs bleiben unvollstaendig. */
+function etfIstAusweis(e){ return !e || e.rolle === 'AUSWEIS'; }
+function etfAusweisZusatz(n){ return n > 0 ? ' - ' + n + ' Ausweis-Position(en) ohne Kurs nicht enthalten' : ''; }
 function etfKernZeile(){
-  var s = dpSollLoad(), kern = 0, tot = 0, ohne = 0, nKern = 0, i, p, e, cp, q, z;
+  var s = dpSollLoad(), kern = 0, tot = 0, ohne = 0, nAus = 0, nKern = 0, i, p, e, cp, q, z;
   for(i=0;i<ETF_POSITIONS.length;i++){
     p = ETF_POSITIONS[i];
     e = etfEintrag(p.t);
     if(e && e.rolle === 'KERN') nKern++;
     cp = etfCurrentPrice(p.t);
-    if(cp === null){ ohne++; continue; }
+    if(cp === null){ if(etfIstAusweis(e)) nAus++; else ohne++; continue; }
     tot += p.shares * cp;
     if(e && e.rolle === 'KERN') kern += p.shares * cp;
   }
   if(nKern === 0) return 'kein Kern im Bestand';
-  if(ohne > 0 || !(tot > 0)) return 'Kern-Quote unvollst&auml;ndig - ' + ohne + ' Position(en) ohne Kurs';
+  if(ohne > 0 || !(tot > 0)) return 'Kern-Quote unvollst&auml;ndig - ' + ohne + ' Position(en) ohne Kurs' + etfAusweisZusatz(nAus);
   q = kern / tot * 100;
   z = (q < s.kern_min) ? '&#8595; unter dem Band' : ((q > s.kern_max) ? '&#8593; &uuml;ber dem Band' : '&#8596; im Band');
-  return 'Kern ' + q.toFixed(0) + ' % des ETF-Teils (Soll ' + s.kern_pct + ' %, Band ' + s.kern_min + '-' + s.kern_max + ' %) - ' + z;
+  return 'Kern ' + q.toFixed(0) + ' % des ETF-Teils (Soll ' + s.kern_pct + ' %, Band ' + s.kern_min + '-' + s.kern_max + ' %) - ' + z + etfAusweisZusatz(nAus);
 }
 
 /* S490: Gruppen nach Rolle in ETF_ROLLEN-Reihenfolge, Rest als Sonstige; innerhalb nach Symbol. */
@@ -5176,7 +5253,49 @@ function etfCurrentPrice(sym){
 function etfRender(){
   etfRenderSummary();
   etfRenderTable();
+  etfRenderTxLog();  /* S494 B-1 */
   etfRenderListe();
+}
+
+/* S494 B-1: Buchungsliste des ETF-TX-Logs unter dem Bestand (neueste zuerst, Muster dpRenderTxLog),
+   Storno je Zeile. Der ETF-Bestand ist ein TX-Log (stockiq_etf_tx_v1) -- daher Storno, nicht Position entfernen. */
+function etfRenderTxLog(){
+  var el = document.getElementById('etf-txlog');
+  if(!el) return;
+  var txList = etfTxLoad(), i, tx, out, typC;
+  if(txList.length === 0){
+    el.innerHTML = '<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:12px">Noch keine Buchungen.</div>';
+    return;
+  }
+  var th = '<th style="background:#1a3a5c;color:#dce8f5;padding:4px 5px;text-align:left">';
+  out = '<div class="dp-scroll"><table style="width:100%;border-collapse:collapse;font-size:10px"><tr>'
+    + th + 'Datum</th>' + th + 'Typ</th>' + th + 'Symbol</th>' + th + 'Anz.</th>' + th + 'Kurs</th>' + th + 'Kl</th>' + th + 'Notiz</th></tr>';
+  for(i=txList.length-1;i>=0;i--){
+    tx = txList[i];
+    typC = (tx.typ==='BUY'||tx.typ==='ADD') ? '#00e57a' : (tx.typ==='SELL'||tx.typ==='TRIM') ? '#ff5252' : '#7a9bb5';
+    out += '<tr class="etf-tx" style="background:' + ((txList.length-1-i)%2===0 ? '#0a1628' : '#0c1a2e') + '">'
+      + '<td style="padding:4px 5px;color:#7a9bb5;font-family:monospace;font-size:10px">' + etfEsc(tx.d||'--') + txStornoKnopf('etfTxStorno', i, tx) + '</td>'
+      + '<td style="padding:4px 5px;color:' + typC + ';font-family:monospace;font-weight:700">' + etfEsc(tx.typ||'?') + '</td>'
+      + '<td style="padding:4px 5px;color:#00c8f0;font-family:monospace;font-weight:700">' + etfEsc(tx.t||'?') + '</td>'
+      + '<td style="padding:4px 5px;text-align:right;color:#dce8f5">' + (typeof tx.n==='number' ? tx.n : '--') + '</td>'
+      + '<td style="padding:4px 5px;text-align:right;color:#dce8f5">' + (typeof tx.px==='number' ? tx.px.toFixed(2) : '--') + '</td>'
+      + '<td style="padding:4px 5px;color:#7a9bb5">' + etfEsc(tx.cls||'') + '</td>'
+      + '<td style="padding:4px 5px;color:var(--mut)">' + etfEsc(tx.note||'') + '</td></tr>';
+  }
+  el.innerHTML = out + '</table></div>';
+}
+/* S494 B-1: ETF-Storno. Neuberechnung wie etfImport (etfTxSave -> etfLoad -> etfRender -> etfFillExisting),
+   dazu Allok-Felder (allocPrefillFromEtf) und Depot-Risiko-Block (Soll liest den ETF-Bestand, S491). */
+function etfTxStorno(idx, el){
+  var r = txStornoLauf(etfTxLoad(), idx, el);
+  if(!r.log){ if(r.grund === 'id') etfRenderTxLog(); return; }
+  etfTxSave(r.log);
+  etfLoad();
+  etfRender();
+  try { etfFillExisting(); } catch(fe){}
+  try { allocPrefillFromEtf(); } catch(ae){}
+  try { dpRenderRisk(); } catch(re){}
+  alert('Buchung storniert: ' + r.txt);
 }
 
 /* ETF Export als JSON (S121 E6, analog dpExport). */
@@ -6876,15 +6995,16 @@ function dpSollForm(soll){
 }
 /* S491 A-5: Teil des Risiko-Blocks -- Kopf, Zeilen (oder EINE Zeile "unvollstaendig"), Legende, Formular */
 function dpSollTeil(dpItems,ohneDp){
-  var soll=dpSollLoad(),etf=[],ohne=ohneDp,i,p,cp;
+  var soll=dpSollLoad(),etf=[],ohne=ohneDp,nAus=0,i,p,cp;
   try{ etfLoad(); }catch(e){}
   for(i=0;i<ETF_POSITIONS.length;i++){
     p=ETF_POSITIONS[i]; cp=etfCurrentPrice(p.t);
-    if(cp===null){ ohne++; continue; }
+    if(cp===null){ if(etfIstAusweis(etfEintrag(p.t))) nAus++; else ohne++; continue; }  /* S494 B-3 */
     etf.push({t:p.t,w:p.shares*cp});
   }
   var h='<div class="dp-soll" style="margin-top:8px;padding-top:8px;border-top:1px solid #2a3441">'
     +'<div style="font-size:12px;color:#9fb0c0;margin-bottom:4px">Ist gegen Soll &middot; Durchleuchtung</div>';
+  if(nAus>0) h+='<div class="dp-soll-ausweis" style="font-size:11px;color:#9fb0c0">'+nAus+' Ausweis-Position(en) ohne Kurs nicht enthalten</div>';
   if(ohne>0||!dpItems) h+='<div class="dp-soll-unv" style="font-size:11px;color:#9fb0c0">Soll-Vergleich unvollst&auml;ndig - '+ohne+' Position(en) ohne Kurs</div>';
   else h+=dpSollBlock(dpItems,etf,soll,(typeof _etfStamm!=='undefined')?_etfStamm:null);
   h+='<div class="dp-soll-leg" style="font-size:10px;color:#5a6875;margin-top:4px">'+KZ_ROLLE.K87+' (Nutzerparameter)</div>';
@@ -6934,8 +7054,8 @@ function dpRenderTxLog(){
     var rowBg = (txList.length-1-i)%2===0 ? '#0a1628' : '#0c1a2e';
     var typC = (tx.typ==='BUY'||tx.typ==='ADD') ? '#00e57a'
              : (tx.typ==='SELL'||tx.typ==='TRIM') ? '#ff5252' : '#7a9bb5';
-    out += '<tr style="background:'+rowBg+'">';
-    out += '<td style="padding:4px 5px;color:#7a9bb5;font-family:monospace;font-size:10px">'+(tx.d||'--')+'</td>';
+    out += '<tr class="dp-tx" style="background:'+rowBg+'">';
+    out += '<td style="padding:4px 5px;color:#7a9bb5;font-family:monospace;font-size:10px">'+(tx.d||'--')+txStornoKnopf('dpTxStorno', i, tx)+'</td>';  /* S494 A-3 */
     out += '<td style="padding:4px 5px;text-align:center;color:'+typC+';font-family:monospace;font-size:10px;font-weight:700">'+(tx.typ||'?')+'</td>';
     out += '<td style="padding:4px 5px;color:#00c8f0;font-family:monospace;font-weight:700">'+(tx.t||'?')+'</td>';
     out += '<td style="padding:4px 5px;text-align:right;color:#dce8f5">'+(typeof tx.n==='number'?tx.n:'--')+'</td>';
@@ -6946,6 +7066,18 @@ function dpRenderTxLog(){
   }
   out += '</table></div>';
   el.innerHTML = out;
+}
+
+/* S494 A-2: Depot-Storno. Neuberechnung ueber denselben Pfad wie dpImportData nach dem Ersetzen
+   (dpTxSave -> dpAggregate -> depotSave -> dpRender; dpRender zeichnet Historie und Risiko-Block neu). */
+function dpTxStorno(idx, el){
+  var r = txStornoLauf(dpTxLoad(), idx, el);
+  if(!r.log){ if(r.grund === 'id') dpRenderTxLog(); return; }
+  dpTxSave(r.log);
+  DEPOT_POSITIONS = dpAggregate(r.log);
+  depotSave();
+  dpRender();
+  alert('Buchung storniert: ' + r.txt);
 }
 
 function initAlloc(){
@@ -6986,24 +7118,36 @@ function allocPrefillFromDepot(){
 /* ETF-Bestaende nach Anlageklasse in Allok-Felder (S121 E5).
    cls-verteilt: E->etfs, A->bonds, G->gold, R->commod. Hart ueberschreiben
    nur bei Klassensumme > 0 (leere Klasse -> Feld unberuehrt). */
+/* S494 C-1: Klassensummen der ETF-Bausteine (Marktwert, sonst Einstand) -- EINE Quelle fuer die
+   Allok-Felder (allocPrefillFromEtf) und die Zeile davon ETF-Teil gesamt (allocEtfTeilGesamt). */
+function allocEtfKlassen(){
+  var acc = {E:0, A:0, G:0, R:0, D:0};  /* D: kein Allok-Feld bis E-3 (gezaehlt, nicht verteilt) */
+  var i, p, cp, mv;
+  for(i=0;i<ETF_POSITIONS.length;i++){
+    p = ETF_POSITIONS[i];
+    cp = etfCurrentPrice(p.t);
+    mv = (cp !== null && cp > 0) ? cp * p.shares : p.buyPrice * p.shares;
+    if(acc.hasOwnProperty(p.cls)) acc[p.cls] += mv;
+  }
+  return acc;
+}
+/* Summe ueber alle Klassen in den gerundeten Werten, mit denen die Felder gefuellt werden (nur Anzeige) */
+function allocEtfTeilGesamt(){
+  var acc = allocEtfKlassen(), k, sum = 0;
+  for(k in acc) if(acc.hasOwnProperty(k)) sum += Math.round(acc[k]);
+  return {sum:sum, d:Math.round(acc.D)};
+}
 function allocPrefillFromEtf(){
   try {
     etfLoad();
-    var acc = {E:0, A:0, G:0, R:0, D:0};  /* D: kein Allok-Feld bis E-3 (gezaehlt, nicht verteilt) */
-    var i, p, cp, mv;
-    for(i=0;i<ETF_POSITIONS.length;i++){
-      p = ETF_POSITIONS[i];
-      cp = etfCurrentPrice(p.t);
-      mv = (cp !== null && cp > 0) ? cp * p.shares : p.buyPrice * p.shares;
-      if(acc.hasOwnProperty(p.cls)) acc[p.cls] += mv;
-    }
+    var acc = allocEtfKlassen();
     var map = {E:'ai-etfs', A:'ai-bonds', G:'ai-gold', R:'ai-commod'};
     var k, el;
     for(k in map){
       if(!map.hasOwnProperty(k)) continue;
       if(acc[k] > 0){
         el = document.getElementById(map[k]);
-        if(el){ el.value = Math.round(acc[k]); }
+        if(el){ el.value = Math.round(acc[k]); }  /* dieselbe Rundung wie allocEtfTeilGesamt */
       }
     }
     /* Badge entfernt (v6.6.2) -- Erklaerung jetzt im Allok-Footer */
@@ -7411,7 +7555,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.44 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.45 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
