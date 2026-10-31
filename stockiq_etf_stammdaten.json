@@ -8,23 +8,33 @@
   "erzeugt": "2026-10-20T17:53:40",
   "skript_version": "1.0",
   "skript_md5": "3663b12e4844b0cb094aebb0f8d43cef",
-  "liste_version": "762a4d6aa7a664b2fc4f49712d58f85b",
-  "fund_juno_version": "7.9.57",
+  "liste_version": "9925d8ed65e79c7e6d688d2817ba46e1",
+  "fund_juno_version": "7.9.58",
   "mapping_version": "8a86bb1f7edaffb2c3d8dbb11879a833",
   "sektor_namen_gleich_scores": true,
-  "n_gesamt": 24,
+  "n_gesamt": 25,
   "n_mit_laendern": 14,
-  "n_mit_sektoren": 17,
+  "n_mit_sektoren": 18,
   "n_vollstaendig": 13,
   "quellen": {
    "Global X API-csv": 1,
    "SPDR holdings-daily xlsx": 2,
    "iShares latest-holdings.csv": 11,
    "manuell (Kla-Download)": 6,
-   "n. a.": 4
+   "n. a.": 5
   },
   "konzept": "Konzept ETF im Depot v1.3 Abschn. 5a; Region-Tabelle Konzept Depot-Soll v1.1 Abschn. 2.2",
-  "hinweis": "Stand je ETF und je Feld (stand_land aus der Datei, stand_sektor = Abruf); kein gemeinsames Datum."
+  "hinweis": "Stand je ETF und je Feld (stand_land aus der Datei, stand_sektor = Abruf); kein gemeinsames Datum.",
+  "nachtrag": {
+   "datum": "2026-10-30T10:58:13",
+   "sprint": "S509",
+   "symbole": [
+    "ACM9.DE"
+   ],
+   "skript_version": "1.1",
+   "skript_md5": "258e7887382a29af2269d210c523e9eb",
+   "hinweis": "Nachtrag zum Freeze 20261020: ein Eintrag neu (baue_eintrag/hole_yf); die uebrigen Eintraege unveraendert aus etf_stammdaten_20261020.json; erzeugt bleibt der Stand des Freeze."
+  }
  },
  "etf": [
   {
@@ -1088,6 +1098,42 @@
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
    "hinweis": []
+  },
+  {
+   "isin": "FR0010756114",
+   "symbol": "ACM9.DE",
+   "rolle": "GRUPPE",
+   "klasse": "E",
+   "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
+   "stand_sektor": "2026-10-30",
+   "sektoren": {
+    "Basic Materials": 2.98,
+    "Communication Services": 8.82,
+    "Consumer Cyclical": 8.33,
+    "Consumer Defensive": 4.69,
+    "Energy": 4.05,
+    "Financial Services": 14.57,
+    "Healthcare": 9.51,
+    "Industrials": 9.62,
+    "Real Estate": 1.62,
+    "Technology": 33.92,
+    "Utilities": 1.9,
+    "sonstige": -0.01
+   },
+   "quelle_land": "n. a.",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": null,
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Aktien",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "keine Bestandsliste erwartet (ETC/Swap)",
+    "Swap (Gegenpartei BNP Paribas): die Bestandsliste ist der Ersatzkorb, nicht das Indexengagement; Laender des Index MSCI World ex EMU offen (Folgeposten S509)"
+   ]
   },
   {
    "isin": "IE00B4WXJJ64",
