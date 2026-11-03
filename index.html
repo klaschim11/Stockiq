@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.46</title>
+<title>StockIQ v6.6.47</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -129,7 +129,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.46 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.47 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
       <div id="hdr-rangbasis" style="font-family:monospace;font-size:10px;color:var(--mut)">Rangbasis D1-IND seit 03.11.2026; D1 als Schatten</div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
@@ -184,6 +184,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button id="wl-u2-btn" class="wf" onclick="toggleU2Filter()">U200 (--)</button>
     <button id="wl-hi-btn" class="wf" onclick="toggleHiFilter()">HIST (--)</button>
     <button id="wl-bb-btn" class="wf" onclick="toggleBbFilter()">Bleibt BUY (--)</button>
+    <button id="wl-sn-btn" class="wf" onclick="toggleSnFilter()" title="Schnitt: in BUY nach beiden Rangbasen (D1-IND und Schatten D1). Kandidat C-BUY-SCHNITT, ungetestet &ndash; Anzeige, keine Regel.">Schnitt (--)</button>
     <button id="wl-erl-btn" class="wf" onclick="wlErlToggle()" title="Erl&auml;uterungen ein- und ausblenden" aria-label="Erl&auml;uterungen" style="font-weight:700;padding:5px 11px">i</button>
   </div>
   <!-- S459 W3: Legendenzeile, Text zur Laufzeit aus KZ_ZEILE_WL/KZ_ROLLE (wlLegende) -->
@@ -201,9 +202,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="wl-monatskauf-erl" class="wl-erl-blk">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Monatskauf in f&uuml;nf Schritten</strong></div>
     <div style="margin-bottom:3px">1. Am Monatsende den rangh&ouml;chsten BUY-Titel kaufen, der nicht im Depot liegt.</div>
-    <div style="margin-bottom:3px">2. Vorher im Depot die Grenzen f&uuml;r Sektor, Region und Einzelposition ansehen (Hinweis, kein Verbot). Q und KGV sind Information, keine Auswahlregel.</div>
+    <div style="margin-bottom:3px">2. Vorher im Depot pr&uuml;fen, ob der Kauf eine Grenze des Depot-Solls (Region, Sektor, Deckel Einzeltitel) &uuml;berschreitet. Gesperrt hei&szlig;t: der Vorschlag &uuml;berspringt den Titel; die Entscheidung bleibt beim Anleger. Q und KGV sind Information, keine Auswahlregel.</div>
     <div style="margin-bottom:3px">3. Zw&ouml;lf Monate halten &ndash; auch bei R&uuml;ckschl&auml;gen und auch, wenn der Titel zwischendurch aus BUY f&auml;llt.</div>
-    <div style="margin-bottom:3px">4. Am Pr&uuml;fdatum: noch BUY &rarr; weiter halten; sonst SELL Abstieg &rarr; ersetzen erw&auml;gen.</div>
+    <div style="margin-bottom:3px">4. Am Pr&uuml;fdatum: noch BUY und zul&auml;ssig &rarr; weiter halten; sonst SELL Abstieg &rarr; Verkaufskandidat. Verkauf St&uuml;ck f&uuml;r St&uuml;ck, Auswahl beim Anleger.</div>
     <div style="margin-bottom:3px">5. Marktphase ROT betrifft die Aktienquote, nicht die Titelwahl.</div>
     <div>Getestet ist der Korb &uuml;ber viele K&auml;ufe, nicht der einzelne Titel. Die Verkaufsentscheidung bleibt beim Anleger. Mehr: Anwenderleitfaden, Kapitel 4.</div>
   </div>
@@ -211,7 +212,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="wl-kennz-erl" style="background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:6px;padding:8px 12px;margin-bottom:8px;font-size:11px;color:var(--mut);line-height:1.6">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Auswahl</strong>: die vorderen Pl&auml;tze der BUY-Liste. Diese Gruppe hat in der R&uuml;ckrechnung am besten abgeschnitten.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Trend</strong>: das fr&uuml;here Kaufsignal. Es hat im Test keinen eigenen Vorteil gezeigt und dient nur der Information.</div>
-    <div><strong style="color:#7a9bb5">U200</strong>: Kurs unter der 200-Tage-Linie. Ein Kennzeichen, kein Verkaufssignal.</div>
+    <div style="margin-bottom:3px"><strong style="color:#7a9bb5">U200</strong>: Kurs unter der 200-Tage-Linie. Ein Kennzeichen, kein Verkaufssignal.</div>
+    <div><strong style="color:#7a9bb5">Schnitt</strong>: Titel, die nach beiden Rangbasen (Branchenvergleich und rohe Zw&ouml;lf-Monats-Entwicklung) im obersten Zehntel stehen. Hypothesenkandidat, ungetestet; kein Kaufhinweis.</div>
   </div>
   <div id="wl-etik-erl" class="wl-erl-blk">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">HIST</strong>: das fr&uuml;here Verkaufssignal aus dem MACD-Histogramm. Es hat im Test keine Vorhersagekraft gezeigt und dient nur der Information.</div>
@@ -301,7 +303,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation<span id="alloc-kz55" style="font-weight:400;font-size:10px;color:var(--mut)"></span></div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.46</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.47</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -500,7 +502,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.46 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.47 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -628,7 +630,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="hilfe-kennz-erl" style="margin-top:10px;font-size:12px;color:var(--mut);line-height:1.7">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Auswahl</strong>: die vorderen Pl&auml;tze der BUY-Liste. Diese Gruppe hat in der R&uuml;ckrechnung am besten abgeschnitten.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Trend</strong>: das fr&uuml;here Kaufsignal. Es hat im Test keinen eigenen Vorteil gezeigt und dient nur der Information.</div>
-    <div><strong style="color:#7a9bb5">U200</strong>: Kurs unter der 200-Tage-Linie. Ein Kennzeichen, kein Verkaufssignal.</div>
+    <div style="margin-bottom:3px"><strong style="color:#7a9bb5">U200</strong>: Kurs unter der 200-Tage-Linie. Ein Kennzeichen, kein Verkaufssignal.</div>
+    <div><strong style="color:#7a9bb5">Schnitt</strong>: Titel, die nach beiden Rangbasen (Branchenvergleich und rohe Zw&ouml;lf-Monats-Entwicklung) im obersten Zehntel stehen. Hypothesenkandidat, ungetestet; kein Kaufhinweis.</div>
   </div>
   </div>
 
@@ -753,6 +756,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.47</td><td style="padding:5px 8px;color:var(--mut)">Watchlist: neuer Filter Schnitt zeigt die Titel, die nach beiden Rangbasen im obersten Zehntel stehen (Anzeige, Hypothesenkandidat, ungetestet).</td><td style="padding:5px 8px;color:var(--mut)">Nov 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.46</td><td style="padding:5px 8px;color:var(--mut)">BUY und Rang vergleichen die Zw&ouml;lf-Monats-Entwicklung jetzt mit der eigenen Branche; SELL Abstieg und Pr&uuml;fdatum folgen derselben Rangfolge. Der i-Punkt der Watchlist beginnt mit dem Monatskauf in f&uuml;nf Schritten.</td><td style="padding:5px 8px;color:var(--mut)">Nov 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.45</td><td style="padding:5px 8px;color:var(--mut)">Depot und ETF: jede Buchung l&auml;sst sich einzeln stornieren (Knopf Storno in der Transaktionshistorie bzw. unter Buchungen; kein Undo, vorher Export; verboten, wenn ein sp&auml;terer Verkauf ungedeckt bliebe). ETF-Positionen unter Ausweis ohne Kurs machen Kern-Zeile und Soll-Vergleich nicht mehr unvollst&auml;ndig, sie werden genannt. Allokation: Feld AKTIEN-ETFs und Zeile davon ETF-Teil gesamt.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.44</td><td style="padding:5px 8px;color:var(--mut)">ETF-Tab: Rangliste aus dem Tageslauf mit Gruppen nach Rolle, Kern-Zeile, 12M und Rang; Positionen au&szlig;erhalb der Rangliste stehen unter Ausweis. Depot: Risiko-Block mit Ist gegen Soll, Formular Soll bearbeiten (Pr&auml;ferenz, keine Regel) und Durchleuchtung; Export und Import tragen das Soll. Allokation: Kopf mit Etikett Nutzerparameter, ungetestet.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -938,7 +942,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.46 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.47 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1036,7 +1040,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.46 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.47 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1372,7 +1376,8 @@ var WL_TR_FILTER      = false; /* S383: Zeilenfilter Kennzeichen Trend; von "All
 var _wlAwN = null, _wlTrN = null; /* S383: Chip-Zahl n je rWL; null = vor dem Laden ("--") */
 /* S417 W-2/W-3: weitere Zeilenfilter; von "Alle" zurueckgesetzt, nicht persistiert */
 var WL_U2_FILTER = false, WL_HI_FILTER = false, WL_BB_FILTER = false, WL_DV_FILTER = false;
-var _wlU2N = null, _wlHiN = null, _wlBbN = null;
+var WL_SN_FILTER = false;  /* S523: Schnitt D1/D1-IND, Anzeige ohne Regel; von "Alle" zurueckgesetzt, nicht persistiert */
+var _wlU2N = null, _wlHiN = null, _wlBbN = null, _wlSnN = null;
 var WL_DV_MIN = 4;   /* S417 W-2 (Kla 08.10.2026): Dividendenrendite in Prozent; Schwelle steht nur hier, nie auf der Seite */
 var _wlFavHinweis = false; /* S417 W-5: Fav ohne Favoriten -> Hinweis statt Markierung */
 // SYNC-START:FSC_FILTER_VARS
@@ -2083,7 +2088,7 @@ function wlKachelKlick(f){ wlFilt(WL_FILTER===f?'all':f,null); }
 function rWL(){
   var i,s,t,scored;
   var buys=0,abst=0,watches=0;
-  var n={aw:0,tr:0,u2:0,hi:0,bb:0};  /* S383/S417: Chip-Zahlen */
+  var n={aw:0,tr:0,u2:0,hi:0,bb:0,sn:0};  /* S383/S417/S523: Chip-Zahlen */
   rMpZeile();
   /* S417 W-5: Fav ohne Favoriten wirkt nicht -- Hinweis statt Markierung. */
   if(WL2_SYNC&&Object.keys(WL2).length===0){ WL2_SYNC=false; _wlFavHinweis=true; }
@@ -2101,6 +2106,7 @@ function rWL(){
     if(wlRowPass(s,'u2')&&u200Is(s)) n.u2++;
     if(wlRowPass(s,'hi')&&histIs(s)) n.hi++;
     if(wlRowPass(s,'bb')&&bleibtBuy(t)) n.bb++;
+    if(wlRowPass(s,'sn')&&schnittIs(t)) n.sn++;
     if(!wlRowPass(s)) continue;
     /* S296: Zuordnung ueber wlBucket -- eine Quelle fuer Kachel, Gruppe
        und Filter. */
@@ -2114,6 +2120,7 @@ function rWL(){
   _wlAwN=_geladen?n.aw:null; _wlTrN=_geladen?n.tr:null;
   _wlU2N=_geladen?n.u2:null; _wlHiN=_geladen?n.hi:null;
   _wlBbN=(_geladen&&_abAkt)?n.bb:null;  /* AP-3: ohne Projektion "--", nie 0 */
+  _wlSnN=_geladen?n.sn:null;
   var kpi=document.getElementById('wl-kpi');
   /* S395 R-1 / S417 W-7: SELL Abstieg zeigt "--", solange die Projektion
      fehlt (AP-3: nie 0 statt fehlend), und ist dann nicht antippbar. */
@@ -2174,6 +2181,7 @@ function wlReset(){
   WL_U2_FILTER=false;
   WL_HI_FILTER=false;
   WL_BB_FILTER=false;
+  WL_SN_FILTER=false;
   _wlFavHinweis=false;
   rWL();
 }
@@ -2192,6 +2200,7 @@ function wlAktiveFilter(){
   if(WL_U2_FILTER) a.push('U200');
   if(WL_HI_FILTER) a.push('HIST');
   if(WL_BB_FILTER) a.push('Bleibt BUY');
+  if(WL_SN_FILTER) a.push('Schnitt');
   if(WL_FILTER!=='all') a.push(({buy:'BUY',abstieg:'SELL Abstieg',watch:'WATCH'})[WL_FILTER]||wlEsc(WL_FILTER));
   return a;
 }
@@ -2209,7 +2218,7 @@ function wlPaint(){
   var akt=wlAktiveFilter(),i,b,an;
   var defs=[['wl-alle-btn',akt.length===0],['sync-btn',WL2_SYNC],['wl-fsc-btn',FSC_FILTER],['wl-dv-btn',WL_DV_FILTER],
             ['wl-aw-btn',WL_AW_FILTER],['wl-tr-btn',WL_TR_FILTER],['wl-u2-btn',WL_U2_FILTER],['wl-hi-btn',WL_HI_FILTER],
-            ['wl-bb-btn',WL_BB_FILTER],['sort-rang',WL_SORT==='std'],['sort-q',WL_SORT==='q'],['sort-kgv',WL_SORT==='kgv'],
+            ['wl-bb-btn',WL_BB_FILTER],['wl-sn-btn',WL_SN_FILTER],['sort-rang',WL_SORT==='std'],['sort-q',WL_SORT==='q'],['sort-kgv',WL_SORT==='kgv'],
             ['sort-div',WL_SORT==='div'],['sort-alpha',WL_SORT==='alpha'],
             ['wl-sector-filter',!!WL_SECTOR_FILTER],['wl-search',!!WL_SEARCH]];
   for(i=0;i<defs.length;i++){
@@ -2426,6 +2435,7 @@ function wlRowPass(s,ohne){
   if(WL_U2_FILTER&&ohne!=='u2'&&!u200Is(s)) return false;
   if(WL_HI_FILTER&&ohne!=='hi'&&!histIs(s)) return false;
   if(WL_BB_FILTER&&ohne!=='bb'&&!bleibtBuy(s.t)) return false;
+  if(WL_SN_FILTER&&ohne!=='sn'&&!schnittIs(s.t)) return false;  /* S523 */
   return true;
 }
 /* isD1: EINZIGE Stelle, an der die Schwelle des obersten Zehntels steht
@@ -2470,6 +2480,15 @@ function rang12m(t){
    (Muster d1BadgeFor, S356). */
 function buyIsD1(t){
   return isD1(buyPctFor(t));
+}
+/* S523 schnittIs: Schnitt = BUY nach beiden Rangbasen (D1-IND und Schatten D1).
+   UND-Verknuepfung zweier bestehender Kennzeichen, kein Mischrang, keine neue
+   Schwelle: beide Pruefungen laufen ueber isD1(). Fehlt eines der Felder, ist
+   der Titel nicht im Schnitt (AP-3). Kandidat C-BUY-SCHNITT, Anzeige ohne Regel. */
+function schnittIs(t){
+  var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
+  if(!rec||typeof rec!=='object') return false;
+  return buyIsD1(t)&&isD1(rec.mom12m_pct);
 }
 /* S394 R-1: sellAbstieg -- EINZIGE Stelle des Abstieg-Praedikats (G-G).
    SELL Abstieg = vor 12 Monaten BUY (buy_ref12m_ind === true, Producer S478)
@@ -3104,7 +3123,7 @@ function toggleDvFilter(){ WL_DV_FILTER = !WL_DV_FILTER; rWL(); }
 function wlChipPaint(){
   /* S417: Text "Name (n)"; die Markierung setzt wlPaint (Klasse on). */
   var defs=[['wl-aw-btn','Auswahl',_wlAwN],['wl-tr-btn','Trend',_wlTrN],['wl-u2-btn','U200',_wlU2N],
-            ['wl-hi-btn','HIST',_wlHiN],['wl-bb-btn','Bleibt BUY',_wlBbN]],i,b;
+            ['wl-hi-btn','HIST',_wlHiN],['wl-bb-btn','Bleibt BUY',_wlBbN],['wl-sn-btn','Schnitt',_wlSnN]],i,b;
   for(i=0;i<defs.length;i++){
     b=document.getElementById(defs[i][0]); if(!b) continue;
     b.textContent=defs[i][1]+' ('+((defs[i][2]===null)?'--':defs[i][2])+')';
@@ -3125,6 +3144,7 @@ function toggleTrFilter(){
 function toggleU2Filter(){ WL_U2_FILTER = !WL_U2_FILTER; rWL(); }
 function toggleHiFilter(){ WL_HI_FILTER = !WL_HI_FILTER; rWL(); }
 function toggleBbFilter(){ if(!abstiegAktiv()&&!WL_BB_FILTER) return; WL_BB_FILTER = !WL_BB_FILTER; rWL(); }
+function toggleSnFilter(){ WL_SN_FILTER = !WL_SN_FILTER; rWL(); }  /* S523 */
 
 function toggleSync(btn){
   /* S417 W-5: ohne Favoriten wird Fav nicht markiert -- Hinweis statt Markierung. */
@@ -3594,7 +3614,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.46';
+      var PAGE_VERSION = 'v6.6.47';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -7586,7 +7606,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.46 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.47 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
