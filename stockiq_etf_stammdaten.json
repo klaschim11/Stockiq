@@ -13,27 +13,28 @@
   "mapping_version": "8a86bb1f7edaffb2c3d8dbb11879a833",
   "sektor_namen_gleich_scores": true,
   "n_gesamt": 25,
-  "n_mit_laendern": 14,
+  "n_mit_laendern": 15,
   "n_mit_sektoren": 18,
-  "n_vollstaendig": 13,
+  "n_vollstaendig": 14,
   "quellen": {
    "Global X API-csv": 1,
    "SPDR holdings-daily xlsx": 2,
+   "abgeleitet: MSCI World ex EMU = iShares latest-holdings.csv IE00B4L5Y983 ohne AT BE DE ES FI FR IE IT NL PT, neu normiert": 1,
    "iShares latest-holdings.csv": 11,
    "manuell (Kla-Download)": 6,
-   "n. a.": 5
+   "n. a.": 4
   },
   "konzept": "Konzept ETF im Depot v1.3 Abschn. 5a; Region-Tabelle Konzept Depot-Soll v1.1 Abschn. 2.2",
   "hinweis": "Stand je ETF und je Feld (stand_land aus der Datei, stand_sektor = Abruf); kein gemeinsames Datum.",
   "nachtrag": {
-   "datum": "2026-10-30T10:58:13",
-   "sprint": "S509",
+   "datum": "2026-11-03T17:46:02",
+   "sprint": "S525",
    "symbole": [
     "ACM9.DE"
    ],
-   "skript_version": "1.1",
-   "skript_md5": "258e7887382a29af2269d210c523e9eb",
-   "hinweis": "Nachtrag zum Freeze 20261020: ein Eintrag neu (baue_eintrag/hole_yf); die uebrigen Eintraege unveraendert aus etf_stammdaten_20261020.json; erzeugt bleibt der Stand des Freeze."
+   "skript_version": "1.2",
+   "skript_md5": "db509ba0132ecf034db39d58bb115b64",
+   "hinweis": "Nachtrag zum Freeze 20261020 (nach S509): ACM9.DE Laender aus dem Basisindex MSCI World ohne EMU abgeleitet; uebrige Eintraege unveraendert; erzeugt bleibt der Stand des Freeze."
   }
  },
  "etf": [
@@ -1105,7 +1106,7 @@
    "rolle": "GRUPPE",
    "klasse": "E",
    "quelle_sektor": "yfinance funds_data.sector_weightings (ohne Datum, Stand = Abruf)",
-   "stand_sektor": "2026-10-30",
+   "stand_sektor": "2026-11-03",
    "sektoren": {
     "Basic Materials": 2.98,
     "Communication Services": 8.82,
@@ -1120,20 +1121,206 @@
     "Utilities": 1.9,
     "sonstige": -0.01
    },
-   "quelle_land": "n. a.",
-   "stand_land": null,
-   "laender": null,
-   "regionen": null,
-   "top": null,
-   "positionen_n": null,
-   "gewicht_summe_roh": null,
-   "anteil_nicht_aktie": null,
+   "quelle_land": "abgeleitet: MSCI World ex EMU = iShares latest-holdings.csv IE00B4L5Y983 ohne AT BE DE ES FI FR IE IT NL PT, neu normiert",
+   "stand_land": "2026-11-02",
+   "laender": {
+    "US": 79.05,
+    "JP": 6.2,
+    "UK": 3.84,
+    "CA": 3.76,
+    "CH": 2.56,
+    "AU": 1.74,
+    "SE": 0.97,
+    "HK": 0.49,
+    "DK": 0.45,
+    "SG": 0.45,
+    "IL": 0.26,
+    "NO": 0.19,
+    "NZ": 0.04
+   },
+   "regionen": {
+    "USA": 79.05,
+    "EUROPA": 8.01,
+    "JAPAN": 6.2,
+    "UEBRIGE_INDUSTRIELAENDER": 6.75,
+    "SCHWELLENLAENDER": 0.0,
+    "SONSTIGE": 0.0
+   },
+   "top": [
+    {
+     "name": "APPLE",
+     "gewicht": 6.0586,
+     "isin": null,
+     "ticker": "AAPL"
+    },
+    {
+     "name": "NVIDIA",
+     "gewicht": 5.6649,
+     "isin": null,
+     "ticker": "NVDA"
+    },
+    {
+     "name": "MICROSOFT",
+     "gewicht": 4.3635,
+     "isin": null,
+     "ticker": "MSFT"
+    },
+    {
+     "name": "AMAZON.COM INC",
+     "gewicht": 2.8981,
+     "isin": null,
+     "ticker": "AMZN"
+    },
+    {
+     "name": "ALPHABET CLASS A",
+     "gewicht": 2.0013,
+     "isin": null,
+     "ticker": "GOOGL"
+    },
+    {
+     "name": "BROADCOM INC",
+     "gewicht": 1.7717,
+     "isin": null,
+     "ticker": "AVGO"
+    },
+    {
+     "name": "META PLATFORMS CLASS A",
+     "gewicht": 1.6295,
+     "isin": null,
+     "ticker": "META"
+    },
+    {
+     "name": "ALPHABET CLASS C",
+     "gewicht": 1.5857,
+     "isin": null,
+     "ticker": "GOOG"
+    },
+    {
+     "name": "TESLA INC",
+     "gewicht": 1.4108,
+     "isin": null,
+     "ticker": "TSLA"
+    },
+    {
+     "name": "ELI LILLY",
+     "gewicht": 1.378,
+     "isin": null,
+     "ticker": "LLY"
+    },
+    {
+     "name": "MICRON TECHNOLOGY",
+     "gewicht": 1.1483,
+     "isin": null,
+     "ticker": "MU"
+    },
+    {
+     "name": "JPMORGAN CHASE & CO",
+     "gewicht": 1.1045,
+     "isin": null,
+     "ticker": "JPM"
+    },
+    {
+     "name": "BERKSHIRE HATHAWAY INC CLASS B",
+     "gewicht": 0.9514,
+     "isin": null,
+     "ticker": "BRK B"
+    },
+    {
+     "name": "ADVANCED MICRO DEVICES",
+     "gewicht": 0.9296,
+     "isin": null,
+     "ticker": "AMD"
+    },
+    {
+     "name": "EXXONMOBIL HOLDINGS CORP",
+     "gewicht": 0.9077,
+     "isin": null,
+     "ticker": "XOM"
+    },
+    {
+     "name": "VISA CLASS A",
+     "gewicht": 0.864,
+     "isin": null,
+     "ticker": "V"
+    },
+    {
+     "name": "JOHNSON & JOHNSON",
+     "gewicht": 0.7874,
+     "isin": null,
+     "ticker": "JNJ"
+    },
+    {
+     "name": "WALMART",
+     "gewicht": 0.678,
+     "isin": null,
+     "ticker": "WMT"
+    },
+    {
+     "name": "MASTERCARD CLASS A",
+     "gewicht": 0.6562,
+     "isin": null,
+     "ticker": "MA"
+    },
+    {
+     "name": "ABBVIE",
+     "gewicht": 0.6234,
+     "isin": null,
+     "ticker": "ABBV"
+    },
+    {
+     "name": "COSTCO WHOLESALE CORP",
+     "gewicht": 0.5577,
+     "isin": null,
+     "ticker": "COST"
+    },
+    {
+     "name": "CHEVRON",
+     "gewicht": 0.514,
+     "isin": null,
+     "ticker": "CVX"
+    },
+    {
+     "name": "CISCO SYSTEMS INC",
+     "gewicht": 0.4921,
+     "isin": null,
+     "ticker": "CSCO"
+    },
+    {
+     "name": "PALANTIR TECHNOLOGIES CLASS A",
+     "gewicht": 0.4703,
+     "isin": null,
+     "ticker": "PLTR"
+    },
+    {
+     "name": "PROCTER & GAMBLE",
+     "gewicht": 0.4593,
+     "isin": null,
+     "ticker": "PG"
+    }
+   ],
+   "positionen_n": 1034,
+   "gewicht_summe_roh": 100.06,
+   "anteil_nicht_aktie": 0.44,
    "anlageklasse": "Aktien",
-   "vollstaendig": "nein",
+   "vollstaendig": "ja",
    "hinweis": [
-    "keine Bestandsliste erwartet (ETC/Swap)",
-    "Swap (Gegenpartei BNP Paribas): die Bestandsliste ist der Ersatzkorb, nicht das Indexengagement; Laender des Index MSCI World ex EMU offen (Folgeposten S509)"
-   ]
+    "Laender aus dem Basisindex abgeleitet (MSCI World ohne EMU); die Swap-Bestandsliste ist der Ersatzkorb und wird nicht gelesen",
+    "Gegenprobe MSCI-Factsheet World ex EMU (Stand 2026-09-30) gegen Basisdatei (Stand 2026-11-02): Abweichung der fuenf groessten Laender hoechstens 0.45 pp"
+   ],
+   "basis_isin": "IE00B4L5Y983",
+   "ausschluss_iso": [
+    "AT",
+    "BE",
+    "DE",
+    "ES",
+    "FI",
+    "FR",
+    "IE",
+    "IT",
+    "NL",
+    "PT"
+   ],
+   "anteil_ausgeschlossen": 8.18
   },
   {
    "isin": "IE00B4WXJJ64",
