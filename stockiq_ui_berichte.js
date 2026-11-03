@@ -872,7 +872,7 @@ function rptTextAnalysis(tk, secStats){
 
   if(isBuySignal){
     p1 = name + ' steht auf <strong style="color:#00e57a">BUY</strong> (Score ' + sc + '/100): '
-       + 'geh&ouml;rt zu den Titeln mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung. ';
+       + 'geh&ouml;rt zu den Titeln mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Vergleich zur eigenen Branche. ';
   } else if(isAbstieg){
     p1 = name + ' steht auf <strong style="color:#ff6666">SELL Abstieg</strong> (Score ' + sc + '/100): '
        + 'vor zw&ouml;lf Monaten BUY, heute nicht mehr. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger. ';
@@ -951,7 +951,7 @@ function rptTextAnalysis(tk, secStats){
 
   /* Fazit nach dem Etikett der Watchlist (S416) */
   if(isBuySignal){
-    p4 += '<strong>Fazit: BUY &mdash; oberstes Zehntel der Zw&ouml;lf-Monats-Entwicklung im Universum. Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.</strong>';
+    p4 += '<strong>Fazit: BUY &mdash; oberstes Zehntel der Zw&ouml;lf-Monats-Entwicklung im Vergleich zur eigenen Branche. Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.</strong>';
   } else if(isAbstieg){
     p4 += '<strong>Fazit: SELL Abstieg &mdash; vor zw&ouml;lf Monaten BUY, heute nicht mehr.</strong>';
   } else {
@@ -989,7 +989,7 @@ function rptGlossar(){
     {t:'52W-Pos.', d:'52-Wochen-Position: Lage des Kurses zwischen 52-Wochen-Tief und -Hoch. Hoch hei&szlig;t nahe am Hoch, niedrig nahe am Tief. Information, kein Signal.'},
     {t:'Divergenz', d:'Bullische Divergenz: der RSI steigt, w&auml;hrend der Kurs f&auml;llt &mdash; nachlassender Verkaufsdruck. B&auml;rische Divergenz: das Gegenst&uuml;ck.'},
     {t:'U200', d:'Kurs unter der 200-Tage-Linie. Kennzeichen, kein Signal.'},
-    {t:'BUY', d:'Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Universum (oberstes Zehntel). Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.'},
+    {t:'BUY', d:'Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Vergleich zur eigenen Branche (oberstes Zehntel). Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.'},
     {t:'SELL Abstieg', d:'Vor zw&ouml;lf Monaten BUY, heute nicht mehr. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger.'},
     {t:'Moat (Faustregel aus ROCE/FCF)', d:'Eigene Faustregel aus Kapitalrendite (ROCE) und freiem Cashflow, kein Moat-Rating eines Anbieters: Wide, Narrow oder None. Nur Anzeige.'},
   ];
@@ -1315,13 +1315,13 @@ function rptBuildSignal(){
                   (null = kein Referenzwert -> Hinweis "keine Referenz")
      Bleibt BUY   wlBucket = 'BUY' und buyRef12m(t) === true
      SELL Abstieg wlBucket = 'ABSTIEG' (sellAbstieg)
-   Rang = Rang (von n) im Universum nach der 12-Monats-Rendite, gespeichert
-   in scores.json (mom12m_rang, score.py v1.4.26; gelesen ueber rang12m wie
+   Rang = Rang (von n) im Universum nach D1-IND (S478b), gespeichert
+   in scores.json (mom12m_ind_rang, score.py v1.4.30; gelesen ueber rang12m wie
    Spalte 1 der Watchlist; 1 = bester, Gleichstand teilt den Rang -- S423 C),
    dahinter das
    Perzentil wie im BUY-Tooltip. Rang vor 12 Monaten: dieselbe Definition
-   in der Kohorte des Referenz-Ultimos (buy_ref12m_platz / _pct, score.py
-   v1.4.25). Kennzeichen, KGV und Dividende wie in der Watchlist.
+   in der Kohorte des Referenz-Ultimos (buy_ref12m_ind_platz / _ind_pct, score.py
+   v1.4.31). Kennzeichen, KGV und Dividende wie in der Watchlist.
    rptRotCalc ist die EINE Datenquelle fuer Tabelle und CSV.
    ======================================== */
 var RPT_ROT_GRP = ['Neu BUY','Bleibt BUY','SELL Abstieg'];
@@ -1341,7 +1341,7 @@ function rptRotWert(v){
 }
 /* S419: Rang aus rang12m() (index.html) -- dieselbe Funktion wie Spalte 1
    der Watchlist; die eigene Rangfunktion des Berichts entfaellt. Seit S423 C
-   liest rang12m das gespeicherte Feld mom12m_rang (kein Rechnen im Dashboard). */
+   liest rang12m das gespeicherte Feld mom12m_ind_rang (kein Rechnen im Dashboard). */
 function rptRotRang(rang, pct){
   if(rang === null || pct === null) return null;
   return rang + ' (' + pct.toFixed(1) + ')';
@@ -1364,7 +1364,7 @@ function rptRotCalc(){
     var rg = rang12m(s.t), rang = (rg === null) ? null : rg.r;
     var keineRef = (ref === null);
     if(keineRef) nKeineRef++;
-    var rRang = rptRotRang(rptRotWert(sd.buy_ref12m_platz), rptRotWert(sd.buy_ref12m_pct));
+    var rRang = rptRotRang(rptRotWert(sd.buy_ref12m_ind_platz), rptRotWert(sd.buy_ref12m_ind_pct));
     var ret = rptRotWert(sd.mom12m_ret), dy = rptRotWert(sd.div_yield);
     var mk = rptMarks(s.t, sig);
     grp[g].push({t: s.t, grp: g, rang: rang, keineRef: keineRef, cells: [
@@ -1372,7 +1372,7 @@ function rptRotCalc(){
       dName(s) || s.t,
       rptRotRang(rang, pct) || '-',
       ret === null ? '-' : fp(ret),
-      keineRef ? 'keine Referenz' : (rRang || '-'),
+      keineRef ? (refIndFehlt() ? REF_IND_AB : 'keine Referenz') : (rRang || '-'),
       mk.indexOf('Auswahl') >= 0 ? 'Auswahl' : '-',
       mk.indexOf('Trend') >= 0 ? 'Trend' : '-',
       mk.indexOf('U200') >= 0 ? 'U200' : '-',
@@ -1393,10 +1393,10 @@ function rptRotCalc(){
     rec = arr[i];
     if(rec && typeof rec === 'object' && rec.ticker && buyRef12m(rec.ticker) === true) nRef++;
   }
-  var weg = (mac.buy_ref12m_weg && typeof mac.buy_ref12m_weg.length === 'number') ? mac.buy_ref12m_weg : null;
+  var weg = (mac.buy_ref12m_ind_weg && typeof mac.buy_ref12m_ind_weg.length === 'number') ? mac.buy_ref12m_ind_weg : null;
   return {grp: grp, nKeineRef: nKeineRef, nRefHeute: nRef, weg: weg,
           aktiv: abstiegAktiv(), stand: mac.run_date || '',
-          stichtag: mac.buy_ref12m_stichtag || ''};
+          stichtag: mac.buy_ref12m_ind_stichtag || ''};
 }
 
 function rptCtrlRot(){
@@ -1502,7 +1502,7 @@ function rptBuildRot(){
     html += '</tbody></table></div>';
   }
   html += '<div class="rpt-card" style="background:#0a1628;border:1px solid #1a3050;border-radius:12px;padding:12px;font-size:10px;color:#a0b0c0;line-height:1.6">' +
-    'Rang heute: Rang nach der 12-Monats-Rendite im Universum (1 = bester), in Klammern das Perzentil wie im BUY-Tooltip. ' +
+    'Rang heute: Rang im Universum nach der Zw&ouml;lf-Monats-Entwicklung im Vergleich zur Branche (1 = bester), in Klammern das Perzentil wie im BUY-Tooltip. ' +
     'Rang vor 12 Monaten: dieselbe Rangfolge am Vergleichsstichtag. Kennzeichen, KGV und Dividende wie in der Watchlist. ' +
     'Innerhalb jeder Gruppe nach Rang heute geordnet.</div>';
   out.innerHTML = html;

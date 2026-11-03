@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.45</title>
+<title>StockIQ v6.6.46</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -129,7 +129,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.45 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.46 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div id="hdr-rangbasis" style="font-family:monospace;font-size:10px;color:var(--mut)">Rangbasis D1-IND seit 03.11.2026; D1 als Schatten</div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
       <span style="white-space:nowrap"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e57a;animation:blink 2s infinite;margin-right:4px"></span><span id="clock">--:--:--</span></span>
@@ -197,7 +198,16 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="wl-hint" style="display:none;font-family:monospace;font-size:11px;color:#ff9f1c;margin-bottom:8px">Noch keine Favoriten: Stern &#9734; an einer Zeile antippen.</div>
   <!-- S417 W-8: i-Box -- kurze Erklaerungen, antippbar, ohne Formel, Gewicht, Schwelle -->
   <div id="wl-erl-box" style="display:none">
-  <div style="background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:6px;padding:8px 12px;margin-bottom:8px;font-size:11px;color:var(--mut);line-height:1.5"><strong style="color:#7a9bb5">BUY</strong> (Stand 10/2026): BUY zeigt die Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Universum (oberstes Zehntel). Die R&uuml;ckrechnung hat diese Gruppe als Ganzes best&auml;tigt; die H&ouml;he ist &uuml;berzeichnet, weil nur heute noch gehandelte Titel z&auml;hlen. Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.</div>
+  <div id="wl-monatskauf-erl" class="wl-erl-blk">
+    <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Monatskauf in f&uuml;nf Schritten</strong></div>
+    <div style="margin-bottom:3px">1. Am Monatsende den rangh&ouml;chsten BUY-Titel kaufen, der nicht im Depot liegt.</div>
+    <div style="margin-bottom:3px">2. Vorher im Depot die Grenzen f&uuml;r Sektor, Region und Einzelposition ansehen (Hinweis, kein Verbot). Q und KGV sind Information, keine Auswahlregel.</div>
+    <div style="margin-bottom:3px">3. Zw&ouml;lf Monate halten &ndash; auch bei R&uuml;ckschl&auml;gen und auch, wenn der Titel zwischendurch aus BUY f&auml;llt.</div>
+    <div style="margin-bottom:3px">4. Am Pr&uuml;fdatum: noch BUY &rarr; weiter halten; sonst SELL Abstieg &rarr; ersetzen erw&auml;gen.</div>
+    <div style="margin-bottom:3px">5. Marktphase ROT betrifft die Aktienquote, nicht die Titelwahl.</div>
+    <div>Getestet ist der Korb &uuml;ber viele K&auml;ufe, nicht der einzelne Titel. Die Verkaufsentscheidung bleibt beim Anleger. Mehr: Anwenderleitfaden, Kapitel 4.</div>
+  </div>
+  <div style="background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:6px;padding:8px 12px;margin-bottom:8px;font-size:11px;color:var(--mut);line-height:1.5"><strong style="color:#7a9bb5">BUY</strong> (Stand 11/2026): BUY zeigt die Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Vergleich zur eigenen Branche (oberstes Zehntel). Die R&uuml;ckrechnung hat diese Gruppe als Ganzes best&auml;tigt; die H&ouml;he ist &uuml;berzeichnet, weil nur heute noch gehandelte Titel z&auml;hlen. Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.</div>
   <div id="wl-kennz-erl" style="background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:6px;padding:8px 12px;margin-bottom:8px;font-size:11px;color:var(--mut);line-height:1.6">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Auswahl</strong>: die vorderen Pl&auml;tze der BUY-Liste. Diese Gruppe hat in der R&uuml;ckrechnung am besten abgeschnitten.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Trend</strong>: das fr&uuml;here Kaufsignal. Es hat im Test keinen eigenen Vorteil gezeigt und dient nur der Information.</div>
@@ -291,7 +301,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Rebalancing-Alert +/-7pp
      ============================================================ -->
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation<span id="alloc-kz55" style="font-weight:400;font-size:10px;color:var(--mut)"></span></div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.45</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.46</div>
 
 <!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
 <div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
@@ -490,7 +500,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.45 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.46 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -521,7 +531,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128202; TradingView-Setup</div>
     <div style="font-size:13px;color:var(--mut);line-height:1.8">
-      <div style="margin-bottom:6px">Die Indikatoren dienen der eigenen Chartansicht. BUY folgt in StockIQ dem Rang der 12-Monats-Rendite; die 200-Tage-Linie entspricht dem Kennzeichen U200. Einmalig als Chart-Template in TradingView speichern:</div>
+      <div style="margin-bottom:6px">Die Indikatoren dienen der eigenen Chartansicht. BUY folgt in StockIQ dem Rang der Zw&ouml;lf-Monats-Entwicklung im Vergleich zur Branche; die 200-Tage-Linie entspricht dem Kennzeichen U200. Einmalig als Chart-Template in TradingView speichern:</div>
       <div style="padding:10px 12px;background:rgba(0,200,240,.06);border-left:3px solid #00c8f0;border-radius:6px;margin-bottom:10px;font-family:monospace;font-size:11px">
         <div style="color:#00c8f0;margin-bottom:3px">&#10003; SMA 200 &mdash; Periode 200 (200-Tage-Linie, Kennzeichen U200)</div>
         <div style="color:#00c8f0;margin-bottom:3px">&#10003; MACD 12/26/9 mit Histogramm (Kennzeichen HIST und Trend)</div>
@@ -535,7 +545,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#11088; Signal-Logik</div>
     <div id="hilfe-signal-logik" style="padding:10px 12px;background:rgba(0,229,122,.06);border-left:3px solid #00e57a;border-radius:6px;margin-bottom:10px;font-size:12px;color:var(--mut);line-height:1.7">
-      <div style="margin-bottom:3px"><strong style="color:#00e57a">BUY</strong>: die Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Universum.</div>
+      <div style="margin-bottom:3px"><strong style="color:#00e57a">BUY</strong>: die Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Vergleich zur eigenen Branche.</div>
       <div style="margin-bottom:3px"><strong style="color:#ff6666">SELL Abstieg</strong>: Der Titel war vor 12 Monaten BUY und ist es heute nicht mehr. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger.</div>
       <div style="margin-bottom:3px"><strong style="color:#7a9bb5">HOLD</strong> (nur Depot): innerhalb der Haltezeit.</div>
       <div style="margin-bottom:3px"><strong style="color:#7a9bb5">WATCH</strong>: alle &uuml;brigen.</div>
@@ -614,7 +624,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <!-- BUY / AUSWAHL / TREND (S370) -->
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#7a9bb5">&#128202; BUY, Auswahl und Trend</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.7"><b>BUY</b> kennzeichnet die Titel im obersten Zehntel der 12-Monats-Rendite des Watchlist-Korbs. Diese Gruppe hat in der R&uuml;ckrechnung &uuml;ber 25 Jahre den Korb nach Kosten geschlagen; die H&ouml;he des Vorsprungs ist &uuml;berzeichnet, weil nur heute noch gehandelte Titel in der Rechnung stehen. <b>Auswahl</b> markiert die vorderen Pl&auml;tze der BUY-Liste &ndash; gedacht f&uuml;r ein Depot mit wenigen Einzeltiteln. <b>Trend</b> ist das fr&uuml;here Kaufsignal; es bleibt als Zusatzinformation sichtbar und hat in der R&uuml;ckrechnung keinen Vorteil gezeigt. So war es getestet: kaufen und zw&ouml;lf Monate halten. Der Kaufmonat spielte in der R&uuml;ckrechnung keine Rolle. Warten auf einen R&uuml;cksetzer und ein fester Verlust-Stopp haben das Ergebnis verschlechtert. Die BUY-Liste wird t&auml;glich neu gebildet; an der Grenze wechseln einzelne Titel von Tag zu Tag. Verl&auml;sst ein Titel die Liste, ist das kein Verkaufssignal. Ein BUY-Titel kann zugleich ein Warnzeichen tragen (zum Beispiel U200: Kurs unter der 200-Tage-Linie); beide Aussagen stehen dann nebeneinander.</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.7"><b>BUY</b> kennzeichnet die Titel im obersten Zehntel der Zw&ouml;lf-Monats-Entwicklung im Vergleich zur eigenen Branche. Diese Gruppe hat in der R&uuml;ckrechnung &uuml;ber 25 Jahre den Korb nach Kosten geschlagen; die H&ouml;he des Vorsprungs ist &uuml;berzeichnet, weil nur heute noch gehandelte Titel in der Rechnung stehen. <b>Auswahl</b> markiert die vorderen Pl&auml;tze der BUY-Liste &ndash; gedacht f&uuml;r ein Depot mit wenigen Einzeltiteln. <b>Trend</b> ist das fr&uuml;here Kaufsignal; es bleibt als Zusatzinformation sichtbar und hat in der R&uuml;ckrechnung keinen Vorteil gezeigt. So war es getestet: kaufen und zw&ouml;lf Monate halten. Der Kaufmonat spielte in der R&uuml;ckrechnung keine Rolle. Warten auf einen R&uuml;cksetzer und ein fester Verlust-Stopp haben das Ergebnis verschlechtert. Die BUY-Liste wird t&auml;glich neu gebildet; an der Grenze wechseln einzelne Titel von Tag zu Tag. Verl&auml;sst ein Titel die Liste, ist das kein Verkaufssignal. Ein BUY-Titel kann zugleich ein Warnzeichen tragen (zum Beispiel U200: Kurs unter der 200-Tage-Linie); beide Aussagen stehen dann nebeneinander.</div>
   <div id="hilfe-kennz-erl" style="margin-top:10px;font-size:12px;color:var(--mut);line-height:1.7">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Auswahl</strong>: die vorderen Pl&auml;tze der BUY-Liste. Diese Gruppe hat in der R&uuml;ckrechnung am besten abgeschnitten.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Trend</strong>: das fr&uuml;here Kaufsignal. Es hat im Test keinen eigenen Vorteil gezeigt und dient nur der Information.</div>
@@ -642,7 +652,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>i</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Blendet die Erkl&auml;rungen zu Etiketten, Kennzeichen, Filtern und Marktphase ein und aus, auch auf dem iPhone. Beim Laden zu.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">nein</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Suchfeld</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, deren Ticker oder Name den Suchtext enth&auml;lt.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, das Feld wird geleert</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel BUY / SELL Abstieg / WATCH</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Antippen zeigt nur diese Gruppe, nochmals antippen hebt das auf. Ohne aktuelle Daten zeigt SELL Abstieg &ndash;&ndash;.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter (Gruppe)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
-      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Rang / Q / KGV / Div / A-Z</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Rang (Grundzustand, markiert): alle Gruppen nach Rang. Q ordnet nach der Qualit&auml;t (h&ouml;chste zuerst), KGV nach dem laufenden KGV (niedrigstes zuerst, Verlust am Ende), Div nach der Dividendenrendite (h&ouml;chste zuerst, ohne Dividende am Ende), A-Z alphabetisch nach Firmennamen. Fehlende Werte stehen am Ende, Gleichstand nach Rang. Ein zweiter Druck auf den aktiven Knopf stellt die Grundordnung wieder her. Die Legendenzeile unter den Kn&ouml;pfen nennt die Rolle jeder Zahl der Zeile. Die Zahl vor dem Ticker ist immer der Rang im Universum nach der 12-Monats-Entwicklung (1 = bester). Filter &auml;ndern die Reihenfolge nie.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, zur&uuml;ck zur Grundordnung</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Rang / Q / KGV / Div / A-Z</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Rang (Grundzustand, markiert): alle Gruppen nach Rang. Q ordnet nach der Qualit&auml;t (h&ouml;chste zuerst), KGV nach dem laufenden KGV (niedrigstes zuerst, Verlust am Ende), Div nach der Dividendenrendite (h&ouml;chste zuerst, ohne Dividende am Ende), A-Z alphabetisch nach Firmennamen. Fehlende Werte stehen am Ende, Gleichstand nach Rang. Ein zweiter Druck auf den aktiven Knopf stellt die Grundordnung wieder her. Die Legendenzeile unter den Kn&ouml;pfen nennt die Rolle jeder Zahl der Zeile. Die Zahl vor dem Ticker ist immer der Rang im Universum (Zw&ouml;lf-Monats-Entwicklung im Vergleich zur Branche; 1 = bester). Filter &auml;ndern die Reihenfolge nie.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sortierung</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, zur&uuml;ck zur Grundordnung</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Men&uuml; &#8942; (Export / Import)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Sichert die Favoritenliste als Datei bzw. l&auml;dt sie. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Datei</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Marktphase (Zeile unter den Tabs)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Lage des Gesamtmarkts zu seiner 200-Tage-Linie. GR&Uuml;N und ROT sind &uuml;ber zehn Handelstage best&auml;tigt. GELB ist der &Uuml;bergang: der Pfeil zeigt die Richtung, bis zum zehnten Tag gilt der bisherige Zustand. Kein Filter.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">&ndash;</td></tr>
     </table>
@@ -743,6 +753,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.46</td><td style="padding:5px 8px;color:var(--mut)">BUY und Rang vergleichen die Zw&ouml;lf-Monats-Entwicklung jetzt mit der eigenen Branche; SELL Abstieg und Pr&uuml;fdatum folgen derselben Rangfolge. Der i-Punkt der Watchlist beginnt mit dem Monatskauf in f&uuml;nf Schritten.</td><td style="padding:5px 8px;color:var(--mut)">Nov 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.45</td><td style="padding:5px 8px;color:var(--mut)">Depot und ETF: jede Buchung l&auml;sst sich einzeln stornieren (Knopf Storno in der Transaktionshistorie bzw. unter Buchungen; kein Undo, vorher Export; verboten, wenn ein sp&auml;terer Verkauf ungedeckt bliebe). ETF-Positionen unter Ausweis ohne Kurs machen Kern-Zeile und Soll-Vergleich nicht mehr unvollst&auml;ndig, sie werden genannt. Allokation: Feld AKTIEN-ETFs und Zeile davon ETF-Teil gesamt.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.44</td><td style="padding:5px 8px;color:var(--mut)">ETF-Tab: Rangliste aus dem Tageslauf mit Gruppen nach Rolle, Kern-Zeile, 12M und Rang; Positionen au&szlig;erhalb der Rangliste stehen unter Ausweis. Depot: Risiko-Block mit Ist gegen Soll, Formular Soll bearbeiten (Pr&auml;ferenz, keine Regel) und Durchleuchtung; Export und Import tragen das Soll. Allokation: Kopf mit Etikett Nutzerparameter, ungetestet.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.43</td><td style="padding:5px 8px;color:var(--mut)">Die Watchlist-Zeile zeigt Rang, 12M, Q (Qualit&auml;t), KGV und Div; PEG, FCF, ROCE und 52W-Pos. stehen in der Detailansicht. F&uuml;nf Sortierkn&ouml;pfe Rang, Q, KGV, Div und A-Z mit Legendenzeile; im Grundzustand stehen alle Gruppen nach Rang. Detailansicht: Qualit&auml;t zuerst, dann die Angaben ohne bekannten Mangel; Score und bekannt fehlerhafte Kennzahlen eingeklappt am Schluss; der Score tr&auml;gt das Etikett Schatten, ungetestet. Die Qualit&auml;tszeile nennt das Perzentil im Universum (h&ouml;her = besser) und die Titelzahl.</td><td style="padding:5px 8px;color:var(--mut)">Okt 2026</td></tr>
@@ -927,7 +938,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Depot-Tracking</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.45 (DDB-8)
+    Positionen &middot; Wertentwicklung &middot; Zeitreihe aus Snapshots &middot; v6.6.46 (DDB-8)
   </div>
 
   <!-- â”€â”€ Position hinzufÃ¼gen â”€â”€ -->
@@ -1025,7 +1036,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
 </div><!-- Ende p8 Depot -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.45 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.46 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2107,8 +2118,8 @@ function rWL(){
   /* S395 R-1 / S417 W-7: SELL Abstieg zeigt "--", solange die Projektion
      fehlt (AP-3: nie 0 statt fehlend), und ist dann nicht antippbar. */
   if(kpi)kpi.innerHTML=
-    wlKachel('buy','BUY',buys,'#00e57a',true,'BUY zeigt die Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Universum (oberstes Zehntel). Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.')
-    +wlKachel('abstieg','SELL Abstieg',_abAkt?abst:'--','#ff6666',_abAkt,'Diese Titel standen vor zw&ouml;lf Monaten auf BUY und stehen heute nicht mehr dort. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger. Im Depot entscheidet das Pr&uuml;fdatum der Position.')
+    wlKachel('buy','BUY',buys,'#00e57a',true,'BUY zeigt die Titel mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Vergleich zur eigenen Branche (oberstes Zehntel). Getestet als Korb mit zw&ouml;lf Monaten Haltedauer, nicht als Einzeltitel-Tipp.')
+    +wlKachel('abstieg','SELL Abstieg',_abAkt?abst:'--','#ff6666',_abAkt,(refIndFehlt()?REF_IND_AB+' ':'')+'Rangbasis D1-IND. Diese Titel standen vor zw&ouml;lf Monaten auf BUY und stehen heute nicht mehr dort. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger. Im Depot entscheidet das Pr&uuml;fdatum der Position.')
     +wlKachel('watch','WATCH',watches,'#00c8f0',true,'Beobachten. Kein Kauf- und kein Verkaufshinweis.');
   wlRend(scored);
   wlPaint();
@@ -2373,8 +2384,9 @@ function wlSetCnt(shown){
    Rendite (Challenger, M-12 bestanden). Die Schwelle bleibt an ihrer
    einen Stelle, isD1(). Der Champion bleibt in scores.json unveraendert
    und erscheint als neutrales Kennzeichen "Trend".
-   Rangbasis ist weiterhin mom12m_pct aus scores.json (Perzentil 0..100,
-   score.py v1.4.21, DM v1.58 Abschn. 2).
+   Rangbasis seit S478b (v6.6.46): mom12m_ind_pct aus scores.json (D1-IND,
+   Perzentil 0..100, score.py v1.4.30); D1 (mom12m_pct) rechnet als Schatten,
+   das Dashboard liest ihn nicht. Die Funktionsnamen buyIsD1/isD1 bleiben.
    AP-3: fehlender Wert -> kein BUY; pct=0 ist ein GUELTIGER Wert
    (schlechtester Rang) und darf nicht per ||-Falsy verschluckt werden.
    R-deskriptiv: die Rueckrechnung ist bestanden, die Hoehe durch
@@ -2435,11 +2447,11 @@ function isD1(pct){
 function buyPctFor(t){
   var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
   if(!rec||typeof rec!=='object') return null;
-  return (rec.mom12m_pct!==null&&rec.mom12m_pct!==undefined)?rec.mom12m_pct:null;
+  return (rec.mom12m_ind_pct!==null&&rec.mom12m_ind_pct!==undefined)?rec.mom12m_ind_pct:null;
 }
 /* rang12m: EINZIGE Stelle fuer den Rang (von n) im Dashboard (S419, Kla
    09.10.2026). Seit S423 Teil C liest sie die gespeicherte Kennzahl aus
-   _scoresIdx: {r: mom12m_rang, n: mom12m_rang_n} (Erzeuger score.py v1.4.26,
+   _scoresIdx: {r: mom12m_ind_rang, n: mom12m_ind_rang_n} (seit S478b; Erzeuger score.py v1.4.30,
    1 = bester, Gleichstand teilt den Rang). Sie rechnet nicht mehr selbst.
    Fehlt eines der Felder: null -> Anzeige "--" (AP-3), kein Rueckfall auf
    eine Dashboard-Rechnung. Leser: Spalte 1 der Watchlist (renderEntry) und
@@ -2447,7 +2459,7 @@ function buyPctFor(t){
 function rang12m(t){
   var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
   if(!rec||typeof rec!=='object') return null;
-  var r=rec.mom12m_rang,n=rec.mom12m_rang_n;
+  var r=rec.mom12m_ind_rang,n=rec.mom12m_ind_rang_n;
   if(typeof r!=='number'||typeof n!=='number'||isNaN(r)||isNaN(n)) return null;
   return {r:r,n:n};
 }
@@ -2460,7 +2472,7 @@ function buyIsD1(t){
   return isD1(buyPctFor(t));
 }
 /* S394 R-1: sellAbstieg -- EINZIGE Stelle des Abstieg-Praedikats (G-G).
-   SELL Abstieg = vor 12 Monaten BUY (buy_ref12m === true, Producer S390)
+   SELL Abstieg = vor 12 Monaten BUY (buy_ref12m_ind === true, Producer S478)
    und heute nicht BUY (buyIsD1). Fehlt das Feld oder ist es null: kein
    Abstieg. abstiegAktiv(): sell_proj_status "ok" UND das Feld bei
    mindestens einem Titel geliefert -- sonst zeigt die Kachel "--" und die
@@ -2472,7 +2484,7 @@ function abstiegAktiv(){
   arr=(typeof _scoresArr!=='undefined'&&_scoresArr)?_scoresArr:[];
   for(i=0;i<arr.length;i++){
     r=arr[i];
-    if(r&&typeof r==='object'&&r.buy_ref12m!==undefined&&r.buy_ref12m!==null) return true;
+    if(r&&typeof r==='object'&&r.buy_ref12m_ind!==undefined&&r.buy_ref12m_ind!==null) return true;
   }
   return false;
 }
@@ -2485,18 +2497,27 @@ function buyRef12m(t){
   if(!abstiegAktiv()) return null;
   rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
   if(!rec||typeof rec!=='object') return null;
-  if(rec.buy_ref12m===true||rec.buy_ref12m===false) return rec.buy_ref12m;
+  if(rec.buy_ref12m_ind===true||rec.buy_ref12m_ind===false) return rec.buy_ref12m_ind;
   return null;
 }
 function sellAbstieg(t){
   return buyRef12m(t)===true&&!buyIsD1(t);
+}
+/* S478b Null-Regel (Kla 03.11.2026): Projektion ok, aber die Referenz der Rangbasis
+   D1-IND noch nicht in scores.json (Vorwaerts-Regel, Befuellung ab Tageslauf 04.11.).
+   Kein Fehler, nie false, nie 0 (AP-3). Mit dem ersten gefuellten Lauf greift der
+   Zweig nicht mehr. */
+var REF_IND_AB='Referenz ab 04.11.';
+function refIndFehlt(){
+  var mac=(typeof FD!=='undefined'&&FD&&FD['__macro__'])?FD['__macro__']:null;
+  return !!mac&&mac.sell_proj_status==='ok'&&!mac.buy_ref12m_ind_stichtag;
 }
 /* buyTitle: Tooltip des BUY-Etiketts. Nennt den Rang DIESES Titels,
    nicht die Schwelle und keine Formel (S-14). */
 function buyTitle(t){
   var pct=buyPctFor(t);
   if(pct===null) return 'BUY';
-  return 'BUY: oberstes Zehntel der 12-Monats-Rendite im Watchlist-Korb '
+  return 'BUY: oberstes Zehntel der Zwoelf-Monats-Entwicklung im Vergleich zur eigenen Branche '
        + '(Perzentil ' + pct.toFixed(1) + '). Getestet.';  /* S423 G.1.5 + K01 */
 }
 /* trendRaw: traegt der Titel das fruehere Kaufsignal? Liest das ROHSIGNAL
@@ -2623,7 +2644,7 @@ var KZ_ROLLE={
   K57:'Sortierhilfe, ungetestet',
   K29:'Sortierhilfe, ungetestet', K39:'Sortierhilfe, ungetestet', K41:'Sortierhilfe, ungetestet',
   K42:'Sortierhilfe, ungetestet',  /* S434: Waehrungs-Zusatz entfaellt (S428, geschlossen ab Lauf 14.10.2026) */
-  K02:'Rang (von n) im Universum (12M)', K26:'Sortierhilfe, ungetestet',
+  K02:'Rang (von n) im Universum (Zw&ouml;lf-Monats-Entwicklung im Vergleich zur Branche)', K26:'Sortierhilfe, ungetestet',
   K27:'nur Anzeige (Angabe, kein Signal)', K31:'nur Anzeige (laufende Dividende laut Anbieter)',
   K53:'nur Anzeige',  /* S434 (Kla 14.10.2026, Option 2): Zeilen-Kennzahlen, etikett_soll der Status-Datei */
   K25:'nur Anzeige, Anbieterwert ungepr&uuml;ft', K55:'Nutzerparameter, ungetestet', K56:'SPY &uuml;ber 200-Tage-Linie',
@@ -2755,7 +2776,7 @@ function wlRend(scored){
     var h='<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderLeft+'border-radius:8px;padding:11px 13px;margin-bottom:6px;cursor:pointer" onclick="wlDetail(\''+s.t+'\')">';
     /* S417 T-4: Kopf bricht um statt seitlich zu schieben (Name gekuerzt, Badges in die zweite Zeile) */
     h+='<div class="wl-rh">';
-    h+='<div class="wl-rl"><span class="wl-rang" style="font-family:monospace;font-size:10px;color:'+topC+'"'+(rg===null?'':' title="Rang '+rg.r+' von '+rg.n+' (12M-Rendite)"')+'>'+(rg===null?'--':rg.r)+'</span><span style="font-size:15px;font-weight:800;flex-shrink:0">'+s.t+'</span><span class="wl-rn">'+dName(s)+'</span></div>';
+    h+='<div class="wl-rl"><span class="wl-rang" style="font-family:monospace;font-size:10px;color:'+topC+'"'+(rg===null?'':' title="Rang '+rg.r+' von '+rg.n+' (Zw&ouml;lf-Monats-Entwicklung im Vergleich zur Branche)"')+'>'+(rg===null?'--':rg.r)+'</span><span style="font-size:15px;font-weight:800;flex-shrink:0">'+s.t+'</span><span class="wl-rn">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
     h+='<div class="wl-rb">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+srAmpBdg+dB+_sB+'</div></div>';  /* S441 C.1: Score-Badge entfaellt (nur Detail Block 2) */
@@ -2873,7 +2894,7 @@ function wlDetail(ticker){
   /* S398 R-2: Begruendungszeile = Etikett in Klartext. Die Kette des alten
      Kaufsignals (ZL, 200MA, Hist mit Mindestwert, PEG-Vergleich) entfaellt
      (Schutzziel A). Kennzeichen als Pillen darunter, dann die Info-Zeilen. */
-  var why=_svD.buy?'BUY: geh&ouml;rt zu den Titeln mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung.'
+  var why=_svD.buy?'BUY: geh&ouml;rt zu den Titeln mit der st&auml;rksten Zw&ouml;lf-Monats-Entwicklung im Vergleich zur eigenen Branche.'
          :isAbstD?'SELL Abstieg: vor zw&ouml;lf Monaten BUY, heute nicht mehr. Vorzeichen richtig, nicht gesichert.'
          :'WATCH: kein Kauf- und kein Verkaufshinweis.';
   var sigTitleSuffix=isAbstD?' (SELL Abstieg)':'';
@@ -3573,7 +3594,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.45';
+      var PAGE_VERSION = 'v6.6.46';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -5631,11 +5652,11 @@ function dpPruefDaten(anker, heute){
    oder keinen Rangwert hat (entscheidet der Aufrufer ueber buyPctFor --
    der Rang wird nur dort gelesen, D1-13). mac = __macro__, heuteBuy =
    buyIsD1(t) des Aufrufers (die Schwelle steht weiter nur in isD1).
-   buy_hist und buy_hist_na sind Listen halboffener Intervalle [von, bis_exkl). */
+   buy_hist_ind und buy_hist_ind_na (Rangbasis D1-IND, S478b) sind Listen halboffener Intervalle [von, bis_exkl). */
 function dpBuyAm(rec, mac, D, heute, heuteBuy){
   if(!rec || typeof rec !== 'object') return null;
-  var ab = mac ? mac.buy_hist_ab : null, bis = mac ? mac.buy_hist_bis : null;
-  if(!mac || mac.sell_proj_status !== 'ok' || !ab || !bis || !Array.isArray(rec.buy_hist)){
+  var ab = mac ? mac.buy_hist_ind_ab : null, bis = mac ? mac.buy_hist_ind_bis : null;
+  if(!mac || mac.sell_proj_status !== 'ok' || !ab || !bis || !Array.isArray(rec.buy_hist_ind)){
     return D === heute ? (heuteBuy === true) : null;
   }
   if(D < ab) return null;
@@ -5648,8 +5669,8 @@ function dpBuyAm(rec, mac, D, heute, heuteBuy){
     }
     return false;
   }
-  if(drin(rec.buy_hist_na)) return null;
-  return drin(rec.buy_hist);
+  if(drin(rec.buy_hist_ind_na)) return null;
+  return drin(rec.buy_hist_ind);
 }
 
 /* R-6: Status einer offenen Position. code: etf | ohne | haelt | verl |
@@ -5665,7 +5686,11 @@ function dpPruefStatus(start, heute, rec, mac, heuteBuy, istEtf){
   var b = dpBuyAm(rec, mac, pd.letzt, heute, heuteBuy);
   if(b === true) r.code = 'verl';
   else if(b === false){ r.code = 'sell'; r.wieder = (heuteBuy === true); }
-  else r.code = 'nb';
+  else {
+    r.code = 'nb';
+    /* S478b Null-Regel: Referenz D1-IND noch nicht geliefert (AP-3, kein false) */
+    if(mac && mac.sell_proj_status === 'ok' && !mac.buy_hist_ind_ab) r.refAb = true;
+  }
   return r;
 }
 
@@ -5722,11 +5747,17 @@ function dpPruefZelle(s, maTxt){
     col = '#ff5252';
     ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + (s.wieder ? '; heute wieder BUY' : '') + '.';
   }
+  else if(s.refAb){
+    txt = REF_IND_AB;
+    col = '#456278';
+    ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + ': Rangbasis D1-IND, die Referenz liegt noch nicht vor (' + REF_IND_AB + ').';
+  }
   else {
     txt = 'nicht bewertet';
     col = '#456278';
     ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + ': f&uuml;r diesen Tag liegt keine Bewertung vor.';
   }
+  if(s && (s.code === 'verl' || s.code === 'sell')) ttl += ' Rangbasis D1-IND.';
   if(maTxt) ttl += ' ' + maTxt;
   return '<td style="padding:5px 6px;text-align:center;font-family:monospace;font-size:10px;font-weight:700;white-space:nowrap;color:' + col + '" title="' + ttl + '">' + txt + '</td>';
 }
@@ -7555,7 +7586,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.45 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.46 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>

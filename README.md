@@ -6,7 +6,7 @@ Live: [klaschim11.github.io/Stockiq](https://klaschim11.github.io/Stockiq)
 
 ## Was StockIQ zeigt
 
-- **Rang (von n):** die Stellung jedes Titels im Universum nach der Rendite der letzten 12 Monate.
+- **Rang (von n):** die Stellung jedes Titels im Universum nach der Rendite der letzten 12 Monate im Vergleich zur eigenen Branche.
 - **BUY:** die Titel im obersten Zehntel dieser Rangfolge.
 - **SELL Abstieg:** Titel, die vor 12 Monaten BUY waren und es heute nicht mehr sind. Getestet 12.10.2026: Vorzeichen richtig, nicht gesichert.
 - **Marktphase:** der Zustand des Gesamtmarkts (GRUEN, GELB, ROT).
