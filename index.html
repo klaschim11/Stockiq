@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.48</title>
+<title>StockIQ v6.6.49</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -137,7 +137,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.48 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.49 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
       <div id="hdr-rangbasis" style="font-family:monospace;font-size:10px;color:var(--mut)">Rangbasis D1-IND seit 03.11.2026; D1 als Schatten</div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
@@ -150,7 +150,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="tab-bar" style="display:flex;flex-wrap:wrap;gap:2px;padding:0 16px">
     <button id="tb1" class="tab active" onclick="goTab(1,this)">&#128202; WL</button>
     <button id="tb2" class="tab" onclick="goTab(2,this)">&#128200; Bestand</button>
-    <button id="tb3" class="tab" onclick="goTab(3,this)">&#9878; Allok.</button>
+    <button id="tb3" class="tab" onclick="goTab(3,this)">&#9878; Monat</button>
     <button id="tb4" class="tab" onclick="goTab(4,this)">&#127759; Sektor</button>
   </div>
   <div id="mp-zeile" onclick="mpErlToggle()" title="Lage des Gesamtmarkts zu seiner 200-Tage-Linie. Antippen f&uuml;r die Erkl&auml;rung.">Marktphase <span id="mp-txt" style="font-weight:700">--</span> <span id="mp-sub"></span>
@@ -309,13 +309,10 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Ziel-Allokation: 60% Aktien / 20% Anleihen / 15% Gold / 5% Cash
      Rebalancing-Alert +/-7pp
      ============================================================ -->
-<div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:4px">&#9878; Portfolio-Allokation<span id="alloc-kz55" style="font-weight:400;font-size:10px;color:var(--mut)"></span></div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:16px">Ist vs. Soll &middot; Rebalancing-Alert &plusmn;7pp &middot; v6.6.48</div>
-
-<!-- BECK-KRISEN-REGIME v5.9.69 (Andreas Beck / Global Portfolio One) -->
-<div id="beck-regime" style="display:none;background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:14px"></div>
-
-<!-- SEKTOR-AMPEL v5.9.69 -->
+<div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:6px">&#9878; Monatsentscheid <span style="font-weight:400;font-size:10px;color:var(--mut)">(Pr&auml;ferenz, verbindlich f&uuml;r den Kaufvorschlag; Nutzerparameter, ungetestet)</span></div>
+<div id="me-root"></div>
+<details id="me-eingabe" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:10px 12px;margin-bottom:8px"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#dce8f5">Aktueller Portfoliowert eingeben</summary>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin:6px 0">Wandert mit B-2 in den Bestand. Cash und Werte au&szlig;erhalb des Depots flie&szlig;en bis dahin von hier in die Anteile je Anlageklasse.</div>
 <div id="alloc-inputs" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:14px">
   <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:12px">&#128221; Aktueller Portfoliowert eingeben</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
@@ -332,13 +329,13 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
           oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ANLEIHEN / RENTEN (EUR)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ANLEIHEN / RENTEN (EUR)<span id="ai-auto-bonds" style="color:#7a9bb5;font-size:10px;margin-left:4px"></span></div>
       <input id="ai-bonds" type="number" min="0" step="100" placeholder="z.B. 20000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">GOLD / EDELMETALLE (EUR)</div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">GOLD / EDELMETALLE (EUR)<span id="ai-auto-gold" style="color:#7a9bb5;font-size:10px;margin-left:4px"></span></div>
       <input id="ai-gold" type="number" min="0" step="100" placeholder="z.B. 15000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
@@ -350,15 +347,15 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ROHSTOFFE / COMMODITIES (EUR)
-        <span style="display:block;font-size:10px;color:var(--mut);font-weight:400;margin-top:2px">Rohstoff-ETF-Bausteine setzen dieses Feld automatisch &middot; ohne solche Bausteine manuell nutzbar</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ROHSTOFFE / COMMODITIES (EUR)<span id="ai-auto-commod" style="color:#7a9bb5;font-size:10px;margin-left:4px"></span>
+        <span style="display:block;font-size:10px;color:var(--mut);font-weight:400;margin-top:2px">Rohstoff-ETF-Bausteine setzen dieses Feld, solange kein Wert gespeichert ist</span></div>
       <input id="ai-commod" type="number" min="0" step="100" placeholder="z.B. 8000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
     </div>
   </div>
   <div style="font-family:monospace;font-size:9px;color:var(--mut);margin-bottom:8px;line-height:1.5">
-    &#8505; Einzelaktien aus Depot &middot; ETF-Bausteine nach Anlageklasse verteilt (Rohstoff-ETF &#8594; Rohstoffe, Gold-ETF &#8594; Gold, Anleihen-ETF &#8594; Anleihen). Aktien-ETFs stehen im Feld AKTIEN-ETFs. Felder mit ETF-Bausteinen werden automatisch gesetzt und &uuml;berschreiben manuelle Eingaben &middot; Felder ohne solche Bausteine bleiben manuell.</div>
+    &#8505; Einzelaktien aus Depot &middot; ETF-Bausteine nach Anlageklasse verteilt (Rohstoff-ETF &#8594; Rohstoffe, Gold-ETF &#8594; Gold, Anleihen-ETF &#8594; Anleihen). Aktien-ETFs stehen im Feld AKTIEN-ETFs. Anleihen, Gold und Rohstoffe: ein gespeicherter Wert bleibt stehen, der ETF-Wert steht als auto daneben; ohne gespeicherten Wert setzt ihn der ETF-Bestand.</div>
   <div style="display:flex;gap:10px;align-items:center">
     <div style="font-family:monospace;font-size:10px;color:var(--mut)">Gesamt: <span id="ai-total" style="color:#dce8f5;font-weight:700">0 EUR</span></div>
     <button onclick="allocClear()" style="margin-left:auto;padding:5px 12px;background:transparent;border:1px solid #1a3050;border-radius:5px;color:var(--mut);font-size:10px;cursor:pointer">&#10006; Leeren</button>
@@ -369,8 +366,11 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:6px">davon ETF-Teil gesamt: <span id="ai-etf-teil" style="color:#dce8f5;font-weight:700">0 EUR</span></div>
 </div>
+</details>
 
 <!-- ZYKLUS-OVERLAY v5.9.69 (Fidelity Business Cycle, Hambro/BlackRock) -->
+<details id="me-matrix-box" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:10px 12px;margin-bottom:8px"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#dce8f5">Matrix Profil x Phase</summary>
+<div id="me-matrix-etikett" style="font-family:monospace;font-size:10px;color:var(--mut);margin:6px 0;color:#ffcf70">Kontext, ungetestet, keine Anweisung -- Soll ist fest (2.0)<span id="alloc-kz55" style="font-weight:400;font-size:10px;color:var(--mut)"></span></div>
 <div style="background:#0c1420;border:1px solid #1a3050;border-radius:12px;padding:14px;margin-bottom:14px">
   <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:8px">&#9881; Konjunkturzyklus-Overlay <span style="font-family:monospace;font-size:10px;color:var(--mut)">Fidelity Business Cycle 2026</span></div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px">
@@ -389,40 +389,21 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="cycle-targets" style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px"></div>
 </div>
 
-<!-- ERGEBNIS-SEKTION -->
-<div id="alloc-result" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:14px">
-  <div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:12px">&#128200; Ist vs. Soll</div>
-  <div id="alloc-bars">
-    <div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:24px 0">Bitte Portfoliowerte eingeben.</div>
-  </div>
-</div>
-
-<!-- KONZENTRATION (R3): Einzelaktien-HHI aus Depot -->
-<div id="alloc-conc" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:14px;display:none"></div>
-
-<!-- REBALANCING-SEKTION -->
-<div id="alloc-rebal" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:14px;display:none">
-  <div style="font-size:12px;font-weight:700;color:#ffab00;margin-bottom:10px">&#9888; Rebalancing-Empfehlung</div>
-  <div id="alloc-rebal-body"></div>
-</div>
-
-<!-- ZIEL-INFO -->
-<div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px">
-  <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">&#128270; Ziel-Allokation (zyklus-adjustiert, v5.9.78)</div>
-  <div id="ziel-kacheln" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:10px"></div>
-  <div style="font-family:monospace;font-size:10px;color:var(--mut);line-height:1.6">
-    <strong style="color:#dce8f5">Basis (Hambro/BlackRock 2026):</strong> 55% Aktien / 15% Anleihen / 12% Gold / 8% Rohstoffe / 10% Cash<br>
-    <strong style="color:#dce8f5">Quelle:</strong> Fidelity Business Cycle AART Jan 2025 &middot; BlackRock Hambro Webinar Mai 2026<br>
-    <strong style="color:#dce8f5">Rebalancing-Trigger:</strong> Abweichung &gt; &plusmn;7pp vom Zielwert &rarr; rot markiert + Empfehlung.
-  </div>
-</div>
-
-<!-- ============================================================
-     GOLD-SILVER-RATIO (GSR) v5.9.47
-     Signal: GSR + Spread-adjustierte Switch-Empfehlung
-     ============================================================ -->
+<div id="me-matrix" style="margin-top:8px"></div>
+</details>
+<details id="me-entfernt" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:10px 12px;margin-bottom:8px"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#dce8f5">Was aus dem Tab Allokation entfallen ist</summary>
+<div style="font-size:10px;color:#9fb0c0;line-height:1.6;margin-top:6px">
+<div class="me-ent" data-b="beck" style="margin-bottom:8px"><b>Beck/GPO-Karte.</b> Sie sagte je VIX-Stufe, wie die Aktienquote zu &auml;ndern sei. An ihre Stelle tritt die Marktphase als einzige Marktampel. An deiner Entscheidung &auml;ndert sich nichts, sie hing an keinem Test (ADR-005; Zielknoten G4/G7, Beleg RH-7). F&uuml;r dich: Die Quote des Depots folgt dem Soll, nicht dem VIX.</div>
+<div class="me-ent" data-b="rechner" style="margin-bottom:8px"><b>Rechner Ist gegen Soll und Alarm &bdquo;Rebalancing!&ldquo;.</b> Er verglich Handwerte mit einer Quote je Profil und Phase und forderte Umschichtung ab 7 Prozentpunkten. An seine Stelle treten die Anteile je Anlageklasse aus dem Bestand (hier) und die Grenzen des festen Solls. Ein Kauf wird nach Soll zugelassen, ein Verkaufszwang entsteht nicht (ADR-005, Konzept 2.0; Zielknoten G6, Nutzerparameter ohne Test). F&uuml;r dich: Es gibt nur noch ein Soll.</div>
+<div class="me-ent" data-b="cycle" style="margin-bottom:8px"><b>Zahlen der Phasentabelle (CYCLE_ALLOC) und Zielkacheln.</b> Sie nannten eine zweite Quote je Phase. Die Beschreibung der Phase bleibt, die Matrix steht eingeklappt als Kontext. Die Entscheidungslogik &auml;ndert sich nicht, die Zahlen hatten keinen Leser (ADR-005; G-G). F&uuml;r dich: Die Phase beschreibt, sie weist nicht an.</div>
+<div class="me-ent" data-b="hhi" style="margin-bottom:8px"><b>HHI-Kachel.</b> Sie zeigte die Namens-Konzentration ein zweites Mal. Sie steht weiter im Tab Bestand unter Mehr: Streuung. Die Entscheidungslogik &auml;ndert sich nicht (ADR-005; ein Ort je Gegenstand, Zielknoten G6). F&uuml;r dich: Die Kennzahl findest du im Tab Bestand.</div>
+<div class="me-ent" data-b="naechster" style="margin-bottom:8px"><b>Zeile N&auml;chster Kauf (Bestand).</b> Sie pr&uuml;fte nur Sektoren. Seit v6.6.48 steht ihr Inhalt in der Folge-Spalte, die Entscheidung trifft dieser Tab mit Region, Sektor und Deckel (Konzept 3.6, Zielknoten G6). F&uuml;r dich: Den Kaufvorschlag findest du in Schritt 5.</div>
+<div class="me-ent" data-b="gsr"><b>Switch-Texte Gold/Silber.</b> Sie empfahlen Umschichtungen ohne Test. Die Kennzahl bleibt eingeklappt stehen. Die Entscheidungslogik &auml;ndert sich nicht (ADR-005; Kandidat C-GSR). F&uuml;r dich: Die Zahlen bleiben, die Anweisung entf&auml;llt.</div>
+</div></details>
+<details id="me-gsr-box" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:10px 12px;margin-bottom:8px"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#dce8f5">Gold/Silber-Verh&auml;ltnis</summary>
+<div id="me-gsr-etikett" style="font-family:monospace;font-size:10px;color:var(--mut);margin:6px 0;color:#ffcf70">ungetestet, kein Signal</div>
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#ffab00;margin:18px 0 4px">&#127750; Gold-Silver-Ratio (GSR)</div>
-<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:6px">Spread-adjustiertes Switch-Signal &middot; Physische Edelmetalle</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:6px">Kennzahl, ungetestet, kein Signal &middot; Physische Edelmetalle</div>
 <div id="macro-auto-badge" style="display:none;font-family:monospace;font-size:10px;color:#00e57a;background:rgba(0,229,122,.07);border:1px solid rgba(0,229,122,.2);border-radius:6px;padding:5px 10px;margin-bottom:10px"></div>
 <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:10px">Preise werden nach JSON-Laden automatisch befuellt (fund_juno v7.9.29+). Manuell &uuml;berschreibbar.</div>
 
@@ -454,7 +435,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         oninput="rGSR()">
     </div>
   </div>
-  <div id="gsr-result" style="font-family:monospace;font-size:11px;color:var(--mut);text-align:center;padding:12px 0">Preise eingeben zur Signalberechnung.</div>
+  <div id="gsr-result" style="font-family:monospace;font-size:11px;color:var(--mut);text-align:center;padding:12px 0">Preise eingeben.</div>
 </div>
 
 <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:12px;margin-bottom:18px;font-size:10px;color:var(--mut);line-height:1.7">
@@ -470,6 +451,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      BOND-ETF DURATION-ALLOKATION v5.9.47
      Empfehlung nach Bund-Yield-Level + Yield-Kurven-Form
      ============================================================ -->
+</details>
+<details id="me-duration-box" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:10px 12px;margin-bottom:8px"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#dce8f5">Bond-ETF Duration (Altmodul)</summary>
+<div id="me-duration-etikett" style="font-family:monospace;font-size:10px;color:var(--mut);margin:6px 0;color:#ffcf70">Datenlage: rechnet im Normalbetrieb mit der Vorgabe 2,6 % und Kurve normal, weil us10y und yield_curve nicht in der Tagesdatei stehen. Ungetestet, kein Signal.</div>
 <div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin:4px 0">&#128218; Bond-ETF Duration-Allokation</div>
 <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:12px">Laufzeit-Empfehlung nach Zinsniveau &amp; Yield-Kurve &middot; v5.9.48</div>
 
@@ -502,6 +486,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   Bei inverser Kurve: immer kurz bleiben (kein Laufzeit-Aufpreis).
   <strong style="color:#dce8f5">1pp Zinsanstieg</strong> kostet bei 7J-Duration ~7% Kursverlust.
 </div>
+</details>
 
 
 </div>
@@ -509,7 +494,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.48 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.49 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -529,7 +514,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. &#128202; WL</strong> &mdash; Alle bewerteten Titel in drei Gruppen (BUY, SELL Abstieg, WATCH). Filter in zwei Zeilen, Erkl&auml;rungen &uuml;ber den i-Punkt. Antippen = Detail.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. &#128188; ETF</strong> &mdash; ETF-Bestand buchen, mit Tageskurs bewerten; Liste, 12M und Rang (von m) aus den Tagesdaten (nur Anzeige).</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. &#128200; Depot</strong> &mdash; Portfolio-Tracking. Positionen hinzufuegen, Wertentwicklung und Zeitreihe aus Snapshots. Pr&uuml;fung: Jede Position wird zw&ouml;lf Monate ab Erstkauf gehalten. Am Pr&uuml;fdatum gilt: steht der Titel dann auf BUY, verl&auml;ngert sich die Haltezeit um ein Jahr; sonst zeigt die Zeile SELL Abstieg. Nachkauf und Teilverkauf verschieben das Pr&uuml;fdatum nicht. Bestand vom Jahresanfang 2026 wird gemeinsam am 31.10.2026 gepr&uuml;ft. HOLD bei einer gehaltenen Position heisst: innerhalb der Haltezeit, kein Verkaufshinweis. SELL Abstieg erscheint erst am Pr&uuml;fdatum.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. &#9878; Allok.</strong> &mdash; Ziel-Allokation nach Anlegerprofil und Marktzyklus, Hinweis zum Rebalancing.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. &#9878; Monat</strong> &mdash; Monatsentscheid in sechs Schritten: f&auml;llige Positionen, Platz, Kern, Zulassung nach Soll, Vorschlag, Buchung mit Protokoll. Das Dreieck an einem BUY-Titel warnt vor steilem Anstieg, es sperrt nichts.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">5. &#127759; Sektor</strong> &mdash; RSS-Signale + Momentum 3 Monate ohne letzten Monat, 11 SPDR-ETFs. Dispersion-Signal.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">? Hilfe</strong> &mdash; Diese Seite, &uuml;ber das Fragezeichen oben rechts; am Ende die Versionen.</div>
       <div><strong style="color:#dce8f5">Marktphase</strong> &mdash; Zeile unter den Tabs, auf jeder Seite: Lage des Gesamtmarkts zu seiner 200-Tage-Linie (GR&Uuml;N, GELB als &Uuml;bergang, ROT). Antippen = Erkl&auml;rung.</div>
@@ -581,7 +566,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#127942; Sektor-Ampel (Kontext, kein Entry-Signal)</div>
     <div style="font-size:11px;color:var(--mut);margin-bottom:10px;line-height:1.7">
-      Die <strong style="color:#dce8f5">Sektor-Ampel</strong> (Spalte &ldquo;Skt&rdquo; im Tab Bestand, Block im Allokations-Tab) zeigt ob der Sektor eines Titels in der aktuellen Marktphase f&uuml;hrt oder nachhinkt &mdash; basierend auf 12M-Return des Sektor-ETFs (XLV, XLK etc.)
+      Die <strong style="color:#dce8f5">Sektor-Ampel</strong> (Spalte &ldquo;Skt&rdquo; im Tab Bestand, Block im Tab Sektor) zeigt ob der Sektor eines Titels in der aktuellen Marktphase f&uuml;hrt oder nachhinkt &mdash; basierend auf 12M-Return des Sektor-ETFs (XLV, XLK etc.)
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">
       <div style="text-align:center;padding:7px;background:rgba(0,229,122,.07);border:1px solid rgba(0,229,122,.3);border-radius:7px">
@@ -767,6 +752,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.49</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat ersetzt den Tab Allokation: Monatsentscheid in sechs Schritten (f&auml;llige Positionen, Platz, Kern, Zulassung nach Soll, Vorschlag, Buchung mit Protokoll), Ersatzpapiere, Warnetikett nach steilem Anstieg auch in Watchlist und Bestand. Einzeltitel-Anteil jetzt mit Cash und Werten au&szlig;erhalb des Depots. Der Rechner mit Alarm und die Beck/GPO-Karte entfallen.</td><td style="padding:5px 8px;color:#456278">Nov 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.48</td><td style="padding:5px 8px;color:var(--mut)">Tab Bestand: Depot und ETF stehen in einem Tab mit gleichen Funktionen (Buchung, Storno, Transaktionshistorie, geschlossene Positionen, Export und Import). Kacheln f&uuml;r das Gesamtdepot, Wertverlauf mit Einzeltitel, ETF und Summe, Erl&auml;uterung als Tabelle Soll gegen Ist mit Baendern nach Konzept. Land nach Sitz des Unternehmens. x-Knopf und Alle l&ouml;schen entfallen: Eine Position entfernst du &uuml;ber Storno oder Verkauf.</td><td style="padding:5px 8px;color:var(--mut);font-family:monospace">11/2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.47</td><td style="padding:5px 8px;color:var(--mut)">Watchlist: neuer Filter Schnitt zeigt die Titel, die nach beiden Rangbasen im obersten Zehntel stehen (Anzeige, Hypothesenkandidat, ungetestet).</td><td style="padding:5px 8px;color:var(--mut)">Nov 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.46</td><td style="padding:5px 8px;color:var(--mut)">BUY und Rang vergleichen die Zw&ouml;lf-Monats-Entwicklung jetzt mit der eigenen Branche; SELL Abstieg und Pr&uuml;fdatum folgen derselben Rangfolge. Der i-Punkt der Watchlist beginnt mit dem Monatskauf in f&uuml;nf Schritten.</td><td style="padding:5px 8px;color:var(--mut)">Nov 2026</td></tr>
@@ -850,7 +836,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Bestand</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.48
+    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.49
   </div>
   <div id="dp-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:14px"></div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
@@ -1040,7 +1026,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </details>
 </div><!-- Ende p8 Bestand -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.48 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.49 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2798,7 +2784,7 @@ function wlRend(scored){
     h+='<div class="wl-rl"><span class="wl-rang" style="font-family:monospace;font-size:10px;color:'+topC+'"'+(rg===null?'':' title="Rang '+rg.r+' von '+rg.n+' (Zw&ouml;lf-Monats-Entwicklung im Vergleich zur Branche)"')+'>'+(rg===null?'--':rg.r)+'</span><span style="font-size:15px;font-weight:800;flex-shrink:0">'+s.t+'</span><span class="wl-rn">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
-    h+='<div class="wl-rb">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+srAmpBdg+dB+_sB+'</div></div>';  /* S441 C.1: Score-Badge entfaellt (nur Detail Block 2) */
+    h+='<div class="wl-rb">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+(_sv.buy?warnBdg(s.t):'')+srAmpBdg+dB+_sB+'</div></div>';  /* S441 C.1: Score-Badge entfaellt (nur Detail Block 2) */
     /* S459: genau vier Zellen 12M, Q, KGV, Div; KGV neutral ohne Farbe (S405). Schmal bricht die Zeile um (.wl-kz). */
     h+='<div class="wl-kz">';
     h+='<div class="wl-12m" style="font-family:monospace;font-size:10px"><span style="color:var(--mut)">12M </span><span>'+r12D+'</span></div>';
@@ -3614,7 +3600,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.48';
+      var PAGE_VERSION = 'v6.6.49';
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -4446,17 +4432,13 @@ var ALLOC_BASE = [
   {id:'cash',   label:'Cash',         icon:'&#128181;', col:'#b388ff', colAmber:'#ffab00', colRed:'#ff5252'}
 ];
 var CYCLE_ALLOC = {
-  early:     {stocks:65, bonds:15, gold:8,  commod:5,  cash:7,
-              label:'Early Cycle', col:'#00e57a',
+  early:     {label:'Early Cycle', col:'#00e57a',
               note:'Zykliker &amp; Finanzwerte f&uuml;hren. Hochwertige Aktien maximal gewichten.'},
-  mid:       {stocks:60, bonds:15, gold:10, commod:7,  cash:8,
-              label:'Mid Cycle', col:'#00c8f0',
+  mid:       {label:'Mid Cycle', col:'#00c8f0',
               note:'Breiteste Outperformance. Tech, Industrie &amp; Healthcare f&uuml;hren.'},
-  late:      {stocks:50, bonds:12, gold:13, commod:13, cash:12,
-              label:'Late Cycle', col:'#ffab00',
+  late:      {label:'Late Cycle', col:'#ffab00',
               note:'Energy &amp; Rohstoffe f&uuml;hren. Defensive Sektoren aufbauen. Cash erh&ouml;hen.'},
-  recession: {stocks:40, bonds:20, gold:15, commod:5,  cash:20,
-              label:'Rezession', col:'#ff5252',
+  recession: {label:'Rezession', col:'#ff5252',
               note:'Defensive Minimalposition. Anleihen &amp; Cash als Schutz. Rohstoffe reduzieren.'}
 };
 var CURRENT_CYCLE = 'mid';
@@ -4521,8 +4503,6 @@ function renderCyclePhaseBadge(){
     highlightCycleBtn(stored);
   } catch(ex){}
 }
-var ALLOC_TOL = 7;
-var ALLOC_AMBER = 4;
 
 function allocLoad(){
   try {
@@ -4577,7 +4557,9 @@ function allocSave(){
       var el = document.getElementById('ai-'+ids[i]);
       data[ids[i]] = el ? (parseFloat(el.value)||0) : 0;
     }
+    data.stand = dpHeute();  /* S537n E-1: Stand des Eingabeblocks fuer das Nenner-Etikett */
     localStorage.setItem(ALLOC_KEY, JSON.stringify(data));
+    try { meRender(); } catch(eM) {}
     var btn = document.querySelector('[onclick="allocSave()"]');
     if(btn){ btn.textContent = '\u2713 Gespeichert'; setTimeout(function(){ btn.innerHTML='&#128190; Speichern'; },1500); }
   } catch(e){}
@@ -4591,6 +4573,7 @@ function allocClear(){
   }
   try { localStorage.removeItem(ALLOC_KEY); } catch(e){}
   rAlloc();
+  try { meRender(); } catch(eM) {}
 }
 
 function rAlloc(){
@@ -4611,142 +4594,8 @@ function rAlloc(){
   if(etEl){ try { var _et = allocEtfTeilGesamt(); etEl.textContent = _et.sum.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR'
     + (_et.d > 0 ? ' (inkl. Bitcoin ' + _et.d.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR ohne eigenes Feld)' : ''); } catch(ee){} }
 
-  var barsEl = document.getElementById('alloc-bars');
-  var rebalEl = document.getElementById('alloc-rebal');
-  var rebalBody = document.getElementById('alloc-rebal-body');
-  if(!barsEl) return;
-
-  if(total <= 0){
-    barsEl.innerHTML = '<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:24px 0">Bitte Portfoliowerte eingeben.</div>';
-    if(rebalEl) rebalEl.style.display = 'none';
-    try { rAllocConc(); } catch(e) {}
-    return;
-  }
-
-  var html = '';
-  var rebalHtml = '';
-  var needRebal = false;
-
-  for(var j=0;j<ALLOC_TARGETS.length;j++){
-    var t = ALLOC_TARGETS[j];
-    var ist = (vals[j] / total) * 100;
-    var delta = ist - t.soll;
-    var absDelta = delta < 0 ? -delta : delta;
-
-    var barColor = t.col;
-    var labelColor = '#dce8f5';
-    var statusIcon = '&#9989;';
-    var statusText = 'Im Ziel';
-
-    if(absDelta > ALLOC_TOL){
-      barColor = t.colRed;
-      labelColor = '#ff5252';
-      statusIcon = '&#9888;';
-      statusText = 'Rebalancing!';
-      needRebal = true;
-    } else if(absDelta > ALLOC_AMBER){
-      barColor = t.colAmber;
-      labelColor = '#ffab00';
-      statusIcon = '&#9651;';
-      statusText = 'Randzone';
-    }
-
-    var barPct = ist > 100 ? 100 : ist;
-    var sollPct = t.soll;
-
-    html += '<div style="margin-bottom:14px">';
-    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
-    html += '<div style="font-family:monospace;font-size:10px;font-weight:700;color:' + labelColor + '">' + t.icon + ' ' + t.label + '</div>';
-    html += '<div style="display:flex;gap:12px;align-items:center">';
-    html += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">Soll: <span style="color:#dce8f5">' + t.soll + '%</span></div>';
-    html += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">Ist: <span style="color:' + barColor + ';font-weight:700">' + ist.toFixed(1) + '%</span></div>';
-    html += '<div style="font-family:monospace;font-size:10px;color:' + labelColor + '">' + statusIcon + ' ' + statusText + '</div>';
-    html += '</div></div>';
-
-    /* Fortschrittsbalken */
-    html += '<div style="position:relative;height:18px;background:#0a1628;border-radius:4px;overflow:hidden;border:1px solid #1a3050">';
-    /* Ist-Balken */
-    html += '<div style="position:absolute;top:0;left:0;height:100%;width:' + barPct.toFixed(1) + '%;background:' + barColor + ';opacity:0.7;border-radius:3px;transition:width 0.3s"></div>';
-    /* Soll-Marker */
-    html += '<div style="position:absolute;top:0;left:' + sollPct.toFixed(1) + '%;width:2px;height:100%;background:#dce8f5;opacity:0.5"></div>';
-    /* Delta-Label */
-    html += '<div style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-family:monospace;font-size:10px;color:#dce8f5;opacity:0.9">';
-    html += (delta >= 0 ? '+' : '') + delta.toFixed(1) + 'pp</div>';
-    html += '</div>';
-
-    /* Eurobetrag */
-    html += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:3px">';
-    html += vals[j].toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR';
-    var sollVal = (t.soll / 100) * total;
-    var diff = vals[j] - sollVal;
-    var diffStr = (diff >= 0 ? '+' : '') + diff.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0});
-    html += ' &nbsp;(Soll: ' + sollVal.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR &nbsp;&#916; ' + diffStr + ' EUR)</div>';
-    html += '</div>';
-
-    /* Rebalancing-Empfehlung */
-    if(absDelta > ALLOC_TOL){
-      var action = diff > 0 ? 'REDUZIEREN' : 'AUFSTOCKEN';
-      var absDiff = diff < 0 ? -diff : diff;
-      rebalHtml += '<div style="margin-bottom:8px;padding:8px;background:#0a1628;border-left:3px solid ' + barColor + ';border-radius:4px">';
-      rebalHtml += '<div style="font-family:monospace;font-size:10px;font-weight:700;color:' + barColor + '">' + t.label + ' &#8594; ' + action + '</div>';
-      rebalHtml += '<div style="font-size:10px;color:#dce8f5;margin-top:3px">';
-      rebalHtml += absDiff.toLocaleString('de-DE',{minimumFractionDigits:0,maximumFractionDigits:0}) + ' EUR ' + (diff > 0 ? 'verkaufen / umschichten' : 'zukaufen');
-      rebalHtml += ' &nbsp;<span style="color:var(--mut)">(' + (diff > 0 ? '+' : '') + delta.toFixed(1) + 'pp Abweichung)</span>';
-      rebalHtml += '</div></div>';
-    }
-  }
-
-  barsEl.innerHTML = html;
-
-  if(rebalEl && rebalBody){
-    if(needRebal){
-      rebalBody.innerHTML = rebalHtml;
-      rebalEl.style.display = 'block';
-    } else {
-      rebalEl.style.display = 'none';
-    }
-  }
-  try { renderEtfScoreList(); } catch(e) {}
-  try { rAllocConc(); } catch(e) {}
-}
-
-/* R3: Einzelaktien-Konzentration (HHI) im Allokations-Tab.
-   Wiederverwendung von dpHHI() (pure, DP-9..DP-14 getestet). Basis:
-   DEPOT_POSITIONS-Marktwerte. Spiegelt die p8-Sperr-Logik (dpRenderRisk):
-   bei >=1 Position ohne EUR-Kurs KEINE HHI -- sichtbarer Zustand
-   "unvollstaendig" statt stillem Fehlwert (AP-3). R-deskriptiv, kein
-   Score-/Sizing-Eingriff. Misst Namens-Konzentration im Aktienblock,
-   NICHT Klassen-Diversifikation (das leistet die Ist-vs-Soll-Ansicht). */
-function rAllocConc(){
-  var el = document.getElementById('alloc-conc');
-  if(!el) return;
-  try { depotLoad(); } catch(e){}
-  var n = DEPOT_POSITIONS ? DEPOT_POSITIONS.length : 0;
-  if(n === 0){ el.style.display = 'none'; el.innerHTML = ''; return; }
-  var tot = dpCalcTotal();
-  var complete = (tot.hasPrice === n);
-  var html = '<div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:10px">\u25A0 Aktien-Konzentration (HHI)</div>';
-  if(!complete || tot.val <= 0){
-    var miss = n - tot.hasPrice;
-    html += '<div style="font-family:monospace;font-size:11px;color:#e0a030">\u26A0 Unvollstaendig \u2014 ' + miss + ' Position(en) ohne EUR-Kurs. HHI ausgesetzt (kein Fehlwert).</div>';
-    el.innerHTML = html;
-    el.style.display = 'block';
-    return;
-  }
-  var i, w = [], cp, v;
-  for(i=0;i<n;i++){
-    cp = dpCurrentPrice(DEPOT_POSITIONS[i].t);
-    v = DEPOT_POSITIONS[i].shares * cp;
-    w.push(v / tot.val);
-  }
-  var h = dpHHI(w);
-  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">';
-  html += '<span style="font-family:monospace;font-size:11px;color:#9fb0c0">HHI</span>';
-  html += '<span style="font-family:monospace;font-size:13px;font-weight:700;color:#cfe0f0">' + h.hhi.toFixed(2) + '</span></div>';
-  html += '<div style="font-family:monospace;font-size:11px;color:#6b7a8a">' + n + ' Aktienpositionen wirken wie effektiv ' + h.effN.toFixed(1) + ' unabhaengige Wetten</div>';
-  html += '<div style="font-family:monospace;font-size:10px;color:#5a6875;margin-top:4px">Misst Namens-Konzentration im Aktienblock, nicht Klassen-Diversifikation (siehe Ist vs. Soll) und nicht Faktor-Korrelation.</div>';
-  el.innerHTML = html;
-  el.style.display = 'block';
+  /* S537 (ADR-005): Rechner Ist gegen Soll und Alarm entfallen; die Felder speisen die Anteile je Anlageklasse */
+  try { meKlassenRender(); } catch(e) {}
 }
 
 /* ============================================================
@@ -5969,10 +5818,10 @@ function dpRenderSummary(v){
   if(z.ohne>0 || !hat){
     out+=kachel('best-k-einzel','EINZELTITEL','n/a','#dce8f5',z.ohne>0?('unvollst&auml;ndig - ohne '+z.ohne+' Kurs'):'','Anteil erst bei voller Bewertung.');
   } else {
-    var q=z.a.val/z.val*100;
+    var _gvk=(typeof gvNenner==='function')?gvNenner(z.a.val,z.e.val):null,q=z.a.val/(z.val+(_gvk?_gvk.x:0))*100;  /* S537n: gleicher Nenner wie Zeile Deckel Einzeltitel */
     out+=kachel('best-k-einzel','EINZELTITEL',q.toFixed(0)+' %','#dce8f5',
       (q>soll.einzel_max?'&#8593; ':'')+'Deckel '+dpSollPar(soll.einzel_max)+' &middot; Band '+String(soll.band_pp).replace('.',',')+' pp',
-      'Anteil am Gesamtdepot, Deckel aus dem gespeicherten Soll (Pr&auml;ferenz).');
+      'Anteil am Gesamtverm&ouml;gen (mit Cash und Werten au&szlig;erhalb des Depots aus der Handeingabe), Deckel aus dem gespeicherten Soll (Pr&auml;ferenz).');
   }
   var kd=etfKernDaten();
   if(kd.nKern===0) out+=kachel('best-k-kern','KERN-QUOTE','kein Kern','#dce8f5','','Kein Kern-ETF im Bestand.');
@@ -6085,7 +5934,7 @@ function dpRenderTable(){
     c.t = '<td style="padding:5px 6px;color:#00c8f0;font-weight:700;font-family:monospace;cursor:pointer;text-decoration:underline dotted" title="In WL-Detailansicht &ouml;ffnen" onclick="goTab(1,document.getElementById(\'tb1\'));setTimeout(function(){wlDetail(\''+p.t+'\');},80)">'+p.t+'</td>';
     c.name = '<td class="best-name" title="'+etfEsc(p.name)+'" style="padding:5px 6px;color:#dce8f5;font-size:10px">'+p.name+'</td>';
     c.akt = '<td style="padding:5px 6px;text-align:right;color:'+aktC+';font-size:10px">'+aktStr+'</td>';
-    c.sig = '<td style="padding:5px 6px;text-align:center;color:'+sigC+';font-size:10px;font-weight:700" title="'+(sigLbl==='SELL Abstieg'?ABST_TTL:(sigLbl==='HOLD'?'HOLD: '+KZ_ROLLE.K10:_dpSv.ttl))+'">'+sigLbl+_dpSv.bdg+_dpSrBdg+'</td>';
+    c.sig = '<td style="padding:5px 6px;text-align:center;color:'+sigC+';font-size:10px;font-weight:700" title="'+(sigLbl==='SELL Abstieg'?ABST_TTL:(sigLbl==='HOLD'?'HOLD: '+KZ_ROLLE.K10:_dpSv.ttl))+'">'+sigLbl+_dpSv.bdg+(_dpSv.buy?warnBdg(p.t):'')+_dpSrBdg+'</td>';
     c.pruef = dpPruefZelle(_dpPm[p.t], _mt);
     c.kgv = '<td class="dp-kgv" style="padding:5px 6px;text-align:right;font-family:monospace;font-size:10px;white-space:nowrap;color:#dce8f5" title="'+KGV_TTL+'">'+kgvText(p.t).replace(/^KGV /,'')+'</td>';
     c.skt = '<td style="padding:5px 6px;text-align:center">'+getSektorBadge(p.t)+'</td>';
@@ -7078,14 +6927,15 @@ function dpEffektiv(t,name,direkt,etf,idx,nenner){
   }
   return sum/nenner*100;
 }
-function dpSgRechnung(dpItems,etf,stamm,soll){
+function dpSgRechnung(dpItems,etf,stamm,soll,nennerX){
   var idx=dpStammIdx(stamm),E=0,T=0,n=0,i,x,f,g,k,r={fehltR:[],fehltS:[],unt:[],chinaUnt:[],stamm:!!(stamm&&stamm.etf&&stamm.etf.length)};
   for(i=0;i<dpItems.length;i++) if(dpItems[i].w>0){ E+=dpItems[i].w; n++; }
   for(i=0;i<etf.length;i++) if(etf[i].w>0) T+=etf[i].w;
   var avg=n>0?E/n:0,band=soll.band_pp;
   r.avg=avg;
-  r.q=(E+T>0)?E/(E+T)*100:null;
-  r.qNach=(E+T>0)?(E+avg)/(E+T+avg)*100:null;
+  var X=(typeof nennerX==='number'&&nennerX>0)?nennerX:0;  /* S537n: Nenner Gesamtvermoegen (gvNenner) */
+  r.q=(E+T+X>0)?E/(E+T+X)*100:null;
+  r.qNach=(E+T+X>0)?(E+avg)/(E+T+X+avg)*100:null;
   r.qZone=r.qNach===null?null:dpSgZone(r.qNach,soll.einzel_max,band);
   var iR={},iS={},kS={},nR=0,nS=0,kw=0,cn=0,nKern=0;
   for(i=0;i<dpItems.length;i++){
@@ -7141,6 +6991,7 @@ function dpSgRechnung(dpItems,etf,stamm,soll){
     }
     r.sektoren.sort(function(p,q){ return (rang[p.zone]-rang[q.zone])||((q.ist-q.grenze)-(p.ist-p.grenze)); });
   }
+  r.roh={x:X,E:E,T:T,n:n,avg:avg,iR:iR,iS:iS,kS:kS,kw:kw,nR:nR,nS:nS,cn:cn};  /* S537: Monatsentscheid rechnet auf denselben Summen */
   r.nm={};
   for(i=0;i<DEPOT_POSITIONS.length;i++) r.nm[DEPOT_POSITIONS[i].t]=DEPOT_POSITIONS[i].name||DEPOT_POSITIONS[i].t;
   r.sek=dpSollAnteile(dpItems,function(y){ return dpSektor(y.t)||'ohne Angabe'; });
@@ -7186,7 +7037,8 @@ function dpSgToggle(){
 }
 /* Name bleibt dpSollBlock (Einstieg der Tabelle); Rueckgabe Tabelle plus Fussnoten */
 function dpSollBlock(dpItems,etf,soll,stamm){
-  var r=dpSgRechnung(dpItems,etf,soll?stamm:null,soll),i,z,h;
+  var _gv=(typeof gvFuer==='function')?gvFuer(dpItems,etf):null;
+  var r=dpSgRechnung(dpItems,etf,soll?stamm:null,soll,_gv?_gv.x:0),i,z,h;
   var kd=etfKernDaten(),band=soll.band_pp;
   h='<div class="dp-scroll"><table class="dp-soll-tab" style="width:100%;border-collapse:collapse;font-size:11px;color:#cfe0f0"><tr>';
   var th=['Gr&ouml;&szlig;e','Soll (Korridor/Grenze)','Ist','Differenz',r.avg>0?'Folge f&uuml;r einen Kauf in Durchschnittsgr&ouml;&szlig;e (&Oslash; '+bestEur(r.avg)+')':'Folge f&uuml;r einen Kauf (noch keine Einzeltitel: Stand heute)'];
@@ -7203,8 +7055,8 @@ function dpSollBlock(dpItems,etf,soll,stamm){
       kz==='unter'?'&#8595; unter dem Band: frische Mittel zuerst in den Kern':(kz==='ueber'?'&#8593; &uuml;ber dem Band: frische Mittel nicht in den Kern':'&#8596; im Band: frei'),kz);
   }
   var qS='max '+dpSollPar(soll.einzel_max)+' (Band '+String(band).replace('.',',')+' pp)';
-  if(r.q===null) h+=dpSgZeile('dp-soll-deckel','Einzeltitel (% Gesamtdepot)',qS,'--','--','--','');
-  else h+=dpSgZeile('dp-soll-deckel','Einzeltitel (% Gesamtdepot)',qS,dpSgPct(r.q),dpSgDiff(r.q-soll.einzel_max,r.q>soll.einzel_max?'&#8593;':'&#8596;'),
+  if(r.q===null) h+=dpSgZeile('dp-soll-deckel','Einzeltitel (% Gesamtverm&ouml;gen)',qS,'--','--','--','');
+  else h+=dpSgZeile('dp-soll-deckel','Einzeltitel (% Gesamtverm&ouml;gen)',qS,dpSgPct(r.q),dpSgDiff(r.q-soll.einzel_max,r.q>soll.einzel_max?'&#8593;':'&#8596;'),
     r.q>soll.einzel_max+band?'&#8593; gesperrt: Einzeltitel-Kauf nur gegen einen Verkauf':dpSgFolge(r.qZone,'Einzeltitel',r.qNach,dpSgRahmenO(soll.einzel_max,band,'Deckel'),r.avg),r.qZone);
   /* 2 Region */
   h+=dpSgGruppe('Region (Gesamtdepot durchleuchtet)');
@@ -7266,6 +7118,7 @@ function dpSollBlock(dpItems,etf,soll,stamm){
   if(r.unt.length) fu.push('Bestandsliste unvollst&auml;ndig: '+r.unt.join(', ')+' (Untergrenze)');
   if(r.chinaUnt.length) fu.push('China ohne L&auml;nderliste: '+r.chinaUnt.join(', ')+' (Untergrenze)');
   if(r.posEff!==null) fu.push('Effektives Gewicht &uuml;ber die Top-Listen der ETFs (Namensabgleich), daher Untergrenze; keine Zulassungsbedingung.');
+  if(_gv) fu.push('Einzeltitel-Anteil: '+gvEtikett(_gv));
   if(stamm && stamm.kopf) fu.push('Stammdaten Stand '+k1Datum(stamm.kopf.erzeugt));
   h+='<div class="dp-sg-fuss" style="font-size:10px;color:#6b7a8a;margin-top:6px;line-height:1.5">'+fu.join('<br>')+'</div>'+dpLandEtikett(dpItems);
   return h;
@@ -7310,7 +7163,7 @@ function dpSollTeil(dpItems,ohneDp,hhiHtml){
   if(leer) h+='<div class="dp-soll-leer" style="font-size:11px;color:#9fb0c0">Noch keine Positionen.</div>';
   else if(!voll) h+='<div class="dp-soll-unv" style="font-size:11px;color:#9fb0c0">Soll-Vergleich unvollst&auml;ndig - '+ohne+' Position(en) ohne Kurs</div>';
   else h+=dpSollBlock(dpItems,etf,soll,(typeof _etfStamm!=='undefined')?_etfStamm:null);
-  h+='<div class="dp-soll-satz" style="font-size:11px;color:#9fb0c0;margin-top:6px">Den Kaufvorschlag erstellt der Monatsentscheid.</div>';
+  h+='<div class="dp-soll-satz" style="font-size:11px;color:#9fb0c0;margin-top:6px">Die Entscheidung trifft der Tab Monatsentscheid.</div>';
   h+='<div class="dp-soll-leg" style="font-size:10px;color:#5a6875;margin-top:4px">'+KZ_ROLLE.K87+'. Grenze f&uuml;r den Kaufvorschlag, kein Verkaufszwang.</div>';
   h+=dpSollForm(soll);
   h+='<details id="best-mehr" style="margin-top:8px"><summary style="cursor:pointer;font-size:11px;color:#9fb0c0">Mehr: Streuung (Beschreibung, keine Regel)</summary>'
@@ -7381,6 +7234,743 @@ function dpTxStorno(idx, el){
   alert('Buchung storniert: ' + r.txt);
 }
 
+/* ============================================================
+   S537 (M-2b-1a) Tab Monatsentscheid -- Konzept Depot-Soll v1.5 Abschn. 3.6.
+   Reine Anzeige und Protokoll im Browser. Keine Aenderung an Signal, Rang, BUY
+   oder Warnfeldern. Zonen und Bestandsrechnung kommen aus dpSgRechnung,
+   dpSgZone, dpSgKorridor (ein Praedikat). Rang = rang12m (D1-IND, Tagesdatei).
+   ============================================================ */
+var ME_KEY='stockiq_monat_v1', ER_KEY='stockiq_ersatzpapier_v1';
+var ME_WARN_AB='09.11.2026';  /* Null-Regel Warnetikett: erster Tageslauf mit den Feldern (S536/S557) */
+var ME_UI={verkauf:{},kauf:null,ersatz:true,quittung:''};
+var ME_CALC=null;
+var ER_VORBELEG={'005930.KS':{name:'Samsung Electronics GDR',wkn:'896360',isin:'US7960508882',verhaeltnis:25,art:'GDR',hinweis:'Stammaktie; ING Direkthandel',stand:'2026-11-02'}};
+
+/* ---- Kalender (rein) ---- */
+function meIso(d){
+  var m=d.getUTCMonth()+1,t=d.getUTCDate();
+  return d.getUTCFullYear()+'-'+(m<10?'0':'')+m+'-'+(t<10?'0':'')+t;
+}
+/* letzter Montag bis Freitag des Monats; Feiertage kennt die Seite nicht (Datum ist aenderbar) */
+function meLetzterHandelstag(jahr,mon0){
+  var d=new Date(Date.UTC(jahr,mon0+1,0));
+  while(d.getUTCDay()===0||d.getUTCDay()===6) d.setUTCDate(d.getUTCDate()-1);
+  return meIso(d);
+}
+function meMonatsende(iso){
+  return meIso(new Date(Date.UTC(parseInt(iso.substring(0,4),10),parseInt(iso.substring(5,7),10),0)));
+}
+/* Kauftag: Termin des laufenden Monats; ist er vorbei, der des Folgemonats. map = {'JJJJ-MM':'JJJJ-MM-TT'} */
+function meKauftag(heute,map){
+  var y=parseInt(heute.substring(0,4),10),m=parseInt(heute.substring(5,7),10)-1,ym,k,i;
+  for(i=0;i<2;i++){
+    ym=y+'-'+(m<9?'0':'')+(m+1);
+    k=(map&&typeof map[ym]==='string')?map[ym]:meLetzterHandelstag(y,m);
+    if(k>=heute||i===1) return {datum:k,ym:ym,eigen:!!(map&&typeof map[ym]==='string')};
+    m++; if(m>11){ m=0; y++; }
+  }
+}
+/* Faelligkeit 3.6.2. Pruefdatum im Monat des Kauftags: BUY-Status des Kauftags. Frueheres Pruefdatum:
+   war der Titel dort BUY, lief die Frist bereits weiter (Konzept SELL); sonst wartet er und wird neu geprueft. */
+function meFaelligStatus(start,kauftag,heute,rec,mac,heuteBuy,entschieden){
+  var anker=dpAnker(start),pd,b;
+  if(!anker) return null;
+  pd=dpPruefDaten(anker,meMonatsende(kauftag));
+  if(!pd.letzt) return null;
+  if(entschieden&&entschieden[pd.letzt]) return null;
+  if(pd.letzt.substring(0,7)===kauftag.substring(0,7)) return {pruef:pd.letzt,buy:heuteBuy===true,quelle:'kauftag'};
+  b=dpBuyAm(rec,mac,pd.letzt,heute,heuteBuy);
+  if(b===true) return null;
+  return {pruef:pd.letzt,buy:heuteBuy===true,quelle:b===null?'nb':'wartet'};
+}
+
+/* ---- Lage nach Buchungen (rein). ops: [{w,reg,sek,cn}], w positiv = Kauf, negativ = Verkauf. Erloes ohne
+   Kauf bleibt im Gesamtdepot; reicht er nicht, waechst das Gesamtdepot um die Differenz (frische Mittel). ---- */
+function meKop(o){ var c={},k; for(k in o) if(o.hasOwnProperty(k)) c[k]=o[k]; return c; }
+function meLage(roh,ops){
+  var L={E:roh.E,T:roh.T,iR:meKop(roh.iR),iS:meKop(roh.iS),nR:roh.nR,nS:roh.nS,cn:roh.cn},i,o,erl=0,kauf=0;
+  for(i=0;i<ops.length;i++){
+    o=ops[i];
+    L.E+=o.w; L.iR[o.reg]=(L.iR[o.reg]||0)+o.w; L.nR+=o.w;
+    L.iS[o.sek]=(L.iS[o.sek]||0)+o.w; L.nS+=o.w;
+    if(o.cn) L.cn+=o.w;
+    if(o.w<0) erl-=o.w; else kauf+=o.w;
+  }
+  L.ges=roh.E+roh.T+(roh.x||0)+Math.max(0,kauf-erl);
+  L.q=L.ges>0?L.E/L.ges*100:null;
+  return L;
+}
+function meRegRahmen(k,soll){ var s=soll.region_soll[DP_REGION_SOLL[k]],b=soll.band_pp; return {lo:Math.max(0,s-b),hi:Math.min(100,s+b),s:s}; }
+function meSekGrenze(k,roh,soll){ return roh.kw>0?((roh.kS[k]||0)/roh.kw*100+soll.kern_abw_pp):null; }
+function meRegPct(L,k){ return L.nR>0?(L.iR[k]||0)/L.nR*100:0; }
+function meSekPct(L,k){ return L.nS>0?(L.iS[k]||0)/L.nS*100:0; }
+function meChinaPct(L){ return L.nR>0?L.cn/L.nR*100:0; }
+function meViolReg(L,k,soll){ var r=meRegRahmen(k,soll),v=meRegPct(L,k); return Math.max(0,r.lo-v,v-r.hi); }
+function meViolSek(L,k,roh,soll){ var g=meSekGrenze(k,roh,soll); return g===null?0:Math.max(0,meSekPct(L,k)-g); }
+function meViolDeckel(L,soll){ return L.q===null?0:Math.max(0,L.q-soll.einzel_max); }
+/* Mass der Paare (3.6.1): Summe der Abstaende zu Korridoren und Grenzen in pp, ohne Band; 0 = alles eingehalten */
+function meMass(L,roh,soll){
+  var s=0,i,k;
+  for(i=0;i<DP_REGION_REIHE.length;i++) s+=meViolReg(L,DP_REGION_REIHE[i],soll);
+  s+=Math.max(0,meChinaPct(L)-soll.china_max);
+  for(k in L.iS) if(L.iS.hasOwnProperty(k)&&k!=='sonstige') s+=meViolSek(L,k,roh,soll);
+  return s+meViolDeckel(L,soll);
+}
+/* Zulassung (2.2a-c) auf der Lage NACH der Buchung; ohneDeckel: Pruefung einer gehaltenen Position (Halten) */
+function meZul(L,roh,soll,o,ohneDeckel){
+  var g=[],h=[],p,z,r,gr,b=soll.band_pp,lbl;
+  if(o.reg==='SONSTIGE'||!DP_REGION_SOLL[o.reg]) h.push('Land unbekannt');
+  else if(L.nR>0){
+    r=meRegRahmen(o.reg,soll); p=meRegPct(L,o.reg); z=dpSgKorridor(p,r.lo,r.hi); lbl=DP_REGION_LBL[o.reg];
+    if(z==='gesperrt') g.push('Region '+lbl+' &uuml;ber dem Korridor ('+dpSgPct(p)+', bis '+r.hi+' %)');
+    else if(z==='unter') h.push('Region '+lbl+' untergewichtet ('+dpSgPct(p)+', ab '+r.lo+' %)');
+  }
+  if(o.cn&&L.nR>0){ p=meChinaPct(L); if(dpSgZone(p,soll.china_max,null)==='gesperrt') g.push('China &uuml;ber dem Deckel ('+dpSgPct(p)+', max '+soll.china_max+' %)'); }
+  if(o.sek!=='sonstige'){
+    gr=meSekGrenze(o.sek,roh,soll);
+    if(gr===null) h.push('Sektor nicht pr&uuml;fbar (kein Kern)');
+    else {
+      p=meSekPct(L,o.sek); z=dpSgZone(p,gr,b);
+      if(z==='gesperrt') g.push('Sektor '+etfEsc(o.sek)+' &uuml;ber Grenze und Band ('+dpSgPct(p)+', Grenze '+dpSgPct(gr)+')');
+      else if(z==='hinweis') h.push('Sektor '+etfEsc(o.sek)+' im Band ('+dpSgPct(p)+', Grenze '+dpSgPct(gr)+')');
+    }
+  } else h.push('Sektor unbekannt');
+  if(!ohneDeckel&&L.q!==null){
+    z=dpSgZone(L.q,soll.einzel_max,b);
+    if(z==='gesperrt') g.push('Deckel Einzeltitel ('+dpSgPct(L.q)+', max '+soll.einzel_max+' % + Band)');
+    else if(z==='hinweis') h.push('Deckel Einzeltitel im Band ('+dpSgPct(L.q)+')');
+  }
+  return {zone:g.length?'gesperrt':(h.length?'hinweis':'frei'),g:g,h:h};
+}
+/* Soll-Entlastung in pp (3.6.1): Abbau der Verletzung bei Verkauf der ganzen Position; Summe nur aus Abbauten */
+function meEntlastung(L0,roh,soll,o,w){
+  var L1=meLage(roh,[{w:-w,reg:o.reg,sek:o.sek,cn:o.cn}]),r=0,s,p,a;
+  if(DP_REGION_SOLL[o.reg]) r=meViolReg(L0,o.reg,soll)-meViolReg(L1,o.reg,soll);
+  s=o.sek==='sonstige'?0:(meViolSek(L0,o.sek,roh,soll)-meViolSek(L1,o.sek,roh,soll));
+  a=roh.E>0?w/roh.E*100:0;
+  p=Math.max(0,a-soll.position_max);
+  return {reg:r,sek:s,pos:p,sum:Math.max(0,r)+Math.max(0,s)+p};
+}
+/* Vorschlag (3.6.1 Schritt 5): ranghoechster Titel, der nicht gesperrt ist; die davor liegenden uebersprungen */
+function meVorschlag(kand,platz){
+  var ueb=[],i;
+  if(!platz) return {v:null,ueb:[]};
+  for(i=0;i<kand.length;i++){
+    if(kand[i].zul.zone!=='gesperrt') return {v:kand[i],ueb:ueb};
+    ueb.push(kand[i]);
+  }
+  return {v:null,ueb:ueb};
+}
+/* Paare (3.6.1): je Verkaufskandidat x Kaufkandidat die Lage nach beiden Buchungen; drei beste nach Mass,
+   bei Gleichstand der hoehere Kaufrang. "Kein Verkauf + Kauf" nur mit Platz. Gesperrte Kaeufe zaehlen nicht. */
+function mePaareAlle(roh,soll,verk,kauf,platz){
+  var res=[],i,j,v,k,ops,L,z,liste=[null].concat(verk);
+  for(i=0;i<liste.length;i++){
+    v=liste[i];
+    if(v===null&&!platz) continue;
+    for(j=0;j<kauf.length&&j<15;j++){
+      k=kauf[j];
+      ops=v?[{w:-v.w,reg:v.op.reg,sek:v.op.sek,cn:v.op.cn},k.op]:[k.op];
+      L=meLage(roh,ops); z=meZul(L,roh,soll,k.op,false);
+      if(z.zone==='gesperrt') continue;
+      res.push({v:v?v.t:null,k:k.t,rang:k.r,mass:meMass(L,roh,soll),zone:z.zone});
+    }
+  }
+  res.sort(function(a,b){
+    var d=Math.round((a.mass-b.mass)*1e6);
+    if(d!==0) return d;
+    if(a.rang!==b.rang) return a.rang-b.rang;
+    if((a.v||'')!==(b.v||'')) return (a.v||'')<(b.v||'')?-1:1;
+    return a.k<b.k?-1:(a.k>b.k?1:0);
+  });
+  return res;
+}
+function mePaare(roh,soll,verk,kauf,platz){ return mePaareAlle(roh,soll,verk,kauf,platz).slice(0,3); }
+/* E-4 (c): bestes Paar mit dem Vorschlag, wenn es nicht unter den drei besten steht */
+function mePaarVorschlag(alle,t){
+  var i;
+  for(i=0;i<alle.length;i++) if(alle[i].k===t) return i<3?null:alle[i];
+  return null;
+}
+
+/* ---- Speicher ---- */
+function meLoad(){
+  var o=null;
+  try{ o=JSON.parse(localStorage.getItem(ME_KEY)); }catch(e){ o=null; }
+  if(!o||typeof o!=='object'||Array.isArray(o)) o={};
+  if(!o.param||typeof o.param!=='object') o.param={};
+  if(!o.param.kauftag||typeof o.param.kauftag!=='object') o.param.kauftag={};
+  if(!Array.isArray(o.eintraege)) o.eintraege=[];
+  o.version=ME_KEY;
+  return o;
+}
+function meSave(o){
+  try{ localStorage.setItem(ME_KEY,JSON.stringify(o)); return JSON.parse(localStorage.getItem(ME_KEY)).eintraege.length===o.eintraege.length; }catch(e){ return false; }
+}
+/* {ticker:{pruefdatum:true}} der als Halten entschiedenen Pruefdaten */
+function meEntschieden(prot){
+  var m={},i,j,f;
+  for(i=0;i<prot.eintraege.length;i++){
+    f=prot.eintraege[i].faellig||[];
+    for(j=0;j<f.length;j++) if(f[j]&&f[j].status==='halten'){ if(!m[f[j].t]) m[f[j].t]={}; m[f[j].t][f[j].pruef]=true; }
+  }
+  return m;
+}
+function meKauftagSetzen(el){
+  var p=meLoad(),kd=ME_CALC?ME_CALC.kd:null;
+  if(!kd) return;
+  if(el&&/^\d{4}-\d{2}-\d{2}$/.test(el.value)) p.param.kauftag[kd.ym]=el.value; else delete p.param.kauftag[kd.ym];
+  try{ localStorage.setItem(ME_KEY,JSON.stringify(p)); }catch(e){}
+  meRender();
+}
+function meKauftagStd(){ var p=meLoad(); if(ME_CALC) delete p.param.kauftag[ME_CALC.kd.ym]; try{ localStorage.setItem(ME_KEY,JSON.stringify(p)); }catch(e){} meRender(); }
+
+/* ---- Ersatzpapier (3.6.4) ---- */
+function erKop(o){ return JSON.parse(JSON.stringify(o)); }
+function erLoad(){
+  var raw=null,o;
+  try{ raw=localStorage.getItem(ER_KEY); }catch(e){ raw=null; }
+  if(raw===null) return erKop(ER_VORBELEG);  /* Vorbelegung, bis der Nutzer die Liste aendert; nach Loeschen bleibt sie leer */
+  try{ o=JSON.parse(raw); }catch(e2){ o=null; }
+  return (o&&typeof o==='object'&&!Array.isArray(o))?o:{};
+}
+function erSave(o){ try{ localStorage.setItem(ER_KEY,JSON.stringify(o)); return true; }catch(e){ return false; } }
+function erFuer(t){ var l=erLoad(),r=dpRohTicker(t); return l[t]||l[r]||null; }
+/* Umrechnung: Stueck = Ersatzpapiere x Verhaeltnis, Kurs = Preis je Ersatzpapier / Verhaeltnis; ohne Verhaeltnis null */
+function erUmrechnung(nErs,pxErs,v){
+  if(!(typeof v==='number'&&v>0)||!(nErs>0)||!(pxErs>0)) return null;
+  return {n:nErs*v,px:pxErs/v};
+}
+function erVal(id){ var el=document.getElementById(id); return el?String(el.value).trim():''; }
+function erSpeichern(){
+  var t=erVal('er-t').toUpperCase(),l,v=parseFloat(erVal('er-v')),m=document.getElementById('er-msg');
+  if(!t){ if(m) m.textContent='Ticker fehlt.'; return; }
+  l=erLoad();
+  l[t]={name:erVal('er-name'),wkn:erVal('er-wkn'),isin:erVal('er-isin'),verhaeltnis:(v>0?v:null),art:erVal('er-art')||'GDR',hinweis:erVal('er-hinweis'),stand:erVal('er-stand')||dpHeute()};
+  if(!erSave(l)){ if(m) m.textContent='Speichern fehlgeschlagen.'; return; }
+  meRender();
+}
+function erLoeschen(t){
+  var l=erLoad();
+  if(!confirm('Ersatzpapier zu '+t+' l\u00f6schen?')) return;
+  delete l[t]; erSave(l); meRender();
+}
+function erBearbeiten(t){
+  var e=erLoad()[t],f,k,el;
+  if(!e) return;
+  f={'er-t':t,'er-name':e.name,'er-wkn':e.wkn,'er-isin':e.isin,'er-v':e.verhaeltnis===null?'':e.verhaeltnis,'er-art':e.art,'er-hinweis':e.hinweis,'er-stand':e.stand};
+  for(k in f) if(f.hasOwnProperty(k)){ el=document.getElementById(k); if(el) el.value=(f[k]===undefined?'':f[k]); }
+}
+function erExport(){
+  var blob=new Blob([JSON.stringify({version:ER_KEY,exported:dpHeute(),ersatz:erLoad()},null,2)],{type:'application/json'});
+  var url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url; a.download='stockiq_ersatzpapier.json'; a.click(); URL.revokeObjectURL(url);
+}
+/* Pruefung vor dem Schreiben; '' = gueltig */
+function erValid(l){
+  var k,e;
+  if(!l||typeof l!=='object'||Array.isArray(l)) return 'keine Liste';
+  for(k in l){
+    if(!l.hasOwnProperty(k)) continue;
+    e=l[k];
+    if(!e||typeof e!=='object') return k+': kein Eintrag';
+    if(e.verhaeltnis!==null&&e.verhaeltnis!==undefined&&!(typeof e.verhaeltnis==='number'&&e.verhaeltnis>0)) return k+': Verh\u00e4ltnis ung\u00fcltig';
+  }
+  return '';
+}
+function erImport(inp){
+  var f=inp&&inp.files&&inp.files[0],rd;
+  if(!f) return;
+  rd=new FileReader();
+  rd.onload=function(e){
+    var d=null,l,fe,n=0,k;
+    try{ d=JSON.parse(e.target.result); }catch(ex){ alert('Import abgewiesen: keine JSON-Datei.'); return; }
+    if(!d||d.version!==ER_KEY){ alert('Import abgewiesen: keine Ersatzpapier-Datei.'); return; }
+    l=d.ersatz; fe=erValid(l);
+    if(fe){ alert('Import abgewiesen: '+fe); return; }
+    for(k in l) if(l.hasOwnProperty(k)) n++;
+    if(!confirm('Liste ersetzen? '+n+' Eintr\u00e4ge.')) return;
+    if(erSave(l)){ alert('Import: '+n+' Eintr\u00e4ge \u00fcbernommen.'); meRender(); } else alert('Speichern fehlgeschlagen.');
+  };
+  rd.readAsText(f);
+  inp.value='';
+}
+
+/* ---- Warnetikett (3.6.6): nur Anzeige, wirkt weder auf Zulassung noch auf Reihenfolge ---- */
+function warnMeta(){ var m=etfMacro(); return (m&&m.warn_meta&&m.warn_meta.raten)?m.warn_meta:null; }
+function warnRec(t){ var r=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null; return (r&&typeof r==='object')?r:null; }
+function warnRate(meta,zelle){ var l=meta.raten,i; for(i=0;i<l.length;i++) if(l[i].zelle===zelle) return l[i]; return null; }
+var WARN_JEDER={2:'zweite',3:'dritte',4:'vierte',5:'f&uuml;nfte',6:'sechste',7:'siebte',8:'achte',9:'neunte',10:'zehnte'};
+function warnJeder(p){ var n=Math.round(100/p); return WARN_JEDER[n]?('etwa jeder '+WARN_JEDER[n]+' Kauf'):('rund '+Math.round(p)+' % der K&auml;ufe'); }
+function warnJederKurz(p){ var n=Math.round(100/p); return WARN_JEDER[n]?('jeder '+WARN_JEDER[n]):('rund '+Math.round(p)+' %'); }
+function warnZehntel(p){ return Math.round(p/10)+' von 10'; }
+function warnProz(v){ return (v>=0?'+':'')+Math.round(v)+' %'; }
+/* Saetze je Etikett; meta und rec werden uebergeben (rein) */
+function warnSaetze(rec,meta){
+  var o=[],z,alle,x;
+  if(!rec||!meta) return o;
+  alle=warnRate(meta,'alle BUY');
+  if((rec.warn_titel==='erhoeht'||rec.warn_titel==='hoch')&&typeof rec.anstieg24_roh==='number'){
+    z=warnRate(meta,rec.warn_titel==='hoch'?'Titel hoch':'Titel erhoeht'); x=warnProz(rec.anstieg24_roh);
+    if(z&&rec.warn_titel==='erhoeht') o.push('Steiler Anstieg: '+x+' in 24 Monaten. Nach solchen Anstiegen fiel der Kurs bisher in '+warnZehntel(z.rueckschlag_25_pct)+' F&auml;llen zwischendurch um mindestens 25 %; nach zwei Jahren lag '+warnJeder(z.endverlust_24m_pct)+' mindestens 25 % im Minus'+(alle?' (alle BUY: '+warnJederKurz(alle.endverlust_24m_pct)+').':'.'));
+    if(z&&rec.warn_titel==='hoch') o.push('Sehr steiler Anstieg: '+x+' in 24 Monaten. R&uuml;ckschlag von mindestens 25 % bisher in '+warnZehntel(z.rueckschlag_25_pct)+' F&auml;llen; nach zwei Jahren lag '+warnJeder(z.endverlust_24m_pct)+' mindestens 25 % im Minus.');
+  }
+  if((rec.warn_branche==='erhoeht'||rec.warn_branche==='hoch')&&typeof rec.anstieg24_branche_roh==='number'){
+    z=warnRate(meta,rec.warn_branche==='hoch'?'Branche hoch':'Branche erhoeht');
+    if(z) o.push('Hei&szlig;e Branche: '+etfEsc(rec.branche_name||'--')+' '+warnProz(rec.anstieg24_branche_roh)+' in 24 Monaten. Nach zwei Jahren lag '+warnJeder(z.endverlust_24m_pct)+' mindestens 25 % im Minus.'+(rec.warn_branche_blase===true?' Blasenbereich (um 2000), wenige F&auml;lle.':''));
+  }
+  return o;
+}
+/* Stufe des Zeichens: die hoehere aus Titel und Branche; '' = kein Etikett, '--' = kein Wert (Null-Regel) */
+function warnStufe(rec){
+  var a,b;
+  if(!rec) return '--';
+  a=rec.warn_titel; b=rec.warn_branche;
+  if(a==='hoch'||b==='hoch') return 'hoch';
+  if(a==='erhoeht'||b==='erhoeht') return 'erhoeht';
+  if((a===null||a===undefined)&&(b===null||b===undefined)) return '--';
+  return '';
+}
+function warnPlain(html){ var d=document.createElement('div'); d.innerHTML=html; return d.textContent; }
+function warnTitel(t){ var m=warnMeta(); return m?warnPlain(warnSaetze(warnRec(t),m).join(' ')):''; }
+function warnZeig(t){ var x=warnTitel(t); if(x) alert(x); }
+/* Zeichen an BUY-Zeilen (Watchlist, Bestand) und im Monatsentscheid. Ohne warn_meta: nichts, Hinweis steht im Tab Monat */
+function warnBdg(t){
+  var m=warnMeta(),st,c;
+  if(!m) return '';
+  st=warnStufe(warnRec(t));
+  if(st==='') return '';
+  if(st==='--') return '<span class="warn-et" data-warn="null" style="font-size:10px;color:#7a9bb5;margin-left:3px" title="Warnetikett: kein Wert">--</span>';
+  c=st==='hoch'?'#ff6666':'#ffab00';
+  return '<span class="warn-et" data-warn="'+st+'" role="button" aria-label="Warnetikett" onclick="event.stopPropagation();warnZeig(\''+t+'\')" style="font-size:10px;color:'+c+';margin-left:3px;cursor:pointer" title="'+etfEsc(warnTitel(t))+'">&#9650;</span>';
+}
+/* Monat: Zeichen mit vollem Wortlaut oder Null-Regel */
+function meWarnBlock(t){
+  var m=warnMeta(),s;
+  if(!m) return '<div class="me-warn me-warn-null" style="color:#7a9bb5;font-size:10px;margin-top:2px">Warnetikett ab '+ME_WARN_AB+'</div>';
+  if(warnStufe(warnRec(t))==='--') return '<div class="me-warn me-warn-null" style="color:#7a9bb5;font-size:10px;margin-top:2px">Warnetikett: --</div>';
+  s=warnSaetze(warnRec(t),m);
+  if(!s.length) return '';
+  return '<div class="me-warn" style="color:#ffcf70;font-size:10px;line-height:1.5;margin-top:3px">'+warnBdg(t)+' '+s.join('<br>')+'</div>';
+}
+function meWarnErl(){
+  var m=warnMeta(),h='',i,r;
+  h='<details id="me-warn-erl" style="margin-top:6px;font-size:10px;color:#9fb0c0"><summary style="cursor:pointer">Was das Warnetikett bedeutet</summary><div style="line-height:1.6;margin-top:4px">'
+    +'<b>Anstieg Titel</b>: Kursver&auml;nderung mit Dividenden der letzten 24 Monate. <b>Anstieg Branche</b>: derselbe Wert f&uuml;r den gleichgewichteten Index der Industrie (mindestens drei Titel, sonst Sektor). '
+    +'<b>Endverlust</b>: 24 Monate nach dem Stichtag mindestens 25 % im Minus. <b>R&uuml;ckschlag</b>: Fall um mindestens 25 % vom laufenden Hoch innerhalb der 24 Monate. '
+    +'Stufen Titel: erh&ouml;ht ab 100 %, hoch ab 200 %. Stufen Branche: erh&ouml;ht ab 50 %, hoch ab 150 %. Das Etikett &auml;ndert weder Zulassung noch Reihenfolge, es ist keine Verkaufsregel. Belegstufe 2: die Grenzen wurden nach Sicht der Daten gew&auml;hlt.';
+  if(m){
+    h+='<div class="dp-scroll" style="margin-top:4px"><table style="border-collapse:collapse;font-size:10px"><tr><th style="text-align:left;padding:2px 6px">Zelle</th><th style="text-align:right;padding:2px 6px">N</th><th style="text-align:right;padding:2px 6px">Endverlust</th><th style="text-align:right;padding:2px 6px">R&uuml;ckschlag</th></tr>';
+    for(i=0;i<m.raten.length;i++){
+      r=m.raten[i];
+      h+='<tr><td style="padding:2px 6px">'+etfEsc(r.zelle)+'</td><td style="text-align:right;padding:2px 6px">'+r.n+'</td><td style="text-align:right;padding:2px 6px">'+Math.round(r.endverlust_24m_pct)+' %</td><td style="text-align:right;padding:2px 6px">'+Math.round(r.rueckschlag_25_pct)+' %</td></tr>';
+    }
+    h+='</table></div><div style="margin-top:3px;color:#6b7a8a">Basis: '+etfEsc(m.raten_basis)+'. Quelle: '+etfEsc(m.quelle)+'.</div>';
+  } else h+='<div style="margin-top:3px">Warnetikett ab '+ME_WARN_AB+'.</div>';
+  return h+'</div></details>';
+}
+
+/* ---- Berechnung der Seite ---- */
+function mePos(t){ var i; for(i=0;i<DEPOT_POSITIONS.length;i++) if(DEPOT_POSITIONS[i].t===t) return DEPOT_POSITIONS[i]; return null; }
+function meOp(t,w){ return {w:w,reg:dpRegion(t),sek:dpSektor(t)||'sonstige',cn:dpLand(t)==='CN'}; }
+function meKandListe(avg){
+  var im={},i,p,s,g,l=[];
+  for(i=0;i<DEPOT_POSITIONS.length;i++){ p=DEPOT_POSITIONS[i]; im[p.t]=true; im[dpRohTicker(p.t)]=true; }
+  for(i=0;i<STOCKS.length;i++){
+    s=STOCKS[i];
+    if(im[s.t]||im[dpRohTicker(s.t)]||!buyIsD1(s.t)) continue;
+    g=rang12m(s.t);
+    if(g===null) continue;
+    l.push({t:s.t,name:s.n||s.t,r:g.r,n:g.n,op:meOp(s.t,avg)});
+  }
+  l.sort(function(a,b){ return (a.r-b.r)||(a.t<b.t?-1:(a.t>b.t?1:0)); });
+  return l;
+}
+function meKern(){
+  var kd=etfKernDaten(),K=0,T=0,sym=null,i,p,e,cp,bed=null;
+  for(i=0;i<ETF_POSITIONS.length;i++){
+    p=ETF_POSITIONS[i]; e=etfEintrag(p.t); cp=etfCurrentPrice(p.t);
+    if(e&&e.rolle==='KERN'&&!sym) sym=p.t;
+    if(cp===null) continue;
+    T+=p.shares*cp; if(e&&e.rolle==='KERN') K+=p.shares*cp;
+  }
+  if(kd.q!==null){ var q=kd.soll.kern_min/100; bed=Math.max(0,(q*T-K)/(1-q)); }
+  if(!sym){ var l=etfListe(); for(i=0;i<l.length;i++) if(l[i]&&l[i].rolle==='KERN'){ sym=l[i].symbol; break; } }
+  return {kd:kd,bedarf:bed,sym:sym};
+}
+function meBerechne(){
+  var soll=dpSollLoad(),dp=[],etf=[],ohne=0,nAus=0,i,p,cp,heute=dpHeute(),prot=meLoad(),kd=meKauftag(heute,prot.param.kauftag),r,roh;
+  for(i=0;i<DEPOT_POSITIONS.length;i++){ p=DEPOT_POSITIONS[i]; cp=dpCurrentPrice(p.t); if(cp===null) ohne++; else dp.push({t:p.t,w:p.shares*cp}); }
+  for(i=0;i<ETF_POSITIONS.length;i++){
+    p=ETF_POSITIONS[i]; cp=etfCurrentPrice(p.t);
+    if(cp===null){ if(etfIstAusweis(etfEintrag(p.t))) nAus++; else ohne++; continue; }
+    etf.push({t:p.t,w:p.shares*cp});
+  }
+  var gv=gvFuer(dp,etf);
+  r=dpSgRechnung(dp,etf,(typeof _etfStamm!=='undefined')?_etfStamm:null,soll,gv.x);
+  roh=r.roh;
+  var L0=meLage(roh,[]),tx=dpTxLoad(),starts=dpZyklusStarts(tx),ent=meEntschieden(prot),mac=etfMacro(),faellig=[],halten=[],kandV=[],f,rec,st,w,o,zul;
+  for(i=0;i<DEPOT_POSITIONS.length;i++){
+    p=DEPOT_POSITIONS[i];
+    st=starts.hasOwnProperty(p.t)?starts[p.t]:(p.buyDate||'');
+    rec=(buyPctFor(p.t)===null)?null:_scoresIdx[p.t];
+    f=meFaelligStatus(st,kd.datum,heute,rec,mac,buyIsD1(p.t),ent[p.t]);
+    if(!f) continue;
+    cp=dpCurrentPrice(p.t); w=cp===null?null:p.shares*cp; o=meOp(p.t,w===null?0:w);
+    zul=meZul(L0,roh,soll,o,true);
+    var g=rang12m(p.t),e=(w===null)?null:meEntlastung(L0,roh,soll,o,w);
+    var x={t:p.t,name:p.name||p.t,pruef:f.pruef,quelle:f.quelle,buy:f.buy,zul:zul,zulOk:zul.zone!=='gesperrt',r:g?g.r:null,n:g?g.n:null,w:w,op:o,ent:e,
+      anteil:(w!==null&&roh.E>0)?w/roh.E*100:null,gewinn:cp===null?null:(cp-p.buyPrice)*p.shares,shares:p.shares,cp:cp};
+    x.status=(f.buy&&x.zulOk)?'halten':'kandidat';
+    faellig.push(x);
+    if(x.status==='halten') halten.push(x); else kandV.push(x);
+  }
+  kandV.sort(function(a,b){ var sa=a.ent?a.ent.sum:-1,sb=b.ent?b.ent.sum:-1; return (sb-sa)||(a.t<b.t?-1:(a.t>b.t?1:0)); });
+  var ops=[],erl=0;
+  for(i=0;i<kandV.length;i++) if(ME_UI.verkauf[kandV[i].t]&&kandV[i].w!==null){ ops.push({w:-kandV[i].w,reg:kandV[i].op.reg,sek:kandV[i].op.sek,cn:kandV[i].op.cn}); erl+=kandV[i].w; }
+  var avg=roh.avg,LV=meLage(roh,ops),LP=meLage(roh,ops.concat([{w:avg,reg:'SONSTIGE',sek:'sonstige',cn:false}]));
+  var pZone=LP.q===null?null:dpSgZone(LP.q,soll.einzel_max,soll.band_pp);
+  var unv=ohne>0||!r.stamm;
+  var platz=(pZone!==null&&pZone!=='gesperrt'&&!unv);
+  var L1=meLage(roh,[{w:avg,reg:'SONSTIGE',sek:'sonstige',cn:false}]);
+  var platz0=(L1.q!==null&&dpSgZone(L1.q,soll.einzel_max,soll.band_pp)!=='gesperrt'&&!unv);
+  var kand=meKandListe(avg);
+  for(i=0;i<kand.length;i++) kand[i].zul=meZul(meLage(roh,ops.concat([kand[i].op])),roh,soll,kand[i].op,false);
+  var verk=[];
+  for(i=0;i<kandV.length;i++) if(kandV[i].w!==null) verk.push(kandV[i]);
+  ME_CALC={gv:gv,soll:soll,r:r,roh:roh,kd:kd,heute:heute,prot:prot,ohne:ohne,nAus:nAus,unv:unv,faellig:faellig,halten:halten,kandV:kandV,LV:LV,LP:LP,pZone:pZone,platz:platz,erl:erl,avg:avg,
+    kand:kand,vs:unv?{v:null,ueb:[]}:meVorschlag(kand,platz),champion:kand.length?kand[0]:null,paare:[],paarVs:null,kern:meKern()};
+  if(!unv){ var alleP=mePaareAlle(roh,soll,verk,kand,platz0); ME_CALC.paare=alleP.slice(0,3); ME_CALC.paarVs=ME_CALC.vs.v?mePaarVorschlag(alleP,ME_CALC.vs.v.t):null; }
+  return ME_CALC;
+}
+
+/* ---- Anteile je Anlageklasse (3.4, bis B-2 ohne Soll-Spalte). Cash und Werte ausserhalb des Depots aus dem Eingabeblock (N2). ---- */
+function allocGespeichert(){ try{ var o=JSON.parse(localStorage.getItem(ALLOC_KEY)); return (o&&typeof o==='object')?o:{}; }catch(e){ return {}; } }
+function allocSpeicherDa(){ try{ return localStorage.getItem(ALLOC_KEY)!==null; }catch(e){ return false; } }
+/* rein: E Einzeltitel, acc Klassen aus dem Bestand, st gespeicherte Handwerte, cash Feldwert (null = leer) */
+function meKlassenRechnung(E,acc,st,cash){
+  function aus(f,k){ var v=st[f]; return (typeof v==='number'&&v>acc[k])?v-acc[k]:0; }
+  var z=[{k:'Einzeltitel',b:E,a:0},{k:'Aktien-ETF',b:acc.E,a:0},{k:'Anleihen',b:acc.A,a:aus('bonds','A')},{k:'Gold',b:acc.G,a:aus('gold','G')},{k:'BTC',b:acc.D,a:0},{k:'Rohstoffe',b:acc.R,a:aus('commod','R')}];
+  var c=(typeof cash==='number'&&cash>0)?cash:null,sum=0,i;
+  z.push({k:'Cash',b:0,a:c===null?0:c});
+  for(i=0;i<z.length;i++){ z[i].s=z[i].b+z[i].a; sum+=z[i].s; }
+  for(i=0;i<z.length;i++) z[i].p=sum>0?z[i].s/sum*100:null;
+  return {z:z,sum:sum,cashFehlt:c===null};
+}
+/* S537n E-1: EINE Rechnung des Nenners Gesamtvermoegen (Konzept 2.0/2.1), Leser: Schritt 2, Klassenblock, Tab Bestand.
+   x = Nenner minus Einzeltitel minus bewerteter ETF-Teil; Handwerte aus dem GESPEICHERTEN Eingabeblock (N2). */
+function gvNenner(E,T){
+  var st=allocGespeichert(),c=(typeof st.cash==='number')?st.cash:null,kr=meKlassenRechnung(E,allocEtfKlassen(),st,c);
+  return {x:Math.max(0,kr.sum-E-T),kr:kr,da:allocSpeicherDa(),stand:(typeof st.stand==='string')?st.stand:null};
+}
+function gvFuer(dpItems,etf){
+  var E=0,T=0,i;
+  for(i=0;i<dpItems.length;i++) if(dpItems[i].w>0) E+=dpItems[i].w;
+  for(i=0;i<etf.length;i++) if(etf[i].w>0) T+=etf[i].w;
+  return gvNenner(E,T);
+}
+function gvEtikett(g){
+  if(!g.da) return 'unvollst&auml;ndig';
+  return 'Nenner mit Cash und Werten au&szlig;erhalb des Depots aus der Handeingabe (Stand '+(g.stand?dpDatumTxt(g.stand):'unbekannt')+'); fehlt die Eingabe: unvollst&auml;ndig';
+}
+function meKlassenRender(){
+  var el=document.getElementById('me-klassen'),tot,kr,h,i,x;
+  if(!el) return;
+  tot=dpCalcTotal();
+  kr=gvNenner(tot.val,0).kr;
+  h='<div class="dp-scroll"><table style="width:100%;border-collapse:collapse;font-size:11px;color:#cfe0f0"><tr><th style="text-align:left;padding:3px 6px;background:#1a3a5c">Klasse</th><th style="text-align:right;padding:3px 6px;background:#1a3a5c">Bestand</th><th style="text-align:right;padding:3px 6px;background:#1a3a5c">Au&szlig;erhalb</th><th style="text-align:right;padding:3px 6px;background:#1a3a5c">Summe</th><th style="text-align:right;padding:3px 6px;background:#1a3a5c">Anteil</th></tr>';
+  for(i=0;i<kr.z.length;i++){
+    x=kr.z[i];
+    h+='<tr class="me-klasse" data-k="'+x.k+'" style="border-top:1px solid #1f2933"><td style="padding:3px 6px">'+x.k+'</td><td style="text-align:right;padding:3px 6px">'+(x.b>0?bestEur(x.b):'--')+'</td><td style="text-align:right;padding:3px 6px">'+(x.a>0?bestEur(x.a):'--')+'</td><td style="text-align:right;padding:3px 6px">'+bestEur(x.s)+'</td><td style="text-align:right;padding:3px 6px">'+(x.p===null?'--':dpSgPct(x.p))+'</td></tr>';
+  }
+  h+='</table></div><div style="font-size:10px;color:#6b7a8a;margin-top:3px">Ohne Soll-Spalte bis zur Gruppe Anlageklassen im Tab Bestand. Au&szlig;erhalb = gespeicherte Handwerte des Eingabeblocks &uuml;ber die Bestands-ETF hinaus.'+(kr.cashFehlt?' <b class="me-cash-fehlt">Cash nicht erfasst.</b>':'')+'</div>';
+  el.innerHTML=h;
+}
+
+/* ---- Darstellung ---- */
+function meKarte(nr,titel,inhalt,id){
+  return '<div class="me-karte"'+(id?' id="'+id+'"':'')+' style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:10px 12px;margin-bottom:8px"><div style="font-size:12px;font-weight:700;color:#dce8f5;margin-bottom:6px">'+(nr?nr+'. ':'')+titel+'</div>'+inhalt+'</div>';
+}
+function meZoneTxt(z){ return z==='gesperrt'?'&#8593; gesperrt':(z==='hinweis'?'&#8596; Hinweis':'&#8596; frei'); }
+function meJN(b){ return b?'ja':'nein'; }
+function mePp(x){ return (x>=0?'':'-')+Math.abs(x).toFixed(1).replace('.',','); }
+function meKopfTxt(c){
+  var pl=c.unv?'--':(c.platz?'ja':'nein'),q=c.LV.q===null?'--':dpSgPct(c.LV.q),f=c.halten.length+c.kandV.length;
+  return 'Platz: '+pl+' (Einzeltitel '+q+') - F&auml;llig: '+f+' - Vorschlag: '+(c.vs.v?etfEsc(c.vs.v.t)+' (Rang '+c.vs.v.r+')':'kein')+' - &uuml;bersprungen: '+c.vs.ueb.length;
+}
+function meVerkaufToggle(t,el){ if(el.checked) ME_UI.verkauf[t]=true; else delete ME_UI.verkauf[t]; ME_UI.kauf=null; meRender(); }
+function mePaarWahl(i){
+  var p=ME_CALC&&ME_CALC.paare[i],f;
+  if(!p) return;
+  ME_UI.verkauf={};
+  if(p.v) ME_UI.verkauf[p.v]=true;
+  ME_UI.kauf=p.k;
+  meRender();
+  f=document.getElementById('me-form');
+  if(f&&f.scrollIntoView) f.scrollIntoView();
+}
+function meKaufWahl(v){ ME_UI.kauf=v; meRenderForm(); }
+function meErsatzToggle(el){ ME_UI.ersatz=!!el.checked; meRenderForm(); }
+function meSchritt1(c){
+  var h='',i,x,s='padding:3px 5px;vertical-align:top;white-space:nowrap';
+  h+='<div style="font-size:10px;color:#9fb0c0;margin-bottom:5px">Kauftag <input type="date" id="me-kauftag" value="'+c.kd.datum+'" onchange="meKauftagSetzen(this)" style="background:#0a1628;border:1px solid #1a3050;color:#dce8f5;font-size:11px;border-radius:4px;padding:1px 3px"> '
+    +(c.kd.eigen?'(eigenes Datum, <a href="#" onclick="meKauftagStd();return false" style="color:#00c8f0">Standard</a>)':'(letzter Handelstag des Monats, Mo-Fr; Feiertage pr&uuml;fen)')+'</div>';
+  if(!c.faellig.length) return h+'<div style="font-size:11px;color:#9fb0c0">Keine Position f&auml;llig.</div>';
+  if(c.halten.length){
+    var hl=[];
+    for(i=0;i<c.halten.length;i++) hl.push(etfEsc(c.halten[i].t));
+    h+='<div class="me-halten" style="font-size:11px;color:#cfe0f0;margin-bottom:5px">Halten (BUY und zul&auml;ssig, neue Haltefrist 12 Monate): '+hl.join(', ')+'</div>';
+  }
+  if(c.kandV.length){
+    h+='<div class="dp-scroll"><table id="me-verkauf-tab" style="width:100%;border-collapse:collapse;font-size:10px;color:#cfe0f0"><tr>';
+    var th=['','Titel','Pr&uuml;fdatum','BUY','zul&auml;ssig','Rang','Soll-Entlastung pp<br>(Region/Sektor/Position)','Anteil Einzeltitel','Gewinn seit Kauf'];
+    for(i=0;i<th.length;i++) h+='<th style="background:#1a3a5c;padding:3px 5px;text-align:left">'+th[i]+'</th>';
+    h+='</tr>';
+    for(i=0;i<c.kandV.length;i++){
+      x=c.kandV[i];
+      h+='<tr class="me-vk" data-t="'+etfEsc(x.t)+'" style="border-top:1px solid #1f2933">'
+        +'<td style="'+s+'"><input type="checkbox" aria-label="Verkauf w&auml;hlen" '+(ME_UI.verkauf[x.t]?'checked ':'')+(x.w===null?'disabled ':'')+'onchange="meVerkaufToggle(\''+x.t+'\',this)"></td>'
+        +'<td style="'+s+';font-weight:700;color:#00c8f0">'+etfEsc(x.t)+'</td>'
+        +'<td style="'+s+'">'+dpDatumTxt(x.pruef)+(x.quelle==='nb'?' (Pr&uuml;fstand nicht bewertbar)':'')+'</td>'
+        +'<td style="'+s+'">'+meJN(x.buy)+'</td>'
+        +'<td style="'+s+'" title="'+etfEsc(warnPlain(x.zul.g.concat(x.zul.h).join('; ')))+'">'+meJN(x.zulOk)+'</td>'
+        +'<td style="'+s+'">'+(x.r===null?'--':x.r)+'</td>'
+        +'<td style="'+s+'">'+(x.ent?mePp(x.ent.sum)+' ('+mePp(x.ent.reg)+'/'+mePp(x.ent.sek)+'/'+mePp(x.ent.pos)+')':'--')+'</td>'
+        +'<td style="'+s+'">'+(x.anteil===null?'n/a':dpSgPct(x.anteil))+'</td>'
+        +'<td style="'+s+'">'+(x.gewinn===null?'n/a':bestEur(x.gewinn))+'</td></tr>';
+    }
+    h+='</table></div><div style="font-size:10px;color:#6b7a8a;margin-top:3px">Sortiert nach Soll-Entlastung, der Rang steht daneben. Keine Reihenfolgeregel: Auswahl und Menge entscheidest du; ein Verkauf finanziert einen Kauf, die &uuml;brigen werden n&auml;chsten Monat neu gepr&uuml;ft.</div>';
+  }
+  return h;
+}
+function meSchritt2(c){
+  if(c.unv) return '<div class="me-unv" style="font-size:11px;color:#ffab00">Soll-Vergleich unvollst&auml;ndig'+(c.ohne?' - '+c.ohne+' Position(en) ohne Kurs':'')+(c.r.stamm?'':' - Stammdaten nicht geladen')+'.</div>';
+  var s=c.soll;
+  if(c.LV.q===null) return '<div class="me-leer" style="font-size:11px;color:#9fb0c0">Noch keine Positionen im Bestand.</div>';
+  return '<div style="font-size:11px;color:#cfe0f0">Einzeltitel '+dpSgPct(c.LV.q)+' des Gesamtverm&ouml;gens, nach einem Kauf in Durchschnittsgr&ouml;&szlig;e ('+bestEur(c.avg)+') '+dpSgPct(c.LP.q)+' (Deckel '+s.einzel_max+' %, Band '+s.band_pp+' pp): '+meZoneTxt(c.pZone)+'. '+(c.platz?'Platz f&uuml;r einen Kauf.':'Kein Einzeltitel-Kauf, weiter mit Schritt 3.')+'</div><div class="me-nenner" style="font-size:10px;color:#6b7a8a;margin-top:2px">'+gvEtikett(c.gv)+'</div>';
+}
+function meSchritt3(c){
+  var k=c.kern,kd=k.kd,h,ohneKauf=!c.vs.v;
+  h='<div style="font-size:11px;color:#cfe0f0">'+etfKernZeile()+'</div>';
+  if(k.bedarf!==null&&k.bedarf>0) h+='<div style="font-size:11px;color:#cfe0f0;margin-top:3px">Bis zur Untergrenze ('+kd.soll.kern_min+' %) fehlen '+bestEur(k.bedarf)+': frische Mittel und Verkaufserl&ouml;se ohne Kauf gehen zuerst in den Kern.</div>';
+  if(ohneKauf) h+='<div class="me-rueckfall" style="font-size:11px;color:#ffcf70;margin-top:3px">Kein Einzeltitel-Kauf: Der Betrag flie&szlig;t in den Kern-ETF bis zur Schwelle, danach Gold, BTC, Faktor zuletzt.</div>';
+  return h;
+}
+function meGrund(z){ return z.g.concat(z.h).join('; '); }
+function meKandZeile(k,rolle){
+  var er=erFuer(k.t);
+  return '<tr class="me-kand" data-t="'+etfEsc(k.t)+'" data-zone="'+k.zul.zone+'" style="border-top:1px solid #1f2933"><td style="padding:3px 5px;white-space:nowrap">'+k.r+'</td><td style="padding:3px 5px;white-space:nowrap;font-weight:700;color:#00c8f0">'+etfEsc(k.t)+warnBdg(k.t)+'</td><td style="padding:3px 5px;white-space:nowrap">'+meZoneTxt(k.zul.zone)+'</td><td style="padding:3px 5px;white-space:normal;min-width:140px">'+(meGrund(k.zul)||'--')+(er?'<div style="color:#7a9bb5">Ersatzpapier: '+etfEsc(er.name)+'</div>':'')+'</td></tr>';
+}
+function meSchritt4(c){
+  if(c.unv) return '<div style="font-size:11px;color:#ffab00">Zulassung unvollst&auml;ndig.</div>';
+  if(!c.kand.length) return '<div style="font-size:11px;color:#9fb0c0">Kein BUY-Titel ohne Depotposition.</div>';
+  var h='<div class="dp-scroll"><table style="width:100%;border-collapse:collapse;font-size:10px;color:#cfe0f0"><tr><th style="background:#1a3a5c;padding:3px 5px;text-align:left">Rang</th><th style="background:#1a3a5c;padding:3px 5px;text-align:left">Titel</th><th style="background:#1a3a5c;padding:3px 5px;text-align:left">Zulassung</th><th style="background:#1a3a5c;padding:3px 5px;text-align:left">Grund</th></tr>',i,m=Math.min(5,c.kand.length),rest='';
+  for(i=0;i<m;i++) h+=meKandZeile(c.kand[i]);
+  for(i=m;i<c.kand.length;i++) rest+=meKandZeile(c.kand[i]);
+  h+='</table></div>';
+  if(rest) h+='<details style="margin-top:4px;font-size:10px;color:#9fb0c0"><summary style="cursor:pointer">Alle '+c.kand.length+' BUY-Titel</summary><div class="dp-scroll"><table style="width:100%;border-collapse:collapse;font-size:10px;color:#cfe0f0">'+rest+'</table></div></details>';
+  if(c.r.fehltR.length||c.r.unt.length) h+='<div style="font-size:10px;color:#6b7a8a;margin-top:3px">Untergrenze: '+c.r.fehltR.concat(c.r.unt).join(', ')+' (Bestandsdaten l&uuml;ckenhaft).</div>';
+  return h;
+}
+function meKgvHinweis(t){
+  var r=warnRec(t),v=r?r.pe_ttm:null;
+  return (typeof v==='number'&&v>1000)?'<div style="font-size:10px;color:#ffab00;margin-top:2px">Hinweis: KGV &uuml;ber 1000.</div>':'';
+}
+function meErsatzInfo(t){
+  var e=erFuer(t);
+  if(!e) return '';
+  return '<div class="me-ersatz" style="font-size:10px;color:#9fb0c0;line-height:1.5;margin-top:3px">Ersatzpapier: '+etfEsc(e.name)+' (WKN '+etfEsc(e.wkn)+', ISIN '+etfEsc(e.isin)+'), '+(e.verhaeltnis?'Verh&auml;ltnis '+e.verhaeltnis+' Aktien je '+etfEsc(e.art):'<b>Verh&auml;ltnis fehlt</b>')+(e.hinweis?'; '+etfEsc(e.hinweis):'')+'. Gebucht wird unter '+etfEsc(t)+'; Zweitnotiz, Spanne pr&uuml;fen, Limit-Order.</div>';
+}
+function meSchritt5(c){
+  var h='',v=c.vs.v,i,x,fehl=(c.champion&&v&&c.champion.t!==v.t);
+  if(c.unv) return '<div style="font-size:11px;color:#ffab00">Kein Vorschlag: Soll-Vergleich unvollst&auml;ndig.</div>';
+  if(v) h+='<div id="me-vorschlag" data-t="'+etfEsc(v.t)+'" style="font-size:13px;font-weight:700;color:#00e57a">'+etfEsc(v.t)+' <span style="font-weight:400;font-size:11px;color:#dce8f5">'+etfEsc(v.name)+' (Rang '+v.r+' von '+v.n+') '+meZoneTxt(v.zul.zone)+'</span></div>'+(v.zul.h.length?'<div style="font-size:10px;color:#9fb0c0">'+v.zul.h.join('; ')+'</div>':'')+meWarnBlock(v.t)+meKgvHinweis(v.t)+meErsatzInfo(v.t);
+  else h+='<div id="me-vorschlag" style="font-size:12px;color:#ffcf70">Kein zugelassener Titel: Schritt 3 (Kern).</div>';
+  if(c.vs.ueb.length){
+    h+='<div style="margin-top:6px;font-size:10px;color:#9fb0c0">&Uuml;bersprungen:</div>';
+    for(i=0;i<c.vs.ueb.length;i++){
+      x=c.vs.ueb[i];
+      h+='<div class="me-ueb" data-t="'+etfEsc(x.t)+'" style="font-size:10px;color:#cfe0f0;margin-top:3px"><b>'+etfEsc(x.t)+'</b> (Rang '+x.r+') &mdash; '+meGrund(x.zul)+meWarnBlock(x.t)+meErsatzInfo(x.t)+'</div>';
+    }
+  }
+  if(c.paare.length){
+    h+='<div style="margin-top:8px;font-size:10px;color:#9fb0c0">Soll-Lage nach beiden Buchungen (drei beste Paare; Ma&szlig;: Summe der Abst&auml;nde in pp au&szlig;erhalb der Regionskorridore, &uuml;ber dem China-Deckel, &uuml;ber den Sektorgrenzen und &uuml;ber dem Deckel Einzeltitel, jeweils ohne Band; kleiner ist besser)</div>';
+    for(i=0;i<c.paare.length;i++){
+      x=c.paare[i];
+      h+='<div class="me-paar" style="font-size:11px;color:#cfe0f0;margin-top:3px;display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span>'+(i+1)+'. '+(x.v?'Verkauf <b>'+etfEsc(x.v)+'</b> + ':'Kein Verkauf + ')+'Kauf <b>'+etfEsc(x.k)+'</b> (Rang '+x.rang+')'+warnBdg(x.k)+' &mdash; '+mePp(x.mass)+' pp</span><button type="button" onclick="mePaarWahl('+i+')" style="font-size:10px;padding:2px 8px;background:transparent;border:1px solid #1a3050;color:#00c8f0;border-radius:4px;cursor:pointer">W&auml;hlen</button></div>';
+    }
+    if(c.paarVs){ x=c.paarVs; h+='<div class="me-paar me-paar-vs" style="font-size:11px;color:#cfe0f0;margin-top:3px">Vorschlag: '+(x.v?'Verkauf <b>'+etfEsc(x.v)+'</b> + ':'Kein Verkauf + ')+'Kauf <b>'+etfEsc(x.k)+'</b> (Rang '+x.rang+')'+warnBdg(x.k)+' &mdash; '+mePp(x.mass)+' pp</div>'; }
+    h+='<div class="me-paar-satz" style="font-size:10px;color:#6b7a8a;margin-top:4px">Der Vorschlag in Schritt 5 ist der ranghoechste zugelassene Titel; die Paare zeigen, welche Verkauf-Kauf-Kombination das Soll am besten einhaelt. Beides ist Anzeige; die Wahl trifft der Anleger.</div>';
+  }
+  if(fehl) h+='<div class="me-champion" style="font-size:10px;color:#6b7a8a;margin-top:6px">Schatten Rang allein: '+etfEsc(c.champion.t)+' (Rang '+c.champion.r+').</div>';
+  return h+meWarnErl();
+}
+function meVal(id){ var el=document.getElementById(id); return el?el.value:''; }
+function meRenderForm(){
+  var el=document.getElementById('me-form-body'),c=ME_CALC,h='',i,x,v,kt,er,inp='background:#0a1628;border:1px solid #1a3050;color:#dce8f5;font-size:11px;border-radius:4px;padding:2px 4px;width:80px';
+  if(!el||!c) return;
+  kt=(ME_UI.kauf!==null)?ME_UI.kauf:(c.vs.v?c.vs.v.t:'');
+  h+='<div style="font-size:11px;color:#9fb0c0;margin-bottom:6px">Buchungsdatum <input type="date" id="me-datum" value="'+c.kd.datum+'" style="'+inp+';width:130px"></div>';
+  for(i=0;i<c.kandV.length;i++){
+    x=c.kandV[i];
+    if(!ME_UI.verkauf[x.t]) continue;
+    h+='<div class="me-vb" data-t="'+etfEsc(x.t)+'" style="font-size:11px;color:#cfe0f0;margin-bottom:4px">Verkauf <b>'+etfEsc(x.t)+'</b> Anzahl <input id="me-v-n-'+i+'" type="number" step="any" value="'+x.shares+'" style="'+inp+'"> Kurs EUR <input id="me-v-px-'+i+'" type="number" step="any" value="'+(x.cp===null?'':x.cp.toFixed(2))+'" style="'+inp+'"></div>';
+  }
+  h+='<div style="font-size:11px;color:#cfe0f0;margin:6px 0 4px">Kauf <select id="me-k-t" onchange="meKaufWahl(this.value)" style="'+inp+';width:150px"><option value="">kein Kauf</option>';
+  for(i=0;i<c.kand.length;i++){ v=c.kand[i]; h+='<option value="'+etfEsc(v.t)+'"'+(v.t===kt?' selected':'')+'>'+etfEsc(v.t)+' (Rang '+v.r+', '+v.zul.zone+')</option>'; }
+  h+='</select></div>';
+  if(kt){
+    er=erFuer(kt);
+    var mitE=!!(er&&er.verhaeltnis&&ME_UI.ersatz),cpK=dpCurrentPrice(kt),nVor=(cpK&&c.avg>0)?Math.floor(c.avg/cpK):'';
+    if(er) h+='<label style="font-size:10px;color:#9fb0c0;display:block;margin-bottom:4px"><input type="checkbox" id="me-k-ersatz" '+(ME_UI.ersatz?'checked ':'')+(er.verhaeltnis?'':'disabled ')+'onchange="meErsatzToggle(this)"> &uuml;ber Ersatzpapier '+etfEsc(er.name)+(er.verhaeltnis?'':' (Verh&auml;ltnis fehlt: keine Umrechnung)')+'</label>';
+    h+='<div style="font-size:11px;color:#cfe0f0;margin-bottom:4px">'+(mitE?'Anzahl Ersatzpapiere':'Anzahl')+' <input id="me-k-n" type="number" step="any" value="'+(mitE?'':nVor)+'" oninput="meErsatzVorschau()" style="'+inp+'"> '+(mitE?'Preis je Ersatzpapier EUR':'Kurs EUR')+' <input id="me-k-px" type="number" step="any" value="'+(mitE||!cpK?'':cpK.toFixed(2))+'" oninput="meErsatzVorschau()" style="'+inp+'"> <span id="me-ersatz-erg" style="color:#9fb0c0;font-size:10px"></span></div>';
+    h+=meErsatzInfo(kt);
+  }
+  if(c.kern.sym) h+='<div style="font-size:11px;color:#cfe0f0;margin:6px 0 4px">Kern-Zufluss '+etfEsc(c.kern.sym)+' Anzahl <input id="me-z-n" type="number" step="any" style="'+inp+'"> Kurs EUR <input id="me-z-px" type="number" step="any" style="'+inp+'"></div>';
+  var vt=c.vs.v?c.vs.v.t:'';
+  h+='<div style="font-size:11px;color:#cfe0f0;margin:6px 0 4px">Grund '+(kt!==vt?'<b style="color:#ffab00">(Pflicht: Abweichung vom Vorschlag)</b>':'(bei Verkaufswahl empfohlen)')+'<br><textarea id="me-grund" rows="2" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;color:#dce8f5;font-size:11px;border-radius:4px;padding:3px"></textarea></div>';
+  h+='<button type="button" id="me-buchen" onclick="meBuchen()" style="padding:6px 14px;background:#001a30;border:1px solid #00e57a;border-radius:5px;color:#00e57a;font-size:11px;cursor:pointer">Buchen und protokollieren</button> <span id="me-msg" style="font-size:11px;color:#ffab00"></span>';
+  el.innerHTML=h;
+  meErsatzVorschau();
+}
+function meErsatzVorschau(){
+  var el=document.getElementById('me-ersatz-erg'),kt=meVal('me-k-t'),er=kt?erFuer(kt):null,u;
+  if(!el) return;
+  if(!er||!ME_UI.ersatz||!er.verhaeltnis){ el.textContent=''; return; }
+  u=erUmrechnung(parseFloat(meVal('me-k-n')),parseFloat(meVal('me-k-px')),er.verhaeltnis);
+  el.innerHTML=u?'= '+u.n+' St&uuml;ck zu '+u.px.toFixed(2).replace('.',',')+' EUR':'';
+}
+function meMsg(t){ var m=document.getElementById('me-msg'); if(m) m.textContent=t; return false; }
+function meTxSig(t){
+  var s=null,i,sig='',lbl='';
+  for(i=0;i<STOCKS.length;i++) if(STOCKS[i].t===t){ s=STOCKS[i]; break; }
+  if(s&&_scoresIdx&&_scoresIdx[t]){ sig=mSig(s)||''; lbl=sigLogText(t,sig); }
+  return {sig:sig,lbl:lbl,name:s?(s.n||t):t};
+}
+/* Schritt 6: alles pruefen, dann schreiben (TX-Log, dann Protokoll), Quittung */
+function meBuchen(){
+  var c=ME_CALC,datum=meVal('me-datum'),dpL=dpTxLoad(),neuD=[],neuE=[],verk=[],i,x,n,px,typ,e;
+  if(!c) return false;
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(datum)) return meMsg('Datum fehlt.');
+  for(i=0;i<c.kandV.length;i++){
+    x=c.kandV[i];
+    if(!ME_UI.verkauf[x.t]) continue;
+    n=parseFloat(meVal('me-v-n-'+i)); px=parseFloat(meVal('me-v-px-'+i));
+    if(!(n>0)||!(px>0)) return meMsg('Verkauf '+x.t+': Anzahl oder Kurs ung\u00fcltig.');
+    typ=(Math.abs(n-x.shares)<=0.0001)?'SELL':'TRIM';
+    e=txMengenPruef(typ,x.t,n,mePos(x.t),'Depot');
+    if(e) return meMsg(e);
+    neuD.push({t:x.t,d:datum,typ:typ,n:n,px:px,name:x.name,cur:'EUR',sig:'',lbl:'',note:'Monatsentscheid'});
+    verk.push({t:x.t,n:n,px:px,typ:typ});
+  }
+  var kt=meVal('me-k-t'),gek=null,vt=c.vs.v?c.vs.v.t:null;
+  if(kt){
+    var er=erFuer(kt),mitE=!!(er&&er.verhaeltnis&&ME_UI.ersatz),note='Monatsentscheid',nK=parseFloat(meVal('me-k-n')),pK=parseFloat(meVal('me-k-px')),u,pos=mePos(kt),info;
+    if(!(nK>0)||!(pK>0)) return meMsg('Kauf '+kt+': Anzahl oder Kurs ung\u00fcltig.');
+    if(mitE){ u=erUmrechnung(nK,pK,er.verhaeltnis); nK=u.n; pK=u.px; note='\u00fcber Ersatzpapier '+er.wkn+', Verh\u00e4ltnis '+er.verhaeltnis; }
+    typ=pos?'ADD':'BUY';
+    e=txMengenPruef(typ,kt,nK,pos,'Depot');
+    if(e) return meMsg(e);
+    info=meTxSig(kt);
+    neuD.push({t:kt,d:datum,typ:typ,n:nK,px:pK,name:info.name,cur:'EUR',sig:info.sig,lbl:info.lbl,note:note});
+    gek={t:kt,n:nK,px:pK,ersatz:mitE?er.wkn:null};
+  }
+  var grund=String(meVal('me-grund')||'').trim(),abw=((gek?gek.t:null)!==vt);
+  if(abw&&!grund) return meMsg('Abweichung vom Vorschlag: Grund fehlt.');
+  var zN=meVal('me-z-n'),zP=meVal('me-z-px'),zufluss=null;
+  if(zN!==''||zP!==''){
+    n=parseFloat(zN); px=parseFloat(zP);
+    if(!(n>0)||!(px>0)) return meMsg('Kern-Zufluss: Anzahl oder Kurs ung\u00fcltig.');
+    var kp=null,kc=etfEintrag(c.kern.sym);
+    for(i=0;i<ETF_POSITIONS.length;i++) if(ETF_POSITIONS[i].t===c.kern.sym) kp=ETF_POSITIONS[i];
+    neuE.push({t:c.kern.sym,d:datum,typ:kp?'ADD':'BUY',n:n,px:px,name:kp?kp.name:(kc?kc.name:c.kern.sym),cur:'EUR',cls:kp?kp.cls:'E',isin:kp?kp.isin:(kc&&kc.isin?kc.isin:''),note:'Monatsentscheid'});
+    zufluss={t:c.kern.sym,n:n,px:px};
+  }
+  var fl=[],ub=[],sch=[];
+  for(i=0;i<c.faellig.length;i++){ fl.push({t:c.faellig[i].t,pruef:c.faellig[i].pruef,status:c.faellig[i].status}); if(!c.faellig[i].buy) sch.push(c.faellig[i].t); }
+
+  for(i=0;i<c.vs.ueb.length;i++) ub.push({ticker:c.vs.ueb[i].t,rang:c.vs.ueb[i].r,grund:warnPlain(meGrund(c.vs.ueb[i].zul))});
+  /* Schreiben: erst TX-Logs (mit Rueckleseprobe), dann Protokoll */
+  if(neuD.length){
+    for(i=0;i<neuD.length;i++) dpL.push(neuD[i]);
+    if(dpTxSave(dpL)===false) return meMsg('Depot-Log nicht geschrieben; nichts gebucht.');
+    DEPOT_POSITIONS=dpAggregate(dpL);
+    try{ depotSave(); }catch(e1){}
+  }
+  if(neuE.length){
+    var etL=etfTxLoad();
+    for(i=0;i<neuE.length;i++) etL.push(neuE[i]);
+    if(etfTxSave(etL)===false) return meMsg('ETF-Log nicht geschrieben; Depot-Buchungen stehen, bitte pr\u00fcfen.');
+    etfLoad();
+  }
+  var p=meLoad();
+  p.eintraege.push({datum:c.kd.datum,faellig:fl,verkauft:verk,platz:{ja:c.platz,q:c.LV.q,zone:c.pZone},vorschlag:c.vs.v?{t:c.vs.v.t,rang:c.vs.v.r}:null,uebersprungen:ub,champion_rang:c.champion?{t:c.champion.t,rang:c.champion.r}:null,schatten_sell_sofort:sch,gekauft:gek,abweichung_grund:grund||null,kern_zufluss:zufluss,stand:new Date().toISOString()});
+  var ok=meSave(p),nTx=neuD.length+neuE.length;
+  ME_UI.verkauf={}; ME_UI.kauf=null;
+  ME_UI.quittung=nTx+' Transaktion'+(nTx===1?'':'en')+' gebucht ('+verk.length+' Verkauf, '+(gek?1:0)+' Kauf, '+(zufluss?1:0)+' Kern-Zufluss). Protokoll Kauftag '+dpDatumTxt(c.kd.datum)+(ok?' gespeichert.':' NICHT gespeichert.');
+  meRender();
+  return true;
+}
+function meProtokollHtml(c){
+  var l=c.prot.eintraege,h='',i,x,m=Math.max(0,l.length-6);
+  if(!l.length) return '<div style="font-size:10px;color:#6b7a8a">Noch kein Eintrag.</div>';
+  for(i=l.length-1;i>=m;i--){
+    x=l[i];
+    h+='<div class="me-prot" style="font-size:10px;color:#9fb0c0;margin-bottom:3px">'+dpDatumTxt(x.datum)+': Kauf '+(x.gekauft?etfEsc(x.gekauft.t):'keiner')+', Verkauf '+(x.verkauft.length?x.verkauft.map(function(v){return etfEsc(v.t);}).join(', '):'keiner')+', Vorschlag '+(x.vorschlag?etfEsc(x.vorschlag.t):'keiner')+', Rang allein '+(x.champion_rang?etfEsc(x.champion_rang.t):'--')+(x.abweichung_grund?', Grund: '+etfEsc(x.abweichung_grund):'')+'</div>';
+  }
+  return h;
+}
+function meErsatzHtml(){
+  var l=erLoad(),h='',t,e,n=0,inp='background:#0a1628;border:1px solid #1a3050;color:#dce8f5;font-size:11px;border-radius:4px;padding:2px 4px;width:100px';
+  for(t in l){
+    if(!l.hasOwnProperty(t)) continue;
+    e=l[t]; n++;
+    h+='<div class="er-zeile" data-t="'+etfEsc(t)+'" style="font-size:10px;color:#cfe0f0;margin-bottom:3px"><b>'+etfEsc(t)+'</b>: '+etfEsc(e.name)+' (WKN '+etfEsc(e.wkn)+', ISIN '+etfEsc(e.isin)+'), '+(e.verhaeltnis?e.verhaeltnis+' je '+etfEsc(e.art):'Verh&auml;ltnis fehlt')+', Stand '+etfEsc(e.stand)+' <a href="#" onclick="erBearbeiten(\''+etfEsc(t)+'\');return false" style="color:#00c8f0">bearbeiten</a> <a href="#" onclick="erLoeschen(\''+etfEsc(t)+'\');return false" style="color:#ff8a80">l&ouml;schen</a></div>';
+  }
+  if(!n) h='<div style="font-size:10px;color:#6b7a8a;margin-bottom:3px">Keine Ersatzpapiere.</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px">';
+  var f=[['er-t','Ticker'],['er-name','Name'],['er-wkn','WKN'],['er-isin','ISIN'],['er-v','Verh\u00e4ltnis'],['er-art','Art'],['er-hinweis','Hinweis'],['er-stand','Stand JJJJ-MM-TT']],i;
+  for(i=0;i<f.length;i++) h+='<input id="'+f[i][0]+'" placeholder="'+f[i][1]+'" style="'+inp+'">';
+  h+='</div><div style="margin-top:6px"><button type="button" onclick="erSpeichern()" style="font-size:10px;padding:3px 10px;background:transparent;border:1px solid #00c8f0;color:#00c8f0;border-radius:4px;cursor:pointer">Speichern</button> <button type="button" onclick="erExport()" style="font-size:10px;padding:3px 10px;background:transparent;border:1px solid #00e57a;color:#00e57a;border-radius:4px;cursor:pointer">Export</button> <input type="file" id="er-import" accept=".json" style="display:none" onchange="erImport(this)"><label for="er-import" style="font-size:10px;padding:3px 10px;border:1px solid #00e57a;color:#00e57a;border-radius:4px;cursor:pointer">Import</label> <span id="er-msg" style="font-size:10px;color:#ffab00"></span></div>';
+  return h;
+}
+function meRender(){
+  var root=document.getElementById('me-root'),c,h='';
+  if(!root) return;
+  try{
+    c=meBerechne();
+    h+='<div id="me-kopf" style="font-family:monospace;font-size:11px;color:#dce8f5;background:#0a1628;border:1px solid #1a3050;border-radius:8px;padding:7px 10px;margin-bottom:8px">'+meKopfTxt(c)+'</div>';
+    if(ME_UI.quittung) h+='<div id="me-quittung" style="font-size:11px;color:#00e57a;margin-bottom:8px">'+ME_UI.quittung+'</div>';
+    h+=meKarte(1,'F&auml;llig und Verkauf',meSchritt1(c),'me-s1');
+    h+=meKarte(2,'Platz',meSchritt2(c),'me-s2');
+    h+=meKarte(3,'Zufluss Kern',meSchritt3(c),'me-s3');
+    h+=meKarte(4,'Zulassung',meSchritt4(c),'me-s4');
+    h+=meKarte(5,'Vorschlag',meSchritt5(c),'me-s5');
+    h+=meKarte(6,'Buchung','<div id="me-form-body"></div>','me-form');
+    h+='<details id="me-protokoll" style="margin-bottom:8px;font-size:11px;color:#9fb0c0"><summary style="cursor:pointer">Protokoll Monatsentscheid</summary><div style="margin-top:5px">'+meProtokollHtml(c)+'</div></details>';
+    h+='<details id="me-ersatz-liste" style="margin-bottom:8px;font-size:11px;color:#9fb0c0"><summary style="cursor:pointer">Ersatzpapiere</summary><div style="margin-top:5px">'+meErsatzHtml()+'</div></details>';
+    h+='<details id="me-klassen-box" style="margin-bottom:8px;font-size:11px;color:#9fb0c0" open><summary style="cursor:pointer">Anteile je Anlageklasse</summary><div id="me-klassen" style="margin-top:5px"></div></details>';
+    root.innerHTML=h;
+    meRenderForm();
+    meKlassenRender();
+  }catch(ex){
+    root.innerHTML='<div style="font-size:11px;color:#ff8a80">Monatsentscheid konnte nicht gerechnet werden: '+etfEsc(ex&&ex.message)+'</div>';
+  }
+}
+/* S537 Matrix Profil x Phase: Kontext, keine Anweisung */
+function meMatrixRender(){
+  var el=document.getElementById('me-matrix'),h='',pr=[['kapital','Kapitalerhalt'],['ausgewogen','Ausgewogen'],['rendite','Rendite-Max']],ph=[['early','Early'],['mid','Mid'],['late','Late'],['recession','Rezession']],sp=['stocks','etfs','bonds','gold','commod','cash'],i,j,k,c;
+  if(!el) return;
+  h='<div class="dp-scroll"><table style="border-collapse:collapse;font-size:10px;color:#cfe0f0"><tr><th style="text-align:left;padding:2px 5px">Profil / Phase</th><th style="padding:2px 5px">Eins.</th><th style="padding:2px 5px">ETF</th><th style="padding:2px 5px">Anl.</th><th style="padding:2px 5px">Gold</th><th style="padding:2px 5px">Rohst.</th><th style="padding:2px 5px">Cash</th></tr>';
+  for(i=0;i<pr.length;i++) for(j=0;j<ph.length;j++){
+    c=ALLOC_MATRIX[pr[i][0]][ph[j][0]];
+    h+='<tr><td style="padding:2px 5px;white-space:nowrap">'+pr[i][1]+' / '+ph[j][1]+'</td>';
+    for(k=0;k<sp.length;k++) h+='<td style="text-align:right;padding:2px 5px">'+c[sp[k]]+'</td>';
+    h+='</tr>';
+  }
+  el.innerHTML=h+'</table></div>';
+}
+
 function initAlloc(){
   /* S491 C-1 (Konzept Depot-Soll v1.1 Abschn. 3.4): Kopfzeile traegt das Etikett K55 aus KZ_ROLLE */
   var _k55=document.getElementById('alloc-kz55'); if(_k55){ _k55.innerHTML=kzRolle('K55'); _k55.title='Allokation: '+KZ_ROLLE.K55; }
@@ -7388,14 +7978,14 @@ function initAlloc(){
   renderCyclePhaseBadge();
   ALLOC_TARGETS = buildAllocTargets(CURRENT_CYCLE);
   renderCycleTargets(CURRENT_CYCLE);
-  renderZielKacheln(CURRENT_CYCLE);
   highlightCycleBtn(CURRENT_CYCLE);
   allocPrefillFromDepot();  /* v5.9.69: Aktienwert aus Depot */
   allocPrefillFromEtf();    /* S121 E5: ETF cls-verteilt */
   rAlloc();
   rGSR();
   rBondETF();
-  rBeckRegime();            /* v5.9.69: Beck-Krisen-Regime */
+  meMatrixRender();
+  meRender();
 }
 
 /* Aktienwert aus Depot-Tab vorbelegen (v5.9.69) */
@@ -7443,10 +8033,13 @@ function allocPrefillFromEtf(){
     etfLoad();
     var acc = allocEtfKlassen();
     var map = {E:'ai-etfs', A:'ai-bonds', G:'ai-gold', R:'ai-commod'};
-    var k, el;
+    var k, el, au, hand = {A:'bonds', G:'gold', R:'commod'}, st = allocGespeichert();  /* S537n E-3: gespeicherter Handwert bleibt, Auto-Wert als Hinweis */
     for(k in map){
       if(!map.hasOwnProperty(k)) continue;
+      au = hand[k] ? document.getElementById('ai-auto-' + hand[k]) : null;
+      if(au) au.textContent = '';
       if(acc[k] > 0){
+        if(hand[k] && typeof st[hand[k]] === 'number' && st[hand[k]] > 0){ if(au) au.textContent = 'auto: ' + bestEur(acc[k]); continue; }
         el = document.getElementById(map[k]);
         if(el){ el.value = Math.round(acc[k]); }  /* dieselbe Rundung wie allocEtfTeilGesamt */
       }
@@ -7542,47 +8135,6 @@ function getSektorBadge(ticker){
   } catch(e){return '';}
 }
 
-/* Beck-Krisen-Regime (v5.9.69, Andreas Beck / GPO) */
-function rBeckRegime(){
-  var el = document.getElementById('beck-regime');
-  if(!el) return;
-  var vix = null;
-  try{
-    var fdm = FD['__macro__'];
-    if(fdm && fdm.vix) vix = fdm.vix;
-  } catch(e){}
-  if(vix === null){ el.style.display='none'; return; }
-  el.style.display = 'block';
-
-  var regime, col, note, action;
-  if(vix > 40){
-    regime = 'CRASH  VIX ' + vix.toFixed(1);
-    col = '#ff5252';
-    note = 'Maximale antizyklische Opportunity nach Beck/GPO-Prinzip.';
-    action = 'Investitionsreserve vollst\u00e4ndig einsetzen \u2014 Aktienquote auf 100%.';
-  } else if(vix > 30){
-    regime = 'KRISE  VIX ' + vix.toFixed(1);
-    col = '#ff7043';
-    note = 'Antizyklisch aufstocken \u2014 Krisen als Renditeturbo (Beck/GPO).';
-    action = 'Aktienquote +10pp aus Reserve. Qualit\u00e4tstitel gezielt nachkaufen.';
-  } else if(vix > 20){
-    regime = 'ERHOHT  VIX ' + vix.toFixed(1);
-    col = '#ffab00';
-    note = 'Erh\u00f6hte Marktspannung \u2014 Vorsicht bei neuen Positionen.';
-    action = 'Aktienquote -5pp, Cash-Reserve +5pp. Bestehende Positionen halten.';
-  } else {
-    regime = 'NORMAL  VIX ' + vix.toFixed(1);
-    col = '#00e57a';
-    note = 'Normale Marktphase \u2014 Zyklus-Overlay bestimmt Allokation.';
-    action = 'Fidelity-Zielwerte gelten. Keine VIX-Anpassung n\u00f6tig.';
-  }
-  el.innerHTML =
-    '<div style="font-size:11px;font-weight:700;color:' + col + ';margin-bottom:5px">' +
-    '&#128201; Beck/GPO Markt-Regime: ' + regime + '</div>' +
-    '<div style="font-family:monospace;font-size:10px;color:#dce8f5;margin-bottom:4px">' + note + '</div>' +
-    '<div style="font-family:monospace;font-size:10px;color:#7a9bb5">&#9654; ' + action + '</div>';
-}
-
 /* Button-Highlighting fuer Zyklus-Buttons */
 function highlightCycleBtn(c){
   var cycles = ['early','mid','late','recession'];
@@ -7611,7 +8163,6 @@ function setCycle(c){
   highlightCycleBtn(c);
   renderCyclePhaseBadge();
   renderCycleTargets(c);
-  renderZielKacheln(c);
   rAlloc();
 }
 
@@ -7625,21 +8176,6 @@ function renderCycleTargets(c){
     out += '<div style="text-align:center;padding:6px 2px;background:#0a1628;border:1px solid #1a3050;border-radius:6px">';
     out += '<div style="font-size:15px;font-weight:800;color:' + items[i].col + '">' + items[i].soll + '%</div>';
     out += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">' + items[i].label + '</div>';
-    out += '</div>';
-  }
-  el.innerHTML = out;
-}
-
-/* Ziel-Kacheln unten */
-function renderZielKacheln(c){
-  var el = document.getElementById('ziel-kacheln');
-  if(!el) return;
-  var items = buildAllocTargets(c);
-  var out = '';
-  for(var i=0;i<items.length;i++){
-    out += '<div style="text-align:center;padding:8px 4px;background:#0a1628;border:1px solid #1a3050;border-radius:8px">';
-    out += '<div style="font-size:17px;font-weight:700;color:' + items[i].col + '">' + items[i].soll + '%</div>';
-    out += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:2px">' + items[i].label.toUpperCase() + '</div>';
     out += '</div>';
   }
   el.innerHTML = out;
@@ -7659,56 +8195,12 @@ function rGSR(){
   var sSpread = parseFloat(document.getElementById('gsr-sspread').value) || 8;
 
   if(!gPrice || !sPrice || sPrice <= 0){
-    el.innerHTML = '<span style="color:var(--mut)">Preise eingeben zur Signalberechnung.</span>';
+    el.innerHTML = '<span style="color:var(--mut)">Preise eingeben.</span>';
     return;
   }
 
   var gsr = gPrice / sPrice;
   var combinedSpread = gSpread + sSpread; /* Kosten: Verkauf + Kauf */
-
-  /* Signal-Logik */
-  var signal = 'NEUTRAL';
-  var sigCol  = '#7a9bb5';
-  var sigText = '';
-  var sigIcon = '';
-
-  if(gsr > 100 && combinedSpread < 30){
-    signal = 'SWITCH zu SILBER';
-    sigCol  = '#00e57a';
-    sigText = 'GSR extrem. 19%-MwSt-Hurdle ueberwunden. Switch langfristig vorteilhaft.';
-    sigIcon = '&#8593;';
-  } else if(gsr > 90 && combinedSpread < 32){
-    signal = 'SILBER stark ueberwichten';
-    sigCol  = '#a5d6a7';
-    sigText = 'GSR sehr hoch. MwSt-Hurdle fast ueberwunden. Schrittweise Umschichtung pruefen.';
-    sigIcon = '&#8599;';
-  } else if(gsr > 80){
-    signal = 'BEOBACHTEN - MwSt-Hurdle zu hoch';
-    sigCol  = '#ffab00';
-    sigText = 'GSR erhoht, aber 19% MwSt auf Silber (' + combinedSpread.toFixed(1) + '% Spread) macht Switch unwirtschaftlich.';
-    sigIcon = '&#8594;';
-    sigIcon = '&#8594;';
-  } else if(gsr < 45 && combinedSpread < 25){
-    signal = 'SWITCH zu GOLD';
-    sigCol  = '#ffab00';
-    sigText = 'GSR sehr niedrig. Gold historisch guenstig. Silber verkaufen + Gold kaufen.';
-    sigIcon = '&#8595;';
-  } else if(gsr < 55 && combinedSpread < 30){
-    signal = 'GOLD ueberwichten';
-    sigCol  = '#ffe082';
-    sigText = 'GSR niedrig. Gold relativ attraktiv vs. Silber (MwSt-Vorteil).';
-    sigIcon = '&#8600;';
-  } else if(gsr >= 55 && gsr <= 80){
-    signal = 'NEUTRAL â€” im historischen Bereich';
-    sigCol  = '#7a9bb5';
-    sigText = 'GSR im normalen Bereich (55-80). Kein Switch wirtschaftlich sinnvoll. Historisch ~65.';
-    sigIcon = '&#8594;';
-  } else {
-    signal = 'BEOBACHTEN';
-    sigCol  = '#7a9bb5';
-    sigText = 'GSR ausserhalb Neutralzone, aber 19% MwSt-Hurdle (' + combinedSpread.toFixed(1) + '%) nicht ueberwunden.';
-    sigIcon = '&#9888;';
-  }
 
   /* Breakeven-GSR: ab wann lohnt Switch bei aktuellem Spread */
   var beGSR = (65 + combinedSpread * 0.7).toFixed(1);  /* 19% MwSt Basis */
@@ -7727,10 +8219,6 @@ function rGSR(){
   out += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">BE-GSR f. Switch</div>';
   out += '<div style="font-size:20px;font-weight:800;color:#7a9bb5">' + beGSR + '</div>';
   out += '<div style="font-family:monospace;font-size:10px;color:var(--mut)">bei akt. Spread</div></div>';
-  out += '</div>';
-  out += '<div style="padding:10px 12px;border-left:3px solid ' + sigCol + ';background:rgba(0,0,0,.2);border-radius:4px">';
-  out += '<div style="font-size:13px;font-weight:700;color:' + sigCol + '">' + sigIcon + ' ' + signal + '</div>';
-  out += '<div style="font-family:monospace;font-size:10px;color:var(--mut);margin-top:3px">' + sigText + '</div>';
   out += '</div>';
   el.innerHTML = out;
 }
@@ -7856,7 +8344,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.48 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.49 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
