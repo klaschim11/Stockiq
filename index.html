@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:,">
-<meta name="version" content="6.6.41">
+<meta name="version" content="6.6.55">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.54</title>
+<title>StockIQ v6.6.55</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -137,7 +137,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.54 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.55 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
       <div id="hdr-rangbasis" style="font-family:monospace;font-size:10px;color:var(--mut)">Rangbasis D1-IND seit 03.11.2026; D1 als Schatten</div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
@@ -212,7 +212,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:3px">1. Am Monatsende den rangh&ouml;chsten BUY-Titel kaufen, der nicht im Depot liegt.</div>
     <div style="margin-bottom:3px">2. Vorher im Depot pr&uuml;fen, ob der Kauf eine Grenze des Depot-Solls (Region, Sektor, Deckel Einzeltitel) &uuml;berschreitet. Gesperrt hei&szlig;t: der Vorschlag &uuml;berspringt den Titel; die Entscheidung bleibt beim Anleger. Q und KGV sind Information, keine Auswahlregel.</div>
     <div style="margin-bottom:3px">3. Zw&ouml;lf Monate halten &ndash; auch bei R&uuml;ckschl&auml;gen und auch, wenn der Titel zwischendurch aus BUY f&auml;llt.</div>
-    <div style="margin-bottom:3px">4. Am Pr&uuml;fdatum: noch BUY und zul&auml;ssig &rarr; weiter halten; sonst SELL Abstieg &rarr; Verkaufskandidat. Verkauf St&uuml;ck f&uuml;r St&uuml;ck, Auswahl beim Anleger.</div>
+    <div style="margin-bottom:3px">4. Am Kauftag des Monats, in dem das Pr&uuml;fdatum liegt: noch BUY und zul&auml;ssig &rarr; weitere zw&ouml;lf Monate halten; sonst Verkaufskandidat im Tab Monat. Verkauf St&uuml;ck f&uuml;r St&uuml;ck, Auswahl beim Anleger.</div>
     <div style="margin-bottom:3px">5. Marktphase ROT betrifft die Aktienquote, nicht die Titelwahl.</div>
     <div>Getestet ist der Korb &uuml;ber viele K&auml;ufe, nicht der einzelne Titel. Die Verkaufsentscheidung bleibt beim Anleger. Mehr: Anwenderleitfaden, Kapitel 4.</div>
   </div>
@@ -229,7 +229,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div id="wl-etik-erl" class="wl-erl-blk">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">HIST</strong>: das fr&uuml;here Verkaufssignal aus dem MACD-Histogramm. Es hat im Test keine Vorhersagekraft gezeigt und dient nur der Information.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Bleibt BUY</strong>: heute BUY und schon vor zw&ouml;lf Monaten BUY (wie im Bericht Rotation).</div>
-    <div style="margin-bottom:3px"><strong style="color:#ff6666">SELL Abstieg</strong>: Diese Titel standen vor zw&ouml;lf Monaten auf BUY und stehen heute nicht mehr dort. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger. Im Depot entscheidet das Pr&uuml;fdatum der Position.</div>
+    <div style="margin-bottom:3px"><strong style="color:#ff6666">SELL Abstieg</strong>: Diese Titel standen vor zw&ouml;lf Monaten auf BUY und stehen heute nicht mehr dort. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger. Im Bestand entscheidet der Kauftag im Monat des Pr&uuml;fdatums.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">WATCH</strong>: Beobachten. Kein Kauf- und kein Verkaufshinweis.</div>
     <div><strong style="color:#7a9bb5">Marktphase</strong> (Zeile unter den Tabs): Lage des Gesamtmarkts zu seiner 200-Tage-Linie. GR&Uuml;N und ROT sind &uuml;ber zehn Handelstage best&auml;tigt. GELB ist der &Uuml;bergang: der Pfeil zeigt die Richtung, bis zum zehnten Tag gilt der bisherige Zustand.</div>
   </div>
@@ -499,7 +499,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.54 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.55 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -517,10 +517,9 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#9889; Schnellstart</div>
     <div style="font-size:13px;color:var(--mut);line-height:1.8">
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">1. &#128202; WL</strong> &mdash; Alle bewerteten Titel in drei Gruppen (BUY, SELL Abstieg, WATCH). Filter in zwei Zeilen, Erkl&auml;rungen &uuml;ber den i-Punkt. Antippen = Detail.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">2. &#128188; ETF</strong> &mdash; ETF-Bestand buchen, mit Tageskurs bewerten; Liste, 12M und Rang (von m) aus den Tagesdaten (nur Anzeige).</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. &#128200; Depot</strong> &mdash; Portfolio-Tracking. Positionen hinzufuegen, Wertentwicklung und Zeitreihe aus Snapshots. Pr&uuml;fung: Jede Position wird zw&ouml;lf Monate ab Erstkauf gehalten. Am Pr&uuml;fdatum gilt: steht der Titel dann auf BUY, verl&auml;ngert sich die Haltezeit um ein Jahr; sonst zeigt die Zeile SELL Abstieg. Nachkauf und Teilverkauf verschieben das Pr&uuml;fdatum nicht. Bestand vom Jahresanfang 2026 wird gemeinsam am 31.10.2026 gepr&uuml;ft. HOLD bei einer gehaltenen Position heisst: innerhalb der Haltezeit, kein Verkaufshinweis. SELL Abstieg erscheint erst am Pr&uuml;fdatum.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. &#9878; Monat</strong> &mdash; Monatsentscheid in sechs Schritten: f&auml;llige Positionen, Platz, Kern, Zulassung nach Soll, Vorschlag, Buchung mit Protokoll. Das Dreieck an einem BUY-Titel warnt vor steilem Anstieg, es sperrt nichts.</div>
-      <div style="margin-bottom:6px"><strong style="color:#dce8f5">5. &#127759; Sektor</strong> &mdash; RSS-Signale + Momentum 3 Monate ohne letzten Monat, 11 SPDR-ETFs. Dispersion-Signal.</div>
+      <div id="hilfe-ss-bestand" style="margin-bottom:6px"><strong style="color:#dce8f5">2. &#128200; Bestand</strong> &mdash; Im Tab Bestand stehen Einzeltitel und ETF mit Wert, Gewinn und Pr&uuml;fdatum. Jede Aktie hat 12 Monate nach dem Erstkauf ihr Pr&uuml;fdatum; f&auml;llig wird sie am Kauftag dieses Monats. Was dann geschieht, entscheidest du im Tab Monat. ETF haben keine Frist.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">3. &#9878; Monat</strong> &mdash; Monatsentscheid in sechs Schritten: f&auml;llige Positionen, Platz, Kern, Zulassung nach Soll, Vorschlag, Buchung mit Protokoll. Das Dreieck an einem BUY-Titel warnt vor steilem Anstieg, es sperrt nichts.</div>
+      <div style="margin-bottom:6px"><strong style="color:#dce8f5">4. &#127759; Sektor</strong> &mdash; RSS-Signale + Momentum 3 Monate ohne letzten Monat, 11 SPDR-ETFs. Dispersion-Signal.</div>
       <div style="margin-bottom:6px"><strong style="color:#dce8f5">? Hilfe</strong> &mdash; Diese Seite, &uuml;ber das Fragezeichen oben rechts; am Ende die Versionen.</div>
       <div><strong style="color:#dce8f5">Marktphase</strong> &mdash; Zeile unter den Tabs, auf jeder Seite: Lage des Gesamtmarkts zu seiner 200-Tage-Linie (GR&Uuml;N, GELB als &Uuml;bergang, ROT). Antippen = Erkl&auml;rung.</div>
     </div>
@@ -558,8 +557,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
     <div style="padding:10px 12px;background:rgba(255,63,63,.06);border-left:3px solid #ff3f3f;border-radius:6px;margin-bottom:10px;font-family:monospace;font-size:11px">
       <div style="color:#ff6666;font-weight:700;margin-bottom:4px">SELL Abstieg</div>
-      <div style="color:#ff6666;margin-bottom:4px">Diese Titel standen vor zw&ouml;lf Monaten auf BUY und stehen heute nicht mehr dort. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger. Im Depot entscheidet das Pr&uuml;fdatum der Position.</div>
-      <div style="color:var(--mut);margin-bottom:4px">HOLD bei einer gehaltenen Position heisst: innerhalb der Haltezeit, kein Verkaufshinweis. SELL Abstieg erscheint erst am Pr&uuml;fdatum.</div>
+      <div style="color:#ff6666;margin-bottom:4px">Diese Titel standen vor zw&ouml;lf Monaten auf BUY und stehen heute nicht mehr dort. Vorzeichen richtig, nicht gesichert. Getestet 12.10.2026: Ersetzen war im Mittel besser als Halten, aber nicht statistisch gesichert; der Rang hilft nicht bei der Wahl, welcher Titel bleibt. Die Verkaufsentscheidung bleibt beim Anleger.</div>
+      <div id="hilfe-sell-depot" style="color:var(--mut);margin-bottom:4px">HOLD bei einer gehaltenen Position heisst: innerhalb der Haltezeit, kein Verkaufshinweis. Im Depot z&auml;hlt nicht der Tag, sondern der Kauftag: f&auml;llige Positionen pr&uuml;ft der Tab Monat einmal im Monat.</div>
       <div style="color:var(--mut)">Der fr&uuml;here Verkaufshinweis an der 200-Tage-Linie und die fr&uuml;here Verkaufssperre nach Fundamentalwert sind entfallen: beide haben in der R&uuml;ckrechnung keinen Vorteil gezeigt.</div>
     </div>
     <div style="font-size:12px;color:var(--mut);line-height:1.7">
@@ -770,6 +769,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.55</td><td style="padding:5px 8px;color:var(--mut)">F&auml;lligkeit in Bestand und Monat aus einer Rechnung; Kachel F&auml;llig am Kauftag; Spalte Rang bei den Einzeltiteln.</td><td style="padding:5px 8px;color:var(--mut)">18.11.2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.54</td><td style="padding:5px 8px;color:var(--mut)">Ticker im Tab Monat &ouml;ffnen die Watchlist; neuer Filter Monat.</td><td style="padding:5px 8px;color:var(--mut)">18.11.2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.53</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Die Anlageorientierung wirkt -- Kapitalerhalt kauft keinen Titel mit Warnstufe hoch, Ausgewogen h&ouml;chstens eine solche Position im ganzen Depot, Rendite-max zeigt das Risikosignal; Zeilen Profil und Riskanter Teil; Hype-Anteil im Tab Bestand.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.52</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Kaufbremse bei Warnstufe hoch -- ein Titel mit Warnstufe hoch wird nicht vorgeschlagen, wenn im Bestand schon so viele Positionen desselben Sektors mit Warnstufe hoch liegen, wie im Soll erlaubt (Start: eine); Soll-Feld im Tab Bestand.</td></tr>
@@ -859,7 +859,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Bestand</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.54
+    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.55
   </div>
   <div id="dp-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:14px"></div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
@@ -1045,7 +1045,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </details>
 </div><!-- Ende p8 Bestand -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.54 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.55 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2756,7 +2756,7 @@ function meAnlToggle(){
   if(auf) b.innerHTML=meAnleitungHtml();
   if(k){ k.style.borderColor=auf?'#7a9bb5':'#1a2a3a'; k.style.color=auf?'#7a9bb5':'var(--mut)'; }
 }
-var KZ_ZEILE_DP=[['K53','Akt. / Wert / +/-%'],['K11','Pr&uuml;fung'],['K27','KGV'],['K87','Soll']];  /* S441 C.4: Score nicht mehr in der Zeile */
+var KZ_ZEILE_DP=[['K53','Akt. / Wert / +/-%'],['K11','Pr&uuml;fung'],['K02','Rang'],['K27','KGV'],['K87','Soll']];  /* S599 Nr. 8: Spalte Rang */  /* S441 C.4: Score nicht mehr in der Zeile */
 /* S441 C.3 (Kla 14.10.2026), S459: Detail Block 2 traegt den Zusatz EINMAL, als erste Zeile des Aufklappers. Welche
    Kennzahlen dort stehen, folgt aus KZ_ZUSATZ und den data-kz-Marken, die der Block wirklich
    zeigt (kzRolle, Score-Kopf) -- keine Hand-Liste. KZ_KURZ liefert nur den Anzeigenamen. */
@@ -3725,7 +3725,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.54';
+      var PAGE_VERSION = 'v6.6.55';
       window.SIQ_PAGE_VERSION = PAGE_VERSION;  /* S572 A-4: meta.page_version im Exportpaket */
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
@@ -5667,93 +5667,107 @@ function dpBuyAm(rec, mac, D, heute, heuteBuy){
   return drin(rec.buy_hist_ind);
 }
 
-/* R-6: Status einer offenen Position. code: etf | ohne | haelt | verl |
-   sell | nb; dazu letzt, naechst, rest (Tage bis naechst), wieder. */
-function dpPruefStatus(start, heute, rec, mac, heuteBuy, istEtf){
-  if(istEtf) return {code:'etf'};
-  var anker = dpAnker(start);
+/* S599 B-1: juengstes Pruefdatum vor dem Pruefdatum p (oder null). Rein. */
+function dpPruefVor(anker, p){
+  var v = null, d = anker, k = 0;
+  while(d < p && k < 200){ v = d; k++; d = dpJahrePlus(anker, k); }
+  return v;
+}
+
+/* S599 B-1 (Konzept Depot-Soll 3.6.2 N5): Zustand einer offenen Position im Tab Bestand. Ob sie faellig ist,
+   entscheidet allein meFaelligStatus in der gemeinsamen Pruefrechnung (mePruefKern; Stichtag Kauftag des laufenden
+   Monats); f ist deren Ergebnis fuer die Position (null = nicht faellig). Hier stehen nur Datum und Code fuer die
+   Anzeige. code: etf | ohne | haelt | verl | faellig (Pruefdatum im Monat des Kauftags) | wartet (frueheres
+   Pruefdatum, nicht gehalten); naechst = naechstes Pruefdatum (bei faellig/wartet das offene), letzt = das davor. Rein. */
+function dpPruefZustand(start, kauftag, f, istEtf){
+  if(istEtf && !f) return {code:'etf'};
+  var anker = dpAnker(start), pd;
   if(!anker) return {code:'ohne'};
-  var pd = dpPruefDaten(anker, heute);
-  var r = {code:'', letzt:pd.letzt, naechst:pd.naechst,
-           rest:dpTageBis(heute, pd.naechst), wieder:false};
-  if(!pd.letzt){ r.code = 'haelt'; return r; }
-  var b = dpBuyAm(rec, mac, pd.letzt, heute, heuteBuy);
-  if(b === true) r.code = 'verl';
-  else if(b === false){ r.code = 'sell'; r.wieder = (heuteBuy === true); }
-  else {
-    r.code = 'nb';
-    /* S478b Null-Regel: Referenz D1-IND noch nicht geliefert (AP-3, kein false) */
-    if(mac && mac.sell_proj_status === 'ok' && !mac.buy_hist_ind_ab) r.refAb = true;
-  }
-  return r;
+  if(f) return {code:(f.quelle === 'kauftag' ? 'faellig' : 'wartet'), quelle:f.quelle, kauftag:kauftag,
+                naechst:f.pruef, letzt:dpPruefVor(anker, f.pruef), buy:f.buy};
+  pd = dpPruefDaten(anker, meMonatsende(kauftag));
+  return {code:(pd.letzt ? 'verl' : 'haelt'), letzt:pd.letzt, naechst:pd.naechst};
 }
 
-/* R-8: Kachel ZU PRUEFEN -- SELL Abstieg plus laufende Fristen mit
-   hoechstens 30 Resttagen; dazu das naechste Pruefdatum im Depot. */
-function dpPruefZaehlung(liste){
-  var n = 0, naechst = '', i, s;
-  for(i = 0; i < liste.length; i++){
-    s = liste[i];
-    if(!s || s.code === 'etf' || s.code === 'ohne') continue;
-    if(s.code === 'sell' || ((s.code === 'haelt' || s.code === 'verl') && s.rest <= 30)) n++;
-    if(s.naechst && (!naechst || s.naechst < naechst)) naechst = s.naechst;
-  }
-  return {n:n, naechst:naechst};
-}
-
-/* Status aller offenen Positionen {ticker: status}. Einzige nicht reine
-   Stelle: liest DEPOT_POSITIONS, _scoresIdx, __macro__, buyIsD1 und die
-   ETF-Liste (etf_rang + ETF-Log -> keine Frist; S490 statt der festen Liste). */
-function dpPruefMap(txList, heute){
-  var starts = dpZyklusStarts(txList);
-  var mac = (window.FD && FD['__macro__']) ? FD['__macro__'] : null;
-  var etf = {}, res = {}, i, et, p, st, rec, el = etfListe();
+/* S599 B-1/B-2 (Konzept Depot-Soll 3.6.2 N5): Zustand aller offenen Positionen und Zahlen der Kachel aus der
+   gemeinsamen Pruefrechnung. Einzige nicht reine Stelle: liest mePruefKern (dieselbe Liste wie Kopfzeile und
+   Schritt 1 des Tabs Monat), DEPOT_POSITIONS, das Protokoll stockiq_monat_v1 (nur lesend, meEntschieden), buyPctFor
+   und die ETF-Liste (etf_rang + ETF-Log -> keine Frist; S490). Rueckgabe {pos:{ticker:zustand}, n, m, kauftag}:
+   n = Zahl Faellig der Kopfzeile des Tabs Monat, m = Positionen mit Pruefdatum im Monat nach dem Kauftag; ohne
+   Rechnung null (AP-3, nie 0). Vorschau je faelliger Position aus BUY und Zulassung des Lauftags (dieselben Werte
+   wie Schritt 1); ohne Rangwert oder bei unvollstaendigem Soll-Vergleich entfaellt die Angabe. */
+function dpPruefMap(){
+  var res = {}, etf = {}, fm = {}, ent = {}, k = null, i, p, st, s, x, starts, el = etfListe(), et = etfTxLoad(), ymN = '', m = 0, kj, km;
   for(i = 0; i < el.length; i++){ if(el[i] && el[i].symbol) etf[el[i].symbol] = true; }
-  et = etfTxLoad();
   for(i = 0; i < et.length; i++){ if(et[i] && et[i].t) etf[et[i].t] = true; }
+  try{ k = mePruefKern(); }catch(e){ k = null; }
+  if(k){
+    for(i = 0; i < k.faellig.length; i++) fm[k.faellig[i].t] = k.faellig[i];
+    ent = meEntschieden(k.prot);
+    kj = parseInt(k.kd.datum.substring(0, 4), 10); km = parseInt(k.kd.datum.substring(5, 7), 10) + 1;
+    if(km > 12){ km = 1; kj++; }
+    ymN = kj + '-' + (km < 10 ? '0' : '') + km;
+  }
+  starts = dpZyklusStarts(dpTxLoad());
   for(i = 0; i < DEPOT_POSITIONS.length; i++){
     p = DEPOT_POSITIONS[i];
+    if(!k){ res[p.t] = {code:(etf[p.t] === true ? 'etf' : 'unbek')}; continue; }
     st = starts.hasOwnProperty(p.t) ? starts[p.t] : (p.buyDate || '');
-    rec = (buyPctFor(p.t) === null) ? null : _scoresIdx[p.t];
-    res[p.t] = dpPruefStatus(st, heute, rec, mac, buyIsD1(p.t), etf[p.t] === true);
+    x = fm.hasOwnProperty(p.t) ? fm[p.t] : null;
+    s = dpPruefZustand(st, k.kd.datum, x, etf[p.t] === true);
+    if(x){ s.bewertet = (buyPctFor(p.t) !== null); s.zul = k.unv ? null : x.zulOk; }
+    if(s.code === 'verl' && ent[p.t] && ent[p.t][s.letzt]) s.entschieden = true;
+    if((s.code === 'haelt' || s.code === 'verl') && s.naechst.substring(0, 7) === ymN){ s.naechsterMonat = true; m++; }
+    res[p.t] = s;
   }
-  return res;
+  return {pos:res, n:(k ? k.faellig.length : null), m:(k ? m : null), kauftag:(k ? k.kd.datum : null)};
+}
+/* S392 R-9: Pruefdatum fuer den Nachkauf-Hinweis (naechstes Pruefdatum nach heute; '' ohne Kaufdatum). Rein. */
+function dpPruefNaechst(start, heute){
+  var a = dpAnker(start);
+  return a ? dpPruefDaten(a, heute).naechst : '';
 }
 
-/* Zelle Pruefung (R-6/R-7). maTxt: Satz zu den Tagen unter der
+/* S599 B-3 (Konzept Depot-Soll 3.6.2 N5): Vorschau "(heute ...)" einer faelligen Position aus BUY und Zulassung
+   des Lauftags (Werte der gemeinsamen Pruefrechnung, dieselben wie Schritt 1 des Tabs Monat). Fehlt eine Angabe:
+   '' (AP-3, nie geraten). Rein. */
+function dpPruefVorschau(s){
+  if(!s || s.bewertet !== true) return '';
+  if(s.buy !== true) return '(heute nicht BUY)';
+  if(s.zul === true) return '(heute BUY und zul&auml;ssig)';
+  if(s.zul === false) return '(heute BUY, nicht zul&auml;ssig)';
+  return '';
+}
+/* S599 B-3: Zelle Pruefung mit genau einem Zustand (W-1): haelt bis | faellig am <Kauftag> (Vorschau) |
+   faellig, wartet | verlaengert bis. SELL Abstieg steht nur in der Watchlist. maTxt: Satz zu den Tagen unter der
    200-Tage-Linie (frueher eigene Spalte MA-Tg) oder ''. */
 function dpPruefZelle(s, maTxt){
-  var txt, col, ttl;
+  var txt, col, ttl, vs = dpPruefVorschau(s);
   if(!s || s.code === 'etf'){ txt = '&mdash;'; col = '#456278'; ttl = 'ETF: keine Frist.'; }
   else if(s.code === 'ohne'){ txt = '&mdash;'; col = '#456278'; ttl = 'Kaufdatum fehlt im Buchungslog.'; }
+  else if(s.code === 'unbek'){ txt = '--'; col = '#456278'; ttl = 'Pr&uuml;frechnung nicht verf&uuml;gbar.'; }
   else if(s.code === 'haelt'){
-    txt = dpDatumTxt(s.naechst) + ' (' + s.rest + ' T)';  /* S405: kurz, 'haelt bis' im Tooltip */
-    col = s.rest <= 30 ? '#ffab00' : '#7a9bb5';
-    ttl = 'H&auml;lt bis ' + dpDatumTxt(s.naechst) + '. Pr&uuml;fdatum ' + dpDatumTxt(s.naechst) + ', noch ' + s.rest + ' Tage.';
+    txt = 'h&auml;lt bis ' + dpDatumTxt(s.naechst);
+    col = s.naechsterMonat ? '#ffab00' : '#7a9bb5';
+    ttl = 'Pr&uuml;fdatum ' + dpDatumTxt(s.naechst) + (s.naechsterMonat ? '; f&auml;llig am Kauftag des n&auml;chsten Monats.' : '.');
   }
   else if(s.code === 'verl'){
-    txt = dpDatumTxt(s.naechst) + ' (' + s.rest + ' T)';  /* S405: kurz, 'verlaengert bis' im Tooltip */
-    col = '#00e57a';
-    ttl = 'Verl&auml;ngert bis ' + dpDatumTxt(s.naechst) + '. Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + ': BUY. N&auml;chste Pr&uuml;fung in ' + s.rest + ' Tagen.';
+    txt = 'verl&auml;ngert bis ' + dpDatumTxt(s.naechst);
+    col = s.naechsterMonat ? '#ffab00' : '#00e57a';
+    ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + ': ' + (s.entschieden ? 'im Tab Monat als Halten entschieden' : 'BUY') + '. N&auml;chstes Pr&uuml;fdatum ' + dpDatumTxt(s.naechst) + '.';
   }
-  else if(s.code === 'sell'){
-    txt = 'SELL Abstieg';
-    col = '#ff5252';
-    ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + (s.wieder ? '; heute wieder BUY' : '') + '.';
-  }
-  else if(s.refAb){
-    txt = REF_IND_AB;
-    col = '#456278';
-    ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + ': Rangbasis D1-IND, die Referenz liegt noch nicht vor (' + REF_IND_AB + ').';
+  else if(s.code === 'faellig'){
+    txt = 'f&auml;llig am ' + dpDatumTxt(s.kauftag) + (vs ? ' <span class="dp-pv" style="display:block;font-weight:400">' + vs + '</span>' : '');
+    col = '#ffab00';
+    ttl = 'Pr&uuml;fdatum ' + dpDatumTxt(s.naechst) + '. Am Kauftag entscheidet der Tab Monat; die Klammer zeigt BUY und Zulassung von heute.';
   }
   else {
-    txt = 'nicht bewertet';
-    col = '#456278';
-    ttl = 'Pr&uuml;fung vom ' + dpDatumTxt(s.letzt) + ': f&uuml;r diesen Tag liegt keine Bewertung vor.';
+    txt = 'f&auml;llig, wartet';
+    col = '#ff5252';
+    ttl = 'Pr&uuml;fdatum ' + dpDatumTxt(s.naechst) + (s.quelle === 'nb' ? ' (Pr&uuml;fstand nicht bewertbar)' : '') + ', nicht gehalten. Der Tab Monat pr&uuml;ft am Kauftag ' + dpDatumTxt(s.kauftag) + ' neu' + (vs ? ' ' + vs : '') + '.';
   }
-  if(s && (s.code === 'verl' || s.code === 'sell')) ttl += ' Rangbasis D1-IND.';
   if(maTxt) ttl += ' ' + maTxt;
-  return '<td style="padding:5px 6px;text-align:center;font-family:monospace;font-size:10px;font-weight:700;white-space:nowrap;color:' + col + '" title="' + ttl + '">' + txt + '</td>';
+  return '<td class="dp-pruef" data-code="' + ((s && s.code) || 'etf') + '" style="padding:5px 6px;text-align:center;font-family:monospace;font-size:10px;font-weight:700;white-space:nowrap;color:' + col + '" title="' + ttl + '">' + txt + '</td>';
 }
 
 function initDepot(){
@@ -5903,9 +5917,9 @@ function dpAdd(){
   /* S392 R-9: Nachkauf eines gehaltenen Titels -- das Pruefdatum bleibt. */
   var _hint = document.getElementById('dp-add-hint');
   if(_hint && _hint.style){
-    var _hs = (typ === 'ADD') ? dpPruefMap(txList, dpHeute())[tk] : null;
-    if(_hs && _hs.naechst){
-      _hint.innerHTML = 'Nachkauf: Pr&uuml;fdatum bleibt ' + dpDatumTxt(_hs.naechst);
+    var _hs = (typ === 'ADD') ? dpPruefNaechst(dpZyklusStarts(txList)[tk] || '', dpHeute()) : '';  /* S599: nur Datum */
+    if(_hs){
+      _hint.innerHTML = 'Nachkauf: Pr&uuml;fdatum bleibt ' + dpDatumTxt(_hs);
       _hint.style.display = 'block';
     } else if(_frei){
       _hint.innerHTML = 'Titel nicht im Universum: gebucht, aber ohne aktuellen Kurs und ohne Signal; der Wert fehlt in der Depot-Summe.';
@@ -5998,10 +6012,9 @@ function dpRenderSummary(v){
   out+=kachel('best-k-gv','+/- EUR',hat?((pnl>=0?'+':'')+bestEur(pnl)):'n/a',hat?(pnl>=0?'#00e57a':'#ff5252'):'#7a9bb5',
     (pct!==null?(pct>=0?'+':'')+pct.toFixed(1).replace('.',',')+' %':'')+(ohneAlle>0?' &middot; ohne '+ohneAlle:''),
     'Wert minus Einstand &uuml;ber beide Teile; Position ohne Kurs z&auml;hlt weder im Wert noch im Einstand.');
-  var pm=dpPruefMap(dpTxLoad(),dpHeute()),pl=[],pk;
-  for(pk in pm){ if(pm.hasOwnProperty(pk)) pl.push(pm[pk]); }
-  var pz=dpPruefZaehlung(pl);
-  out+=kachel('best-k-pruef','ZU PR&Uuml;FEN',pz.n,pz.n>0?'#ffab00':'#dce8f5',pz.naechst?'n&auml;chste '+dpDatumTxt(pz.naechst):'','Einzeltitel mit f&auml;lligem Pr&uuml;fdatum; ETF ohne Frist.');
+  var pm=dpPruefMap();  /* S599 B-2: Zahl = Faellig der Kopfzeile des Tabs Monat (gemeinsame Pruefrechnung) */
+  out+=kachel('best-k-pruef','F&Auml;LLIG AM KAUFTAG',pm.n===null?'--':pm.n,(pm.n!==null&&pm.n>0)?'#ffab00':'#dce8f5',pm.m===null?'':'n&auml;chster Monat: '+pm.m,
+    'F&auml;llig: Pr&uuml;fdatum im Monat des n&auml;chsten Kauftags oder fr&uuml;her. Am Kauftag entscheidet der Tab Monat.');
   var dd=bestDrawdown(v);
   out+=kachel('best-k-dd','DRAWDOWN',dd.txt,'#dce8f5',dd.sub,dd.ttl);
   el.innerHTML=out;
@@ -6024,15 +6037,14 @@ function dpSellMaDays(tk){
     return found?cnt:-1;
   }
 
-/* S394 R-7: Etikett der Depot-Signalzelle. sv = sigView(), code =
-   dpPruefStatus().code. BUY bleibt BUY; innerhalb der Haltezeit (haelt,
-   verl) HOLD; am Pruefdatum ohne BUY (sell) SELL Abstieg; sonst (nb, etf,
-   ohne) das WL-Etikett -- ausser SELL Abstieg, das im Depot nur das
-   Pruefdatum vergibt (dann WATCH). Rein: keine Seiteneffekte. */
+/* S394 R-7, S599 B-3: Etikett der Depot-Signalzelle. sv = sigView(), code =
+   dpPruefZustand().code. BUY bleibt BUY; innerhalb der Haltezeit (haelt,
+   verl) und bis zum Kauftag (faellig) HOLD; sonst (wartet, etf, ohne, unbek)
+   das WL-Etikett -- ausser SELL Abstieg, das im Bestand nicht erscheint
+   (dann WATCH; Konzept Depot-Soll 3.6.2 N5). Rein: keine Seiteneffekte. */
 function dpSigLbl(sv, code){
   if(sv && sv.buy) return {lbl:sv.lbl, col:sv.col};
-  if(code === 'haelt' || code === 'verl') return {lbl:'HOLD', col:'#7a9bb5'};
-  if(code === 'sell') return {lbl:'SELL Abstieg', col:'#ff6666'};
+  if(code === 'haelt' || code === 'verl' || code === 'faellig') return {lbl:'HOLD', col:'#7a9bb5'};
   if(!sv || sv.lbl === 'SELL Abstieg') return {lbl:'WATCH', col:'#7a9bb5'};
   return {lbl:sv.lbl, col:sv.col};
 }
@@ -6081,12 +6093,13 @@ function dpRenderTable(){
   th.t = '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:left">Ticker</th>';
   th.sig = '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Sig</th>';
   th.pruef = '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center;font-size:10px" title="Pr&uuml;fdatum: zw&ouml;lf Monate ab Erstkauf, danach j&auml;hrlich. Regel getestet: verfehlt.">Pr&uuml;fung</th>';
+  th.rang = bestTh('center','Rang',kzTtl('K02','Rang'),'dp-rang-h');  /* S599 B-4 (Konzept 3.1a N5) */
   th.kgv = '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:right;font-size:10px" title="'+KGV_TTL+'">KGV</th>';  /* S405 */
   th.skt = '<th style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:center">Skt</th>';
   var out = '<div class="dp-scroll"><table style="width:100%;border-collapse:collapse;font-size:10px"><tr>';  /* S423 D: Scroll-Behaelter */
   for(z=0;z<folge.length;z++) out += th[folge[z]];
   out += '</tr>';
-  var _dpPm = dpPruefMap(dpTxLoad(), dpHeute());
+  var _dpPm = dpPruefMap().pos;  /* S599 B-1: gemeinsame Pruefrechnung */
   var _dpOrd = dpNameOrder(DEPOT_POSITIONS);  /* S441 C.2: Anzeige nach Namen */
   for(var _oi=0;_oi<_dpOrd.length;_oi++){
     var p = DEPOT_POSITIONS[_dpOrd[_oi]];
@@ -6119,6 +6132,8 @@ function dpRenderTable(){
     c.akt = '<td style="padding:5px 6px;text-align:right;color:'+aktC+';font-size:10px">'+aktStr+'</td>';
     c.sig = '<td style="padding:5px 6px;text-align:center;color:'+sigC+';font-size:10px;font-weight:700" title="'+(sigLbl==='SELL Abstieg'?ABST_TTL:(sigLbl==='HOLD'?'HOLD: '+KZ_ROLLE.K10:_dpSv.ttl))+'">'+sigLbl+_dpSv.bdg+(_dpSv.buy?warnBdg(p.t):'')+_dpSrBdg+'</td>';
     c.pruef = dpPruefZelle(_dpPm[p.t], _mt);
+    var _dpRg = rang12m(p.t);  /* S599 B-4: dieselbe Quelle wie WL-Spalte 1 (K02); nur Information */
+    c.rang = '<td class="dp-rang" style="padding:5px 6px;text-align:center;font-family:monospace;font-size:10px;white-space:nowrap;color:#dce8f5">'+(_dpRg===null?'--':_dpRg.r+' von '+_dpRg.n)+'</td>';
     c.kgv = '<td class="dp-kgv" style="padding:5px 6px;text-align:right;font-family:monospace;font-size:10px;white-space:nowrap;color:#dce8f5" title="'+KGV_TTL+'">'+kgvText(p.t).replace(/^KGV /,'')+'</td>';
     c.skt = '<td style="padding:5px 6px;text-align:center">'+getSektorBadge(p.t)+'</td>';
     out += '<tr style="background:'+(_oi%2===0?'#0a1628':'#0c1a2e')+'">';
@@ -6128,8 +6143,8 @@ function dpRenderTable(){
   el.innerHTML = out + '</table></div>';
   /* Legenden: S394 R-9 HOLD; Pruefung; S434 B.2 Zahlen der Zeile; S359 Warnung ohne EUR-Kurs (eine Quelle: dpCurrentPrice) */
   var box = 'margin-top:6px;padding:7px 10px;background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:4px;font-family:monospace;font-size:10px;color:#7a9bb5';
-  var lg = '<div style="'+box+'">HOLD bei einer gehaltenen Position heisst: innerhalb der Haltezeit, kein Verkaufshinweis. SELL Abstieg erscheint erst am Pr&uuml;fdatum.</div>';
-  lg += '<div style="'+box+'">Pr&uuml;fung: Jede Position wird zw&ouml;lf Monate ab Erstkauf gehalten. Am Pr&uuml;fdatum gilt: steht der Titel dann auf BUY, verl&auml;ngert sich die Haltezeit um ein Jahr; sonst zeigt die Zeile SELL Abstieg. Nachkauf und Teilverkauf verschieben das Pr&uuml;fdatum nicht. Bestand vom Jahresanfang 2026 wird gemeinsam am 31.10.2026 gepr&uuml;ft.</div>';
+  var lg = '<div style="'+box+'">HOLD bei einer gehaltenen Position heisst: innerhalb der Haltezeit, kein Verkaufshinweis.</div>';
+  lg += '<div class="dp-pruef-erl" style="'+box+'">Pr&uuml;fung: Jede Position wird zw&ouml;lf Monate ab Erstkauf gehalten. H&auml;lt: Frist l&auml;uft. F&auml;llig: Pr&uuml;fdatum im Monat des n&auml;chsten Kauftags oder fr&uuml;her. Am Kauftag entscheidet der Tab Monat: noch BUY und zul&auml;ssig &ndash; weitere 12 Monate; sonst f&auml;llig, wartet. Verkauft wird St&uuml;ck f&uuml;r St&uuml;ck. Nachkauf und Teilverkauf verschieben das Pr&uuml;fdatum nicht. Bestand vom Jahresanfang 2026 hatte das gemeinsame Pr&uuml;fdatum 31.10.2026.</div>';
   lg += '<details id="dp-zahlen-erl" style="'+box+'"><summary style="cursor:pointer">Was die Zahlen der Zeile bedeuten</summary>';
   lg += '<div id="dp-zahlen-liste" style="margin-top:4px;line-height:1.5">'+kzAbschnitt(KZ_ZEILE_DP)+kzLang(KZ_ZEILE_DP)+'</div></details>';
   var noEurCount = 0;
@@ -6487,7 +6502,7 @@ function paketLage(){
     L.kauftag=c.kd.datum;
     for(i=0;i<c.faellig.length;i++){ x=c.faellig[i]; L.faellig.push({ticker:x.t,name:x.name,pruefdatum:x.pruef,buy:x.buy,zulaessig:x.zulOk,status:x.status==='halten'?'halten':'faellig, wartet',rang:x.r,rang_n:x.n}); }
   }
-  pm=dpPruefMap(tx,dpHeute()); starts=dpZyklusStarts(tx);
+  pm=dpPruefMap().pos; starts=dpZyklusStarts(tx);  /* S599 B-1: gemeinsame Pruefrechnung */
   for(i=0;i<DEPOT_POSITIONS.length;i++){
     p=DEPOT_POSITIONS[i]; s=pm[p.t]||null; cp=dpCurrentPrice(p.t); g=rang12m(p.t); uh=dpUnivHinweis(p.t);
     st=starts.hasOwnProperty(p.t)?starts[p.t]:(p.buyDate||'');
@@ -6875,7 +6890,7 @@ function bestDrawdown(v){
 }
 /* Sechs Kacheln (Konzept 3.1a). Name dpRenderSummary bleibt (Ziel-Id dp-summary, Tests). */
 /* Tabelle Einzeltitel: Stamm + Eigenes, Folge siehe DP_SPALTEN; Titelspalte fest (.dp-scroll, S423 D). */
-var DP_SPALTEN=['t','name','sig','pruef','anz','einst','akt','wert','pp','pe','real','gew','kgv','skt'];  /* Kla 04.11.2026 12:50 */
+var DP_SPALTEN=['t','name','sig','pruef','rang','anz','einst','akt','wert','pp','pe','real','gew','kgv','skt'];  /* Kla 04.11.2026 12:50; S599 B-4: Rang nach Pruefung (Konzept 3.1a N5) */
 var ETF_SPALTEN=['t','name','rang','m12','anz','einst','akt','wert','pp','pe','real','gew','kl'];
 function bestTh(a,txt,ttl,cls){ return '<th'+(cls?' class="'+cls+'"':'')+(ttl||'')+' style="background:#1a3a5c;color:#dce8f5;padding:5px 6px;text-align:'+a+'">'+txt+'</th>'; }
 function bestReal(r){
@@ -8117,7 +8132,11 @@ function meKern(){
   if(!sym){ var l=etfListe(); for(i=0;i<l.length;i++) if(l[i]&&l[i].rolle==='KERN'){ sym=l[i].symbol; break; } }
   return {kd:kd,bedarf:bed,sym:sym};
 }
-function meBerechne(){
+/* S599 B-1 (Konzept Depot-Soll 3.6.2 N5): gemeinsame Pruefrechnung Bestand und Monat. EINE Stelle ruft meFaelligStatus
+   (Stichtag Kauftag des laufenden Monats, Pruefdatum im Kaufmonat oder frueher, nicht entschieden laut stockiq_monat_v1)
+   und bildet je faelliger Position BUY und Zulassung des Lauftags. Leser: meBerechne (Kopfzeile, Schritt 1, Exportpaket)
+   und dpPruefMap (Tab Bestand: Kachel, Pruefzelle). Rein lesend: schreibt weder stockiq_monat_v1 noch ME_CALC. */
+function mePruefKern(){
   var soll=dpSollLoad(),dp=[],etf=[],ohne=0,nAus=0,i,p,cp,heute=dpHeute(),prot=meLoad(),kd=meKauftag(heute,prot.param.kauftag),r,roh;
   for(i=0;i<DEPOT_POSITIONS.length;i++){ p=DEPOT_POSITIONS[i]; cp=dpCurrentPrice(p.t); if(cp===null) ohne++; else dp.push({t:p.t,w:p.shares*cp}); }
   for(i=0;i<ETF_POSITIONS.length;i++){
@@ -8145,6 +8164,10 @@ function meBerechne(){
     if(x.status==='halten') halten.push(x); else kandV.push(x);
   }
   kandV.sort(function(a,b){ var sa=a.ent?a.ent.sum:-1,sb=b.ent?b.ent.sum:-1; return (sb-sa)||(a.t<b.t?-1:(a.t>b.t?1:0)); });
+  return {soll:soll,heute:heute,prot:prot,kd:kd,ohne:ohne,nAus:nAus,gv:gv,r:r,roh:roh,unv:ohne>0||!r.stamm,faellig:faellig,halten:halten,kandV:kandV};
+}
+function meBerechne(){
+  var k=mePruefKern(),soll=k.soll,heute=k.heute,prot=k.prot,kd=k.kd,ohne=k.ohne,nAus=k.nAus,gv=k.gv,r=k.r,roh=k.roh,faellig=k.faellig,halten=k.halten,kandV=k.kandV,i;
   var ops=[],erl=0;
   for(i=0;i<kandV.length;i++) if(ME_UI.verkauf[kandV[i].t]&&kandV[i].w!==null){ ops.push({w:-kandV[i].w,reg:kandV[i].op.reg,sek:kandV[i].op.sek,cn:kandV[i].op.cn}); erl+=kandV[i].w; }
   var avg=roh.avg,LV=meLage(roh,ops),LP=meLage(roh,ops.concat([{w:avg,reg:'SONSTIGE',sek:'sonstige',cn:false}]));
@@ -8375,6 +8398,8 @@ function meKandZeile(k,rolle){
   var er=erFuer(k.t);
   return '<tr class="me-kand" data-t="'+etfEsc(k.t)+'" data-zone="'+k.zul.zone+'" style="border-top:1px solid #1f2933"><td style="padding:3px 5px;white-space:nowrap">'+k.r+'</td><td style="padding:3px 5px;white-space:nowrap;font-weight:700;color:#00c8f0">'+meWlLink(k.t)+warnBdg(k.t)+'</td><td style="padding:3px 5px;white-space:nowrap">'+meZoneTxt(k.zul.zone)+'</td><td style="padding:3px 5px;white-space:normal;min-width:140px">'+(meGrund(k.zul)||'--')+meRisikoSig(k.t)+(er?'<div style="color:#7a9bb5">Ersatzpapier: '+etfEsc(er.name)+'</div>':'')+'</td></tr>';
 }
+/* S599 B-5 (Inventar S594 I-9): Liste ohne Doppelnennung, Reihenfolge des ersten Auftretens bleibt. Rein. */
+function meOhneDoppel(l){ var o=[],i; for(i=0;i<l.length;i++) if(o.indexOf(l[i])<0) o.push(l[i]); return o; }
 function meSchritt4(c){
   if(c.unv) return '<div style="font-size:11px;color:#ffab00">Zulassung unvollst&auml;ndig.</div>';
   if(!c.kand.length) return '<div style="font-size:11px;color:#9fb0c0">Kein BUY-Titel ohne Depotposition.</div>';
@@ -8383,7 +8408,7 @@ function meSchritt4(c){
   for(i=m;i<c.kand.length;i++) rest+=meKandZeile(c.kand[i]);
   h+='</table></div>';
   if(rest) h+='<details style="margin-top:4px;font-size:10px;color:#9fb0c0"><summary style="cursor:pointer">Alle '+c.kand.length+' BUY-Titel</summary><div class="dp-scroll"><table style="width:100%;border-collapse:collapse;font-size:10px;color:#cfe0f0">'+rest+'</table></div></details>';
-  if(c.r.fehltR.length||c.r.unt.length) h+='<div style="font-size:10px;color:#6b7a8a;margin-top:3px">Untergrenze: '+c.r.fehltR.concat(c.r.unt).join(', ')+' (Bestandsdaten l&uuml;ckenhaft).</div>';
+  if(c.r.fehltR.length||c.r.unt.length) h+='<div style="font-size:10px;color:#6b7a8a;margin-top:3px">Untergrenze: '+meOhneDoppel(c.r.fehltR.concat(c.r.unt)).join(', ')+' (Bestandsdaten l&uuml;ckenhaft).</div>';
   return h;
 }
 function meKgvHinweis(t){
@@ -8963,7 +8988,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.54 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.55 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
