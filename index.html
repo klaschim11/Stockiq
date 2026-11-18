@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.52</title>
+<title>StockIQ v6.6.53</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -137,7 +137,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.52 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.53 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
       <div id="hdr-rangbasis" style="font-family:monospace;font-size:10px;color:var(--mut)">Rangbasis D1-IND seit 03.11.2026; D1 als Schatten</div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
@@ -497,7 +497,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.52 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.53 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -765,6 +765,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.53</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Die Anlageorientierung wirkt -- Kapitalerhalt kauft keinen Titel mit Warnstufe hoch, Ausgewogen h&ouml;chstens eine solche Position im ganzen Depot, Rendite-max zeigt das Risikosignal; Zeilen Profil und Riskanter Teil; Hype-Anteil im Tab Bestand.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.52</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Kaufbremse bei Warnstufe hoch -- ein Titel mit Warnstufe hoch wird nicht vorgeschlagen, wenn im Bestand schon so viele Positionen desselben Sektors mit Warnstufe hoch liegen, wie im Soll erlaubt (Start: eine); Soll-Feld im Tab Bestand.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.51</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Anleitung hinter dem Knopf i (auch in der Hilfe), Vergleichszeile Rang allein / D1 roh / Schnitt (Beobachtung), Kopfzeile Stand dieses Ger&auml;ts, Exportpaket f&uuml;r den Berater (auch im Bestand). Watchlist: Zeichen S und R links nach dem Ticker. Bestand: Kursdatum je ETF, Hinweis nicht im Universum. Buchungen speichern das Etikett.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.50</td><td style="padding:5px 8px;color:var(--mut)">Detailansicht: Qualit&auml;t mit Cash (Schatten, ungetestet), Cash-Profitabilit&auml;t, Cash je Euro Gewinn, Accruals-Quote und FCF-Rendite nach Aktienverg&uuml;tung; kein Einfluss auf Rang oder BUY. Buchung Einzeltitel: ein Suchfeld &uuml;ber alle Titel.</td></tr>
@@ -852,7 +853,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Bestand</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.52
+    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.53
   </div>
   <div id="dp-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:14px"></div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
@@ -1038,7 +1039,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </details>
 </div><!-- Ende p8 Bestand -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.52 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.53 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2726,11 +2727,12 @@ var ME_ANLEITUNG=[
   '2 Platz: Liegt der Einzeltitel-Teil nach den Verk\u00e4ufen unter dem Deckel? Gesperrt: kein Einzeltitel-Kauf, weiter mit 3.',
   '3 Kern: Liegt der Kern-ETF unter seinem Band, geht das Geld zuerst dorthin; kommt kein Kauf zustande, ebenfalls.',
   '4 Zulassung: F\u00fcr jeden BUY-Titel ohne Depotposition zeigt die Seite, was ein Kauf in Durchschnittsgr\u00f6\u00dfe mit Region, Sektor und Deckel macht: frei, Hinweis oder gesperrt.',
-  '5 Vorschlag: der rangh\u00f6chste zugelassene Titel und die drei besten Paare aus Verkauf und Kauf. Das Dreieck ist das Warnetikett nach steilem Anstieg -- allein nur Information; liegen im Bestand schon Positionen mit Warnstufe hoch, kann die Kaufbremse den Kauf sperren (Schritt 4). Die Vergleichszeile zeigt, was die Rangliste allein und die Challenger gekauft h\u00e4tten: Beobachtung, keine Empfehlung.',
+  '5 Vorschlag: der rangh\u00f6chste zugelassene Titel und die drei besten Paare aus Verkauf und Kauf. Das Dreieck ist das Warnetikett nach steilem Anstieg. Ob es den Kauf sperrt, h\u00e4ngt von deiner Anlageorientierung und den Grenzen im Soll ab: bei Kapitalerhalt immer, sonst erst, wenn das Depot schon so viele Positionen mit Warnstufe hoch h\u00e4lt, wie das Soll erlaubt (Schritt 4). Die Vergleichszeile zeigt, was die Rangliste allein und die Challenger gekauft h\u00e4tten: Beobachtung, keine Empfehlung.',
   '6 Buchung: Verkauf und Kauf eintragen. Weichst du vom Vorschlag ab, nenne den Grund. Danach das Exportpaket ziehen.',
   'Was getestet ist: die Auswahl nach Rang, als Korb. Die Grenzen (Deckel, Region, Sektor) sind deine Pr\u00e4ferenzen, ungetestet.'
 ];
-function meAnleitungHtml(){ var h='',i; for(i=0;i<ME_ANLEITUNG.length;i++) h+='<div class="me-anl-z" style="margin-bottom:4px">'+ME_ANLEITUNG[i]+'</div>'; return h; }
+var ME_PROFIL_HILFE_TXT='Deine Anlageorientierung steuert, wie der Monatsentscheid mit Titeln mit Warnstufe hoch umgeht: Kapitalerhalt kauft keine, Ausgewogen h\u00f6chstens eine im ganzen Depot, Rendite-max h\u00f6chstens eine je Sektor. Die Zeile Riskanter Teil zeigt die Obergrenze deiner Orientierung und den schlechtesten Ertrag nach zwei Jahren im R\u00fcckblick. Alles sind Pr\u00e4ferenzen, verbindlich f\u00fcr den Vorschlag und ungetestet; du kannst in Schritt 6 mit Grund abweichen.';  /* S593 A-7: Absatz Anlageorientierung (Wortlaut Brief); eine Konstante */
+function meAnleitungHtml(){ var h='',i; for(i=0;i<ME_ANLEITUNG.length;i++) h+='<div class="me-anl-z" style="margin-bottom:4px">'+ME_ANLEITUNG[i]+'</div>'; return h+'<div class="me-anl-profil" style="margin-bottom:4px">'+ME_PROFIL_HILFE_TXT+'</div>'; }
 /* Muster wlErlToggle: beim Laden zu, Zustand nicht gespeichert */
 function meAnlToggle(){
   var b=document.getElementById('me-anl-box'),k=document.getElementById('me-anl-btn'),auf;
@@ -3707,7 +3709,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.52';
+      var PAGE_VERSION = 'v6.6.53';
       window.SIQ_PAGE_VERSION = PAGE_VERSION;  /* S572 A-4: meta.page_version im Exportpaket */
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
@@ -4732,6 +4734,7 @@ var ETF_ROLLE_LBL = {KERN:'Kern', GRUPPE:'Gruppen-ETFs (Regionen, Faktoren, Divi
    als Rueckfall; einzel_max = Deckel Einzeltitel in % des Gesamtdepots (Abschn. 2.1; DA-Zusatz zu 3.3). */
 var DEPOT_SOLL_STD = {kern_pct:40, kern_min:30, kern_max:50, einzel_max:60, sektor_max:20, region_max:50, position_max:15, kern_abw_pp:10, band_pp:5, china_max:5,
   warn_hoch_je_sektor_max:1,  /* S591 A-3 (Konzept Depot-Soll 3.3/3.6.11): Kaufbremse h, ganze Zahl >= 0; im Formular geleert = null = Bremse aus */
+  hype_max_depot:1,  /* S593 A-2 (Konzept Depot-Soll 3.3 N7 mit N9): Ausgewogen, hoechstens n Positionen mit Warnstufe hoch im ganzen Depot; geleert = null = Regel aus; hype_betrag_faktor entfaellt (N9) */
   region_soll:{USA:57, EUROPA:20, JAPAN:7, UEBRIGE:5, SCHWELLEN:11}};  /* S532: Konzept v1.3 3.3; gespeicherte Werte bleiben, keine stille Umschreibung */
 
 function etfMacro(){ return (window.FD && FD['__macro__']) ? FD['__macro__'] : null; }
@@ -6451,11 +6454,17 @@ function paketSollIst(L){
   if(!L.soll_ist.length){ u=el.querySelector('.dp-soll-unv,.dp-soll-leer'); if(u) L.hinweise.push(paketTxt(u.innerHTML)); }
 }
 function paketLage(){
-  var L={gesamtvermoegen:null,nenner:null,klassen:[],riskanter_teil:'--',soll_ist:[],kauftag:null,faellig:[],positionen:[],etf_kurse:[],hinweise:[]};
+  var L={gesamtvermoegen:null,nenner:null,klassen:[],riskanter_teil:null,hype_anteil:null,soll_ist:[],kauftag:null,faellig:[],positionen:[],etf_kurse:[],hinweise:[]};
   var tot=dpCalcTotal(),gv=gvNenner(tot.val,0),kr=gv.kr,i,x,c=null,tx=dpTxLoad(),pm,starts,p,s,cp,st,g,k,e,et,uh;
   L.gesamtvermoegen=kr.sum; L.nenner=paketTxt(gvEtikett(gv));
   for(i=0;i<kr.z.length;i++){ x=kr.z[i]; L.klassen.push({klasse:x.k,bestand:x.b,ausserhalb:x.a,summe:x.s,anteil_pct:x.p}); }
   if(kr.cashFehlt) L.hinweise.push('Cash nicht erfasst');
+  try{  /* S593 A-4/A-5: lage.riskanter_teil und lage.hype_anteil */
+    var rt=meRiskant(kr,!kr.cashFehlt&&tot.hasPrice===tot.n,meProfil()),hy=meHypeAnteil();
+    L.riskanter_teil={ist_pct:rt.ist_pct,obergrenze_pct:rt.obergrenze_pct,orientierung:rt.orientierung,zustand:rt.zustand,k125_rueckblick_pct:rt.k125_rueckblick_pct,q_raster:rt.q_raster,vollstaendig:rt.vollstaendig};
+    L.hype_anteil={anteil_pct:hy.anteil_pct,stress50:hy.stress50,stress80:hy.stress80,positionen:hy.positionen,vollstaendig:hy.vollstaendig};
+    if(hy.ohne_stufe.length) L.hinweise.push('Warnstufe nicht bestimmbar: '+hy.ohne_stufe.join(', '));
+  }catch(eR){ L.hinweise.push('Riskanter Teil / Hype-Anteil nicht gerechnet: '+(eR&&eR.message)); }
   paketSollIst(L);
   try{ c=meBerechne(); }catch(e1){ L.hinweise.push('Monatsentscheid nicht gerechnet: '+(e1&&e1.message)); }
   if(c){
@@ -6687,7 +6696,7 @@ function dpRenderKopf(){
   if(!el) return;
   var z=bestZahlen(),mac=etfMacro();
   var kurs=(mac && typeof mac.run_date==='string') ? k1Datum(mac.run_date) : '--';
-  el.innerHTML=bestKopfHtml(z.a.n,z.a.val,z.a.cost,z.a.ohne,kurs,'Lauf vom');  /* run_date, kein Kursdatum je Ticker (Kla 05.11.2026) */
+  el.innerHTML=bestKopfHtml(z.a.n,z.a.val,z.a.cost,z.a.ohne,kurs,'Lauf vom')+((typeof meHypeKopf==='function')?meHypeKopf():'');  /* S593 T-1 */  /* run_date, kein Kursdatum je Ticker (Kla 05.11.2026) */
 }
 
 /* ETF-Tagesreihe des Producers (S531). Fehlt das Feld: Platzhalter nach Null-Regel, keine Summe. */
@@ -7053,7 +7062,7 @@ function dpRenderRisk(){
   } else {
     hh='<div class="dp-risk-unv" style="font-size:12px;color:#e0a030;margin-top:8px">&#9888; Risiko unvollst&auml;ndig &mdash; '+(n-tot.hasPrice)+' Position(en) ohne Kurs.</div>';
   }
-  el.innerHTML=dpSollTeil(items,n-tot.hasPrice,hh);
+  el.innerHTML=((typeof meHypeZeile==='function')?meHypeZeile():'')+dpSollTeil(items,n-tot.hasPrice,hh);  /* S593 A-4: K130 */
   el.style.display='block';
 }
 /* S491 A-2 (Konzept Depot-Soll v1.1 Abschn. 3.3): Soll-Speicher je Browser, Nutzerparameter (keine Regel).
@@ -7071,6 +7080,7 @@ var DP_SOLL_OPTIONAL={kern_abw_pp:1,einzel_max:1,band_pp:1,china_max:1};
    in einem Soll-Block (aelterer Stand, Import), bleibt es weg und das Laden nimmt den Standard -- kein stilles
    Umschreiben, Roundtrip byte-gleich. */
 var DP_SOLL_WARN='warn_hoch_je_sektor_max';
+var DP_SOLL_HYPE='hype_max_depot';  /* S593 A-2: wie DP_SOLL_WARN (optional, Pruefung dpSollWarnOk) */
 function dpSollWarnOk(v){ return v===null||(dpSollZahl(v)&&v>=0&&v<=100&&Math.floor(v)===v); }  /* fehlt in aelterem Stand: Standard, kein Fehler (Abschn. 3.3) */
 var DP_SOLL_AUF=false;  /* Formular nach Speichern/Standard offen lassen */
 /* Soll-Speicher v1.3 (Konzept 3.3): region_soll als Objekt neben den Zahlenfeldern */
@@ -7105,6 +7115,7 @@ function dpSollLoad(){
     o[f]=(r&&dpSollZahl(r[f]))?r[f]:DEPOT_SOLL_STD[f];
   }
   o[DP_SOLL_WARN]=(r&&r.hasOwnProperty(DP_SOLL_WARN)&&dpSollWarnOk(r[DP_SOLL_WARN]))?r[DP_SOLL_WARN]:DEPOT_SOLL_STD[DP_SOLL_WARN];  /* S591 */
+  o[DP_SOLL_HYPE]=(r&&r.hasOwnProperty(DP_SOLL_HYPE)&&dpSollWarnOk(r[DP_SOLL_HYPE]))?r[DP_SOLL_HYPE]:DEPOT_SOLL_STD[DP_SOLL_HYPE];  /* S593: alter Block ohne Feld = Startwert */
   o.region_soll=dpSollRegionLoad(r);
   o.stand=(r&&typeof r.stand==='string')?r.stand:null;
   return o;
@@ -7119,6 +7130,7 @@ function dpSollValid(o){
     if(o[f]<0||o[f]>mx) return DP_SOLL_LBL[f][0]+': ausserhalb des zulaessigen Bereichs';
   }
   if(o[DP_SOLL_WARN]!==undefined&&!dpSollWarnOk(o[DP_SOLL_WARN])) return 'Warnstufe hoch je Sektor: ganze Zahl ab 0 oder leer';  /* S591 */
+  if(o[DP_SOLL_HYPE]!==undefined&&!dpSollWarnOk(o[DP_SOLL_HYPE])) return 'Warnstufe hoch im ganzen Depot: ganze Zahl ab 0 oder leer';  /* S593 */
   if(!(o.kern_min<=o.kern_pct&&o.kern_pct<=o.kern_max)) return 'Kern-Quote liegt nicht im Kern-Band (von <= Quote <= bis)';
   return dpSollRegionValid(o.region_soll);
 }
@@ -7132,6 +7144,7 @@ function dpSollAusImport(s){
   }
   o.region_soll=(s.region_soll===undefined)?DEPOT_SOLL_STD.region_soll:s.region_soll;
   if(s[DP_SOLL_WARN]!==undefined) o[DP_SOLL_WARN]=s[DP_SOLL_WARN];  /* S591: fehlt -> bleibt weg, Laden nimmt den Standard */
+  if(s[DP_SOLL_HYPE]!==undefined) o[DP_SOLL_HYPE]=s[DP_SOLL_HYPE];  /* S593: wie S591 */
   fe=dpSollValid(o);
   return fe?{o:null,f:fe}:{o:o,f:''};
 }
@@ -7139,6 +7152,7 @@ function dpSollSave(o,stand){
   var s={},i;
   for(i=0;i<DP_SOLL_FELDER.length;i++) s[DP_SOLL_FELDER[i]]=o[DP_SOLL_FELDER[i]];
   if(o[DP_SOLL_WARN]!==undefined) s[DP_SOLL_WARN]=o[DP_SOLL_WARN];  /* S591 */
+  if(o[DP_SOLL_HYPE]!==undefined) s[DP_SOLL_HYPE]=o[DP_SOLL_HYPE];  /* S593 */
   s.region_soll=o.region_soll;
   s.stand=(typeof stand==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(stand))?stand:dpHeute();
   try{ localStorage.setItem(DP_SOLL_KEY,JSON.stringify(s)); return true; }catch(e){ return false; }
@@ -7152,6 +7166,8 @@ function dpSollFormSave(){
   }
   el=document.getElementById('dp-soll-'+DP_SOLL_WARN);  /* S591: leeres Feld = null = Kaufbremse aus */
   if(el) o[DP_SOLL_WARN]=(String(el.value).replace(/\s/g,'')==='')?null:Number(el.value);
+  el=document.getElementById('dp-soll-'+DP_SOLL_HYPE);  /* S593: leeres Feld = null = Regel Ausgewogen aus */
+  if(el) o[DP_SOLL_HYPE]=(String(el.value).replace(/\s/g,'')==='')?null:Number(el.value);
   o.region_soll={};
   for(f in DEPOT_SOLL_STD.region_soll){ if(DEPOT_SOLL_STD.region_soll.hasOwnProperty(f)){ el=document.getElementById('dp-soll-rs-'+f); o.region_soll[f]=el?parseFloat(el.value):NaN; } }
   fe=dpSollValid(o);
@@ -7428,6 +7444,10 @@ function dpSollForm(soll){
     +'<input type="number" id="dp-soll-'+DP_SOLL_WARN+'" min="0" max="100" step="1" value="'+(soll[DP_SOLL_WARN]===null?'':soll[DP_SOLL_WARN])+'"'
     +' style="width:48px;background:#0c1420;border:1px solid #1a3050;color:#cfe0f0;font-size:11px;padding:2px 4px;border-radius:4px"> '
     +'Position(en) mit Warnstufe hoch je Sektor (leer = Kaufbremse aus)</label>';
+  h+='<label class="dp-soll-hype" style="display:block;min-width:0;grid-column:1/-1">H\u00f6chstens '  /* S593 A-2 Formularzeile (Wortlaut Brief) */
+    +'<input type="number" id="dp-soll-'+DP_SOLL_HYPE+'" min="0" max="100" step="1" value="'+(soll[DP_SOLL_HYPE]===null?'':soll[DP_SOLL_HYPE])+'"'
+    +' style="width:48px;background:#0c1420;border:1px solid #1a3050;color:#cfe0f0;font-size:11px;padding:2px 4px;border-radius:4px"> '
+    +'Position(en) mit Warnstufe hoch im ganzen Depot (Ausgewogen; leer = Regel aus)</label>';
   h+='</div><div style="margin-top:8px">Regions-Soll (% des Aktienteils; Summe siehe Pr&uuml;fung beim Speichern; Korridor = Soll +/- Band)</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px;margin-top:4px">';
   for(f in DEPOT_SOLL_STD.region_soll){
     if(!DEPOT_SOLL_STD.region_soll.hasOwnProperty(f)) continue;
@@ -7543,6 +7563,20 @@ function dpTxStorno(idx, el){
 var ME_KEY='stockiq_monat_v1', ER_KEY='stockiq_ersatzpapier_v1';
 var ME_WARN_AB='09.11.2026';
 var ME_BREMSE_TXT='Kaufbremse: Ein Titel mit Warnstufe hoch wird nicht vorgeschlagen, wenn im Bestand schon so viele Positionen desselben Sektors mit Warnstufe hoch liegen, wie im Soll erlaubt (Start: eine). Pr\u00e4ferenz, verbindlich f\u00fcr den Kaufvorschlag; ungetestet. Du kannst sie in Schritt 6 \u00fcberstimmen, der Grund kommt ins Protokoll. Sie verkauft nichts und \u00e4ndert weder Rang noch BUY.';  /* S591 A-4: Hilfetext Kaufbremse (Brief S591, Konzept 3.6.11); eine Konstante */  /* Null-Regel Warnetikett: erster Tageslauf mit den Feldern (S536/S557) */
+/* S593 (Konzept Depot-Soll 3.6.12 mit N9, 2.0b): Texte im Wortlaut des Briefs S593 (Regex aus der Brief-Datei, Umlaute als Escape). */
+var ME_RISIKO_TXT='Warnstufe hoch: 21,0 % der vergleichbaren K\u00e4ufe lagen nach 24 Monaten mindestens 25 % im Minus (ohne Etikett 7,6 %; R\u00fcckblick, Belegstufe 2).';  /* S593 A-3: Risikosignal bei Rendite-max; eine Konstante */
+var ME_PROFIL_TXT={rendite:'Anlageorientierung: Rendite-max. Sie wirkt im Monatsentscheid auf Titel mit Warnstufe hoch (h\u00f6chstens <h> je Sektor) und zeigt die Obergrenze des riskanten Teils. Noch ohne Wirkung: Soll je Anlageklasse und Sperre \u00fcber der Obergrenze; beides kommt mit dem Ausbau Anlageklassen.',
+  ausgewogen:'Anlageorientierung: Ausgewogen. Sie wirkt im Monatsentscheid auf Titel mit Warnstufe hoch (h\u00f6chstens <n> im ganzen Depot, dazu h\u00f6chstens <h> je Sektor) und zeigt die Obergrenze des riskanten Teils. Noch ohne Wirkung: Soll je Anlageklasse und Sperre \u00fcber der Obergrenze; beides kommt mit dem Ausbau Anlageklassen.',
+  kapital:'Anlageorientierung: Kapitalerhalt. Sie wirkt im Monatsentscheid auf Titel mit Warnstufe hoch (kein Kauf) und zeigt die Obergrenze des riskanten Teils. Noch ohne Wirkung: Soll je Anlageklasse und Sperre \u00fcber der Obergrenze; beides kommt mit dem Ausbau Anlageklassen.',
+  keins:'Anlageorientierung nicht erfasst; es gilt Rendite-max. Du kannst sie im Profil festlegen.'};  /* S593 A-6: Zeile Profil je Orientierung; <h>/<n> aus dem Soll, geleert: (Regel aus) */
+var ME_RISIKO_GRENZE={kapital:20,ausgewogen:40,rendite:90};  /* S593 A-5: Obergrenze riskanter Teil je Orientierung (2.0b; Rendite-max bis B-2 Variante A) */
+var ME_RISKANT_ZUSATZ='Variante B erst mit dem Profil aus f\u00fcnf Fragen';
+var ME_RISKANT_ETIKETT='R\u00fcckblick 1960-2026, USD, S&amp;P 500 und Geldmarkt; kein Fall wie 1929-32 im Zeitraum';
+var ME_RISKANT_KL={'Einzeltitel':1,'Aktien-ETF':1,'Gold':1,'BTC':1,'Rohstoffe':1};  /* K87.riskant: Aktien (Einzeltitel + Aktien-ETF) + Gold + BTC + Rohstoffe */
+/* S593 A-5 K125 Referenz: schlechtester Ertrag des Gesamtvermoegens nach 24 Monaten in %, Raster q = 0, 5, ..., 100 % riskant.
+   Quelle: debugs\v260_S567_risikobudget_messung_out.md (md5 e6b447d25e3534b0e7cfff4ec2b1ad4e), Abschnitt "Geldmarkt, ab Beginn sicherer Teil (1960; 1928 laut Brief nicht vorhanden)",
+   Spalte "M1 min"; programmatisch uebernommen (s593_patch.py, Restregel v228). R-deskriptiv, Rueckblick, nominal, USD, S&P 500 und Geldmarkt. */
+var ME_K125=[0.0,-0.3,-1.5,-4.7,-7.8,-10.9,-13.9,-16.7,-19.6,-22.3,-25.0,-27.5,-30.1,-32.5,-34.9,-37.2,-39.4,-41.6,-43.7,-45.8,-47.7];
 var ME_UI={verkauf:{},kauf:null,ersatz:true,quittung:''};
 var ME_CALC=null;
 var ER_VORBELEG={'005930.KS':{name:'Samsung Electronics GDR',wkn:'896360',isin:'US7960508882',verhaeltnis:25,art:'GDR',hinweis:'Stammaktie; ING Direkthandel',stand:'2026-11-02'}};
@@ -7709,10 +7743,53 @@ function meZulBremse(z,b){
   if(b.g) g.push(b.g); else h.push(b.h);
   return {zone:g.length?'gesperrt':(h.length?'hinweis':'frei'),g:g,h:h,bremse:b.g?'gesperrt':'unbestimmt'};
 }
+/* S593 A-1 (Konzept Depot-Soll 3.6.12 Nr. 4 mit N9): Regeln je Anlageorientierung zum Hype-Risiko, zusaetzlich zur Kaufbremse.
+   Profil aus stockiq_profile.orientierung (kapital / ausgewogen / rendite); fehlt oder unbekannt: o = null, es gilt Rendite-max.
+   Kapitalerhalt: Kandidat mit Warnstufe hoch gesperrt. Ausgewogen: Kandidat hoch gesperrt, wenn der Einzeltitel-Bestand schon
+   mindestens n Positionen mit Warnstufe hoch haelt, quer ueber alle Sektoren (n = hype_max_depot; null = aus; 0 = jeder
+   Kandidat hoch gesperrt); voller Betrag (N9). Rendite-max: keine weitere Regel. Zaehlung, Lauftag-Wert, Universumsticker,
+   Verkaeufe (aus) und Paare wie meBremse (S591, Entscheide Kla 18.11.2026). Null-Regel: fehlt eine Warnstufe, sperrt nichts
+   (Hinweis 'Warnstufe nicht bestimmbar'). Aendert weder Rang, BUY, Warnetikett noch Vergleichszeile. */
+function meProfil(){
+  var o=null,p;
+  try{ p=JSON.parse(localStorage.getItem('stockiq_profile')); if(p&&(p.orientierung==='kapital'||p.orientierung==='ausgewogen'||p.orientierung==='rendite')) o=p.orientierung; }catch(e){ o=null; }
+  return {o:o,eff:o||'rendite'};
+}
+function meProfilRegel(t,soll,aus,pr){
+  var k,n,hoch=[],unb=[],i,p,u,w;
+  if(!pr||(pr.o!=='kapital'&&pr.o!=='ausgewogen')) return null;
+  k=meWarnHoch(warnRec(t));
+  if(pr.o==='kapital') return k===true?{g:'Kapitalerhalt: Warnstufe hoch'}:(k===null?{h:'Warnstufe nicht bestimmbar (Kapitalerhalt)'}:null);
+  n=soll?soll.hype_max_depot:null;  /* Feldname wie DP_SOLL_HYPE; Modul bleibt ohne Soll-Teil ladbar */
+  if(typeof n!=='number'||k===false) return null;
+  for(i=0;i<DEPOT_POSITIONS.length;i++){
+    p=DEPOT_POSITIONS[i];
+    if(!(p.shares>0)||(aus&&aus[p.t])) continue;
+    u=meUniTicker(p.t); w=(u===null)?null:meWarnHoch(warnRec(u));
+    if(w===true) hoch.push(etfEsc(p.t)); else if(w===null) unb.push(etfEsc(p.t));
+  }
+  if(k===true&&hoch.length>=n) return {g:hoch.length?'Ausgewogen: Depot h\u00e4lt schon '+hoch.length+' Position(en) mit Warnstufe hoch ('+hoch.join(', ')+')':'Ausgewogen: Soll erlaubt keine Position mit Warnstufe hoch im Depot',n:hoch.length};
+  if(hoch.length+unb.length>=n&&(k===null||unb.length)) return {h:'Warnstufe nicht bestimmbar (Ausgewogen'+(unb.length?'; Bestand: '+unb.join(', '):'')+')'};
+  return null;
+}
+function meZulProfil(z,b){
+  if(!b) return z;
+  var o=meKop(z);
+  o.g=z.g.slice(); o.h=z.h.slice();
+  if(b.g) o.g.push(b.g); else o.h.push(b.h);
+  o.zone=o.g.length?'gesperrt':(o.h.length?'hinweis':'frei'); o.profil=b.g?'gesperrt':'unbestimmt';
+  return o;
+}
+/* S593 A-3: Risikosignal an jedem Kandidaten mit Warnstufe hoch, nur bei Rendite-max (auch ohne Profil: es gilt Rendite-max) */
+function meRisikoSig(t){
+  var pr=(ME_CALC&&ME_CALC.profil)?ME_CALC.profil:meProfil();
+  if(pr.eff!=='rendite'||meWarnHoch(warnRec(t))!==true) return '';
+  return '<div class="me-risiko" style="font-size:10px;color:#ffcf70;line-height:1.5;margin-top:2px">'+ME_RISIKO_TXT+'</div>';
+}
 /* Paare (3.6.1): je Verkaufskandidat x Kaufkandidat die Lage nach beiden Buchungen; drei beste nach Mass,
    bei Gleichstand der hoehere Kaufrang. "Kein Verkauf + Kauf" nur mit Platz. Gesperrte Kaeufe zaehlen nicht. */
 function mePaareAlle(roh,soll,verk,kauf,platz){
-  var res=[],i,j,v,k,ops,L,z,liste=[null].concat(verk),ap,bb;
+  var res=[],i,j,v,k,ops,L,z,liste=[null].concat(verk),ap,bb,pr=meProfil(),pp;
   for(i=0;i<liste.length;i++){
     v=liste[i];
     if(v===null&&!platz) continue;
@@ -7722,6 +7799,7 @@ function mePaareAlle(roh,soll,verk,kauf,platz){
       L=meLage(roh,ops); z=meZul(L,roh,soll,k.op,false);
       if(z.zone==='gesperrt') continue;
       ap={}; if(v) ap[v.t]=true; bb=meBremse(k.t,soll,ap); if(bb&&bb.g) continue;  /* S591: Kaufbremse; der Verkauf des Paars zaehlt nicht */
+      pp=meProfilRegel(k.t,soll,ap,pr); if(pp&&pp.g) continue;  /* S593 A-1: Profilregel wie die Kaufbremse */
       res.push({v:v?v.t:null,k:k.t,rang:k.r,mass:meMass(L,roh,soll),zone:z.zone});
     }
   }
@@ -7845,7 +7923,7 @@ function erImport(inp){
   inp.value='';
 }
 
-/* ---- Warnetikett (3.6.6): nur Anzeige, wirkt weder auf Zulassung noch auf Reihenfolge ---- */
+/* ---- Warnetikett (3.6.6): Anzeige; den Kauf sperrt es nur ueber Kaufbremse (3.6.11) und Profilregeln (3.6.12), nie die Reihenfolge ---- */
 function warnMeta(){ var m=etfMacro(); return (m&&m.warn_meta&&m.warn_meta.raten)?m.warn_meta:null; }
 function warnRec(t){ var r=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null; return (r&&typeof r==='object')?r:null; }
 function warnRate(meta,zelle){ var l=meta.raten,i; for(i=0;i<l.length;i++) if(l[i].zelle===zelle) return l[i]; return null; }
@@ -7907,7 +7985,7 @@ function meWarnErl(){
   h='<details id="me-warn-erl" style="margin-top:6px;font-size:10px;color:#9fb0c0"><summary style="cursor:pointer">Was das Warnetikett bedeutet</summary><div style="line-height:1.6;margin-top:4px">'
     +'<b>Anstieg Titel</b>: Kursver&auml;nderung mit Dividenden der letzten 24 Monate. <b>Anstieg Branche</b>: derselbe Wert f&uuml;r den gleichgewichteten Index der Industrie (mindestens drei Titel, sonst Sektor). '
     +'<b>Endverlust</b>: 24 Monate nach dem Stichtag mindestens 25 % im Minus. <b>R&uuml;ckschlag</b>: Fall um mindestens 25 % vom laufenden Hoch innerhalb der 24 Monate. '
-    +'Stufen Titel: erh&ouml;ht ab 100 %, hoch ab 200 %. Stufen Branche: erh&ouml;ht ab 50 %, hoch ab 150 %. Das Etikett allein &auml;ndert weder Zulassung noch Reihenfolge, es ist keine Verkaufsregel. Belegstufe 2: die Grenzen wurden nach Sicht der Daten gew&auml;hlt.';
+    +'Stufen Titel: erh&ouml;ht ab 100 %, hoch ab 200 %. Stufen Branche: erh&ouml;ht ab 50 %, hoch ab 150 %. Das Etikett &auml;ndert nie die Reihenfolge und ist keine Verkaufsregel; den Kauf sperrt es nur &uuml;ber die Regeln deiner Anlageorientierung (Schritt 4). Belegstufe 2: die Grenzen wurden nach Sicht der Daten gew&auml;hlt.';
   h+='<div class="me-bremse-erl" style="margin-top:4px">'+ME_BREMSE_TXT+'</div>';  /* S591 A-4 */
   if(m){
     h+='<div class="dp-scroll" style="margin-top:4px"><table style="border-collapse:collapse;font-size:10px"><tr><th style="text-align:left;padding:2px 6px">Zelle</th><th style="text-align:right;padding:2px 6px">N</th><th style="text-align:right;padding:2px 6px">Endverlust</th><th style="text-align:right;padding:2px 6px">R&uuml;ckschlag</th></tr>';
@@ -8032,10 +8110,12 @@ function meBerechne(){
   var ausV={};  /* S591: in Schritt 1 gewaehlte Verkaeufe zaehlen nicht zum Bestand der Kaufbremse */
   for(i=0;i<kandV.length;i++) if(ME_UI.verkauf[kandV[i].t]&&kandV[i].w!==null) ausV[kandV[i].t]=true;
   for(i=0;i<kand.length;i++) kand[i].zul=meZulBremse(kand[i].zul,meBremse(kand[i].t,soll,ausV));
+  var pr=meProfil();  /* S593 A-1: Profilregel nach der Kaufbremse; Gruende hintereinander */
+  for(i=0;i<kand.length;i++) kand[i].zul=meZulProfil(kand[i].zul,meProfilRegel(kand[i].t,soll,ausV,pr));
   var verk=[];
   for(i=0;i<kandV.length;i++) if(kandV[i].w!==null) verk.push(kandV[i]);
   ME_CALC={gv:gv,soll:soll,r:r,roh:roh,kd:kd,heute:heute,prot:prot,ohne:ohne,nAus:nAus,unv:unv,faellig:faellig,halten:halten,kandV:kandV,LV:LV,LP:LP,pZone:pZone,platz:platz,erl:erl,avg:avg,
-    kand:kand,vs:unv?{v:null,ueb:[]}:meVorschlag(kand,platz),champion:kand.length?kand[0]:null,paare:[],paarVs:null,kern:meKern()};
+    profil:pr,kand:kand,vs:unv?{v:null,ueb:[]}:meVorschlag(kand,platz),champion:kand.length?kand[0]:null,paare:[],paarVs:null,kern:meKern()};
   if(!unv){ var alleP=mePaareAlle(roh,soll,verk,kand,platz0); ME_CALC.paare=alleP.slice(0,3); ME_CALC.paarVs=ME_CALC.vs.v?mePaarVorschlag(alleP,ME_CALC.vs.v.t):null; }
   ME_CALC.arme=meVergleich(ME_CALC);  /* S572 A-2 */
   return ME_CALC;
@@ -8053,6 +8133,88 @@ function meKlassenRechnung(E,acc,st,cash){
   for(i=0;i<z.length;i++){ z[i].s=z[i].b+z[i].a; sum+=z[i].s; }
   for(i=0;i<z.length;i++) z[i].p=sum>0?z[i].s/sum*100:null;
   return {z:z,sum:sum,cashFehlt:c===null};
+}
+/* S593 A-5 (2.0b Ausweis vor B-2, K87.riskant, K125): Ist-Quote riskanter Teil auf dem Nenner der Klassenrechnung,
+   Obergrenze je Orientierung, Zustand frei / hinweis (ohne Sperre), K125 am naechsthoeheren 5er-Rasterpunkt. */
+function meRiskant(kr,voll,pr){
+  var s=0,i,ist,q,g;
+  for(i=0;i<kr.z.length;i++) if(ME_RISKANT_KL[kr.z[i].k]) s+=kr.z[i].s;
+  ist=kr.sum>0?s/kr.sum*100:null;
+  q=(ist===null)?null:Math.min(100,Math.max(0,Math.ceil(ist/5-1e-9)*5));
+  g=pr.o?ME_RISIKO_GRENZE[pr.o]:null;
+  return {ist_pct:ist,obergrenze_pct:g,orientierung:pr.o,zustand:(g===null||ist===null)?null:(ist<=g?'frei':'hinweis'),
+    k125_rueckblick_pct:(q===null)?null:ME_K125[q/5],q_raster:q,vollstaendig:!!voll,summe:s,cashFehlt:kr.cashFehlt};
+}
+function mePkt(x){ return x.toFixed(1).replace('.',','); }
+function meRiskantZeile(rt){
+  return '<tr class="me-riskant" style="border-top:2px solid #2a3a4a"><td style="padding:3px 6px;font-weight:700">Riskanter Teil</td><td style="text-align:right;padding:3px 6px"></td><td style="text-align:right;padding:3px 6px"></td><td style="text-align:right;padding:3px 6px">'+bestEur(rt.summe)+'</td><td style="text-align:right;padding:3px 6px;font-weight:700">'+(rt.ist_pct===null?'--':dpSgPct(rt.ist_pct))+'</td></tr>';
+}
+function meRiskantTxt(rt){
+  var h='<div class="me-riskant-txt" style="font-size:10px;color:#cfe0f0;line-height:1.5;margin-top:4px">Riskanter Teil (Aktien, Gold, BTC, Rohstoffe): '+(rt.ist_pct===null?'--':dpSgPct(rt.ist_pct));
+  if(rt.orientierung===null) h+=' &mdash; <span class="me-riskant-oh">'+ME_PROFIL_KEIN_TXT+'</span>.';
+  else h+=' &mdash; Obergrenze <span class="me-riskant-og">'+rt.obergrenze_pct+' %</span> ('+ME_ORIENT_LBL[rt.orientierung]+(rt.orientierung==='rendite'?'; '+ME_RISKANT_ZUSATZ:'')+'): <b class="me-riskant-z">'+(rt.zustand==='frei'?'frei':(rt.zustand==='hinweis'?'&uuml;ber der Grenze (Hinweis)':'--'))+'</b>.';
+  if(rt.q_raster!==null) h+=' Schlechtester Ertrag nach zwei Jahren bei <span class="me-k125-q">'+rt.q_raster+' %</span>: <b class="me-k125">'+mePkt(rt.k125_rueckblick_pct)+' %</b> ('+ME_RISKANT_ETIKETT+').';
+  if(!rt.vollstaendig) h+=' <b class="me-riskant-unv">unvollst&auml;ndig</b>'+(rt.cashFehlt?' (Cash nicht erfasst)':'')+'.';
+  return h+' Ausweis ohne Sperre; die Sperre kommt mit dem Ausbau Anlageklassen.</div>';
+}
+/* S593 A-4 (3.6.12 Nr. 6, K130): Hype-Anteil = Marktwert der Einzeltitel-Positionen mit Warnstufe hoch (Lauftag,
+   Universumsticker wie meBremse) / Gesamtvermoegen (derselbe Nenner wie der Tab Monat, gvNenner). ETF zaehlen nicht.
+   Stresswert = 0,5 bzw. 0,8 x K130 in Punkten Gesamtvermoegen. Unvollstaendig ohne Cash oder bei Position ohne Kurs (AP-3). */
+function meHypeAnteil(){
+  var tot=dpCalcTotal(),kr=gvNenner(tot.val,0).kr,s=0,pos=[],unb=[],i,p,u,w,cp,a;
+  for(i=0;i<DEPOT_POSITIONS.length;i++){
+    p=DEPOT_POSITIONS[i];
+    if(!(p.shares>0)) continue;
+    u=meUniTicker(p.t); w=(u===null)?null:meWarnHoch(warnRec(u));
+    if(w===null){ unb.push(p.t); continue; }
+    if(w!==true) continue;
+    cp=dpCurrentPrice(p.t);
+    if(cp===null) continue;
+    s+=p.shares*cp; pos.push({ticker:p.t,wert_eur:p.shares*cp});
+  }
+  a=kr.sum>0?s/kr.sum*100:null;
+  return {anteil_pct:a,stress50:(a===null)?null:0.5*a,stress80:(a===null)?null:0.8*a,positionen:pos,vollstaendig:!kr.cashFehlt&&tot.hasPrice===tot.n,
+    ohne_stufe:unb,cashFehlt:kr.cashFehlt,ohneKurs:tot.n-tot.hasPrice};
+}
+function meHypeZeile(){
+  var x,pr,h,i,l=[];
+  if(!DEPOT_POSITIONS.length) return '';
+  try{ x=meHypeAnteil(); pr=meProfil(); }catch(e){ return ''; }
+  for(i=0;i<x.positionen.length;i++) l.push(etfEsc(x.positionen[i].ticker));
+  h='<div id="dp-hype" style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #2a3441"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="font-size:12px;color:#9fb0c0">Hype-Anteil (Warnstufe hoch)</span>'
+    +'<span class="dp-hype-wert" style="font-size:13px;font-weight:600;color:#cfe0f0">'+(x.anteil_pct===null?'--':dpSgPct(x.anteil_pct))+'</span></div>'
+    +'<div style="font-size:11px;color:#cfe0f0;margin-top:2px;line-height:1.5">des Gesamtverm&ouml;gens'+(l.length?' ('+l.join(', ')+')':'')+'.';
+  if(pr.eff==='rendite'&&x.anteil_pct!==null) h+=' <span class="dp-hype-stress">Stresswert: bei -50 %: -'+mePkt(x.stress50)+' Punkte, bei -80 %: -'+mePkt(x.stress80)+' Punkte Gesamtverm&ouml;gen.</span>';
+  if(!x.vollstaendig) h+=' <b class="dp-hype-unv" style="color:#e0a030">unvollst&auml;ndig</b>'+(x.cashFehlt?' (Cash nicht erfasst)':'')+(x.ohneKurs?' ('+x.ohneKurs+' Position(en) ohne Kurs)':'')+'.';
+  if(x.ohne_stufe.length) h+=' Warnstufe nicht bestimmbar: '+etfEsc(x.ohne_stufe.join(', '))+'.';
+  return h+'</div><div style="font-size:10px;color:#5a6875;margin-top:2px">Anzeige, ungetestet (K130). Nenner wie im Tab Monat: Gesamtverm&ouml;gen mit Cash und Werten au&szlig;erhalb des Depots.</div></div>';
+}
+/* S593 A-6: Zeile Profil (Wortlaut Brief); <h> = warn_hoch_je_sektor_max, <n> = hype_max_depot, geleert: (Regel aus) */
+var ME_ORIENT_LBL={kapital:'Kapitalerhalt',ausgewogen:'Ausgewogen',rendite:'Rendite-max'};
+var ME_PROFIL_KEIN_TXT='Anlageorientierung nicht erfasst';
+/* Textregel T-3 (debugs\v272_S593_textregeln.md): geleertes Feld ersetzt die Wendung, nicht nur die Zahl */
+var ME_PROFIL_AUS={h:['h\u00f6chstens <h> je Sektor','je Sektor: Regel aus'],n:['h\u00f6chstens <n> im ganzen Depot','im ganzen Depot: Regel aus']};
+function meProfilTxt(soll,pr){
+  var t,h,n;
+  if(!pr.o) return ME_PROFIL_TXT.keins;
+  t=ME_PROFIL_TXT[pr.o]; h=soll?soll.warn_hoch_je_sektor_max:null; n=soll?soll.hype_max_depot:null;
+  t=(typeof h==='number')?t.replace('<h>',String(h)):t.replace(ME_PROFIL_AUS.h[0],ME_PROFIL_AUS.h[1]);
+  t=(typeof n==='number')?t.replace('<n>',String(n)):t.replace(ME_PROFIL_AUS.n[0],ME_PROFIL_AUS.n[1]);
+  return t;
+}
+/* S593 T-1: Kurzzeile Hype-Anteil ohne Aufklappen im Kopf des Einzeltitel-Teils (#dp-kopf); dieselbe Rechnung meHypeAnteil */
+function meHypeKopf(){
+  var x,pr,t;
+  if(!DEPOT_POSITIONS.length) return '';
+  try{ x=meHypeAnteil(); pr=meProfil(); }catch(e){ return ''; }
+  if(x.anteil_pct===null) return '';
+  if(!x.positionen.length) t='Hype-Anteil (Warnstufe hoch): 0 %';
+  else{
+    t='Hype-Anteil (Warnstufe hoch): '+mePkt(x.anteil_pct)+' % des Gesamtverm\u00f6gens';
+    if(pr.eff==='rendite') t+='; bei -80 %: -'+mePkt(x.stress80)+' Punkte';
+  }
+  if(!x.vollstaendig) t+=' (unvollst\u00e4ndig)';
+  return '<div id="dp-hype-kopf" style="font-family:monospace;font-size:11px;color:#ffcf70;margin:-4px 0 8px;line-height:1.5">'+t+'</div>';
 }
 /* S537n E-1: EINE Rechnung des Nenners Gesamtvermoegen (Konzept 2.0/2.1), Leser: Schritt 2, Klassenblock, Tab Bestand.
    x = Nenner minus Einzeltitel minus bewerteter ETF-Teil; Handwerte aus dem GESPEICHERTEN Eingabeblock (N2). */
@@ -8077,7 +8239,7 @@ function meGeraetTxt(){
   return 'Stand dieses Ger&auml;ts'+(g?' ('+etfEsc(g)+')':'')+': Cash '+((cash&&sd)?'vom '+sd:'nicht erfasst')+', Werte au&szlig;erhalb '+(sd?'vom '+sd:'nicht erfasst');
 }
 function meKlassenRender(){
-  var el=document.getElementById('me-klassen'),tot,kr,h,i,x;
+  var el=document.getElementById('me-klassen'),tot,kr,h,i,x,rt;
   if(!el) return;
   tot=dpCalcTotal();
   kr=gvNenner(tot.val,0).kr;
@@ -8086,7 +8248,8 @@ function meKlassenRender(){
     x=kr.z[i];
     h+='<tr class="me-klasse" data-k="'+x.k+'" style="border-top:1px solid #1f2933"><td style="padding:3px 6px">'+x.k+'</td><td style="text-align:right;padding:3px 6px">'+(x.b>0?bestEur(x.b):'--')+'</td><td style="text-align:right;padding:3px 6px">'+(x.a>0?bestEur(x.a):'--')+'</td><td style="text-align:right;padding:3px 6px">'+bestEur(x.s)+'</td><td style="text-align:right;padding:3px 6px">'+(x.p===null?'--':dpSgPct(x.p))+'</td></tr>';
   }
-  h+='</table></div><div style="font-size:10px;color:#6b7a8a;margin-top:3px">Ohne Soll-Spalte bis zur Gruppe Anlageklassen im Tab Bestand. Au&szlig;erhalb = gespeicherte Handwerte des Eingabeblocks &uuml;ber die Bestands-ETF hinaus.'+(kr.cashFehlt?' <b class="me-cash-fehlt">Cash nicht erfasst.</b>':'')+'</div>';
+  rt=meRiskant(kr,!kr.cashFehlt&&tot.hasPrice===tot.n,meProfil());  /* S593 A-5 */
+  h+=meRiskantZeile(rt)+'</table></div>'+meRiskantTxt(rt)+'<div style="font-size:10px;color:#6b7a8a;margin-top:3px">Ohne Soll-Spalte bis zur Gruppe Anlageklassen im Tab Bestand. Au&szlig;erhalb = gespeicherte Handwerte des Eingabeblocks &uuml;ber die Bestands-ETF hinaus.'+(kr.cashFehlt?' <b class="me-cash-fehlt">Cash nicht erfasst.</b>':'')+'</div>';
   el.innerHTML=h;
 }
 
@@ -8162,7 +8325,7 @@ function meSchritt3(c){
 function meGrund(z){ return z.g.concat(z.h).join('; '); }
 function meKandZeile(k,rolle){
   var er=erFuer(k.t);
-  return '<tr class="me-kand" data-t="'+etfEsc(k.t)+'" data-zone="'+k.zul.zone+'" style="border-top:1px solid #1f2933"><td style="padding:3px 5px;white-space:nowrap">'+k.r+'</td><td style="padding:3px 5px;white-space:nowrap;font-weight:700;color:#00c8f0">'+etfEsc(k.t)+warnBdg(k.t)+'</td><td style="padding:3px 5px;white-space:nowrap">'+meZoneTxt(k.zul.zone)+'</td><td style="padding:3px 5px;white-space:normal;min-width:140px">'+(meGrund(k.zul)||'--')+(er?'<div style="color:#7a9bb5">Ersatzpapier: '+etfEsc(er.name)+'</div>':'')+'</td></tr>';
+  return '<tr class="me-kand" data-t="'+etfEsc(k.t)+'" data-zone="'+k.zul.zone+'" style="border-top:1px solid #1f2933"><td style="padding:3px 5px;white-space:nowrap">'+k.r+'</td><td style="padding:3px 5px;white-space:nowrap;font-weight:700;color:#00c8f0">'+etfEsc(k.t)+warnBdg(k.t)+'</td><td style="padding:3px 5px;white-space:nowrap">'+meZoneTxt(k.zul.zone)+'</td><td style="padding:3px 5px;white-space:normal;min-width:140px">'+(meGrund(k.zul)||'--')+meRisikoSig(k.t)+(er?'<div style="color:#7a9bb5">Ersatzpapier: '+etfEsc(er.name)+'</div>':'')+'</td></tr>';
 }
 function meSchritt4(c){
   if(c.unv) return '<div style="font-size:11px;color:#ffab00">Zulassung unvollst&auml;ndig.</div>';
@@ -8187,13 +8350,13 @@ function meErsatzInfo(t){
 function meSchritt5(c){
   var h='',v=c.vs.v,i,x;
   if(c.unv) return '<div style="font-size:11px;color:#ffab00">Kein Vorschlag: Soll-Vergleich unvollst&auml;ndig.</div>'+meVergleichHtml(c.arme);
-  if(v) h+='<div id="me-vorschlag" data-t="'+etfEsc(v.t)+'" style="font-size:13px;font-weight:700;color:#00e57a">'+etfEsc(v.t)+' <span style="font-weight:400;font-size:11px;color:#dce8f5">'+etfEsc(v.name)+' (Rang '+v.r+' von '+v.n+') '+meZoneTxt(v.zul.zone)+'</span></div>'+(v.zul.h.length?'<div style="font-size:10px;color:#9fb0c0">'+v.zul.h.join('; ')+'</div>':'')+meWarnBlock(v.t)+meKgvHinweis(v.t)+meErsatzInfo(v.t);
+  if(v) h+='<div id="me-vorschlag" data-t="'+etfEsc(v.t)+'" style="font-size:13px;font-weight:700;color:#00e57a">'+etfEsc(v.t)+' <span style="font-weight:400;font-size:11px;color:#dce8f5">'+etfEsc(v.name)+' (Rang '+v.r+' von '+v.n+') '+meZoneTxt(v.zul.zone)+'</span></div>'+(v.zul.h.length?'<div style="font-size:10px;color:#9fb0c0">'+v.zul.h.join('; ')+'</div>':'')+meWarnBlock(v.t)+meRisikoSig(v.t)+meKgvHinweis(v.t)+meErsatzInfo(v.t);
   else h+='<div id="me-vorschlag" style="font-size:12px;color:#ffcf70">Kein zugelassener Titel: Schritt 3 (Kern).</div>';
   if(c.vs.ueb.length){
     h+='<div style="margin-top:6px;font-size:10px;color:#9fb0c0">&Uuml;bersprungen:</div>';
     for(i=0;i<c.vs.ueb.length;i++){
       x=c.vs.ueb[i];
-      h+='<div class="me-ueb" data-t="'+etfEsc(x.t)+'" style="font-size:10px;color:#cfe0f0;margin-top:3px"><b>'+etfEsc(x.t)+'</b> (Rang '+x.r+') &mdash; '+meGrund(x.zul)+meWarnBlock(x.t)+meErsatzInfo(x.t)+'</div>';
+      h+='<div class="me-ueb" data-t="'+etfEsc(x.t)+'" style="font-size:10px;color:#cfe0f0;margin-top:3px"><b>'+etfEsc(x.t)+'</b> (Rang '+x.r+') &mdash; '+meGrund(x.zul)+meWarnBlock(x.t)+meRisikoSig(x.t)+meErsatzInfo(x.t)+'</div>';
     }
   }
   if(c.paare.length){
@@ -8344,6 +8507,7 @@ function meRender(){
   try{
     c=meBerechne();
     h+='<div id="me-geraet" style="font-size:10px;color:#9fb0c0;margin-bottom:4px">'+meGeraetTxt()+'</div>';
+    h+='<div id="me-profil" data-o="'+(c.profil.o||'')+'" style="font-size:11px;color:#cfe0f0;line-height:1.5;background:#0a1628;border:1px solid #1a3050;border-radius:8px;padding:6px 10px;margin-bottom:6px">'+meProfilTxt(c.soll,c.profil)+'</div>';  /* S593 A-6 */
     h+='<div id="me-kopf" style="font-family:monospace;font-size:11px;color:#dce8f5;background:#0a1628;border:1px solid #1a3050;border-radius:8px;padding:7px 10px;margin-bottom:8px">'+meKopfTxt(c)+'</div>';
     if(ME_UI.quittung) h+='<div id="me-quittung" style="font-size:11px;color:#00e57a;margin-bottom:8px">'+ME_UI.quittung+'</div>';
     h+=meKarte(1,'F&auml;llig und Verkauf',meSchritt1(c),'me-s1');
@@ -8751,7 +8915,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.52 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.53 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
@@ -9197,6 +9361,7 @@ function obNext(){
     try{localStorage.setItem(OB_KEY,JSON.stringify(profile));}catch(e){}
     var ov=document.getElementById('onboarding-overlay');if(ov){ov.style.display='none';}
     renderProfileBadge(profile);
+    try{ if(typeof meRender==='function') meRender(); if(typeof dpRenderRisk==='function') dpRenderRisk(); if(typeof dpRenderKopf==='function') dpRenderKopf(); }catch(eP){}  /* S593: Profilwechsel wirkt sofort im Tab Monat und Bestand */
     /* S101: Allok-Zielkacheln nach Profilwechsel neu berechnen.
        Nur wenn Alloc-Tab bereits initialisiert (ALLOC_TARGETS befuellt);
        sonst uebernimmt initAlloc() das neue Profil beim naechsten Oeffnen. */
