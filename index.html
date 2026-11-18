@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.51</title>
+<title>StockIQ v6.6.52</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -137,7 +137,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.51 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.52 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
       <div id="hdr-rangbasis" style="font-family:monospace;font-size:10px;color:var(--mut)">Rangbasis D1-IND seit 03.11.2026; D1 als Schatten</div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
@@ -497,7 +497,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.51 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.52 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -765,6 +765,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.52</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Kaufbremse bei Warnstufe hoch -- ein Titel mit Warnstufe hoch wird nicht vorgeschlagen, wenn im Bestand schon so viele Positionen desselben Sektors mit Warnstufe hoch liegen, wie im Soll erlaubt (Start: eine); Soll-Feld im Tab Bestand.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.51</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Anleitung hinter dem Knopf i (auch in der Hilfe), Vergleichszeile Rang allein / D1 roh / Schnitt (Beobachtung), Kopfzeile Stand dieses Ger&auml;ts, Exportpaket f&uuml;r den Berater (auch im Bestand). Watchlist: Zeichen S und R links nach dem Ticker. Bestand: Kursdatum je ETF, Hinweis nicht im Universum. Buchungen speichern das Etikett.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.50</td><td style="padding:5px 8px;color:var(--mut)">Detailansicht: Qualit&auml;t mit Cash (Schatten, ungetestet), Cash-Profitabilit&auml;t, Cash je Euro Gewinn, Accruals-Quote und FCF-Rendite nach Aktienverg&uuml;tung; kein Einfluss auf Rang oder BUY. Buchung Einzeltitel: ein Suchfeld &uuml;ber alle Titel.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.49</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat ersetzt den Tab Allokation: Monatsentscheid in sechs Schritten (f&auml;llige Positionen, Platz, Kern, Zulassung nach Soll, Vorschlag, Buchung mit Protokoll), Ersatzpapiere, Warnetikett nach steilem Anstieg auch in Watchlist und Bestand. Einzeltitel-Anteil jetzt mit Cash und Werten au&szlig;erhalb des Depots. Der Rechner mit Alarm und die Beck/GPO-Karte entfallen.</td><td style="padding:5px 8px;color:#456278">Nov 2026</td></tr>
@@ -851,7 +852,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Bestand</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.51
+    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.52
   </div>
   <div id="dp-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:14px"></div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
@@ -1037,7 +1038,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </details>
 </div><!-- Ende p8 Bestand -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.51 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.52 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2725,7 +2726,7 @@ var ME_ANLEITUNG=[
   '2 Platz: Liegt der Einzeltitel-Teil nach den Verk\u00e4ufen unter dem Deckel? Gesperrt: kein Einzeltitel-Kauf, weiter mit 3.',
   '3 Kern: Liegt der Kern-ETF unter seinem Band, geht das Geld zuerst dorthin; kommt kein Kauf zustande, ebenfalls.',
   '4 Zulassung: F\u00fcr jeden BUY-Titel ohne Depotposition zeigt die Seite, was ein Kauf in Durchschnittsgr\u00f6\u00dfe mit Region, Sektor und Deckel macht: frei, Hinweis oder gesperrt.',
-  '5 Vorschlag: der rangh\u00f6chste zugelassene Titel und die drei besten Paare aus Verkauf und Kauf. Das Dreieck ist das Warnetikett nach steilem Anstieg -- nur Information. Die Vergleichszeile zeigt, was die Rangliste allein und die Challenger gekauft h\u00e4tten: Beobachtung, keine Empfehlung.',
+  '5 Vorschlag: der rangh\u00f6chste zugelassene Titel und die drei besten Paare aus Verkauf und Kauf. Das Dreieck ist das Warnetikett nach steilem Anstieg -- allein nur Information; liegen im Bestand schon Positionen mit Warnstufe hoch, kann die Kaufbremse den Kauf sperren (Schritt 4). Die Vergleichszeile zeigt, was die Rangliste allein und die Challenger gekauft h\u00e4tten: Beobachtung, keine Empfehlung.',
   '6 Buchung: Verkauf und Kauf eintragen. Weichst du vom Vorschlag ab, nenne den Grund. Danach das Exportpaket ziehen.',
   'Was getestet ist: die Auswahl nach Rang, als Korb. Die Grenzen (Deckel, Region, Sektor) sind deine Pr\u00e4ferenzen, ungetestet.'
 ];
@@ -3706,7 +3707,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.51';
+      var PAGE_VERSION = 'v6.6.52';
       window.SIQ_PAGE_VERSION = PAGE_VERSION;  /* S572 A-4: meta.page_version im Exportpaket */
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
@@ -4730,6 +4731,7 @@ var ETF_ROLLE_LBL = {KERN:'Kern', GRUPPE:'Gruppen-ETFs (Regionen, Faktoren, Divi
    Speicher stockiq_depot_soll_v1 (S491, dpSollLoad im Depot-Risiko-Block) liest diese Konstante je Feld
    als Rueckfall; einzel_max = Deckel Einzeltitel in % des Gesamtdepots (Abschn. 2.1; DA-Zusatz zu 3.3). */
 var DEPOT_SOLL_STD = {kern_pct:40, kern_min:30, kern_max:50, einzel_max:60, sektor_max:20, region_max:50, position_max:15, kern_abw_pp:10, band_pp:5, china_max:5,
+  warn_hoch_je_sektor_max:1,  /* S591 A-3 (Konzept Depot-Soll 3.3/3.6.11): Kaufbremse h, ganze Zahl >= 0; im Formular geleert = null = Bremse aus */
   region_soll:{USA:57, EUROPA:20, JAPAN:7, UEBRIGE:5, SCHWELLEN:11}};  /* S532: Konzept v1.3 3.3; gespeicherte Werte bleiben, keine stille Umschreibung */
 
 function etfMacro(){ return (window.FD && FD['__macro__']) ? FD['__macro__'] : null; }
@@ -7064,7 +7066,12 @@ var DP_SOLL_LBL={kern_pct:['Kern-Quote','% des ETF-Teils'],kern_min:['Kern-Band 
   region_max:['Grenze je Region','% der Einzeltitel'],position_max:['Grenze Einzelposition','% der Einzeltitel'],
   kern_abw_pp:['Toleranz zum Kern','pp (Sektor)'],band_pp:['Band','pp'],china_max:['Deckel China','% des Aktienteils']};
 var DP_SOLL_MAX={kern_abw_pp:50};  /* Obergrenze je Feld, sonst 100 */
-var DP_SOLL_OPTIONAL={kern_abw_pp:1,einzel_max:1,band_pp:1,china_max:1};  /* fehlt in aelterem Stand: Standard, kein Fehler (Abschn. 3.3) */
+var DP_SOLL_OPTIONAL={kern_abw_pp:1,einzel_max:1,band_pp:1,china_max:1};
+/* S591 A-3: Kaufbremse h neben der Feldliste (darf null sein = vom Nutzer geleert = Bremse aus). Fehlt das Feld
+   in einem Soll-Block (aelterer Stand, Import), bleibt es weg und das Laden nimmt den Standard -- kein stilles
+   Umschreiben, Roundtrip byte-gleich. */
+var DP_SOLL_WARN='warn_hoch_je_sektor_max';
+function dpSollWarnOk(v){ return v===null||(dpSollZahl(v)&&v>=0&&v<=100&&Math.floor(v)===v); }  /* fehlt in aelterem Stand: Standard, kein Fehler (Abschn. 3.3) */
 var DP_SOLL_AUF=false;  /* Formular nach Speichern/Standard offen lassen */
 /* Soll-Speicher v1.3 (Konzept 3.3): region_soll als Objekt neben den Zahlenfeldern */
 function dpSollRegionLoad(r){
@@ -7097,6 +7104,7 @@ function dpSollLoad(){
     f=DP_SOLL_FELDER[i];
     o[f]=(r&&dpSollZahl(r[f]))?r[f]:DEPOT_SOLL_STD[f];
   }
+  o[DP_SOLL_WARN]=(r&&r.hasOwnProperty(DP_SOLL_WARN)&&dpSollWarnOk(r[DP_SOLL_WARN]))?r[DP_SOLL_WARN]:DEPOT_SOLL_STD[DP_SOLL_WARN];  /* S591 */
   o.region_soll=dpSollRegionLoad(r);
   o.stand=(r&&typeof r.stand==='string')?r.stand:null;
   return o;
@@ -7110,6 +7118,7 @@ function dpSollValid(o){
     if(!dpSollZahl(o[f])) return DP_SOLL_LBL[f][0]+': keine Zahl';
     if(o[f]<0||o[f]>mx) return DP_SOLL_LBL[f][0]+': ausserhalb des zulaessigen Bereichs';
   }
+  if(o[DP_SOLL_WARN]!==undefined&&!dpSollWarnOk(o[DP_SOLL_WARN])) return 'Warnstufe hoch je Sektor: ganze Zahl ab 0 oder leer';  /* S591 */
   if(!(o.kern_min<=o.kern_pct&&o.kern_pct<=o.kern_max)) return 'Kern-Quote liegt nicht im Kern-Band (von <= Quote <= bis)';
   return dpSollRegionValid(o.region_soll);
 }
@@ -7122,12 +7131,14 @@ function dpSollAusImport(s){
     o[f]=(s[f]===undefined&&DP_SOLL_OPTIONAL[f])?DEPOT_SOLL_STD[f]:s[f];
   }
   o.region_soll=(s.region_soll===undefined)?DEPOT_SOLL_STD.region_soll:s.region_soll;
+  if(s[DP_SOLL_WARN]!==undefined) o[DP_SOLL_WARN]=s[DP_SOLL_WARN];  /* S591: fehlt -> bleibt weg, Laden nimmt den Standard */
   fe=dpSollValid(o);
   return fe?{o:null,f:fe}:{o:o,f:''};
 }
 function dpSollSave(o,stand){
   var s={},i;
   for(i=0;i<DP_SOLL_FELDER.length;i++) s[DP_SOLL_FELDER[i]]=o[DP_SOLL_FELDER[i]];
+  if(o[DP_SOLL_WARN]!==undefined) s[DP_SOLL_WARN]=o[DP_SOLL_WARN];  /* S591 */
   s.region_soll=o.region_soll;
   s.stand=(typeof stand==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(stand))?stand:dpHeute();
   try{ localStorage.setItem(DP_SOLL_KEY,JSON.stringify(s)); return true; }catch(e){ return false; }
@@ -7139,6 +7150,8 @@ function dpSollFormSave(){
     f=DP_SOLL_FELDER[i]; el=document.getElementById('dp-soll-'+f);
     o[f]=el?parseFloat(el.value):NaN;
   }
+  el=document.getElementById('dp-soll-'+DP_SOLL_WARN);  /* S591: leeres Feld = null = Kaufbremse aus */
+  if(el) o[DP_SOLL_WARN]=(String(el.value).replace(/\s/g,'')==='')?null:Number(el.value);
   o.region_soll={};
   for(f in DEPOT_SOLL_STD.region_soll){ if(DEPOT_SOLL_STD.region_soll.hasOwnProperty(f)){ el=document.getElementById('dp-soll-rs-'+f); o.region_soll[f]=el?parseFloat(el.value):NaN; } }
   fe=dpSollValid(o);
@@ -7411,6 +7424,10 @@ function dpSollForm(soll){
       +' style="width:64px;background:#0c1420;border:1px solid #1a3050;color:#cfe0f0;font-size:11px;padding:2px 4px;border-radius:4px"> '
       +DP_SOLL_LBL[f][1]+'</label>';
   }
+  h+='<label class="dp-soll-warn" style="display:block;min-width:0;grid-column:1/-1">H&ouml;chstens '  /* S591 A-3 Formularzeile */
+    +'<input type="number" id="dp-soll-'+DP_SOLL_WARN+'" min="0" max="100" step="1" value="'+(soll[DP_SOLL_WARN]===null?'':soll[DP_SOLL_WARN])+'"'
+    +' style="width:48px;background:#0c1420;border:1px solid #1a3050;color:#cfe0f0;font-size:11px;padding:2px 4px;border-radius:4px"> '
+    +'Position(en) mit Warnstufe hoch je Sektor (leer = Kaufbremse aus)</label>';
   h+='</div><div style="margin-top:8px">Regions-Soll (% des Aktienteils; Summe siehe Pr&uuml;fung beim Speichern; Korridor = Soll +/- Band)</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px;margin-top:4px">';
   for(f in DEPOT_SOLL_STD.region_soll){
     if(!DEPOT_SOLL_STD.region_soll.hasOwnProperty(f)) continue;
@@ -7524,7 +7541,8 @@ function dpTxStorno(idx, el){
    dpSgZone, dpSgKorridor (ein Praedikat). Rang = rang12m (D1-IND, Tagesdatei).
    ============================================================ */
 var ME_KEY='stockiq_monat_v1', ER_KEY='stockiq_ersatzpapier_v1';
-var ME_WARN_AB='09.11.2026';  /* Null-Regel Warnetikett: erster Tageslauf mit den Feldern (S536/S557) */
+var ME_WARN_AB='09.11.2026';
+var ME_BREMSE_TXT='Kaufbremse: Ein Titel mit Warnstufe hoch wird nicht vorgeschlagen, wenn im Bestand schon so viele Positionen desselben Sektors mit Warnstufe hoch liegen, wie im Soll erlaubt (Start: eine). Pr\u00e4ferenz, verbindlich f\u00fcr den Kaufvorschlag; ungetestet. Du kannst sie in Schritt 6 \u00fcberstimmen, der Grund kommt ins Protokoll. Sie verkauft nichts und \u00e4ndert weder Rang noch BUY.';  /* S591 A-4: Hilfetext Kaufbremse (Brief S591, Konzept 3.6.11); eine Konstante */  /* Null-Regel Warnetikett: erster Tageslauf mit den Feldern (S536/S557) */
 var ME_UI={verkauf:{},kauf:null,ersatz:true,quittung:''};
 var ME_CALC=null;
 var ER_VORBELEG={'005930.KS':{name:'Samsung Electronics GDR',wkn:'896360',isin:'US7960508882',verhaeltnis:25,art:'GDR',hinweis:'Stammaktie; ING Direkthandel',stand:'2026-11-02'}};
@@ -7644,10 +7662,57 @@ function meVorschlag(kand,platz){
   }
   return {v:null,ueb:ueb};
 }
+/* S591 A-1 (Konzept Depot-Soll 3.6.11, Nachtrag N6): Kaufbremse bei Warnstufe hoch. Gesperrt, wenn der Kandidat
+   Warnstufe hoch traegt (warn_titel oder warn_branche) UND im Einzeltitel-Bestand schon mindestens h Positionen
+   desselben Sektors (Feld sector) Warnstufe hoch tragen; beides Wert des Lauftags (warnRec, dpSektor). h aus dem
+   Soll (warn_hoch_je_sektor_max; null = aus; 0 = jeder Kandidat mit hoch gesperrt). ETF zaehlen nicht. Eine Position
+   zaehlt mit ihrem Universumsticker (Zuordnung wie meKandListe/meArmSpitze: Ticker oder Rohsymbol ueber
+   dpRohTicker; das Ersatzpapier ist unter dem Universumsticker gebucht, 3.6.4). aus = {ticker:true}: in Schritt 1
+   gewaehlte bzw. im Paar verkaufte Positionen zaehlen nicht (Kla 18.11.2026). Null-Regel: fehlt eine Warnstufe,
+   sperrt die Bremse nicht ('Warnstufe nicht bestimmbar'). Aendert weder Rang, BUY, Warnetikett noch Vergleichszeile;
+   wirkt nur auf die Zulassung (Schritt 4, Vorschlag, Paare: Kla 18.11.2026). */
+function meWarnHoch(rec){
+  var a,b;
+  if(!rec) return null;
+  a=rec.warn_titel; b=rec.warn_branche;
+  if(a==='hoch'||b==='hoch') return true;
+  if((a==='kein'||a==='erhoeht')&&(b==='kein'||b==='erhoeht')) return false;
+  return null;
+}
+function meUniTicker(t){
+  var r=dpRohTicker(t),i,s;
+  for(i=0;i<STOCKS.length;i++){ s=STOCKS[i]; if(s.t===t||dpRohTicker(s.t)===r) return s.t; }
+  return null;
+}
+function meBremse(t,soll,aus){
+  var h=soll?soll.warn_hoch_je_sektor_max:null,sek,k,hoch=[],unb=[],i,p,u,w;  /* Feldname wie DP_SOLL_WARN; Modul bleibt ohne Soll-Teil ladbar */
+  if(typeof h!=='number') return null;
+  sek=dpSektor(t);
+  if(!sek) return null;
+  k=meWarnHoch(warnRec(t));
+  if(k===false) return null;
+  for(i=0;i<DEPOT_POSITIONS.length;i++){
+    p=DEPOT_POSITIONS[i];
+    if(!(p.shares>0)||(aus&&aus[p.t])) continue;
+    u=meUniTicker(p.t);
+    if(u===null||dpSektor(u)!==sek) continue;
+    w=meWarnHoch(warnRec(u));
+    if(w===true) hoch.push(etfEsc(p.t)); else if(w===null) unb.push(etfEsc(p.t));
+  }
+  if(k===true&&hoch.length>=h) return {g:hoch.length?'Kaufbremse: Sektor '+etfEsc(sek)+' hat schon '+hoch.length+' Position(en) mit Warnstufe hoch ('+hoch.join(', ')+')':'Kaufbremse: Soll erlaubt keine Position mit Warnstufe hoch je Sektor',n:hoch.length};
+  if(hoch.length+unb.length>=h&&(k===null||unb.length)) return {h:'Warnstufe nicht bestimmbar (Kaufbremse'+(unb.length?'; Bestand: '+unb.join(', '):'')+')'};
+  return null;
+}
+function meZulBremse(z,b){
+  if(!b) return z;
+  var g=z.g.slice(),h=z.h.slice();
+  if(b.g) g.push(b.g); else h.push(b.h);
+  return {zone:g.length?'gesperrt':(h.length?'hinweis':'frei'),g:g,h:h,bremse:b.g?'gesperrt':'unbestimmt'};
+}
 /* Paare (3.6.1): je Verkaufskandidat x Kaufkandidat die Lage nach beiden Buchungen; drei beste nach Mass,
    bei Gleichstand der hoehere Kaufrang. "Kein Verkauf + Kauf" nur mit Platz. Gesperrte Kaeufe zaehlen nicht. */
 function mePaareAlle(roh,soll,verk,kauf,platz){
-  var res=[],i,j,v,k,ops,L,z,liste=[null].concat(verk);
+  var res=[],i,j,v,k,ops,L,z,liste=[null].concat(verk),ap,bb;
   for(i=0;i<liste.length;i++){
     v=liste[i];
     if(v===null&&!platz) continue;
@@ -7656,6 +7721,7 @@ function mePaareAlle(roh,soll,verk,kauf,platz){
       ops=v?[{w:-v.w,reg:v.op.reg,sek:v.op.sek,cn:v.op.cn},k.op]:[k.op];
       L=meLage(roh,ops); z=meZul(L,roh,soll,k.op,false);
       if(z.zone==='gesperrt') continue;
+      ap={}; if(v) ap[v.t]=true; bb=meBremse(k.t,soll,ap); if(bb&&bb.g) continue;  /* S591: Kaufbremse; der Verkauf des Paars zaehlt nicht */
       res.push({v:v?v.t:null,k:k.t,rang:k.r,mass:meMass(L,roh,soll),zone:z.zone});
     }
   }
@@ -7841,7 +7907,8 @@ function meWarnErl(){
   h='<details id="me-warn-erl" style="margin-top:6px;font-size:10px;color:#9fb0c0"><summary style="cursor:pointer">Was das Warnetikett bedeutet</summary><div style="line-height:1.6;margin-top:4px">'
     +'<b>Anstieg Titel</b>: Kursver&auml;nderung mit Dividenden der letzten 24 Monate. <b>Anstieg Branche</b>: derselbe Wert f&uuml;r den gleichgewichteten Index der Industrie (mindestens drei Titel, sonst Sektor). '
     +'<b>Endverlust</b>: 24 Monate nach dem Stichtag mindestens 25 % im Minus. <b>R&uuml;ckschlag</b>: Fall um mindestens 25 % vom laufenden Hoch innerhalb der 24 Monate. '
-    +'Stufen Titel: erh&ouml;ht ab 100 %, hoch ab 200 %. Stufen Branche: erh&ouml;ht ab 50 %, hoch ab 150 %. Das Etikett &auml;ndert weder Zulassung noch Reihenfolge, es ist keine Verkaufsregel. Belegstufe 2: die Grenzen wurden nach Sicht der Daten gew&auml;hlt.';
+    +'Stufen Titel: erh&ouml;ht ab 100 %, hoch ab 200 %. Stufen Branche: erh&ouml;ht ab 50 %, hoch ab 150 %. Das Etikett allein &auml;ndert weder Zulassung noch Reihenfolge, es ist keine Verkaufsregel. Belegstufe 2: die Grenzen wurden nach Sicht der Daten gew&auml;hlt.';
+  h+='<div class="me-bremse-erl" style="margin-top:4px">'+ME_BREMSE_TXT+'</div>';  /* S591 A-4 */
   if(m){
     h+='<div class="dp-scroll" style="margin-top:4px"><table style="border-collapse:collapse;font-size:10px"><tr><th style="text-align:left;padding:2px 6px">Zelle</th><th style="text-align:right;padding:2px 6px">N</th><th style="text-align:right;padding:2px 6px">Endverlust</th><th style="text-align:right;padding:2px 6px">R&uuml;ckschlag</th></tr>';
     for(i=0;i<m.raten.length;i++){
@@ -7962,6 +8029,9 @@ function meBerechne(){
   var platz0=(L1.q!==null&&dpSgZone(L1.q,soll.einzel_max,soll.band_pp)!=='gesperrt'&&!unv);
   var kand=meKandListe(avg);
   for(i=0;i<kand.length;i++) kand[i].zul=meZul(meLage(roh,ops.concat([kand[i].op])),roh,soll,kand[i].op,false);
+  var ausV={};  /* S591: in Schritt 1 gewaehlte Verkaeufe zaehlen nicht zum Bestand der Kaufbremse */
+  for(i=0;i<kandV.length;i++) if(ME_UI.verkauf[kandV[i].t]&&kandV[i].w!==null) ausV[kandV[i].t]=true;
+  for(i=0;i<kand.length;i++) kand[i].zul=meZulBremse(kand[i].zul,meBremse(kand[i].t,soll,ausV));
   var verk=[];
   for(i=0;i<kandV.length;i++) if(kandV[i].w!==null) verk.push(kandV[i]);
   ME_CALC={gv:gv,soll:soll,r:r,roh:roh,kd:kd,heute:heute,prot:prot,ohne:ohne,nAus:nAus,unv:unv,faellig:faellig,halten:halten,kandV:kandV,LV:LV,LP:LP,pZone:pZone,platz:platz,erl:erl,avg:avg,
@@ -8681,7 +8751,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.51 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.52 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
