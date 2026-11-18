@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.53</title>
+<title>StockIQ v6.6.54</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -137,7 +137,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.53 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.54 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
       <div id="hdr-rangbasis" style="font-family:monospace;font-size:10px;color:var(--mut)">Rangbasis D1-IND seit 03.11.2026; D1 als Schatten</div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
@@ -192,6 +192,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <button id="wl-hi-btn" class="wf" onclick="toggleHiFilter()">HIST (--)</button>
     <button id="wl-bb-btn" class="wf" onclick="toggleBbFilter()">Bleibt BUY (--)</button>
     <button id="wl-sn-btn" class="wf" onclick="toggleSnFilter()" title="Schnitt: in BUY nach beiden Rangbasen (D1-IND und Schatten D1). Kandidat C-BUY-SCHNITT, ungetestet &ndash; Anzeige, keine Regel.">Schnitt (--)</button>
+    <button id="wl-mo-btn" class="wf" onclick="toggleMoFilter()" title="Kaufkandidaten aus Schritt 4 des Monatsentscheids">Monat (--)</button>
     <button id="wl-erl-btn" class="wf" onclick="wlErlToggle()" title="Erl&auml;uterungen ein- und ausblenden" aria-label="Erl&auml;uterungen" style="font-weight:700;padding:5px 11px">i</button>
   </div>
   <!-- S459 W3: Legendenzeile, Text zur Laufzeit aus KZ_ZEILE_WL/KZ_ROLLE (wlLegende) -->
@@ -220,7 +221,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Auswahl</strong>: die vorderen Pl&auml;tze der BUY-Liste. Diese Gruppe hat in der R&uuml;ckrechnung am besten abgeschnitten.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Trend</strong>: das fr&uuml;here Kaufsignal. Es hat im Test keinen eigenen Vorteil gezeigt und dient nur der Information.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">U200</strong>: Kurs unter der 200-Tage-Linie. Ein Kennzeichen, kein Verkaufssignal.</div>
-    <div><strong style="color:#7a9bb5">Schnitt</strong>: Titel, die nach beiden Rangbasen (Branchenvergleich und rohe Zw&ouml;lf-Monats-Entwicklung) im obersten Zehntel stehen. Hypothesenkandidat, ungetestet; kein Kaufhinweis.</div>
+    <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Schnitt</strong>: Titel, die nach beiden Rangbasen (Branchenvergleich und rohe Zw&ouml;lf-Monats-Entwicklung) im obersten Zehntel stehen. Hypothesenkandidat, ungetestet; kein Kaufhinweis.</div>
+    <div><strong style="color:#7a9bb5">Monat</strong>: zeigt die Kaufkandidaten aus Schritt 4 des Tabs Monat. Ob ein Titel zugelassen ist und warum nicht, steht nur im Tab Monat.</div>
   </div>
   <!-- S572 A-3: S und R, Text aus WL_ARM_TXT (wlErlToggle); eigener Block, #wl-kennz-erl bleibt wortgleich mit der Hilfe -->
   <div id="wl-arm-erl" class="wl-erl-blk"></div>
@@ -497,7 +499,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.53 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.54 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -640,14 +642,15 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Auswahl</strong>: die vorderen Pl&auml;tze der BUY-Liste. Diese Gruppe hat in der R&uuml;ckrechnung am besten abgeschnitten.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Trend</strong>: das fr&uuml;here Kaufsignal. Es hat im Test keinen eigenen Vorteil gezeigt und dient nur der Information.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">U200</strong>: Kurs unter der 200-Tage-Linie. Ein Kennzeichen, kein Verkaufssignal.</div>
-    <div><strong style="color:#7a9bb5">Schnitt</strong>: Titel, die nach beiden Rangbasen (Branchenvergleich und rohe Zw&ouml;lf-Monats-Entwicklung) im obersten Zehntel stehen. Hypothesenkandidat, ungetestet; kein Kaufhinweis.</div>
+    <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Schnitt</strong>: Titel, die nach beiden Rangbasen (Branchenvergleich und rohe Zw&ouml;lf-Monats-Entwicklung) im obersten Zehntel stehen. Hypothesenkandidat, ungetestet; kein Kaufhinweis.</div>
+    <div><strong style="color:#7a9bb5">Monat</strong>: zeigt die Kaufkandidaten aus Schritt 4 des Tabs Monat. Ob ein Titel zugelassen ist und warum nicht, steht nur im Tab Monat.</div>
   </div>
   </div>
 
   <!-- FILTER DER WATCHLIST (S297) v6.6.18 -->
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128202; Filter der Watchlist</div>
-    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Watchlist zeigt alle bewerteten Titel. Oben stehen die Filter f&uuml;r die Auswahl der Titel (Alle, Sektor, Favoriten, fSc hoch, Dividende), darunter die Kennzeichen (Auswahl, Trend, U200, HIST, Bleibt BUY). Alle Filter wirken zusammen und &auml;ndern die Reihenfolge nie: Wer den Sektor &bdquo;Technologie&ldquo; und die Kachel BUY w&auml;hlt, sieht nur die BUY-Titel aus der Technologie. Jedes wirkende Element ist markiert. Findet eine Kombination keinen Titel, nennt die Liste die Filter und bietet &bdquo;Filter zur&uuml;cksetzen&ldquo;.</div>
+    <div style="font-size:12px;color:var(--mut);line-height:1.7;margin-bottom:10px">Die Watchlist zeigt alle bewerteten Titel. Oben stehen die Filter f&uuml;r die Auswahl der Titel (Alle, Sektor, Favoriten, fSc hoch, Dividende), darunter die Kennzeichen (Auswahl, Trend, U200, HIST, Bleibt BUY, Schnitt, Monat). Alle Filter wirken zusammen und &auml;ndern die Reihenfolge nie: Wer den Sektor &bdquo;Technologie&ldquo; und die Kachel BUY w&auml;hlt, sieht nur die BUY-Titel aus der Technologie. Jedes wirkende Element ist markiert. Findet eine Kombination keinen Titel, nennt die Liste die Filter und bietet &bdquo;Filter zur&uuml;cksetzen&ldquo;.</div>
     <div style="overflow-x:auto">
     <table style="width:100%;border-collapse:collapse;font-size:11px;color:var(--mut)">
       <tr><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">Bedienelement</th><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">Wirkung</th><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">Art</th><th style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a;text-align:left;color:#dce8f5">&bdquo;Alle&ldquo; setzt zur&uuml;ck</th></tr>
@@ -661,6 +664,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>U200 (n)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel unter der 200-Tage-Linie, bei jedem Etikett. Ein Kennzeichen, kein Verkaufssignal.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter (Kennzeichen)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>HIST (n)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel mit dem fr&uuml;heren Verkaufssignal aus dem MACD-Histogramm, bei jedem Etikett. Ohne belegte Vorhersagekraft.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter (Kennzeichen)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Bleibt BUY (n)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, die heute BUY sind und schon vor zw&ouml;lf Monaten BUY waren (wie im Bericht Rotation). Ohne aktuelle Daten nicht w&auml;hlbar.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter (Kennzeichen)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Schnitt (n)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Titel, die nach beiden Rangbasen (Branchenvergleich und rohe Zw&ouml;lf-Monats-Entwicklung) im obersten Zehntel stehen. Hypothesenkandidat, ungetestet; kein Kaufhinweis.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter (Kennzeichen)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
+      <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Monat (n)</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">zeigt die Kaufkandidaten aus Schritt 4 des Tabs Monat. Ob ein Titel zugelassen ist und warum nicht, steht nur im Tab Monat.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter (Kennzeichen)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>i</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Blendet die Erkl&auml;rungen zu Etiketten, Kennzeichen, Filtern und Marktphase ein und aus, auch auf dem iPhone. Beim Laden zu.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Anzeige</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">nein</td></tr>
       <tr style="background:#0a1628"><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Suchfeld</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Nur Titel, deren Ticker oder Name den Suchtext enth&auml;lt.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja, das Feld wird geleert</td></tr>
       <tr><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a"><b>Kachel BUY / SELL Abstieg / WATCH</b></td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Antippen zeigt nur diese Gruppe, nochmals antippen hebt das auf. Ohne aktuelle Daten zeigt SELL Abstieg &ndash;&ndash;.</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">Filter (Gruppe)</td><td style="padding:5px 7px;vertical-align:top;border-top:1px solid #1a2a3a">ja</td></tr>
@@ -765,6 +770,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.54</td><td style="padding:5px 8px;color:var(--mut)">Ticker im Tab Monat &ouml;ffnen die Watchlist; neuer Filter Monat.</td><td style="padding:5px 8px;color:var(--mut)">18.11.2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.53</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Die Anlageorientierung wirkt -- Kapitalerhalt kauft keinen Titel mit Warnstufe hoch, Ausgewogen h&ouml;chstens eine solche Position im ganzen Depot, Rendite-max zeigt das Risikosignal; Zeilen Profil und Riskanter Teil; Hype-Anteil im Tab Bestand.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.52</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Kaufbremse bei Warnstufe hoch -- ein Titel mit Warnstufe hoch wird nicht vorgeschlagen, wenn im Bestand schon so viele Positionen desselben Sektors mit Warnstufe hoch liegen, wie im Soll erlaubt (Start: eine); Soll-Feld im Tab Bestand.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.51</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Anleitung hinter dem Knopf i (auch in der Hilfe), Vergleichszeile Rang allein / D1 roh / Schnitt (Beobachtung), Kopfzeile Stand dieses Ger&auml;ts, Exportpaket f&uuml;r den Berater (auch im Bestand). Watchlist: Zeichen S und R links nach dem Ticker. Bestand: Kursdatum je ETF, Hinweis nicht im Universum. Buchungen speichern das Etikett.</td></tr>
@@ -853,7 +859,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Bestand</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.53
+    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.54
   </div>
   <div id="dp-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:14px"></div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
@@ -1039,7 +1045,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </details>
 </div><!-- Ende p8 Bestand -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.53 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.54 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -1376,7 +1382,9 @@ var _wlAwN = null, _wlTrN = null; /* S383: Chip-Zahl n je rWL; null = vor dem La
 /* S417 W-2/W-3: weitere Zeilenfilter; von "Alle" zurueckgesetzt, nicht persistiert */
 var WL_U2_FILTER = false, WL_HI_FILTER = false, WL_BB_FILTER = false, WL_DV_FILTER = false;
 var WL_SN_FILTER = false;  /* S523: Schnitt D1/D1-IND, Anzeige ohne Regel; von "Alle" zurueckgesetzt, nicht persistiert */
-var _wlU2N = null, _wlHiN = null, _wlBbN = null, _wlSnN = null;
+var WL_MO_FILTER = false;  /* S598: Monat = Kaufkandidaten aus Schritt 4 des Tabs Monat (monatIs), Anzeige; von "Alle" zurueckgesetzt, nicht persistiert */
+var _wlU2N = null, _wlHiN = null, _wlBbN = null, _wlSnN = null, _wlMoN = null;
+var _wlMoSet = null;  /* S598: Menge des Filters Monat je rWL-Lauf (monatMenge); null = nicht berechenbar */
 var WL_DV_MIN = 4;   /* S417 W-2 (Kla 08.10.2026): Dividendenrendite in Prozent; Schwelle steht nur hier, nie auf der Seite */
 var _wlFavHinweis = false; /* S417 W-5: Fav ohne Favoriten -> Hinweis statt Markierung */
 // SYNC-START:FSC_FILTER_VARS
@@ -2087,7 +2095,8 @@ function wlKachelKlick(f){ wlFilt(WL_FILTER===f?'all':f,null); }
 function rWL(){
   var i,s,t,scored;
   var buys=0,abst=0,watches=0;
-  var n={aw:0,tr:0,u2:0,hi:0,bb:0,sn:0};  /* S383/S417/S523: Chip-Zahlen */
+  var n={aw:0,tr:0,u2:0,hi:0,bb:0,sn:0,mo:0};  /* S383/S417/S523/S598: Chip-Zahlen */
+  _wlMoSet=monatMenge();  /* S598: Menge Schritt 4 einmal je Lauf, vor Zaehlung und Zeilenauswahl */
   rMpZeile();
   /* S417 W-5: Fav ohne Favoriten wirkt nicht -- Hinweis statt Markierung. */
   if(WL2_SYNC&&Object.keys(WL2).length===0){ WL2_SYNC=false; _wlFavHinweis=true; }
@@ -2106,6 +2115,7 @@ function rWL(){
     if(wlRowPass(s,'hi')&&histIs(s)) n.hi++;
     if(wlRowPass(s,'bb')&&bleibtBuy(t)) n.bb++;
     if(wlRowPass(s,'sn')&&schnittIs(t)) n.sn++;
+    if(wlRowPass(s,'mo')&&monatIs(t)) n.mo++;  /* S598 */
     if(!wlRowPass(s)) continue;
     /* S296: Zuordnung ueber wlBucket -- eine Quelle fuer Kachel, Gruppe
        und Filter. */
@@ -2120,6 +2130,7 @@ function rWL(){
   _wlU2N=_geladen?n.u2:null; _wlHiN=_geladen?n.hi:null;
   _wlBbN=(_geladen&&_abAkt)?n.bb:null;  /* AP-3: ohne Projektion "--", nie 0 */
   _wlSnN=_geladen?n.sn:null;
+  _wlMoN=(_geladen&&_wlMoSet!==null)?n.mo:null;  /* S598 AP-3: Menge nicht berechenbar -> "--", nie 0 */
   var kpi=document.getElementById('wl-kpi');
   /* S395 R-1 / S417 W-7: SELL Abstieg zeigt "--", solange die Projektion
      fehlt (AP-3: nie 0 statt fehlend), und ist dann nicht antippbar. */
@@ -2182,6 +2193,7 @@ function wlReset(){
   WL_HI_FILTER=false;
   WL_BB_FILTER=false;
   WL_SN_FILTER=false;
+  WL_MO_FILTER=false;  /* S598 */
   _wlFavHinweis=false;
   rWL();
 }
@@ -2201,6 +2213,7 @@ function wlAktiveFilter(){
   if(WL_HI_FILTER) a.push('HIST');
   if(WL_BB_FILTER) a.push('Bleibt BUY');
   if(WL_SN_FILTER) a.push('Schnitt');
+  if(WL_MO_FILTER) a.push('Monat');  /* S598 */
   if(WL_FILTER!=='all') a.push(({buy:'BUY',abstieg:'SELL Abstieg',watch:'WATCH'})[WL_FILTER]||wlEsc(WL_FILTER));
   return a;
 }
@@ -2218,7 +2231,7 @@ function wlPaint(){
   var akt=wlAktiveFilter(),i,b,an;
   var defs=[['wl-alle-btn',akt.length===0],['sync-btn',WL2_SYNC],['wl-fsc-btn',FSC_FILTER],['wl-dv-btn',WL_DV_FILTER],
             ['wl-aw-btn',WL_AW_FILTER],['wl-tr-btn',WL_TR_FILTER],['wl-u2-btn',WL_U2_FILTER],['wl-hi-btn',WL_HI_FILTER],
-            ['wl-bb-btn',WL_BB_FILTER],['wl-sn-btn',WL_SN_FILTER],['sort-rang',WL_SORT==='std'],['sort-q',WL_SORT==='q'],['sort-kgv',WL_SORT==='kgv'],
+            ['wl-bb-btn',WL_BB_FILTER],['wl-sn-btn',WL_SN_FILTER],['wl-mo-btn',WL_MO_FILTER],['sort-rang',WL_SORT==='std'],['sort-q',WL_SORT==='q'],['sort-kgv',WL_SORT==='kgv'],
             ['sort-div',WL_SORT==='div'],['sort-alpha',WL_SORT==='alpha'],
             ['wl-sector-filter',!!WL_SECTOR_FILTER],['wl-search',!!WL_SEARCH]];
   for(i=0;i<defs.length;i++){
@@ -2437,6 +2450,7 @@ function wlRowPass(s,ohne){
   if(WL_HI_FILTER&&ohne!=='hi'&&!histIs(s)) return false;
   if(WL_BB_FILTER&&ohne!=='bb'&&!bleibtBuy(s.t)) return false;
   if(WL_SN_FILTER&&ohne!=='sn'&&!schnittIs(s.t)) return false;  /* S523 */
+  if(WL_MO_FILTER&&ohne!=='mo'&&!monatIs(s.t)) return false;  /* S598 */
   return true;
 }
 /* isD1: EINZIGE Stelle, an der die Schwelle des obersten Zehntels steht
@@ -3180,12 +3194,13 @@ function toggleDvFilter(){ WL_DV_FILTER = !WL_DV_FILTER; rWL(); }
 function wlChipPaint(){
   /* S417: Text "Name (n)"; die Markierung setzt wlPaint (Klasse on). */
   var defs=[['wl-aw-btn','Auswahl',_wlAwN],['wl-tr-btn','Trend',_wlTrN],['wl-u2-btn','U200',_wlU2N],
-            ['wl-hi-btn','HIST',_wlHiN],['wl-bb-btn','Bleibt BUY',_wlBbN],['wl-sn-btn','Schnitt',_wlSnN]],i,b;
+            ['wl-hi-btn','HIST',_wlHiN],['wl-bb-btn','Bleibt BUY',_wlBbN],['wl-sn-btn','Schnitt',_wlSnN],['wl-mo-btn','Monat',_wlMoN]],i,b;
   for(i=0;i<defs.length;i++){
     b=document.getElementById(defs[i][0]); if(!b) continue;
     b.textContent=defs[i][1]+' ('+((defs[i][2]===null)?'--':defs[i][2])+')';
   }
   b=document.getElementById('wl-bb-btn'); if(b) b.disabled=!abstiegAktiv();  /* AP-3: ohne Projektion nicht waehlbar */
+  b=document.getElementById('wl-mo-btn'); if(b) b.disabled=(_wlMoN===null&&!WL_MO_FILTER);  /* S598 AP-3: Menge nicht berechenbar -> gesperrt; ein aktiver Filter bleibt abschaltbar */
 }
 /* toggleAwFilter: Schalter des Zeilenfilters Auswahl. */
 function toggleAwFilter(){
@@ -3202,6 +3217,7 @@ function toggleU2Filter(){ WL_U2_FILTER = !WL_U2_FILTER; rWL(); }
 function toggleHiFilter(){ WL_HI_FILTER = !WL_HI_FILTER; rWL(); }
 function toggleBbFilter(){ if(!abstiegAktiv()&&!WL_BB_FILTER) return; WL_BB_FILTER = !WL_BB_FILTER; rWL(); }
 function toggleSnFilter(){ WL_SN_FILTER = !WL_SN_FILTER; rWL(); }  /* S523 */
+function toggleMoFilter(){ if(_wlMoN===null&&!WL_MO_FILTER) return; WL_MO_FILTER = !WL_MO_FILTER; rWL(); }  /* S598 */
 
 function toggleSync(btn){
   /* S417 W-5: ohne Favoriten wird Fav nicht markiert -- Hinweis statt Markierung. */
@@ -3709,7 +3725,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.53';
+      var PAGE_VERSION = 'v6.6.54';
       window.SIQ_PAGE_VERSION = PAGE_VERSION;  /* S572 A-4: meta.page_version im Exportpaket */
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
@@ -8014,6 +8030,38 @@ function meKandListe(avg){
   l.sort(function(a,b){ return (a.r-b.r)||(a.t<b.t?-1:(a.t>b.t?1:0)); });
   return l;
 }
+/* S598 B-1: Ticker im Tab Monat als Link in die Watchlist. meWlSprung ist die EINE Sprungfunktion: Ticker -> Universumsticker
+   (meUniTicker: Rohsymbol oder unter dem Universumsticker gebuchtes Ersatzpapier, 3.6.4), dann Muster Ticker-Zelle Tab Bestand
+   (goTab(1), wlDetail nach 80 ms). wl-detail steht ausserhalb der Liste: die Detailansicht oeffnet auch, wenn ein Filter den
+   Titel ausblendet; Filter bleiben unberuehrt. WL_SEL wird vorher geleert, damit ein schon offener Titel nicht zuklappt.
+   meWlLink baut den Link (Text = angezeigter Ticker); Ticker ausserhalb des Universums bleiben Text. ME_UI bleibt unberuehrt. */
+var ME_WL_TTL='In der Watchlist \u00f6ffnen (Kennzahlen und Chart)';  /* W-1 */
+function meWlSprung(t){
+  var u=meUniTicker(t);
+  if(u===null) return;
+  goTab(1,document.getElementById('tb1'));
+  setTimeout(function(){ var d; WL_SEL=null; wlDetail(u); d=document.getElementById('wl-detail'); if(d&&d.scrollIntoView) d.scrollIntoView(); },80);
+}
+function meWlLink(t){
+  var u=meUniTicker(t);
+  if(u===null) return etfEsc(t);
+  return '<a href="#" class="me-wl" data-wl="'+etfEsc(u)+'" title="'+ME_WL_TTL+'" onclick="meWlSprung(\''+etfEsc(t)+'\');return false" style="color:inherit;text-decoration:underline dotted;cursor:pointer">'+etfEsc(t)+'</a>';
+}
+/* S598 B-4/B-5: Filter Monat der Watchlist. Menge = Kaufkandidaten aus Schritt 4 (ME_CALC.kand aus meKandListe), ohne
+   Zulassungsstatus. Die Menge haengt nicht von der Auswahl in Schritt 1/5 ab (nur die Zulassung haengt daran). Gerechnet
+   wird mit meBerechne auf dem aktuellen Stand und der Auswahl ME_UI (ohne Besuch des Tabs leer), nur lesend: ME_CALC wird
+   zurueckgesetzt, kein Schreibzugriff. null = nicht berechenbar (keine Tagesdaten, Soll-Vergleich unvollstaendig wie in
+   Schritt 4, Fehler) -> Chip "Monat (--)" gesperrt, nie 0 (AP-3). monatIs ist das EINE Praedikat (wlRowPass, rWL). */
+function monatMenge(){
+  var alt=ME_CALC,c=null,m={},i;
+  if(typeof _scoresArr==='undefined'||!_scoresArr||!_scoresArr.length) return null;
+  try{ c=meBerechne(); }catch(e){ c=null; }
+  ME_CALC=alt;
+  if(!c||c.unv) return null;
+  for(i=0;i<c.kand.length;i++) m[c.kand[i].t]=true;
+  return m;
+}
+function monatIs(t){ return !!(_wlMoSet&&_wlMoSet.hasOwnProperty(t)&&_wlMoSet[t]===true); }
 /* S572 A-2 (Konzept Depot-Soll 3.6.8): Vergleichszeile. Je Arm der ranghoechste Titel des Arms ohne Depotposition,
    ohne Zulassung (wie Rang allein, 3.6.3), Rang in der eigenen Basis. Praedikate: buyIsD1 (Rang allein),
    d1RohIs (D1 roh, Rang mom12m_rang), schnittIs (Schnitt, Rang D1-IND laut Kla 17.11.2026). Beobachtung,
@@ -8053,7 +8101,7 @@ function meVergleichHtml(a){
       x=g[i].arme[j]; nm.push(x.name+(x.et?' ('+x.et+')':'')); ks.push(x.k);
       if(x.x) rg.push((g[i].arme.length>1?x.name+': ':'')+'Rang '+x.x.r+' von '+x.x.n);
     }
-    h+='<div class="me-arm" data-arme="'+ks.join(' ')+'" data-t="'+(g[i].t?etfEsc(g[i].t):'')+'">'+(nm.length>1?nm.slice(0,-1).join(', ')+' und '+nm[nm.length-1]:nm[0])+': '+(g[i].t?'<b>'+etfEsc(g[i].t)+'</b> ('+rg.join('; ')+')':'--')+'</div>';
+    h+='<div class="me-arm" data-arme="'+ks.join(' ')+'" data-t="'+(g[i].t?etfEsc(g[i].t):'')+'">'+(nm.length>1?nm.slice(0,-1).join(', ')+' und '+nm[nm.length-1]:nm[0])+': '+(g[i].t?'<b>'+meWlLink(g[i].t)+'</b> ('+rg.join('; ')+')':'--')+'</div>';
   }
   return h+'</div>';
 }
@@ -8284,7 +8332,7 @@ function meSchritt1(c){
   if(!c.faellig.length) return h+'<div style="font-size:11px;color:#9fb0c0">Keine Position f&auml;llig.</div>';
   if(c.halten.length){
     var hl=[];
-    for(i=0;i<c.halten.length;i++) hl.push(etfEsc(c.halten[i].t));
+    for(i=0;i<c.halten.length;i++) hl.push(meWlLink(c.halten[i].t));
     h+='<div class="me-halten" style="font-size:11px;color:#cfe0f0;margin-bottom:5px">Halten (BUY und zul&auml;ssig, neue Haltefrist 12 Monate): '+hl.join(', ')+'</div>';
   }
   if(c.kandV.length){
@@ -8296,7 +8344,7 @@ function meSchritt1(c){
       x=c.kandV[i];
       h+='<tr class="me-vk" data-t="'+etfEsc(x.t)+'" style="border-top:1px solid #1f2933">'
         +'<td style="'+s+'"><input type="checkbox" aria-label="Verkauf w&auml;hlen" '+(ME_UI.verkauf[x.t]?'checked ':'')+(x.w===null?'disabled ':'')+'onchange="meVerkaufToggle(\''+x.t+'\',this)"></td>'
-        +'<td style="'+s+';font-weight:700;color:#00c8f0">'+etfEsc(x.t)+'</td>'
+        +'<td style="'+s+';font-weight:700;color:#00c8f0">'+meWlLink(x.t)+'</td>'
         +'<td style="'+s+'">'+dpDatumTxt(x.pruef)+(x.quelle==='nb'?' (Pr&uuml;fstand nicht bewertbar)':'')+'</td>'
         +'<td style="'+s+'">'+meJN(x.buy)+'</td>'
         +'<td style="'+s+'" title="'+etfEsc(warnPlain(x.zul.g.concat(x.zul.h).join('; ')))+'">'+meJN(x.zulOk)+'</td>'
@@ -8325,7 +8373,7 @@ function meSchritt3(c){
 function meGrund(z){ return z.g.concat(z.h).join('; '); }
 function meKandZeile(k,rolle){
   var er=erFuer(k.t);
-  return '<tr class="me-kand" data-t="'+etfEsc(k.t)+'" data-zone="'+k.zul.zone+'" style="border-top:1px solid #1f2933"><td style="padding:3px 5px;white-space:nowrap">'+k.r+'</td><td style="padding:3px 5px;white-space:nowrap;font-weight:700;color:#00c8f0">'+etfEsc(k.t)+warnBdg(k.t)+'</td><td style="padding:3px 5px;white-space:nowrap">'+meZoneTxt(k.zul.zone)+'</td><td style="padding:3px 5px;white-space:normal;min-width:140px">'+(meGrund(k.zul)||'--')+meRisikoSig(k.t)+(er?'<div style="color:#7a9bb5">Ersatzpapier: '+etfEsc(er.name)+'</div>':'')+'</td></tr>';
+  return '<tr class="me-kand" data-t="'+etfEsc(k.t)+'" data-zone="'+k.zul.zone+'" style="border-top:1px solid #1f2933"><td style="padding:3px 5px;white-space:nowrap">'+k.r+'</td><td style="padding:3px 5px;white-space:nowrap;font-weight:700;color:#00c8f0">'+meWlLink(k.t)+warnBdg(k.t)+'</td><td style="padding:3px 5px;white-space:nowrap">'+meZoneTxt(k.zul.zone)+'</td><td style="padding:3px 5px;white-space:normal;min-width:140px">'+(meGrund(k.zul)||'--')+meRisikoSig(k.t)+(er?'<div style="color:#7a9bb5">Ersatzpapier: '+etfEsc(er.name)+'</div>':'')+'</td></tr>';
 }
 function meSchritt4(c){
   if(c.unv) return '<div style="font-size:11px;color:#ffab00">Zulassung unvollst&auml;ndig.</div>';
@@ -8345,27 +8393,27 @@ function meKgvHinweis(t){
 function meErsatzInfo(t){
   var e=erFuer(t);
   if(!e) return '';
-  return '<div class="me-ersatz" style="font-size:10px;color:#9fb0c0;line-height:1.5;margin-top:3px">Ersatzpapier: '+etfEsc(e.name)+' (WKN '+etfEsc(e.wkn)+', ISIN '+etfEsc(e.isin)+'), '+(e.verhaeltnis?'Verh&auml;ltnis '+e.verhaeltnis+' Aktien je '+etfEsc(e.art):'<b>Verh&auml;ltnis fehlt</b>')+(e.hinweis?'; '+etfEsc(e.hinweis):'')+'. Gebucht wird unter '+etfEsc(t)+'; Zweitnotiz, Spanne pr&uuml;fen, Limit-Order.</div>';
+  return '<div class="me-ersatz" style="font-size:10px;color:#9fb0c0;line-height:1.5;margin-top:3px">Ersatzpapier: '+etfEsc(e.name)+' (WKN '+etfEsc(e.wkn)+', ISIN '+etfEsc(e.isin)+'), '+(e.verhaeltnis?'Verh&auml;ltnis '+e.verhaeltnis+' Aktien je '+etfEsc(e.art):'<b>Verh&auml;ltnis fehlt</b>')+(e.hinweis?'; '+etfEsc(e.hinweis):'')+'. Gebucht wird unter '+meWlLink(t)+'; Zweitnotiz, Spanne pr&uuml;fen, Limit-Order.</div>';
 }
 function meSchritt5(c){
   var h='',v=c.vs.v,i,x;
   if(c.unv) return '<div style="font-size:11px;color:#ffab00">Kein Vorschlag: Soll-Vergleich unvollst&auml;ndig.</div>'+meVergleichHtml(c.arme);
-  if(v) h+='<div id="me-vorschlag" data-t="'+etfEsc(v.t)+'" style="font-size:13px;font-weight:700;color:#00e57a">'+etfEsc(v.t)+' <span style="font-weight:400;font-size:11px;color:#dce8f5">'+etfEsc(v.name)+' (Rang '+v.r+' von '+v.n+') '+meZoneTxt(v.zul.zone)+'</span></div>'+(v.zul.h.length?'<div style="font-size:10px;color:#9fb0c0">'+v.zul.h.join('; ')+'</div>':'')+meWarnBlock(v.t)+meRisikoSig(v.t)+meKgvHinweis(v.t)+meErsatzInfo(v.t);
+  if(v) h+='<div id="me-vorschlag" data-t="'+etfEsc(v.t)+'" style="font-size:13px;font-weight:700;color:#00e57a">'+meWlLink(v.t)+' <span style="font-weight:400;font-size:11px;color:#dce8f5">'+etfEsc(v.name)+' (Rang '+v.r+' von '+v.n+') '+meZoneTxt(v.zul.zone)+'</span></div>'+(v.zul.h.length?'<div style="font-size:10px;color:#9fb0c0">'+v.zul.h.join('; ')+'</div>':'')+meWarnBlock(v.t)+meRisikoSig(v.t)+meKgvHinweis(v.t)+meErsatzInfo(v.t);
   else h+='<div id="me-vorschlag" style="font-size:12px;color:#ffcf70">Kein zugelassener Titel: Schritt 3 (Kern).</div>';
   if(c.vs.ueb.length){
     h+='<div style="margin-top:6px;font-size:10px;color:#9fb0c0">&Uuml;bersprungen:</div>';
     for(i=0;i<c.vs.ueb.length;i++){
       x=c.vs.ueb[i];
-      h+='<div class="me-ueb" data-t="'+etfEsc(x.t)+'" style="font-size:10px;color:#cfe0f0;margin-top:3px"><b>'+etfEsc(x.t)+'</b> (Rang '+x.r+') &mdash; '+meGrund(x.zul)+meWarnBlock(x.t)+meRisikoSig(x.t)+meErsatzInfo(x.t)+'</div>';
+      h+='<div class="me-ueb" data-t="'+etfEsc(x.t)+'" style="font-size:10px;color:#cfe0f0;margin-top:3px"><b>'+meWlLink(x.t)+'</b> (Rang '+x.r+') &mdash; '+meGrund(x.zul)+meWarnBlock(x.t)+meRisikoSig(x.t)+meErsatzInfo(x.t)+'</div>';
     }
   }
   if(c.paare.length){
     h+='<div style="margin-top:8px;font-size:10px;color:#9fb0c0">Soll-Lage nach beiden Buchungen (drei beste Paare; Ma&szlig;: Summe der Abst&auml;nde in pp au&szlig;erhalb der Regionskorridore, &uuml;ber dem China-Deckel, &uuml;ber den Sektorgrenzen und &uuml;ber dem Deckel Einzeltitel, jeweils ohne Band; kleiner ist besser)</div>';
     for(i=0;i<c.paare.length;i++){
       x=c.paare[i];
-      h+='<div class="me-paar" style="font-size:11px;color:#cfe0f0;margin-top:3px;display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span>'+(i+1)+'. '+(x.v?'Verkauf <b>'+etfEsc(x.v)+'</b> + ':'Kein Verkauf + ')+'Kauf <b>'+etfEsc(x.k)+'</b> (Rang '+x.rang+')'+warnBdg(x.k)+' &mdash; '+mePp(x.mass)+' pp</span><button type="button" onclick="mePaarWahl('+i+')" style="font-size:10px;padding:2px 8px;background:transparent;border:1px solid #1a3050;color:#00c8f0;border-radius:4px;cursor:pointer">W&auml;hlen</button></div>';
+      h+='<div class="me-paar" style="font-size:11px;color:#cfe0f0;margin-top:3px;display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span>'+(i+1)+'. '+(x.v?'Verkauf <b>'+meWlLink(x.v)+'</b> + ':'Kein Verkauf + ')+'Kauf <b>'+meWlLink(x.k)+'</b> (Rang '+x.rang+')'+warnBdg(x.k)+' &mdash; '+mePp(x.mass)+' pp</span><button type="button" onclick="mePaarWahl('+i+')" style="font-size:10px;padding:2px 8px;background:transparent;border:1px solid #1a3050;color:#00c8f0;border-radius:4px;cursor:pointer">W&auml;hlen</button></div>';
     }
-    if(c.paarVs){ x=c.paarVs; h+='<div class="me-paar me-paar-vs" style="font-size:11px;color:#cfe0f0;margin-top:3px">Vorschlag: '+(x.v?'Verkauf <b>'+etfEsc(x.v)+'</b> + ':'Kein Verkauf + ')+'Kauf <b>'+etfEsc(x.k)+'</b> (Rang '+x.rang+')'+warnBdg(x.k)+' &mdash; '+mePp(x.mass)+' pp</div>'; }
+    if(c.paarVs){ x=c.paarVs; h+='<div class="me-paar me-paar-vs" style="font-size:11px;color:#cfe0f0;margin-top:3px">Vorschlag: '+(x.v?'Verkauf <b>'+meWlLink(x.v)+'</b> + ':'Kein Verkauf + ')+'Kauf <b>'+meWlLink(x.k)+'</b> (Rang '+x.rang+')'+warnBdg(x.k)+' &mdash; '+mePp(x.mass)+' pp</div>'; }
     h+='<div class="me-paar-satz" style="font-size:10px;color:#6b7a8a;margin-top:4px">Der Vorschlag in Schritt 5 ist der ranghoechste zugelassene Titel; die Paare zeigen, welche Verkauf-Kauf-Kombination das Soll am besten einhaelt. Beides ist Anzeige; die Wahl trifft der Anleger.</div>';
   }
   h+=meVergleichHtml(c.arme);  /* S572 A-2: Vergleichszeile ersetzt die Zeile "Schatten Rang allein" (bisher nur bei Abweichung) */
@@ -8380,7 +8428,7 @@ function meRenderForm(){
   for(i=0;i<c.kandV.length;i++){
     x=c.kandV[i];
     if(!ME_UI.verkauf[x.t]) continue;
-    h+='<div class="me-vb" data-t="'+etfEsc(x.t)+'" style="font-size:11px;color:#cfe0f0;margin-bottom:4px">Verkauf <b>'+etfEsc(x.t)+'</b> Anzahl <input id="me-v-n-'+i+'" type="number" step="any" value="'+x.shares+'" style="'+inp+'"> Kurs EUR <input id="me-v-px-'+i+'" type="number" step="any" value="'+(x.cp===null?'':x.cp.toFixed(2))+'" style="'+inp+'"></div>';
+    h+='<div class="me-vb" data-t="'+etfEsc(x.t)+'" style="font-size:11px;color:#cfe0f0;margin-bottom:4px">Verkauf <b>'+meWlLink(x.t)+'</b> Anzahl <input id="me-v-n-'+i+'" type="number" step="any" value="'+x.shares+'" style="'+inp+'"> Kurs EUR <input id="me-v-px-'+i+'" type="number" step="any" value="'+(x.cp===null?'':x.cp.toFixed(2))+'" style="'+inp+'"></div>';
   }
   h+='<div style="font-size:11px;color:#cfe0f0;margin:6px 0 4px">Kauf <select id="me-k-t" onchange="meKaufWahl(this.value)" style="'+inp+';width:150px"><option value="">kein Kauf</option>';
   for(i=0;i<c.kand.length;i++){ v=c.kand[i]; h+='<option value="'+etfEsc(v.t)+'"'+(v.t===kt?' selected':'')+'>'+etfEsc(v.t)+' (Rang '+v.r+', '+v.zul.zone+')</option>'; }
@@ -8483,7 +8531,7 @@ function meProtokollHtml(c){
   if(!l.length) return '<div style="font-size:10px;color:#6b7a8a">Noch kein Eintrag.</div>';
   for(i=l.length-1;i>=m;i--){
     x=l[i];
-    h+='<div class="me-prot" style="font-size:10px;color:#9fb0c0;margin-bottom:3px">'+dpDatumTxt(x.datum)+': Kauf '+(x.gekauft?etfEsc(x.gekauft.t):'keiner')+', Verkauf '+(x.verkauft.length?x.verkauft.map(function(v){return etfEsc(v.t);}).join(', '):'keiner')+', Vorschlag '+(x.vorschlag?etfEsc(x.vorschlag.t):'keiner')+', Rang allein '+(x.champion_rang?etfEsc(x.champion_rang.t):'--')+(x.champion_d1roh!==undefined?', D1 roh '+(x.champion_d1roh?etfEsc(x.champion_d1roh.ticker):'--'):'')+(x.champion_schnitt!==undefined?', Schnitt '+(x.champion_schnitt?etfEsc(x.champion_schnitt.ticker):'--'):'')+(x.abweichung_grund?', Grund: '+etfEsc(x.abweichung_grund):'')+'</div>';
+    h+='<div class="me-prot" style="font-size:10px;color:#9fb0c0;margin-bottom:3px">'+dpDatumTxt(x.datum)+': Kauf '+(x.gekauft?meWlLink(x.gekauft.t):'keiner')+', Verkauf '+(x.verkauft.length?x.verkauft.map(function(v){return meWlLink(v.t);}).join(', '):'keiner')+', Vorschlag '+(x.vorschlag?meWlLink(x.vorschlag.t):'keiner')+', Rang allein '+(x.champion_rang?meWlLink(x.champion_rang.t):'--')+(x.champion_d1roh!==undefined?', D1 roh '+(x.champion_d1roh?meWlLink(x.champion_d1roh.ticker):'--'):'')+(x.champion_schnitt!==undefined?', Schnitt '+(x.champion_schnitt?meWlLink(x.champion_schnitt.ticker):'--'):'')+(x.abweichung_grund?', Grund: '+etfEsc(x.abweichung_grund):'')+'</div>';
   }
   return h;
 }
@@ -8492,7 +8540,7 @@ function meErsatzHtml(){
   for(t in l){
     if(!l.hasOwnProperty(t)) continue;
     e=l[t]; n++;
-    h+='<div class="er-zeile" data-t="'+etfEsc(t)+'" style="font-size:10px;color:#cfe0f0;margin-bottom:3px"><b>'+etfEsc(t)+'</b>: '+etfEsc(e.name)+' (WKN '+etfEsc(e.wkn)+', ISIN '+etfEsc(e.isin)+'), '+(e.verhaeltnis?e.verhaeltnis+' je '+etfEsc(e.art):'Verh&auml;ltnis fehlt')+', Stand '+etfEsc(e.stand)+' <a href="#" onclick="erBearbeiten(\''+etfEsc(t)+'\');return false" style="color:#00c8f0">bearbeiten</a> <a href="#" onclick="erLoeschen(\''+etfEsc(t)+'\');return false" style="color:#ff8a80">l&ouml;schen</a></div>';
+    h+='<div class="er-zeile" data-t="'+etfEsc(t)+'" style="font-size:10px;color:#cfe0f0;margin-bottom:3px"><b>'+meWlLink(t)+'</b>: '+etfEsc(e.name)+' (WKN '+etfEsc(e.wkn)+', ISIN '+etfEsc(e.isin)+'), '+(e.verhaeltnis?e.verhaeltnis+' je '+etfEsc(e.art):'Verh&auml;ltnis fehlt')+', Stand '+etfEsc(e.stand)+' <a href="#" onclick="erBearbeiten(\''+etfEsc(t)+'\');return false" style="color:#00c8f0">bearbeiten</a> <a href="#" onclick="erLoeschen(\''+etfEsc(t)+'\');return false" style="color:#ff8a80">l&ouml;schen</a></div>';
   }
   if(!n) h='<div style="font-size:10px;color:#6b7a8a;margin-bottom:3px">Keine Ersatzpapiere.</div>';
   h+='<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px">';
@@ -8915,7 +8963,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.53 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.54 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
