@@ -8,11 +8,11 @@
   "erzeugt": "2026-10-20T17:53:40",
   "skript_version": "1.0",
   "skript_md5": "3663b12e4844b0cb094aebb0f8d43cef",
-  "liste_version": "9925d8ed65e79c7e6d688d2817ba46e1",
-  "fund_juno_version": "7.9.58",
+  "liste_version": "09388bf7ba03f1550c51025d6eda6042",
+  "fund_juno_version": "7.9.64",
   "mapping_version": "8a86bb1f7edaffb2c3d8dbb11879a833",
   "sektor_namen_gleich_scores": true,
-  "n_gesamt": 25,
+  "n_gesamt": 28,
   "n_mit_laendern": 15,
   "n_mit_sektoren": 18,
   "n_vollstaendig": 14,
@@ -21,20 +21,27 @@
    "SPDR holdings-daily xlsx": 2,
    "abgeleitet: MSCI World ex EMU = iShares latest-holdings.csv IE00B4L5Y983 ohne AT BE DE ES FI FR IE IT NL PT, neu normiert": 1,
    "iShares latest-holdings.csv": 11,
-   "manuell (Kla-Download)": 6,
-   "n. a.": 4
+   "manuell (Kla-Download)": 8,
+   "n. a.": 5
   },
   "konzept": "Konzept ETF im Depot v1.3 Abschn. 5a; Region-Tabelle Konzept Depot-Soll v1.1 Abschn. 2.2",
   "hinweis": "Stand je ETF und je Feld (stand_land aus der Datei, stand_sektor = Abruf); kein gemeinsames Datum.",
   "nachtrag": {
-   "datum": "2026-11-03T17:46:02",
-   "sprint": "S525",
+   "datum": "2026-11-18T19:32:57",
+   "sprint": "S601",
    "symbole": [
-    "ACM9.DE"
+    "EXVM.DE",
+    "DBXP.DE",
+    "EL4S.DE"
    ],
-   "skript_version": "1.2",
-   "skript_md5": "db509ba0132ecf034db39d58bb115b64",
-   "hinweis": "Nachtrag zum Freeze 20261020 (nach S509): ACM9.DE Laender aus dem Basisindex MSCI World ohne EMU abgeleitet; uebrige Eintraege unveraendert; erzeugt bleibt der Stand des Freeze."
+   "felder_neu": [
+    "laufzeitband",
+    "quelle_laufzeit",
+    "stand_laufzeit"
+   ],
+   "skript_version": "1.4",
+   "skript_md5": "bd62a66c416e46a2987e1848ac53ea5a",
+   "hinweis": "Nachtrag zum Freeze 20261020 (nach S509, S525): EXVM.DE (Klasse C Geldmarkt) und DBXP.DE (Klasse A, 1-3 J.) neu; Stammdatum laufzeitband/quelle_laufzeit/stand_laufzeit je ETF (Klassen A und C mit Wert, sonst null); uebrige Felder unveraendert, kein neuer Abruf; erzeugt bleibt der Stand des Freeze."
   }
  },
  "etf": [
@@ -276,7 +283,10 @@
    "anteil_nicht_aktie": 0.0,
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
-   "hinweis": []
+   "hinweis": [],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00BDBRDM35",
@@ -535,7 +545,10 @@
     "ohne Sektor",
     "Land unbekannt: 'Supranational' -> XX (SONSTIGE)",
     "Gewichtssumme 75.73 % ausserhalb 95-105 % -> unvollstaendig"
-   ]
+   ],
+   "laufzeitband": "gemischt",
+   "quelle_laufzeit": "Breiter Index ueber alle Laufzeiten (Regel F-4); Emittent: durchschn. Restlaufzeit 7,96 J., Stand 29.09.2026 (Inventar S594 I-10)",
+   "stand_laufzeit": "2026-11-18"
   },
   {
    "isin": "IE00B4ND3602",
@@ -558,7 +571,10 @@
    "hinweis": [
     "ohne Sektor",
     "keine Bestandsliste erwartet (ETC/Swap)"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00BD6FTQ80",
@@ -581,7 +597,10 @@
    "hinweis": [
     "ohne Sektor (yfinance unplausibel, S467)",
     "keine Bestandsliste erwartet (ETC/Swap)"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00BP3QZ601",
@@ -794,7 +813,10 @@
    "anteil_nicht_aktie": 0.23,
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
-   "hinweis": []
+   "hinweis": [],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "LU2089238385",
@@ -891,7 +913,10 @@
    "hinweis": [
     "Laender nicht verfuegbar (Kla-Download ausstehend)",
     "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00BQN1K901",
@@ -1098,7 +1123,10 @@
    "anteil_nicht_aktie": 0.36,
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
-   "hinweis": []
+   "hinweis": [],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "FR0010756114",
@@ -1320,7 +1348,10 @@
     "NL",
     "PT"
    ],
-   "anteil_ausgeschlossen": 8.18
+   "anteil_ausgeschlossen": 8.18,
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00B4WXJJ64",
@@ -1520,7 +1551,10 @@
    "vollstaendig": "ja",
    "hinweis": [
     "ohne Sektor"
-   ]
+   ],
+   "laufzeitband": "gemischt",
+   "quelle_laufzeit": "Breiter Index ueber alle Laufzeiten (Regel F-4); Emittent: durchschn. Restlaufzeit 8,41 J., Stand 29.10.2026 (Inventar S594 I-10)",
+   "stand_laufzeit": "2026-11-18"
   },
   {
    "isin": "IE00BFXYHY63",
@@ -1702,7 +1736,10 @@
    "vollstaendig": "ja",
    "hinweis": [
     "ohne Sektor"
-   ]
+   ],
+   "laufzeitband": "3-7",
+   "quelle_laufzeit": "Indexdefinition ICE US Treasury 3-7 Year; Emittent: durchschn. Restlaufzeit 4,74 J., Stand 30.10.2026 (Inventar S594 I-10)",
+   "stand_laufzeit": "2026-11-18"
   },
   {
    "isin": "IE000OJ5TQP4",
@@ -1799,7 +1836,10 @@
    "hinweis": [
     "Laender nicht verfuegbar (Kla-Download ausstehend)",
     "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE000NDWFGA5",
@@ -2002,7 +2042,10 @@
    "vollstaendig": "ja",
    "hinweis": [
     "Land = Boersenplatz, nicht Sitz"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "DE000A0S9GB0",
@@ -2025,7 +2068,88 @@
    "hinweis": [
     "ohne Sektor",
     "keine Bestandsliste erwartet (ETC/Swap)"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
+  },
+  {
+   "isin": "DE000A0Q4RZ9",
+   "symbol": "EXVM.DE",
+   "rolle": "ALLOK",
+   "klasse": "C",
+   "quelle_sektor": "n. a.",
+   "stand_sektor": null,
+   "sektoren": null,
+   "quelle_land": "n. a.",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": null,
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Geldmarkt",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "ohne Sektor",
+    "Klasse C Geldmarkt: Bestandsliste nicht ausgewertet (S601)"
+   ],
+   "laufzeitband": "0-1",
+   "quelle_laufzeit": "Indexdefinition: Restlaufzeit 1 Monat bis 1 Jahr (justETF-Profil 18.11.2026, Inventar S594 I-11)",
+   "stand_laufzeit": "2026-11-18"
+  },
+  {
+   "isin": "LU0290356871",
+   "symbol": "DBXP.DE",
+   "rolle": "ALLOK",
+   "klasse": "A",
+   "quelle_sektor": "n. a.",
+   "stand_sektor": null,
+   "sektoren": null,
+   "quelle_land": "manuell (Kla-Download)",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": null,
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Anleihen",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "ohne Sektor",
+    "Laender nicht verfuegbar (Kla-Download ausstehend)"
+   ],
+   "laufzeitband": "1-3",
+   "quelle_laufzeit": "Indexdefinition: Laufzeit 1-3 Jahre (justETF-Profil 18.11.2026, Inventar S594 I-11)",
+   "stand_laufzeit": "2026-11-18"
+  },
+  {
+   "isin": "DE000ETFL185",
+   "symbol": "EL4S.DE",
+   "rolle": "ALLOK",
+   "klasse": "A",
+   "quelle_sektor": "n. a.",
+   "stand_sektor": null,
+   "sektoren": null,
+   "quelle_land": "manuell (Kla-Download)",
+   "stand_land": null,
+   "laender": null,
+   "regionen": null,
+   "top": null,
+   "positionen_n": null,
+   "gewicht_summe_roh": null,
+   "anteil_nicht_aktie": null,
+   "anlageklasse": "Anleihen",
+   "vollstaendig": "nein",
+   "hinweis": [
+    "ohne Sektor",
+    "Laender nicht verfuegbar (Kla-Download ausstehend)"
+   ],
+   "laufzeitband": "1-3",
+   "quelle_laufzeit": "Indexdefinition: hoechstens 15 deutsche Staatsanleihen, Restlaufzeit 1-3 Jahre (justETF-Profil 18.11.2026; Beck/Kocher 2023 S. 23)",
+   "stand_laufzeit": "2026-11-18"
   },
   {
    "isin": "IE00B5BMR087",
@@ -2218,7 +2342,10 @@
    "anteil_nicht_aktie": 0.12,
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
-   "hinweis": []
+   "hinweis": [],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00B4K48X80",
@@ -2425,7 +2552,10 @@
    "anteil_nicht_aktie": 0.61,
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
-   "hinweis": []
+   "hinweis": [],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00BKM4GZ66",
@@ -2645,7 +2775,10 @@
    "anteil_nicht_aktie": 0.52,
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
-   "hinweis": []
+   "hinweis": [],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00BP3QZ825",
@@ -2860,7 +2993,10 @@
    "anteil_nicht_aktie": 0.42,
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
-   "hinweis": []
+   "hinweis": [],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00B8FHGS14",
@@ -3075,7 +3211,10 @@
    "anteil_nicht_aktie": 0.35,
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
-   "hinweis": []
+   "hinweis": [],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00B8GKDB10",
@@ -3172,7 +3311,10 @@
    "hinweis": [
     "Laender nicht verfuegbar (Kla-Download ausstehend)",
     "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "DE000A27Z304",
@@ -3195,7 +3337,10 @@
    "hinweis": [
     "ohne Sektor",
     "keine Bestandsliste erwartet (ETC/Swap)"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00BK5BQT80",
@@ -3292,7 +3437,10 @@
    "hinweis": [
     "Laender nicht verfuegbar (Kla-Download ausstehend)",
     "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00B3RBWM25",
@@ -3389,7 +3537,10 @@
    "hinweis": [
     "Laender nicht verfuegbar (Kla-Download ausstehend)",
     "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00B44Z5B48",
@@ -3629,7 +3780,10 @@
    "anteil_nicht_aktie": 0.0,
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
-   "hinweis": []
+   "hinweis": [],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "NL0011683594",
@@ -3726,7 +3880,10 @@
    "hinweis": [
     "Laender nicht verfuegbar (Kla-Download ausstehend)",
     "Top 10, Untergrenze (yfinance top_holdings, ohne Datum)"
-   ]
+   ],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   },
   {
    "isin": "IE00BP3QZB59",
@@ -3940,7 +4097,10 @@
    "anteil_nicht_aktie": 0.51,
    "anlageklasse": "Aktien",
    "vollstaendig": "ja",
-   "hinweis": []
+   "hinweis": [],
+   "laufzeitband": null,
+   "quelle_laufzeit": null,
+   "stand_laufzeit": null
   }
  ]
 }
