@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.50</title>
+<title>StockIQ v6.6.51</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -137,7 +137,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.50 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.51 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
       <div id="hdr-rangbasis" style="font-family:monospace;font-size:10px;color:var(--mut)">Rangbasis D1-IND seit 03.11.2026; D1 als Schatten</div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
@@ -222,6 +222,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">U200</strong>: Kurs unter der 200-Tage-Linie. Ein Kennzeichen, kein Verkaufssignal.</div>
     <div><strong style="color:#7a9bb5">Schnitt</strong>: Titel, die nach beiden Rangbasen (Branchenvergleich und rohe Zw&ouml;lf-Monats-Entwicklung) im obersten Zehntel stehen. Hypothesenkandidat, ungetestet; kein Kaufhinweis.</div>
   </div>
+  <!-- S572 A-3: S und R, Text aus WL_ARM_TXT (wlErlToggle); eigener Block, #wl-kennz-erl bleibt wortgleich mit der Hilfe -->
+  <div id="wl-arm-erl" class="wl-erl-blk"></div>
   <div id="wl-etik-erl" class="wl-erl-blk">
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">HIST</strong>: das fr&uuml;here Verkaufssignal aus dem MACD-Histogramm. Es hat im Test keine Vorhersagekraft gezeigt und dient nur der Information.</div>
     <div style="margin-bottom:3px"><strong style="color:#7a9bb5">Bleibt BUY</strong>: heute BUY und schon vor zw&ouml;lf Monaten BUY (wie im Bericht Rotation).</div>
@@ -309,7 +311,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
      Ziel-Allokation: 60% Aktien / 20% Anleihen / 15% Gold / 5% Cash
      Rebalancing-Alert +/-7pp
      ============================================================ -->
-<div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:6px">&#9878; Monatsentscheid <span style="font-weight:400;font-size:10px;color:var(--mut)">(Pr&auml;ferenz, verbindlich f&uuml;r den Kaufvorschlag; Nutzerparameter, ungetestet)</span></div>
+<div style="font-family:monospace;font-size:13px;font-weight:700;color:#00c8f0;margin-bottom:6px">&#9878; Monatsentscheid <span style="font-weight:400;font-size:10px;color:var(--mut)">(Pr&auml;ferenz, verbindlich f&uuml;r den Kaufvorschlag; Nutzerparameter, ungetestet)</span> <button id="me-anl-btn" class="wf" onclick="meAnlToggle()" title="Anleitung ein- und ausblenden" aria-label="Anleitung" style="font-weight:700;padding:3px 10px;font-size:11px">i</button></div>
+<div id="me-anl-box" class="wl-erl-blk" style="display:none"></div>
 <div id="me-root"></div>
 <details id="me-eingabe" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:10px;padding:10px 12px;margin-bottom:8px"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#dce8f5">Aktueller Portfoliowert eingeben</summary>
 <div style="font-family:monospace;font-size:10px;color:var(--mut);margin:6px 0">Wandert mit B-2 in den Bestand. Cash und Werte au&szlig;erhalb des Depots flie&szlig;en bis dahin von hier in die Anteile je Anlageklasse.</div>
@@ -341,14 +344,14 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         oninput="rAlloc()">
     </div>
     <div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">CASH / TAGESGELD (EUR)</div>
-      <input id="ai-cash" type="number" min="0" step="100" placeholder="z.B. 10000"
+      <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">CASH / TAGESGELD (EUR) <span id="ai-cash-hinweis" style="color:#7a9bb5">leer = nicht erfasst</span></div>
+      <input id="ai-cash" type="number" min="0" step="100" placeholder="leer = nicht erfasst"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
     </div>
     <div>
       <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:4px">ROHSTOFFE / COMMODITIES (EUR)<span id="ai-auto-commod" style="color:#7a9bb5;font-size:10px;margin-left:4px"></span>
-        <span style="display:block;font-size:10px;color:var(--mut);font-weight:400;margin-top:2px">Rohstoff-ETF-Bausteine setzen dieses Feld, solange kein Wert gespeichert ist</span></div>
+        <span style="display:block;font-size:10px;color:var(--mut);font-weight:400;margin-top:2px">Summe inkl. Rohstoff-ETF; au&szlig;erhalb = Feld minus ETF</span></div>
       <input id="ai-commod" type="number" min="0" step="100" placeholder="z.B. 8000"
         style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;border-radius:6px;padding:8px 10px;color:#dce8f5;font-size:13px;font-family:monospace"
         oninput="rAlloc()">
@@ -494,7 +497,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.50 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.51 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -521,6 +524,12 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     </div>
   </div>
 
+
+  <!-- S572 A-1: Abschnitt Tab Monat, Text aus ME_ANLEITUNG (wlLegende) -->
+  <div id="hilfe-monat" style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#9878; Tab Monat</div>
+    <div id="hilfe-monat-text" style="font-size:12px;color:var(--mut);line-height:1.7"></div>
+  </div>
 
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#00c8f0">&#128202; TradingView-Setup</div>
@@ -756,6 +765,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.51</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat: Anleitung hinter dem Knopf i (auch in der Hilfe), Vergleichszeile Rang allein / D1 roh / Schnitt (Beobachtung), Kopfzeile Stand dieses Ger&auml;ts, Exportpaket f&uuml;r den Berater (auch im Bestand). Watchlist: Zeichen S und R links nach dem Ticker. Bestand: Kursdatum je ETF, Hinweis nicht im Universum. Buchungen speichern das Etikett.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.50</td><td style="padding:5px 8px;color:var(--mut)">Detailansicht: Qualit&auml;t mit Cash (Schatten, ungetestet), Cash-Profitabilit&auml;t, Cash je Euro Gewinn, Accruals-Quote und FCF-Rendite nach Aktienverg&uuml;tung; kein Einfluss auf Rang oder BUY. Buchung Einzeltitel: ein Suchfeld &uuml;ber alle Titel.</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.49</td><td style="padding:5px 8px;color:var(--mut)">Tab Monat ersetzt den Tab Allokation: Monatsentscheid in sechs Schritten (f&auml;llige Positionen, Platz, Kern, Zulassung nach Soll, Vorschlag, Buchung mit Protokoll), Ersatzpapiere, Warnetikett nach steilem Anstieg auch in Watchlist und Bestand. Einzeltitel-Anteil jetzt mit Cash und Werten au&szlig;erhalb des Depots. Der Rechner mit Alarm und die Beck/GPO-Karte entfallen.</td><td style="padding:5px 8px;color:#456278">Nov 2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.48</td><td style="padding:5px 8px;color:var(--mut)">Tab Bestand: Depot und ETF stehen in einem Tab mit gleichen Funktionen (Buchung, Storno, Transaktionshistorie, geschlossene Positionen, Export und Import). Kacheln f&uuml;r das Gesamtdepot, Wertverlauf mit Einzeltitel, ETF und Summe, Erl&auml;uterung als Tabelle Soll gegen Ist mit Baendern nach Konzept. Land nach Sitz des Unternehmens. x-Knopf und Alle l&ouml;schen entfallen: Eine Position entfernst du &uuml;ber Storno oder Verkauf.</td><td style="padding:5px 8px;color:var(--mut);font-family:monospace">11/2026</td></tr>
@@ -841,7 +851,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Bestand</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.50
+    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.51
   </div>
   <div id="dp-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:14px"></div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
@@ -1017,6 +1027,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </section>
   </div>
   <div style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 14px">
+    <button id="best-paket-btn" onclick="bestPaketExport()" title="Eine Datei mit Bestand, Soll, Protokoll und Lage f&uuml;r den Berater; sie entsteht nur auf diesem Ger&auml;t." style="background:rgba(0,229,122,.1);border:1px solid rgba(0,229,122,.3);color:#00e57a;font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">&#8595; Exportpaket</button>
     <button onclick="snapExport()" style="background:rgba(176,124,248,.1);border:1px solid rgba(176,124,248,.3);color:#b07cf8;font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">&#8595; Verlauf sichern</button>
     <label style="background:rgba(176,124,248,.1);border:1px solid rgba(176,124,248,.3);color:#b07cf8;font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer">&#8593; Verlauf importieren<input type="file" accept=".json" onchange="snapImport(event)" style="display:none"></label>
   </div>
@@ -1026,7 +1037,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </details>
 </div><!-- Ende p8 Bestand -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.50 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.51 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2126,6 +2137,7 @@ function wlErlToggle(){
   auf=(b.style.display==='none');
   b.style.display=auf?'block':'none';
   if(auf){ var zl=document.getElementById('wl-zahlen-liste'); if(zl) zl.innerHTML=kzAbschnitt(KZ_ZEILE_WL)+kzLang(KZ_ZEILE_WL); }  /* S434 B.2 */
+  if(auf){ var ae=document.getElementById('wl-arm-erl'); if(ae) ae.innerHTML=armErlHtml(); }  /* S572 A-3 */
   if(k){ k.style.borderColor=auf?'#7a9bb5':'#1a2a3a'; k.style.color=auf?'#7a9bb5':'var(--mut)'; }
 }
 /* S459 W-D1: Aufklapper 'Bekannt fehlerhaft' der Detailansicht (Muster wlErlToggle). Beim
@@ -2223,6 +2235,7 @@ function wlLegende(){
   var i,b,p=[],el=document.getElementById('wl-legende');
   for(i=0;i<WL_SORT_KZ.length;i++){ b=document.getElementById(WL_SORT_KZ[i][0]); if(b) b.setAttribute('title',KZ_ROLLE[WL_SORT_KZ[i][1]]); }
   b=document.getElementById('hilfe-q-lang'); if(b) b.innerHTML=KZ_LANG.K85;  /* S459n: Langtext aus KZ_LANG */
+  b=document.getElementById('hilfe-monat-text'); if(b) b.innerHTML=meAnleitungHtml();  /* S572 A-1: Anleitung Tab Monat aus ME_ANLEITUNG */
   if(!el) return;
   for(i=0;i<KZ_ZEILE_WL.length;i++) p.push(kzZeileTxt(KZ_ZEILE_WL[i][0],KZ_ZEILE_WL[i][1]));
   el.innerHTML=p.join(' | ');
@@ -2474,8 +2487,37 @@ function buyIsD1(t){
 function schnittIs(t){
   var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
   if(!rec||typeof rec!=='object') return false;
-  return buyIsD1(t)&&isD1(rec.mom12m_pct);
+  return buyIsD1(t)&&d1RohIs(t);  /* S572: D1 roh ueber d1RohIs -- eine Lesestelle fuer mom12m_pct (G-G) */
 }
+/* S572 A-2/A-3: D1 roh (Schatten, frueherer Champion bis 02.11.2026) -- Lesezugriff auf mom12m_pct;
+   die Schwelle steht nur in isD1() (G-G), wie in schnittIs. Fehlt das Feld: nicht BUY nach D1 roh (AP-3). */
+function d1RohIs(t){
+  var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
+  if(!rec||typeof rec!=='object') return false;
+  return isD1(rec.mom12m_pct);
+}
+/* Rang (von n) nach D1 roh: gespeicherte Kennzahl mom12m_rang / mom12m_rang_n (Muster rang12m, kein Rechenweg). */
+function rang12mRoh(t){
+  var rec=(typeof _scoresIdx!=='undefined'&&_scoresIdx)?_scoresIdx[t]:null;
+  if(!rec||typeof rec!=='object') return null;
+  var r=rec.mom12m_rang,n=rec.mom12m_rang_n;
+  if(typeof r!=='number'||typeof n!=='number'||isNaN(r)||isNaN(n)) return null;
+  return {r:r,n:n};
+}
+/* S572 A-3 (Konzept Depot-Soll 3.6.9): ein Platz links nach dem Ticker. S = BUY im Schnitt; R = BUY nach D1 roh,
+   nicht nach D1-IND; sonst kein Zeichen. Kein Etikett, keine Aenderung an Rang, Sortierung oder Vorschlag.
+   Wortlaut der Fenster: Kla 18.11.2026 (HALT 1 S572, Chat 09:00); Umlaute als \\u-Escape. */
+var WL_ARM_TXT={S:'S = Schnitt: BUY nach dem Rang mit Branchenvergleich und zugleich unter den besten 10 % aller Titel nach 12-Monats-Rendite. Beobachtung, ungetestet: Ob S-Titel besser abschneiden, wird ab 30.11.2026 gemessen. Kein Kaufgrund, die Reihenfolge bleibt der Rang. S hei\u00dft oft steiler Anstieg; das Risiko daraus zeigt das Warn-Dreieck.',
+  R:'R = nur nach 12-Monats-Rendite ohne Branchenvergleich BUY, die Regel des fr\u00fcheren Champions bis 02.11.2026. Nach der geltenden Regel kein BUY. Beobachtung, ungetestet; kein Kaufgrund.'};
+function armZeichen(t){ if(schnittIs(t)) return 'S'; if(d1RohIs(t)&&!buyIsD1(t)) return 'R'; return ''; }
+function armZeig(z){ if(WL_ARM_TXT[z]) alert(WL_ARM_TXT[z]); }  /* Antippen statt title (iPhone), Muster warnZeig */
+function armBdg(t){
+  var z=armZeichen(t);
+  if(!z) return '';
+  return '<span class="wl-arm" data-arm="'+z+'" role="button" aria-label="Kennzeichen '+z+'" onclick="event.stopPropagation();armZeig(\''+z+'\')" style="font-family:monospace;font-size:10px;font-weight:700;color:'+(z==='S'?'#00c8f0':'#7a9bb5')+';border:1px solid currentColor;border-radius:3px;padding:0 3px;flex-shrink:0;cursor:pointer">'+z+'</span>';
+}
+function armErlHtml(){ return '<div style="margin-bottom:3px"><strong style="color:#7a9bb5">S und R</strong> (Zeichen links nach dem Ticker, antippen zeigt den Satz):</div>'
+  +'<div style="margin-bottom:3px">'+WL_ARM_TXT.S+'</div><div>'+WL_ARM_TXT.R+'</div>'; }
 /* S394 R-1: sellAbstieg -- EINZIGE Stelle des Abstieg-Praedikats (G-G).
    SELL Abstieg = vor 12 Monaten BUY (buy_ref12m_ind === true, Producer S478)
    und heute nicht BUY (buyIsD1). Fehlt das Feld oder ist es null: kein
@@ -2674,6 +2716,29 @@ var KZ_ZEILE_WL=[['K02','Rang'],['K35','12M'],['K85','Q'],['K27','KGV'],['K31','
 /* S459n (Kla 19.10.2026 09:27): Langtext je Kennzahl fuer i-Box und Hilfe-Glossar -- EINE Quelle; KZ_ROLLE bleibt das kurze Etikett. */
 var KZ_LANG={K85:'Q: Qualit&auml;t der Ertragskraft &uuml;ber mehrere Jahresabschl&uuml;sse (Niveau und Stabilit&auml;t), als Perzentil im Universum des Tages: Q 33 bedeutet, 67 % der Titel haben eine h&ouml;here Qualit&auml;t. Schatten: wird t&auml;glich mitgerechnet, hat keinen Einfluss auf BUY, Rang oder Auswahl; Test FH-14 (30.11.2026). Finanztitel &uuml;ber eigenen Pfad; -- = nicht bewertbar (zu wenige Abschl&uuml;sse).',K87:'Pr&auml;ferenz des Anlegers (Nutzerparameter, ungetestet). Verbindlich f&uuml;r den Kaufvorschlag im Monatsentscheid; erzwingt keinen Verkauf.'};
 function kzLang(liste){ var h='',i; for(i=0;i<liste.length;i++) if(KZ_LANG[liste[i][0]]) h+='<div class="kz-lang" data-kz="'+liste[i][0]+'" style="margin-top:4px">'+KZ_LANG[liste[i][0]]+'</div>'; return h; }
+/* S572 A-1 (Konzept Depot-Soll 3.6.7, Nachtrag N5): Anleitung Tab Monat -- EINE Quelle fuer den Knopf i am
+   Panel-Titel und den Hilfe-Abschnitt "Tab Monat" (Muster KZ_LANG; keine Kennzahl, keine K-ID). Wortlaut 3.6.7. */
+var ME_ANLEITUNG=[
+  'So gehst du am Kauftag vor (einmal im Monat, Standard: letzter Handelstag).',
+  'Vorher: Im Tab Bestand die Buchungen pr\u00fcfen; Cash und Werte au\u00dferhalb des Depots auf diesem Ger\u00e4t eintragen. Entscheide jeden Monat auf demselben Ger\u00e4t -- die Daten bleiben im Browser und werden nicht abgeglichen.',
+  '1 F\u00e4llig und Verkauf: Die Liste zeigt Positionen, deren Pr\u00fcfdatum im Kaufmonat liegt oder fr\u00fcher. Noch BUY und zul\u00e4ssig: halten, die Frist l\u00e4uft 12 Monate weiter. Sonst: f\u00e4llig, wartet. Verkauft wird St\u00fcck f\u00fcr St\u00fcck -- ein Verkauf finanziert einen Kauf; die \u00fcbrigen warten und werden n\u00e4chsten Monat neu gepr\u00fcft. Welchen du verkaufst, entscheidest du.',
+  '2 Platz: Liegt der Einzeltitel-Teil nach den Verk\u00e4ufen unter dem Deckel? Gesperrt: kein Einzeltitel-Kauf, weiter mit 3.',
+  '3 Kern: Liegt der Kern-ETF unter seinem Band, geht das Geld zuerst dorthin; kommt kein Kauf zustande, ebenfalls.',
+  '4 Zulassung: F\u00fcr jeden BUY-Titel ohne Depotposition zeigt die Seite, was ein Kauf in Durchschnittsgr\u00f6\u00dfe mit Region, Sektor und Deckel macht: frei, Hinweis oder gesperrt.',
+  '5 Vorschlag: der rangh\u00f6chste zugelassene Titel und die drei besten Paare aus Verkauf und Kauf. Das Dreieck ist das Warnetikett nach steilem Anstieg -- nur Information. Die Vergleichszeile zeigt, was die Rangliste allein und die Challenger gekauft h\u00e4tten: Beobachtung, keine Empfehlung.',
+  '6 Buchung: Verkauf und Kauf eintragen. Weichst du vom Vorschlag ab, nenne den Grund. Danach das Exportpaket ziehen.',
+  'Was getestet ist: die Auswahl nach Rang, als Korb. Die Grenzen (Deckel, Region, Sektor) sind deine Pr\u00e4ferenzen, ungetestet.'
+];
+function meAnleitungHtml(){ var h='',i; for(i=0;i<ME_ANLEITUNG.length;i++) h+='<div class="me-anl-z" style="margin-bottom:4px">'+ME_ANLEITUNG[i]+'</div>'; return h; }
+/* Muster wlErlToggle: beim Laden zu, Zustand nicht gespeichert */
+function meAnlToggle(){
+  var b=document.getElementById('me-anl-box'),k=document.getElementById('me-anl-btn'),auf;
+  if(!b) return;
+  auf=(b.style.display==='none');
+  b.style.display=auf?'block':'none';
+  if(auf) b.innerHTML=meAnleitungHtml();
+  if(k){ k.style.borderColor=auf?'#7a9bb5':'#1a2a3a'; k.style.color=auf?'#7a9bb5':'var(--mut)'; }
+}
 var KZ_ZEILE_DP=[['K53','Akt. / Wert / +/-%'],['K11','Pr&uuml;fung'],['K27','KGV'],['K87','Soll']];  /* S441 C.4: Score nicht mehr in der Zeile */
 /* S441 C.3 (Kla 14.10.2026), S459: Detail Block 2 traegt den Zusatz EINMAL, als erste Zeile des Aufklappers. Welche
    Kennzahlen dort stehen, folgt aus KZ_ZUSATZ und den data-kz-Marken, die der Block wirklich
@@ -2781,7 +2846,7 @@ function wlRend(scored){
     var h='<div style="'+rowBg+'border:1px solid #1a2a3a;'+borderLeft+'border-radius:8px;padding:11px 13px;margin-bottom:6px;cursor:pointer" onclick="wlDetail(\''+s.t+'\')">';
     /* S417 T-4: Kopf bricht um statt seitlich zu schieben (Name gekuerzt, Badges in die zweite Zeile) */
     h+='<div class="wl-rh">';
-    h+='<div class="wl-rl"><span class="wl-rang" style="font-family:monospace;font-size:10px;color:'+topC+'"'+(rg===null?'':' title="Rang '+rg.r+' von '+rg.n+' (Zw&ouml;lf-Monats-Entwicklung im Vergleich zur Branche)"')+'>'+(rg===null?'--':rg.r)+'</span><span style="font-size:15px;font-weight:800;flex-shrink:0">'+s.t+'</span><span class="wl-rn">'+dName(s)+'</span></div>';
+    h+='<div class="wl-rl"><span class="wl-rang" style="font-family:monospace;font-size:10px;color:'+topC+'"'+(rg===null?'':' title="Rang '+rg.r+' von '+rg.n+' (Zw&ouml;lf-Monats-Entwicklung im Vergleich zur Branche)"')+'>'+(rg===null?'--':rg.r)+'</span><span style="font-size:15px;font-weight:800;flex-shrink:0">'+s.t+'</span>'+armBdg(s.t)+'<span class="wl-rn">'+dName(s)+'</span></div>';
     var _sC=WL2[s.t]?'#ff9f1c':'#456278';
     var _sB='<button onclick="event.stopPropagation();wl2Toggle(\''+s.t+'\');rWL();" style="font-size:14px;color:'+_sC+';background:transparent;border:none;cursor:pointer;padding:2px 4px;min-width:28px;min-height:28px;line-height:1">'+(WL2[s.t]?'&#9733;':'&#9734;')+'</button>';
     h+='<div class="wl-rb">'+sktBdg+hcBdg+'<span title="'+_sv.ttl+'" style="font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.06);color:'+sc2+'">'+slbl+'</span>'+_sv.bdg+(_sv.buy?warnBdg(s.t):'')+srAmpBdg+dB+_sB+'</div></div>';  /* S441 C.1: Score-Badge entfaellt (nur Detail Block 2) */
@@ -3641,7 +3706,8 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.50';
+      var PAGE_VERSION = 'v6.6.51';
+      window.SIQ_PAGE_VERSION = PAGE_VERSION;  /* S572 A-4: meta.page_version im Exportpaket */
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
           && !sessionStorage.getItem('siq_rl')) {
@@ -4579,6 +4645,7 @@ function allocImportFile(inp){
   reader.onload = function(e){
     try{
       var data = JSON.parse(e.target.result);
+      if(data && data.version === 'stockiq_bestand_v3'){ alert('Diese Datei ist ein Exportpaket (stockiq_bestand_v3). Der Import des Pakets kommt mit B-2. Nichts importiert.'); return; }  /* S572 A-4 */
       var ids = ['stocks','etfs','bonds','gold','commod','cash'];
       for(var i=0;i<ids.length;i++){
         var el = document.getElementById('ai-'+ids[i]);
@@ -4598,6 +4665,8 @@ function allocSave(){
       var el = document.getElementById('ai-'+ids[i]);
       data[ids[i]] = el ? (parseFloat(el.value)||0) : 0;
     }
+    /* S572 A-5 Nr. 9: leeres Cash-Feld = nicht erfasst (null, AP-3), nicht 0 */
+    var _ce = document.getElementById('ai-cash'); if(_ce && String(_ce.value).replace(/\s/g,'') === '') data.cash = null;
     data.stand = dpHeute();  /* S537n E-1: Stand des Eingabeblocks fuer das Nenner-Etikett */
     localStorage.setItem(ALLOC_KEY, JSON.stringify(data));
     try { meRender(); } catch(eM) {}
@@ -5091,7 +5160,7 @@ function etfRenderTable(){
       var c=bestStamm(p,wert,ges);
       c.t='<td style="padding:5px 6px;color:#00c8f0;font-weight:700;font-family:monospace">'+etfEsc(p.t)+'</td>';
       c.name='<td class="best-name" title="'+etfEsc(nameVon(p))+'" style="padding:5px 6px;color:#dce8f5;font-size:10px">'+etfEsc(nameVon(p))+'</td>';
-      c.akt='<td class="etf-kurs" style="padding:5px 6px;text-align:right;color:#dce8f5;font-size:10px"'+((k && k.datum)?(' title="Kurs vom '+k1Datum(k.datum)+'"'):'')+'>'+(cp!==null?cp.toFixed(2):'n/a')+'</td>';
+      c.akt='<td class="etf-kurs" style="padding:5px 6px;text-align:right;color:#dce8f5;font-size:10px"'+((k && k.datum)?(' title="Kurs vom '+k1Datum(k.datum)+'"'):'')+'>'+(cp!==null?cp.toFixed(2):'n/a')+etfKursZusatz(k)+'</td>';
       c.kl='<td style="padding:5px 6px;text-align:center;color:#7a9bb5">'+etfEsc(p.cls||'')+'</td>';
       c.m12='<td class="etf-12m" style="padding:5px 6px;text-align:right;color:#dce8f5">'+etf12m(e)+'</td>';
       c.rang='<td class="etf-rang" style="padding:5px 6px;text-align:center;color:#dce8f5">'+etfRangTxt(e)+'</td>';
@@ -5161,6 +5230,29 @@ function etfKurs(sym){
   if(e && typeof e.close_eur === 'number' && e.close_eur > 0) return {px:e.close_eur, datum:e.kursdatum||''};
   if(x && typeof x.px_eur === 'number' && x.px_eur > 0) return {px:x.px_eur, datum:x.date||''};
   return null;
+}
+/* S572 A-5 Nr. 5 (Konzept Depot-Soll 3.6.10): Kursdatum je ETF in Bestand und Export. Aelter als
+   ETF_KURS_ALT_HT Handelstage (Mo-Fr) gegen den Stand der Tagesdaten (run_date): Etikett "Kurs vom <Datum>".
+   Parameter (Sensitivitaet mit Probelauf 2); die Ursache fehlender Tageskurse klaert ein eigener Brief. */
+var ETF_KURS_ALT_HT=3;
+function handelstageNach(a,b){
+  var re=/^\d{4}-\d{2}-\d{2}$/,d,n=0,k=0,w;
+  if(!re.test(a)||!re.test(b)||a>=b) return 0;
+  d=new Date(Date.UTC(parseInt(a.substring(0,4),10),parseInt(a.substring(5,7),10)-1,parseInt(a.substring(8,10),10)));
+  while(k<800){ d.setUTCDate(d.getUTCDate()+1); k++; if(meIso(d)>b) break; w=d.getUTCDay(); if(w!==0&&w!==6) n++; }
+  return n;
+}
+function etfKursRef(){ var m=etfMacro(); return (m&&typeof m.run_date==='string')?m.run_date.substring(0,10):dpHeute(); }
+function etfKursEtikett(k){
+  if(!k||!k.datum) return null;
+  var d=String(k.datum).substring(0,10);
+  return handelstageNach(d,etfKursRef())>ETF_KURS_ALT_HT?'Kurs vom '+k1Datum(d):null;
+}
+function etfKursZusatz(k){
+  if(!k) return '';
+  var et=etfKursEtikett(k),d=k.datum?String(k.datum).substring(0,10):'';
+  if(!d) return '<div class="etf-kursdatum" style="font-size:9px;color:#6b7a8a">Kursdatum --</div>';
+  return '<div class="etf-kursdatum'+(et?' etf-kurs-alt':'')+'" style="font-size:9px;color:'+(et?'#ffab00':'#6b7a8a')+'">'+(et||k1Datum(d))+'</div>';
 }
 function etfCurrentPrice(sym){
   var k = etfKurs(sym);
@@ -5778,7 +5870,10 @@ function dpAdd(){
   if(_scoresIdx && _scoresIdx[tk]){ lbl = sigLogText(tk, sig); }
 
   /* TX schreiben */
-  var txNew = {t:tk, d:buyDt, typ:typ, n:shares, px:buyPrc, name:name, cur:curr, sig:sig, lbl:lbl, note:''};
+  /* S572 A-5 Nr. 7 (Konzept Depot-Soll 3.6.10): neue Buchungen tragen in sig das angezeigte Etikett
+     (BUY / SELL Abstieg / WATCH) und in sig_roh das Rohsignal; alte Buchungen bleiben unveraendert. */
+  var sigEt = (_scoresIdx && _scoresIdx[tk]) ? sigView(tk, sig).lbl : '';
+  var txNew = {t:tk, d:buyDt, typ:typ, n:shares, px:buyPrc, name:name, cur:curr, sig:sigEt, sig_roh:sig, lbl:lbl, note:''};
   var txList = dpTxLoad();
   txList.push(txNew);
   if(dpTxSave(txList)===false) return;
@@ -5936,6 +6031,23 @@ function dpNameOrder(list){
   });
   return ix;
 }
+/* S572 A-5 Nr. 6 (Konzept Depot-Soll 3.6.10): Ticker im Bestand, der nicht im Universum steht, bekommt einen
+   Hinweis; Vorschlag nur bei eindeutiger Zuordnung (gleicher Stamm mit Boersensuffix). Keine Umschreibung des Logs. */
+function dpImUniversum(t){
+  var r=dpRohTicker(t),i;
+  if(typeof _scoresIdx!=='undefined'&&_scoresIdx&&(_scoresIdx[t]||_scoresIdx[r])) return true;
+  for(i=0;i<STOCKS.length;i++) if(STOCKS[i].t===t||STOCKS[i].t===r) return true;
+  return false;
+}
+function dpStamm(t){ var s=String(t||'').toUpperCase(),j=s.lastIndexOf('.'); return j>0?s.substring(0,j):s; }
+function dpUnivVorschlag(t){
+  var st=dpStamm(t),l=[],i,u;
+  if(!st) return null;
+  for(i=0;i<STOCKS.length;i++){ u=String(STOCKS[i].t); if(u!==t&&u.indexOf('.')>0&&dpStamm(u)===st) l.push(u); }
+  return l.length===1?l[0]:null;
+}
+function dpUnivHinweis(t){ if(dpImUniversum(t)) return ''; var v=dpUnivVorschlag(t); return 'nicht im Universum'+(v?' -- gemeint '+v+'?':''); }
+function dpUnivZusatz(t){ var h=dpUnivHinweis(t); return h?'<div class="dp-univ" style="font-size:9px;color:#ffab00;font-weight:400">'+etfEsc(h)+'</div>':''; }
 function dpRenderTable(){
   var el = document.getElementById('dp-table'), leg = document.getElementById('dp-legende');
   if(!el) return;
@@ -5981,7 +6093,7 @@ function dpRenderTable(){
     var _md = (dp_sig==='sell_ma') ? dpSellMaDays(p.t) : null;
     var _mt = (_md===null) ? '' : ('Tage unter der 200-Tage-Linie: '+(_md<0?'unbekannt':_md)+'.');
     var c = bestStamm(p, wert, ges);
-    c.t = '<td style="padding:5px 6px;color:#00c8f0;font-weight:700;font-family:monospace;cursor:pointer;text-decoration:underline dotted" title="In WL-Detailansicht &ouml;ffnen" onclick="goTab(1,document.getElementById(\'tb1\'));setTimeout(function(){wlDetail(\''+p.t+'\');},80)">'+p.t+'</td>';
+    c.t = '<td style="padding:5px 6px;color:#00c8f0;font-weight:700;font-family:monospace;cursor:pointer;text-decoration:underline dotted" title="In WL-Detailansicht &ouml;ffnen" onclick="goTab(1,document.getElementById(\'tb1\'));setTimeout(function(){wlDetail(\''+p.t+'\');},80)">'+p.t+dpUnivZusatz(p.t)+'</td>';
     c.name = '<td class="best-name" title="'+etfEsc(p.name)+'" style="padding:5px 6px;color:#dce8f5;font-size:10px">'+p.name+'</td>';
     c.akt = '<td style="padding:5px 6px;text-align:right;color:'+aktC+';font-size:10px">'+aktStr+'</td>';
     c.sig = '<td style="padding:5px 6px;text-align:center;color:'+sigC+';font-size:10px;font-weight:700" title="'+(sigLbl==='SELL Abstieg'?ABST_TTL:(sigLbl==='HOLD'?'HOLD: '+KZ_ROLLE.K10:_dpSv.ttl))+'">'+sigLbl+_dpSv.bdg+(_dpSv.buy?warnBdg(p.t):'')+_dpSrBdg+'</td>';
@@ -6284,6 +6396,119 @@ function dpExportData(){
   return data;
 }
 
+/* ============================================================
+   S572 A-4 (Konzept Depot-Soll 3.3, Nachtrag N5): Exportpaket fuer den Berater, Datei stockiq_bestand_v3.
+   Nur EXPORT; der Import v3 kommt mit B-2 und wird bis dahin abgewiesen (txImportKennung, allocImportFile).
+   Die Datei entsteht nur lokal im Browser (G8). lage = Werte der Funktionen, die die Seite anzeigt
+   (gvNenner, dpRenderRisk/dpSollBlock, meBerechne, dpPruefMap/dpPruefZelle, etfKurs) -- kein Nachbau;
+   ein spaeterer Import liest lage nicht. riskanter_teil bis Deploy (c): "--" (Null-Regel).
+   ============================================================ */
+var GERAET_KEY='stockiq_geraet_v1';
+function geraetName(fragen){
+  var n=null;
+  try{ n=localStorage.getItem(GERAET_KEY); }catch(e){ n=null; }
+  if(n) return n;
+  if(!fragen) return null;
+  n=window.prompt('Name dieses Ger\u00e4ts f\u00fcr das Exportpaket (zum Beispiel iPhone oder Laptop):','');
+  n=(n===null||n===undefined)?'':String(n).replace(/^\s+|\s+$/g,'');
+  if(!n) return null;
+  try{ localStorage.setItem(GERAET_KEY,n); }catch(e2){}
+  return n;
+}
+function paketLs(k){
+  var r=null;
+  try{ r=localStorage.getItem(k); }catch(e){ return undefined; }
+  if(r===null) return undefined;
+  try{ return JSON.parse(r); }catch(e2){ return undefined; }
+}
+function paketTxt(h){
+  var d=document.createElement('div');
+  d.innerHTML=String((h===null||h===undefined)?'':h);
+  return (d.textContent||'').replace(/\s+/g,' ').replace(/^\s+|\s+$/g,'');
+}
+function paketZelle(tr,cls){ var x=tr.querySelector('.'+cls); return x?paketTxt(x.innerHTML):null; }
+function paketAusserhalb(){
+  var st=allocGespeichert(),da=allocSpeicherDa(),tot=dpCalcTotal(),kr=gvNenner(tot.val,0).kr,a={},i;
+  for(i=0;i<kr.z.length;i++) a[kr.z[i].k]=kr.z[i].a;
+  return {cash:kr.cashFehlt?null:a.Cash,gold:da?a.Gold:null,anleihen:da?a.Anleihen:null,rohstoffe:da?a.Rohstoffe:null,sonstiges:null,
+    stand:(typeof st.stand==='string')?st.stand:null,quelle:'Eingabeblock Tab Monat (bis B-2)'};
+}
+function paketSollIst(L){
+  var el=document.getElementById('dp-risk'),rows,i,tr,gr='',td,u;
+  try{ dpRenderRisk(); }catch(e){ L.hinweise.push('Soll gegen Ist nicht gerechnet: '+(e&&e.message)); return; }
+  if(!el) return;
+  rows=el.querySelectorAll('.dp-soll-tab tr');
+  for(i=0;i<rows.length;i++){
+    tr=rows[i];
+    if((' '+tr.className+' ').indexOf(' dp-sg-gr ')!==-1){ gr=paketTxt(tr.innerHTML); continue; }
+    if((' '+tr.className+' ').indexOf(' dp-sg-z ')===-1) continue;
+    td=tr.querySelector('.dp-sg-name');
+    L.soll_ist.push({gruppe:gr,groesse:(td&&td.firstChild)?paketTxt(td.firstChild.textContent):null,soll:paketZelle(tr,'dp-sg-soll'),
+      ist:paketZelle(tr,'dp-sg-ist'),differenz:paketZelle(tr,'dp-sg-diff'),folge:paketZelle(tr,'dp-sg-folge'),zone:tr.getAttribute('data-zone')||null});
+  }
+  if(!L.soll_ist.length){ u=el.querySelector('.dp-soll-unv,.dp-soll-leer'); if(u) L.hinweise.push(paketTxt(u.innerHTML)); }
+}
+function paketLage(){
+  var L={gesamtvermoegen:null,nenner:null,klassen:[],riskanter_teil:'--',soll_ist:[],kauftag:null,faellig:[],positionen:[],etf_kurse:[],hinweise:[]};
+  var tot=dpCalcTotal(),gv=gvNenner(tot.val,0),kr=gv.kr,i,x,c=null,tx=dpTxLoad(),pm,starts,p,s,cp,st,g,k,e,et,uh;
+  L.gesamtvermoegen=kr.sum; L.nenner=paketTxt(gvEtikett(gv));
+  for(i=0;i<kr.z.length;i++){ x=kr.z[i]; L.klassen.push({klasse:x.k,bestand:x.b,ausserhalb:x.a,summe:x.s,anteil_pct:x.p}); }
+  if(kr.cashFehlt) L.hinweise.push('Cash nicht erfasst');
+  paketSollIst(L);
+  try{ c=meBerechne(); }catch(e1){ L.hinweise.push('Monatsentscheid nicht gerechnet: '+(e1&&e1.message)); }
+  if(c){
+    L.kauftag=c.kd.datum;
+    for(i=0;i<c.faellig.length;i++){ x=c.faellig[i]; L.faellig.push({ticker:x.t,name:x.name,pruefdatum:x.pruef,buy:x.buy,zulaessig:x.zulOk,status:x.status==='halten'?'halten':'faellig, wartet',rang:x.r,rang_n:x.n}); }
+  }
+  pm=dpPruefMap(tx,dpHeute()); starts=dpZyklusStarts(tx);
+  for(i=0;i<DEPOT_POSITIONS.length;i++){
+    p=DEPOT_POSITIONS[i]; s=pm[p.t]||null; cp=dpCurrentPrice(p.t); g=rang12m(p.t); uh=dpUnivHinweis(p.t);
+    st=starts.hasOwnProperty(p.t)?starts[p.t]:(p.buyDate||'');
+    L.positionen.push({ticker:p.t,name:p.name||p.t,anzahl:p.shares,kurs_eur:cp,wert_eur:cp===null?null:p.shares*cp,erstkauf:st||null,
+      altbestand_stichtag:(st===DP_ALTBESTAND_START)?DP_ALTBESTAND_ANKER:null,pruefdatum:s?(s.naechst||s.letzt||null):null,letzte_pruefung:s?(s.letzt||null):null,
+      status:s?paketTxt(dpPruefZelle(s,'')):null,status_code:s?s.code:null,rang:g?g.r:null,rang_n:g?g.n:null,im_universum:!uh,hinweis:uh||null});
+    if(cp===null) L.hinweise.push('ohne Kurs: '+p.t);
+    if(uh) L.hinweise.push(p.t+': '+uh);
+  }
+  for(i=0;i<ETF_POSITIONS.length;i++){
+    p=ETF_POSITIONS[i]; k=etfKurs(p.t); e=etfEintrag(p.t); et=etfKursEtikett(k);
+    L.etf_kurse.push({ticker:p.t,name:(e&&e.name)?e.name:(p.name||p.t),klasse:p.cls||null,anzahl:p.shares,kurs_eur:k?k.px:null,
+      kursdatum:(k&&k.datum)?String(k.datum).substring(0,10):null,etikett:et,wert_eur:k?p.shares*k.px:null});
+    if(!k) L.hinweise.push('ohne Kurs: '+p.t+(etfIstAusweis(e)?' (Ausweis)':''));
+    if(et) L.hinweise.push(p.t+': '+et);
+  }
+  return L;
+}
+function bestPaketDaten(geraet){
+  var mac=etfMacro(),jetzt=new Date(),o,m,e,pr;
+  o={version:'stockiq_bestand_v3',exported:jetzt.toISOString(),
+    meta:{geraet:geraet||null,page_version:(typeof window.SIQ_PAGE_VERSION==='string')?window.SIQ_PAGE_VERSION:null,run_date:(mac&&typeof mac.run_date==='string')?mac.run_date:null},
+    depot:dpExportData(),
+    etf:{version:'stockiq_etf_v2',exported:jetzt.toISOString().slice(0,10),tx:etfTxLoad(),positions:ETF_POSITIONS},
+    soll:dpSollRoh()};
+  m=paketLs(ME_KEY); e=paketLs(ER_KEY); pr=paketLs(OB_KEY);
+  if(m!==undefined) o.monat=m;
+  if(e!==undefined) o.ersatz=e;
+  if(pr!==undefined) o.profil=pr;
+  o.ausserhalb=paketAusserhalb();
+  o.lage=paketLage();
+  return o;
+}
+function bestPaketExport(){
+  var o,blob,url,a;
+  try{ o=bestPaketDaten(geraetName(true)); }catch(ex){ alert('Exportpaket nicht erstellt: '+(ex&&ex.message)); return null; }
+  blob=new Blob([JSON.stringify(o,null,2)],{type:'application/json'});
+  url=URL.createObjectURL(blob);
+  a=document.createElement('a');
+  a.href=url;
+  a.download='stockiq_bestand_v3_'+o.exported.slice(0,10)+'.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  return o;
+}
+
 /* Depot Import aus JSON (v5.9.69) */
 /* C1 (v6.6.4): Import laesst Snapshot-Verlauf (stockiq_snapshots_v1/_bak) bewusst aus -- Snapshots sind ableitbare Anzeigedaten, kein Import-Kanal. */
 /* S491 B-1: dpImport ist die Datei-Huelle (FileReader) um den Importkern dpImportData. */
@@ -6378,6 +6603,7 @@ function txImportKennung(data,eigene,ohneErlaubt){
   if(v===eigene) return '';
   if(v==='stockiq_depot_v2') return 'Diese Datei ist ein Einzeltitel-Export. Bitte den Import im Abschnitt Einzeltitel nutzen.';
   if(v==='stockiq_etf_v2') return 'Diese Datei ist ein ETF-Export. Bitte den Import im Abschnitt ETF nutzen.';
+  if(v==='stockiq_bestand_v3') return 'Diese Datei ist ein Exportpaket (stockiq_bestand_v3). Der Import des Pakets kommt mit B-2; bis dahin die Importe je Abschnitt nutzen. Nichts importiert.';  /* S572 A-4 */
   if(v===undefined || v===null){
     if(!ohneErlaubt) return 'Datei ohne Kennung '+eigene+'. Nichts importiert.';
     var l=Array.isArray(data)?data:(data?(data.tx||data.positions):null),i;
@@ -7235,6 +7461,13 @@ function dpToggleTx(){
   }
 }
 
+/* S572 A-5 Nr. 7: die Anzeige liest das Etikett. Neue Buchungen (mit sig_roh): sig. Alte Buchungen: Etikett aus
+   lbl (S-11); fehlt es, wie bisher sig. */
+function txSigAnzeige(tx){
+  if(tx.sig_roh!==undefined) return etfEsc(tx.sig||'--');
+  if(typeof tx.lbl==='string'&&tx.lbl) return etfEsc(tx.lbl.split(' (')[0]);
+  return etfEsc(tx.sig||'--');
+}
 function dpRenderTxLog(){
   var el = document.getElementById('dp-txlog');
   if(!el) return;
@@ -7264,7 +7497,7 @@ function dpRenderTxLog(){
     out += '<td style="padding:4px 5px;color:#00c8f0;font-family:monospace;font-weight:700">'+(tx.t||'?')+'</td>';
     out += '<td style="padding:4px 5px;text-align:right;color:#dce8f5">'+(typeof tx.n==='number'?tx.n:'--')+'</td>';
     out += '<td style="padding:4px 5px;text-align:right;color:#dce8f5">'+(typeof tx.px==='number'?tx.px.toFixed(2):'--')+'</td>';
-    out += '<td style="padding:4px 5px;text-align:center;color:#7a9bb5;font-size:10px">'+(tx.sig||'--')+'</td>';
+    out += '<td style="padding:4px 5px;text-align:center;color:#7a9bb5;font-size:10px">'+txSigAnzeige(tx)+'</td>';
     out += '<td style="padding:4px 5px;color:var(--mut);font-size:10px">'+(tx.note||'')+'</td>';
     out += '</tr>';
   }
@@ -7636,6 +7869,49 @@ function meKandListe(avg){
   l.sort(function(a,b){ return (a.r-b.r)||(a.t<b.t?-1:(a.t>b.t?1:0)); });
   return l;
 }
+/* S572 A-2 (Konzept Depot-Soll 3.6.8): Vergleichszeile. Je Arm der ranghoechste Titel des Arms ohne Depotposition,
+   ohne Zulassung (wie Rang allein, 3.6.3), Rang in der eigenen Basis. Praedikate: buyIsD1 (Rang allein),
+   d1RohIs (D1 roh, Rang mom12m_rang), schnittIs (Schnitt, Rang D1-IND laut Kla 17.11.2026). Beobachtung,
+   keine Empfehlung; aendert weder Vorschlag noch Zulassung, Paare oder Rang. */
+var ME_ARM_ETIKETT={rang:'Champion',d1roh:'Schatten, fr\u00fcherer Champion bis 02.11.2026',schnitt:'Kandidat, ungetestet'};  /* Etikett je Arm: Kla 18.11.2026 */
+function meArmSpitze(pred,rang){
+  var im={},i,p,s,g,best=null;
+  for(i=0;i<DEPOT_POSITIONS.length;i++){ p=DEPOT_POSITIONS[i]; im[p.t]=true; im[dpRohTicker(p.t)]=true; }
+  for(i=0;i<STOCKS.length;i++){
+    s=STOCKS[i];
+    if(im[s.t]||im[dpRohTicker(s.t)]||!pred(s.t)) continue;
+    g=rang(s.t);
+    if(g===null) continue;
+    if(best===null||g.r<best.r||(g.r===best.r&&s.t<best.t)) best={t:s.t,r:g.r,n:g.n};
+  }
+  return best;
+}
+function meVergleich(c){
+  return [{k:'rang',name:'Rang allein',x:c.champion?{t:c.champion.t,r:c.champion.r,n:c.champion.n}:null,et:ME_ARM_ETIKETT.rang},
+    {k:'d1roh',name:'D1 roh',x:meArmSpitze(d1RohIs,rang12mRoh),et:ME_ARM_ETIKETT.d1roh},
+    {k:'schnitt',name:'Schnitt',x:meArmSpitze(schnittIs,rang12m),et:ME_ARM_ETIKETT.schnitt}];
+}
+/* Protokollfeld {ticker, rang} je Arm; Arm ohne Titel: null */
+function meArmProt(a,k){ var i; a=a||[]; for(i=0;i<a.length;i++) if(a[i].k===k) return a[i].x?{ticker:a[i].x.t,rang:a[i].x.r}:null; return null; }
+function meVergleichHtml(a){
+  var g=[],i,j,x,f,h,nm,rg,ks;
+  a=a||[];
+  for(i=0;i<a.length;i++){
+    x=a[i]; f=null;
+    if(x.x) for(j=0;j<g.length;j++) if(g[j].t===x.x.t){ f=g[j]; break; }
+    if(f) f.arme.push(x); else g.push({t:x.x?x.x.t:null,arme:[x]});
+  }
+  h='<div id="me-vergleich" style="font-size:10px;color:#9fb0c0;margin-top:8px;line-height:1.6"><div style="color:#7a9bb5;font-weight:700">Vergleich (Beobachtung, keine Empfehlung)</div>';
+  for(i=0;i<g.length;i++){
+    nm=[]; rg=[]; ks=[];
+    for(j=0;j<g[i].arme.length;j++){
+      x=g[i].arme[j]; nm.push(x.name+(x.et?' ('+x.et+')':'')); ks.push(x.k);
+      if(x.x) rg.push((g[i].arme.length>1?x.name+': ':'')+'Rang '+x.x.r+' von '+x.x.n);
+    }
+    h+='<div class="me-arm" data-arme="'+ks.join(' ')+'" data-t="'+(g[i].t?etfEsc(g[i].t):'')+'">'+(nm.length>1?nm.slice(0,-1).join(', ')+' und '+nm[nm.length-1]:nm[0])+': '+(g[i].t?'<b>'+etfEsc(g[i].t)+'</b> ('+rg.join('; ')+')':'--')+'</div>';
+  }
+  return h+'</div>';
+}
 function meKern(){
   var kd=etfKernDaten(),K=0,T=0,sym=null,i,p,e,cp,bed=null;
   for(i=0;i<ETF_POSITIONS.length;i++){
@@ -7691,6 +7967,7 @@ function meBerechne(){
   ME_CALC={gv:gv,soll:soll,r:r,roh:roh,kd:kd,heute:heute,prot:prot,ohne:ohne,nAus:nAus,unv:unv,faellig:faellig,halten:halten,kandV:kandV,LV:LV,LP:LP,pZone:pZone,platz:platz,erl:erl,avg:avg,
     kand:kand,vs:unv?{v:null,ueb:[]}:meVorschlag(kand,platz),champion:kand.length?kand[0]:null,paare:[],paarVs:null,kern:meKern()};
   if(!unv){ var alleP=mePaareAlle(roh,soll,verk,kand,platz0); ME_CALC.paare=alleP.slice(0,3); ME_CALC.paarVs=ME_CALC.vs.v?mePaarVorschlag(alleP,ME_CALC.vs.v.t):null; }
+  ME_CALC.arme=meVergleich(ME_CALC);  /* S572 A-2 */
   return ME_CALC;
 }
 
@@ -7722,6 +7999,12 @@ function gvFuer(dpItems,etf){
 function gvEtikett(g){
   if(!g.da) return 'unvollst&auml;ndig';
   return 'Nenner mit Cash und Werten au&szlig;erhalb des Depots aus der Handeingabe (Stand '+(g.stand?dpDatumTxt(g.stand):'unbekannt')+'); fehlt die Eingabe: unvollst&auml;ndig';
+}
+/* S572 A-5 Nr. 11 (Konzept Depot-Soll 3.6.10): Stand dieses Geraets; kein Abgleich zwischen Geraeten (G8). */
+function meGeraetTxt(){
+  var st=allocGespeichert(),da=allocSpeicherDa(),sd=(da&&typeof st.stand==='string')?dpDatumTxt(st.stand):null,g=geraetName(false);
+  var cash=(typeof st.cash==='number'&&st.cash>0);
+  return 'Stand dieses Ger&auml;ts'+(g?' ('+etfEsc(g)+')':'')+': Cash '+((cash&&sd)?'vom '+sd:'nicht erfasst')+', Werte au&szlig;erhalb '+(sd?'vom '+sd:'nicht erfasst');
 }
 function meKlassenRender(){
   var el=document.getElementById('me-klassen'),tot,kr,h,i,x;
@@ -7832,8 +8115,8 @@ function meErsatzInfo(t){
   return '<div class="me-ersatz" style="font-size:10px;color:#9fb0c0;line-height:1.5;margin-top:3px">Ersatzpapier: '+etfEsc(e.name)+' (WKN '+etfEsc(e.wkn)+', ISIN '+etfEsc(e.isin)+'), '+(e.verhaeltnis?'Verh&auml;ltnis '+e.verhaeltnis+' Aktien je '+etfEsc(e.art):'<b>Verh&auml;ltnis fehlt</b>')+(e.hinweis?'; '+etfEsc(e.hinweis):'')+'. Gebucht wird unter '+etfEsc(t)+'; Zweitnotiz, Spanne pr&uuml;fen, Limit-Order.</div>';
 }
 function meSchritt5(c){
-  var h='',v=c.vs.v,i,x,fehl=(c.champion&&v&&c.champion.t!==v.t);
-  if(c.unv) return '<div style="font-size:11px;color:#ffab00">Kein Vorschlag: Soll-Vergleich unvollst&auml;ndig.</div>';
+  var h='',v=c.vs.v,i,x;
+  if(c.unv) return '<div style="font-size:11px;color:#ffab00">Kein Vorschlag: Soll-Vergleich unvollst&auml;ndig.</div>'+meVergleichHtml(c.arme);
   if(v) h+='<div id="me-vorschlag" data-t="'+etfEsc(v.t)+'" style="font-size:13px;font-weight:700;color:#00e57a">'+etfEsc(v.t)+' <span style="font-weight:400;font-size:11px;color:#dce8f5">'+etfEsc(v.name)+' (Rang '+v.r+' von '+v.n+') '+meZoneTxt(v.zul.zone)+'</span></div>'+(v.zul.h.length?'<div style="font-size:10px;color:#9fb0c0">'+v.zul.h.join('; ')+'</div>':'')+meWarnBlock(v.t)+meKgvHinweis(v.t)+meErsatzInfo(v.t);
   else h+='<div id="me-vorschlag" style="font-size:12px;color:#ffcf70">Kein zugelassener Titel: Schritt 3 (Kern).</div>';
   if(c.vs.ueb.length){
@@ -7852,7 +8135,7 @@ function meSchritt5(c){
     if(c.paarVs){ x=c.paarVs; h+='<div class="me-paar me-paar-vs" style="font-size:11px;color:#cfe0f0;margin-top:3px">Vorschlag: '+(x.v?'Verkauf <b>'+etfEsc(x.v)+'</b> + ':'Kein Verkauf + ')+'Kauf <b>'+etfEsc(x.k)+'</b> (Rang '+x.rang+')'+warnBdg(x.k)+' &mdash; '+mePp(x.mass)+' pp</div>'; }
     h+='<div class="me-paar-satz" style="font-size:10px;color:#6b7a8a;margin-top:4px">Der Vorschlag in Schritt 5 ist der ranghoechste zugelassene Titel; die Paare zeigen, welche Verkauf-Kauf-Kombination das Soll am besten einhaelt. Beides ist Anzeige; die Wahl trifft der Anleger.</div>';
   }
-  if(fehl) h+='<div class="me-champion" style="font-size:10px;color:#6b7a8a;margin-top:6px">Schatten Rang allein: '+etfEsc(c.champion.t)+' (Rang '+c.champion.r+').</div>';
+  h+=meVergleichHtml(c.arme);  /* S572 A-2: Vergleichszeile ersetzt die Zeile "Schatten Rang allein" (bisher nur bei Abweichung) */
   return h+meWarnErl();
 }
 function meVal(id){ var el=document.getElementById(id); return el?el.value:''; }
@@ -7880,6 +8163,7 @@ function meRenderForm(){
   var vt=c.vs.v?c.vs.v.t:'';
   h+='<div style="font-size:11px;color:#cfe0f0;margin:6px 0 4px">Grund '+(kt!==vt?'<b style="color:#ffab00">(Pflicht: Abweichung vom Vorschlag)</b>':'(bei Verkaufswahl empfohlen)')+'<br><textarea id="me-grund" rows="2" style="width:100%;box-sizing:border-box;background:#0a1628;border:1px solid #1a3050;color:#dce8f5;font-size:11px;border-radius:4px;padding:3px"></textarea></div>';
   h+='<button type="button" id="me-buchen" onclick="meBuchen()" style="padding:6px 14px;background:#001a30;border:1px solid #00e57a;border-radius:5px;color:#00e57a;font-size:11px;cursor:pointer">Buchen und protokollieren</button> <span id="me-msg" style="font-size:11px;color:#ffab00"></span>';
+  h+='<div style="margin-top:8px;font-size:10px;color:#9fb0c0"><button type="button" id="me-paket-btn" onclick="bestPaketExport()" style="padding:4px 12px;background:transparent;border:1px solid #00e57a;border-radius:5px;color:#00e57a;font-size:10px;cursor:pointer">&#8595; Exportpaket</button> Datei f&uuml;r den Berater; sie entsteht nur auf diesem Ger&auml;t.</div>';  /* S572 A-4 */
   el.innerHTML=h;
   meErsatzVorschau();
 }
@@ -7892,10 +8176,10 @@ function meErsatzVorschau(){
 }
 function meMsg(t){ var m=document.getElementById('me-msg'); if(m) m.textContent=t; return false; }
 function meTxSig(t){
-  var s=null,i,sig='',lbl='';
+  var s=null,i,sig='',lbl='',et='';
   for(i=0;i<STOCKS.length;i++) if(STOCKS[i].t===t){ s=STOCKS[i]; break; }
-  if(s&&_scoresIdx&&_scoresIdx[t]){ sig=mSig(s)||''; lbl=sigLogText(t,sig); }
-  return {sig:sig,lbl:lbl,name:s?(s.n||t):t};
+  if(s&&_scoresIdx&&_scoresIdx[t]){ sig=mSig(s)||''; lbl=sigLogText(t,sig); et=sigView(t,sig).lbl; }
+  return {sig:et,sig_roh:sig,lbl:lbl,name:s?(s.n||t):t};  /* S572 A-5 Nr. 7: sig = Etikett, sig_roh = Rohsignal */
 }
 /* Schritt 6: alles pruefen, dann schreiben (TX-Log, dann Protokoll), Quittung */
 function meBuchen(){
@@ -7922,7 +8206,7 @@ function meBuchen(){
     e=txMengenPruef(typ,kt,nK,pos,'Depot');
     if(e) return meMsg(e);
     info=meTxSig(kt);
-    neuD.push({t:kt,d:datum,typ:typ,n:nK,px:pK,name:info.name,cur:'EUR',sig:info.sig,lbl:info.lbl,note:note});
+    neuD.push({t:kt,d:datum,typ:typ,n:nK,px:pK,name:info.name,cur:'EUR',sig:info.sig,sig_roh:info.sig_roh,lbl:info.lbl,note:note});
     gek={t:kt,n:nK,px:pK,ersatz:mitE?er.wkn:null};
   }
   var grund=String(meVal('me-grund')||'').trim(),abw=((gek?gek.t:null)!==vt);
@@ -7954,7 +8238,7 @@ function meBuchen(){
     etfLoad();
   }
   var p=meLoad();
-  p.eintraege.push({datum:c.kd.datum,faellig:fl,verkauft:verk,platz:{ja:c.platz,q:c.LV.q,zone:c.pZone},vorschlag:c.vs.v?{t:c.vs.v.t,rang:c.vs.v.r}:null,uebersprungen:ub,champion_rang:c.champion?{t:c.champion.t,rang:c.champion.r}:null,schatten_sell_sofort:sch,gekauft:gek,abweichung_grund:grund||null,kern_zufluss:zufluss,stand:new Date().toISOString()});
+  p.eintraege.push({datum:c.kd.datum,faellig:fl,verkauft:verk,platz:{ja:c.platz,q:c.LV.q,zone:c.pZone},vorschlag:c.vs.v?{t:c.vs.v.t,rang:c.vs.v.r}:null,uebersprungen:ub,champion_rang:c.champion?{t:c.champion.t,rang:c.champion.r}:null,champion_d1roh:meArmProt(c.arme,'d1roh'),champion_schnitt:meArmProt(c.arme,'schnitt'),schatten_sell_sofort:sch,gekauft:gek,abweichung_grund:grund||null,kern_zufluss:zufluss,stand:new Date().toISOString()});
   var ok=meSave(p),nTx=neuD.length+neuE.length;
   ME_UI.verkauf={}; ME_UI.kauf=null;
   ME_UI.quittung=nTx+' Transaktion'+(nTx===1?'':'en')+' gebucht ('+verk.length+' Verkauf, '+(gek?1:0)+' Kauf, '+(zufluss?1:0)+' Kern-Zufluss). Protokoll Kauftag '+dpDatumTxt(c.kd.datum)+(ok?' gespeichert.':' NICHT gespeichert.');
@@ -7966,7 +8250,7 @@ function meProtokollHtml(c){
   if(!l.length) return '<div style="font-size:10px;color:#6b7a8a">Noch kein Eintrag.</div>';
   for(i=l.length-1;i>=m;i--){
     x=l[i];
-    h+='<div class="me-prot" style="font-size:10px;color:#9fb0c0;margin-bottom:3px">'+dpDatumTxt(x.datum)+': Kauf '+(x.gekauft?etfEsc(x.gekauft.t):'keiner')+', Verkauf '+(x.verkauft.length?x.verkauft.map(function(v){return etfEsc(v.t);}).join(', '):'keiner')+', Vorschlag '+(x.vorschlag?etfEsc(x.vorschlag.t):'keiner')+', Rang allein '+(x.champion_rang?etfEsc(x.champion_rang.t):'--')+(x.abweichung_grund?', Grund: '+etfEsc(x.abweichung_grund):'')+'</div>';
+    h+='<div class="me-prot" style="font-size:10px;color:#9fb0c0;margin-bottom:3px">'+dpDatumTxt(x.datum)+': Kauf '+(x.gekauft?etfEsc(x.gekauft.t):'keiner')+', Verkauf '+(x.verkauft.length?x.verkauft.map(function(v){return etfEsc(v.t);}).join(', '):'keiner')+', Vorschlag '+(x.vorschlag?etfEsc(x.vorschlag.t):'keiner')+', Rang allein '+(x.champion_rang?etfEsc(x.champion_rang.t):'--')+(x.champion_d1roh!==undefined?', D1 roh '+(x.champion_d1roh?etfEsc(x.champion_d1roh.ticker):'--'):'')+(x.champion_schnitt!==undefined?', Schnitt '+(x.champion_schnitt?etfEsc(x.champion_schnitt.ticker):'--'):'')+(x.abweichung_grund?', Grund: '+etfEsc(x.abweichung_grund):'')+'</div>';
   }
   return h;
 }
@@ -7989,6 +8273,7 @@ function meRender(){
   if(!root) return;
   try{
     c=meBerechne();
+    h+='<div id="me-geraet" style="font-size:10px;color:#9fb0c0;margin-bottom:4px">'+meGeraetTxt()+'</div>';
     h+='<div id="me-kopf" style="font-family:monospace;font-size:11px;color:#dce8f5;background:#0a1628;border:1px solid #1a3050;border-radius:8px;padding:7px 10px;margin-bottom:8px">'+meKopfTxt(c)+'</div>';
     if(ME_UI.quittung) h+='<div id="me-quittung" style="font-size:11px;color:#00e57a;margin-bottom:8px">'+ME_UI.quittung+'</div>';
     h+=meKarte(1,'F&auml;llig und Verkauf',meSchritt1(c),'me-s1');
@@ -8094,6 +8379,8 @@ function allocPrefillFromEtf(){
         if(el){ el.value = Math.round(acc[k]); }  /* dieselbe Rundung wie allocEtfTeilGesamt */
       }
     }
+    /* S572 A-5 Nr. 10 (Kla 17.11.2026): ETF-Wert der Klasse Rohstoffe steht daneben zur Information */
+    var auR = document.getElementById('ai-auto-commod'); if(auR) auR.textContent = 'ETF im Bestand: ' + bestEur(acc.R);
     /* Badge entfernt (v6.6.2) -- Erklaerung jetzt im Allok-Footer */
   } catch(e){}
 }
@@ -8394,7 +8681,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.50 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.51 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
