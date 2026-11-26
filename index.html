@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:,">
-<meta name="version" content="6.6.58">
+<meta name="version" content="6.6.59">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>StockIQ v6.6.58</title>
+<title>StockIQ v6.6.59</title>
 <style>
 :root{
   --f-sans:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
@@ -137,7 +137,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;padding:10px 16px 8px">
     <div>
       <div style="font-size:20px;font-weight:800">Stock<em style="color:#00c8f0;font-style:normal">IQ</em></div>
-      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.58 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
+      <div style="font-family:monospace;font-size:10px;color:var(--mut)">v6.6.59 &middot; <span id="hdr-cnt">--</span> Titel &middot; Datenstand <span id="hdr-date">--</span></div>
       <div id="hdr-rangbasis" style="font-family:monospace;font-size:10px;color:var(--mut)">Rangbasis D1-IND seit 03.11.2026; D1 als Schatten</div>
     </div>
     <div id="hdr-rechts" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:4px 6px;margin-left:auto;font-family:monospace;font-size:11px;color:var(--mut)">
@@ -212,7 +212,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
     <div style="margin-bottom:3px">1. Am Monatsende den rangh&ouml;chsten BUY-Titel kaufen, der nicht im Depot liegt.</div>
     <div style="margin-bottom:3px">2. Vorher im Depot pr&uuml;fen, ob der Kauf eine Grenze des Depot-Solls (Region, Sektor, Deckel Einzeltitel) &uuml;berschreitet. Gesperrt hei&szlig;t: der Vorschlag &uuml;berspringt den Titel; die Entscheidung bleibt beim Anleger. Q und KGV sind Information, keine Auswahlregel.</div>
     <div style="margin-bottom:3px">3. Zw&ouml;lf Monate halten &ndash; auch bei R&uuml;ckschl&auml;gen und auch, wenn der Titel zwischendurch aus BUY f&auml;llt.</div>
-    <div style="margin-bottom:3px">4. Am Kauftag des Monats, in dem das Pr&uuml;fdatum liegt: noch BUY und zul&auml;ssig &rarr; weitere zw&ouml;lf Monate halten; sonst Verkaufskandidat im Tab Monat. Verkauf St&uuml;ck f&uuml;r St&uuml;ck, Auswahl beim Anleger.</div>
+    <div style="margin-bottom:3px">4. Am Kauftag des Monats, in dem das Pr&uuml;fdatum liegt: noch BUY und zul&auml;ssig &rarr; weitere zw&ouml;lf Monate halten; sonst entscheidest Du im Tab Monat. Titel, die nicht &uuml;ber ein BUY gekauft wurden, haben keine Verkaufsregel. Verkauf St&uuml;ck f&uuml;r St&uuml;ck, Auswahl beim Anleger.</div>
     <div style="margin-bottom:3px">5. Marktphase ROT betrifft die Aktienquote, nicht die Titelwahl.</div>
     <div>Getestet ist der Korb &uuml;ber viele K&auml;ufe, nicht der einzelne Titel. Die Verkaufsentscheidung bleibt beim Anleger. Mehr: Anwenderleitfaden, Kapitel 4.</div>
   </div>
@@ -500,7 +500,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 
 <div class="page" id="p6">
   <div style="font-size:20px;font-weight:800;margin-bottom:4px">&#128218; Hilfe &amp; Bedienungsanleitung</div>
-  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.58 &middot; Stand Juli 2026</div>
+  <div style="font-family:monospace;font-size:11px;color:var(--mut);margin-bottom:18px">StockIQ v6.6.59 &middot; Stand Juli 2026</div>
   <div style="background:#0c1420;border:2px solid #ff9f1c;border-radius:12px;padding:16px;margin-bottom:12px">
     <div style="font-size:15px;font-weight:700;margin-bottom:10px;color:#ff9f1c">&#128241; Lokal speichern &amp; als App nutzen</div>
     <div style="font-size:12px;color:var(--mut);line-height:1.9">
@@ -770,6 +770,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
         </tr>
       </thead>
       <tbody>
+<tr><td style="padding:5px 8px;color:#00e57a">v6.6.59</td><td style="padding:5px 8px;color:var(--mut)">Monatsentscheid: &bdquo;F&auml;llig: pr&uuml;fen&ldquo; mit zwei Listen (Gekauft auf StockIQ-Empfehlung (BUY) / Andere K&auml;ufe (ohne BUY-Empfehlung)); Halten ist der Normalfall, Pr&uuml;fentscheid mit Protokoll, Momentaufnahme je Position, Abstand zur Grenze, Frage 5 im Profil.</td><td style="padding:5px 8px;color:var(--mut)">26.11.2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.58</td><td style="padding:5px 8px;color:var(--mut)">Monatsentscheid: Kaufsperre &Uuml;berdehnung und KGV*-Sperre als Stufen der Zulassung (Pr&auml;ferenz, abschaltbar im Soll); Anleitung Schritt 4 erg&auml;nzt.</td><td style="padding:5px 8px;color:var(--mut)">24.11.2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.57</td><td style="padding:5px 8px;color:var(--mut)">Monatsentscheid mit Schritt 0 Anlageklasse und Sperre des riskanten Teils (Tausch m&ouml;glich); Kern-Quote auf den Aktien-ETF-Teil; Laufzeit-Hinweis bei Anleihen; Profil mit f&uuml;nf Fragen.</td><td style="padding:5px 8px;color:var(--mut)">23.11.2026</td></tr>
 <tr><td style="padding:5px 8px;color:#00e57a">v6.6.56</td><td style="padding:5px 8px;color:var(--mut)">Cash und Werte au&szlig;erhalb des Depots im Tab Bestand; Soll je Anlageklasse; Kachel Gesamtdepot mit Cash; Import Paket.</td><td style="padding:5px 8px;color:var(--mut)">21.11.2026</td></tr>
@@ -863,7 +864,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
 <div id="p8" style="display:none;padding:14px">
   <div style="font-size:18px;font-weight:800;margin-bottom:4px">&#128200; Bestand</div>
   <div style="font-family:monospace;font-size:10px;color:var(--mut);margin-bottom:14px">
-    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.58
+    Einzeltitel und ETF &middot; Wertentwicklung &middot; v6.6.59
   </div>
   <div id="dp-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:14px"></div>
   <div style="background:#0c1420;border:1px solid #1a2a3a;border-radius:12px;padding:14px;margin-bottom:14px">
@@ -1054,7 +1055,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--f-sans);padding:0}
   </details>
 </div><!-- Ende p8 Bestand -->
 
-<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.58 &middot; Claude (Anthropic) &middot; Juni 2026</div>
+<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:8px">StockIQ v6.6.59 &middot; Claude (Anthropic) &middot; Juni 2026</div>
 
 <!-- ============================================================
      CORE DATA & SCORING
@@ -2747,7 +2748,7 @@ var ME_ANLEITUNG=[
   'So gehst du am Kauftag vor (einmal im Monat, Standard: letzter Handelstag).',
   'Vorher: Im Tab Bestand die Buchungen pr\u00fcfen; Cash und Werte au\u00dferhalb des Depots auf diesem Ger\u00e4t eintragen. Entscheide jeden Monat auf demselben Ger\u00e4t -- die Daten bleiben im Browser und werden nicht abgeglichen.',
   '0 Anlageklassen: Zuerst vergleicht die Seite jede Anlageklasse mit deinem Soll. Liegen Aktien \u00fcber ihrem Korridor, geht frisches Geld in die Klasse, die am weitesten unter ihrem Soll liegt -- in das Referenzpapier, das du f\u00fcr diese Klasse gew\u00e4hlt hast. Liegt der riskante Teil (Aktien, Gold, BTC, Rohstoffe) \u00fcber der Grenze deiner Anlageorientierung, geht frisches Geld nur in Anleihen oder Cash; ein Kauf bleibt m\u00f6glich, wenn ihn ein Verkauf aus Schritt 1 in derselben Anlageklasse bezahlt und das Gekaufte nicht riskanter ist als das Verkaufte (bei Aktien: Warnstufe gleich oder niedriger, ein ETF statt eines Einzeltitels ist erlaubt, umgekehrt nicht). Fehlen Cash oder Werte au\u00dferhalb, ist das Ergebnis nur ein Hinweis.',  /* S612 B-4: Zeile 0 nach Konzept 3.6.7 (N16); Zeile 4 folgt mit D-3b */
-  '1 F\u00e4llig und Verkauf: Die Liste zeigt Positionen, deren Pr\u00fcfdatum im Kaufmonat liegt oder fr\u00fcher. Noch BUY und zul\u00e4ssig: halten, die Frist l\u00e4uft 12 Monate weiter. Sonst: f\u00e4llig, wartet. Verkauft wird St\u00fcck f\u00fcr St\u00fcck -- ein Verkauf finanziert einen Kauf; die \u00fcbrigen warten und werden n\u00e4chsten Monat neu gepr\u00fcft. Welchen du verkaufst, entscheidest du.',
+  '1 F\u00e4llig: pr\u00fcfen: Die Seite zeigt Positionen, deren Pr\u00fcfdatum im Kaufmonat liegt oder fr\u00fcher, in zwei Listen. Gekauft auf StockIQ-Empfehlung (BUY): heute noch BUY und zul\u00e4ssig -- weitere 12 Monate; sonst entscheidest Du. Andere K\u00e4ufe (ohne BUY-Empfehlung): Du siehst Zul\u00e4ssigkeit und Verlauf, keine Verkaufsempfehlung. Halten ist der Normalfall: ohne Deinen Entscheid wird nichts verkauft, die Position wartet bis zum n\u00e4chsten Kauftag. Ein Verkauf tr\u00e4gt einen Grund (Verlauf, Risikobudget, Geldbedarf, Tausch). Verkauft wird St\u00fcck f\u00fcr St\u00fcck.',  /* S620 B-9: Textvorschlag HALT 1 */
   '2 Platz: Liegt der Einzeltitel-Teil nach den Verk\u00e4ufen unter dem Deckel? Gesperrt: kein Einzeltitel-Kauf, weiter mit 3.',
   '3 Kern: Liegt der Kern-ETF unter seinem Band, geht das Geld zuerst dorthin; kommt kein Kauf zustande, ebenfalls.',
   '4 Zulassung: F\u00fcr jeden BUY-Titel ohne Depotposition zeigt die Seite, was ein Kauf in Durchschnittsgr\u00f6\u00dfe mit Region, Sektor und Deckel macht: frei, Hinweis oder gesperrt. Dazu pr\u00fcft sie die Kaufbremse, die Regel deiner Anlageorientierung zu Titeln nach steilem Anstieg und die Bewertung: ein Titel im teuersten Drittel der Kandidaten nach KGV* ist gesperrt, wenn seine Qualit\u00e4t in der unteren H\u00e4lfte liegt oder sein Gewinn nicht w\u00e4chst. Ein Titel, dessen Kurs sich in wenigen Monaten mindestens verdreifacht hat, danach um 30 % oder mehr gefallen ist und sein altes Hoch nicht wieder erreicht hat, ist gesperrt, bis er das Hoch \u00fcberschreitet oder ein Jahr vergangen ist.',  /* S613 B-5: Zeile 4 nach Konzept 3.6.7 */
@@ -3735,7 +3736,7 @@ function loadScores() {
         }
         if ((mac.gold_eur || mac.silver_eur) && typeof rGSR === 'function') { rGSR(); }
       }
-      var PAGE_VERSION = 'v6.6.58';
+      var PAGE_VERSION = 'v6.6.59';
       window.SIQ_PAGE_VERSION = PAGE_VERSION;  /* S572 A-4: meta.page_version im Exportpaket */
       if (mac && mac.dashboard_version
           && mac.dashboard_version !== PAGE_VERSION
@@ -5670,23 +5671,26 @@ function dpDatumTxt(s){
 /* R-1: Zyklusstart je Titel = erste Kaufbuchung nach dem letzten
    Nullbestand (Nullbestand wie dpBuildMap: Bestand <= 0). Nachkauf und
    Teilverkauf aendern ihn nicht; Wiederkauf nach Vollverkauf beginnt neu. */
-function dpZyklusStarts(txList){
+function dpZyklusStarts(txList){ return dpZyklusKern(txList).start; }
+/* S620 B-2 (Konzept Depot-Soll 3.6.1 Schritt 1, N20): dieselbe Zyklusrechnung liefert je Titel auch die Erstkauf-Buchung
+   (erste Kaufbuchung nach dem letzten Nullbestand; Nachkauf aendert sie nicht, Wiederkauf nach Vollverkauf beginnt neu). Rein. */
+function dpZyklusKern(txList){
   var sorted = txSortByDate(txList || []);
-  var st = {}, res = {}, i, tx, s, k;
+  var st = {}, res = {start:{}, tx:{}}, i, tx, s, k;
   for(i = 0; i < sorted.length; i++){
     tx = sorted[i];
     if(!tx || !tx.t) continue;
-    if(!st[tx.t]) st[tx.t] = {n:0, start:''};
+    if(!st[tx.t]) st[tx.t] = {n:0, start:'', tx:null};
     s = st[tx.t];
     if(tx.typ === 'BUY' || tx.typ === 'ADD'){
-      if(s.n <= 0) s.start = txDateKey(tx);
+      if(s.n <= 0){ s.start = txDateKey(tx); s.tx = tx; }
       s.n += tx.n;
     } else if(tx.typ === 'TRIM' || tx.typ === 'SELL'){
       s.n -= tx.n;
       if(s.n < 0) s.n = 0;
     }
   }
-  for(k in st){ if(st.hasOwnProperty(k)) res[k] = st[k].start; }
+  for(k in st){ if(st.hasOwnProperty(k)){ res.start[k] = st[k].start; res.tx[k] = st[k].tx; } }
   return res;
 }
 
@@ -5696,6 +5700,11 @@ function dpAnker(start){
   return start === DP_ALTBESTAND_START ? DP_ALTBESTAND_ANKER : dpJahrePlus(start, 1);
 }
 
+/* S620 B-2: EINE Einordnung faelliger Einzeltitel (Monat und Bestand lesen sie ueber mePruefKern): 'a' = Kauf mit BUY, wenn das
+   Etikett (Feld lbl) der Erstkauf-Buchung mit BUY beginnt; sonst 'b' = Altbestand ohne Regel. Fehlt das Etikett: 'b' (nie raten). Rein. */
+function dpListe(tx){ return (tx && typeof tx.lbl === 'string' && tx.lbl.indexOf('BUY') === 0) ? 'a' : 'b'; }
+/* S620 B-5: Platzhalterdatum migrierter Buchungen (Konzept 3.6.1: 'Kaufdatum unbekannt'); Pruefdatum und Liste aendert die Anzeige nicht. Rein. */
+function dpKaufUnbekannt(d){ return d === DP_ALTBESTAND_START; }
 /* R-3: juengstes Pruefdatum <= heute (letzt) und aeltestes > heute (naechst). */
 function dpPruefDaten(anker, heute){
   var letzt = null, naechst = anker, k = 0;
@@ -5777,7 +5786,7 @@ function dpPruefMap(){
     st = starts.hasOwnProperty(p.t) ? starts[p.t] : (p.buyDate || '');
     x = fm.hasOwnProperty(p.t) ? fm[p.t] : null;
     s = dpPruefZustand(st, k.kd.datum, x, etf[p.t] === true);
-    if(x){ s.bewertet = (buyPctFor(p.t) !== null); s.zul = k.unv ? null : x.zulOk; }
+    if(x){ s.bewertet = (buyPctFor(p.t) !== null); s.zul = k.unv ? null : x.zulOk; s.liste = x.liste; }  /* S620 B-2 */
     if(s.code === 'verl' && ent[p.t] && ent[p.t][s.letzt]) s.entschieden = true;
     if((s.code === 'haelt' || s.code === 'verl') && s.naechst.substring(0, 7) === ymN){ s.naechsterMonat = true; m++; }
     res[p.t] = s;
@@ -5794,6 +5803,7 @@ function dpPruefNaechst(start, heute){
    des Lauftags (Werte der gemeinsamen Pruefrechnung, dieselben wie Schritt 1 des Tabs Monat). Fehlt eine Angabe:
    '' (AP-3, nie geraten). Rein. */
 function dpPruefVorschau(s){
+  if(s && s.liste === 'b') return '(ohne BUY-Empfehlung, Dein Entscheid)';  /* S620 HALT 1 Textregel (4) */  /* S620 B-2: keine Verkaufsaussage fuer Liste b */
   if(!s || s.bewertet !== true) return '';
   if(s.buy !== true) return '(heute nicht BUY)';
   if(s.zul === true) return '(heute BUY und zul&auml;ssig)';
@@ -6209,7 +6219,7 @@ function dpRenderTable(){
   /* Legenden: S394 R-9 HOLD; Pruefung; S434 B.2 Zahlen der Zeile; S359 Warnung ohne EUR-Kurs (eine Quelle: dpCurrentPrice) */
   var box = 'margin-top:6px;padding:7px 10px;background:rgba(122,155,181,.07);border-left:3px solid #7a9bb5;border-radius:4px;font-family:monospace;font-size:10px;color:#7a9bb5';
   var lg = '<div style="'+box+'">HOLD bei einer gehaltenen Position heisst: innerhalb der Haltezeit, kein Verkaufshinweis.</div>';
-  lg += '<div class="dp-pruef-erl" style="'+box+'">Pr&uuml;fung: Jede Position wird zw&ouml;lf Monate ab Erstkauf gehalten. H&auml;lt: Frist l&auml;uft. F&auml;llig: Pr&uuml;fdatum im Monat des n&auml;chsten Kauftags oder fr&uuml;her. Am Kauftag entscheidet der Tab Monat: noch BUY und zul&auml;ssig &ndash; weitere 12 Monate; sonst f&auml;llig, wartet. Verkauft wird St&uuml;ck f&uuml;r St&uuml;ck. Nachkauf und Teilverkauf verschieben das Pr&uuml;fdatum nicht. Bestand vom Jahresanfang 2026 hatte das gemeinsame Pr&uuml;fdatum 31.10.2026.</div>';
+  lg += '<div class="dp-pruef-erl" style="'+box+'">Pr&uuml;fung: Jede Position wird zw&ouml;lf Monate ab Erstkauf gehalten. H&auml;lt: Frist l&auml;uft. F&auml;llig: Pr&uuml;fdatum im Monat des n&auml;chsten Kauftags oder fr&uuml;her. Am Kauftag pr&uuml;ft der Tab Monat: noch BUY und zul&auml;ssig &ndash; weitere 12 Monate; sonst entscheidest Du. Ohne Entscheid wird nichts verkauft. Positionen, die nicht &uuml;ber ein BUY gekauft wurden, stehen unter "Andere K&auml;ufe (ohne BUY-Empfehlung)" ohne Verkaufsregel. Verkauft wird St&uuml;ck f&uuml;r St&uuml;ck. Nachkauf und Teilverkauf verschieben das Pr&uuml;fdatum nicht. Bestand vom Jahresanfang 2026 hatte das gemeinsame Pr&uuml;fdatum 31.10.2026.</div>';
   lg += '<details id="dp-zahlen-erl" style="'+box+'"><summary style="cursor:pointer">Was die Zahlen der Zeile bedeuten</summary>';
   lg += '<div id="dp-zahlen-liste" style="margin-top:4px;line-height:1.5">'+kzAbschnitt(KZ_ZEILE_DP)+kzLang(KZ_ZEILE_DP)+'</div></details>';
   var noEurCount = 0;
@@ -7493,6 +7503,27 @@ function dpLzGrenze(soll){
   return {o:null,g:null,gilt:false};
 }
 /* Auswahl je Klasse aus den ETF der Liste mit passender Klasse (CASH: Klasse C oder Konto; ANLEIHEN: A innerhalb der Grenze) */
+/* S620 B-10 (Befund 0-8): Referenzpapier Anleihen gegen die Laufzeitgrenze der gespeicherten Orientierung. Ohne Profil, ohne Grenze,
+   ohne Papier oder ohne Band: kein Satz (nicht pruefbar ist kein Verstoss). Rein bis auf dpLzGrenze/dpStammBand. */
+function lzJahre(v){ return v==='0'?'keine Anleihen':(v==='gemischt'?'alle Laufzeiten':v+' Jahre'); }
+function lzRefHinweis(soll){
+  var rp=(soll&&soll.referenz_papier)?soll.referenz_papier.ANLEIHEN:null,lz,b,e,nm;
+  if(!rp) return '';
+  lz=dpLzGrenze(soll);
+  if(!lz.gilt||lz.g===null) return '';
+  b=dpStammBand(rp);
+  if(b===null||dpBandOk(b,lz.g)) return '';
+  try{ e=etfEintrag(rp); }catch(x){ e=null; }
+  nm=(e&&e.name)?e.name:rp;
+  return '<div class="lz-ref-hinweis" style="color:#ffab00;margin-top:4px">Das Referenzpapier '+etfEsc(nm)+' (Laufzeit '+lzJahre(b)+') passt nicht zu Deiner Laufzeitgrenze ('+lzJahre(lz.g)+'). &Auml;ndere die Grenze im Profil oder w&auml;hle ein anderes Papier. <a href="#" onclick="lzZurEingabe();return false" style="color:#00c8f0">Zur Eingabe</a></div>';
+}
+function lzZurEingabe(){
+  var f,e;
+  DP_SOLL_AUF=true;
+  goTab(2,document.getElementById('tb2'));
+  f=document.getElementById('dp-soll-form'); if(f) f.open=true;
+  e=document.getElementById('dp-soll-rp-ANLEIHEN'); if(e){ try{ e.scrollIntoView(); e.focus(); }catch(x){} }
+}
 function dpRefOptionen(k,soll){
   var l=etfListe(),o=[],i,e,b,lz=(k==='ANLEIHEN')?dpLzGrenze(soll):null;
   if(k==='CASH') o.push({v:'KONTO',t:'Konto (Verrechnungskonto, Tagesgeld)'});
@@ -7526,6 +7557,7 @@ function dpSollKlassenForm(soll){
   h+='</div><div class="dp-soll-lz-hinweis" style="margin-top:4px;color:#6b7a8a">'+(lz.gilt
     ?'Anleihen: angezeigt sind ETF mit Laufzeitband innerhalb der Grenze '+(lz.g===null?'(keine Grenze)':LZ_LBL[lz.g])+' ('+ME_ORIENT_LBL[LZ_ORIENT[lz.o]]+'); ohne Band nur ohne Grenze; &bdquo;gemischt&ldquo; z&auml;hlt als 7+.'
     :'Anleihen: Anlageorientierung nicht erfasst, alle Anleihen-ETF angezeigt.')+'</div>';
+  h+=lzRefHinweis(soll);  /* S620 B-10 */
   h+='<div style="margin-top:8px">Laufzeitgrenze Anleihen je Anlageorientierung (leer = keine Grenze)</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;margin-top:4px">';
   for(k in DEPOT_SOLL_STD.laufzeit_max){
     if(!DEPOT_SOLL_STD.laufzeit_max.hasOwnProperty(k)) continue;
@@ -7911,9 +7943,19 @@ function txSigAnzeige(tx){
   if(typeof tx.lbl==='string'&&tx.lbl) return etfEsc(tx.lbl.split(' (')[0]);
   return etfEsc(tx.sig||'--');
 }
+/* S620 B-5: Datum im Buchungslog; Platzhalter migrierter Kaeufe als 'Kaufdatum unbekannt' (eigene Angabe aus dem Verlaufsblatt, sonst Platzhalter im title) */
+function dpTxDatumTxt(tx,ke){
+  if(tx && tx.typ === 'BUY' && dpKaufUnbekannt(tx.d)){
+    var e = (ke && typeof ke[tx.t] === 'string') ? ke[tx.t] : null;
+    return '<span class="dp-tx-kd" title="Platzhalter ' + tx.d + ' (migrierte Buchung)">' + (e ? e + ' (Deine Angabe)' : 'Kaufdatum unbekannt') + '</span>';
+  }
+  return (tx && tx.d) || '--';
+}
 function dpRenderTxLog(){
   var el = document.getElementById('dp-txlog');
   if(!el) return;
+  var _ke = null;
+  try{ _ke = meLoad().kaufdatum_echt || null; }catch(eK){ _ke = null; }
   var txList = dpTxLoad();
   if(txList.length === 0){
     el.innerHTML = '<div style="font-family:monospace;font-size:10px;color:var(--mut);text-align:center;padding:12px">Noch keine Transaktionen.</div>';
@@ -7935,7 +7977,7 @@ function dpRenderTxLog(){
     var typC = (tx.typ==='BUY'||tx.typ==='ADD') ? '#00e57a'
              : (tx.typ==='SELL'||tx.typ==='TRIM') ? '#ff5252' : '#7a9bb5';
     out += '<tr class="dp-tx" style="background:'+rowBg+'">';
-    out += '<td style="padding:4px 5px;color:#7a9bb5;font-family:monospace;font-size:10px">'+(tx.d||'--')+txStornoKnopf('dpTxStorno', i, tx)+'</td>';  /* S494 A-3 */
+    out += '<td style="padding:4px 5px;color:#7a9bb5;font-family:monospace;font-size:10px">'+dpTxDatumTxt(tx,_ke)+txStornoKnopf('dpTxStorno', i, tx)+'</td>';  /* S494 A-3; S620 B-5 */
     out += '<td style="padding:4px 5px;text-align:center;color:'+typC+';font-family:monospace;font-size:10px;font-weight:700">'+(tx.typ||'?')+'</td>';
     out += '<td style="padding:4px 5px;color:#00c8f0;font-family:monospace;font-weight:700">'+(tx.t||'?')+'</td>';
     out += '<td style="padding:4px 5px;text-align:right;color:#dce8f5">'+(typeof tx.n==='number'?tx.n:'--')+'</td>';
@@ -7987,7 +8029,7 @@ var ME_RISKANT_SPERRE_TXT='Sperre: frisches Geld geht nur in Anleihen oder Cash/
    Quelle: debugs\v260_S567_risikobudget_messung_out.md (md5 e6b447d25e3534b0e7cfff4ec2b1ad4e), Abschnitt "Geldmarkt, ab Beginn sicherer Teil (1960; 1928 laut Brief nicht vorhanden)",
    Spalte "M1 min"; programmatisch uebernommen (s593_patch.py, Restregel v228). R-deskriptiv, Rueckblick, nominal, USD, S&P 500 und Geldmarkt. */
 var ME_K125=[0.0,-0.3,-1.5,-4.7,-7.8,-10.9,-13.9,-16.7,-19.6,-22.3,-25.0,-27.5,-30.1,-32.5,-34.9,-37.2,-39.4,-41.6,-43.7,-45.8,-47.7];
-var ME_UI={verkauf:{},kauf:null,ersatz:true,quittung:'',form:{},formLeer:false};  /* S606 T-10: form = getippte Werte in Schritt 6 */
+var ME_UI={verkauf:{},kauf:null,ersatz:true,quittung:'',form:{},formLeer:false,vgrund:{},vbAuf:{}};  /* S620: vgrund = Grund je gewaehltem Verkauf, vbAuf = offene Verlaufsblaetter */  /* S606 T-10: form = getippte Werte in Schritt 6 */
 var ME_CALC=null;
 var ER_VORBELEG={'005930.KS':{name:'Samsung Electronics GDR',wkn:'896360',isin:'US7960508882',verhaeltnis:25,art:'GDR',hinweis:'Stammaktie; ING Direkthandel',stand:'2026-11-02'}};
 
@@ -8017,13 +8059,14 @@ function meKauftag(heute,map){
 }
 /* Faelligkeit 3.6.2. Pruefdatum im Monat des Kauftags: BUY-Status des Kauftags. Frueheres Pruefdatum:
    war der Titel dort BUY, lief die Frist bereits weiter (Konzept SELL); sonst wartet er und wird neu geprueft. */
-function meFaelligStatus(start,kauftag,heute,rec,mac,heuteBuy,entschieden){
+function meFaelligStatus(start,kauftag,heute,rec,mac,heuteBuy,entschieden,liste){
   var anker=dpAnker(start),pd,b;
   if(!anker) return null;
   pd=dpPruefDaten(anker,meMonatsende(kauftag));
   if(!pd.letzt) return null;
   if(entschieden&&entschieden[pd.letzt]) return null;
   if(pd.letzt.substring(0,7)===kauftag.substring(0,7)) return {pruef:pd.letzt,buy:heuteBuy===true,quelle:'kauftag'};
+  if(liste==='b') return {pruef:pd.letzt,buy:heuteBuy===true,quelle:'wartet'};  /* S620 Frage 3 (Kla 26.11.2026): Liste b ohne Automatik, wartet auf den Entscheid */
   b=dpBuyAm(rec,mac,pd.letzt,heute,heuteBuy);
   if(b===true) return null;
   return {pruef:pd.letzt,buy:heuteBuy===true,quelle:b===null?'nb':'wartet'};
@@ -8163,10 +8206,16 @@ function meZulBremse(z,b){
 function meProfil(){
   var o=null,p=null;
   try{ p=JSON.parse(localStorage.getItem('stockiq_profile')); if(p&&(p.orientierung==='kapital'||p.orientierung==='ausgewogen'||p.orientierung==='rendite')) o=p.orientierung; }catch(e){ o=null; p=null; }
-  return {o:o,eff:o||'rendite',variante:(o&&typeof profilVariante==='function')?profilVariante(p):null,offen:(o&&typeof profilFragenOffen==='function')?profilFragenOffen(p):[]};  /* S612 B-6: Variante A/B (2.0a) */
+  return {o:o,eff:o||'rendite',hype:(p&&typeof p.hype_kauf==='string')?p.hype_kauf:null,variante:(o&&typeof profilVariante==='function')?profilVariante(p):null,offen:(o&&typeof profilFragenOffen==='function')?profilFragenOffen(p):[]};  /* S612 B-6: Variante A/B (2.0a) */
 }
+var ME_HYPE_NEIN_TXT='Dein Profil: kein Kauf bei Warnstufe hoch';  /* S620 B-8 Wortlaut Konzept 3.6.12 */
+var ME_HYPE_NEIN_PROFIL='Frage 5 im Profil: nein -- kein Kauf bei Warnstufe hoch (Pr\u00e4ferenz, in Schritt 6 mit Grund \u00fcberstimmbar).';
 function meProfilRegel(t,soll,aus,pr){
   var k,n,hoch=[],unb=[],i,p,u,w;
+  if(pr&&pr.o==='rendite'&&pr.hype==='nein'){  /* S620 B-8 (N20 Punkt 9, Konzept 3.6.12): Frage 5 'nein' sperrt Warnstufe hoch; Praeferenz, in Schritt 6 ueberstimmbar */
+    k=meWarnHoch(warnRec(t));
+    return k===true?{g:ME_HYPE_NEIN_TXT}:(k===null?{h:'Warnstufe nicht bestimmbar (Dein Profil)'}:null);
+  }
   if(!pr||(pr.o!=='kapital'&&pr.o!=='ausgewogen')) return null;
   k=meWarnHoch(warnRec(t));
   if(pr.o==='kapital') return k===true?{g:'Kapitalerhalt: Warnstufe hoch'}:(k===null?{h:'Warnstufe nicht bestimmbar (Kapitalerhalt)'}:null);
@@ -8493,7 +8542,8 @@ function meSave(o){
 }
 /* {ticker:{pruefdatum:true}} der als Halten entschiedenen Pruefdaten */
 function meEntschieden(prot){
-  var m={},i,j,f;
+  var m={},i,j,f,pe=(prot&&Array.isArray(prot.pruefentscheide))?prot.pruefentscheide:[];
+  for(i=0;i<pe.length;i++){ f=pe[i]; if(f&&f.entscheid==='halten'&&!f.zurueck&&f.t&&f.pruef){ if(!m[f.t]) m[f.t]={}; m[f.t][f.pruef]=true; } }  /* S620 B-6: Pruefentscheid Halten */
   for(i=0;i<prot.eintraege.length;i++){
     f=prot.eintraege[i].faellig||[];
     for(j=0;j<f.length;j++) if(f[j]&&f[j].status==='halten'){ if(!m[f[j].t]) m[f[j].t]={}; m[f[j].t][f[j].pruef]=true; }
@@ -8762,6 +8812,21 @@ function meKern(){
    (Stichtag Kauftag des laufenden Monats, Pruefdatum im Kaufmonat oder frueher, nicht entschieden laut stockiq_monat_v1)
    und bildet je faelliger Position BUY und Zulassung des Lauftags. Leser: meBerechne (Kopfzeile, Schritt 1, Exportpaket)
    und dpPruefMap (Tab Bestand: Kachel, Pruefzelle). Rein lesend: schreibt weder stockiq_monat_v1 noch ME_CALC. */
+/* S620 B-3: Anzeigename einer Position (Name wie Watchlist, sonst Name aus dem Buchungslog) und Vergleich A-Z (deutsch, ohne Intl
+   Kleinbuchstaben); Gleichstand nach Ticker. */
+var _meColl;
+function meAnzName(p){
+  var u=null,n;
+  try{ u=meUniTicker(p.t); }catch(e0){ u=null; }
+  try{ n=dName({t:u||p.t,n:p.name||p.t}); }catch(e1){ n=null; }
+  return String(n||p.name||p.t);
+}
+function meNameCmp(a,b){
+  var x=String(a.nm||a.name||a.t),y=String(b.nm||b.name||b.t),r;
+  if(_meColl===undefined){ try{ _meColl=(typeof Intl!=='undefined'&&Intl.Collator)?new Intl.Collator('de',{sensitivity:'accent'}):false; }catch(e){ _meColl=false; } }
+  if(_meColl) r=_meColl.compare(x,y); else { x=x.toLowerCase(); y=y.toLowerCase(); r=x<y?-1:(x>y?1:0); }
+  return r!==0?r:(a.t<b.t?-1:(a.t>b.t?1:0));
+}
 function mePruefKern(){
   var soll=dpSollLoad(),dp=[],etf=[],ohne=0,nAus=0,i,p,cp,heute=dpHeute(),prot=meLoad(),kd=meKauftag(heute,prot.param.kauftag),r,roh;
   for(i=0;i<DEPOT_POSITIONS.length;i++){ p=DEPOT_POSITIONS[i]; cp=dpCurrentPrice(p.t); if(cp===null) ohne++; else dp.push({t:p.t,w:p.shares*cp}); }
@@ -8773,29 +8838,31 @@ function mePruefKern(){
   var gv=gvFuer(dp,etf);
   r=dpSgRechnung(dp,etf,(typeof _etfStamm!=='undefined')?_etfStamm:null,soll,gv.x);
   roh=r.roh;
-  var L0=meLage(roh,[]),tx=dpTxLoad(),starts=dpZyklusStarts(tx),ent=meEntschieden(prot),mac=etfMacro(),faellig=[],halten=[],kandV=[],f,rec,st,w,o,zul;
+  var L0=meLage(roh,[]),tx=dpTxLoad(),zk=dpZyklusKern(tx),starts=zk.start,ent=meEntschieden(prot),mac=etfMacro(),faellig=[],halten=[],kandV=[],f,rec,st,w,o,zul,li;
   for(i=0;i<DEPOT_POSITIONS.length;i++){
     p=DEPOT_POSITIONS[i];
     st=starts.hasOwnProperty(p.t)?starts[p.t]:(p.buyDate||'');
     rec=(buyPctFor(p.t)===null)?null:_scoresIdx[p.t];
-    f=meFaelligStatus(st,kd.datum,heute,rec,mac,buyIsD1(p.t),ent[p.t]);
+    li=dpListe(starts.hasOwnProperty(p.t)?zk.tx[p.t]:null);  /* S620 B-2 */
+    f=meFaelligStatus(st,kd.datum,heute,rec,mac,buyIsD1(p.t),ent[p.t],li);
     if(!f) continue;
     cp=dpCurrentPrice(p.t); w=cp===null?null:p.shares*cp; o=meOp(p.t,w===null?0:w);
     zul=meZul(L0,roh,soll,o,true);
     var g=rang12m(p.t),e=(w===null)?null:meEntlastung(L0,roh,soll,o,w);
     var x={t:p.t,name:p.name||p.t,pruef:f.pruef,quelle:f.quelle,buy:f.buy,zul:zul,zulOk:zul.zone!=='gesperrt',r:g?g.r:null,n:g?g.n:null,w:w,op:o,ent:e,
-      anteil:(w!==null&&roh.E>0)?w/roh.E*100:null,gewinn:cp===null?null:(cp-p.buyPrice)*p.shares,shares:p.shares,cp:cp};
-    x.status=(f.buy&&x.zulOk)?'halten':'kandidat';
+      anteil:(w!==null&&roh.E>0)?w/roh.E*100:null,gewinn:cp===null?null:(cp-p.buyPrice)*p.shares,shares:p.shares,cp:cp,
+      liste:li,start:st,real:(typeof p.realized==='number'&&isFinite(p.realized))?p.realized:0,nm:meAnzName(p)};  /* S620 B-2/B-4 */
+    x.status=(li==='a')?((f.buy&&x.zulOk)?'halten':'kandidat'):'altbestand';  /* S620: Liste b ohne Verkaufsaussage */
     faellig.push(x);
-    if(x.status==='halten') halten.push(x); else kandV.push(x);
+    if(x.status==='halten') halten.push(x); else if(x.status==='kandidat') kandV.push(x);
   }
-  kandV.sort(function(a,b){ var sa=a.ent?a.ent.sum:-1,sb=b.ent?b.ent.sum:-1; return (sb-sa)||(a.t<b.t?-1:(a.t>b.t?1:0)); });
+  faellig.sort(meNameCmp); halten.sort(meNameCmp); kandV.sort(meNameCmp);  /* S620 B-3 (N20 Punkt 3): je Liste alphabetisch nach Name; Soll-Entlastung bleibt Spalte */
   return {soll:soll,heute:heute,prot:prot,kd:kd,ohne:ohne,nAus:nAus,gv:gv,r:r,roh:roh,unv:ohne>0||!r.stamm,faellig:faellig,halten:halten,kandV:kandV};
 }
 function meBerechne(){
   var k=mePruefKern(),soll=k.soll,heute=k.heute,prot=k.prot,kd=k.kd,ohne=k.ohne,nAus=k.nAus,gv=k.gv,r=k.r,roh=k.roh,faellig=k.faellig,halten=k.halten,kandV=k.kandV,i;
   var ops=[],erl=0;
-  for(i=0;i<kandV.length;i++) if(ME_UI.verkauf[kandV[i].t]&&kandV[i].w!==null){ ops.push({w:-kandV[i].w,reg:kandV[i].op.reg,sek:kandV[i].op.sek,cn:kandV[i].op.cn}); erl+=kandV[i].w; }
+  for(i=0;i<faellig.length;i++) if(ME_UI.verkauf[faellig[i].t]&&faellig[i].w!==null){ ops.push({w:-faellig[i].w,reg:faellig[i].op.reg,sek:faellig[i].op.sek,cn:faellig[i].op.cn}); erl+=faellig[i].w; }  /* S620: Verkauf aus beiden Listen */
   var avg=roh.avg,LV=meLage(roh,ops),LP=meLage(roh,ops.concat([{w:avg,reg:'SONSTIGE',sek:'sonstige',cn:false}]));
   var pZone=LP.q===null?null:dpSgZone(LP.q,soll.einzel_max,soll.band_pp);
   var unv=ohne>0||!r.stamm;
@@ -8804,13 +8871,13 @@ function meBerechne(){
   var platz0=(L1.q!==null&&dpSgZone(L1.q,soll.einzel_max,soll.band_pp)!=='gesperrt'&&!unv);
   var kand=meKandListe(avg);
   var ausV={},verkR=[];  /* S591: in Schritt 1 gewaehlte Verkaeufe zaehlen nicht zum Bestand der Kaufbremse; S612: Erloes fuer den Tausch */
-  for(i=0;i<kandV.length;i++) if(ME_UI.verkauf[kandV[i].t]&&kandV[i].w!==null){ ausV[kandV[i].t]=true; verkR.push(meVerkRisiko(kandV[i])); }
+  for(i=0;i<faellig.length;i++) if(ME_UI.verkauf[faellig[i].t]&&faellig[i].w!==null){ ausV[faellig[i].t]=true; verkR.push(meVerkRisiko(faellig[i])); }
   var pr=meProfil(),tot0=dpCalcTotal(),kr0=gvNenner(tot0.val,0).kr,voll0=!kr0.cashFehlt&&tot0.hasPrice===tot0.n,rt=meRiskant(kr0,voll0,pr),rk=meRkKontext(rt,verkR);  /* S612 B-3: Nenner wie meKlassenRender */
   var sk=meStufenKontext(kand,soll);  /* S613 B-3: Kandidaten-Stufen Ueberdehnung und KGV* ueber dieselbe Grundmenge */
   for(i=0;i<kand.length;i++){ kand[i].zul=meZulassung(kand[i].t,{L:meLage(roh,ops.concat([kand[i].op])),roh:roh,soll:soll,op:kand[i].op,aus:ausV,pr:pr,rk:rk,stufen:sk.stufen,uebd:sk.uebd,kgv:sk.kgv}); kand[i].status=meKandStatus(kand[i].zul); }  /* S612 B-1, S613 W-2 */
   var s0=meSchritt0Calc(kr0,soll,avg,rt,voll0),frisch=meFrisch(s0,rt);  /* S612 B-4 */
   var verk=[];
-  for(i=0;i<kandV.length;i++) if(kandV[i].w!==null) verk.push(kandV[i]);
+  for(i=0;i<faellig.length;i++) if(faellig[i].w!==null&&(faellig[i].status==='kandidat'||ME_UI.verkauf[faellig[i].t])) verk.push(faellig[i]);  /* S620: Paare nur mit Kandidaten der Liste a oder gewaehlten Verkaeufen (Liste b ohne Verkaufsaussage) */
   ME_CALC={gv:gv,soll:soll,r:r,roh:roh,kd:kd,heute:heute,prot:prot,ohne:ohne,nAus:nAus,unv:unv,faellig:faellig,halten:halten,kandV:kandV,LV:LV,LP:LP,pZone:pZone,platz:platz,erl:erl,avg:avg,
     profil:pr,rt:rt,s0:s0,frisch:frisch,kand:kand,stufen:sk,vs:unv?{v:null,ueb:[]}:meVorschlag(kand,platz),champion:kand.length?kand[0]:null,paare:[],paarVs:null,kern:meKern()};
   if(!unv){ var alleP=mePaareAlle(roh,soll,verk,kand,platz0,rt,sk); ME_CALC.paare=alleP.slice(0,3); ME_CALC.paarVs=ME_CALC.vs.v?mePaarVorschlag(alleP,ME_CALC.vs.v.t):null; }
@@ -8914,7 +8981,7 @@ function klassenRiskantZeile(kr,voll){
   var rt=meRiskant(kr,voll,meProfil()),z=rt.zustand,g=rt.obergrenze_pct;
   return dpSgZeile('dp-kl dp-kl-riskant','Riskanter Teil (Aktien, Gold, BTC, Rohstoffe)',g===null?'--':'max '+g+' %',rt.ist_pct===null?'--':dpSgPct(rt.ist_pct),
     (rt.ist_pct===null||g===null)?'--':dpSgDiff(rt.ist_pct-g,rt.ist_pct>g?'&#8593;':'&#8596;'),
-    rt.orientierung===null?ME_PROFIL_KEIN_TXT:(z==='gesperrt'?'&#8593; gesperrt: kein Kauf in Aktien, Gold, BTC, Rohstoffe (Tausch m&ouml;glich)':(z==='hinweis'?'&#8593; Hinweis: &uuml;ber der Obergrenze (unvollst&auml;ndig, ohne Sperre)':(z==='frei'?'&#8596; frei':'--'))),z||'');
+    rt.orientierung===null?ME_PROFIL_KEIN_TXT:(z==='gesperrt'?'&#8593; gesperrt: kein Kauf in Aktien, Gold, BTC, Rohstoffe (Tausch m&ouml;glich)':(z==='hinweis'?'&#8593; Hinweis: &uuml;ber der Obergrenze (unvollst&auml;ndig, ohne Sperre)':(z==='frei'?'&#8596; frei':'--')))+(meAbstandTxt(rt)?' '+meAbstandTxt(rt):''),z||'');  /* S620 B-7 */
 }
 /* S593 A-5 (2.0b Ausweis vor B-2, K87.riskant, K125): Ist-Quote riskanter Teil auf dem Nenner der Klassenrechnung,
    Obergrenze je Orientierung, Zustand frei / hinweis (ohne Sperre), K125 am naechsthoeheren 5er-Rasterpunkt. */
@@ -8925,9 +8992,19 @@ function meRiskant(kr,voll,pr){
   q=(ist===null)?null:Math.min(100,Math.max(0,Math.ceil(ist/5-1e-9)*5));
   g=meRisikoGrenze(pr);  /* S612 B-3: ueber der Grenze bei vollstaendigem Stand gesperrt, sonst Hinweis (Null-Regel) */
   return {ist_pct:ist,obergrenze_pct:g,orientierung:pr.o,variante:pr.variante||null,offen:pr.offen||[],zustand:(g===null||ist===null)?null:(ist<=g?'frei':(voll?'gesperrt':'hinweis')),
-    k125_rueckblick_pct:(q===null)?null:ME_K125[q/5],q_raster:q,vollstaendig:!!voll,summe:s,cashFehlt:kr.cashFehlt};
+    k125_rueckblick_pct:(q===null)?null:ME_K125[q/5],q_raster:q,vollstaendig:!!voll,summe:s,cashFehlt:kr.cashFehlt,abstand_eur:(ist!==null&&g!==null&&ist>g&&kr.sum>0)?s-g/100*kr.sum:null};  /* S620 B-7: Umschichtung in den sicheren Teil bis zur Grenze */
 }
 function mePkt(x){ return x.toFixed(1).replace('.',','); }
+/* S620 B-7 (Konzept Depot-Soll 2.0b N20 Punkt 8; Frage 2 Kla 26.11.2026 A): ueber der Grenze der Abstand in EUR, bei Marktphase ROT
+   (bestaetigt, k1_phase.zustand) als Abbaubetrag; keine Titelliste, keine Aufforderung. Ohne Betrag kein Satz (Null-Regel). */
+function meAbstandTxt(rt){
+  var k=null,rot;
+  if(!meUeberGrenze(rt)) return '';
+  try{ k=(window.FD&&FD['__macro__'])?FD['__macro__'].k1_phase:null; }catch(e){ k=null; }
+  rot=!!(k&&typeof k==='object'&&k.zustand==='ROT');
+  return '<span class="me-abstand" data-rot="'+(rot?'1':'0')+'">'+(rot?'Abbaubetrag bis zur Grenze: ':'Abstand zur Grenze: ')+bestEur(rt.abstand_eur)+'. Kein Verkaufszwang.'+(rt.vollstaendig?'':' (unvollst&auml;ndig)')+'</span>';
+}
+function meUeberGrenze(rt){ return !!(rt&&typeof rt.abstand_eur==='number'&&isFinite(rt.abstand_eur)); }
 function meRiskantZeile(rt){
   return '<tr class="me-riskant" style="border-top:2px solid #2a3a4a"><td style="padding:3px 6px;font-weight:700">Riskanter Teil</td><td style="text-align:right;padding:3px 6px"></td><td style="text-align:right;padding:3px 6px"></td><td style="text-align:right;padding:3px 6px">'+bestEur(rt.summe)+'</td><td style="text-align:right;padding:3px 6px;font-weight:700">'+(rt.ist_pct===null?'--':dpSgPct(rt.ist_pct))+'</td></tr>';
 }
@@ -8938,6 +9015,7 @@ function meRiskantTxt(rt){
   if(rt.q_raster!==null) h+=' Schlechtester Ertrag nach zwei Jahren bei <span class="me-k125-q">'+rt.q_raster+' %</span>: <b class="me-k125">'+mePkt(rt.k125_rueckblick_pct)+' %</b> ('+ME_RISKANT_ETIKETT+').';
   if(!rt.vollstaendig) h+=' <b class="me-riskant-unv">unvollst&auml;ndig</b>'+(rt.cashFehlt?' (Cash nicht erfasst)':'')+'.';
   if(rt.zustand==='gesperrt') h+=' <span class="me-riskant-sperre">'+ME_RISKANT_SPERRE_TXT+'</span>';  /* S612 B-3 */
+  if(meAbstandTxt(rt)) h+=' '+meAbstandTxt(rt);  /* S620 B-7 */
   if(rt.orientierung==='kapital') h+='<div class="me-w122" style="color:#9fb0c0;margin-top:3px">'+ME_W122+'</div>';  /* S612 B-8 W-12.2 */
   return h+'</div>';
 }
@@ -9000,6 +9078,7 @@ function meSchritt0(c){
     h+='<div class="me-s0-vorschlag" data-ziel="'+(s.ziel?s.ziel.k:'')+'" style="font-weight:700;color:#00e57a;margin-top:3px">'+(v?'Kaufvorschlag: '+v:'Keine Zielklasse: jede in Frage kommende Klasse l&auml;ge nach dem Kauf &uuml;ber ihrem Korridor.')+'</div>';
     if(s.ziel&&s.ziel.k==='CASH') h+='<div class="me-w121" style="font-size:10px;color:#9fb0c0;margin-top:3px">'+ME_W121+'</div>';  /* S612 B-8 W-12.1 */
   }
+  h+=lzRefHinweis(c.soll);  /* S620 B-10 */
   if(!s.vollstaendig) h+='<div class="me-s0-unv" style="color:#ffab00;margin-top:3px"><b>unvollst&auml;ndig</b>: '+((c.rt&&c.rt.cashFehlt)?'Cash nicht erfasst -- Klassenlage nur als Hinweis':'Position(en) ohne Kurs -- Klassenlage nur als Hinweis')+'.</div>';
   return h+'<div style="font-size:10px;color:#6b7a8a;margin-top:3px">Pr&auml;ferenz, verbindlich f&uuml;r den Kaufvorschlag (Nutzerparameter, ungetestet). Abweichen in Schritt 6 mit Grund.</div></div>';
 }
@@ -9048,7 +9127,7 @@ function meProfilTxt(soll,pr){
   t=ME_PROFIL_TXT[pr.o]; h=soll?soll.warn_hoch_je_sektor_max:null; n=soll?soll.hype_max_depot:null;
   t=(typeof h==='number')?t.replace('<h>',String(h)):t.replace(ME_PROFIL_AUS.h[0],ME_PROFIL_AUS.h[1]);
   t=(typeof n==='number')?t.replace('<n>',String(n)):t.replace(ME_PROFIL_AUS.n[0],ME_PROFIL_AUS.n[1]);
-  return t;
+  return t+((pr.o==='rendite'&&pr.hype==='nein')?' '+ME_HYPE_NEIN_PROFIL:'');  /* S620 B-8 */
 }
 /* S593 T-1: Kurzzeile Hype-Anteil ohne Aufklappen im Kopf des Einzeltitel-Teils (#dp-kopf); dieselbe Rechnung meHypeAnteil */
 function meHypeKopf(){
@@ -9251,7 +9330,7 @@ function meZoneTxt(z){ return z==='gesperrt'?'&#8593; gesperrt':(z==='hinweis'?'
 function meJN(b){ return b?'ja':'nein'; }
 function mePp(x){ return (x>=0?'':'-')+Math.abs(x).toFixed(1).replace('.',','); }
 function meKopfTxt(c){
-  var pl=c.unv?'--':(c.platz?'ja':'nein'),q=c.LV.q===null?'--':dpSgPct(c.LV.q),f=c.halten.length+c.kandV.length;
+  var pl=c.unv?'--':(c.platz?'ja':'nein'),q=c.LV.q===null?'--':dpSgPct(c.LV.q),f=c.faellig.length;
   return 'Platz: '+pl+' (Einzeltitel '+q+') - F&auml;llig: '+f+' - Vorschlag: '+(c.vs.v?etfEsc(c.vs.v.t)+' (Rang '+c.vs.v.r+')':'kein')+' - &uuml;bersprungen: '+c.vs.ueb.length;
 }
 function meVerkaufToggle(t,el){ if(el.checked) ME_UI.verkauf[t]=true; else delete ME_UI.verkauf[t]; ME_UI.kauf=null; meRender(); }
@@ -9274,38 +9353,127 @@ function mePaarWahl(i){
 }
 function meKaufWahl(v){ ME_UI.kauf=v; meRenderForm(); }
 function meErsatzToggle(el){ ME_UI.ersatz=!!el.checked; meRenderForm(); }
+/* S620 B-1 bis B-4, B-9 (Konzept Depot-Soll 3.6.1 Schritt 1 und Anzeige je faelliger Position, N20): "Faellig: pruefen" in zwei
+   Listen nach dem Etikett beim Erstkauf (dpListe), je Liste alphabetisch; je Position Halten oder Verkaufen (mit Grund) und
+   Verlaufsblatt. Liste b ohne Verkaufsaussage. Texte im Wortlaut des Briefs S620 B-9. */
+var ME_S1_KOPF='Halten ist der Normalfall. Ohne Deinen Entscheid wird nichts verkauft.';
+var ME_S1_TXT_A='F\u00fcr diese Titel gilt eine Regel: Ist der Titel nach 12 Monaten noch BUY und passt er ins Soll, l\u00e4uft er 12 Monate weiter. Sonst entscheidest Du.';  /* S620 HALT 1 Textregel (4) */
+var ME_S1_TXT_B='F\u00fcr diese Titel gibt es keine getestete Regel. Die Seite zeigt Dir die Lage, keine Verkaufsempfehlung. Du entscheidest.';
+var ME_S1_LISTE={a:'Gekauft auf StockIQ-Empfehlung (BUY)',b:'Andere K\u00e4ufe (ohne BUY-Empfehlung)'};  /* S620 HALT 1 Textregel (4): Listennamen, eine Quelle */
+var ME_VB_KOPF='Momentaufnahme (Beschreibung, keine Empfehlung)';  /* S620 HALT 1 Textregel (3) */
 function meSchritt1(c){
-  var h='',i,x,s='padding:3px 5px;vertical-align:top;white-space:nowrap';
+  var h='',i,a=[],b=[];
   h+='<div style="font-size:10px;color:#9fb0c0;margin-bottom:5px">Kauftag <input type="date" id="me-kauftag" value="'+c.kd.datum+'" onchange="meKauftagSetzen(this)" style="background:#0a1628;border:1px solid #1a3050;color:#dce8f5;font-size:11px;border-radius:4px;padding:1px 3px"> '
     +(c.kd.eigen?'(eigenes Datum, <a href="#" onclick="meKauftagStd();return false" style="color:#00c8f0">Standard</a>)':'(letzter Handelstag des Monats, Mo-Fr; Feiertage pr&uuml;fen)')+'</div>';
+  h+='<div class="me-s1-kopf" style="font-size:11px;font-weight:700;color:#dce8f5;margin-bottom:5px">'+ME_S1_KOPF+'</div>';
+  h+=meHeuteHalten(c);
   if(!c.faellig.length) return h+'<div style="font-size:11px;color:#9fb0c0">Keine Position f&auml;llig.</div>';
-  if(c.halten.length){
-    var hl=[];
-    for(i=0;i<c.halten.length;i++) hl.push(meWlLink(c.halten[i].t));
-    h+='<div class="me-halten" style="font-size:11px;color:#cfe0f0;margin-bottom:5px">Halten (BUY und zul&auml;ssig, neue Haltefrist 12 Monate): '+hl.join(', ')+'</div>';
-  }
-  if(c.kandV.length){
-    h+='<div class="dp-scroll"><table id="me-verkauf-tab" style="width:100%;border-collapse:collapse;font-size:10px;color:#cfe0f0"><tr>';
-    var th=['','Titel','Pr&uuml;fdatum','BUY','zul&auml;ssig','Rang','Soll-Entlastung pp<br>(Region/Sektor/Position)','Anteil Einzeltitel','Gewinn seit Kauf'];
-    for(i=0;i<th.length;i++) h+='<th style="background:#1a3a5c;padding:3px 5px;text-align:left">'+th[i]+'</th>';
-    h+='</tr>';
-    for(i=0;i<c.kandV.length;i++){
-      x=c.kandV[i];
-      h+='<tr class="me-vk" data-t="'+etfEsc(x.t)+'" style="border-top:1px solid #1f2933">'
-        +'<td style="'+s+'"><input type="checkbox" aria-label="Verkauf w&auml;hlen" '+(ME_UI.verkauf[x.t]?'checked ':'')+(x.w===null?'disabled ':'')+'onchange="meVerkaufToggle(\''+x.t+'\',this)"></td>'
-        +'<td style="'+s+';font-weight:700;color:#00c8f0">'+meWlLink(x.t)+'</td>'
-        +'<td style="'+s+'">'+dpDatumTxt(x.pruef)+(x.quelle==='nb'?' (Pr&uuml;fstand nicht bewertbar)':'')+'</td>'
-        +'<td style="'+s+'">'+meJN(x.buy)+'</td>'
-        +'<td style="'+s+'" title="'+etfEsc(warnPlain(x.zul.g.concat(x.zul.h).join('; ')))+'">'+meJN(x.zulOk)+'</td>'
-        +'<td style="'+s+'">'+(x.r===null?'--':x.r)+'</td>'
-        +'<td style="'+s+'">'+(x.ent?mePp(x.ent.sum)+' ('+mePp(x.ent.reg)+'/'+mePp(x.ent.sek)+'/'+mePp(x.ent.pos)+')':'--')+'</td>'
-        +'<td style="'+s+'">'+(x.anteil===null?'n/a':dpSgPct(x.anteil))+'</td>'
-        +'<td style="'+s+'">'+(x.gewinn===null?'n/a':bestEur(x.gewinn))+'</td></tr>';
-    }
-    h+='</table></div><div style="font-size:10px;color:#6b7a8a;margin-top:3px">Sortiert nach Soll-Entlastung, der Rang steht daneben. Keine Reihenfolgeregel: Auswahl und Menge entscheidest du; ein Verkauf finanziert einen Kauf, die &uuml;brigen werden n&auml;chsten Monat neu gepr&uuml;ft.</div>';
-  }
+  for(i=0;i<c.faellig.length;i++) (c.faellig[i].liste==='a'?a:b).push(c.faellig[i]);
+  h+=meS1Liste(c,a,'a',ME_S1_LISTE.a,ME_S1_TXT_A);
+  h+=meS1Liste(c,b,'b',ME_S1_LISTE.b,ME_S1_TXT_B);
   return h;
 }
+function meS1Liste(c,l,k,titel,txt){
+  var h,i,th,nc,s='padding:3px 5px;vertical-align:top;white-space:nowrap';
+  h='<div class="me-liste" id="me-liste-'+k+'" data-n="'+l.length+'" style="margin-top:6px"><div style="font-size:11px;font-weight:700;color:#cfe0f0;margin-bottom:3px">'+titel+' ('+l.length+')</div>';
+  h+='<div class="me-liste-txt" style="font-size:10px;color:#9fb0c0;margin-bottom:3px">'+txt+'</div>';  /* S620 HALT 1 Textregel (4): Satz ueber der Tabelle */
+  if(!l.length) return h+'<div style="font-size:10px;color:#6b7a8a">Keine Position.</div></div>';
+  th=['Titel','Entscheid','Pr&uuml;fdatum','BUY','zul&auml;ssig'].concat(k==='a'?['Pr&uuml;fung']:[]).concat(['Rang','Soll-Entlastung pp<br>(Region/Sektor/Position)','Anteil Einzeltitel']);  /* S620 HALT 1 Textregel (1): Entscheid direkt nach Titel (390 px) */
+  nc=th.length;
+  h+='<div class="dp-scroll"><table class="me-s1-tab" style="width:100%;border-collapse:collapse;font-size:10px;color:#cfe0f0"><tr>';
+  for(i=0;i<th.length;i++) h+='<th style="background:#1a3a5c;padding:3px 5px;text-align:left">'+th[i]+'</th>';
+  h+='</tr>';
+  for(i=0;i<l.length;i++) h+=meS1Zeile(c,l[i],k,s,nc);
+  return h+'</table></div></div>';
+}
+function meS1Zeile(c,x,k,s,nc){
+  var vk=!!ME_UI.verkauf[x.t],g=ME_UI.vgrund[x.t]||{g:'',z:''},h,i,op='',q='\''+x.t+'\'',ent;
+  ent='<td class="me-entscheid" style="'+s+'">'+(x.status==='halten'?'<span class="me-regel-halten" style="color:#00e57a">h&auml;lt (Regel)</span>'
+      :'<button type="button" class="me-halten-btn" onclick="mePruefHalten('+q+')" style="font-size:10px;padding:1px 8px;background:transparent;border:1px solid #00e57a;color:#00e57a;border-radius:4px;cursor:pointer">Halten</button>')
+    +' <label style="white-space:nowrap"><input type="checkbox" class="me-vk-cb" aria-label="Verkaufen" '+(vk?'checked ':'')+(x.w===null?'disabled ':'')+'onchange="meVerkaufToggle('+q+',this)"> Verkaufen</label></td>';
+  h='<tr class="me-vk" data-t="'+etfEsc(x.t)+'" data-liste="'+k+'" data-status="'+x.status+'" style="border-top:1px solid #1f2933">'
+    +'<td style="'+s+';font-weight:700;color:#00c8f0">'+meWlLink(x.t)+'<div class="me-vk-name" style="font-weight:400;color:#9fb0c0">'+etfEsc(x.nm||x.name||x.t)+'</div></td>'
+    +ent
+    +'<td style="'+s+'">'+dpDatumTxt(x.pruef)+(x.quelle==='nb'?' (Pr&uuml;fstand nicht bewertbar)':'')+'</td>'
+    +'<td style="'+s+'">'+meJN(x.buy)+'</td>'
+    +'<td style="'+s+'" title="'+etfEsc(warnPlain(x.zul.g.concat(x.zul.h).join('; ')))+'">'+(c.unv?'--':meJN(x.zulOk))+'</td>'
+    +(k==='a'?'<td class="me-pruefung" style="'+s+'">'+(x.status==='halten'?'weitere 12 Monate':'Kandidat: Dein Entscheid')+'</td>':'')
+    +'<td style="'+s+'">'+(x.r===null?'--':x.r)+'</td>'
+    +'<td style="'+s+'">'+(x.ent?mePp(x.ent.sum)+' ('+mePp(x.ent.reg)+'/'+mePp(x.ent.sek)+'/'+mePp(x.ent.pos)+')':'--')+'</td>'
+    +'<td style="'+s+'">'+(x.anteil===null?'--':dpSgPct(x.anteil))+'</td></tr>';
+  if(vk){
+    for(i=0;i<ME_VK_GRUENDE.length;i++) op+='<option value="'+ME_VK_GRUENDE[i]+'"'+(g.g===ME_VK_GRUENDE[i]?' selected':'')+'>'+ME_VK_GRUENDE[i]+'</option>';
+    h+='<tr class="me-vk-grund" data-t="'+etfEsc(x.t)+'"><td colspan="'+nc+'" style="padding:2px 5px 4px 5px;font-size:10px;color:#cfe0f0">Grund (Pflicht) <select class="me-vk-g" onchange="meVkGrund('+q+',\'g\',this)" style="background:#0a1628;border:1px solid #1a3050;color:#dce8f5;font-size:10px;border-radius:4px"><option value="">bitte w&auml;hlen</option>'+op+'</select> Zusatz <input type="text" class="me-vk-z" value="'+etfEsc(g.z||'')+'" oninput="meVkGrund('+q+',\'z\',this)" style="background:#0a1628;border:1px solid #1a3050;color:#dce8f5;font-size:10px;border-radius:4px;width:160px"></td></tr>';
+  }
+  h+='<tr class="me-vb-zeile" data-t="'+etfEsc(x.t)+'"><td colspan="'+nc+'" style="padding:0 5px 4px 5px"><details class="me-vbl"'+(ME_UI.vbAuf[x.t]?' open':'')+' ontoggle="meVbToggle('+q+',this)"><summary style="cursor:pointer;color:#9fb0c0;font-size:10px">'+ME_VB_KOPF+'</summary>'+meVerlaufHtml(c,x)+'</details></td></tr>';
+  return h;
+}
+/* S620 B-4/B-5 (Konzept 3.6.1 Anzeige je faelliger Position, Verlaufsblatt Stufe 1): nur vorhandene Felder, fehlend '--' (Null-Regel);
+   Gewinn lokal aus dem Buchungslog (dpBuildMap: Buchgewinn plus realisiert, G8). Lage zur 200-Tage-Linie nur darueber/darunter
+   (above200; sma200_dist ist aus dem Trend-Score rueckgerechnet und gekappt). Kein Rangverlauf, kein Q, kein altes Signal. */
+function meVbPct(v){ return (v>0?'+':'')+v.toFixed(1).replace('.',',')+' %'; }
+function meKaufEcht(prot,t){ var m=(prot&&prot.kaufdatum_echt&&typeof prot.kaufdatum_echt==='object')?prot.kaufdatum_echt:{}; return (typeof m[t]==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(m[t]))?m[t]:null; }
+function meVerlaufHtml(c,x){
+  var u=meUniTicker(x.t),r=warnRec(u===null?x.t:u),ech=meKaufEcht(c.prot,x.t),z=[],h,i,unb=dpKaufUnbekannt(x.start);
+  z.push(['Kauf',unb?(ech?dpDatumTxt(ech)+' (Deine Angabe)':'Kaufdatum unbekannt'):(x.start?dpDatumTxt(x.start):'--')]);
+  z.push(['Gewinn mit diesem Titel (alle K&auml;ufe und Verk&auml;ufe)',  /* S620 HALT 1 Textregel (2) */x.gewinn===null?'--':bestEur(x.gewinn+x.real)+(x.real?' (davon realisiert '+bestEur(x.real)+')':'')]);
+  z.push(['Rendite 12 Monate',(r&&meZahl(r.mom12m_ret))?meVbPct(r.mom12m_ret):'--']);
+  z.push(['Abstand zum Hoch der letzten 12 Monate',(r&&meZahl(r.ueb_abstand))?((r.ueb_abstand<=0?'am Hoch':meVbPct(-100*r.ueb_abstand))+((typeof r.ueb_hoch_datum==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(r.ueb_hoch_datum))?' (Hoch am '+dpDatumTxt(r.ueb_hoch_datum)+')':'')):'--']);
+  z.push(['Lage zur 200-Tage-Linie',(r&&r.above200===true)?'dar&uuml;ber':((r&&r.above200===false)?'darunter':'--')]);
+  z.push(['&Uuml;berdehnungsfaktor',(r&&meZahl(r.ueb_faktor))?r.ueb_faktor.toFixed(2).replace('.',','):'--']);
+  h='<div class="me-vb-blatt" style="font-size:10px;color:#cfe0f0;line-height:1.6;margin:3px 0 2px 8px">';
+  for(i=0;i<z.length;i++) h+='<div class="me-vb-z" data-i="'+i+'"><span style="color:#9fb0c0">'+z[i][0]+':</span> '+z[i][1]+'</div>';
+  if(unb) h+='<div class="me-vb-kd" style="margin-top:3px;color:#9fb0c0">Echtes Kaufdatum <input type="date" id="me-kd-'+etfEsc(x.t)+'" value="'+(ech||'')+'" style="background:#0a1628;border:1px solid #1a3050;color:#dce8f5;font-size:10px;border-radius:4px"> <button type="button" onclick="meKaufEchtSetzen(\''+x.t+'\')" style="font-size:10px;padding:1px 8px;background:transparent;border:1px solid #1a3050;color:#00c8f0;border-radius:4px;cursor:pointer">Speichern</button> (nur Anzeige, auf diesem Ger&auml;t; Pr&uuml;fdatum und Liste &auml;ndert es nicht)</div>';
+  return h+'</div>';
+}
+function meVbToggle(t,el){ if(el&&el.open) ME_UI.vbAuf[t]=true; else delete ME_UI.vbAuf[t]; }
+function meKaufEchtSetzen(t){
+  var el=document.getElementById('me-kd-'+t),v=el?String(el.value||''):'',p=meLoad();
+  if(!p.kaufdatum_echt||typeof p.kaufdatum_echt!=='object'||Array.isArray(p.kaufdatum_echt)) p.kaufdatum_echt={};
+  if(/^\d{4}-\d{2}-\d{2}$/.test(v)) p.kaufdatum_echt[t]=v; else delete p.kaufdatum_echt[t];
+  ME_UI.quittung='Kaufdatum '+etfEsc(t)+(meSchreiben(p)?' gespeichert.':' NICHT gespeichert.');
+  ME_UI.vbAuf[t]=true;
+  meRender();
+}
+/* S620 B-1/B-6 (Konzept 3.6.1 Schritt 1 und 6, N20 Punkte 1 und 7): Pruefentscheid je faelliger Position in stockiq_monat_v1.pruefentscheide
+   {kauftag, t, liste, entscheid, grund, zusatz, buy_heute, zul_heute, pruef, neu_pruef, stand} -- buy_heute und zul_heute sind der Schatten
+   der alten Lesart. Halten wird sofort geschrieben und ist am selben Kauftag ruecknehmbar (zurueck, kein Loeschen); neues Pruefdatum ueber
+   denselben Mechanismus wie die Verlaengerung (naechster Jahrestag des Ankers, meEntschieden). Verkaufen traegt einen Pflicht-Grund und
+   wird mit der Buchung geschrieben. Ohne Entscheid wird nichts geschrieben (Frage 1 Kla 26.11.2026: faellig, wartet). */
+var ME_VK_GRUENDE=['Verlauf','Risikobudget','Geldbedarf','Tausch'];
+function meSchreiben(p){ var j=JSON.stringify(p); try{ localStorage.setItem(ME_KEY,j); return localStorage.getItem(ME_KEY)===j; }catch(e){ return false; } }
+function mePruefEintrag(c,x,entscheid,grund,zusatz){
+  var a=dpAnker(x.start),nx=(a&&x.pruef)?dpPruefDaten(a,x.pruef).naechst:null;
+  return {kauftag:c.kd.datum,t:x.t,liste:x.liste,entscheid:entscheid,grund:grund||null,zusatz:zusatz||null,buy_heute:x.buy===true,
+    zul_heute:c.unv?null:(x.zulOk===true),pruef:x.pruef,neu_pruef:entscheid==='halten'?nx:null,stand:new Date().toISOString()};
+}
+function mePruefHalten(t){
+  var c=ME_CALC,x=null,i,p,e,ok;
+  if(!c) return false;
+  for(i=0;i<c.faellig.length;i++) if(c.faellig[i].t===t) x=c.faellig[i];
+  if(!x) return false;
+  p=meLoad(); if(!Array.isArray(p.pruefentscheide)) p.pruefentscheide=[];
+  e=mePruefEintrag(c,x,'halten',null,null); p.pruefentscheide.push(e);
+  ok=meSchreiben(p);
+  delete ME_UI.verkauf[t]; delete ME_UI.vgrund[t];
+  ME_UI.quittung='Halten '+etfEsc(t)+' protokolliert'+(e.neu_pruef?'; n&auml;chstes Pr&uuml;fdatum '+dpDatumTxt(e.neu_pruef):'')+(ok?'.':' -- NICHT gespeichert.');
+  meRender();
+  return ok;
+}
+function mePruefZurueck(i){
+  var p=meLoad(),e=Array.isArray(p.pruefentscheide)?p.pruefentscheide[i]:null;
+  if(!e||e.entscheid!=='halten'||e.zurueck||!ME_CALC||e.kauftag!==ME_CALC.kd.datum) return false;
+  e.zurueck=new Date().toISOString();
+  ME_UI.quittung='Halten '+etfEsc(e.t)+' zur&uuml;ckgenommen'+(meSchreiben(p)?'.':' -- NICHT gespeichert.');
+  meRender();
+  return true;
+}
+function meHeuteHalten(c){
+  var pe=(c.prot&&Array.isArray(c.prot.pruefentscheide))?c.prot.pruefentscheide:[],l=[],i,e;
+  for(i=0;i<pe.length;i++){ e=pe[i]; if(e&&e.entscheid==='halten'&&!e.zurueck&&e.kauftag===c.kd.datum) l.push(meWlLink(e.t)+' (n&auml;chstes Pr&uuml;fdatum '+(e.neu_pruef?dpDatumTxt(e.neu_pruef):'--')+', <a href="#" class="me-zurueck" onclick="mePruefZurueck('+i+');return false" style="color:#00c8f0">zur&uuml;cknehmen</a>)'); }
+  return l.length?'<div class="me-heute-halten" style="font-size:11px;color:#cfe0f0;margin-bottom:5px">Heute als Halten entschieden: '+l.join(', ')+'</div>':'';
+}
+function meVkGrund(t,f,el){ if(!ME_UI.vgrund[t]) ME_UI.vgrund[t]={g:'',z:''}; ME_UI.vgrund[t][f]=el?String(el.value||''):''; }
 function meSchritt2(c){
   if(c.unv) return '<div class="me-unv" style="font-size:11px;color:#ffab00">Soll-Vergleich unvollst&auml;ndig'+(c.ohne?' - '+c.ohne+' Position(en) ohne Kurs':'')+(c.r.stamm?'':' - Stammdaten nicht geladen')+'.</div>';
   var s=c.soll;
@@ -9383,9 +9551,10 @@ function meRenderForm(){
   meFormMerken();  /* S606 T-10 */
   kt=(ME_UI.kauf!==null)?ME_UI.kauf:(c.vs.v?c.vs.v.t:'');
   h+='<div style="font-size:11px;color:#9fb0c0;margin-bottom:6px">Buchungsdatum <input type="date" id="me-datum" data-mk="datum" value="'+c.kd.datum+'" style="'+inp+';width:130px"></div>';
-  for(i=0;i<c.kandV.length;i++){
-    x=c.kandV[i];
+  for(i=0;i<c.faellig.length;i++){
+    x=c.faellig[i];
     if(!ME_UI.verkauf[x.t]) continue;
+    if(meUeberGrenze(c.rt)) h+='<div class="me-vk-sicher" style="font-size:10px;color:#ffcf70;margin-bottom:2px">Erl&ouml;s in den sicheren Teil, bis die Grenze erreicht ist.</div>';  /* S620 B-7 */
     h+='<div class="me-vb" data-t="'+etfEsc(x.t)+'" style="font-size:11px;color:#cfe0f0;margin-bottom:4px">Verkauf <b>'+meWlLink(x.t)+'</b> Anzahl <input id="me-v-n-'+i+'" data-mk="vn|'+etfEsc(x.t)+'" type="number" step="any" value="'+x.shares+'" style="'+inp+'"> Kurs EUR <input id="me-v-px-'+i+'" data-mk="vpx|'+etfEsc(x.t)+'" type="number" step="any" value="'+(x.cp===null?'':x.cp.toFixed(2))+'" style="'+inp+'"></div>';
   }
   h+='<div style="font-size:11px;color:#cfe0f0;margin:6px 0 4px">Kauf <select id="me-k-t" onchange="meKaufWahl(this.value)" style="'+inp+';width:150px"><option value="">kein Kauf</option>';
@@ -9437,12 +9606,14 @@ function meTxSig(t){
 }
 /* Schritt 6: alles pruefen, dann schreiben (TX-Log, dann Protokoll), Quittung */
 function meBuchen(){
-  var c=ME_CALC,datum=meVal('me-datum'),dpL=dpTxLoad(),neuD=[],neuE=[],verk=[],i,x,n,px,typ,e;
+  var c=ME_CALC,datum=meVal('me-datum'),dpL=dpTxLoad(),neuD=[],neuE=[],verk=[],i,x,n,px,typ,e,vg,pe=[];
   if(!c) return false;
   if(!/^\d{4}-\d{2}-\d{2}$/.test(datum)) return meMsg('Datum fehlt.');
-  for(i=0;i<c.kandV.length;i++){
-    x=c.kandV[i];
+  for(i=0;i<c.faellig.length;i++){
+    x=c.faellig[i];
     if(!ME_UI.verkauf[x.t]) continue;
+    vg=ME_UI.vgrund[x.t]||{g:'',z:''};
+    if(ME_VK_GRUENDE.indexOf(vg.g)<0) return meMsg('Verkauf '+x.t+': Grund fehlt (Schritt 1).');  /* S620 B-1 */
     n=parseFloat(meVal('me-v-n-'+i)); px=parseFloat(meVal('me-v-px-'+i));
     if(!(n>0)||!(px>0)) return meMsg('Verkauf '+x.t+': Anzahl oder Kurs ung\u00fcltig.');
     typ=(Math.abs(n-x.shares)<=0.0001)?'SELL':'TRIM';
@@ -9450,6 +9621,7 @@ function meBuchen(){
     if(e) return meMsg(e);
     neuD.push({t:x.t,d:datum,typ:typ,n:n,px:px,name:x.name,cur:'EUR',sig:'',lbl:'',note:'Monatsentscheid'});
     verk.push({t:x.t,n:n,px:px,typ:typ});
+    e=mePruefEintrag(c,x,'verkaufen',vg.g,String(vg.z||'').trim()||null); e.typ=typ; e.n=n; pe.push(e);  /* S620 B-6 */
   }
   var kt=meVal('me-k-t'),gek=null,vt=c.vs.v?c.vs.v.t:null;
   if(kt){
@@ -9480,7 +9652,7 @@ function meBuchen(){
     if(wKa>wVe+0.01&&!grund) return meMsg('Kauf \u00fcber dem Verkaufserl\u00f6s, obwohl frisches Geld gesperrt ist ('+warnPlain(c.frisch.grund)+'): Grund fehlt.');
   }
   var fl=[],ub=[],sch=[];
-  for(i=0;i<c.faellig.length;i++){ fl.push({t:c.faellig[i].t,pruef:c.faellig[i].pruef,status:c.faellig[i].status}); if(!c.faellig[i].buy) sch.push(c.faellig[i].t); }
+  for(i=0;i<c.faellig.length;i++){ fl.push({t:c.faellig[i].t,pruef:c.faellig[i].pruef,status:c.faellig[i].status,liste:c.faellig[i].liste}); if(!c.faellig[i].buy) sch.push(c.faellig[i].t); }
 
   for(i=0;i<c.vs.ueb.length;i++) ub.push({ticker:c.vs.ueb[i].t,rang:c.vs.ueb[i].r,grund:warnPlain(meGrund(c.vs.ueb[i].zul))});
   /* Schreiben: erst TX-Logs (mit Rueckleseprobe), dann Protokoll */
@@ -9497,9 +9669,10 @@ function meBuchen(){
     etfLoad();
   }
   var p=meLoad();
+  if(pe.length){ if(!Array.isArray(p.pruefentscheide)) p.pruefentscheide=[]; for(i=0;i<pe.length;i++) p.pruefentscheide.push(pe[i]); }  /* S620 B-6 */
   p.eintraege.push({datum:c.kd.datum,faellig:fl,verkauft:verk,platz:{ja:c.platz,q:c.LV.q,zone:c.pZone},vorschlag:c.vs.v?{t:c.vs.v.t,rang:c.vs.v.r}:null,uebersprungen:ub,champion_rang:c.champion?{t:c.champion.t,rang:c.champion.r}:null,champion_d1roh:meArmProt(c.arme,'d1roh'),champion_schnitt:meArmProt(c.arme,'schnitt'),schatten_sell_sofort:sch,gekauft:gek,abweichung_grund:grund||null,kern_zufluss:zufluss,klasse_schritt0:meS0Prot(c),riskant_teil:meRtProt(c),stufen_meta:meStufenMetaProt(c),kandidaten:meKandProt(c),stand:new Date().toISOString()});  /* S613 B-4 */
   var ok=meSave(p),nTx=neuD.length+neuE.length;
-  ME_UI.verkauf={}; ME_UI.kauf=null; ME_UI.form={}; ME_UI.formLeer=true;  /* S606 T-10 */
+  ME_UI.verkauf={}; ME_UI.vgrund={}; ME_UI.kauf=null; ME_UI.form={}; ME_UI.formLeer=true;  /* S606 T-10; S620 */
   ME_UI.quittung=nTx+' Transaktion'+(nTx===1?'':'en')+' gebucht ('+verk.length+' Verkauf, '+(gek?1:0)+' Kauf, '+(zufluss?1:0)+' Kern-Zufluss). Protokoll Kauftag '+dpDatumTxt(c.kd.datum)+(ok?' gespeichert.':' NICHT gespeichert.');
   meRender();
   return true;
@@ -9540,7 +9713,7 @@ function meRender(){
     h+='<div id="me-kopf" style="font-family:monospace;font-size:11px;color:#dce8f5;background:#0a1628;border:1px solid #1a3050;border-radius:8px;padding:7px 10px;margin-bottom:8px">'+meKopfTxt(c)+'</div>';
     if(ME_UI.quittung) h+='<div id="me-quittung" style="font-size:11px;color:#00e57a;margin-bottom:8px">'+ME_UI.quittung+'</div>';
     h+=meKarte('0','Anlageklasse',meSchritt0(c),'me-s0');  /* S612 B-4 */
-    h+=meKarte(1,'F&auml;llig und Verkauf',meSchritt1(c),'me-s1');
+    h+=meKarte(1,'F&auml;llig: pr&uuml;fen',meSchritt1(c),'me-s1');  /* S620 B-1 */
     h+=meKarte(2,'Platz',meSchritt2(c),'me-s2');
     h+=meKarte(3,'Zufluss Kern',meSchritt3(c),'me-s3');
     h+=meKarte(4,'Zulassung',meSchritt4(c),'me-s4');
@@ -9946,7 +10119,7 @@ function rBondETF(){
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
         <div style="font-size:16px;font-weight:800;color:#dce8f5">&#128203; Berichte</div>
-        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.58 &middot; Daten aus scores.json</div>
+        <div style="font-family:monospace;font-size:10px;color:var(--mut)">StockIQ v6.6.59 &middot; Daten aus scores.json</div>
       </div>
       <button id="rpt-close-btn" onclick="rptClose()" style="background:rgba(255,255,255,.1);border:none;color:#dce8f5;font-size:18px;padding:6px 12px;border-radius:8px;cursor:pointer">&#10005;</button>
     </div>
